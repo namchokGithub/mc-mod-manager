@@ -59,6 +59,7 @@ function collection(mods: Mod[], batches: Batch[]): Collection {
     },
     mods,
     batches: withOrder(batches),
+    inbox: { version: 1, entries: [] },
   };
 }
 

@@ -27,6 +27,8 @@ const baseline = {
   mods: fingerprint(onDisk.mods),
   // No batches.json on disk counts as an empty build plan.
   batches: fingerprint(serializeJson(published.batches)),
+  // No mod-inbox.json on disk counts as an empty inbox.
+  inbox: fingerprint(serializeJson(published.inbox)),
 };
 
 describe("trusted requests", () => {
@@ -103,6 +105,7 @@ describe("planning a save", () => {
       "modpack",
       "mods",
       "batches",
+      "inbox",
     ]);
     expect(plan.body).toMatchObject({
       ok: true,
@@ -167,6 +170,39 @@ describe("planning a save", () => {
       { ...onDisk, batches: serializeJson(plan) },
     );
     expect(changedOnDisk.status).toBe(409);
+  });
+
+  it("writes mod-inbox.json without changing the mods", () => {
+    const inbox = {
+      version: 1 as const,
+      entries: [
+        {
+          id: "create",
+          name: "Create",
+          notes: "Later",
+          createdAt: "2026-10-17T00:00:00.000Z",
+        },
+      ],
+    };
+    const saved = planSave({ ...published, inbox, baseline }, onDisk);
+    expect(saved.status).toBe(200);
+    expect(JSON.parse(saved.files?.inbox ?? "{}")).toEqual(inbox);
+    expect(saved.files?.mods).toBe(onDisk.mods);
+    const changedOnDisk = planSave(
+      { ...published, inbox, baseline },
+      { ...onDisk, inbox: serializeJson(inbox) },
+    );
+    expect(changedOnDisk.status).toBe(409);
+    const invalid = planSave(
+      {
+        ...published,
+        inbox: { version: 1, entries: [{ id: "x", name: "" }] },
+        baseline,
+      },
+      onDisk,
+    );
+    expect(invalid.status).toBe(400);
+    expect(invalid.body.error).toContain("mod-inbox.json");
   });
 
   it("rejects an invalid build plan", () => {

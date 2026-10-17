@@ -83,6 +83,8 @@ export function PlanningDashboard({
     { label: "Assigned mods", value: dashboard.assignedMods },
     { label: "Unassigned mods", value: dashboard.unassigned.length },
     { label: "Batches", value: dashboard.totalBatches },
+    // Separate from the collection: not part of totals, coverage, or health.
+    { label: "In the inbox", value: dashboard.inboxCount },
   ];
 
   return (

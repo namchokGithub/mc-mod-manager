@@ -185,7 +185,7 @@ describe("drafts and the build plan", () => {
       modpack: { ...published.modpack, name: "Edited" },
       mods: published.mods,
     });
-    expect(parseDraft(oldDraft, published.batches)?.batches).toEqual(
+    expect(parseDraft(oldDraft, published)?.batches).toEqual(
       published.batches,
     );
     const storage = {
@@ -210,6 +210,6 @@ describe("drafts and the build plan", () => {
       ...published,
       batches: { version: 1, batches: [] },
     });
-    expect(parseDraft(draft, published.batches)?.batches.batches).toEqual([]);
+    expect(parseDraft(draft, published)?.batches.batches).toEqual([]);
   });
 });

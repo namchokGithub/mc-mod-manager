@@ -21,6 +21,8 @@ export type BatchSummary = {
 };
 
 export type PlanningDashboard = {
+  /** Mod Inbox entries; never counted in any collection statistic. */
+  inboxCount: number;
   totalMods: number;
   assignedMods: number;
   unassigned: Mod[];
@@ -154,6 +156,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
   });
 
   return {
+    inboxCount: collection.inbox.entries.length,
     totalMods: mods.length,
     assignedMods: assigned.size,
     unassigned,

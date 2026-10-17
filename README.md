@@ -22,7 +22,7 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 - **Modrinth search**: find a mod, filter its versions by game version and loader, review a compatibility preview, then add it through the normal form.
 - **Compatibility checker** (read-only): Minecraft version, modloader, required and incompatible dependencies, duplicate projects, and missing metadata. Results are Compatible, Warning, Incompatible, or Unknown.
 - **Update checker**: compares each linked mod with the versions Modrinth lists for the pack. Results are Up to date, Update available, or Unknown.
-- **Quick add**: paste mod names, one per line, to plan with them before any metadata exists. Duplicates (case-insensitive, against the paste and the list) are shown and skipped by default. New mods are Planned, `Uncategorized` unless you pick a category, source `Other`, with no version or link, and stay Unknown for compatibility and dependencies. Fill them in later with ↻ Link to Modrinth or by importing their JAR with **Update existing mod**. Both keep the mod's ID, name, status, notes, and batches, and show which fields will be filled or replaced first.
+- **Mod Inbox** (Manage): **Quick add to inbox** saves pasted names (one per line) to `public/data/mod-inbox.json`, not to the collection. Duplicates against the paste, the inbox, and the collection are shown and skipped by default. In the inbox you can search, rename, add notes, delete, and select entries. **Add to collection** then shows a review and creates Planned mods with unknown metadata through the same defaults as before. Names the collection already has are skipped and stay in the inbox, and entries are removed only after the mods are added. Inbox entries are not counted in the collection, dashboard statistics (except a separate inbox count), or Preview. Fill in promoted mods with ↻ Link to Modrinth or a JAR import with **Update existing mod**.
 - **JAR import**: reads `.jar` files or a mods folder locally, with an import preview and duplicate warnings.
 - **Planning dashboard** (Manage): mod and batch counts, Planning Coverage (share of mods in at least one batch; not installation or testing), dependency health, a per-batch breakdown, and a "Needs attention" list, all derived from current data.
 - **Build plan**: ordered installation batches with assigned mods and checklist steps, edited in Manage and shown on Preview as a read-only installation guide for building the pack in CurseForge.
@@ -72,6 +72,7 @@ Published data lives in `public/data/`:
 - `public/data/modpack.json`: one object with `name`, `description`, `version`, `minecraftVersion`, `modloader`, `modloaderVersion`, `author`, `updatedAt` (`YYYY-MM-DD`), and `heroImageUrl`.
 - `public/data/mods.json`: an array of mods. Each mod has `id` (unique), `name`, `version`, `category`, `tags`, `status` (`planned`, `testing`, `installed`, `disabled`, `removed`), `side` (`client`, `server`, `both`), `source` (`Modrinth`, `CurseForge`, `GitHub`, `Other`), `sourceUrl`, `description`, `dependencies`, `notes`, and `imageUrl`.
 
+- `public/data/mod-inbox.json` (optional; a missing file means an empty inbox): `{ "version": 1, "entries": [{ "id", "name", "notes", "createdAt" }] }`. Names waiting to become mods; never part of `mods.json`.
 - `public/data/batches.json` (optional; a missing file means an empty plan): `{ "version": 1, "batches": [...] }`. Each batch has `id`, `name`, `description`, `order` (1-based), `modIds` (references to mod `id`s, no duplicates within a batch; a mod may be in several batches), and `checklist` items `{ id, text, done }`. `done` tracks planning progress only and never changes a mod's status.
 
 Each batch has a read-only **Dependency overview** (Manage and Preview). For every mod it lists required, optional, and conflicting dependencies from one source, in this order: Modrinth version data, then the imported JAR's metadata, then manual references. Matching uses identifiers only: Modrinth project IDs against linked mods, JAR loader mod IDs against imported mod IDs, and manual entries only when they equal another mod's exact `id`. It never matches by display name or file name. Each dependency shows whether it is in this batch, in another batch (with a warning when a required one is only in a later batch), in the list but not in any batch, missing, or unresolved (no ID, or several mods share the ID). Mods with no dependency metadata are shown as Unknown, never as having no dependencies. Nothing is moved automatically. Renaming a mod ID updates its references; deleting a mod removes them; references to mods that no longer exist are shown as missing.
@@ -92,13 +93,13 @@ The schemas are in `src/lib/schema.ts`.
 **Editing in the browser never changes the published site.** The workflow is:
 
 1. Run `pnpm dev` and edit in **Manage**. Changes are saved as a draft in this browser's LocalStorage about half a second after each change. Preview in the same browser shows the draft.
-2. When ready, click **Save to local JSON** at the top of Manage and confirm. The dev server writes `public/data/modpack.json`, `mods.json`, and `batches.json` directly, and the draft is cleared. Exporting from **Manage → Data & export** and replacing the files by hand still works as a backup.
+2. When ready, click **Save to local JSON** at the top of Manage and confirm. The dev server writes `public/data/modpack.json`, `mods.json`, `batches.json`, and `mod-inbox.json` directly, and the draft is cleared. Exporting from **Manage → Data & export** and replacing the files by hand still works as a backup.
 3. Commit and push the JSON files. The site updates after the GitHub Pages workflow finishes.
 
 Saving to local JSON:
 
 - It exists only while `pnpm dev` runs (a Vite dev-server plugin). Production builds and GitHub Pages have no write endpoint.
-- It accepts requests only from this computer, from the app's own localhost page. It writes only those three files, after validating them with the same schemas as import, and writes atomically (temporary file, then rename).
+- It accepts requests only from this computer, from the app's own localhost page. It writes only those four files, after validating them with the same schemas as import, and writes atomically (temporary file, then rename).
 - If the files changed on disk since the page loaded (for example, edited in an editor or by `git pull`), it shows a conflict and only overwrites after you confirm.
 - It never runs automatically. Edits keep autosaving to the browser draft until you click Save.
 

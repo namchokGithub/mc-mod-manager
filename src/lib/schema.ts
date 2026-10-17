@@ -184,11 +184,41 @@ export const emptyBatchFile = (): z.infer<typeof batchFileSchema> => ({
   batches: [],
 });
 
+// Mod Inbox (public/data/mod-inbox.json): names waiting to become mods. Not part of the collection.
+export const inboxEntrySchema = z.object({
+  id: z.string().trim().min(1),
+  name: z.string().trim().min(1, "Name is required"),
+  notes: z.string().default(""),
+  createdAt: z.iso.datetime(),
+});
+
+export const inboxFileSchema = z.object({
+  version: z.literal(1),
+  entries: z.array(inboxEntrySchema).superRefine((entries, context) => {
+    const seen = new Set<string>();
+    entries.forEach((entry, index) => {
+      if (seen.has(entry.id))
+        context.addIssue({
+          code: "custom",
+          path: [index, "id"],
+          message: `Duplicate inbox entry ID: ${entry.id}`,
+        });
+      seen.add(entry.id);
+    });
+  }),
+});
+
+export const emptyInboxFile = (): z.infer<typeof inboxFileSchema> => ({
+  version: 1,
+  entries: [],
+});
+
 export const collectionSchema = z.object({
   modpack: modpackSchema,
   mods: modsSchema,
   // Optional in stored data so older drafts and collections without a plan still load.
   batches: batchFileSchema.default(emptyBatchFile),
+  inbox: inboxFileSchema.default(emptyInboxFile),
 });
 
 export type Modpack = z.infer<typeof modpackSchema>;
@@ -201,6 +231,8 @@ export type Collection = z.infer<typeof collectionSchema>;
 export type BatchFile = z.infer<typeof batchFileSchema>;
 export type Batch = z.infer<typeof batchSchema>;
 export type ChecklistItem = z.infer<typeof checklistItemSchema>;
+export type InboxFile = z.infer<typeof inboxFileSchema>;
+export type InboxEntry = z.infer<typeof inboxEntrySchema>;
 
 export function formatValidationError(error: z.ZodError): string {
   return error.issues

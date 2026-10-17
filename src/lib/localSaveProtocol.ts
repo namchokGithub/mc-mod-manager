@@ -7,4 +7,5 @@ export type SaveFingerprints = {
   modpack: string;
   mods: string;
   batches: string;
+  inbox: string;
 };

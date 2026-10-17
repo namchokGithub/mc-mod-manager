@@ -10,23 +10,41 @@ export function normalizeName(name: string): string {
 
 export type QuickAddLine = {
   name: string;
-  /** "list": a mod with this name exists; "repeat": an earlier pasted line has it. */
-  duplicate: null | "list" | "repeat";
+  /**
+   * "inbox": already waiting in the Mod Inbox; "collection": already a mod in the collection;
+   * "repeat": an earlier pasted line has the same name.
+   */
+  duplicate: null | "inbox" | "collection" | "repeat";
   existingName?: string;
 };
 
 /** One name per line; blank lines are ignored. Nothing is created here. */
-export function parseQuickAdd(text: string, existing: Mod[]): QuickAddLine[] {
-  const byName = new Map(existing.map((mod) => [normalizeName(mod.name), mod]));
+export function parseQuickAdd(
+  text: string,
+  existing: { inbox: { name: string }[]; collection: { name: string }[] },
+): QuickAddLine[] {
+  const inInbox = new Map(
+    existing.inbox.map((item) => [normalizeName(item.name), item]),
+  );
+  const inCollection = new Map(
+    existing.collection.map((item) => [normalizeName(item.name), item]),
+  );
   const seen = new Set<string>();
   const lines: QuickAddLine[] = [];
   for (const raw of text.split(/\r?\n/)) {
     const name = raw.trim().replace(/\s+/g, " ");
     if (!name) continue;
     const key = normalizeName(name);
-    const match = byName.get(key);
-    if (match)
-      lines.push({ name, duplicate: "list", existingName: match.name });
+    const inboxMatch = inInbox.get(key);
+    const collectionMatch = inCollection.get(key);
+    if (inboxMatch)
+      lines.push({ name, duplicate: "inbox", existingName: inboxMatch.name });
+    else if (collectionMatch)
+      lines.push({
+        name,
+        duplicate: "collection",
+        existingName: collectionMatch.name,
+      });
     else if (seen.has(key)) lines.push({ name, duplicate: "repeat" });
     else lines.push({ name, duplicate: null });
     seen.add(key);

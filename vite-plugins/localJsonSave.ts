@@ -12,6 +12,8 @@ import {
   modsSchema,
   batchFileSchema,
   emptyBatchFile,
+  inboxFileSchema,
+  emptyInboxFile,
 } from "../src/lib/schema";
 
 const MAX_BODY_BYTES = 5 * 1024 * 1024;
@@ -66,13 +68,21 @@ export type CurrentFiles = {
   modpack: string | null;
   mods: string | null;
   batches?: string | null;
+  inbox?: string | null;
 };
 export type SavePlan = {
   status: number;
   body: Record<string, unknown>;
   /** Present only when the files should be written; `batches` only when the request has a plan. */
-  files?: { modpack: string; mods: string; batches?: string };
+  files?: { modpack: string; mods: string; batches?: string; inbox?: string };
 };
+
+// A missing mod-inbox.json is the same as an empty inbox.
+function inboxFingerprint(text: string | null | undefined): string | null {
+  return text === null || text === undefined
+    ? fingerprint(serializeJson(emptyInboxFile()))
+    : diskFingerprint(text, inboxFileSchema);
+}
 
 // A missing batches.json is the same as an empty build plan.
 function batchesFingerprint(text: string | null | undefined): string | null {
@@ -95,7 +105,13 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
     modpack?: unknown;
     mods?: unknown;
     batches?: unknown;
-    baseline?: { modpack?: unknown; mods?: unknown; batches?: unknown };
+    inbox?: unknown;
+    baseline?: {
+      modpack?: unknown;
+      mods?: unknown;
+      batches?: unknown;
+      inbox?: unknown;
+    };
     force?: unknown;
   };
   const modpack = modpackSchema.safeParse(request.modpack);
@@ -119,6 +135,15 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       status: 400,
       body: { error: `batches.json: ${formatValidationError(batches.error)}` },
     };
+  const inbox =
+    request.inbox === undefined
+      ? undefined
+      : inboxFileSchema.safeParse(request.inbox);
+  if (inbox && !inbox.success)
+    return {
+      status: 400,
+      body: { error: `mod-inbox.json: ${formatValidationError(inbox.error)}` },
+    };
   if (request.force !== true) {
     const disk = {
       modpack: diskFingerprint(current.modpack, modpackSchema),
@@ -130,7 +155,9 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       request.baseline?.modpack !== disk.modpack ||
       request.baseline?.mods !== disk.mods ||
       (batches !== undefined &&
-        request.baseline?.batches !== batchesFingerprint(current.batches))
+        request.baseline?.batches !== batchesFingerprint(current.batches)) ||
+      (inbox !== undefined &&
+        request.baseline?.inbox !== inboxFingerprint(current.inbox))
     )
       return {
         status: 409,
@@ -145,6 +172,7 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
     modpack: serializeJson(modpack.data),
     mods: serializeJson(mods.data),
     ...(batches && { batches: serializeJson(batches.data) }),
+    ...(inbox && { inbox: serializeJson(inbox.data) }),
   };
   return {
     status: 200,
@@ -153,6 +181,7 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       modpack: modpack.data,
       mods: mods.data,
       ...(batches && { batches: batches.data }),
+      ...(inbox && { inbox: inbox.data }),
       fingerprints: {
         modpack: fingerprint(files.modpack),
         mods: fingerprint(files.mods),
@@ -224,7 +253,7 @@ function send(response: ServerResponse, status: number, body: unknown) {
 }
 
 /**
- * Dev-only endpoint that writes public/data/modpack.json, mods.json, and batches.json. `apply: "serve"` keeps it
+ * Dev-only endpoint that writes public/data/modpack.json, mods.json, batches.json, and mod-inbox.json. `apply: "serve"` keeps it
  * out of production builds, and the target paths are fixed here, never taken from the client.
  */
 export function localJsonSave(): Plugin {
@@ -237,6 +266,7 @@ export function localJsonSave(): Plugin {
         modpack: path.join(dataDir, "modpack.json"),
         mods: path.join(dataDir, "mods.json"),
         batches: path.join(dataDir, "batches.json"),
+        inbox: path.join(dataDir, "mod-inbox.json"),
       };
       let saving = false;
       server.middlewares.use(SAVE_ENDPOINT, (request, response) => {
@@ -277,6 +307,7 @@ export function localJsonSave(): Plugin {
               modpack: await readOptional(targets.modpack),
               mods: await readOptional(targets.mods),
               batches: await readOptional(targets.batches),
+              inbox: await readOptional(targets.inbox),
             });
             if (plan.files)
               await commitFiles([
@@ -285,6 +316,9 @@ export function localJsonSave(): Plugin {
                 ...(plan.files.batches === undefined
                   ? []
                   : [{ target: targets.batches, text: plan.files.batches }]),
+                ...(plan.files.inbox === undefined
+                  ? []
+                  : [{ target: targets.inbox, text: plan.files.inbox }]),
               ]);
             send(response, plan.status, plan.body);
           } catch (error) {

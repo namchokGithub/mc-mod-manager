@@ -4,6 +4,7 @@ import {
   modsSchema,
   type Collection,
   batchFileSchema,
+  inboxFileSchema,
 } from "../lib/schema";
 import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
 import {
@@ -52,12 +53,13 @@ export function DataProvider({ children }: { children: ReactNode }) {
     let active = true;
     async function load() {
       try {
-        const [responses, batchesResponse] = await Promise.all([
+        const [responses, batchesResponse, inboxResponse] = await Promise.all([
           Promise.all([
             fetch(jsonUrl("modpack.json")),
             fetch(jsonUrl("mods.json")),
           ]),
           fetch(jsonUrl("batches.json")),
+          fetch(jsonUrl("mod-inbox.json")),
         ]);
         if (responses.some((response) => !response.ok))
           throw new Error("Published JSON files could not be loaded.");
@@ -68,10 +70,15 @@ export function DataProvider({ children }: { children: ReactNode }) {
         const batches: unknown = batchesResponse.ok
           ? await batchesResponse.json()
           : undefined;
+        // mod-inbox.json is optional too: a missing file means an empty inbox.
+        const inbox: unknown = inboxResponse.ok
+          ? await inboxResponse.json()
+          : undefined;
         const result = collectionSchema.safeParse({
           modpack: values[0],
           mods: values[1],
           batches,
+          inbox,
         });
         if (!result.success)
           throw new Error("Published JSON files have invalid data.");
@@ -111,7 +118,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         setExternalUpdate((count) => count + 1);
         return;
       }
-      const next = parseDraft(event.newValue, published.batches);
+      const next = parseDraft(event.newValue, published);
       if (!next) return;
       skipNextSave.current = true;
       setData(next);
@@ -198,6 +205,24 @@ export function DataProvider({ children }: { children: ReactNode }) {
     updateBatches: (batches) =>
       change({ ...data, batches: batchFileSchema.parse(withOrder(batches)) }),
     importBatches: (batches) => change({ ...data, batches }),
+    updateInbox: (entries) =>
+      change({
+        ...data,
+        inbox: inboxFileSchema.parse({ version: 1, entries }),
+      }),
+    promoteInbox: (created, promotedIds) => {
+      // Validated before anything changes, so a failure leaves mods and inbox untouched.
+      const mods = modsSchema.parse([...data.mods, ...created]);
+      const removed = new Set(promotedIds);
+      change({
+        ...data,
+        mods,
+        inbox: {
+          ...data.inbox,
+          entries: data.inbox.entries.filter((entry) => !removed.has(entry.id)),
+        },
+      });
+    },
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),
     markSaved: (saved) => {

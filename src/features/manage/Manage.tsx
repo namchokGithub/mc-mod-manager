@@ -18,6 +18,7 @@ import {
   Copy,
   HardDriveDownload,
   FileJson2,
+  Inbox,
   Info,
   LayoutDashboard,
   ListChecks,
@@ -83,6 +84,8 @@ import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { BuildPlanEditor } from "./BuildPlanEditor";
 import { PlanningDashboard } from "./PlanningDashboard";
 import { QuickAddDialog } from "./QuickAddDialog";
+import { InboxPanel } from "./InboxPanel";
+import { inboxEntriesFromNames } from "../../lib/inbox";
 import { CompatibilityPanel } from "./CompatibilityPanel";
 import {
   SupportedLoadersField,
@@ -90,7 +93,7 @@ import {
 } from "./CompatibilityFields";
 import { UpdateBadge } from "./UpdateBadge";
 
-type Tab = "dashboard" | "mods" | "settings" | "plan" | "data";
+type Tab = "dashboard" | "mods" | "inbox" | "settings" | "plan" | "data";
 const initialFilters: Filters = {
   query: "",
   category: "",
@@ -945,6 +948,7 @@ export function Manage() {
     deleteMods,
     updateModpack,
     importMods,
+    updateInbox,
     published,
     markSaved,
     saveStatus,
@@ -1137,20 +1141,24 @@ export function Manage() {
     });
     return true;
   };
-  const quickAdd = (created: Mod[]) => {
+  // Quick Add only writes to the Mod Inbox; the collection is never touched here.
+  const addToInbox = (names: string[]) => {
     try {
-      importMods(modsSchema.parse([...data.mods, ...created]));
+      updateInbox([
+        ...data.inbox.entries,
+        ...inboxEntriesFromNames(names, data.inbox.entries),
+      ]);
     } catch {
       notify({
         kind: "error",
-        title: "Mods not added",
-        description: "The new entries did not pass validation.",
+        title: "Not added to the inbox",
+        description: "The names did not pass validation.",
       });
       return false;
     }
     notify({
-      title: `Added ${created.length} ${created.length === 1 ? "mod" : "mods"}`,
-      description: "Planned, with details still unknown.",
+      title: `Added ${names.length} to the inbox`,
+      description: "Add them to the collection from Mod inbox when ready.",
     });
     return true;
   };
@@ -1318,6 +1326,15 @@ export function Manage() {
           </button>
           <button
             type="button"
+            className={tab === "inbox" ? "sidebar-item active" : "sidebar-item"}
+            aria-current={tab === "inbox" ? "page" : undefined}
+            onClick={() => changeTab("inbox")}
+          >
+            <Inbox size={18} /> Mod inbox{" "}
+            <span>{data.inbox.entries.length}</span>
+          </button>
+          <button
+            type="button"
             className={tab === "plan" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "plan" ? "page" : undefined}
             onClick={() => {
@@ -1370,7 +1387,7 @@ export function Manage() {
                         variant="secondary"
                         onClick={() => setQuickAdding(true)}
                       >
-                        <ListPlus size={16} /> Quick add
+                        <ListPlus size={16} /> Quick add to inbox
                       </Button>
                       <Button
                         variant="secondary"
@@ -1649,6 +1666,9 @@ export function Manage() {
                   }}
                 />
               )}
+              {tab === "inbox" && (
+                <InboxPanel onQuickAdd={() => setQuickAdding(true)} />
+              )}
               {tab === "plan" && (
                 <BuildPlanEditor
                   onOpenMod={(mod) => setEditing({ mod })}
@@ -1861,7 +1881,8 @@ export function Manage() {
         open={quickAdding}
         onOpenChange={setQuickAdding}
         mods={data.mods}
-        onAdd={quickAdd}
+        inbox={data.inbox.entries}
+        onAdd={addToInbox}
       />
       <Dialog
         open={confirmDiscard !== null}

@@ -1,6 +1,13 @@
 import { createContext, useContext } from "react";
 import type { FileSavePhase, SaveStatus } from "../lib/saveStatus";
-import type { Batch, BatchFile, Collection, Mod, Modpack } from "../lib/schema";
+import type {
+  Batch,
+  BatchFile,
+  Collection,
+  InboxEntry,
+  Mod,
+  Modpack,
+} from "../lib/schema";
 
 export type DataContextValue = {
   data: Collection;
@@ -18,6 +25,13 @@ export type DataContextValue = {
   /** Replaces the build plan; `order` is rewritten from the array order. */
   updateBatches: (batches: Batch[]) => void;
   importBatches: (batches: BatchFile) => void;
+  /** Replaces the Mod Inbox entries. Never touches the mod collection. */
+  updateInbox: (entries: InboxEntry[]) => void;
+  /**
+   * Adds `created` mods and removes `promotedIds` from the inbox in one change. Throws (and
+   * changes nothing) when the new mods do not validate.
+   */
+  promoteInbox: (created: Mod[], promotedIds: string[]) => void;
   importModpack: (modpack: Modpack) => void;
   importMods: (mods: Mod[]) => void;
   reset: () => void;
