@@ -1,5 +1,8 @@
 import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   test: { environment: "node" },
+  plugins: [react()],
+  base: "/mc-mod-manager/",
 });
