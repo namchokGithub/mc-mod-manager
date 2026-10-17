@@ -1591,7 +1591,9 @@ export function Manage() {
                   }}
                 />
               )}
-              {tab === "plan" && <BuildPlanEditor />}
+              {tab === "plan" && (
+                <BuildPlanEditor onOpenMod={(mod) => setEditing({ mod })} />
+              )}
               {tab === "data" && <DataTools />}
             </motion.div>
           </AnimatePresence>

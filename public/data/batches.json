@@ -4,7 +4,7 @@
     {
       "id": "batch-1-foundation",
       "name": "Batch 1 — Foundation",
-      "description": "สำหรับ Modpack Helloworld: Beyond the Descendant เริ่มจาก Mods พื้นฐานก่อน โดยเน้นให้เกมเปิดได้เสถียร เล่น Multiplayer ได้ และมีประสิทธิภาพดี",
+      "description": "Performance, Libraries, APIs, QoL พื้นฐาน และตรวจว่าเกมเปิดได้ปกติ",
       "order": 1,
       "modIds": [
         "appleskin"
@@ -21,6 +21,38 @@
           "done": false
         }
       ]
+    },
+    {
+      "id": "batch-2-world-exploration",
+      "name": "Batch 2 — World & Exploration",
+      "description": "Biomes, Structures, Dungeons และ World Generation โดยควรทดสอบกับโลกใหม่",
+      "order": 2,
+      "modIds": [],
+      "checklist": []
+    },
+    {
+      "id": "batch-3-combat-progression",
+      "name": "Batch 3 — Combat & Progression",
+      "description": "Weapons, Armor, Mobs, Bosses, Enchantments และระบบความยาก",
+      "order": 3,
+      "modIds": [],
+      "checklist": []
+    },
+    {
+      "id": "batch-4-decoration-quality-of-life",
+      "name": "Batch 4 — Decoration & Quality of Life",
+      "description": "Furniture, Storage, Farming, Maps และการตกแต่ง",
+      "order": 4,
+      "modIds": [],
+      "checklist": []
+    },
+    {
+      "id": "batch-5-balance-configuration",
+      "name": "Batch 5 — Balance & Configuration",
+      "description": "ปรับ Loot, Damage Scaling, Spawn Rates, Progression และ Config ให้เล่นสนุกกับเพื่อน",
+      "order": 5,
+      "modIds": [],
+      "checklist": []
     }
   ]
 }

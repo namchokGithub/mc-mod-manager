@@ -3509,3 +3509,128 @@ main:focus {
     flex-direction: column;
   }
 }
+
+/* Build plan: dependency overview (shared by Manage and Preview) */
+.deps {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.deps-toggle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+}
+.deps-toggle:hover {
+  background: var(--surface-hover);
+}
+.deps-toggle > svg {
+  flex: none;
+  color: var(--primary);
+}
+.deps-toggle > svg:last-child {
+  margin-left: auto;
+  color: var(--text-muted);
+  transition: transform 0.2s var(--ease-out);
+}
+.deps-toggle > svg.rotate {
+  transform: rotate(180deg);
+}
+.deps-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.deps-body {
+  display: grid;
+  gap: 10px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--border);
+}
+.deps-filter .control-trigger {
+  width: auto;
+  min-width: 190px;
+}
+.deps-mods {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.deps-mod {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+}
+.deps-mod-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 13px;
+}
+.deps-source {
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--text-muted);
+}
+.deps-group h5 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.deps-group ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.deps-group li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+}
+.deps-group li > .compat-badge {
+  flex: none;
+}
+.deps-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  min-width: 0;
+}
+.deps-entry code {
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.deps-relation {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warning);
+}
+.deps-detail {
+  flex-basis: 100%;
+  color: var(--text-muted);
+  line-height: 1.45;
+}

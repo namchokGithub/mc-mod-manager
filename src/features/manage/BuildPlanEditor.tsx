@@ -25,7 +25,8 @@ import {
   orderedBatches,
   unassignMod,
 } from "../../lib/batches";
-import type { Batch, ChecklistItem } from "../../lib/schema";
+import { DependencyOverview } from "../../components/DependencyOverview";
+import type { Batch, ChecklistItem, Mod } from "../../lib/schema";
 import { useRetained } from "../../lib/useRetained";
 
 const plural = (count: number, word: string) =>
@@ -104,9 +105,11 @@ function ChecklistRow({
 function BatchBody({
   batch,
   onChange,
+  onOpenMod,
 }: {
   batch: Batch;
   onChange: (batch: Batch) => void;
+  onOpenMod: (mod: Mod) => void;
 }) {
   const { data } = useCollection();
   const [step, setStep] = useState("");
@@ -182,6 +185,12 @@ function BatchBody({
           <p className="mr-hint">No mods in this batch yet.</p>
         )}
       </section>
+      <DependencyOverview
+        batchId={batch.id}
+        plan={data.batches}
+        mods={data.mods}
+        onOpenMod={onOpenMod}
+      />
       <section aria-labelledby={`${addId}-steps`}>
         <h4 id={`${addId}-steps`}>Checklist</h4>
         {batch.checklist.length ? (
@@ -251,7 +260,11 @@ function BatchBody({
 }
 
 /** Manage → Build plan: ordered installation batches that reference mods by ID. */
-export function BuildPlanEditor() {
+export function BuildPlanEditor({
+  onOpenMod,
+}: {
+  onOpenMod: (mod: Mod) => void;
+}) {
   const { data, updateBatches } = useCollection();
   const notify = useToast();
   const batches = orderedBatches(data.batches);
@@ -415,7 +428,11 @@ export function BuildPlanEditor() {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
                     >
-                      <BatchBody batch={batch} onChange={replace} />
+                      <BatchBody
+                        batch={batch}
+                        onChange={replace}
+                        onOpenMod={onOpenMod}
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>

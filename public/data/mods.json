@@ -309,5 +309,120 @@
       "dependencies": [],
       "syncedAt": "2026-10-17T14:50:56.085Z"
     }
+  },
+  {
+    "id": "xaeros-minimap",
+    "name": "Xaero's Minimap",
+    "version": "neoforge-26.1.2-26.6.0",
+    "category": "Adventure",
+    "tags": [
+      "Transportation",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/xaeros-minimap",
+    "description": "Displays a map of the nearby world terrain, players, mobs, entities in the corner of your screen. Lets you create waypoints which help you find the locations you've marked.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/1bokaNcj/354080f65407e49f486fcf9c4580e82c45ae63b8_96.webp",
+    "modrinth": {
+      "projectId": "1bokaNcj",
+      "slug": "xaeros-minimap",
+      "versionId": "ZI7Tpeut",
+      "versionNumber": "neoforge-26.1.2-26.6.0",
+      "versionType": "release",
+      "datePublished": "2026-10-05T07:47:20.040589Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "gF3BGWvG",
+          "versionId": null,
+          "type": "optional",
+          "name": "Open Parties and Claims"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:19:15.791Z"
+    }
+  },
+  {
+    "id": "xaeros-world-map",
+    "name": "Xaero's World Map",
+    "version": "neoforge-26.1.2-1.47.0",
+    "category": "Adventure",
+    "tags": [
+      "Transportation",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/xaeros-world-map",
+    "description": "Adds a full screen world map which shows you what you have explored in the world. Works great together with Xaero's Minimap.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/NcUtCpym/354080f65407e49f486fcf9c4580e82c45ae63b8_96.webp",
+    "modrinth": {
+      "projectId": "NcUtCpym",
+      "slug": "xaeros-world-map",
+      "versionId": "Hv4T7Eyr",
+      "versionNumber": "neoforge-26.1.2-1.47.0",
+      "versionType": "release",
+      "datePublished": "2026-10-05T07:32:38.232040Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "gF3BGWvG",
+          "versionId": null,
+          "type": "optional",
+          "name": "Open Parties and Claims"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:19:30.085Z"
+    }
+  },
+  {
+    "id": "immediatelyfast-2",
+    "name": "ImmediatelyFast",
+    "version": "1.15.3+26.1-neoforge",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/immediatelyfast",
+    "description": "Speed up immediate mode rendering in Minecraft",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/5ZwdcRci/e57b6b451425692ac17ad322d5e14bea686a383a_96.webp",
+    "modrinth": {
+      "projectId": "5ZwdcRci",
+      "slug": "immediatelyfast",
+      "versionId": "adbrNJLm",
+      "versionNumber": "1.15.3+26.1-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-06-30T22:02:27.787010Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:23:10.143Z"
+    }
   }
 ]

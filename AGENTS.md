@@ -24,6 +24,7 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - Keep Preview and Manage on a single shared data state. Drafts sync across tabs through the `storage` event in `DataProvider`; do not write a draft that arrived from another tab back to storage.
 - Modules shared with `vite-plugins` (`src/lib/schema.ts`, `json.ts`, `localSaveProtocol.ts`, `heroImage.ts`) must stay DOM-free.
 - The build plan (`public/data/batches.json`, `src/lib/batches.ts`) references mods by ID only and never copies mod objects. It is part of `Collection`, so drafts, save status, local save, and import/export cover it. Checklist `done` never changes a mod's `status`.
+- Dependency overview (`src/lib/dependencyOverview.ts`) reuses existing dependency data: `modrinth.dependencies`, then `file.dependencies`, then the manual `dependencies` list. It matches only by identifiers in the same namespace, never by name. Missing metadata is Unknown, not "no dependencies". It is read-only.
 - List selection is keyed by mod ID, never by index. Keep pagination and selection logic pure in `src/lib/pagination.ts`.
 - New JSON fields must be optional so existing files and drafts keep loading. Schemas live in `src/lib/schema.ts`.
 - Keep Modrinth code split: `src/lib/modrinth/api.ts` (requests and response validation), `mapping.ts` (pure mapping), `service.ts` (orchestration and caching). Compatibility (`src/lib/compatibility.ts`) and update status (`src/lib/updates.ts`) stay pure and read-only; they never modify mods.

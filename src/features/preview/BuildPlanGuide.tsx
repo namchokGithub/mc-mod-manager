@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, ChevronDown, Circle, CircleCheck } from "lucide-react";
 import { CompatBadge } from "../../components/CompatBadge";
+import { DependencyOverview } from "../../components/DependencyOverview";
 import { ModArtwork } from "../../components/ModArtwork";
 import { batchMods, orderedBatches } from "../../lib/batches";
 import { statusLabel, type CompatResult } from "../../lib/compatibility";
@@ -156,6 +157,12 @@ export function BuildPlanGuide({
                       {!batchList.length && !missing.length && (
                         <p className="mr-hint">No mods in this batch yet.</p>
                       )}
+                      <DependencyOverview
+                        batchId={batch.id}
+                        plan={plan}
+                        mods={mods}
+                        onOpenMod={onOpenMod}
+                      />
                       {batch.checklist.length > 0 && (
                         <ol className="plan-steps plan-steps-readonly">
                           {batch.checklist.map((item) => (
