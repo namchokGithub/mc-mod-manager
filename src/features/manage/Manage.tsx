@@ -342,7 +342,7 @@ function ModEditor({
         </Field>
       </div>
       <div className="dialog-actions dialog-actions-sticky">
-        <UnsavedHint show={isDirty} />
+        <UnsavedHint show={unsaved} />
         <Button type="button" variant="ghost" onClick={onCancel}>
           Cancel
         </Button>
