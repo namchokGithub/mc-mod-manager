@@ -17,7 +17,7 @@ export type ImportCandidate = {
   match?: JarMatch | null;
 };
 
-export type Duplicate = { reason: string; modName: string };
+export type Duplicate = { reason: string; modName: string; modId?: string };
 
 const normalize = (value: string | undefined) =>
   (value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -59,7 +59,7 @@ export function findPackDuplicate(
   ];
   for (const [reason, test] of checks) {
     const mod = mods.find(test);
-    if (mod) return { reason, modName: mod.name };
+    if (mod) return { reason, modName: mod.name, modId: mod.id };
   }
   return null;
 }
@@ -141,5 +141,33 @@ export function candidateToMod(
     notes,
     imageUrl: "",
     file,
+  };
+}
+
+/**
+ * Applies a JAR (and its Modrinth match, if any) to a mod already in the list, for example one
+ * added by name only. ID, name, status, side, notes, and batch references are kept; text fields
+ * are only filled when empty; the JAR metadata and a verified Modrinth match are attached.
+ */
+export function mergeCandidateIntoMod(
+  existing: Mod,
+  candidate: ImportCandidate,
+  syncedAt?: string,
+): Mod {
+  const incoming = candidateToMod(candidate, [], syncedAt);
+  const fill = (current: string, next: string) => current.trim() || next;
+  return {
+    ...existing,
+    version: fill(existing.version, incoming.version),
+    sourceUrl: fill(existing.sourceUrl, incoming.sourceUrl),
+    description: fill(existing.description, incoming.description),
+    imageUrl: fill(existing.imageUrl, incoming.imageUrl),
+    tags: existing.tags.length ? existing.tags : incoming.tags,
+    dependencies: existing.dependencies.length
+      ? existing.dependencies
+      : incoming.dependencies,
+    ...(incoming.file && { file: incoming.file }),
+    // Only a hash match is verified; without one, existing Modrinth data is left alone.
+    ...(incoming.modrinth && { modrinth: incoming.modrinth }),
   };
 }

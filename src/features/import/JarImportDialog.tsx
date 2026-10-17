@@ -16,7 +16,9 @@ import {
   findPackDuplicate,
   sha1Hex,
   type ImportCandidate,
+  mergeCandidateIntoMod,
 } from "../../lib/jar/importing";
+import { describeChanges } from "../../lib/modChanges";
 import { parseJar, type JarLoader } from "../../lib/jar/metadata";
 import { modrinth, ModrinthError } from "../../lib/modrinth/api";
 import { loaderLabels, normalizeLoader } from "../../lib/modrinth/mapping";
@@ -47,13 +49,16 @@ export function JarImportDialog({
 }: {
   mods: Mod[];
   modpack: Modpack;
-  onImport: (mods: Mod[]) => boolean;
+  /** `updated` holds existing mods (same IDs) to replace with merged JAR metadata. */
+  onImport: (created: Mod[], updated: Mod[]) => boolean;
   onCancel: () => void;
 }) {
   const fileInput = useRef<HTMLInputElement>(null);
   const folderInput = useRef<HTMLInputElement>(null);
   const [rows, setRows] = useState<Row[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  // Rows that update the mod they match instead of being added as new mods.
+  const [updates, setUpdates] = useState<Set<string>>(new Set());
   const [progress, setProgress] = useState<{
     done: number;
     total: number;
@@ -149,24 +154,59 @@ export function JarImportDialog({
     }
   };
 
-  const toggle = (key: string) =>
+  const toggle = (key: string) => {
     setSelected((current) => {
       const next = new Set(current);
       if (next.has(key)) next.delete(key);
       else next.add(key);
       return next;
     });
+    // Adding as new and updating an existing mod are exclusive.
+    setUpdates((current) => {
+      const next = new Set(current);
+      next.delete(key);
+      return next;
+    });
+  };
+
+  const updateTarget = (row: Row) => {
+    const modId = duplicates.get(row.key)?.modId;
+    return modId ? mods.find((mod) => mod.id === modId) : undefined;
+  };
+  const toggleUpdate = (key: string) => {
+    setUpdates((current) => {
+      const next = new Set(current);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+    setSelected((current) => {
+      const next = new Set(current);
+      next.delete(key);
+      return next;
+    });
+  };
 
   const confirm = () => {
     const syncedAt = new Date().toISOString();
     const created: Mod[] = [];
+    const updated: Mod[] = [];
     for (const row of rows) {
+      const target = updates.has(row.key) ? updateTarget(row) : undefined;
+      if (target) {
+        const parsed = modSchema.safeParse(
+          mergeCandidateIntoMod(target, row, syncedAt),
+        );
+        if (parsed.success) updated.push(parsed.data);
+        continue;
+      }
       if (!selected.has(row.key)) continue;
       const mod = candidateToMod(row, [...mods, ...created], syncedAt);
       const parsed = modSchema.safeParse(mod);
       if (parsed.success) created.push(parsed.data);
     }
-    if (created.length && onImport(created)) onCancel();
+    if ((created.length || updated.length) && onImport(created, updated))
+      onCancel();
   };
 
   if (progress)
@@ -466,6 +506,43 @@ export function JarImportDialog({
                   ))}
                 </span>
               </label>
+              {(() => {
+                const target = updateTarget(row);
+                if (!target) return null;
+                const changes = describeChanges(
+                  target,
+                  mergeCandidateIntoMod(target, row),
+                );
+                return (
+                  <div className="jar-update">
+                    <label className="mr-check">
+                      <input
+                        type="checkbox"
+                        checked={updates.has(row.key)}
+                        onChange={() => toggleUpdate(row.key)}
+                      />
+                      Update “{target.name}” with this file instead (keeps its
+                      ID, batches, notes, and status)
+                    </label>
+                    {updates.has(row.key) && (
+                      <ul className="jar-update-changes">
+                        {changes.length ? (
+                          changes.map((change) => (
+                            <li key={change.field}>
+                              <strong>{change.label}</strong>:{" "}
+                              {change.overwrites
+                                ? `replaces “${change.from}” with “${change.to}”`
+                                : `fills in “${change.to}”`}
+                            </li>
+                          ))
+                        ) : (
+                          <li>Nothing new to add.</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })()}
             </li>
           );
         })}
@@ -475,11 +552,13 @@ export function JarImportDialog({
           Cancel
         </Button>
         <Button
-          disabled={!selected.size || matching !== null}
+          disabled={(!selected.size && !updates.size) || matching !== null}
           onClick={confirm}
         >
-          <Upload size={16} /> Import {selected.size}{" "}
-          {selected.size === 1 ? "mod" : "mods"}
+          <Upload size={16} />
+          {updates.size
+            ? `Import ${selected.size}, update ${updates.size}`
+            : `Import ${selected.size} ${selected.size === 1 ? "mod" : "mods"}`}
         </Button>
       </div>
     </div>

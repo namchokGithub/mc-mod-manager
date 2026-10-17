@@ -30,6 +30,7 @@ import {
   projectFromResponse,
   type ModrinthProject,
 } from "../../lib/modrinth/mapping";
+import { describeChanges } from "../../lib/modChanges";
 import {
   cachedProjectVersions,
   resolveDependencies,
@@ -634,6 +635,32 @@ export function ModrinthPicker({
               Not checked because this mod is {candidate.status}.
             </p>
           ) : null}
+        </section>
+      )}
+      {existing && candidate && (
+        <section className="mr-compat" aria-live="polite">
+          <h4>Changes to “{existing.name}”</h4>
+          {(() => {
+            const changes = describeChanges(existing, candidate);
+            return changes.length ? (
+              <ul className="jar-update-changes">
+                {changes.map((change) => (
+                  <li key={change.field}>
+                    <strong>{change.label}</strong>:{" "}
+                    {change.overwrites
+                      ? `replaces “${change.from}” with “${change.to}”`
+                      : `fills in “${change.to}”`}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mr-hint">Nothing would change.</p>
+            );
+          })()}
+          <p className="mr-hint">
+            The ID, name, status, notes, and batch assignments stay the same.
+            You can review everything again before saving.
+          </p>
         </section>
       )}
       <div className="dialog-actions">

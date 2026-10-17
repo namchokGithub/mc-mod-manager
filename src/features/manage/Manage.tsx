@@ -21,6 +21,7 @@ import {
   Info,
   LayoutDashboard,
   ListChecks,
+  ListPlus,
   LoaderCircle,
   Pencil,
   Plus,
@@ -81,6 +82,7 @@ import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { BuildPlanEditor } from "./BuildPlanEditor";
 import { PlanningDashboard } from "./PlanningDashboard";
+import { QuickAddDialog } from "./QuickAddDialog";
 import { CompatibilityPanel } from "./CompatibilityPanel";
 import {
   SupportedLoadersField,
@@ -950,6 +952,7 @@ export function Manage() {
   } = useCollection();
   const notify = useToast();
   const [importingJars, setImportingJars] = useState(false);
+  const [quickAdding, setQuickAdding] = useState(false);
   const [updates, setUpdates] = useState<{
     results: Map<string, UpdateResult>;
     at: Date;
@@ -1102,9 +1105,17 @@ export function Manage() {
       setCheckingUpdates(false);
     }
   };
-  const importJars = (created: Mod[]) => {
+  // New mods are appended; updated mods replace their existing record (same ID, so batch
+  // assignments stay). All in one draft change.
+  const importJars = (created: Mod[], updated: Mod[] = []) => {
+    const byId = new Map(updated.map((mod) => [mod.id, mod]));
     try {
-      importMods(modsSchema.parse([...data.mods, ...created]));
+      importMods(
+        modsSchema.parse([
+          ...data.mods.map((mod) => byId.get(mod.id) ?? mod),
+          ...created,
+        ]),
+      );
     } catch {
       notify({
         kind: "error",
@@ -1114,8 +1125,32 @@ export function Manage() {
       return false;
     }
     notify({
-      title: `Imported ${created.length} ${created.length === 1 ? "mod" : "mods"}`,
-      description: "Added to your local draft as installed.",
+      title: [
+        created.length &&
+          `Imported ${created.length} ${created.length === 1 ? "mod" : "mods"}`,
+        updated.length &&
+          `updated ${updated.length} ${updated.length === 1 ? "mod" : "mods"}`,
+      ]
+        .filter(Boolean)
+        .join(", "),
+      description: "Stored in this browser’s draft.",
+    });
+    return true;
+  };
+  const quickAdd = (created: Mod[]) => {
+    try {
+      importMods(modsSchema.parse([...data.mods, ...created]));
+    } catch {
+      notify({
+        kind: "error",
+        title: "Mods not added",
+        description: "The new entries did not pass validation.",
+      });
+      return false;
+    }
+    notify({
+      title: `Added ${created.length} ${created.length === 1 ? "mod" : "mods"}`,
+      description: "Planned, with details still unknown.",
     });
     return true;
   };
@@ -1331,6 +1366,12 @@ export function Manage() {
                       <p>Add, edit, and organize the mods in your pack.</p>
                     </div>
                     <div className="section-head-actions">
+                      <Button
+                        variant="secondary"
+                        onClick={() => setQuickAdding(true)}
+                      >
+                        <ListPlus size={16} /> Quick add
+                      </Button>
                       <Button
                         variant="secondary"
                         onClick={() => setImportingJars(true)}
@@ -1816,6 +1857,12 @@ export function Manage() {
           onCancel={() => setImportingJars(false)}
         />
       </Dialog>
+      <QuickAddDialog
+        open={quickAdding}
+        onOpenChange={setQuickAdding}
+        mods={data.mods}
+        onAdd={quickAdd}
+      />
       <Dialog
         open={confirmDiscard !== null}
         onOpenChange={(open) => !open && setConfirmDiscard(null)}

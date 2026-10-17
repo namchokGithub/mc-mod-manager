@@ -409,7 +409,7 @@ describe("duplicate detection", () => {
       findPackDuplicate(candidate({ modId: "other" }, { sha1 }), [
         { ...baseMod, file: { name: "x.jar", sha1 } },
       ]),
-    ).toEqual({ reason: "Same file", modName: "Sodium" });
+    ).toEqual({ reason: "Same file", modName: "Sodium", modId: "sodium" });
   });
 
   it("finds duplicates by mod ID and by name", () => {

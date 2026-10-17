@@ -3858,3 +3858,59 @@ main:focus {
     flex: 1 1 auto;
   }
 }
+
+/* Quick add and "update existing" previews */
+.quick-add {
+  display: grid;
+  gap: 12px;
+}
+.quick-add-options {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+.quick-add-options .form-field {
+  flex: 1 1 220px;
+}
+.quick-add-preview {
+  display: grid;
+  gap: 6px;
+}
+.quick-add-preview ul {
+  display: grid;
+  gap: 4px;
+  max-height: 220px;
+  margin: 0;
+  padding: 8px 10px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+  list-style: none;
+  font-size: 13px;
+}
+.quick-add-preview li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.quick-add-preview li.quick-add-skip > span:first-child {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+.jar-update {
+  display: grid;
+  gap: 6px;
+  padding: 0 12px 11px 38px;
+}
+.jar-update-changes {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
