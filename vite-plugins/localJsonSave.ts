@@ -10,6 +10,8 @@ import {
   formatValidationError,
   modpackSchema,
   modsSchema,
+  batchFileSchema,
+  emptyBatchFile,
 } from "../src/lib/schema";
 
 const MAX_BODY_BYTES = 5 * 1024 * 1024;
@@ -60,13 +62,24 @@ function diskFingerprint(text: string | null, schema: ZodType): string | null {
   }
 }
 
-export type CurrentFiles = { modpack: string | null; mods: string | null };
+export type CurrentFiles = {
+  modpack: string | null;
+  mods: string | null;
+  batches?: string | null;
+};
 export type SavePlan = {
   status: number;
   body: Record<string, unknown>;
-  /** Present only when the files should be written. */
-  files?: { modpack: string; mods: string };
+  /** Present only when the files should be written; `batches` only when the request has a plan. */
+  files?: { modpack: string; mods: string; batches?: string };
 };
+
+// A missing batches.json is the same as an empty build plan.
+function batchesFingerprint(text: string | null | undefined): string | null {
+  return text === null || text === undefined
+    ? fingerprint(serializeJson(emptyBatchFile()))
+    : diskFingerprint(text, batchFileSchema);
+}
 
 /**
  * Validates a save request against the shared schemas and the files currently on disk.
@@ -81,7 +94,8 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
   const request = input as {
     modpack?: unknown;
     mods?: unknown;
-    baseline?: { modpack?: unknown; mods?: unknown };
+    batches?: unknown;
+    baseline?: { modpack?: unknown; mods?: unknown; batches?: unknown };
     force?: unknown;
   };
   const modpack = modpackSchema.safeParse(request.modpack);
@@ -96,6 +110,15 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       status: 400,
       body: { error: `mods.json: ${formatValidationError(mods.error)}` },
     };
+  const batches =
+    request.batches === undefined
+      ? undefined
+      : batchFileSchema.safeParse(request.batches);
+  if (batches && !batches.success)
+    return {
+      status: 400,
+      body: { error: `batches.json: ${formatValidationError(batches.error)}` },
+    };
   if (request.force !== true) {
     const disk = {
       modpack: diskFingerprint(current.modpack, modpackSchema),
@@ -105,7 +128,9 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       !disk.modpack ||
       !disk.mods ||
       request.baseline?.modpack !== disk.modpack ||
-      request.baseline?.mods !== disk.mods
+      request.baseline?.mods !== disk.mods ||
+      (batches !== undefined &&
+        request.baseline?.batches !== batchesFingerprint(current.batches))
     )
       return {
         status: 409,
@@ -119,6 +144,7 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
   const files = {
     modpack: serializeJson(modpack.data),
     mods: serializeJson(mods.data),
+    ...(batches && { batches: serializeJson(batches.data) }),
   };
   return {
     status: 200,
@@ -126,6 +152,7 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       ok: true,
       modpack: modpack.data,
       mods: mods.data,
+      ...(batches && { batches: batches.data }),
       fingerprints: {
         modpack: fingerprint(files.modpack),
         mods: fingerprint(files.mods),
@@ -197,8 +224,8 @@ function send(response: ServerResponse, status: number, body: unknown) {
 }
 
 /**
- * Dev-only endpoint that writes public/data/modpack.json and mods.json. `apply: "serve"` keeps it
- * out of production builds, and the two target paths are fixed here, never taken from the client.
+ * Dev-only endpoint that writes public/data/modpack.json, mods.json, and batches.json. `apply: "serve"` keeps it
+ * out of production builds, and the target paths are fixed here, never taken from the client.
  */
 export function localJsonSave(): Plugin {
   return {
@@ -209,6 +236,7 @@ export function localJsonSave(): Plugin {
       const targets = {
         modpack: path.join(dataDir, "modpack.json"),
         mods: path.join(dataDir, "mods.json"),
+        batches: path.join(dataDir, "batches.json"),
       };
       let saving = false;
       server.middlewares.use(SAVE_ENDPOINT, (request, response) => {
@@ -248,11 +276,15 @@ export function localJsonSave(): Plugin {
             const plan = planSave(input, {
               modpack: await readOptional(targets.modpack),
               mods: await readOptional(targets.mods),
+              batches: await readOptional(targets.batches),
             });
             if (plan.files)
               await commitFiles([
                 { target: targets.mods, text: plan.files.mods },
                 { target: targets.modpack, text: plan.files.modpack },
+                ...(plan.files.batches === undefined
+                  ? []
+                  : [{ target: targets.batches, text: plan.files.batches }]),
               ]);
             send(response, plan.status, plan.body);
           } catch (error) {

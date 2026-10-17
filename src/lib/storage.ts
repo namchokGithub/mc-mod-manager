@@ -1,12 +1,27 @@
 import { serializeJson } from "./json";
-import { collectionSchema, type Collection } from "./schema";
+import { collectionSchema, type BatchFile, type Collection } from "./schema";
 
 export const DRAFT_KEY = "mc-mod-manager:draft:v1";
 
-/** Parses stored draft text; returns null when it is not a valid collection. */
-export function parseDraft(raw: string): Collection | null {
+/**
+ * Parses stored draft text; returns null when it is not a valid collection. Drafts saved before
+ * the build plan existed have no `batches`; they take `fallbackBatches` so the plan is not lost.
+ */
+export function parseDraft(
+  raw: string,
+  fallbackBatches?: BatchFile,
+): Collection | null {
   try {
-    const parsed = collectionSchema.safeParse(JSON.parse(raw) as unknown);
+    const value = JSON.parse(raw) as unknown;
+    const withBatches =
+      fallbackBatches &&
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      !("batches" in value)
+        ? { ...value, batches: fallbackBatches }
+        : value;
+    const parsed = collectionSchema.safeParse(withBatches);
     return parsed.success ? parsed.data : null;
   } catch {
     return null;
@@ -50,7 +65,7 @@ export function loadDraft(
     return { draft: null, issue: null };
   }
   if (!raw) return { draft: null, issue: null };
-  const draft = readDraft(storage);
+  const draft = parseDraft(raw, published.batches);
   try {
     if (!draft) {
       storage.setItem(DRAFT_BACKUP_KEY, raw);

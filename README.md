@@ -17,12 +17,13 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 - **Manage** (local only): add, edit, duplicate, and delete mods; edit pack settings; per-row status, compatibility, and update badges.
 - **Large lists**: pagination (20, 50, or 100 per page), multi-select across pages, and bulk delete with confirmation.
 - **Save to local JSON**: writes `public/data/*.json` through the dev server, with validation and a conflict check.
-- **JSON import and export** for `modpack.json` and `mods.json`, validated before anything changes.
+- **JSON import and export** for `modpack.json`, `mods.json`, and `batches.json`, validated before anything changes.
 - **Local drafts** saved automatically in this browser's LocalStorage, kept in sync across open tabs, with warnings before unsaved form edits are lost.
 - **Modrinth search**: find a mod, filter its versions by game version and loader, review a compatibility preview, then add it through the normal form.
 - **Compatibility checker** (read-only): Minecraft version, modloader, required and incompatible dependencies, duplicate projects, and missing metadata. Results are Compatible, Warning, Incompatible, or Unknown.
 - **Update checker**: compares each linked mod with the versions Modrinth lists for the pack. Results are Up to date, Update available, or Unknown.
 - **JAR import**: reads `.jar` files or a mods folder locally, with an import preview and duplicate warnings.
+- **Build plan**: ordered installation batches with assigned mods and checklist steps, edited in Manage and shown on Preview as a read-only installation guide for building the pack in CurseForge.
 - **Light and dark themes**: light by default, with a toggle in the header. The choice is remembered in this browser.
 - **Toasts, confirmations, and reduced motion**: clear feedback for every change, confirmation before destructive actions, and animations that respect `prefers-reduced-motion`.
 
@@ -64,10 +65,12 @@ Open the Vite URL for Preview, or add `#/manage` for the editor. Manage and draf
 
 ## Data
 
-Published data lives in two files:
+Published data lives in `public/data/`:
 
 - `public/data/modpack.json`: one object with `name`, `description`, `version`, `minecraftVersion`, `modloader`, `modloaderVersion`, `author`, `updatedAt` (`YYYY-MM-DD`), and `heroImageUrl`.
 - `public/data/mods.json`: an array of mods. Each mod has `id` (unique), `name`, `version`, `category`, `tags`, `status` (`planned`, `testing`, `installed`, `disabled`, `removed`), `side` (`client`, `server`, `both`), `source` (`Modrinth`, `CurseForge`, `GitHub`, `Other`), `sourceUrl`, `description`, `dependencies`, `notes`, and `imageUrl`.
+
+- `public/data/batches.json` (optional; a missing file means an empty plan): `{ "version": 1, "batches": [...] }`. Each batch has `id`, `name`, `description`, `order` (1-based), `modIds` (references to mod `id`s, no duplicates within a batch; a mod may be in several batches), and `checklist` items `{ id, text, done }`. `done` tracks planning progress only and never changes a mod's status. Renaming a mod ID updates its references; deleting a mod removes them; references to mods that no longer exist are shown as missing.
 
 Optional fields added by later features. Files without them still load:
 
@@ -83,13 +86,13 @@ The schemas are in `src/lib/schema.ts`.
 **Editing in the browser never changes the published site.** The workflow is:
 
 1. Run `pnpm dev` and edit in **Manage**. Changes are saved as a draft in this browser's LocalStorage about half a second after each change. Preview in the same browser shows the draft.
-2. When ready, click **Save to local JSON** at the top of Manage and confirm. The dev server writes `public/data/modpack.json` and `public/data/mods.json` directly, and the draft is cleared. Exporting from **Manage → Data & export** and replacing the files by hand still works as a backup.
+2. When ready, click **Save to local JSON** at the top of Manage and confirm. The dev server writes `public/data/modpack.json`, `mods.json`, and `batches.json` directly, and the draft is cleared. Exporting from **Manage → Data & export** and replacing the files by hand still works as a backup.
 3. Commit and push the JSON files. The site updates after the GitHub Pages workflow finishes.
 
 Saving to local JSON:
 
 - It exists only while `pnpm dev` runs (a Vite dev-server plugin). Production builds and GitHub Pages have no write endpoint.
-- It accepts requests only from this computer, from the app's own localhost page. It writes only those two files, after validating them with the same schemas as import, and writes atomically (temporary file, then rename).
+- It accepts requests only from this computer, from the app's own localhost page. It writes only those three files, after validating them with the same schemas as import, and writes atomically (temporary file, then rename).
 - If the files changed on disk since the page loaded (for example, edited in an editor or by `git pull`), it shows a conflict and only overwrites after you confirm.
 - It never runs automatically. Edits keep autosaving to the browser draft until you click Save.
 

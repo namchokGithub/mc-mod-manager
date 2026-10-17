@@ -29,7 +29,7 @@ export function filterMods(mods: Mod[], filters: Filters): Mod[] {
     );
 }
 
-export function uniqueId(name: string, mods: Mod[]): string {
+export function uniqueId(name: string, mods: { id: string }[]): string {
   const base =
     name
       .trim()

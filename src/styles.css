@@ -3288,3 +3288,224 @@ main:focus {
   outline: 1px dashed currentColor;
   outline-offset: -1px;
 }
+
+/* Build plan: Manage editor and Preview guide */
+.plan-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.plan-batch {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.plan-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 10px;
+}
+.plan-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+.plan-toggle:hover {
+  background: var(--surface-hover);
+}
+.plan-toggle svg {
+  flex: none;
+  color: var(--text-muted);
+  transition: transform 0.2s var(--ease-out);
+}
+.plan-toggle svg.rotate {
+  transform: rotate(180deg);
+}
+.plan-order {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+.plan-title {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.plan-title strong {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.plan-title span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.plan-description {
+  margin: -6px 16px 12px 58px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.plan-collapse {
+  overflow: hidden;
+}
+.plan-body {
+  display: grid;
+  gap: 16px;
+  padding: 4px 16px 16px;
+  border-top: 1px solid var(--border);
+}
+.plan-body h4 {
+  margin: 12px 0 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.plan-mods {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.plan-mods li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+}
+.plan-mods .mod-artwork {
+  width: 34px;
+  height: 34px;
+}
+.plan-mod-name {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.plan-mod-name strong,
+.plan-mod-open {
+  font-size: 13px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.plan-mod-open {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 700;
+  text-align: left;
+}
+.plan-mod-open:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.plan-mod-note {
+  line-height: 1.45;
+}
+.plan-mod-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.plan-mod-link:hover {
+  text-decoration: underline;
+}
+.plan-missing {
+  border-style: dashed !important;
+}
+.plan-steps {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.plan-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.plan-steps-readonly .plan-step svg {
+  flex: none;
+  color: var(--text-subtle);
+}
+.plan-steps-readonly .plan-step.done svg {
+  color: var(--primary);
+}
+.plan-steps-readonly .plan-step.done span:not(.sr-only) {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+.plan-step-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+}
+.plan-step-input:focus {
+  outline: 0;
+  border-color: var(--primary);
+  box-shadow: var(--ring);
+}
+.plan-add-step {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.build-guide {
+  padding-bottom: 96px;
+}
+@media (max-width: 650px) {
+  .plan-head {
+    flex-wrap: wrap;
+    padding: 0 6px 6px;
+  }
+  .plan-head .row-actions {
+    margin-left: auto;
+  }
+  .plan-description {
+    margin-left: 16px;
+  }
+  .plan-mods li {
+    flex-wrap: wrap;
+  }
+  .plan-add-step {
+    flex-direction: column;
+  }
+}

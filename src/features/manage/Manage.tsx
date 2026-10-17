@@ -19,6 +19,7 @@ import {
   HardDriveDownload,
   FileJson2,
   Info,
+  ListChecks,
   LoaderCircle,
   Pencil,
   Plus,
@@ -68,6 +69,7 @@ import {
   modsSchema,
   modpackSchema,
   parseJsonFile,
+  type BatchFile,
   type Mod,
   type Modpack,
 } from "../../lib/schema";
@@ -76,6 +78,7 @@ import { saveStatusLabels } from "../../lib/saveStatus";
 import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
+import { BuildPlanEditor } from "./BuildPlanEditor";
 import { CompatibilityPanel } from "./CompatibilityPanel";
 import {
   SupportedLoadersField,
@@ -83,7 +86,7 @@ import {
 } from "./CompatibilityFields";
 import { UpdateBadge } from "./UpdateBadge";
 
-type Tab = "mods" | "settings" | "data";
+type Tab = "mods" | "settings" | "plan" | "data";
 const initialFilters: Filters = {
   query: "",
   category: "",
@@ -630,30 +633,48 @@ function SettingsForm({
 }
 
 function DataTools() {
-  const { data, dirty, importModpack, importMods, reset } = useCollection();
+  const { data, dirty, importModpack, importMods, importBatches, reset } =
+    useCollection();
   const notify = useToast();
   const [importError, setImportError] = useState("");
-  const [importing, setImporting] = useState<"modpack" | "mods" | null>(null);
+  const [importing, setImporting] = useState<
+    "modpack" | "mods" | "batches" | null
+  >(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [pendingImport, setPendingImport] = useState<
     | { kind: "modpack"; fileName: string; value: Modpack }
     | { kind: "mods"; fileName: string; value: Mod[] }
+    | { kind: "batches"; fileName: string; value: BatchFile }
     | null
   >(null);
   const shownImport = useRetained(pendingImport);
   const modpackFileRef = useRef<HTMLInputElement>(null);
   const modsFileRef = useRef<HTMLInputElement>(null);
-  const onImport = async (kind: "modpack" | "mods", file?: File) => {
+  const batchesFileRef = useRef<HTMLInputElement>(null);
+  const onImport = async (
+    kind: "modpack" | "mods" | "batches",
+    file?: File,
+  ) => {
     if (!file) return;
     setImporting(kind);
     try {
-      const parsed = parseJsonFile(await file.text(), kind);
+      const text = await file.text();
       setImportError("");
       // Valid files still replace current data, so they wait for confirmation.
       setPendingImport(
-        kind === "modpack"
-          ? { kind, fileName: file.name, value: parsed as Modpack }
-          : { kind, fileName: file.name, value: parsed as Mod[] },
+        kind === "batches"
+          ? { kind, fileName: file.name, value: parseJsonFile(text, kind) }
+          : kind === "modpack"
+            ? {
+                kind,
+                fileName: file.name,
+                value: parseJsonFile(text, kind) as Modpack,
+              }
+            : {
+                kind,
+                fileName: file.name,
+                value: parseJsonFile(text, kind) as Mod[],
+              },
       );
     } catch (error) {
       setImportError(
@@ -671,6 +692,8 @@ function DataTools() {
   const applyImport = () => {
     if (!pendingImport) return;
     if (pendingImport.kind === "modpack") importModpack(pendingImport.value);
+    else if (pendingImport.kind === "batches")
+      importBatches(pendingImport.value);
     else importMods(pendingImport.value);
     notify({
       title: `${pendingImport.fileName} imported`,
@@ -696,7 +719,7 @@ function DataTools() {
         <Info size={18} />
         <p>
           Changes are saved only in this browser. Use “Save to local JSON” at
-          the top of Manage to write public/data/*.json directly, or export both
+          the top of Manage to write public/data/*.json directly, or export the
           files here as a backup. Commit the files to update the published site.
         </p>
       </div>
@@ -796,6 +819,45 @@ function DataTools() {
             }}
           />
         </div>
+        <div className="data-card">
+          <div className="data-card-icon">
+            <ListChecks size={22} />
+          </div>
+          <h3>Build plan</h3>
+          <p>Installation batches, their order, mods, and checklist steps.</p>
+          <div className="data-card-actions">
+            <Button
+              variant="secondary"
+              size="small"
+              disabled={importing !== null}
+              onClick={() => batchesFileRef.current?.click()}
+            >
+              {importing === "batches" ? (
+                <LoaderCircle className="spin" size={15} aria-hidden="true" />
+              ) : (
+                <ArrowUpFromLine size={15} />
+              )}
+              {importing === "batches" ? "Importing…" : "Import"}
+            </Button>
+            <Button
+              variant="secondary"
+              size="small"
+              onClick={() => onExport("batches.json", data.batches)}
+            >
+              <ArrowDownToLine size={15} /> Export
+            </Button>
+          </div>
+          <input
+            ref={batchesFileRef}
+            className="sr-only"
+            type="file"
+            accept=".json,application/json"
+            onChange={(event) => {
+              void onImport("batches", event.currentTarget.files?.[0]);
+              event.currentTarget.value = "";
+            }}
+          />
+        </div>
       </div>
       <div className="danger-zone">
         <div>
@@ -846,12 +908,16 @@ function DataTools() {
         title={
           shownImport?.kind === "mods"
             ? "Replace the mod collection?"
-            : "Replace the pack settings?"
+            : shownImport?.kind === "batches"
+              ? "Replace the build plan?"
+              : "Replace the pack settings?"
         }
         description={
           shownImport?.kind === "mods"
             ? `${shownImport.fileName} has ${shownImport.value.length} ${shownImport.value.length === 1 ? "mod" : "mods"}. They will replace the ${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"} in your draft, including notes. Save to local JSON or export first if you want to keep the current list.`
-            : `${shownImport?.fileName ?? "This file"} will replace the name, description, versions, and hero image in your draft.`
+            : shownImport?.kind === "batches"
+              ? `${shownImport.fileName} has ${shownImport.value.batches.length} ${shownImport.value.batches.length === 1 ? "batch" : "batches"}. They will replace the ${data.batches.batches.length} in your draft, including checklist progress. Mods are not changed.`
+              : `${shownImport?.fileName ?? "This file"} will replace the name, description, versions, and hero image in your draft.`
         }
       >
         <div className="dialog-actions dialog-actions-flush">
@@ -1203,6 +1269,15 @@ export function Manage() {
           </button>
           <button
             type="button"
+            className={tab === "plan" ? "sidebar-item active" : "sidebar-item"}
+            aria-current={tab === "plan" ? "page" : undefined}
+            onClick={() => changeTab("plan")}
+          >
+            <ListChecks size={18} /> Build plan{" "}
+            <span>{data.batches.batches.length}</span>
+          </button>
+          <button
+            type="button"
             className={tab === "data" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "data" ? "page" : undefined}
             onClick={() => changeTab("data")}
@@ -1516,6 +1591,7 @@ export function Manage() {
                   }}
                 />
               )}
+              {tab === "plan" && <BuildPlanEditor />}
               {tab === "data" && <DataTools />}
             </motion.div>
           </AnimatePresence>

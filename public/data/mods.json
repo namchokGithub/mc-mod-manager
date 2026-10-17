@@ -12,7 +12,15 @@
     "description": "Have you ever been annoyed with Thai fonts that float?",
     "dependencies": [],
     "notes": "",
-    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1102/263/64/64/638650253815005923.png"
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1102/263/64/64/638650253815005923.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    }
   },
   {
     "id": "appleskin",
@@ -72,6 +80,234 @@
       "loaders": [
         "neoforge"
       ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    }
+  },
+  {
+    "id": "jei",
+    "name": "Just Enough Items (JEI)",
+    "version": "29.47.0.110",
+    "category": "Library",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jei",
+    "description": "View Items and Recipes",
+    "dependencies": [
+      "MezzConfig"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/u6dRKJwZ/4a3f18ac0d096c9f8e9176984c44be4e58f94c89_96.webp",
+    "modrinth": {
+      "projectId": "u6dRKJwZ",
+      "slug": "jei",
+      "versionId": "7qmEzno8",
+      "versionNumber": "29.47.0.110",
+      "versionType": "release",
+      "datePublished": "2026-10-15T16:20:32.740109Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "7tEfOcA7",
+          "versionId": null,
+          "type": "required",
+          "name": "MezzConfig"
+        },
+        {
+          "projectId": "BOHUKqOz",
+          "versionId": null,
+          "type": "optional",
+          "name": "MezzConfigGUI"
+        }
+      ],
+      "syncedAt": "2026-10-17T14:42:11.392Z"
+    }
+  },
+  {
+    "id": "mezzconfig",
+    "name": "MezzConfig",
+    "version": "0.6.8",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mezzconfig",
+    "description": "Simple configuration library for Minecraft Mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/7tEfOcA7/afd8afef2372805ff11f89425284129eebf87a1c_96.webp",
+    "modrinth": {
+      "projectId": "7tEfOcA7",
+      "slug": "mezzconfig",
+      "versionId": "ZK7XIgVN",
+      "versionNumber": "0.6.8",
+      "versionType": "beta",
+      "datePublished": "2026-10-03T15:38:17.150784Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T14:42:37.329Z"
+    }
+  },
+  {
+    "id": "jade",
+    "name": "Jade 🔍",
+    "version": "26.1.12+neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jade",
+    "description": "Shows information about what you are looking at. (Hwyla/Waila fork for Minecraft 1.16+)",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/nvQzSEkH/b04217bc2b7dc524c4d12f81ff42cc1cefb9b0fc_96.webp",
+    "modrinth": {
+      "projectId": "nvQzSEkH",
+      "slug": "jade",
+      "versionId": "Pr1h4azo",
+      "versionNumber": "26.1.12+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-13T12:29:42.519766Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        }
+      ],
+      "syncedAt": "2026-10-17T14:43:25.050Z"
+    }
+  },
+  {
+    "id": "mouse-tweaks",
+    "name": "Mouse Tweaks",
+    "version": "26.1-2.31-neoforge",
+    "category": "Storage",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mouse-tweaks",
+    "description": "Enhances inventory management by adding various functions to the mouse buttons. ",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/aC3cM3Vq/6c0eaa4e60a9c87f4766f222ff63286f09da32c0_96.webp",
+    "modrinth": {
+      "projectId": "aC3cM3Vq",
+      "slug": "mouse-tweaks",
+      "versionId": "Vd1fgVcT",
+      "versionNumber": "26.1-2.31-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-03-29T13:38:34.215512Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T14:49:39.509Z"
+    }
+  },
+  {
+    "id": "modernfix",
+    "name": "ModernFix",
+    "version": "5.27.24+mc26.1.2",
+    "category": "Optimization",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/modernfix",
+    "description": "All-in-one mod that improves performance, reduces memory usage, and fixes many bugs. Compatible with all your favorite performance mods!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/nmDcB62a/2af94de5e08ae54567ee86b968fc7ce076d9fee5_96.webp",
+    "modrinth": {
+      "projectId": "nmDcB62a",
+      "slug": "modernfix",
+      "versionId": "mKbwUMKg",
+      "versionNumber": "5.27.24+mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-08T20:39:12.713639Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T14:50:34.911Z"
+    }
+  },
+  {
+    "id": "sodium",
+    "name": "Sodium",
+    "version": "mc26.1.2-0.9.2-neoforge",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sodium",
+    "description": "A high-performance rendering engine replacement for Minecraft, which greatly improves frame rates and reduces micro-stutter.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/AANobbMI/295862f4724dc3f78df3447ad6072b2dcd3ef0c9_96.webp",
+    "modrinth": {
+      "projectId": "AANobbMI",
+      "slug": "sodium",
+      "versionId": "zg4YQ9EL",
+      "versionNumber": "mc26.1.2-0.9.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-11T18:18:37.088803Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T14:50:56.085Z"
     }
   }
 ]

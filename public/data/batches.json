@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "batches": [
+    {
+      "id": "batch-1-foundation",
+      "name": "Batch 1 — Foundation",
+      "description": "สำหรับ Modpack Helloworld: Beyond the Descendant เริ่มจาก Mods พื้นฐานก่อน โดยเน้นให้เกมเปิดได้เสถียร เล่น Multiplayer ได้ และมีประสิทธิภาพดี",
+      "order": 1,
+      "modIds": [
+        "appleskin"
+      ],
+      "checklist": [
+        {
+          "id": "step-1",
+          "text": "A",
+          "done": false
+        },
+        {
+          "id": "step-2",
+          "text": "B",
+          "done": false
+        }
+      ]
+    }
+  ]
+}

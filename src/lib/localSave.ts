@@ -36,9 +36,11 @@ export async function saveToLocalJson(
       body: JSON.stringify({
         modpack: collection.modpack,
         mods: collection.mods,
+        batches: collection.batches,
         baseline: {
           modpack: await fingerprint(baseline.modpack),
           mods: await fingerprint(baseline.mods),
+          batches: await fingerprint(baseline.batches),
         },
         force,
       }),
@@ -68,6 +70,7 @@ export async function saveToLocalJson(
     const saved = collectionSchema.safeParse({
       modpack: data.modpack,
       mods: data.mods,
+      batches: data.batches,
     });
     if (saved.success) return { kind: "saved", collection: saved.data };
     return {

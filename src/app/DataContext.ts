@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import type { FileSavePhase, SaveStatus } from "../lib/saveStatus";
-import type { Collection, Mod, Modpack } from "../lib/schema";
+import type { Batch, BatchFile, Collection, Mod, Modpack } from "../lib/schema";
 
 export type DataContextValue = {
   data: Collection;
@@ -15,6 +15,9 @@ export type DataContextValue = {
   deleteMod: (id: string) => void;
   /** Deletes several mods in a single draft update. */
   deleteMods: (ids: string[]) => void;
+  /** Replaces the build plan; `order` is rewritten from the array order. */
+  updateBatches: (batches: Batch[]) => void;
+  importBatches: (batches: BatchFile) => void;
   importModpack: (modpack: Modpack) => void;
   importMods: (mods: Mod[]) => void;
   reset: () => void;

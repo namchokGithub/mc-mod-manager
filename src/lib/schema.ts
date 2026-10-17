@@ -136,9 +136,59 @@ export const modsSchema = z.array(modSchema).superRefine((mods, context) => {
   });
 });
 
+const uniqueStrings = (values: string[]) =>
+  new Set(values).size === values.length;
+
+// Build plan (public/data/batches.json): ordered installation batches that reference mods by ID.
+export const checklistItemSchema = z.object({
+  id: z.string().trim().min(1),
+  text: z.string().trim().min(1, "Checklist step is empty"),
+  /** Planning progress only; it never changes a mod's status. */
+  done: z.boolean(),
+});
+
+export const batchSchema = z.object({
+  id: z.string().trim().min(1),
+  name: z.string().trim().min(1, "Batch name is required"),
+  description: z.string().default(""),
+  order: z.number().int().min(1),
+  modIds: z
+    .array(z.string().trim().min(1))
+    .refine(uniqueStrings, "A mod is listed twice in this batch"),
+  checklist: z
+    .array(checklistItemSchema)
+    .refine(
+      (items) => uniqueStrings(items.map((item) => item.id)),
+      "Checklist step IDs must be unique",
+    ),
+});
+
+export const batchFileSchema = z.object({
+  version: z.literal(1),
+  batches: z.array(batchSchema).superRefine((batches, context) => {
+    const seen = new Set<string>();
+    batches.forEach((batch, index) => {
+      if (seen.has(batch.id))
+        context.addIssue({
+          code: "custom",
+          path: [index, "id"],
+          message: `Duplicate batch ID: ${batch.id}`,
+        });
+      seen.add(batch.id);
+    });
+  }),
+});
+
+export const emptyBatchFile = (): z.infer<typeof batchFileSchema> => ({
+  version: 1,
+  batches: [],
+});
+
 export const collectionSchema = z.object({
   modpack: modpackSchema,
   mods: modsSchema,
+  // Optional in stored data so older drafts and collections without a plan still load.
+  batches: batchFileSchema.default(emptyBatchFile),
 });
 
 export type Modpack = z.infer<typeof modpackSchema>;
@@ -148,6 +198,9 @@ export type ModrinthDependency = NonNullable<
   ModrinthMeta["dependencies"]
 >[number];
 export type Collection = z.infer<typeof collectionSchema>;
+export type BatchFile = z.infer<typeof batchFileSchema>;
+export type Batch = z.infer<typeof batchSchema>;
+export type ChecklistItem = z.infer<typeof checklistItemSchema>;
 
 export function formatValidationError(error: z.ZodError): string {
   return error.issues
@@ -156,10 +209,15 @@ export function formatValidationError(error: z.ZodError): string {
     .join("; ");
 }
 
+export function parseJsonFile(text: string, kind: "batches"): BatchFile;
 export function parseJsonFile(
   text: string,
   kind: "modpack" | "mods",
-): Modpack | Mod[] {
+): Modpack | Mod[];
+export function parseJsonFile(
+  text: string,
+  kind: "modpack" | "mods" | "batches",
+): Modpack | Mod[] | BatchFile {
   let value: unknown;
   try {
     value = JSON.parse(text) as unknown;
@@ -169,7 +227,9 @@ export function parseJsonFile(
   const result =
     kind === "modpack"
       ? modpackSchema.safeParse(value)
-      : modsSchema.safeParse(value);
+      : kind === "batches"
+        ? batchFileSchema.safeParse(value)
+        : modsSchema.safeParse(value);
   if (!result.success) throw new Error(formatValidationError(result.error));
   return result.data;
 }

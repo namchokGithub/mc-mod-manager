@@ -25,6 +25,8 @@ const onDisk = {
 const baseline = {
   modpack: fingerprint(onDisk.modpack),
   mods: fingerprint(onDisk.mods),
+  // No batches.json on disk counts as an empty build plan.
+  batches: fingerprint(serializeJson(published.batches)),
 };
 
 describe("trusted requests", () => {
@@ -97,7 +99,11 @@ describe("planning a save", () => {
     expect(plan.status).toBe(200);
     expect(plan.files?.modpack).toBe(serializeJson(changed.modpack));
     expect(plan.files?.mods).toBe(serializeJson(changed.mods));
-    expect(Object.keys(plan.files ?? {})).toEqual(["modpack", "mods"]);
+    expect(Object.keys(plan.files ?? {})).toEqual([
+      "modpack",
+      "mods",
+      "batches",
+    ]);
     expect(plan.body).toMatchObject({
       ok: true,
       modpack: { name: "Renamed pack" },
@@ -137,6 +143,51 @@ describe("planning a save", () => {
     const plan = planSave({ ...manual, baseline }, onDisk);
     expect(plan.status).toBe(200);
     expect(JSON.parse(plan.files?.mods ?? "[]")).toEqual(manual.mods);
+  });
+
+  it("writes batches.json with the plan and checks it for conflicts", () => {
+    const plan = {
+      version: 1 as const,
+      batches: [
+        {
+          id: "core",
+          name: "Core",
+          description: "",
+          order: 1,
+          modIds: [published.mods[0]!.id],
+          checklist: [{ id: "step-1", text: "Launch once", done: false }],
+        },
+      ],
+    };
+    const saved = planSave({ ...published, batches: plan, baseline }, onDisk);
+    expect(saved.status).toBe(200);
+    expect(JSON.parse(saved.files?.batches ?? "{}")).toEqual(plan);
+    const changedOnDisk = planSave(
+      { ...published, batches: plan, baseline },
+      { ...onDisk, batches: serializeJson(plan) },
+    );
+    expect(changedOnDisk.status).toBe(409);
+  });
+
+  it("rejects an invalid build plan", () => {
+    const result = planSave(
+      {
+        ...published,
+        batches: { version: 1, batches: [{ id: "x", name: "", order: 1 }] },
+        baseline,
+      },
+      onDisk,
+    );
+    expect(result.status).toBe(400);
+    expect(result.body.error).toContain("batches.json");
+  });
+
+  it("leaves batches.json alone when a request has no plan", () => {
+    const { batches: _omit, ...withoutPlan } = published;
+    void _omit;
+    const result = planSave({ ...withoutPlan, baseline }, onDisk);
+    expect(result.status).toBe(200);
+    expect(result.files?.batches).toBeUndefined();
   });
 
   it("rejects invalid data without writing", () => {

@@ -1,6 +1,16 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { collectionSchema, modsSchema, type Collection } from "../lib/schema";
+import {
+  collectionSchema,
+  modsSchema,
+  type Collection,
+  batchFileSchema,
+} from "../lib/schema";
 import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
+import {
+  removeModsFromBatches,
+  renameModInBatches,
+  withOrder,
+} from "../lib/batches";
 import { removeMods } from "../lib/mods";
 import {
   deriveSaveStatus,
@@ -42,18 +52,26 @@ export function DataProvider({ children }: { children: ReactNode }) {
     let active = true;
     async function load() {
       try {
-        const responses = await Promise.all([
-          fetch(jsonUrl("modpack.json")),
-          fetch(jsonUrl("mods.json")),
+        const [responses, batchesResponse] = await Promise.all([
+          Promise.all([
+            fetch(jsonUrl("modpack.json")),
+            fetch(jsonUrl("mods.json")),
+          ]),
+          fetch(jsonUrl("batches.json")),
         ]);
         if (responses.some((response) => !response.ok))
           throw new Error("Published JSON files could not be loaded.");
         const values = await Promise.all(
           responses.map((response) => response.json() as Promise<unknown>),
         );
+        // batches.json is optional: a missing file means an empty build plan.
+        const batches: unknown = batchesResponse.ok
+          ? await batchesResponse.json()
+          : undefined;
         const result = collectionSchema.safeParse({
           modpack: values[0],
           mods: values[1],
+          batches,
         });
         if (!result.success)
           throw new Error("Published JSON files have invalid data.");
@@ -93,7 +111,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         setExternalUpdate((count) => count + 1);
         return;
       }
-      const next = parseDraft(event.newValue);
+      const next = parseDraft(event.newValue, published.batches);
       if (!next) return;
       skipNextSave.current = true;
       setData(next);
@@ -156,11 +174,30 @@ export function DataProvider({ children }: { children: ReactNode }) {
       const nextMods = originalId
         ? data.mods.map((item) => (item.id === originalId ? mod : item))
         : [...data.mods, mod];
-      change({ ...data, mods: modsSchema.parse(nextMods) });
+      change({
+        ...data,
+        mods: modsSchema.parse(nextMods),
+        // A changed mod ID is followed in the build plan.
+        batches: originalId
+          ? renameModInBatches(data.batches, originalId, mod.id)
+          : data.batches,
+      });
     },
     deleteMod: (id) =>
-      change({ ...data, mods: data.mods.filter((mod) => mod.id !== id) }),
-    deleteMods: (ids) => change({ ...data, mods: removeMods(data.mods, ids) }),
+      change({
+        ...data,
+        mods: data.mods.filter((mod) => mod.id !== id),
+        batches: removeModsFromBatches(data.batches, [id]),
+      }),
+    deleteMods: (ids) =>
+      change({
+        ...data,
+        mods: removeMods(data.mods, ids),
+        batches: removeModsFromBatches(data.batches, ids),
+      }),
+    updateBatches: (batches) =>
+      change({ ...data, batches: batchFileSchema.parse(withOrder(batches)) }),
+    importBatches: (batches) => change({ ...data, batches }),
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),
     markSaved: (saved) => {

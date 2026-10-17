@@ -18,6 +18,7 @@ import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
 import { formatStat } from "../../lib/countUp";
 import { useCountUp } from "./useCountUp";
+import { BuildPlanGuide } from "./BuildPlanGuide";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { checkCompatibility, statusLabel } from "../../lib/compatibility";
@@ -357,6 +358,12 @@ export function Preview() {
             />
           )}
         </section>
+        <BuildPlanGuide
+          plan={data.batches}
+          mods={data.mods}
+          compat={compat}
+          onOpenMod={setSelected}
+        />
       </div>
       <ModDetail
         mod={selected}
