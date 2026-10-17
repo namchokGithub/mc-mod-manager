@@ -2,8 +2,9 @@
 
 /*
  * Typography tokens. Tailwind turns these into the `font-sans` and `font-display` utilities.
- * Inter is the UI font. Minecraft is a
- * display accent only, never for long or dense text. It has one weight and no Thai glyphs.
+ * Inter is the UI font. Minecraft is a [Minecraft](https://www.fontspace.com/minecraft-font-f28180)
+ * display accent by [JDGraphics](https://www.fontspace.com/jdgraphics), only for short or decorative text.
+ * It has one weight and no Thai glyphs.
  * Noto Sans Thai covers Thai; its files load only when Thai characters appear (unicode-range).
  */
 @theme {
@@ -18,7 +19,8 @@
 /* Single regular weight; the public path gets the Vite base prefix at build time. */
 @font-face {
   font-family: "Minecraft";
-  src: url("/assets/fonts/minecraft_font.ttf") format("truetype");
+  src: url("/assets/fonts/minecraft-font/MinecraftRegular-Bmg3.otf")
+    format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

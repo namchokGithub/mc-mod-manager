@@ -167,8 +167,7 @@ Then open `http://localhost:4173/mc-mod-manager/`.
 ## Credits
 
 - Display font
-  - [Minecraft](https://www.dafont.com/minecraft.font) by Craftron Gaming (`public/assets/fonts/Minecraft.ttf`).
-  - [Minecraft](https://fontmeme.com/fonts/minecraft-font/) By Pwnage Block (`public/assets/fonts/minecraft_font.ttf`).
+  - [Minecraft](https://www.fontspace.com/minecraft-font-f28180) designed by [JDGraphics](https://www.fontspace.com/jdgraphics) (`public/assets/fonts/minecraft-font/MinecraftRegular-Bmg3.otf`).
 - UI fonts: [Inter](https://rsms.me/inter/) and [Noto Sans Thai](https://fonts.google.com/noto/specimen/Noto+Sans+Thai), via [Fontsource](https://fontsource.org/).
 - Mod data and version metadata: [Modrinth](https://modrinth.com/).
 
