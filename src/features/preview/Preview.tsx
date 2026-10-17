@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowRight,
   Box,
@@ -40,6 +40,8 @@ export function Preview() {
     () => filterMods(data.mods, filters),
     [data.mods, filters],
   );
+  // Layout animation gets costly for big collections, so it turns off there.
+  const animateLayout = !reduceMotion && filtered.length <= 60;
   const stats = [
     { label: "TOTAL MODS", value: data.mods.length, icon: Box },
     {
@@ -151,6 +153,7 @@ export function Preview() {
             onChange={setFilters}
             categories={categories}
             count={filtered.length}
+            total={data.mods.length}
             view={view}
             onViewChange={setView}
           />
@@ -158,50 +161,94 @@ export function Preview() {
             <div
               className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}
             >
-              {filtered.map((mod) => (
-                <motion.button
-                  layout={!reduceMotion}
-                  key={mod.id}
-                  className="mod-card"
-                  onClick={() => setSelected(mod)}
-                  whileHover={reduceMotion ? undefined : { y: -3 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.18 }}
-                >
-                  <div className="mod-card-top">
-                    <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
-                    <span className={`status status-${mod.status}`}>
-                      {mod.status}
-                    </span>
-                  </div>
-                  <div className="mod-card-body">
-                    <span className="mod-category">{mod.category}</span>
-                    <h3>{mod.name}</h3>
-                    <p>{mod.description || "No description yet."}</p>
-                  </div>
-                  <div className="mod-card-footer">
-                    <span>{mod.side} side</span>
-                    <span>
-                      View details <ArrowRight size={15} />
-                    </span>
-                  </div>
-                </motion.button>
-              ))}
+              <AnimatePresence mode="popLayout">
+                {filtered.map((mod, index) => (
+                  <motion.button
+                    layout={animateLayout ? "position" : false}
+                    key={mod.id}
+                    type="button"
+                    className="mod-card"
+                    onClick={() => setSelected(mod)}
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.97,
+                      transition: { duration: 0.14 },
+                    }}
+                    whileHover={{ y: -3 }}
+                    transition={{
+                      default: { duration: 0.18, ease: "easeOut" },
+                      opacity: {
+                        duration: 0.24,
+                        delay: Math.min(index, 8) * 0.03,
+                      },
+                      scale: {
+                        duration: 0.24,
+                        delay: Math.min(index, 8) * 0.03,
+                      },
+                      layout: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
+                    }}
+                  >
+                    <div className="mod-card-top">
+                      <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
+                      <span className={`status status-${mod.status}`}>
+                        {mod.status}
+                      </span>
+                    </div>
+                    <div className="mod-card-body">
+                      <span className="mod-category">{mod.category}</span>
+                      <h3>{mod.name}</h3>
+                      <p>{mod.description || "No description yet."}</p>
+                    </div>
+                    <div className="mod-card-footer">
+                      <span>{mod.side} side</span>
+                      <span className="mod-card-cta">
+                        View details <ArrowRight size={15} />
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+              </AnimatePresence>
             </div>
           ) : (
-            <div className="empty-state">
-              <Box size={32} />
-              <h3>No mods found</h3>
-              <p>
-                Try another search or clear a filter to see more of the
-                collection.
-              </p>
-              <Button
-                variant="secondary"
-                onClick={() => setFilters(initialFilters)}
-              >
-                Clear filters
-              </Button>
-            </div>
+            <motion.div
+              className="empty-state"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="empty-icon">
+                <Box size={26} />
+              </div>
+              {data.mods.length ? (
+                <>
+                  <h3>No mods match your filters</h3>
+                  <p>
+                    {filters.query.trim()
+                      ? `Nothing found for “${filters.query.trim()}”. Try another search or clear a filter.`
+                      : "Try another combination or clear a filter to see more of the collection."}
+                  </p>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setFilters(initialFilters)}
+                  >
+                    Clear filters
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <h3>This pack has no mods yet</h3>
+                  <p>
+                    Add the first mod from the Manage page to start the
+                    collection.
+                  </p>
+                  <a className="button button-secondary" href="#/manage">
+                    Open Manage <ArrowRight size={16} />
+                  </a>
+                </>
+              )}
+            </motion.div>
           )}
         </section>
       </div>

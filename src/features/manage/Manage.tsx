@@ -1,4 +1,5 @@
-import { useMemo, useRef, useState } from "react";
+import { cloneElement, useId, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
@@ -6,10 +7,11 @@ import {
   ArrowDownToLine,
   ArrowRight,
   ArrowUpFromLine,
+  CircleAlert,
   Copy,
   FileJson2,
   Info,
-  MoreHorizontal,
+  LoaderCircle,
   Pencil,
   Plus,
   RotateCcw,
@@ -17,6 +19,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
+import { useToast } from "../../app/ToastContext";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModFilters } from "../../components/ModFilters";
 import { Button } from "../../components/ui/button";
@@ -30,6 +33,7 @@ import {
   type Modpack,
 } from "../../lib/schema";
 import { downloadJson } from "../../lib/storage";
+import { useRetained } from "../../lib/useRetained";
 
 type Tab = "mods" | "settings" | "data";
 const initialFilters: Filters = {
@@ -54,20 +58,41 @@ function Field({
   error,
   children,
   hint,
+  required = false,
+  wide = false,
 }: {
   label: string;
   error?: string;
-  children: React.ReactNode;
+  children: React.ReactElement<React.AriaAttributes>;
   hint?: string;
+  required?: boolean;
+  wide?: boolean;
 }) {
+  const id = useId();
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = error ? `${id}-error` : undefined;
   return (
-    <label className="form-field">
-      <span>{label}</span>
-      {children}
-      {hint && <small>{hint}</small>}
+    <label
+      className={`form-field${wide ? " form-field-wide" : ""}${error ? " has-error" : ""}`}
+    >
+      <span>
+        {label}
+        {required && (
+          <span className="field-required" aria-hidden="true">
+            *
+          </span>
+        )}
+      </span>
+      {cloneElement(children, {
+        "aria-invalid": error ? true : undefined,
+        "aria-required": required || undefined,
+        "aria-describedby":
+          [hintId, errorId].filter(Boolean).join(" ") || undefined,
+      })}
+      {hint && <small id={hintId}>{hint}</small>}
       {error && (
-        <small className="field-error" role="alert">
-          {error}
+        <small id={errorId} className="field-error" role="alert">
+          <CircleAlert size={12} aria-hidden="true" /> {error}
         </small>
       )}
     </label>
@@ -82,7 +107,7 @@ function ModEditor({
 }: {
   mod: Mod | null;
   mods: Mod[];
-  onSave: (mod: Mod, originalId?: string) => void;
+  onSave: (mod: Mod, originalId?: string) => boolean;
   onClose: () => void;
 }) {
   const initial: ModFields = mod
@@ -111,11 +136,12 @@ function ModEditor({
     handleSubmit,
     control,
     setError,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<ModFields>({
     resolver: zodResolver(formSchema),
     defaultValues: initial,
   });
+  const notify = useToast();
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
   const submit = (values: ModFields) => {
@@ -137,18 +163,26 @@ function ModEditor({
         .filter(Boolean),
     };
     const validation = modSchema.safeParse(candidate);
-    if (!validation.success) return;
+    if (!validation.success) {
+      notify({
+        kind: "error",
+        title: "Mod not saved",
+        description:
+          validation.error.issues[0]?.message ??
+          "Check the highlighted fields.",
+      });
+      return;
+    }
     if (mods.some((item) => item.id === candidate.id && item.id !== mod?.id)) {
       setError("id", { message: "This ID is already used by another mod." });
       return;
     }
-    onSave(validation.data, mod?.id);
-    onClose();
+    if (onSave(validation.data, mod?.id)) onClose();
   };
   return (
-    <form className="editor-form" onSubmit={handleSubmit(submit)}>
+    <form className="editor-form" noValidate onSubmit={handleSubmit(submit)}>
       <div className="form-grid">
-        <Field label="Mod name *" error={errors.name?.message}>
+        <Field label="Mod name" required error={errors.name?.message}>
           <input autoFocus placeholder="e.g. Sodium" {...register("name")} />
         </Field>
         <Field
@@ -168,7 +202,7 @@ function ModEditor({
         <Field label="Version" error={errors.version?.message}>
           <input placeholder="Optional" {...register("version")} />
         </Field>
-        <Field label="Category *" error={errors.category?.message}>
+        <Field label="Category" required error={errors.category?.message}>
           <input placeholder="e.g. Performance" {...register("category")} />
         </Field>
         <Field label="Status" error={errors.status?.message}>
@@ -215,7 +249,7 @@ function ModEditor({
         <Field label="Image URL" error={errors.imageUrl?.message}>
           <input type="url" placeholder="https://…" {...register("imageUrl")} />
         </Field>
-        <Field label="Description" error={errors.description?.message}>
+        <Field label="Description" wide error={errors.description?.message}>
           <textarea
             rows={3}
             placeholder="What does this mod add?"
@@ -232,7 +266,7 @@ function ModEditor({
             {...register("dependenciesText")}
           />
         </Field>
-        <Field label="Notes" error={errors.notes?.message}>
+        <Field label="Notes" wide error={errors.notes?.message}>
           <textarea
             rows={3}
             placeholder="Compatibility, setup, or testing notes"
@@ -240,7 +274,8 @@ function ModEditor({
           />
         </Field>
       </div>
-      <div className="dialog-actions">
+      <div className="dialog-actions dialog-actions-sticky">
+        <UnsavedHint show={isDirty} />
         <Button type="button" variant="ghost" onClick={onClose}>
           Cancel
         </Button>
@@ -249,6 +284,24 @@ function ModEditor({
         </Button>
       </div>
     </form>
+  );
+}
+
+function UnsavedHint({ show }: { show: boolean }) {
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.span
+          className="unsaved-hint"
+          initial={{ opacity: 0, x: 6 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.16 }}
+        >
+          <span className="draft-dot" aria-hidden="true" /> Unsaved changes
+        </motion.span>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -262,19 +315,20 @@ function SettingsForm({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isDirty },
   } = useForm<Modpack>({
     resolver: zodResolver(modpackSchema),
     defaultValues: modpack,
   });
   return (
-    <form className="settings-form" onSubmit={handleSubmit(onSave)}>
+    <form className="settings-form" noValidate onSubmit={handleSubmit(onSave)}>
       <div className="settings-intro">
         <h2>Modpack settings</h2>
         <p>The details that introduce your collection on the Preview page.</p>
       </div>
       <div className="form-grid">
-        <Field label="Modpack name *" error={errors.name?.message}>
+        <Field label="Modpack name" required error={errors.name?.message}>
           <input {...register("name")} />
         </Field>
         <Field label="Pack version" error={errors.version?.message}>
@@ -315,11 +369,20 @@ function SettingsForm({
         <Field label="Last updated" error={errors.updatedAt?.message}>
           <input type="date" {...register("updatedAt")} />
         </Field>
-        <Field label="Description" error={errors.description?.message}>
+        <Field label="Description" wide error={errors.description?.message}>
           <textarea rows={5} {...register("description")} />
         </Field>
       </div>
       <div className="settings-actions">
+        <UnsavedHint show={isDirty} />
+        <Button
+          type="button"
+          variant="ghost"
+          disabled={!isDirty}
+          onClick={() => reset()}
+        >
+          Discard
+        </Button>
         <Button type="submit" disabled={!isDirty}>
           Save settings <ArrowRight size={16} />
         </Button>
@@ -329,30 +392,45 @@ function SettingsForm({
 }
 
 function DataTools() {
-  const { data, importModpack, importMods, reset } = useCollection();
-  const [message, setMessage] = useState<{
-    kind: "success" | "error";
-    text: string;
-  } | null>(null);
+  const { data, dirty, importModpack, importMods, reset } = useCollection();
+  const notify = useToast();
+  const [importError, setImportError] = useState("");
+  const [importing, setImporting] = useState<"modpack" | "mods" | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const modpackFileRef = useRef<HTMLInputElement>(null);
   const modsFileRef = useRef<HTMLInputElement>(null);
   const onImport = async (kind: "modpack" | "mods", file?: File) => {
     if (!file) return;
+    setImporting(kind);
     try {
       const parsed = parseJsonFile(await file.text(), kind);
       if (kind === "modpack") importModpack(parsed as Modpack);
       else importMods(parsed as Mod[]);
-      setMessage({
-        kind: "success",
-        text: `${file.name} imported into your local draft.`,
+      setImportError("");
+      notify({
+        title: `${file.name} imported`,
+        description: "The data is now in your local draft.",
       });
     } catch (error) {
-      setMessage({
+      setImportError(
+        `${file.name}: ${error instanceof Error ? error.message : "Import failed."}`,
+      );
+      notify({
         kind: "error",
-        text: error instanceof Error ? error.message : "Import failed.",
+        title: "Import failed",
+        description: "Your current data was not changed.",
       });
+    } finally {
+      setImporting(null);
     }
+  };
+  const onExport = (filename: string, value: unknown) => {
+    downloadJson(filename, value);
+    notify({
+      kind: "info",
+      title: `${filename} exported`,
+      description: "Replace the file in public/data/ and commit it to publish.",
+    });
   };
   return (
     <div className="data-tools">
@@ -367,11 +445,23 @@ function DataTools() {
           commit them to the repository to update the published site.
         </p>
       </div>
-      {message && (
-        <div className={`inline-message ${message.kind}`} role="status">
-          {message.text}
-        </div>
-      )}
+      <AnimatePresence initial={false}>
+        {importError && (
+          <motion.div
+            className="inline-message error"
+            role="alert"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+          >
+            <CircleAlert size={16} aria-hidden="true" />
+            <span>
+              <strong>Import failed.</strong> {importError}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="data-card-grid">
         <div className="data-card">
           <div className="data-card-icon">
@@ -383,14 +473,20 @@ function DataTools() {
             <Button
               variant="secondary"
               size="small"
+              disabled={importing !== null}
               onClick={() => modpackFileRef.current?.click()}
             >
-              <ArrowUpFromLine size={15} /> Import
+              {importing === "modpack" ? (
+                <LoaderCircle className="spin" size={15} aria-hidden="true" />
+              ) : (
+                <ArrowUpFromLine size={15} />
+              )}
+              {importing === "modpack" ? "Importing…" : "Import"}
             </Button>
             <Button
               variant="secondary"
               size="small"
-              onClick={() => downloadJson("modpack.json", data.modpack)}
+              onClick={() => onExport("modpack.json", data.modpack)}
             >
               <ArrowDownToLine size={15} /> Export
             </Button>
@@ -416,14 +512,20 @@ function DataTools() {
             <Button
               variant="secondary"
               size="small"
+              disabled={importing !== null}
               onClick={() => modsFileRef.current?.click()}
             >
-              <ArrowUpFromLine size={15} /> Import
+              {importing === "mods" ? (
+                <LoaderCircle className="spin" size={15} aria-hidden="true" />
+              ) : (
+                <ArrowUpFromLine size={15} />
+              )}
+              {importing === "mods" ? "Importing…" : "Import"}
             </Button>
             <Button
               variant="secondary"
               size="small"
-              onClick={() => downloadJson("mods.json", data.mods)}
+              onClick={() => onExport("mods.json", data.mods)}
             >
               <ArrowDownToLine size={15} /> Export
             </Button>
@@ -448,7 +550,12 @@ function DataTools() {
             files.
           </p>
         </div>
-        <Button variant="danger" onClick={() => setConfirmReset(true)}>
+        <Button
+          variant="danger"
+          disabled={!dirty}
+          title={dirty ? undefined : "No local draft to discard"}
+          onClick={() => setConfirmReset(true)}
+        >
           <RotateCcw size={16} /> Reset draft
         </Button>
       </div>
@@ -467,9 +574,10 @@ function DataTools() {
             onClick={() => {
               reset();
               setConfirmReset(false);
-              setMessage({
-                kind: "success",
-                text: "Local draft reset to published data.",
+              setImportError("");
+              notify({
+                title: "Draft discarded",
+                description: "You are viewing the published data again.",
               });
             }}
           >
@@ -484,10 +592,14 @@ function DataTools() {
 export function Manage() {
   const { data, dirty, saveState, saveMod, deleteMod, updateModpack } =
     useCollection();
+  const notify = useToast();
+  const [highlightId, setHighlightId] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("mods");
   const [filters, setFilters] = useState(initialFilters);
   const [editing, setEditing] = useState<Mod | "new" | null>(null);
   const [deleting, setDeleting] = useState<Mod | null>(null);
+  const shownEditing = useRetained(editing);
+  const shownDeleting = useRetained(deleting);
   const categories = useMemo(
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
     [data.mods],
@@ -496,13 +608,44 @@ export function Manage() {
     () => filterMods(data.mods, filters),
     [data.mods, filters],
   );
-  const duplicate = (mod: Mod) =>
-    saveMod({
-      ...mod,
-      id: uniqueId(mod.name, data.mods),
-      name: `${mod.name} (copy)`,
-      status: "planned",
+  // Layout animation gets costly for big collections, so it turns off there.
+  const animateLayout = filtered.length <= 60;
+  const persistMod = (mod: Mod, originalId?: string, title?: string) => {
+    try {
+      saveMod(mod, originalId);
+    } catch {
+      notify({
+        kind: "error",
+        title: `Could not save ${mod.name}`,
+        description: "The mod data did not pass validation.",
+      });
+      return false;
+    }
+    setHighlightId(mod.id);
+    notify({
+      title: title ?? (originalId ? `Saved ${mod.name}` : `Added ${mod.name}`),
+      description: "Stored in this browser’s draft.",
     });
+    return true;
+  };
+  const duplicate = (mod: Mod) =>
+    persistMod(
+      {
+        ...mod,
+        id: uniqueId(mod.name, data.mods),
+        name: `${mod.name} (copy)`,
+        status: "planned",
+      },
+      undefined,
+      `Duplicated ${mod.name}`,
+    );
+  const saveCaption = !dirty
+    ? "Viewing published data"
+    : saveState === "saving"
+      ? "Saving draft…"
+      : saveState === "error"
+        ? "Unable to save draft"
+        : "All changes saved locally";
   return (
     <div className="container manage-page">
       <div className="manage-title">
@@ -514,14 +657,12 @@ export function Manage() {
           <p>Shape the pack. Keep every detail in one place.</p>
         </div>
         <div className="manage-title-actions">
-          <span className="save-caption">
-            {!dirty
-              ? "Viewing published data"
-              : saveState === "saving"
-                ? "Saving draft…"
-                : saveState === "error"
-                  ? "Unable to save draft"
-                  : "All changes saved locally"}
+          <span
+            className={`save-caption save-${dirty ? saveState : "published"}`}
+            role="status"
+          >
+            <span className="draft-dot" aria-hidden="true" />
+            {saveCaption}
           </span>
           <a className="button button-secondary" href="#/">
             View preview <ArrowRight size={16} />
@@ -532,25 +673,36 @@ export function Manage() {
         <aside className="manage-sidebar" aria-label="Manage sections">
           <div className="sidebar-heading">WORKSPACE</div>
           <button
+            type="button"
             className={tab === "mods" ? "sidebar-item active" : "sidebar-item"}
+            aria-current={tab === "mods" ? "page" : undefined}
             onClick={() => setTab("mods")}
           >
             <FileJson2 size={18} /> Mod collection{" "}
             <span>{data.mods.length}</span>
           </button>
           <button
+            type="button"
             className={
               tab === "settings" ? "sidebar-item active" : "sidebar-item"
             }
+            aria-current={tab === "settings" ? "page" : undefined}
             onClick={() => setTab("settings")}
           >
             <Settings2 size={18} /> Pack settings
           </button>
           <button
+            type="button"
             className={tab === "data" ? "sidebar-item active" : "sidebar-item"}
+            aria-current={tab === "data" ? "page" : undefined}
             onClick={() => setTab("data")}
           >
             <ArrowDownToLine size={18} /> Data & export
+            {dirty && (
+              <span className="sidebar-dot" title="Draft has changes to export">
+                <span className="sr-only">(changes to export)</span>
+              </span>
+            )}
           </button>
           <div className="sidebar-tip">
             <span className="eyebrow-dot" />
@@ -561,117 +713,181 @@ export function Manage() {
           </div>
         </aside>
         <div className="manage-content">
-          {tab === "mods" && (
-            <>
-              <div className="manage-section-head">
-                <div>
-                  <h2>Mod collection</h2>
-                  <p>Add, edit, and organize the mods in your pack.</p>
-                </div>
-                <Button onClick={() => setEditing("new")}>
-                  <Plus size={17} /> Add mod
-                </Button>
-              </div>
-              <ModFilters
-                filters={filters}
-                onChange={setFilters}
-                categories={categories}
-                count={filtered.length}
-                showView={false}
-              />
-              <div className="manage-list">
-                {filtered.length ? (
-                  filtered.map((mod) => (
-                    <div className="manage-row" key={mod.id}>
-                      <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
-                      <div className="manage-row-main">
-                        <div>
-                          <h3>{mod.name}</h3>
-                          <span className={`status status-${mod.status}`}>
-                            {mod.status}
-                          </span>
-                        </div>
-                        <p>
-                          {mod.category} <span>·</span> {mod.side} side{" "}
-                          {mod.version && (
-                            <>
-                              {" "}
-                              <span>·</span> v{mod.version}
-                            </>
-                          )}
-                        </p>
-                      </div>
-                      <div className="row-actions">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Edit ${mod.name}`}
-                          title="Edit"
-                          onClick={() => setEditing(mod)}
-                        >
-                          <Pencil size={17} />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Duplicate ${mod.name}`}
-                          title="Duplicate"
-                          onClick={() => duplicate(mod)}
-                        >
-                          <Copy size={17} />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Delete ${mod.name}`}
-                          title="Delete"
-                          onClick={() => setDeleting(mod)}
-                        >
-                          <Trash2 size={17} />
-                        </Button>
-                      </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={tab}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.16, ease: "easeOut" }}
+            >
+              {tab === "mods" && (
+                <>
+                  <div className="manage-section-head">
+                    <div>
+                      <h2>Mod collection</h2>
+                      <p>Add, edit, and organize the mods in your pack.</p>
                     </div>
-                  ))
-                ) : (
-                  <div className="empty-state">
-                    <MoreHorizontal size={30} />
-                    <h3>No mods found</h3>
-                    <p>Try adjusting your search or filters.</p>
-                    <Button
-                      variant="secondary"
-                      onClick={() => setFilters(initialFilters)}
-                    >
-                      Clear filters
+                    <Button onClick={() => setEditing("new")}>
+                      <Plus size={17} /> Add mod
                     </Button>
                   </div>
-                )}
-              </div>
-            </>
-          )}
-          {tab === "settings" && (
-            <SettingsForm
-              key={JSON.stringify(data.modpack)}
-              modpack={data.modpack}
-              onSave={updateModpack}
-            />
-          )}
-          {tab === "data" && <DataTools />}
+                  <ModFilters
+                    filters={filters}
+                    onChange={setFilters}
+                    categories={categories}
+                    count={filtered.length}
+                    total={data.mods.length}
+                    showView={false}
+                  />
+                  {filtered.length ? (
+                    <div className="manage-list">
+                      <AnimatePresence mode="popLayout" initial={false}>
+                        {filtered.map((mod) => (
+                          <motion.div
+                            layout={animateLayout ? "position" : false}
+                            className={
+                              mod.id === highlightId
+                                ? "manage-row row-highlight"
+                                : "manage-row"
+                            }
+                            key={mod.id}
+                            initial={{ opacity: 0, x: -8 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{
+                              opacity: 0,
+                              x: 16,
+                              transition: { duration: 0.16 },
+                            }}
+                            transition={{ duration: 0.22, ease: "easeOut" }}
+                            onAnimationEnd={() =>
+                              mod.id === highlightId && setHighlightId(null)
+                            }
+                          >
+                            <ModArtwork
+                              name={mod.name}
+                              imageUrl={mod.imageUrl}
+                            />
+                            <div className="manage-row-main">
+                              <div>
+                                <h3 title={mod.name}>{mod.name}</h3>
+                                <span className={`status status-${mod.status}`}>
+                                  {mod.status}
+                                </span>
+                              </div>
+                              <p>
+                                {mod.category} <span>·</span> {mod.side} side{" "}
+                                {mod.version && (
+                                  <>
+                                    {" "}
+                                    <span>·</span> v{mod.version}
+                                  </>
+                                )}
+                              </p>
+                            </div>
+                            <div className="row-actions">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                aria-label={`Edit ${mod.name}`}
+                                title="Edit"
+                                onClick={() => setEditing(mod)}
+                              >
+                                <Pencil size={17} />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                aria-label={`Duplicate ${mod.name}`}
+                                title="Duplicate"
+                                onClick={() => duplicate(mod)}
+                              >
+                                <Copy size={17} />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="row-delete"
+                                aria-label={`Delete ${mod.name}`}
+                                title="Delete"
+                                onClick={() => setDeleting(mod)}
+                              >
+                                <Trash2 size={17} />
+                              </Button>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <motion.div
+                      className="empty-state"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="empty-icon">
+                        <FileJson2 size={24} />
+                      </div>
+                      {data.mods.length ? (
+                        <>
+                          <h3>No mods match your filters</h3>
+                          <p>Try adjusting your search or filters.</p>
+                          <Button
+                            variant="secondary"
+                            onClick={() => setFilters(initialFilters)}
+                          >
+                            Clear filters
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <h3>No mods yet</h3>
+                          <p>Add your first mod or import a mods.json file.</p>
+                          <Button onClick={() => setEditing("new")}>
+                            <Plus size={17} /> Add your first mod
+                          </Button>
+                        </>
+                      )}
+                    </motion.div>
+                  )}
+                </>
+              )}
+              {tab === "settings" && (
+                <SettingsForm
+                  key={JSON.stringify(data.modpack)}
+                  modpack={data.modpack}
+                  onSave={(modpack) => {
+                    updateModpack(modpack);
+                    notify({
+                      title: "Pack settings saved",
+                      description: "Stored in this browser’s draft.",
+                    });
+                  }}
+                />
+              )}
+              {tab === "data" && <DataTools />}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
       <Dialog
         open={editing !== null}
         onOpenChange={(open) => !open && setEditing(null)}
         title={
-          editing === "new" ? "Add a mod" : `Edit ${editing?.name ?? "mod"}`
+          shownEditing === "new"
+            ? "Add a mod"
+            : `Edit ${shownEditing?.name ?? "mod"}`
         }
-        description="Keep mod information clear and easy to maintain."
+        description="Fields marked * are required. Changes stay in this browser until you export."
+        size="wide"
       >
-        {editing && (
+        {shownEditing && (
           <ModEditor
-            key={editing === "new" ? "new" : editing.id}
-            mod={editing === "new" ? null : editing}
+            key={shownEditing === "new" ? "new" : shownEditing.id}
+            mod={shownEditing === "new" ? null : shownEditing}
             mods={data.mods}
-            onSave={saveMod}
+            onSave={persistMod}
             onClose={() => setEditing(null)}
           />
         )}
@@ -679,7 +895,7 @@ export function Manage() {
       <Dialog
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
-        title={`Delete ${deleting?.name ?? "mod"}?`}
+        title={`Delete ${shownDeleting?.name ?? "mod"}?`}
         description="This removes the mod from your local draft. You can reset to published data before exporting if needed."
       >
         <div className="dialog-actions">
@@ -689,11 +905,18 @@ export function Manage() {
           <Button
             variant="danger"
             onClick={() => {
-              if (deleting) deleteMod(deleting.id);
+              if (deleting) {
+                deleteMod(deleting.id);
+                notify({
+                  kind: "info",
+                  title: `Deleted ${deleting.name}`,
+                  description: "Removed from your local draft.",
+                });
+              }
               setDeleting(null);
             }}
           >
-            Delete mod
+            <Trash2 size={16} /> Delete mod
           </Button>
         </div>
       </Dialog>

@@ -7,19 +7,26 @@ export function Dialog({
   onOpenChange,
   title,
   description,
+  size = "default",
   children,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
   description?: string;
+  size?: "default" | "wide";
   children: ReactNode;
 }) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="dialog-overlay" />
-        <DialogPrimitive.Content className="dialog-content">
+        <DialogPrimitive.Content
+          className={
+            size === "wide" ? "dialog-content dialog-wide" : "dialog-content"
+          }
+          {...(!description && { "aria-describedby": undefined })}
+        >
           <div className="dialog-heading">
             <div>
               <DialogPrimitive.Title>{title}</DialogPrimitive.Title>
