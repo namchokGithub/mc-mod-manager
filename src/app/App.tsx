@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import {
-  ArrowUpRight,
   CircleAlert,
+  GitFork,
   LayoutDashboard,
   LoaderCircle,
   Moon,
@@ -98,8 +98,7 @@ export function App() {
         <button
           type="button"
           className="skip-link"
-          onClick={() => document.getElementById("main-content")?.focus()}
-        >
+          onClick={() => document.getElementById("main-content")?.focus()}>
           Skip to content
         </button>
         <header className="site-header">
@@ -122,16 +121,14 @@ export function App() {
               <a
                 className={page === "preview" ? "nav-link active" : "nav-link"}
                 href="#/"
-                aria-current={page === "preview" ? "page" : undefined}
-              >
+                aria-current={page === "preview" ? "page" : undefined}>
                 <LayoutDashboard size={17} /> Preview
               </a>
               {MANAGE_ENABLED && (
                 <a
                   className={page === "manage" ? "nav-link active" : "nav-link"}
                   href="#/manage"
-                  aria-current={page === "manage" ? "page" : undefined}
-                >
+                  aria-current={page === "manage" ? "page" : undefined}>
                   <PencilLine size={17} /> Manage
                 </a>
               )}
@@ -146,8 +143,7 @@ export function App() {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.18 }}
-                  >
+                    transition={{ duration: 0.18 }}>
                     {saveState === "error" ? (
                       <CircleAlert size={13} aria-hidden="true" />
                     ) : saveState === "saving" ? (
@@ -172,8 +168,7 @@ export function App() {
                     ? "Switch to light theme"
                     : "Switch to dark theme"
                 }
-                title={theme === "dark" ? "Light theme" : "Dark theme"}
-              >
+                title={theme === "dark" ? "Light theme" : "Dark theme"}>
                 {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
               </button>
               <a
@@ -181,9 +176,8 @@ export function App() {
                 href="https://github.com/namchokGithub/mc-mod-manager"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="GitHub"
-              >
-                <ArrowUpRight size={18} />
+                aria-label="GitHub">
+                <GitFork size={18} />
               </a>
             </div>
           </div>
@@ -195,8 +189,7 @@ export function App() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
+              transition={{ duration: 0.2, ease: "easeOut" }}>
               {page === "manage" && Manage ? (
                 <Suspense
                   fallback={
@@ -204,8 +197,7 @@ export function App() {
                       <div className="loading-orb" />
                       <p>Opening the editor…</p>
                     </div>
-                  }
-                >
+                  }>
                   <Manage />
                 </Suspense>
               ) : (
@@ -218,7 +210,10 @@ export function App() {
           <span>
             BLOCK/LIST <span>·</span> {data.modpack.name}
           </span>
-          <span>Built for the worlds we make.</span>
+          <span>
+            © 2026 Namchok and Moo's. All rights reserved.
+            <span>·</span>Built for the worlds we make.
+          </span>
         </footer>
       </div>
     </MotionConfig>
