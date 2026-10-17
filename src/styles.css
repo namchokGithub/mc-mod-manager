@@ -2610,6 +2610,69 @@ main:focus {
   font-size: 12px;
   color: var(--text-secondary);
 }
+.mr-deps-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mr-deps-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: none;
+  padding: 2px 0;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--primary);
+  cursor: pointer;
+}
+.mr-deps-toggle svg {
+  transition: rotate 0.18s;
+}
+.mr-deps-toggle[aria-expanded="true"] svg {
+  rotate: 180deg;
+}
+.mr-dep-list,
+.mr-review-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.mr-dep {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface-sunken);
+  cursor: pointer;
+}
+.mr-dep input {
+  accent-color: var(--accent);
+  margin-top: 2px;
+}
+.mr-review-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface-sunken);
+}
+.mr-review-main {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
 .mr-loading {
   display: grid;
   gap: 8px;

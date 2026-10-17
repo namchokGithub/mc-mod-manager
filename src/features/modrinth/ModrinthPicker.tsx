@@ -3,6 +3,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  ChevronDown,
   Info,
   LoaderCircle,
   PencilLine,
@@ -21,6 +22,16 @@ import {
   statusLabel,
 } from "../../lib/compatibility";
 import { modrinth, type ModrinthError } from "../../lib/modrinth/api";
+import {
+  choiceFor,
+  directDependencies,
+  planModrinthImport,
+  selectDependencies,
+  resolveDirectDependencies,
+  transitiveNeeds,
+  type DependencyChoice,
+  type DirectDependency,
+} from "../../lib/modrinth/dependencyImport";
 import {
   loaderLabels,
   mergeModrinthIntoMod,
@@ -45,6 +56,7 @@ import {
   type VersionFilter,
 } from "../../lib/modrinth/versionFilters";
 import type { Mod, Modpack } from "../../lib/schema";
+import { ImportReview, type NotIncluded } from "./ImportReview";
 import { useModrinthRequest } from "./useModrinthRequest";
 
 export type PickerTarget =
@@ -97,6 +109,7 @@ export function ModrinthPicker({
   mods,
   modpack,
   onPick,
+  onAddMany,
   onManual,
   onCancel,
 }: {
@@ -104,6 +117,8 @@ export function ModrinthPicker({
   mods: Mod[];
   modpack: Modpack;
   onPick: (mod: Mod) => void;
+  /** Adds the main mod and its selected dependencies in one change. Returns false when nothing was added. */
+  onAddMany?: (mods: Mod[], notAdded: NotIncluded[]) => boolean;
   onManual: () => void;
   onCancel: () => void;
 }) {
@@ -239,15 +254,74 @@ export function ModrinthPicker({
     : undefined;
   const duplicate = project ? findByProject(others, project.id) : undefined;
 
+  // Add with dependencies: only when adding, and only the version's direct dependencies.
+  const canAddDependencies = target.kind === "add" && Boolean(onAddMany);
+  const dependencySource =
+    canAddDependencies && !duplicate ? details.data : undefined;
+  const direct = useMemo(
+    () => (dependencySource ? directDependencies(dependencySource) : []),
+    [dependencySource],
+  );
+  const inCollection = (dependency: DirectDependency) =>
+    dependency.projectId
+      ? findByProject(mods, dependency.projectId)
+      : undefined;
+  const missingDirect = direct.filter(
+    (dependency) => !inCollection(dependency),
+  );
+  const dependencyLookup = useModrinthRequest(
+    dependencySource && missingDirect.length
+      ? `dep-import:${dependencySource.id}:${minecraft}:${loader ?? ""}`
+      : null,
+    (signal) =>
+      resolveDirectDependencies(
+        modrinth,
+        missingDirect,
+        { gameVersion: minecraft, loader: loader ?? "" },
+        signal,
+      ),
+  );
+  const [choice, setChoice] = useState<DependencyChoice | null>(null);
+  // The version the review step was opened for; another version closes it.
+  const [reviewing, setReviewing] = useState<string | null>(null);
+  const currentChoice = choiceFor(choice, selectedVersion?.id);
+  const {
+    include: includeDependencies,
+    expanded: showDependencies,
+    selected: selectedDependencies,
+  } = selectDependencies(direct, dependencyLookup.data, mods, currentChoice);
+  const updateChoice = (next: Partial<DependencyChoice>) =>
+    setChoice({ ...currentChoice, ...next });
+  const resolutionFor = (dependency: DirectDependency) =>
+    dependencyLookup.data?.get(dependency.key);
+  const isSelected = (dependency: DirectDependency) =>
+    selectedDependencies.some((item) => item.dependency.key === dependency.key);
+  const importPlan =
+    canAddDependencies && candidate && selectedDependencies.length
+      ? planModrinthImport(candidate, selectedDependencies, mods)
+      : null;
+  const waitingForDependencies =
+    includeDependencies && missingDirect.length > 0 && dependencyLookup.loading;
+  // Project IDs that need no warning: the collection, this mod, and its direct dependencies.
+  const present = new Set([
+    ...mods.flatMap((mod) => (mod.modrinth ? [mod.modrinth.projectId] : [])),
+    ...(project ? [project.id] : []),
+    ...direct.flatMap((dependency) =>
+      dependency.projectId ? [dependency.projectId] : [],
+    ),
+  ]);
+
   const openProject = (next: ModrinthProject) => {
     setPicked(next);
     setVersionId(null);
     setVersionLimit(30);
+    setReviewing(null);
   };
   const backToSearch = () => {
     setPicked(null);
     setBrowsing(true);
     setVersionId(null);
+    setReviewing(null);
   };
 
   const filterNote = !packLabel
@@ -403,6 +477,66 @@ export function ModrinthPicker({
         </div>
       </div>
     );
+
+  if (importPlan && selectedVersion && reviewing === selectedVersion.id) {
+    const roles = new Map<string, string>([
+      [importPlan.created[0]?.id ?? "", "Main mod"],
+    ]);
+    for (const mod of importPlan.created.slice(1)) {
+      const match = selectedDependencies.find(
+        (item) => item.project.id === mod.modrinth?.projectId,
+      );
+      roles.set(
+        mod.id,
+        match?.dependency.type === "optional"
+          ? "Optional dependency"
+          : "Required dependency",
+      );
+    }
+    const alreadyInCollection = direct.flatMap((dependency) => {
+      const found = inCollection(dependency);
+      return found
+        ? [
+            {
+              name: dependency.name,
+              reason: `Already in the collection as “${found.name}”`,
+            },
+          ]
+        : [];
+    });
+    const unresolved = missingDirect.flatMap((dependency) => {
+      const resolution = resolutionFor(dependency);
+      if (resolution?.status === "resolved") return [];
+      return dependency.type === "required" || includeDependencies
+        ? [
+            {
+              name: dependency.name,
+              reason:
+                resolution?.reason ?? "Not checked. Go back and check again.",
+            },
+          ]
+        : [];
+    });
+    return (
+      <ImportReview
+        plan={importPlan}
+        roles={roles}
+        mods={mods}
+        modpack={modpack}
+        packLabel={packLabel}
+        alreadyInCollection={alreadyInCollection}
+        unresolved={unresolved}
+        onBack={() => setReviewing(null)}
+        onCancel={onCancel}
+        onConfirm={() =>
+          onAddMany?.(importPlan.created, [
+            ...unresolved,
+            ...importPlan.skipped,
+          ])
+        }
+      />
+    );
+  }
 
   const shownVersions = matching.slice(0, versionLimit);
   const mismatches = selectedVersion
@@ -637,6 +771,128 @@ export function ModrinthPicker({
           ) : null}
         </section>
       )}
+      {direct.length > 0 && candidate && (
+        <section className="mr-compat mr-deps">
+          <div className="mr-deps-head">
+            <label className="mr-check">
+              <input
+                type="checkbox"
+                checked={includeDependencies}
+                disabled={!missingDirect.length}
+                onChange={(event) =>
+                  updateChoice({
+                    include: event.target.checked,
+                    ...(event.target.checked && { expanded: true }),
+                  })
+                }
+              />
+              Include missing dependencies
+            </label>
+            <button
+              type="button"
+              className="mr-deps-toggle"
+              aria-expanded={showDependencies}
+              aria-controls={`${filterId}-deps`}
+              onClick={() => updateChoice({ expanded: !showDependencies })}
+            >
+              {showDependencies ? "Hide" : "Show"} {direct.length}{" "}
+              {direct.length === 1 ? "dependency" : "dependencies"}
+              <ChevronDown size={14} aria-hidden="true" />
+            </button>
+          </div>
+          <p className="mr-hint" role="status">
+            {!missingDirect.length
+              ? "Every dependency is already in the collection."
+              : `${selectedDependencies.length} selected · ${missingDirect.length} not in the collection`}
+          </p>
+          {showDependencies && (
+            <div id={`${filterId}-deps`}>
+              {dependencyLookup.error && (
+                <RequestError
+                  error={dependencyLookup.error}
+                  onRetry={dependencyLookup.retry}
+                />
+              )}
+              <ul className="mr-dep-list">
+                {direct.map((dependency) => {
+                  const found = inCollection(dependency);
+                  const resolution = found
+                    ? undefined
+                    : resolutionFor(dependency);
+                  const resolved =
+                    resolution?.status === "resolved" ? resolution : null;
+                  const needs = resolved
+                    ? transitiveNeeds(resolved.version, present)
+                    : [];
+                  return (
+                    <li key={dependency.key}>
+                      <label className="mr-dep">
+                        <input
+                          type="checkbox"
+                          checked={isSelected(dependency)}
+                          disabled={!includeDependencies || !resolved}
+                          onChange={(event) =>
+                            updateChoice({
+                              picks: {
+                                ...currentChoice.picks,
+                                [dependency.key]: event.target.checked,
+                              },
+                            })
+                          }
+                        />
+                        <span className="mr-version-main">
+                          <span className="mr-version-title">
+                            <strong>
+                              {resolved?.project.title ?? dependency.name}
+                            </strong>
+                            <span
+                              className={
+                                dependency.type === "required"
+                                  ? "mr-chip"
+                                  : "mr-chip mr-chip-muted"
+                              }
+                            >
+                              {dependency.type}
+                            </span>
+                            {found && (
+                              <span className="mr-chip mr-chip-muted">
+                                Already in Collection
+                              </span>
+                            )}
+                            {resolution?.status === "unresolved" && (
+                              <span className="mr-chip mr-chip-warn">
+                                Unresolved
+                              </span>
+                            )}
+                          </span>
+                          <span>
+                            {found
+                              ? `As “${found.name}”. It is not added again.`
+                              : resolved
+                                ? `${resolved.version.versionNumber} · ${resolved.version.versionType}${resolved.note ? `. ${resolved.note}` : ""}`
+                                : resolution?.status === "unresolved"
+                                  ? resolution.reason
+                                  : dependencyLookup.loading
+                                    ? "Finding a version for the pack…"
+                                    : "Not checked."}
+                          </span>
+                          {needs.length > 0 && (
+                            <span className="jar-warning">
+                              <Info size={13} aria-hidden="true" />
+                              Also requires {needs.join(", ")}, which is not
+                              added automatically.
+                            </span>
+                          )}
+                        </span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
       {existing && candidate && (
         <section className="mr-compat" aria-live="polite">
           <h4>Changes to “{existing.name}”</h4>
@@ -667,13 +923,24 @@ export function ModrinthPicker({
         <Button variant="ghost" onClick={onCancel}>
           Cancel
         </Button>
-        <Button
-          disabled={!candidate || Boolean(duplicate)}
-          onClick={() => candidate && onPick(candidate)}
-        >
-          {existing ? "Review update" : "Review details"}{" "}
-          <ArrowRight size={16} />
-        </Button>
+        {importPlan ? (
+          <Button
+            disabled={waitingForDependencies}
+            onClick={() => setReviewing(selectedVersion?.id ?? null)}
+          >
+            Review {importPlan.created.length} mods <ArrowRight size={16} />
+          </Button>
+        ) : (
+          <Button
+            disabled={
+              !candidate || Boolean(duplicate) || waitingForDependencies
+            }
+            onClick={() => candidate && onPick(candidate)}
+          >
+            {existing ? "Review update" : "Review details"}{" "}
+            <ArrowRight size={16} />
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -51,21 +51,23 @@ async function fillDependencyProjects(
 }
 
 /**
- * Fills dependency project IDs that Modrinth only gave as version IDs, and adds display names.
+ * Fills dependency project IDs that Modrinth only gave as version IDs, and adds display names,
+ * with one bulk request of each kind for all given versions.
  * Name lookup is best effort; a failed lookup keeps the IDs.
  */
-export async function resolveDependencies(
+export async function resolveDependencyVersions(
   client: ModrinthClient,
-  version: ModrinthVersion,
+  versions: ModrinthVersion[],
   signal?: AbortSignal,
-): Promise<ModrinthVersion> {
-  const [filled] = await fillDependencyProjects(client, [version], signal);
-  const dependencies = filled?.dependencies ?? version.dependencies;
-  const projectIds = dependencies
-    .filter((dependency) => dependency.type !== "embedded")
-    .flatMap((dependency) =>
-      dependency.projectId ? [dependency.projectId] : [],
-    );
+): Promise<ModrinthVersion[]> {
+  const filled = await fillDependencyProjects(client, versions, signal);
+  const projectIds = filled.flatMap((version) =>
+    version.dependencies
+      .filter((dependency) => dependency.type !== "embedded")
+      .flatMap((dependency) =>
+        dependency.projectId ? [dependency.projectId] : [],
+      ),
+  );
   const names = new Map<string, string>();
   if (projectIds.length) {
     try {
@@ -76,15 +78,24 @@ export async function resolveDependencies(
         throw error;
     }
   }
-  return {
+  return filled.map((version) => ({
     ...version,
-    dependencies: dependencies.map((dependency) => {
+    dependencies: version.dependencies.map((dependency) => {
       const name = dependency.projectId
         ? names.get(dependency.projectId)
         : undefined;
       return name ? { ...dependency, name } : dependency;
     }),
-  };
+  }));
+}
+
+export async function resolveDependencies(
+  client: ModrinthClient,
+  version: ModrinthVersion,
+  signal?: AbortSignal,
+): Promise<ModrinthVersion> {
+  const [resolved] = await resolveDependencyVersions(client, [version], signal);
+  return resolved ?? version;
 }
 
 /**

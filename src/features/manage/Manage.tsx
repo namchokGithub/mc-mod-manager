@@ -1109,6 +1109,32 @@ export function Manage() {
       setCheckingUpdates(false);
     }
   };
+  // A Modrinth mod and its selected dependencies: validated together and added in one draft
+  // change, or not at all. Batches and the inbox are left as they are.
+  const addFromModrinth = (
+    created: Mod[],
+    notAdded: { name: string; reason: string }[],
+  ) => {
+    try {
+      importMods(modsSchema.parse([...data.mods, ...created]));
+    } catch {
+      notify({
+        kind: "error",
+        title: "Nothing was added",
+        description:
+          "The new mods did not pass validation. The collection is unchanged.",
+      });
+      return false;
+    }
+    setPicking(null);
+    notify({
+      title: `Added ${created.length} ${created.length === 1 ? "mod" : "mods"} from Modrinth`,
+      description: notAdded.length
+        ? `Not added: ${notAdded.map((item) => `${item.name} (${item.reason})`).join("; ")}.`
+        : "Planned, and not in any batch yet.",
+    });
+    return true;
+  };
   // New mods are appended; updated mods replace their existing record (same ID, so batch
   // assignments stay). All in one draft change.
   const importJars = (created: Mod[], updated: Mod[] = []) => {
@@ -1749,6 +1775,7 @@ export function Manage() {
               setPicking(null);
               setEditing({ mod: null });
             }}
+            onAddMany={addFromModrinth}
             onPick={(picked) => {
               setPicking(null);
               setEditing({
