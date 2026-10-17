@@ -16,6 +16,8 @@ import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
+import { formatStat } from "../../lib/countUp";
+import { useCountUp } from "./useCountUp";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { checkCompatibility, statusLabel } from "../../lib/compatibility";
@@ -108,6 +110,9 @@ export function Preview() {
     },
     { label: "CATEGORIES", value: categories.length, icon: FolderOpen },
   ];
+  const { ref: statsRef, shown: shownStats } = useCountUp<HTMLElement>(
+    stats.map((stat) => stat.value),
+  );
 
   return (
     <>
@@ -170,14 +175,21 @@ export function Preview() {
         </div>
       </section>
       <div className="container">
-        <section className="stats-grid" aria-label="Collection statistics">
-          {stats.map(({ label, value, icon: Icon }) => (
+        <section
+          ref={statsRef}
+          className="stats-grid"
+          aria-label="Collection statistics">
+          {stats.map(({ label, value, icon: Icon }, index) => (
             <div className="stat-card" key={label}>
               <div className="stat-icon">
                 <Icon size={19} />
               </div>
               <div>
-                <strong>{value.toString().padStart(2, "0")}</strong>
+                {/* Screen readers get the final value; the counting digits are visual only. */}
+                <strong aria-hidden="true">
+                  {formatStat(shownStats[index] ?? value)}
+                </strong>
+                <span className="sr-only">{value}</span>
                 <span>{label}</span>
               </div>
             </div>
