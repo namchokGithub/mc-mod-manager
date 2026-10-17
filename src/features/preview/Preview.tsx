@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowRight,
@@ -39,9 +39,31 @@ const initialFilters: Filters = {
 export function Preview() {
   const { data } = useCollection();
   const reduceMotion = useReducedMotion();
+  const heroRef = useRef<HTMLElement | null>(null);
+  const heroHasLeftViewport = useRef(false);
   const [filters, setFilters] = useState(initialFilters);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
+  const [heroAnimationCycle, setHeroAnimationCycle] = useState(0);
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (reduceMotion || !hero) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry) return;
+      if (!entry.isIntersecting) {
+        heroHasLeftViewport.current = true;
+        return;
+      }
+      if (heroHasLeftViewport.current) {
+        heroHasLeftViewport.current = false;
+        setHeroAnimationCycle((cycle) => cycle + 1);
+      }
+    });
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [reduceMotion]);
   // Search, filters, and sort change the result set, so they start again from page 1.
   const changeFilters = (next: Filters) => {
     setFilters(next);
@@ -90,6 +112,7 @@ export function Preview() {
   return (
     <>
       <section
+        ref={heroRef}
         className="hero"
         style={
           data.modpack.heroImageUrl
@@ -98,8 +121,14 @@ export function Preview() {
               }
             : undefined
         }>
-        <div className="hero-decor hero-decor-one" />
-        <div className="hero-decor hero-decor-two" />
+        <div
+          className="hero-decor hero-decor-one"
+          key={`hero-decor-one-${heroAnimationCycle}`}
+        />
+        <div
+          className="hero-decor hero-decor-two"
+          key={`hero-decor-two-${heroAnimationCycle}`}
+        />
         <div className="hero-grid" />
         <div className="container hero-inner">
           <motion.div
