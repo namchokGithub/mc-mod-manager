@@ -4,13 +4,13 @@ Instructions for AI coding agents working in the MC Mod Manager repository. Appl
 
 ## Project Summary
 
-Static Minecraft modpack showcase and local editor (v1.0). Published data lives in `public/data/`; browser edits stay in LocalStorage until the user exports JSON and commits it. Manage and drafts exist only in `pnpm dev` (`import.meta.env.DEV`, see `src/app/routes.ts`); production builds are Preview-only and must not import editor code outside DEV-guarded branches. Manage also searches Modrinth, checks compatibility and updates, and imports local `.jar` files. The app has light (default) and dark themes.
+Static Minecraft modpack showcase and local editor (v1.0). Published data lives in `public/data/`; browser edits stay in a LocalStorage draft until the user saves them with **Save to local JSON** (dev server) or exports them, and then commits the files. Manage and drafts exist only in `pnpm dev` (`import.meta.env.DEV`, see `src/app/routes.ts`); production builds are Preview-only and must not import editor code outside DEV-guarded branches. Manage also searches Modrinth (with version filters), checks compatibility and updates, imports local `.jar` files, and paginates and bulk-deletes the mod list. The app has light (default) and dark themes.
 
 ## Tech Stack (quick reference)
 
 React 19, Vite, strict TypeScript (`noUncheckedIndexedAccess` is on), Tailwind CSS 4 plus `src/styles.css`, shadcn-style components on Radix Dialog, Select, and Popover (plus cmdk), React Hook Form + Zod, Motion for React, Vitest, pnpm. GitHub Pages uses hash routing (`#/`, `#/manage`) and the Vite base `/mc-mod-manager/` when `GITHUB_PAGES=true`.
 
-Layout: `src/app` (shell, data provider, toasts, theme), `src/features` (`preview`, `manage`, `modrinth`, `import`), `src/components` (shared UI), `src/lib` (non-UI logic and its tests).
+Layout: `src/app` (shell, routing, data provider, toasts, theme), `src/features` (`preview`, `manage`, `modrinth`, `import`), `src/components` (shared UI, including `ui/select.tsx` and `ui/combobox.tsx`), `src/lib` (non-UI logic and its tests), `vite-plugins` (dev-server Node code, typechecked through `tsconfig.node.json`).
 
 ## Commands
 
@@ -21,7 +21,9 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - Keep data validation and draft persistence separate from presentation.
 - Validate JSON before importing it; failed imports must leave the current data unchanged.
 - The browser never writes files itself. The only file-writing path is the dev-only Vite plugin `vite-plugins/localJsonSave.ts` (`apply: "serve"`). It writes only `public/data/modpack.json` and `mods.json`, after schema validation, from loopback same-origin requests, atomically, and with a conflict check. Never add another write path, accept file paths from clients, or let it reach production builds. Files must still be committed to publish them.
-- Keep Preview and Manage on a single shared data state.
+- Keep Preview and Manage on a single shared data state. Drafts sync across tabs through the `storage` event in `DataProvider`; do not write a draft that arrived from another tab back to storage.
+- Modules shared with `vite-plugins` (`src/lib/schema.ts`, `json.ts`, `localSaveProtocol.ts`, `heroImage.ts`) must stay DOM-free.
+- List selection is keyed by mod ID, never by index. Keep pagination and selection logic pure in `src/lib/pagination.ts`.
 - New JSON fields must be optional so existing files and drafts keep loading. Schemas live in `src/lib/schema.ts`.
 - Keep Modrinth code split: `src/lib/modrinth/api.ts` (requests and response validation), `mapping.ts` (pure mapping), `service.ts` (orchestration and caching). Compatibility (`src/lib/compatibility.ts`) and update status (`src/lib/updates.ts`) stay pure and read-only; they never modify mods.
 - JAR files are parsed locally (`src/lib/jar/`): never execute or upload them. Only SHA-1 hashes may be sent to Modrinth, and only when the user asks.

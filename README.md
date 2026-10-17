@@ -5,7 +5,7 @@
 ![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-62B47A?logo=minecraft&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A static Minecraft modpack showcase with a local, in-browser editor. The public **Preview** page shows the pack and its mods; the **Manage** page lets you edit them, check compatibility, and prepare JSON files to publish. Manage is available only when running locally with `pnpm dev`; the GitHub Pages site shows Preview only. Everything runs in the browser with no backend.
+A static Minecraft modpack showcase with a local, in-browser editor. The public **Preview** page shows the pack and its mods; the **Manage** page lets you edit them, check compatibility, and save the result straight to the project's JSON files. Manage is available only when running locally with `pnpm dev`; the GitHub Pages site shows Preview only. There is no backend: the published site is static, and the only file writing is done by the local dev server.
 
 ![Sample](public/assets/readme/image-beautified.png)
 
@@ -14,10 +14,12 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 ## Features
 
 - **Preview**: hero, pack stats, searchable and filterable mod grid or list, and a detail dialog with compatibility notes.
-- **Manage**: add, edit, duplicate, and delete mods; edit pack settings; per-row status, compatibility, and update badges.
+- **Manage** (local only): add, edit, duplicate, and delete mods; edit pack settings; per-row status, compatibility, and update badges.
+- **Large lists**: pagination (20, 50, or 100 per page), multi-select across pages, and bulk delete with confirmation.
+- **Save to local JSON**: writes `public/data/*.json` through the dev server, with validation and a conflict check.
 - **JSON import and export** for `modpack.json` and `mods.json`, validated before anything changes.
-- **Local drafts** saved automatically in this browser's LocalStorage.
-- **Modrinth search**: find a mod, pick a version, review a compatibility preview, then add it through the normal form.
+- **Local drafts** saved automatically in this browser's LocalStorage, kept in sync across open tabs, with warnings before unsaved form edits are lost.
+- **Modrinth search**: find a mod, filter its versions by game version and loader, review a compatibility preview, then add it through the normal form.
 - **Compatibility checker** (read-only): Minecraft version, modloader, required and incompatible dependencies, duplicate projects, and missing metadata. Results are Compatible, Warning, Incompatible, or Unknown.
 - **Update checker**: compares each linked mod with the versions Modrinth lists for the pack. Results are Up to date, Update available, or Unknown.
 - **JAR import**: reads `.jar` files or a mods folder locally, with an import preview and duplicate warnings.
@@ -26,14 +28,15 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 
 ## Tech stack
 
-React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, Select, and Popover with cmdk for searchable dropdowns, React Hook Form with Zod, Motion for React, lucide-react icons, and Vitest. No backend, database, or authentication.
+React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, Select, and Popover with cmdk for searchable dropdowns, React Hook Form with Zod, Motion for React, lucide-react icons, and Vitest. No backend, database, or authentication; a small Vite dev-server plugin handles local saving.
 
 Code layout:
 
 - `src/app`: app shell, routing, data provider, toasts, and theme.
 - `src/features`: the `preview`, `manage`, `modrinth` (search and version picker), and `import` (JAR) screens.
 - `src/components`: shared UI such as dialogs, buttons, badges, and mod artwork.
-- `src/lib`: logic without UI. This covers schemas (`schema.ts`), drafts and export (`storage.ts`), filtering, compatibility, updates, the Modrinth client (`modrinth/api.ts`, `mapping.ts`, `service.ts`), and JAR parsing (`jar/`).
+- `src/lib`: logic without UI. This covers schemas (`schema.ts`), drafts and export (`storage.ts`), local saving (`localSave.ts`), filtering and pagination, compatibility, updates, the Modrinth client (`modrinth/api.ts`, `mapping.ts`, `service.ts`, `versionFilters.ts`), and JAR parsing (`jar/`).
+- `vite-plugins`: Node code for the dev server, currently the local JSON save endpoint.
 - `src/styles.css`: all styling. Colors come from theme tokens on `:root` (light) and `:root[data-theme="dark"]`.
 
 ## Requirements
@@ -98,12 +101,15 @@ Details:
 - If a stored draft can no longer be read, the app shows the published data, keeps the old draft under the LocalStorage key `mc-mod-manager:draft:v1:unreadable`, and tells you.
 - A draft that matches the published data exactly is cleared on load, so the "Unpublished draft" badge disappears after you publish.
 - The theme choice is stored separately under `mc-mod-manager:theme` and is never part of exported data.
+- With several tabs open, a tab follows drafts saved or reset in another tab instead of overwriting them.
+- Closing the mod editor, leaving unsaved pack settings, or reloading the page with unsaved form edits asks for confirmation first.
 
 ## Modrinth integration
 
 The app calls the public Modrinth API (`https://api.modrinth.com/v2`) directly from the browser. No key or account is needed.
 
 - **Search Modrinth** (Manage) searches mods, optionally filtered by the pack's Minecraft version and loader. Search results are not treated as compatible. The version you pick is checked against its own metadata before you add it.
+- The version step has **Game version** (searchable) and **Modloader** filters that start from Pack settings, plus **Show all versions**. Each project's full version list is fetched once and filtered locally. A version that does not match Pack settings is flagged.
 - **Update from Modrinth** (↻ on a row) links or changes the version. Only the version and the `modrinth` snapshot are replaced; your name, notes, status, side, and other edited fields are kept. Empty fields are filled.
 - **Check compatibility** fetches current metadata for linked versions. **Check updates** fetches each project's compatible version list once, caches it for five minutes, and limits itself to four requests at a time.
 - Updates are judged by version IDs, release channel, and publish date, never by comparing version strings. Ties, missing dates, and unclear ordering show as Unknown.
@@ -141,15 +147,17 @@ Then open `http://localhost:4173/mc-mod-manager/`.
 ## Known limitations
 
 - Drafts are per browser. There is no sync, account, or multi-user editing, and only one modpack profile.
-- Publishing is manual: export, replace files, commit.
+- Publishing still needs a commit and push. **Save to local JSON** only works while `pnpm dev` runs and does not include edits still open in a form.
+- Each JSON file is replaced atomically, but the pair is not: if renaming the second file fails, the first is already updated.
 - Compatibility needs Modrinth version metadata. Manual and unmatched entries are always Unknown.
-- Loaders must match exactly, except Fabric mods on Quilt, which are a Warning. Forge-only versions on a NeoForge pack are reported as Incompatible, even though NeoForge 1.20.1 can load many Forge mods.
+- Loaders must match exactly, except Fabric mods on Quilt, which are a Warning. Forge-only versions on a NeoForge pack are reported as Incompatible. That is correct for current Minecraft versions; only NeoForge 1.20.1 packs could load many Forge mods.
 - Declared Minecraft version ranges in JAR metadata are shown but not evaluated.
 - Modrinth does not expose its rate-limit headers to browsers, so a rate-limit message cannot say exactly how long to wait.
 - Search shows up to 100 results per query.
 - JAR import reads up to 500 files per batch. It does not support ZIP64 archives, cannot tell Forge from NeoForge 1.20.1 when `mods.toml` has no loader dependency, and does not use mod icons from inside the JAR.
 - Folder selection is not available in Firefox or Safari; selecting multiple files works everywhere.
 - Update and live compatibility results are not saved. They reset when the page reloads.
+- If two tabs edit within about half a second of each other, the later saved draft wins.
 - CurseForge, automatic downloads, and dependency installation are not supported.
 
 ---
