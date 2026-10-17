@@ -61,7 +61,16 @@ import {
 import { CurseForgeLink } from "./CurseForgeLink";
 
 /** Manage page for one additional collection: resource packs, data packs, or shaders. */
-export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
+export function ContentPanel({
+  contentKey,
+  openItemId,
+  onOpened,
+}: {
+  contentKey: ContentKey;
+  /** Opens this entry's editor on arrival, e.g. from the build plan. */
+  openItemId?: string | null;
+  onOpened?: () => void;
+}) {
   const { data, updateContent } = useCollection();
   const notify = useToast();
   const meta = contentMeta[contentKey];
@@ -76,7 +85,16 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
   const [editing, setEditing] = useState<{
     item: ContentItem | null;
     initial?: ContentInput;
-  } | null>(null);
+  } | null>(() => {
+    const item = openItemId
+      ? data[contentKey].items.find((entry) => entry.id === openItemId)
+      : undefined;
+    return item ? { item } : null;
+  });
+  // The request is used once; returning to this tab later opens nothing.
+  useEffect(() => {
+    if (openItemId) onOpened?.();
+  }, [openItemId, onOpened]);
   const shownEditing = useRetained(editing);
   const [editorDirty, setEditorDirty] = useState(false);
   const [confirmDiscard, setConfirmDiscard] = useState(false);
@@ -112,8 +130,8 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
     ...items.flatMap((item) => item.minecraftVersions),
   ];
 
-  const save = (items: ContentItem[]) =>
-    updateContent(contentKey, { version: 1, type, items });
+  const save = (items: ContentItem[], deletedIds?: string[]) =>
+    updateContent(contentKey, { version: 1, type, items }, deletedIds);
   const submit = (input: ContentInput) => {
     const current = editing?.item;
     const result = current
@@ -536,7 +554,7 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
         title={`Delete ${shownDeleting?.name ?? ""}?`}
-        description={`This removes it from the ${meta.title.toLowerCase()} draft. Mods are not changed.`}
+        description={`This removes it from the ${meta.title.toLowerCase()} draft and from any batch in the build plan. Mods are not changed.`}
       >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setDeleting(null)}>
@@ -546,7 +564,7 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
             variant="danger"
             onClick={() => {
               if (deleting) {
-                save(deleteContentItem(items, deleting.id));
+                save(deleteContentItem(items, deleting.id), [deleting.id]);
                 notify({
                   kind: "info",
                   title: `${deleting.name} deleted`,

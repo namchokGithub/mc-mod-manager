@@ -110,16 +110,40 @@
       "createdAt": "2026-10-17T21:10:47.246Z"
     },
     {
-      "id": "loot-integrations-choicetheorem-s-overhauled-village-immersive-structures",
-      "name": "Loot Integrations: ChoiceTheorem's Overhauled Village & Immersive Structures",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-choicetheorems-overhauled/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
-      "createdAt": "2026-10-17T21:56:04.889Z"
-    },
-    {
       "id": "armor-damage-scaling",
       "name": "Armor Damage Scaling",
       "notes": "",
       "createdAt": "2026-10-17T22:09:25.237Z"
+    },
+    {
+      "id": "someaddon",
+      "name": "Loot Integrations by someaddon",
+      "notes": "https://www.curseforge.com/members/someaddon/projects",
+      "createdAt": "2026-10-17T22:21:04.217Z"
+    },
+    {
+      "id": "yung-s-better-nether-fortresses",
+      "name": "YUNG's Better Nether Fortresses",
+      "notes": "Check กับ batter end",
+      "createdAt": "2026-10-17T22:23:53.176Z"
+    },
+    {
+      "id": "freshlx",
+      "name": "FreshLX",
+      "notes": "https://www.curseforge.com/members/freshlx/projects",
+      "createdAt": "2026-10-17T22:29:19.553Z"
+    },
+    {
+      "id": "alexander8vkhz",
+      "name": "alexander8vkhz",
+      "notes": "https://www.curseforge.com/members/alexander8vkhz/projects",
+      "createdAt": "2026-10-17T22:38:01.493Z"
+    },
+    {
+      "id": "sophisticated-tab",
+      "name": "Sophisticated Tab",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/sophisticated-tab/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
+      "createdAt": "2026-10-17T22:41:07.137Z"
     }
   ]
 }

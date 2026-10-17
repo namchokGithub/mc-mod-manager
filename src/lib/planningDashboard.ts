@@ -4,7 +4,16 @@ import {
   type DependencyEntry,
   type DependencySource,
 } from "./dependencyOverview";
-import type { Batch, Collection, Mod } from "./schema";
+import { batchContent, contentKeyByType, contentRefsOf } from "./batchContent";
+import {
+  contentKeys,
+  contentTypes,
+  type Batch,
+  type BatchContentRef,
+  type Collection,
+  type ContentKey,
+  type Mod,
+} from "./schema";
 
 export type DependencyIssue = { mod: Mod; entry: DependencyEntry };
 export type LaterIssue = DependencyIssue & { batch: Batch; position: number };
@@ -18,6 +27,10 @@ export type BatchSummary = {
   later: number;
   /** Mod IDs in this batch that are no longer in the mod list. */
   deletedRefs: string[];
+  /** Resource packs, data packs, and shaders in this batch that still exist. */
+  contentCount: number;
+  /** Their references whose entry no longer exists. */
+  missingContent: BatchContentRef[];
 };
 
 export type PlanningDashboard = {
@@ -42,12 +55,30 @@ export type PlanningDashboard = {
     sources: Record<DependencySource, number>;
   };
   batches: BatchSummary[];
+  /**
+   * Every collection together (mods + resource packs + data packs + shaders), counted by unique
+   * type + ID. Separate from the mod-only figures above, which keep their meaning.
+   */
+  combined: {
+    totals: Record<"mods" | ContentKey, number>;
+    totalItems: number;
+    assignedItems: number;
+    unassignedItems: number;
+    /** Unique assigned items / all items × 100, rounded; null when there are none. Planning only. */
+    coverage: number | null;
+  };
   attention: {
     unassigned: Mod[];
     missing: DependencyIssue[];
     unresolved: DependencyIssue[];
     later: LaterIssue[];
     deletedRefs: { batch: Batch; position: number; ids: string[] }[];
+    /** Batch references to resource packs, data packs, or shaders that no longer exist. */
+    deletedContentRefs: {
+      batch: Batch;
+      position: number;
+      refs: BatchContentRef[];
+    }[];
   };
 };
 
@@ -117,6 +148,8 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
   const summaries: BatchSummary[] = [];
   const later: LaterIssue[] = [];
   const deletedRefs: PlanningDashboard["attention"]["deletedRefs"] = [];
+  const deletedContentRefs: PlanningDashboard["attention"]["deletedContentRefs"] =
+    [];
   batches.forEach((batch, index) => {
     const position = index + 1;
     const { mods: present, missing: gone } = batchMods(batch, mods);
@@ -144,6 +177,12 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
         }
       }
     if (gone.length) deletedRefs.push({ batch, position, ids: gone });
+    const content = batchContent(batch, collection);
+    const missingContent = contentTypes.flatMap((type) =>
+      content[type].missing.map((id) => ({ type, id })),
+    );
+    if (missingContent.length)
+      deletedContentRefs.push({ batch, position, refs: missingContent });
     summaries.push({
       batch,
       position,
@@ -152,8 +191,32 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
       unresolved: unresolvedCount,
       later: laterCount,
       deletedRefs: gone,
+      contentCount: contentTypes.reduce(
+        (sum, type) => sum + content[type].items.length,
+        0,
+      ),
+      missingContent,
     });
   });
+
+  // Unique type + ID references that resolve to an existing entry.
+  const assignedContent = new Set<string>();
+  for (const batch of batches)
+    for (const ref of contentRefsOf(batch))
+      if (
+        collection[contentKeyByType[ref.type]].items.some(
+          (item) => item.id === ref.id,
+        )
+      )
+        assignedContent.add(`${ref.type}:${ref.id}`);
+  const totals = {
+    mods: mods.length,
+    ...Object.fromEntries(
+      contentKeys.map((key) => [key, collection[key].items.length]),
+    ),
+  } as Record<"mods" | ContentKey, number>;
+  const totalItems = Object.values(totals).reduce((sum, n) => sum + n, 0);
+  const assignedItems = assigned.size + assignedContent.size;
 
   return {
     inboxCount: collection.inbox.entries.length,
@@ -166,12 +229,22 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
       : null,
     health,
     batches: summaries,
+    combined: {
+      totals,
+      totalItems,
+      assignedItems,
+      unassignedItems: totalItems - assignedItems,
+      coverage: totalItems
+        ? Math.round((assignedItems / totalItems) * 100)
+        : null,
+    },
     attention: {
       unassigned,
       missing,
       unresolved,
       later,
       deletedRefs,
+      deletedContentRefs,
     },
   };
 }

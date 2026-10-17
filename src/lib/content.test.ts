@@ -273,8 +273,10 @@ describe("collection loading and drafts", () => {
         items: added([]),
       },
     };
-    expect(planningDashboard(withContent)).toEqual(
-      planningDashboard(published),
-    );
+    // Mod-only figures are unchanged; only the separate combined totals see it.
+    const { combined: after, ...modsAfter } = planningDashboard(withContent);
+    const { combined: before, ...modsBefore } = planningDashboard(published);
+    expect(modsAfter).toEqual(modsBefore);
+    expect(after.totals.resourcePacks).toBe(before.totals.resourcePacks + 1);
   });
 });

@@ -15,7 +15,20 @@ import { DependencyOverview } from "../../components/DependencyOverview";
 import { ModArtwork } from "../../components/ModArtwork";
 import { batchMods, orderedBatches } from "../../lib/batches";
 import { statusLabel, type CompatResult } from "../../lib/compatibility";
-import type { BatchFile, Mod } from "../../lib/schema";
+import {
+  batchContent,
+  batchCountText,
+  installGuidance,
+  planTypeLabels,
+} from "../../lib/batchContent";
+import { contentSourceLabels, contentStatusLabels } from "../../lib/content";
+import {
+  contentItemCompat,
+  contentSourceText,
+  contentStatusLabel,
+  contentVerificationText,
+} from "../../lib/contentVerification";
+import { contentTypes, type BatchFile, type Mod } from "../../lib/schema";
 
 const plural = (count: number, word: string) =>
   `${count} ${word}${count === 1 ? "" : "s"}`;
@@ -68,6 +81,7 @@ export function BuildPlanGuide({
         {batches.map((batch, index) => {
           const expanded = open.has(batch.id);
           const { mods: batchList, missing } = batchMods(batch, mods);
+          const content = batchContent(batch, collection);
           return (
             <li key={batch.id} className="plan-batch">
               <button
@@ -82,7 +96,7 @@ export function BuildPlanGuide({
                 <span className="plan-title">
                   <strong>{batch.name}</strong>
                   <span>
-                    {plural(batchList.length, "mod")}
+                    {batchCountText(batchList.length, content)}
                     {batch.checklist.length
                       ? ` · ${plural(batch.checklist.length, "step")}`
                       : ""}
@@ -172,6 +186,86 @@ export function BuildPlanGuide({
                       {!batchList.length && !missing.length && (
                         <p className="mr-hint">No mods in this batch yet.</p>
                       )}
+                      {batchList.length > 0 && (
+                        <p className="mr-hint">{installGuidance.mod}</p>
+                      )}
+                      {contentTypes.map((type) => {
+                        const { items, missing: gone } = content[type];
+                        if (!items.length && !gone.length) return null;
+                        return (
+                          <div key={type} className="plan-content-group">
+                            <h4>
+                              {planTypeLabels[type].many}{" "}
+                              <span className="plan-count">{items.length}</span>
+                            </h4>
+                            <ul className="plan-mods">
+                              {items.map((item) => {
+                                const result = contentItemCompat(
+                                  item,
+                                  type,
+                                  collection.modpack.minecraftVersion,
+                                );
+                                const source = contentSourceText(
+                                  item,
+                                  contentSourceLabels,
+                                );
+                                return (
+                                  <li key={item.id}>
+                                    <ModArtwork
+                                      name={item.name}
+                                      imageUrl={item.imageUrl}
+                                    />
+                                    <span className="plan-mod-name">
+                                      <strong>{item.name}</strong>
+                                      <span>
+                                        {item.version
+                                          ? `v${item.version} · `
+                                          : ""}
+                                        {source} ·{" "}
+                                        {contentStatusLabels[item.status]}
+                                      </span>
+                                      {item.notes && (
+                                        <span className="plan-mod-note">
+                                          {item.notes}
+                                        </span>
+                                      )}
+                                    </span>
+                                    <CompatBadge
+                                      status={result.status}
+                                      label={contentStatusLabel(result)}
+                                      source={contentVerificationText(result)}
+                                      compact
+                                    />
+                                    {item.sourceUrl && (
+                                      <a
+                                        className="plan-mod-link"
+                                        href={item.sourceUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        aria-label={`Open ${item.name} on ${contentSourceLabels[item.source]}`}
+                                      >
+                                        {contentSourceLabels[item.source]}
+                                        <ArrowUpRight
+                                          size={13}
+                                          aria-hidden="true"
+                                        />
+                                      </a>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                            {gone.length > 0 && (
+                              <p className="mr-hint">
+                                {plural(gone.length, planTypeLabels[type].one)}{" "}
+                                in this batch {gone.length === 1 ? "is" : "are"}{" "}
+                                no longer in the collection.
+                              </p>
+                            )}
+                            <p className="mr-hint">{installGuidance[type]}</p>
+                          </div>
+                        );
+                      })}
                       <DependencyOverview
                         batchId={batch.id}
                         plan={plan}

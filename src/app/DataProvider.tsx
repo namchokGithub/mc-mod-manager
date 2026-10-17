@@ -16,6 +16,7 @@ import {
   withOrder,
 } from "../lib/batches";
 import { removeMods } from "../lib/mods";
+import { removeContentFromBatches } from "../lib/batchContent";
 import {
   deriveSaveStatus,
   hasUnsavedChanges,
@@ -245,10 +246,17 @@ export function DataProvider({ children }: { children: ReactNode }) {
         },
       });
     },
-    updateContent: (key, file) =>
+    updateContent: (key, file, deletedIds = []) =>
       change({
         ...data,
         [key]: contentFileSchema(contentCollections[key].type).parse(file),
+        batches: deletedIds.length
+          ? removeContentFromBatches(
+              data.batches,
+              contentCollections[key].type,
+              deletedIds,
+            )
+          : data.batches,
       }),
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),

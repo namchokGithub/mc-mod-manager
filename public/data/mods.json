@@ -5831,42 +5831,6 @@
     }
   },
   {
-    "id": "loading-backgrounds",
-    "name": "Loading Backgrounds",
-    "version": "1.8.1",
-    "category": "Game Mechanics",
-    "tags": [
-      "Library",
-      "Management"
-    ],
-    "status": "planned",
-    "side": "client",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/loading-backgrounds",
-    "description": "With this mod you will be able to customize the background of the loading screens of the Minecraft games, placing any type of customizable image.",
-    "dependencies": [],
-    "notes": "ทำภาพพื้นหลัง 1920×1080 (16:9) สัก 3–5 ภาพ แล้วใส่ชื่อ Modpack หรือภาพโลกแฟนตาซีลงไป",
-    "imageUrl": "https://cdn.modrinth.com/data/dH40biZd/a13d8f9cb6a18d0a021ab7dec0d20b50477adedb_96.webp",
-    "modrinth": {
-      "projectId": "dH40biZd",
-      "slug": "loading-backgrounds",
-      "versionId": "cRFwz1oS",
-      "versionNumber": "1.8.1",
-      "versionType": "release",
-      "datePublished": "2026-05-11T11:15:19.052196Z",
-      "gameVersions": [
-        "26.1",
-        "26.1.1",
-        "26.1.2"
-      ],
-      "loaders": [
-        "neoforge"
-      ],
-      "dependencies": [],
-      "syncedAt": "2026-10-17T21:23:48.042Z"
-    }
-  },
-  {
     "id": "more-beautiful-torches",
     "name": "More Beautiful Torches",
     "version": "3.1.1",
@@ -7113,6 +7077,1346 @@
       ],
       "dependencies": [],
       "syncedAt": "2026-10-17T22:14:48.132Z"
+    }
+  },
+  {
+    "id": "sophisticated-inventory-interactions",
+    "name": "Sophisticated Inventory Interactions",
+    "version": "26.1.2-0.1.18.228",
+    "category": "Management",
+    "tags": [
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sophisticated-inventory-interactions",
+    "description": "Adds Sophisticated-style search, sort, and transfer controls to vanilla and compatible modded container GUIs, including player-inventory sorting.",
+    "dependencies": [
+      "Sophisticated Core"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/orgY0JIo/b0e2509740988a72c698b03db32ef428be33fffa_96.webp",
+    "modrinth": {
+      "projectId": "orgY0JIo",
+      "slug": "sophisticated-inventory-interactions",
+      "versionId": "PsqWMbGF",
+      "versionNumber": "26.1.2-0.1.18.228",
+      "versionType": "release",
+      "datePublished": "2026-10-03T12:55:04.274931Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nmoqTijg",
+          "versionId": null,
+          "type": "required",
+          "name": "Sophisticated Core"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:16:55.576Z"
+    }
+  },
+  {
+    "id": "loot-journal",
+    "name": "Loot Journal: Pickup Notifier",
+    "version": "6.2.1",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/loot-journal",
+    "description": "Ultimate item pick-up notifier featuring rich animations, full theming support, customizable layouts, and powerful filtering options!",
+    "dependencies": [
+      "Fragmentum",
+      "YetAnotherConfigLib (YACL)"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/OJ6ZYz5L/36cf7ac32d67b6088711da16d68185021194188b_96.webp",
+    "modrinth": {
+      "projectId": "OJ6ZYz5L",
+      "slug": "loot-journal",
+      "versionId": "WGDhm1uj",
+      "versionNumber": "6.2.1",
+      "versionType": "release",
+      "datePublished": "2026-05-24T16:49:04.980173Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "49C5QgTK",
+          "versionId": null,
+          "type": "required",
+          "name": "Fragmentum"
+        },
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "required",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:18:13.250Z"
+    }
+  },
+  {
+    "id": "fragmentum",
+    "name": "Fragmentum",
+    "version": "4.1.0",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fragmentum",
+    "description": "The lightweight framework for the Obscuria Collection multi-loader mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/49C5QgTK/f434c2e5058fa28cf87aeec43e6680a6ca48178e_96.webp",
+    "modrinth": {
+      "projectId": "49C5QgTK",
+      "slug": "fragmentum",
+      "versionId": "5G5zCLdg",
+      "versionNumber": "4.1.0",
+      "versionType": "release",
+      "datePublished": "2026-05-25T18:12:02.654893Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:18:17.750Z"
+    }
+  },
+  {
+    "id": "betternether-neoforge",
+    "name": "BetterNether: New Dawn",
+    "version": "26.1.9",
+    "category": "Decoration",
+    "tags": [
+      "Game Mechanics",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/betternether-neoforge",
+    "description": "An unofficially maintained continuation of BetterNether for Fabric and NeoForge, bringing the latest BetterNether content to every supported Minecraft version alongside bug fixes, compatibility improvements, and expanded Nether world generation",
+    "dependencies": [
+      "WorldWeaver: New Dawn",
+      "BCLib: New Dawn",
+      "WunderLib: New Dawn"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/fxX3RlL5/1b3aceebcfb0c1bdcf426a7f1c0de8011cd67550_96.webp",
+    "modrinth": {
+      "projectId": "fxX3RlL5",
+      "slug": "betternether-neoforge",
+      "versionId": "MM8NftZs",
+      "versionNumber": "26.1.9",
+      "versionType": "release",
+      "datePublished": "2026-10-14T15:57:42.029391Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "R8uGDQpB",
+          "versionId": null,
+          "type": "required",
+          "name": "WorldWeaver: New Dawn"
+        },
+        {
+          "projectId": "7bdKEtKC",
+          "versionId": null,
+          "type": "required",
+          "name": "BCLib: New Dawn"
+        },
+        {
+          "projectId": "HZmhgdJk",
+          "versionId": null,
+          "type": "required",
+          "name": "WunderLib: New Dawn"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:20:14.841Z"
+    }
+  },
+  {
+    "id": "bclib-neoforge",
+    "name": "BCLib: New Dawn",
+    "version": "26.1.8",
+    "category": "Library",
+    "tags": [
+      "Utility",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/bclib-neoforge",
+    "description": "An unofficially maintained continuation of BCLib for Fabric and NeoForge, providing core utilities and shared functionality for BetterX mods",
+    "dependencies": [
+      "WunderLib: New Dawn",
+      "WorldWeaver: New Dawn"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/7bdKEtKC/8a80718d41d2db87c82f35c39a356395a3b637b5_96.webp",
+    "modrinth": {
+      "projectId": "7bdKEtKC",
+      "slug": "bclib-neoforge",
+      "versionId": "2lzacPwc",
+      "versionNumber": "26.1.8",
+      "versionType": "release",
+      "datePublished": "2026-10-14T15:42:34.407728Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "HZmhgdJk",
+          "versionId": null,
+          "type": "required",
+          "name": "WunderLib: New Dawn"
+        },
+        {
+          "projectId": "R8uGDQpB",
+          "versionId": null,
+          "type": "required",
+          "name": "WorldWeaver: New Dawn"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:20:22.181Z"
+    }
+  },
+  {
+    "id": "worldweaver-neoforge",
+    "name": "WorldWeaver: New Dawn",
+    "version": "26.1.10",
+    "category": "Library",
+    "tags": [
+      "Utility",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/worldweaver-neoforge",
+    "description": "An unofficially maintained continuation of the BetterX Team's utility library for Fabric and NeoForge, designed to streamline common modding tasks, especially those related to world generation",
+    "dependencies": [
+      "BCLib: New Dawn",
+      "WunderLib: New Dawn"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/R8uGDQpB/60774985d4b507cb96d27e6ccde6358387e86a86_96.webp",
+    "modrinth": {
+      "projectId": "R8uGDQpB",
+      "slug": "worldweaver-neoforge",
+      "versionId": "VgCL238U",
+      "versionNumber": "26.1.10",
+      "versionType": "release",
+      "datePublished": "2026-10-14T15:42:06.339406Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "7bdKEtKC",
+          "versionId": null,
+          "type": "required",
+          "name": "BCLib: New Dawn"
+        },
+        {
+          "projectId": "HZmhgdJk",
+          "versionId": null,
+          "type": "required",
+          "name": "WunderLib: New Dawn"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:20:22.181Z"
+    }
+  },
+  {
+    "id": "wunderlib-neoforge",
+    "name": "WunderLib: New Dawn",
+    "version": "26.1.3",
+    "category": "Library",
+    "tags": [
+      "Technology",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/wunderlib-neoforge",
+    "description": "An unofficially maintained continuation of WunderLib for Fabric and NeoForge, providing automated configuration screens, grid-based UI layouts, simplified networking, and other utilities used by BetterX mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/HZmhgdJk/7aa077cc9d0a861abda3a0a774a23be9b1fa4e7d_96.webp",
+    "modrinth": {
+      "projectId": "HZmhgdJk",
+      "slug": "wunderlib-neoforge",
+      "versionId": "Do8DYppU",
+      "versionNumber": "26.1.3",
+      "versionType": "release",
+      "datePublished": "2026-10-14T15:41:49.509875Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:20:22.181Z"
+    }
+  },
+  {
+    "id": "betterend-neoforge",
+    "name": "BetterEnd: New Dawn",
+    "version": "26.1.10",
+    "category": "Decoration",
+    "tags": [
+      "Game Mechanics",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/betterend-neoforge",
+    "description": "An unofficially maintained continuation of BetterEnd for Fabric and NeoForge, bringing the latest BetterEnd content to every supported Minecraft version alongside bug fixes, compatibility improvements, and expanded End world generation",
+    "dependencies": [
+      "BCLib: New Dawn",
+      "WorldWeaver: New Dawn",
+      "WunderLib: New Dawn"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/IcERKldh/28eed11be5d7344f8482ed18c32d1530d6458453_96.webp",
+    "modrinth": {
+      "projectId": "IcERKldh",
+      "slug": "betterend-neoforge",
+      "versionId": "PqElEmDJ",
+      "versionNumber": "26.1.10",
+      "versionType": "release",
+      "datePublished": "2026-10-14T15:46:39.431977Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "7bdKEtKC",
+          "versionId": null,
+          "type": "required",
+          "name": "BCLib: New Dawn"
+        },
+        {
+          "projectId": "R8uGDQpB",
+          "versionId": null,
+          "type": "required",
+          "name": "WorldWeaver: New Dawn"
+        },
+        {
+          "projectId": "HZmhgdJk",
+          "versionId": null,
+          "type": "required",
+          "name": "WunderLib: New Dawn"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:20:35.995Z"
+    }
+  },
+  {
+    "id": "field-guide",
+    "name": "Field Guide",
+    "version": "1.21.5+26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/field-guide",
+    "description": "Discover Plants, Animals and Monsters with a Spyglass. Collect them all and take notes in your personal Field Guide!",
+    "dependencies": [
+      "Immersive Overlays",
+      "Item Descriptions"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/72RRCWM6/aff8f944a75aecb78ae9324be9d6880049cf026e.png",
+    "modrinth": {
+      "projectId": "72RRCWM6",
+      "slug": "field-guide",
+      "versionId": "3Y6Z38GV",
+      "versionNumber": "1.21.5+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-15T18:19:41.468269Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "umyGl7zF",
+          "versionId": null,
+          "type": "optional",
+          "name": "KubeJS"
+        },
+        {
+          "projectId": "5VolwT6c",
+          "versionId": null,
+          "type": "optional",
+          "name": "Reliable Recipe Viewer (RRV)"
+        },
+        {
+          "projectId": "PKoLkD98",
+          "versionId": null,
+          "type": "required",
+          "name": "Immersive Overlays"
+        },
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        },
+        {
+          "projectId": "UaizcMKP",
+          "versionId": null,
+          "type": "required",
+          "name": "Item Descriptions"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:25:05.998Z"
+    }
+  },
+  {
+    "id": "immersive-overlays",
+    "name": "Immersive Overlays",
+    "version": "1.8.5+26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/immersive-overlays",
+    "description": "Overlays useful info like coordinates and the time onto your HUD - as long as you have the right item in your inventory (or bundle!)",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/PKoLkD98/ccfa9d0ddbf9298948bbddfa07ecc29a315dcef1_96.webp",
+    "modrinth": {
+      "projectId": "PKoLkD98",
+      "slug": "immersive-overlays",
+      "versionId": "GrLu2OGX",
+      "versionNumber": "1.8.5+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-22T19:54:24.558010Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "optional",
+          "name": "Cloth Config API"
+        },
+        {
+          "projectId": "SNVQ2c0g",
+          "versionId": null,
+          "type": "embedded"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:25:21.170Z"
+    }
+  },
+  {
+    "id": "item-descriptions",
+    "name": "Item Descriptions",
+    "version": "2.8.5+26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/item-descriptions",
+    "description": "This mod adds unique descriptions for all blocks, items, enchantments, effects, and mobs - built in a way that makes it easy to add modded content.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/UaizcMKP/990af67081998b8ef0ff9c3c044efb5a253fc476_96.webp",
+    "modrinth": {
+      "projectId": "UaizcMKP",
+      "slug": "item-descriptions",
+      "versionId": "ZzOaSApS",
+      "versionNumber": "2.8.5+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-06T16:07:19.559413Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nvQzSEkH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Jade 🔍"
+        },
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:25:21.170Z"
+    }
+  },
+  {
+    "id": "underground-village-stoneholm",
+    "name": "Underground Village, Stoneholm",
+    "version": "2.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/underground-village-stoneholm",
+    "description": "Adding in sprawling mazes of underground halls and floors Stoneholm fills the world with a new type of village.",
+    "dependencies": [
+      "Better Library"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/KmyhssPl/9acf464b7132e6d76c889abd92d5b562da91c515_96.webp",
+    "modrinth": {
+      "projectId": "KmyhssPl",
+      "slug": "underground-village-stoneholm",
+      "versionId": "IZ5UAURT",
+      "versionNumber": "2.1.1",
+      "versionType": "release",
+      "datePublished": "2026-08-07T08:29:17.687523Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "2x0ULgTj",
+          "versionId": null,
+          "type": "required",
+          "name": "Better Library"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:25:55.185Z"
+    }
+  },
+  {
+    "id": "better-library",
+    "name": "Better Library",
+    "version": "2.1.2",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/better-library",
+    "description": "this is just a simple lib for config, 1st join message and live message",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/2x0ULgTj/21e3eb0f4527411d367dc354a13083895df5da03_96.webp",
+    "modrinth": {
+      "projectId": "2x0ULgTj",
+      "slug": "better-library",
+      "versionId": "Djs5Iupg",
+      "versionNumber": "2.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-12T11:28:32.690259Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:25:59.818Z"
+    }
+  },
+  {
+    "id": "ears",
+    "name": "Ears",
+    "version": "2.2.1-d+thermite",
+    "category": "Decoration",
+    "tags": [
+      "Social"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ears",
+    "description": "More skin customization options for just about every version + skin back​ports/fixes for pre-1.9 versions.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/mfzaZK3Z/c92bcfa175f6d27c2616b6c427bb948c510acc88_96.webp",
+    "modrinth": {
+      "projectId": "mfzaZK3Z",
+      "slug": "ears",
+      "versionId": "Tdfeeflh",
+      "versionNumber": "2.2.1-d+thermite",
+      "versionType": "release",
+      "datePublished": "2026-09-16T19:32:22.623682Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:27:59.990Z"
+    }
+  },
+  {
+    "id": "earthmobs",
+    "name": "EarthMobs",
+    "version": "26.1.2-29.6.0",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/earthmobs",
+    "description": "bring back to the Minecraft Earth Mobs with own twist on gameplay!",
+    "dependencies": [
+      "Bagus Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XXnAl6q1/b2274bb6b3f1e6acc699d889dc21ff59b1408bdf_96.webp",
+    "modrinth": {
+      "projectId": "XXnAl6q1",
+      "slug": "earthmobs",
+      "versionId": "MNcGvEv5",
+      "versionNumber": "26.1.2-29.6.0",
+      "versionType": "release",
+      "datePublished": "2026-10-05T20:12:08.805751Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "95nSN4Rd",
+          "versionId": null,
+          "type": "required",
+          "name": "Bagus Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:32:06.901Z"
+    }
+  },
+  {
+    "id": "bagus-lib",
+    "name": "Bagus Lib",
+    "version": "26.1.2-26.5.0",
+    "category": "Library",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/bagus-lib",
+    "description": "This mod is using baguchi's mod and you can use too!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/95nSN4Rd/b6e72dd09dcbf36e0bf08fb9f811093841e21e04.png",
+    "modrinth": {
+      "projectId": "95nSN4Rd",
+      "slug": "bagus-lib",
+      "versionId": "eOOdpCgK",
+      "versionNumber": "26.1.2-26.5.0",
+      "versionType": "release",
+      "datePublished": "2026-08-18T02:11:01.546870Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:32:09.246Z"
+    }
+  },
+  {
+    "id": "sleep-tight",
+    "name": "Sleep Tight",
+    "version": "26.1.2-2.0.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sleep-tight",
+    "description": "Sleep and bed overhaul: hammocks, bedbugs, night bags, nightmares and dream essence",
+    "dependencies": [
+      "Moonlight Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/tNai0h2Y/ce9700ff51ca69b8210dfa39bd23c95d77b66db2_96.webp",
+    "modrinth": {
+      "projectId": "tNai0h2Y",
+      "slug": "sleep-tight",
+      "versionId": "Q9WR1rTy",
+      "versionNumber": "26.1.2-2.0.1",
+      "versionType": "beta",
+      "datePublished": "2026-10-09T18:06:32.489166Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "twkfQtEc",
+          "versionId": null,
+          "type": "required",
+          "name": "Moonlight Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:34:16.225Z"
+    }
+  },
+  {
+    "id": "decorative-paths",
+    "name": "Decorative paths",
+    "version": "1.0",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/decorative-paths",
+    "description": "Paths to decorate your houses and buildings",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ep4qLPDu/c964129ffb9e61eea1852ff2c37fa731be5ad812_96.webp",
+    "modrinth": {
+      "projectId": "ep4qLPDu",
+      "slug": "decorative-paths",
+      "versionId": "Mw6oETGn",
+      "versionNumber": "1.0",
+      "versionType": "release",
+      "datePublished": "2026-06-22T06:18:56.511513Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:37:25.226Z"
+    }
+  },
+  {
+    "id": "mutants-and-zombies",
+    "name": "Mutants and Zombies",
+    "version": "1.3.3-NeoForge-mc26.1",
+    "category": "Adventure",
+    "tags": [
+      "Cursed",
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mutants-and-zombies",
+    "description": "This mod adds new Mutant and Zombie mobs.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/W0C544GP/45871aeef274abf5e47905580c3d3bf5bd7ad2b8_96.webp",
+    "modrinth": {
+      "projectId": "W0C544GP",
+      "slug": "mutants-and-zombies",
+      "versionId": "gJQFZRsr",
+      "versionNumber": "1.3.3-NeoForge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-03-26T22:55:43.648529Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:40:12.036Z"
+    }
+  },
+  {
+    "id": "drippy-loading-screen",
+    "name": "Drippy Loading Screen",
+    "version": "3.1.5-26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/drippy-loading-screen",
+    "description": "Addon for FancyMenu to customize the loading screen.",
+    "dependencies": [
+      "FancyMenu",
+      "Melody",
+      "Konkrete"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/v3CYg2V9/827d193a7e102b2c860683f55bb468dd34e8ee51_96.webp",
+    "modrinth": {
+      "projectId": "v3CYg2V9",
+      "slug": "drippy-loading-screen",
+      "versionId": "DRbhrjs3",
+      "versionNumber": "3.1.5-26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-08-01T08:40:03.305039Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Wq5SjeWM",
+          "versionId": null,
+          "type": "required",
+          "name": "FancyMenu"
+        },
+        {
+          "projectId": "CVT4pFB2",
+          "versionId": null,
+          "type": "required",
+          "name": "Melody"
+        },
+        {
+          "projectId": "J81TRJWm",
+          "versionId": null,
+          "type": "required",
+          "name": "Konkrete"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:44:47.605Z"
+    }
+  },
+  {
+    "id": "fancymenu",
+    "name": "FancyMenu",
+    "version": "3.9.14-26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fancymenu",
+    "description": "Customize Minecraft's menus with ease!",
+    "dependencies": [
+      "Melody",
+      "Konkrete"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Wq5SjeWM/e4e82d028244a1326e6d346bf5b5336140576bb9_96.webp",
+    "modrinth": {
+      "projectId": "Wq5SjeWM",
+      "slug": "fancymenu",
+      "versionId": "gkIEo6K2",
+      "versionNumber": "3.9.14-26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-28T19:51:56.408504Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "CVT4pFB2",
+          "versionId": null,
+          "type": "required",
+          "name": "Melody"
+        },
+        {
+          "projectId": "J81TRJWm",
+          "versionId": null,
+          "type": "required",
+          "name": "Konkrete"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:44:53.143Z"
+    }
+  },
+  {
+    "id": "melody",
+    "name": "Melody",
+    "version": "1.0.16-26.1.1-neoforge",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/melody",
+    "description": "OpenAL-based library mod for playing background music.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/CVT4pFB2/87ac2562f06b104c827d322b4b937bad8fac5fbc_96.webp",
+    "modrinth": {
+      "projectId": "CVT4pFB2",
+      "slug": "melody",
+      "versionId": "lKAVENRI",
+      "versionNumber": "1.0.16-26.1.1-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-04-04T19:55:42.396554Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:44:53.143Z"
+    }
+  },
+  {
+    "id": "champions-unofficial",
+    "name": "Champions-Unofficial",
+    "version": "26.1.2.7-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Cursed",
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/champions-unofficial",
+    "description": "This mod is an unofficial port of the Champions mod for higher version.",
+    "dependencies": [
+      "Architectury API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/VJZc5cJx/e59993633a293b71ef3d13a636168de34902b9db.png",
+    "modrinth": {
+      "projectId": "VJZc5cJx",
+      "slug": "champions-unofficial",
+      "versionId": "DsaWbD4Z",
+      "versionNumber": "26.1.2.7-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-11T13:48:34.767111Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Eyw0UxEx",
+          "versionId": null,
+          "type": "optional",
+          "name": "The One Probe"
+        },
+        {
+          "projectId": "nvQzSEkH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Jade 🔍"
+        },
+        {
+          "projectId": "umyGl7zF",
+          "versionId": null,
+          "type": "optional",
+          "name": "KubeJS"
+        },
+        {
+          "projectId": "lhGA9TYQ",
+          "versionId": null,
+          "type": "required",
+          "name": "Architectury API"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:46:54.400Z"
+    }
+  },
+  {
+    "id": "neruina",
+    "name": "Neruina - Ticking Entity Fixer",
+    "version": "3.3.5",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/neruina",
+    "description": "A Mod that prevents ticking-related crashes from bricking worlds",
+    "dependencies": [
+      "Configurable"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/1s5x833P/b7e3cf809f07d3cad88a60834c3e4e7248021744_96.webp",
+    "modrinth": {
+      "projectId": "1s5x833P",
+      "slug": "neruina",
+      "versionId": "h5srVij3",
+      "versionNumber": "3.3.5",
+      "versionType": "release",
+      "datePublished": "2026-10-17T09:02:37.618064Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "lGffrQ3O",
+          "versionId": null,
+          "type": "required",
+          "name": "Configurable"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:48:04.041Z"
+    }
+  },
+  {
+    "id": "configurable",
+    "name": "Configurable",
+    "version": "3.5.3",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/configurable",
+    "description": "Config library that allows decentralised settings in a mod",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/lGffrQ3O/ba01416a5f946b64040cc6a48e3456e351e73762.png",
+    "modrinth": {
+      "projectId": "lGffrQ3O",
+      "slug": "configurable",
+      "versionId": "szql66EQ",
+      "versionNumber": "3.5.3",
+      "versionType": "release",
+      "datePublished": "2026-10-15T13:12:23.912200Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:48:07.310Z"
+    }
+  },
+  {
+    "id": "configmanager",
+    "name": "Config Manager",
+    "version": "1.1.3",
+    "category": "Management",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/configmanager",
+    "description": "Config Manager is a Minecraft mod that allows modpack developers to ship configuration files without messing with the user's preferences",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/jlNms3Jp/bfeb8f1e34a74c5a8f340deaa0354fe3d443e6a8_96.webp",
+    "modrinth": {
+      "projectId": "jlNms3Jp",
+      "slug": "configmanager",
+      "versionId": "xvw1oVz5",
+      "versionNumber": "1.1.3",
+      "versionType": "release",
+      "datePublished": "2026-06-16T20:15:01.192034Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:50:13.830Z"
+    }
+  },
+  {
+    "id": "faewufs-diversity",
+    "name": "Diversity",
+    "version": "2.5.5",
+    "category": "Cursed",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/faewufs-diversity",
+    "description": "Introduces a wide range of features to enhance the gameplay experience. From quality of life improvements to new mob behaviors and random sh*t, this mod offers a little bit of everything. The mod is designed to work on server-side as well!",
+    "dependencies": [
+      "Faewulf's Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/31qnTHav/3fc7b2531f369b2c84149d3b68fb3cd4d1bbaf1a_96.webp",
+    "modrinth": {
+      "projectId": "31qnTHav",
+      "slug": "faewufs-diversity",
+      "versionId": "VHn4zjWC",
+      "versionNumber": "2.5.5",
+      "versionType": "release",
+      "datePublished": "2026-08-19T10:30:26.436269Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "q4N9H96q",
+          "versionId": null,
+          "type": "required",
+          "name": "Faewulf's Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:53:41.802Z"
+    }
+  },
+  {
+    "id": "faewulfslib",
+    "name": "Faewulf's Lib",
+    "version": "1.4.0",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/faewulfslib",
+    "description": "A library mod that provides utility functions and methods commonly used across my (Faewulf) mods.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/q4N9H96q/4053d5da2c207f77437cd23befe382ea500dd568_96.webp",
+    "modrinth": {
+      "projectId": "q4N9H96q",
+      "slug": "faewulfslib",
+      "versionId": "kDjPT20m",
+      "versionNumber": "1.4.0",
+      "versionType": "release",
+      "datePublished": "2026-08-06T14:11:01.750080Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:53:44.310Z"
+    }
+  },
+  {
+    "id": "more-music-discs",
+    "name": "More Music Discs",
+    "version": "26.1.2-neoforge-35.1.1",
+    "category": "Decoration",
+    "tags": [
+      "Social",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/more-music-discs",
+    "description": "Adds more music discs",
+    "dependencies": [
+      "Deimos"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/pXYChc1a/5569f696a1445cf7a5d17801fd235957a1afbc6e_96.webp",
+    "modrinth": {
+      "projectId": "pXYChc1a",
+      "slug": "more-music-discs",
+      "versionId": "SZne1uyX",
+      "versionNumber": "26.1.2-neoforge-35.1.1",
+      "versionType": "release",
+      "datePublished": "2026-06-14T14:31:06.619673Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "WQaxNzFg",
+          "versionId": null,
+          "type": "required",
+          "name": "Deimos"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:55:24.917Z"
+    }
+  },
+  {
+    "id": "deimos",
+    "name": "Deimos",
+    "version": "26.1.2-neoforge-2.7",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/deimos",
+    "description": "Configuration and data generation library",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/WQaxNzFg/f54a7b23ca8b8a846ac0aa1e6e67b6d410dd7ba5_96.webp",
+    "modrinth": {
+      "projectId": "WQaxNzFg",
+      "slug": "deimos",
+      "versionId": "7mbGgUSb",
+      "versionNumber": "26.1.2-neoforge-2.7",
+      "versionType": "release",
+      "datePublished": "2026-06-12T16:29:42.632827Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:55:26.960Z"
+    }
+  },
+  {
+    "id": "mezzconfiggui",
+    "name": "MezzConfigGUI",
+    "version": "mc26.1.2-0.5.10",
+    "category": "Library",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mezzconfiggui",
+    "description": "Client-side config screen for Minecraft mods",
+    "dependencies": [
+      "MezzConfig"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/BOHUKqOz/a23408c0ea10bbfc79af97acf0fd5a6a7e8f85f8.png",
+    "modrinth": {
+      "projectId": "BOHUKqOz",
+      "slug": "mezzconfiggui",
+      "versionId": "642D5RT3",
+      "versionNumber": "mc26.1.2-0.5.10",
+      "versionType": "beta",
+      "datePublished": "2026-09-29T12:46:04.401230Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "7tEfOcA7",
+          "versionId": null,
+          "type": "required",
+          "name": "MezzConfig"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:57:33.905Z"
     }
   }
 ]

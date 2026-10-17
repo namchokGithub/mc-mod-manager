@@ -4195,3 +4195,34 @@ main:focus {
     gap: 2px;
   }
 }
+.plan-count {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--text-muted);
+}
+.plan-add-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 180px) 1fr;
+  gap: 8px;
+}
+@media (max-width: 560px) {
+  .plan-add-row {
+    grid-template-columns: 1fr;
+  }
+}
+.plan-content-group h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.dash-combined {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 10px 0 6px;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: var(--text-secondary);
+}

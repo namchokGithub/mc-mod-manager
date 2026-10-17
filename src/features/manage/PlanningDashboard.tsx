@@ -12,6 +12,9 @@ import { useCollection } from "../../app/DataContext";
 import { Button } from "../../components/ui/button";
 import { sourceLabels } from "../../lib/dependencyOverview";
 import { planningDashboard } from "../../lib/planningDashboard";
+import { planTypeLabels } from "../../lib/batchContent";
+import { contentMeta } from "../../lib/content";
+import { contentKeys } from "../../lib/schema";
 import type { Mod } from "../../lib/schema";
 
 const LIMIT = 8;
@@ -143,7 +146,7 @@ export function PlanningDashboard({
 
       <div className="dash-cards">
         <section className="dash-card" aria-labelledby="dash-coverage-title">
-          <h3 id="dash-coverage-title">Planning Coverage</h3>
+          <h3 id="dash-coverage-title">Planning Coverage (mods)</h3>
           <p className="dash-big">
             {dashboard.coverage === null ? "—" : `${dashboard.coverage}%`}
           </p>
@@ -162,6 +165,44 @@ export function PlanningDashboard({
               ? `${dashboard.assignedMods} of ${dashboard.totalMods} mods are in at least one batch.`
               : "Add mods to start planning."}{" "}
             This shows planning only, not installation or testing.
+          </p>
+        </section>
+
+        <section className="dash-card" aria-labelledby="dash-combined-title">
+          <h3 id="dash-combined-title">All content (combined)</h3>
+          <p className="dash-big">
+            {dashboard.combined.coverage === null
+              ? "—"
+              : `${dashboard.combined.coverage}%`}
+          </p>
+          <div
+            className="dash-bar"
+            role="progressbar"
+            aria-labelledby="dash-combined-title"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={dashboard.combined.coverage ?? 0}
+          >
+            <span style={{ width: `${dashboard.combined.coverage ?? 0}%` }} />
+          </div>
+          <ul className="dash-combined">
+            <li>
+              {planTypeLabels.mod.many}{" "}
+              <strong>{dashboard.combined.totals.mods}</strong>
+            </li>
+            {contentKeys.map((key) => (
+              <li key={key}>
+                {contentMeta[key].title}{" "}
+                <strong>{dashboard.combined.totals[key]}</strong>
+              </li>
+            ))}
+          </ul>
+          <p className="mr-hint">
+            {dashboard.combined.totalItems
+              ? `${dashboard.combined.assignedItems} of ${dashboard.combined.totalItems} items in all collections are in a batch; ${dashboard.combined.unassignedItems} are not.`
+              : "No items in any collection yet."}{" "}
+            Mods, resource packs, data packs, and shaders together. Planning
+            only, not installation.
           </p>
         </section>
 
@@ -226,13 +267,16 @@ export function PlanningDashboard({
                   </span>
                   <span className="mr-hint">
                     {item.modCount} {item.modCount === 1 ? "mod" : "mods"}
+                    {item.contentCount
+                      ? ` · ${item.contentCount} other ${item.contentCount === 1 ? "item" : "items"}`
+                      : ""}
                     {item.missingRequired
                       ? ` · ${item.missingRequired} required missing`
                       : ""}
                     {item.unresolved ? ` · ${item.unresolved} unresolved` : ""}
                     {item.later ? ` · ${item.later} only in a later batch` : ""}
-                    {item.deletedRefs.length
-                      ? ` · ${item.deletedRefs.length} deleted`
+                    {item.deletedRefs.length + item.missingContent.length
+                      ? ` · ${item.deletedRefs.length + item.missingContent.length} deleted`
                       : ""}
                   </span>
                 </span>
@@ -328,6 +372,27 @@ export function PlanningDashboard({
                   Batch {position}: {batch.name}
                 </button>{" "}
                 — {ids.join(", ")}
+              </li>
+            )}
+          />
+          <Group
+            title="Deleted content references"
+            description="Batches still list resource packs, data packs, or shaders that no longer exist."
+            empty="Every batch refers to existing content."
+            items={attention.deletedContentRefs}
+            render={({ batch, position, refs }) => (
+              <li key={batch.id}>
+                <button
+                  type="button"
+                  className="plan-mod-open"
+                  onClick={() => onOpenBatch(batch.id)}
+                >
+                  Batch {position}: {batch.name}
+                </button>{" "}
+                —{" "}
+                {refs
+                  .map((ref) => `${ref.id} (${planTypeLabels[ref.type].one})`)
+                  .join(", ")}
               </li>
             )}
           />

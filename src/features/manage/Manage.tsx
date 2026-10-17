@@ -1047,6 +1047,8 @@ export function Manage() {
   const [tab, setTab] = useState<Tab>("mods");
   // Batch to expand when the build plan is opened from the dashboard.
   const [planFocus, setPlanFocus] = useState<string | null>(null);
+  // Entry to open when a collection is reached from the build plan.
+  const [contentFocus, setContentFocus] = useState<string | null>(null);
   const [filters, setFilters] = useState(initialFilters);
   const [editing, setEditing] = useState<{
     mod: Mod | null;
@@ -1800,6 +1802,10 @@ export function Manage() {
               {tab === "plan" && (
                 <BuildPlanEditor
                   onOpenMod={(mod) => setEditing({ mod })}
+                  onOpenContent={(key, item) => {
+                    setContentFocus(item.id);
+                    changeTab(key);
+                  }}
                   focusBatchId={planFocus}
                 />
               )}
@@ -1818,7 +1824,14 @@ export function Manage() {
                 />
               )}
               {tab === "data" && <DataTools />}
-              {isContentKey(tab) && <ContentPanel key={tab} contentKey={tab} />}
+              {isContentKey(tab) && (
+                <ContentPanel
+                  key={tab}
+                  contentKey={tab}
+                  openItemId={contentFocus}
+                  onOpened={() => setContentFocus(null)}
+                />
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

@@ -174,6 +174,14 @@ export const checklistItemSchema = z.object({
   done: z.boolean(),
 });
 
+export const contentTypes = ["resourcepack", "datapack", "shader"] as const;
+
+// A batch reference to a resource pack, data pack, or shader. Mods stay in `modIds`.
+export const batchContentRefSchema = z.object({
+  type: z.enum(contentTypes),
+  id: z.string().trim().min(1),
+});
+
 export const batchSchema = z.object({
   id: z.string().trim().min(1),
   name: z.string().trim().min(1, "Batch name is required"),
@@ -182,6 +190,15 @@ export const batchSchema = z.object({
   modIds: z
     .array(z.string().trim().min(1))
     .refine(uniqueStrings, "A mod is listed twice in this batch"),
+  // Optional, so batches.json files from before other content existed load unchanged.
+  // Unique by type + ID; the same ID may exist in different collections.
+  contentRefs: z
+    .array(batchContentRefSchema)
+    .refine(
+      (refs) => uniqueStrings(refs.map((ref) => `${ref.type}:${ref.id}`)),
+      "An item is listed twice in this batch",
+    )
+    .optional(),
   checklist: z
     .array(checklistItemSchema)
     .refine(
@@ -242,7 +259,6 @@ export const emptyInboxFile = (): z.infer<typeof inboxFileSchema> => ({
 
 // Additional content (public/data/resource-packs.json, data-packs.json, shaders.json). Separate
 // from mods: no modloader, dependency, or compatibility fields. Entered by hand, never verified.
-export const contentTypes = ["resourcepack", "datapack", "shader"] as const;
 export const contentSources = [
   "modrinth",
   "curseforge",
@@ -368,6 +384,7 @@ export type Collection = z.infer<typeof collectionSchema>;
 export type BatchFile = z.infer<typeof batchFileSchema>;
 export type Batch = z.infer<typeof batchSchema>;
 export type ChecklistItem = z.infer<typeof checklistItemSchema>;
+export type BatchContentRef = z.infer<typeof batchContentRefSchema>;
 export type InboxFile = z.infer<typeof inboxFileSchema>;
 export type InboxEntry = z.infer<typeof inboxEntrySchema>;
 export type ContentItem = z.infer<typeof contentItemSchema>;

@@ -6,7 +6,27 @@ import {
   type DependencyEntry,
 } from "./dependencyOverview";
 import { loaderLabel } from "./modrinth/versionFilters";
-import type { Batch, Collection, Mod } from "./schema";
+import {
+  batchContent,
+  batchCountText,
+  installGuidance,
+  planTypeLabels,
+  type PlanItemType,
+} from "./batchContent";
+import { contentSourceLabels } from "./content";
+import {
+  contentItemCompat,
+  contentSourceText,
+  contentVerificationText,
+} from "./contentVerification";
+import {
+  contentTypes,
+  type Batch,
+  type Collection,
+  type ContentItem,
+  type ContentType,
+  type Mod,
+} from "./schema";
 
 export type GuideFormat = "markdown" | "text";
 
@@ -105,6 +125,35 @@ function supportLines(mod: Mod): string[] {
   return lines;
 }
 
+/** Details for a resource pack, data pack, or shader; never claims more than its verification. */
+function contentLines(
+  item: ContentItem,
+  type: ContentType,
+  packMinecraft: string,
+): string[] {
+  const compat = contentItemCompat(item, type, packMinecraft);
+  const versions =
+    compat.verification === "manual-verified" && compat.evidence
+      ? compat.evidence.gameVersions
+      : compat.verification === "modrinth"
+        ? (item.modrinth?.gameVersions ?? [])
+        : item.minecraftVersions;
+  const lines = [
+    `Minecraft: ${versions.length ? versions.join(", ") : "not listed"} — ${contentVerificationText(compat)}`,
+  ];
+  if (compat.verification === "manual-verified" && compat.evidence)
+    lines.push(
+      `Evidence: ${compat.evidence.evidenceUrl} (confirmed ${compat.evidence.verifiedAt.slice(0, 10)})`,
+    );
+  if (type === "shader")
+    lines.push(
+      `Shader runtime: ${item.modrinth?.loaders?.length ? `${item.modrinth.loaders.map(loaderLabel).join(", ")} listed, ` : ""}not checked`,
+    );
+  if (item.curseforge && item.curseforge.url !== item.sourceUrl)
+    lines.push(`Also on CurseForge: ${item.curseforge.url}`);
+  return lines;
+}
+
 const relationVerb = {
   required: "Requires",
   optional: "Optional",
@@ -146,10 +195,8 @@ function batchNodes(
   });
   if (batch.description)
     nodes.push({ kind: "paragraph", text: batch.description });
-  nodes.push({
-    kind: "paragraph",
-    text: `${mods.length} ${mods.length === 1 ? "mod" : "mods"}`,
-  });
+  const content = batchContent(batch, collection);
+  nodes.push({ kind: "paragraph", text: batchCountText(mods.length, content) });
 
   nodes.push({ kind: "heading", level: 3, text: "Mods" });
   if (!mods.length)
@@ -182,8 +229,52 @@ function batchNodes(
       text: `Not in the mod list anymore: ${missing.join(", ")}.`,
     });
 
+  for (const type of contentTypes) {
+    const { items, missing: gone } = content[type];
+    if (!items.length && !gone.length) continue;
+    nodes.push({ kind: "heading", level: 3, text: planTypeLabels[type].many });
+    for (const item of items) {
+      const url = safeUrl(item.sourceUrl);
+      const source = contentSourceText(item, contentSourceLabels);
+      nodes.push({
+        kind: "item",
+        depth: 0,
+        checkbox: options.includeChecklist,
+        parts: [
+          item.version ? `${item.name} ${item.version}` : item.name,
+          " — ",
+          url ? { label: source, url } : source,
+        ],
+      });
+      const details = [
+        ...contentLines(item, type, collection.modpack.minecraftVersion),
+        `Planning status: ${item.status}`,
+        ...(options.includeNotes && item.notes.trim()
+          ? [`Notes: ${item.notes.trim()}`]
+          : []),
+      ];
+      for (const detail of details)
+        nodes.push({
+          kind: "item",
+          depth: 1,
+          checkbox: false,
+          parts: [detail],
+        });
+    }
+    if (gone.length)
+      nodes.push({
+        kind: "paragraph",
+        text: `No longer in the ${planTypeLabels[type].many.toLowerCase()} list: ${gone.join(", ")}.`,
+      });
+  }
+
   if (options.includeDependencies) {
     nodes.push({ kind: "heading", level: 3, text: "Dependencies" });
+    if (contentTypes.some((type) => content[type].items.length))
+      nodes.push({
+        kind: "paragraph",
+        text: "Checked for mods only. Resource packs, data packs, and shaders are not part of dependency checks.",
+      });
     const overview = batchDependencyOverview(
       batch.id,
       collection.batches,
@@ -240,6 +331,26 @@ function batchNodes(
           parts: [dependencyText(entry)],
         });
     }
+  }
+
+  // Typical locations only, for the kinds of content in this batch.
+  const present: PlanItemType[] = [
+    ...(mods.length ? (["mod"] as const) : []),
+    ...contentTypes.filter((type) => content[type].items.length),
+  ];
+  if (present.length) {
+    nodes.push({ kind: "heading", level: 3, text: "Installation notes" });
+    for (const type of present)
+      nodes.push({
+        kind: "item",
+        depth: 0,
+        checkbox: false,
+        parts: [installGuidance[type]],
+      });
+    nodes.push({
+      kind: "paragraph",
+      text: "These are typical locations, not guarantees. Follow each project's own instructions where they differ.",
+    });
   }
 
   if (options.includeChecklist && batch.checklist.length) {

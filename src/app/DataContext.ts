@@ -34,8 +34,15 @@ export type DataContextValue = {
    * changes nothing) when the new mods do not validate.
    */
   promoteInbox: (created: Mod[], promotedIds: string[]) => void;
-  /** Replaces one content collection (resource packs, data packs, or shaders). Throws on invalid data. */
-  updateContent: (key: ContentKey, file: ContentFile) => void;
+  /**
+   * Replaces one content collection (resource packs, data packs, or shaders). Throws on invalid
+   * data. `deletedIds` are entries the user deleted; their batch references are removed too.
+   */
+  updateContent: (
+    key: ContentKey,
+    file: ContentFile,
+    deletedIds?: string[],
+  ) => void;
   importModpack: (modpack: Modpack) => void;
   importMods: (mods: Mod[]) => void;
   reset: () => void;

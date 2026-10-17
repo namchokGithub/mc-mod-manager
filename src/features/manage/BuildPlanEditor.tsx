@@ -28,7 +28,26 @@ import {
 } from "../../lib/batches";
 import { DependencyOverview } from "../../components/DependencyOverview";
 import { ExportGuideDialog } from "../../components/ExportGuideDialog";
-import type { Batch, ChecklistItem, Mod } from "../../lib/schema";
+import { Select } from "../../components/ui/select";
+import {
+  assignContent,
+  batchContent,
+  batchCountText,
+  contentKeyByType,
+  installGuidance,
+  planTypeLabels,
+  unassignContent,
+  type PlanItemType,
+} from "../../lib/batchContent";
+import { contentStatusLabels } from "../../lib/content";
+import {
+  contentTypes,
+  type Batch,
+  type ChecklistItem,
+  type ContentItem,
+  type ContentKey,
+  type Mod,
+} from "../../lib/schema";
 import { useRetained } from "../../lib/useRetained";
 
 const plural = (count: number, word: string) =>
@@ -104,42 +123,181 @@ function ChecklistRow({
   );
 }
 
+const typeFilterOptions = [
+  { value: "", label: "All content" },
+  ...(["mod", ...contentTypes] as PlanItemType[]).map((type) => ({
+    value: type,
+    label: planTypeLabels[type].many,
+  })),
+];
+
+/** Resource packs, data packs, or shaders in one batch, with links to their entries. */
+function ContentGroup({
+  type,
+  items,
+  missing,
+  onRemove,
+  onOpen,
+}: {
+  type: (typeof contentTypes)[number];
+  items: ContentItem[];
+  missing: string[];
+  onRemove: (id: string) => void;
+  onOpen: (item: ContentItem) => void;
+}) {
+  const headingId = useId();
+  if (!items.length && !missing.length) return null;
+  const label = planTypeLabels[type];
+  return (
+    <section aria-labelledby={headingId}>
+      <h4 id={headingId}>
+        {label.many} <span className="plan-count">{items.length}</span>
+      </h4>
+      <ul className="plan-mods">
+        {items.map((item) => (
+          <li key={item.id}>
+            <ModArtwork name={item.name} imageUrl={item.imageUrl} />
+            <span className="plan-mod-name">
+              <button
+                type="button"
+                className="plan-mod-open"
+                onClick={() => onOpen(item)}
+              >
+                {item.name}
+              </button>
+              <span>
+                {item.version ? `v${item.version} · ` : ""}
+                {item.source}
+              </span>
+            </span>
+            <span className={`status status-${item.status}`}>
+              {contentStatusLabels[item.status]}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={`Remove ${item.name} from this batch`}
+              title="Remove from batch"
+              onClick={() => onRemove(item.id)}
+            >
+              <X size={15} />
+            </Button>
+          </li>
+        ))}
+        {missing.map((id) => (
+          <li key={id} className="plan-missing">
+            <span className="plan-mod-name">
+              <strong>{id}</strong>
+              <span>No longer in the {label.many.toLowerCase()} list</span>
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={`Remove missing ${label.one} ${id} from this batch`}
+              onClick={() => onRemove(id)}
+            >
+              <X size={15} />
+            </Button>
+          </li>
+        ))}
+      </ul>
+      <p className="mr-hint">{installGuidance[type]}</p>
+    </section>
+  );
+}
+
 function BatchBody({
   batch,
   onChange,
   onOpenMod,
+  onOpenContent,
 }: {
   batch: Batch;
   onChange: (batch: Batch) => void;
   onOpenMod: (mod: Mod) => void;
+  onOpenContent: (key: ContentKey, item: ContentItem) => void;
 }) {
   const { data } = useCollection();
   const [step, setStep] = useState("");
+  const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
   const addId = useId();
   const { mods, missing } = batchMods(batch, data.mods);
-  const available = data.mods
-    .filter((mod) => !batch.modIds.includes(mod.id))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const content = batchContent(batch, data);
+  // One picker for every collection; values are "type:id", so equal IDs never collide.
+  const available = [
+    ...(typeFilter === "" || typeFilter === "mod"
+      ? data.mods
+          .filter((mod) => !batch.modIds.includes(mod.id))
+          .map((mod) => ({
+            value: `mod:${mod.id}`,
+            name: mod.name,
+            label: `${mod.name} · Mod${mod.version ? ` · v${mod.version}` : ""} · ${mod.status}`,
+          }))
+      : []),
+    ...contentTypes
+      .filter((type) => typeFilter === "" || typeFilter === type)
+      .flatMap((type) =>
+        data[contentKeyByType[type]].items
+          .filter(
+            (item) =>
+              !(batch.contentRefs ?? []).some(
+                (ref) => ref.type === type && ref.id === item.id,
+              ),
+          )
+          .map((item) => ({
+            value: `${type}:${item.id}`,
+            name: item.name,
+            label: `${item.name} · ${planTypeLabels[type].one}${item.version ? ` · v${item.version}` : ""} · ${contentStatusLabels[item.status]}`,
+          })),
+      ),
+  ].sort((a, b) => a.name.localeCompare(b.name));
+  const add = (value: string) => {
+    const split = value.indexOf(":");
+    const type = value.slice(0, split) as PlanItemType;
+    const id = value.slice(split + 1);
+    onChange(
+      type === "mod"
+        ? assignMod(batch, id)
+        : assignContent(batch, { type, id }),
+    );
+  };
   const setChecklist = (checklist: ChecklistItem[]) =>
     onChange({ ...batch, checklist });
 
   return (
     <div className="plan-body">
+      <section aria-labelledby={`${addId}-add`} className="plan-add">
+        <h4 id={`${addId}-add`}>Add to this batch</h4>
+        <div className="plan-add-row">
+          <Select
+            aria-label="Content type"
+            size="sm"
+            variant="compact"
+            value={typeFilter}
+            onValueChange={(value) => setTypeFilter(value as PlanItemType | "")}
+            options={typeFilterOptions}
+          />
+          <Combobox
+            aria-labelledby={`${addId}-add`}
+            size="sm"
+            value=""
+            placeholder={
+              available.length
+                ? "Search and add an item…"
+                : "Everything here is already in this batch"
+            }
+            searchPlaceholder="Search by name…"
+            emptyText="Nothing matches."
+            disabled={!available.length}
+            options={available.map(({ value, label }) => ({ value, label }))}
+            onValueChange={(value) => value && add(value)}
+          />
+        </div>
+      </section>
       <section aria-labelledby={`${addId}-mods`}>
-        <h4 id={`${addId}-mods`}>Mods</h4>
-        <Combobox
-          aria-labelledby={`${addId}-mods`}
-          size="sm"
-          value=""
-          placeholder={
-            available.length ? "Add a mod to this batch…" : "All mods added"
-          }
-          searchPlaceholder="Search mods…"
-          emptyText="No mods match."
-          disabled={!available.length}
-          options={available.map((mod) => ({ value: mod.id, label: mod.name }))}
-          onValueChange={(id) => id && onChange(assignMod(batch, id))}
-        />
+        <h4 id={`${addId}-mods`}>
+          Mods <span className="plan-count">{mods.length}</span>
+        </h4>
         {mods.length || missing.length ? (
           <ul className="plan-mods">
             {mods.map((mod) => (
@@ -186,7 +344,18 @@ function BatchBody({
         ) : (
           <p className="mr-hint">No mods in this batch yet.</p>
         )}
+        {mods.length > 0 && <p className="mr-hint">{installGuidance.mod}</p>}
       </section>
+      {contentTypes.map((type) => (
+        <ContentGroup
+          key={type}
+          type={type}
+          items={content[type].items}
+          missing={content[type].missing}
+          onRemove={(id) => onChange(unassignContent(batch, { type, id }))}
+          onOpen={(item) => onOpenContent(contentKeyByType[type], item)}
+        />
+      ))}
       <DependencyOverview
         batchId={batch.id}
         plan={data.batches}
@@ -264,9 +433,11 @@ function BatchBody({
 /** Manage → Build plan: ordered installation batches that reference mods by ID. */
 export function BuildPlanEditor({
   onOpenMod,
+  onOpenContent,
   focusBatchId,
 }: {
   onOpenMod: (mod: Mod) => void;
+  onOpenContent: (key: ContentKey, item: ContentItem) => void;
   /** Expanded and scrolled into view when the editor opens (from the dashboard). */
   focusBatchId?: string | null;
 }) {
@@ -343,8 +514,8 @@ export function BuildPlanEditor({
         <div>
           <h2>Build plan</h2>
           <p>
-            Group mods into batches to install in order, with steps to check
-            after each one.
+            Group mods, resource packs, data packs, and shaders into batches to
+            install in order, with steps to check after each one.
           </p>
         </div>
         <div className="section-head-actions">
@@ -386,7 +557,11 @@ export function BuildPlanEditor({
                     <span className="plan-title">
                       <strong>{batch.name}</strong>
                       <span>
-                        {plural(batch.modIds.length, "mod")} ·{" "}
+                        {batchCountText(
+                          batch.modIds.length,
+                          batchContent(batch, data),
+                        )}{" "}
+                        ·{" "}
                         {batch.checklist.length
                           ? `${done}/${batch.checklist.length} steps done`
                           : "no steps"}
@@ -469,6 +644,7 @@ export function BuildPlanEditor({
                         batch={batch}
                         onChange={replace}
                         onOpenMod={onOpenMod}
+                        onOpenContent={onOpenContent}
                       />
                     </motion.div>
                   )}
@@ -499,7 +675,7 @@ export function BuildPlanEditor({
         open={form !== null}
         onOpenChange={(open) => !open && setForm(null)}
         title={shownForm?.batch ? `Edit ${shownForm.batch.name}` : "New batch"}
-        description="Batches are installed in order. Mods stay in the main list; a batch only refers to them."
+        description="Batches are installed in order. Items stay in their collections; a batch only refers to them."
       >
         <form
           className="editor-form"
