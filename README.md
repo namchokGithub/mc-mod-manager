@@ -23,6 +23,7 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 - **Compatibility checker** (read-only): Minecraft version, modloader, required and incompatible dependencies, duplicate projects, and missing metadata. Results are Compatible, Warning, Incompatible, or Unknown.
 - **Update checker**: compares each linked mod with the versions Modrinth lists for the pack. Results are Up to date, Update available, or Unknown.
 - **JAR import**: reads `.jar` files or a mods folder locally, with an import preview and duplicate warnings.
+- **Planning dashboard** (Manage): mod and batch counts, Planning Coverage (share of mods in at least one batch; not installation or testing), dependency health, a per-batch breakdown, and a "Needs attention" list, all derived from current data.
 - **Build plan**: ordered installation batches with assigned mods and checklist steps, edited in Manage and shown on Preview as a read-only installation guide for building the pack in CurseForge.
 - **Light and dark themes**: light by default, with a toggle in the header. The choice is remembered in this browser.
 - **Toasts, confirmations, and reduced motion**: clear feedback for every change, confirmation before destructive actions, and animations that respect `prefers-reduced-motion`.

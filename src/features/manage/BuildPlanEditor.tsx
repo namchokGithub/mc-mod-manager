@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowDown,
@@ -264,13 +264,24 @@ function BatchBody({
 /** Manage → Build plan: ordered installation batches that reference mods by ID. */
 export function BuildPlanEditor({
   onOpenMod,
+  focusBatchId,
 }: {
   onOpenMod: (mod: Mod) => void;
+  /** Expanded and scrolled into view when the editor opens (from the dashboard). */
+  focusBatchId?: string | null;
 }) {
   const { data, updateBatches } = useCollection();
   const notify = useToast();
   const batches = orderedBatches(data.batches);
-  const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
+  const [expanded, setExpanded] = useState<Set<string>>(
+    () => new Set(focusBatchId ? [focusBatchId] : []),
+  );
+  useEffect(() => {
+    if (focusBatchId)
+      document
+        .getElementById(`batch-${focusBatchId}`)
+        ?.scrollIntoView({ block: "start" });
+  }, [focusBatchId]);
   // null: closed; "" : all batches; otherwise the batch the export was opened from.
   const [exportFor, setExportFor] = useState<string | null>(null);
   const [form, setForm] = useState<{
@@ -357,7 +368,11 @@ export function BuildPlanEditor({
             const open = expanded.has(batch.id);
             const done = batch.checklist.filter((item) => item.done).length;
             return (
-              <li key={batch.id} className="plan-batch">
+              <li
+                key={batch.id}
+                id={`batch-${batch.id}`}
+                className="plan-batch"
+              >
                 <div className="plan-head">
                   <button
                     type="button"

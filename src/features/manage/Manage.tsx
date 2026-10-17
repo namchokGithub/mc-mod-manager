@@ -19,6 +19,7 @@ import {
   HardDriveDownload,
   FileJson2,
   Info,
+  LayoutDashboard,
   ListChecks,
   LoaderCircle,
   Pencil,
@@ -79,6 +80,7 @@ import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { BuildPlanEditor } from "./BuildPlanEditor";
+import { PlanningDashboard } from "./PlanningDashboard";
 import { CompatibilityPanel } from "./CompatibilityPanel";
 import {
   SupportedLoadersField,
@@ -86,7 +88,7 @@ import {
 } from "./CompatibilityFields";
 import { UpdateBadge } from "./UpdateBadge";
 
-type Tab = "mods" | "settings" | "plan" | "data";
+type Tab = "dashboard" | "mods" | "settings" | "plan" | "data";
 const initialFilters: Filters = {
   query: "",
   category: "",
@@ -955,6 +957,8 @@ export function Manage() {
   const [checkingUpdates, setCheckingUpdates] = useState(false);
   const [highlightId, setHighlightId] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("mods");
+  // Batch to expand when the build plan is opened from the dashboard.
+  const [planFocus, setPlanFocus] = useState<string | null>(null);
   const [filters, setFilters] = useState(initialFilters);
   const [editing, setEditing] = useState<{
     mod: Mod | null;
@@ -1250,6 +1254,16 @@ export function Manage() {
           <div className="sidebar-heading">WORKSPACE</div>
           <button
             type="button"
+            className={
+              tab === "dashboard" ? "sidebar-item active" : "sidebar-item"
+            }
+            aria-current={tab === "dashboard" ? "page" : undefined}
+            onClick={() => changeTab("dashboard")}
+          >
+            <LayoutDashboard size={18} /> Dashboard
+          </button>
+          <button
+            type="button"
             className={tab === "mods" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "mods" ? "page" : undefined}
             onClick={() => changeTab("mods")}
@@ -1271,7 +1285,10 @@ export function Manage() {
             type="button"
             className={tab === "plan" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "plan" ? "page" : undefined}
-            onClick={() => changeTab("plan")}
+            onClick={() => {
+              setPlanFocus(null);
+              changeTab("plan");
+            }}
           >
             <ListChecks size={18} /> Build plan{" "}
             <span>{data.batches.batches.length}</span>
@@ -1592,7 +1609,24 @@ export function Manage() {
                 />
               )}
               {tab === "plan" && (
-                <BuildPlanEditor onOpenMod={(mod) => setEditing({ mod })} />
+                <BuildPlanEditor
+                  onOpenMod={(mod) => setEditing({ mod })}
+                  focusBatchId={planFocus}
+                />
+              )}
+              {tab === "dashboard" && (
+                <PlanningDashboard
+                  onOpenMod={(mod) => setEditing({ mod })}
+                  onOpenBatch={(batchId) => {
+                    setPlanFocus(batchId);
+                    changeTab("plan");
+                  }}
+                  onOpenPlan={() => {
+                    setPlanFocus(null);
+                    changeTab("plan");
+                  }}
+                  onOpenMods={() => changeTab("mods")}
+                />
               )}
               {tab === "data" && <DataTools />}
             </motion.div>
