@@ -1,17 +1,22 @@
 import { ArrowUpRight, Link2 } from "lucide-react";
+import type { CompatResult } from "../lib/compatibility";
 import type { Mod } from "../lib/schema";
+import { CompatBadge, CompatReasons } from "./CompatBadge";
 import { Dialog } from "./ui/dialog";
 import { ModArtwork } from "./ModArtwork";
 import { useRetained } from "../lib/useRetained";
 
 export function ModDetail({
   mod,
+  compat,
   onClose,
 }: {
   mod: Mod | null;
+  compat: Map<string, CompatResult>;
   onClose: () => void;
 }) {
   const shown = useRetained(mod);
+  const shownCompat = shown ? compat.get(shown.id) : undefined;
   return (
     <Dialog
       open={Boolean(mod)}
@@ -54,6 +59,29 @@ export function ModDetail({
               </dd>
             </div>
           </dl>
+          <section className="detail-note detail-compat">
+            <div className="detail-compat-head">
+              <h3>Compatibility</h3>
+              {shownCompat && <CompatBadge status={shownCompat.status} />}
+            </div>
+            {shownCompat ? (
+              <>
+                <CompatReasons result={shownCompat} />
+                {shown.modrinth?.versionNumber && (
+                  <p className="detail-compat-source">
+                    Checked against Modrinth version{" "}
+                    {shown.modrinth.versionNumber}
+                    {shown.modrinth.syncedAt
+                      ? `, saved ${new Date(shown.modrinth.syncedAt).toLocaleDateString()}`
+                      : ""}
+                    .
+                  </p>
+                )}
+              </>
+            ) : (
+              <p>Not checked because this mod is {shown.status}.</p>
+            )}
+          </section>
           {shown.notes && (
             <section className="detail-note">
               <h3>Notes</h3>

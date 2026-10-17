@@ -14,16 +14,26 @@ import {
   LoaderCircle,
   Pencil,
   Plus,
+  RefreshCw,
   RotateCcw,
+  Search,
   Settings2,
   Trash2,
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
 import { useToast } from "../../app/ToastContext";
+import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModFilters } from "../../components/ModFilters";
 import { Button } from "../../components/ui/button";
 import { Dialog } from "../../components/ui/dialog";
+import {
+  checkCompatibility,
+  findByProject,
+  type LiveFacts,
+} from "../../lib/compatibility";
+import { modrinth, ModrinthError } from "../../lib/modrinth/api";
+import { fetchLiveVersionFacts } from "../../lib/modrinth/service";
 import { filterMods, uniqueId, type Filters } from "../../lib/mods";
 import {
   modSchema,
@@ -34,6 +44,8 @@ import {
 } from "../../lib/schema";
 import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
+import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
+import { CompatibilityPanel } from "./CompatibilityPanel";
 
 type Tab = "mods" | "settings" | "data";
 const initialFilters: Filters = {
@@ -101,20 +113,23 @@ function Field({
 
 function ModEditor({
   mod,
+  initialValues,
   mods,
   onSave,
   onClose,
 }: {
   mod: Mod | null;
+  initialValues?: Mod;
   mods: Mod[];
   onSave: (mod: Mod, originalId?: string) => boolean;
   onClose: () => void;
 }) {
-  const initial: ModFields = mod
+  const start = initialValues ?? mod;
+  const initial: ModFields = start
     ? {
-        ...mod,
-        tagsText: mod.tags.join(", "),
-        dependenciesText: mod.dependencies.join(", "),
+        ...start,
+        tagsText: start.tags.join(", "),
+        dependenciesText: start.dependencies.join(", "),
       }
     : {
         id: "",
@@ -144,6 +159,7 @@ function ModEditor({
   const notify = useToast();
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
+  const linked = useWatch({ control, name: "modrinth" });
   const submit = (values: ModFields) => {
     const candidate: Mod = {
       ...values,
@@ -177,10 +193,35 @@ function ModEditor({
       setError("id", { message: "This ID is already used by another mod." });
       return;
     }
+    const sameProject = candidate.modrinth
+      ? findByProject(mods, candidate.modrinth.projectId, mod?.id)
+      : undefined;
+    if (sameProject) {
+      notify({
+        kind: "error",
+        title: "Mod not saved",
+        description: `This Modrinth project is already in the pack as “${sameProject.name}”.`,
+      });
+      return;
+    }
     if (onSave(validation.data, mod?.id)) onClose();
   };
   return (
     <form className="editor-form" noValidate onSubmit={handleSubmit(submit)}>
+      {linked && (
+        <div className="data-note mr-linked">
+          <Info size={18} aria-hidden="true" />
+          <p>
+            Linked to Modrinth
+            {linked.slug ? ` (${linked.slug})` : ""}
+            {linked.versionNumber
+              ? `, version ${linked.versionNumber}.`
+              : ", but no version is selected."}{" "}
+            Compatibility uses that version’s metadata. Use “Update from
+            Modrinth” in the mod list to change it.
+          </p>
+        </div>
+      )}
       <div className="form-grid">
         <Field label="Mod name" required error={errors.name?.message}>
           <input autoFocus placeholder="e.g. Sodium" {...register("name")} />
@@ -356,13 +397,13 @@ function SettingsForm({
           <input {...register("author")} />
         </Field>
         <Field
-          label="Hero image URL"
+          label="Hero image URL or path"
           error={errors.heroImageUrl?.message}
-          hint="Leave empty to use the built-in illustrated hero"
+          hint="Use https://… or public/assets/…; leave empty for the built-in hero"
         >
           <input
-            type="url"
-            placeholder="https://…"
+            type="text"
+            placeholder="https://… or public/assets/theme/image.png"
             {...register("heroImageUrl")}
           />
         </Field>
@@ -596,10 +637,46 @@ export function Manage() {
   const [highlightId, setHighlightId] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("mods");
   const [filters, setFilters] = useState(initialFilters);
-  const [editing, setEditing] = useState<Mod | "new" | null>(null);
+  const [editing, setEditing] = useState<{
+    mod: Mod | null;
+    initial?: Mod;
+  } | null>(null);
   const [deleting, setDeleting] = useState<Mod | null>(null);
+  const [picking, setPicking] = useState<PickerTarget | null>(null);
+  const [live, setLive] = useState<{ facts: LiveFacts; at: Date } | null>(null);
+  const [checking, setChecking] = useState(false);
   const shownEditing = useRetained(editing);
   const shownDeleting = useRetained(deleting);
+  const shownPicking = useRetained(picking);
+  const compat = useMemo(
+    () => checkCompatibility(data.mods, data.modpack, live?.facts),
+    [data.mods, data.modpack, live],
+  );
+  const runCheck = async () => {
+    setChecking(true);
+    try {
+      const facts = await fetchLiveVersionFacts(modrinth, data.mods);
+      setLive({ facts, at: new Date() });
+      notify({
+        kind: "info",
+        title: "Compatibility checked",
+        description: facts.size
+          ? `Fetched current metadata for ${facts.size} linked ${facts.size === 1 ? "version" : "versions"}.`
+          : "No mods are linked to a Modrinth version yet.",
+      });
+    } catch (error) {
+      notify({
+        kind: "error",
+        title: "Compatibility check failed",
+        description:
+          error instanceof ModrinthError
+            ? error.message
+            : "Could not reach Modrinth. Saved metadata is still shown.",
+      });
+    } finally {
+      setChecking(false);
+    }
+  };
   const categories = useMemo(
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
     [data.mods],
@@ -728,10 +805,25 @@ export function Manage() {
                       <h2>Mod collection</h2>
                       <p>Add, edit, and organize the mods in your pack.</p>
                     </div>
-                    <Button onClick={() => setEditing("new")}>
-                      <Plus size={17} /> Add mod
-                    </Button>
+                    <div className="section-head-actions">
+                      <Button
+                        variant="secondary"
+                        onClick={() => setPicking({ kind: "add" })}
+                      >
+                        <Search size={16} /> Search Modrinth
+                      </Button>
+                      <Button onClick={() => setEditing({ mod: null })}>
+                        <Plus size={17} /> Add manually
+                      </Button>
+                    </div>
                   </div>
+                  <CompatibilityPanel
+                    mods={data.mods}
+                    results={compat}
+                    checking={checking}
+                    checkedAt={live?.at ?? null}
+                    onCheck={() => void runCheck()}
+                  />
                   <ModFilters
                     filters={filters}
                     onChange={setFilters}
@@ -774,6 +866,12 @@ export function Manage() {
                                 <span className={`status status-${mod.status}`}>
                                   {mod.status}
                                 </span>
+                                {compat.get(mod.id) && (
+                                  <CompatBadge
+                                    status={compat.get(mod.id)!.status}
+                                    compact
+                                  />
+                                )}
                               </div>
                               <p>
                                 {mod.category} <span>·</span> {mod.side} side{" "}
@@ -791,9 +889,28 @@ export function Manage() {
                                 size="icon"
                                 aria-label={`Edit ${mod.name}`}
                                 title="Edit"
-                                onClick={() => setEditing(mod)}
+                                onClick={() => setEditing({ mod })}
                               >
                                 <Pencil size={17} />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                aria-label={
+                                  mod.modrinth
+                                    ? `Update ${mod.name} from Modrinth`
+                                    : `Link ${mod.name} to Modrinth`
+                                }
+                                title={
+                                  mod.modrinth
+                                    ? "Update from Modrinth"
+                                    : "Link to Modrinth"
+                                }
+                                onClick={() =>
+                                  setPicking({ kind: "refresh", mod })
+                                }
+                              >
+                                <RefreshCw size={16} />
                               </Button>
                               <Button
                                 variant="ghost"
@@ -844,8 +961,8 @@ export function Manage() {
                         <>
                           <h3>No mods yet</h3>
                           <p>Add your first mod or import a mods.json file.</p>
-                          <Button onClick={() => setEditing("new")}>
-                            <Plus size={17} /> Add your first mod
+                          <Button onClick={() => setPicking({ kind: "add" })}>
+                            <Search size={16} /> Search Modrinth
                           </Button>
                         </>
                       )}
@@ -875,20 +992,61 @@ export function Manage() {
         open={editing !== null}
         onOpenChange={(open) => !open && setEditing(null)}
         title={
-          shownEditing === "new"
-            ? "Add a mod"
-            : `Edit ${shownEditing?.name ?? "mod"}`
+          shownEditing?.mod
+            ? `Edit ${shownEditing.mod.name}`
+            : shownEditing?.initial
+              ? `Add ${shownEditing.initial.name}`
+              : "Add a mod"
         }
         description="Fields marked * are required. Changes stay in this browser until you export."
         size="wide"
       >
         {shownEditing && (
           <ModEditor
-            key={shownEditing === "new" ? "new" : shownEditing.id}
-            mod={shownEditing === "new" ? null : shownEditing}
+            key={`${shownEditing.mod?.id ?? "new"}:${shownEditing.initial?.modrinth?.versionId ?? ""}`}
+            mod={shownEditing.mod}
+            initialValues={shownEditing.initial}
             mods={data.mods}
             onSave={persistMod}
             onClose={() => setEditing(null)}
+          />
+        )}
+      </Dialog>
+      <Dialog
+        open={picking !== null}
+        onOpenChange={(open) => !open && setPicking(null)}
+        title={
+          shownPicking?.kind === "refresh"
+            ? shownPicking.mod.modrinth
+              ? `Update ${shownPicking.mod.name} from Modrinth`
+              : `Link ${shownPicking.mod.name} to Modrinth`
+            : "Search Modrinth"
+        }
+        description={
+          shownPicking?.kind === "refresh"
+            ? "Pick a version. Your notes, status, and edited fields are kept."
+            : "Find a mod, pick a version, then review the details before adding."
+        }
+        size="wide"
+      >
+        {shownPicking && (
+          <ModrinthPicker
+            key={shownPicking.kind === "refresh" ? shownPicking.mod.id : "add"}
+            target={shownPicking}
+            mods={data.mods}
+            modpack={data.modpack}
+            onCancel={() => setPicking(null)}
+            onManual={() => {
+              setPicking(null);
+              setEditing({ mod: null });
+            }}
+            onPick={(picked) => {
+              setPicking(null);
+              setEditing({
+                mod: shownPicking.kind === "refresh" ? shownPicking.mod : null,
+                initial: picked,
+              });
+            }}
           />
         )}
       </Dialog>

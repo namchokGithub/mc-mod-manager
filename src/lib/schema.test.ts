@@ -25,6 +25,32 @@ describe("collection data", () => {
     ).toThrow("http or https");
   });
 
+  it("accepts a hero image stored under public/assets", () => {
+    const parsed = parseJsonFile(
+      JSON.stringify({
+        ...modpack,
+        heroImageUrl:
+          "public/assets/theme/winter_slime_adventure_in_the_snow.png",
+      }),
+      "modpack",
+    );
+    expect("heroImageUrl" in parsed && parsed.heroImageUrl).toBe(
+      "public/assets/theme/winter_slime_adventure_in_the_snow.png",
+    );
+  });
+
+  it("rejects a hero image path that escapes public/assets", () => {
+    expect(() =>
+      parseJsonFile(
+        JSON.stringify({
+          ...modpack,
+          heroImageUrl: "public/assets/../secret.png",
+        }),
+        "modpack",
+      ),
+    ).toThrow("public/assets");
+  });
+
   it("rejects invalid JSON without returning replacement data", () => {
     expect(() => parseJsonFile("{", "mods")).toThrow("not valid JSON");
   });

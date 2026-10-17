@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import {
   ArrowUpRight,
-  Blocks,
   CircleAlert,
   LayoutDashboard,
   LoaderCircle,
@@ -66,7 +65,12 @@ export function App() {
           <div className="header-inner">
             <a className="brand" href="#/" aria-label="Go to preview">
               <span className="brand-mark">
-                <Blocks size={21} />
+                <img
+                  src={`${import.meta.env.BASE_URL}assets/Glossy%20Minecraft%20Slime%20Mod%20Manager-128x128.png`}
+                  alt=""
+                  width="36"
+                  height="36"
+                />
               </span>
               <span>
                 BLOCK<span className="brand-accent">/</span>LIST

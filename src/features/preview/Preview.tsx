@@ -11,11 +11,14 @@ import {
   MoveUpRight,
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
+import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
 import { Button } from "../../components/ui/button";
+import { checkCompatibility } from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
+import { resolveHeroImageUrl } from "../../lib/heroImage";
 import type { Mod } from "../../lib/schema";
 
 const initialFilters: Filters = {
@@ -35,6 +38,11 @@ export function Preview() {
   const categories = useMemo(
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
     [data.mods],
+  );
+  // Uses the saved Modrinth snapshot only; the public page makes no API calls.
+  const compat = useMemo(
+    () => checkCompatibility(data.mods, data.modpack),
+    [data.mods, data.modpack],
   );
   const filtered = useMemo(
     () => filterMods(data.mods, filters),
@@ -64,7 +72,7 @@ export function Preview() {
         style={
           data.modpack.heroImageUrl
             ? {
-                backgroundImage: `linear-gradient(90deg, #0b1511 0%, rgba(11,21,17,.94) 38%, rgba(11,21,17,.54) 100%), url(${JSON.stringify(data.modpack.heroImageUrl)})`,
+                backgroundImage: `linear-gradient(90deg, #0b1511 0%, rgba(11,21,17,.94) 38%, rgba(11,21,17,.54) 100%), url(${JSON.stringify(resolveHeroImageUrl(data.modpack.heroImageUrl, import.meta.env.BASE_URL))})`,
               }
             : undefined
         }
@@ -192,8 +200,18 @@ export function Preview() {
                   >
                     <div className="mod-card-top">
                       <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
-                      <span className={`status status-${mod.status}`}>
-                        {mod.status}
+                      <span className="card-badges">
+                        {/* Unknown is the default for manual entries, so only verified results earn a badge. */}
+                        {compat.get(mod.id) &&
+                          compat.get(mod.id)!.status !== "unknown" && (
+                            <CompatBadge
+                              status={compat.get(mod.id)!.status}
+                              compact
+                            />
+                          )}
+                        <span className={`status status-${mod.status}`}>
+                          {mod.status}
+                        </span>
                       </span>
                     </div>
                     <div className="mod-card-body">
@@ -252,7 +270,11 @@ export function Preview() {
           )}
         </section>
       </div>
-      <ModDetail mod={selected} onClose={() => setSelected(null)} />
+      <ModDetail
+        mod={selected}
+        compat={compat}
+        onClose={() => setSelected(null)}
+      />
     </>
   );
 }

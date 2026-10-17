@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isPublicAssetPath } from "./heroImage";
 
 const optionalUrl = z.union([
   z
@@ -9,6 +10,12 @@ const optionalUrl = z.union([
     ),
   z.literal(""),
 ]);
+const heroImage = z
+  .string()
+  .refine(
+    (value) => optionalUrl.safeParse(value).success || isPublicAssetPath(value),
+    "Use an http or https URL or a path under public/assets/",
+  );
 const dateString = z.iso.date();
 
 export const modpackSchema = z.object({
@@ -20,7 +27,35 @@ export const modpackSchema = z.object({
   modloaderVersion: z.string(),
   author: z.string(),
   updatedAt: dateString,
-  heroImageUrl: optionalUrl,
+  heroImageUrl: heroImage,
+});
+
+export const dependencyTypes = [
+  "required",
+  "optional",
+  "incompatible",
+  "embedded",
+] as const;
+
+// Snapshot of the selected Modrinth version, so the static site can check compatibility offline.
+export const modrinthMetaSchema = z.object({
+  projectId: z.string().trim().min(1),
+  slug: z.string().optional(),
+  versionId: z.string().trim().min(1).optional(),
+  versionNumber: z.string().optional(),
+  gameVersions: z.array(z.string()).optional(),
+  loaders: z.array(z.string()).optional(),
+  dependencies: z
+    .array(
+      z.object({
+        projectId: z.string().nullable(),
+        versionId: z.string().nullable(),
+        type: z.enum(dependencyTypes),
+        name: z.string().optional(),
+      }),
+    )
+    .optional(),
+  syncedAt: z.string().optional(),
 });
 
 export const modSchema = z.object({
@@ -37,6 +72,7 @@ export const modSchema = z.object({
   dependencies: z.array(z.string().trim().min(1)),
   notes: z.string(),
   imageUrl: optionalUrl,
+  modrinth: modrinthMetaSchema.optional(),
 });
 
 export const modsSchema = z.array(modSchema).superRefine((mods, context) => {
@@ -60,6 +96,10 @@ export const collectionSchema = z.object({
 
 export type Modpack = z.infer<typeof modpackSchema>;
 export type Mod = z.infer<typeof modSchema>;
+export type ModrinthMeta = z.infer<typeof modrinthMetaSchema>;
+export type ModrinthDependency = NonNullable<
+  ModrinthMeta["dependencies"]
+>[number];
 export type Collection = z.infer<typeof collectionSchema>;
 
 export function formatValidationError(error: z.ZodError): string {
