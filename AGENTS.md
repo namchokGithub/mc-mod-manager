@@ -4,7 +4,7 @@ Instructions for AI coding agents working in the MC Mod Manager repository. Appl
 
 ## Project Summary
 
-Static Minecraft modpack showcase and local editor (v1.0). Published data lives in `public/data/`; browser edits stay in LocalStorage until the user exports JSON and commits it. Manage also searches Modrinth, checks compatibility and updates, and imports local `.jar` files. The app has light (default) and dark themes.
+Static Minecraft modpack showcase and local editor (v1.0). Published data lives in `public/data/`; browser edits stay in LocalStorage until the user exports JSON and commits it. Manage and drafts exist only in `pnpm dev` (`import.meta.env.DEV`, see `src/app/routes.ts`); production builds are Preview-only and must not import editor code outside DEV-guarded branches. Manage also searches Modrinth, checks compatibility and updates, and imports local `.jar` files. The app has light (default) and dark themes.
 
 ## Tech Stack (quick reference)
 

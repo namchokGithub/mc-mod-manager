@@ -10,17 +10,29 @@ import {
   Sun,
 } from "lucide-react";
 import { useCollection } from "./DataContext";
+import { MANAGE_ENABLED, resolveRoute, type Page } from "./routes";
 import { useTheme } from "./theme";
 import { useToast } from "./ToastContext";
 import { DRAFT_BACKUP_KEY } from "../lib/storage";
 import { Preview } from "../features/preview/Preview";
 
-const Manage = lazy(async () => ({
-  default: (await import("../features/manage/Manage")).Manage,
-}));
+// import.meta.env.DEV is inlined as false in production, so this import and the whole editor
+// chunk can be dropped from the GitHub Pages build.
+const Manage = import.meta.env.DEV
+  ? lazy(async () => ({
+      default: (await import("../features/manage/Manage")).Manage,
+    }))
+  : null;
 
-function currentPage(): "preview" | "manage" {
-  return window.location.hash.startsWith("#/manage") ? "manage" : "preview";
+function currentPage(): Page {
+  const { page, redirect } = resolveRoute(window.location.hash, MANAGE_ENABLED);
+  if (redirect)
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}${redirect}`,
+    );
+  return page;
 }
 
 export function App() {
@@ -114,13 +126,15 @@ export function App() {
               >
                 <LayoutDashboard size={17} /> Preview
               </a>
-              <a
-                className={page === "manage" ? "nav-link active" : "nav-link"}
-                href="#/manage"
-                aria-current={page === "manage" ? "page" : undefined}
-              >
-                <PencilLine size={17} /> Manage
-              </a>
+              {MANAGE_ENABLED && (
+                <a
+                  className={page === "manage" ? "nav-link active" : "nav-link"}
+                  href="#/manage"
+                  aria-current={page === "manage" ? "page" : undefined}
+                >
+                  <PencilLine size={17} /> Manage
+                </a>
+              )}
             </nav>
             <div className="header-end">
               <AnimatePresence>
@@ -183,7 +197,7 @@ export function App() {
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              {page === "manage" ? (
+              {page === "manage" && Manage ? (
                 <Suspense
                   fallback={
                     <div className="state-screen state-inline" role="status">

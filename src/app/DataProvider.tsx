@@ -3,6 +3,10 @@ import { collectionSchema, modsSchema, type Collection } from "../lib/schema";
 import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
 import { DataContext, type DataContextValue } from "./DataContext";
 
+// Drafts belong to the editor, which only runs in `pnpm dev`. Production always shows the
+// published files and leaves any old draft in LocalStorage untouched.
+const DRAFTS_ENABLED = import.meta.env.DEV;
+
 function jsonUrl(file: string): string {
   return `${import.meta.env.BASE_URL}data/${file}`;
 }
@@ -43,6 +47,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
           throw new Error("Published JSON files have invalid data.");
         if (!active) return;
         setPublished(result.data);
+        if (!DRAFTS_ENABLED) {
+          setData(result.data);
+          return;
+        }
         const { draft, issue } = loadDraft(window.localStorage, result.data);
         setData(draft ?? result.data);
         setDirty(Boolean(draft));
@@ -62,7 +70,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   // Another tab saved or reset the draft: show its version instead of overwriting it later.
   useEffect(() => {
-    if (!published) return;
+    if (!published || !DRAFTS_ENABLED) return;
     const onStorage = (event: StorageEvent) => {
       if (event.storageArea !== window.localStorage) return;
       if (event.key !== DRAFT_KEY && event.key !== null) return;
@@ -86,7 +94,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   }, [published]);
 
   useEffect(() => {
-    if (!data || !dirty) return;
+    if (!data || !dirty || !DRAFTS_ENABLED) return;
     if (skipNextSave.current) {
       skipNextSave.current = false;
       return;

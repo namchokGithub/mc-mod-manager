@@ -6,7 +6,7 @@
 ![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-62B47A?logo=minecraft&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A static Minecraft modpack showcase with a local, in-browser editor. The public **Preview** page shows the pack and its mods; the **Manage** page lets you edit them, check compatibility, and prepare JSON files to publish. It runs entirely in the browser and deploys to GitHub Pages with no backend.
+A static Minecraft modpack showcase with a local, in-browser editor. The public **Preview** page shows the pack and its mods; the **Manage** page lets you edit them, check compatibility, and prepare JSON files to publish. Manage is available only when running locally with `pnpm dev`; the GitHub Pages site shows Preview only. Everything runs in the browser with no backend.
 
 ![Sample](public/assets/readme/image-beautified.png)
 
@@ -49,7 +49,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open the Vite URL for Preview, or add `#/manage` for the editor.
+Open the Vite URL for Preview, or add `#/manage` for the editor. Manage and drafts exist only in development (`import.meta.env.DEV`). Production builds, including `pnpm preview`, show Preview only, redirect `#/manage` and other unknown routes to Preview, and always display the published JSON.
 
 | Command          | What it does                                   |
 | ---------------- | ---------------------------------------------- |
@@ -80,7 +80,7 @@ The schemas are in `src/lib/schema.ts`.
 
 **Editing in the browser never changes the published site.** The workflow is:
 
-1. Edit in **Manage**. Changes are saved as a draft in this browser's LocalStorage about half a second after each change. Preview in the same browser shows the draft.
+1. Run `pnpm dev` and edit in **Manage**. Changes are saved as a draft in this browser's LocalStorage about half a second after each change. Preview in the same browser shows the draft.
 2. When ready, open **Manage → Data & export** and export `modpack.json` and `mods.json`.
 3. Replace the files in `public/data/` with the exported ones, commit, and push. The site updates after the GitHub Pages workflow finishes.
 
@@ -115,7 +115,7 @@ The app calls the public Modrinth API (`https://api.modrinth.com/v2`) directly f
 
 ## Deploying to GitHub Pages
 
-The site is served from `https://<username>.github.io/mc-mod-manager/`.
+The site is served from `https://<username>.github.io/mc-mod-manager/`. It is read-only: there is no Manage page, and LocalStorage drafts are ignored.
 
 1. Push this repository to GitHub as `mc-mod-manager`. If you use another name, change the `base` in `vite.config.ts` to match.
 2. In the repository, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**.

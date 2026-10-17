@@ -11,6 +11,7 @@ import {
   MoveUpRight,
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
+import { MANAGE_ENABLED } from "../../app/routes";
 import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
@@ -268,13 +269,21 @@ export function Preview() {
               ) : (
                 <>
                   <h3>This pack has no mods yet</h3>
-                  <p>
-                    Add the first mod from the Manage page to start the
-                    collection.
-                  </p>
-                  <a className="button button-secondary" href="#/manage">
-                    Open Manage <ArrowRight size={16} />
-                  </a>
+                  {MANAGE_ENABLED ? (
+                    <>
+                      <p>
+                        Add the first mod from the Manage page to start the
+                        collection.
+                      </p>
+                      <a className="button button-secondary" href="#/manage">
+                        Open Manage <ArrowRight size={16} />
+                      </a>
+                    </>
+                  ) : (
+                    <p>
+                      Check back soon. Mods will appear here once published.
+                    </p>
+                  )}
                 </>
               )}
             </motion.div>
