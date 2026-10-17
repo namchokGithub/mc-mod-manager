@@ -26,10 +26,14 @@ export function isEvidenceUrl(value: string): boolean {
   }
 }
 
-/** Checks the form and builds the snapshot; nothing is saved until the user saves the mod. */
+/**
+ * Checks the form and builds the snapshot; nothing is saved until the user saves the entry.
+ * Resource packs, data packs, and shaders pass `requireLoaders: false`: they have no modloader.
+ */
 export function buildManualVerification(
   input: ManualVerificationInput,
   now = new Date(),
+  requireLoaders = true,
 ):
   | { value: ManualVerification; errors?: undefined }
   | { errors: ManualVerificationErrors } {
@@ -48,7 +52,8 @@ export function buildManualVerification(
   if (!version) errors.version = "Enter the version you checked.";
   if (!gameVersions.length)
     errors.gameVersions = "Add at least one Minecraft version.";
-  if (!loaders.length) errors.loaders = "Add at least one modloader.";
+  if (requireLoaders && !loaders.length)
+    errors.loaders = "Add at least one modloader.";
   if (!isEvidenceUrl(input.evidenceUrl))
     errors.evidenceUrl = "Enter the full http(s) link you checked.";
   if (!input.confirmed)

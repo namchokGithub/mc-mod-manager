@@ -6816,5 +6816,303 @@
       "dependencies": [],
       "syncedAt": "2026-10-17T22:03:18.421Z"
     }
+  },
+  {
+    "id": "bundle-upgrade",
+    "name": "Bundle Upgrade",
+    "version": "26.1.6",
+    "category": "Storage",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/bundle-upgrade",
+    "description": "Unlock the full potential of bundles with powerful inventory interactions and navigation.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/4GmQWkZz/eba2bce8d7f09c08ab6125f8d8e8442c07e4d96e_96.webp",
+    "modrinth": {
+      "projectId": "4GmQWkZz",
+      "slug": "bundle-upgrade",
+      "versionId": "Ii5cuqpw",
+      "versionNumber": "26.1.6",
+      "versionType": "release",
+      "datePublished": "2026-10-15T19:36:51.041824Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:04:17.241Z"
+    }
+  },
+  {
+    "id": "irons-artifice",
+    "name": "Iron's Arms 'n Artifice",
+    "version": "26.1.2-1.1.0",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/irons-artifice",
+    "description": "Historical-Fantasy Firearms meet Artificer Buildcrafting",
+    "dependencies": [
+      "Geckolib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/yOy4oSzi/4167149f037a53de50785ff3860f52da7bacfa86_96.webp",
+    "modrinth": {
+      "projectId": "yOy4oSzi",
+      "slug": "irons-artifice",
+      "versionId": "3sIU4Me8",
+      "versionNumber": "26.1.2-1.1.0",
+      "versionType": "release",
+      "datePublished": "2026-10-07T21:06:45.389088Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "8BmcQJ2H",
+          "versionId": null,
+          "type": "required",
+          "name": "Geckolib"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:05:23.964Z"
+    }
+  },
+  {
+    "id": "little-joys",
+    "name": "Little Joys",
+    "version": "26.1.2.5+neoforge-26.1.2",
+    "category": "Game Mechanics",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/little-joys",
+    "description": "Small rewarding events such as Dig Spots, Fishing Spots, Fallen Stars and more.",
+    "dependencies": [
+      "Balm"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/v0j2ftEp/ddc41edfdf81c92b04bf0b11be68027850a0e8bb_96.webp",
+    "modrinth": {
+      "projectId": "v0j2ftEp",
+      "slug": "little-joys",
+      "versionId": "gyEMtcYr",
+      "versionNumber": "26.1.2.5+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-08T13:21:02.373574Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "MBAkmtvl",
+          "versionId": null,
+          "type": "required",
+          "name": "Balm"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:09:39.368Z"
+    }
+  },
+  {
+    "id": "jeioptimizer",
+    "name": "JEIOptimizer",
+    "version": "1.2.0-29.43",
+    "category": "Game Mechanics",
+    "tags": [
+      "Optimization",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jeioptimizer",
+    "description": "15× faster JEI ingredient filter build — drastically reduces \"Joining world...\" wait time on big modded servers.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/GRvMb5oF/1d9266e63931d651a6c44012e96e0775cd6f75de_96.webp",
+    "modrinth": {
+      "projectId": "GRvMb5oF",
+      "slug": "jeioptimizer",
+      "versionId": "izcsvV3I",
+      "versionNumber": "1.2.0-29.43",
+      "versionType": "release",
+      "datePublished": "2026-09-25T18:29:46.433693Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:10:29.002Z"
+    }
+  },
+  {
+    "id": "yori3os-grappling-hooks",
+    "name": "Yori3o's Grappling Hooks",
+    "version": "5.2.0",
+    "category": "Adventure",
+    "tags": [
+      "Equipment"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yori3os-grappling-hooks",
+    "description": "Adds vanilla-like and physically realistic grappling hooks.",
+    "dependencies": [
+      "YetAnotherConfigLib (YACL)"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/t1p8V2nl/1ea80fa3cdf14dfd560674c6af9b15f7b578468c_96.webp",
+    "modrinth": {
+      "projectId": "t1p8V2nl",
+      "slug": "yori3os-grappling-hooks",
+      "versionId": "SCAvaSFt",
+      "versionNumber": "5.2.0",
+      "versionType": "beta",
+      "datePublished": "2026-10-04T07:28:48.464885Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "required",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:11:00.833Z"
+    }
+  },
+  {
+    "id": "more-useful-copper",
+    "name": "More Useful Copper",
+    "version": "3.0.0",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/more-useful-copper",
+    "description": "New uses for copper, such as statues, aquatic redstone, and many other tools!",
+    "dependencies": [
+      "MonoLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/nKAkZnor/ce7f5b4ffa2a1f992b5e3317a6d216ee886f2069_96.webp",
+    "modrinth": {
+      "projectId": "nKAkZnor",
+      "slug": "more-useful-copper",
+      "versionId": "C13koRyC",
+      "versionNumber": "3.0.0",
+      "versionType": "release",
+      "datePublished": "2026-06-08T14:09:17.717705Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9leXt4A5",
+          "versionId": null,
+          "type": "required",
+          "name": "MonoLib"
+        }
+      ],
+      "syncedAt": "2026-10-17T22:13:01.626Z"
+    }
+  },
+  {
+    "id": "flower-tweaks",
+    "name": "Flower Tweaks",
+    "version": "4+mod",
+    "category": "Decoration",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/flower-tweaks",
+    "description": "Adds the ability to craft and crossbread for flowers and grass",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/JSMwcdt3/29053bf0c0cbf6eba23c570a381e39bbee61a06c_96.webp",
+    "modrinth": {
+      "projectId": "JSMwcdt3",
+      "slug": "flower-tweaks",
+      "versionId": "9AGEk7AQ",
+      "versionNumber": "4+mod",
+      "versionType": "release",
+      "datePublished": "2024-12-22T16:22:32.840898Z",
+      "gameVersions": [
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T22:14:48.132Z"
+    }
   }
 ]

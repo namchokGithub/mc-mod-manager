@@ -9,7 +9,10 @@ import {
   type ContentFile,
   type ContentItem,
   type ContentKey,
+  type ContentType,
+  type ContentVerification,
 } from "./schema";
+import { parseCurseForgeUrl } from "./curseforge";
 
 export const contentMeta: Record<
   ContentKey,
@@ -63,7 +66,11 @@ export type ContentInput = Pick<
   | "minecraftVersions"
   | "tags"
   | "notes"
->;
+> & {
+  /** CurseForge page for this entry, primary or additional; "" for none. */
+  curseforgeUrl: string;
+  manualVerification?: ContentVerification;
+};
 
 export const emptyContentInput = (): ContentInput => ({
   name: "",
@@ -76,6 +83,7 @@ export const emptyContentInput = (): ContentInput => ({
   minecraftVersions: [],
   tags: [],
   notes: "",
+  curseforgeUrl: "",
 });
 
 function clean(input: ContentInput): ContentInput {
@@ -91,8 +99,43 @@ function clean(input: ContentInput): ContentInput {
     ),
     tags: [...new Set(input.tags.map((tag) => tag.trim()).filter(Boolean))],
     notes: input.notes.trim(),
+    curseforgeUrl: input.curseforgeUrl.trim(),
   };
 }
+
+/**
+ * The stored fields for a form input. The CurseForge URL is parsed for its format only and must
+ * match the collection's type; an empty URL removes the reference.
+ */
+function fieldsFrom(
+  input: ContentInput,
+  type: ContentType | undefined,
+):
+  | { fields: Record<string, unknown> }
+  | { errors: Partial<Record<keyof ContentInput, string>> } {
+  const { curseforgeUrl, manualVerification, ...values } = clean(input);
+  const link = curseforgeUrl ? parseCurseForgeUrl(curseforgeUrl, type) : null;
+  if (link && !link.ok) return { errors: { curseforgeUrl: link.error } };
+  return {
+    fields: {
+      ...values,
+      curseforge: link?.ok
+        ? {
+            url: link.value.url,
+            slug: link.value.slug,
+            ...(link.value.fileId && { fileId: link.value.fileId }),
+          }
+        : undefined,
+      manualVerification,
+    },
+  };
+}
+
+// Optional fields that are cleared are left out instead of being stored as undefined.
+const withoutUndefined = (value: Record<string, unknown>) =>
+  Object.fromEntries(
+    Object.entries(value).filter(([, field]) => field !== undefined),
+  );
 
 export type ContentResult =
   | { ok: true; items: ContentItem[]; item: ContentItem }
@@ -118,15 +161,19 @@ export function addContentItem(
   items: ContentItem[],
   input: ContentInput,
   now = new Date(),
+  type?: ContentType,
 ): ContentResult {
-  const values = clean(input);
+  const built = fieldsFrom(input, type);
+  if ("errors" in built) return { ok: false, errors: built.errors };
   const at = now.toISOString();
-  const checked = validate({
-    id: uniqueId(values.name, items),
-    ...values,
-    createdAt: at,
-    updatedAt: at,
-  });
+  const checked = validate(
+    withoutUndefined({
+      id: uniqueId(String(built.fields.name), items),
+      ...built.fields,
+      createdAt: at,
+      updatedAt: at,
+    }),
+  );
   if ("errors" in checked) return { ok: false, errors: checked.errors };
   return { ok: true, items: [...items, checked.item], item: checked.item };
 }
@@ -137,16 +184,22 @@ export function updateContentItem(
   id: string,
   input: ContentInput,
   now = new Date(),
+  type?: ContentType,
 ): ContentResult {
   const existing = items.find((item) => item.id === id);
   if (!existing)
     return { ok: false, errors: { name: "This entry no longer exists." } };
-  const checked = validate({
-    ...existing,
-    ...clean(input),
-    id: existing.id,
-    updatedAt: now.toISOString(),
-  });
+  const built = fieldsFrom(input, type);
+  if ("errors" in built) return { ok: false, errors: built.errors };
+  // Modrinth metadata and unknown fields come from `existing` and are never replaced here.
+  const checked = validate(
+    withoutUndefined({
+      ...existing,
+      ...built.fields,
+      id: existing.id,
+      updatedAt: now.toISOString(),
+    }),
+  );
   if ("errors" in checked) return { ok: false, errors: checked.errors };
   return {
     ok: true,
@@ -174,6 +227,10 @@ export function inputFromItem(item: ContentItem): ContentInput {
     minecraftVersions: item.minecraftVersions,
     tags: item.tags,
     notes: item.notes,
+    curseforgeUrl: item.curseforge?.url ?? "",
+    ...(item.manualVerification && {
+      manualVerification: item.manualVerification,
+    }),
   };
 }
 

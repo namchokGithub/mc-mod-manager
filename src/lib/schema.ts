@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { parseCurseForgeUrl } from "./curseforge";
 import { isPublicAssetPath } from "./heroImage";
 
 const httpUrl = z
@@ -268,6 +269,24 @@ export const contentItemSchema = z.looseObject({
   // Provider snapshot from a Modrinth import, same shape as for mods. For shaders, `loaders`
   // holds shader runtimes (e.g. iris), not modloaders. Never treated as manually verified.
   modrinth: modrinthMetaSchema.optional(),
+  // A CurseForge page the user linked by hand (primary or additional source). Only the URL is
+  // known; nothing was fetched. `fileId` is set only when the URL itself names a file.
+  curseforge: z
+    .object({
+      url: z
+        .string()
+        .refine(
+          (value) => parseCurseForgeUrl(value).ok,
+          "Use a CurseForge resource pack, data pack, or shader link",
+        ),
+      slug: z.string().trim().min(1),
+      fileId: z.string().regex(/^\d+$/).optional(),
+    })
+    .optional(),
+  // User-confirmed values for one version; no modloaders for this content.
+  manualVerification: manualVerificationSchema
+    .omit({ loaders: true })
+    .optional(),
 });
 
 export const contentItemsSchema = z
@@ -352,6 +371,9 @@ export type ChecklistItem = z.infer<typeof checklistItemSchema>;
 export type InboxFile = z.infer<typeof inboxFileSchema>;
 export type InboxEntry = z.infer<typeof inboxEntrySchema>;
 export type ContentItem = z.infer<typeof contentItemSchema>;
+export type ContentVerification = NonNullable<
+  ContentItem["manualVerification"]
+>;
 export type ContentFile = {
   version: 1;
   type: ContentType;

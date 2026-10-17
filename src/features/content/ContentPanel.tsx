@@ -6,6 +6,7 @@ import {
   Box,
   Pencil,
   Plus,
+  Link2,
   Search,
   Trash2,
   X,
@@ -49,6 +50,15 @@ import { useRetained } from "../../lib/useRetained";
 import { ContentEditor } from "./ContentEditor";
 import { ContentModrinthPicker } from "../modrinth/ContentModrinthPicker";
 import { findContentDuplicate } from "../../lib/modrinth/contentImport";
+import { CompatBadge } from "../../components/CompatBadge";
+import { nameFromSlug } from "../../lib/curseforge";
+import {
+  contentItemCompat,
+  contentSourceText,
+  contentStatusLabel,
+  contentVerificationText,
+} from "../../lib/contentVerification";
+import { CurseForgeLink } from "./CurseForgeLink";
 
 /** Manage page for one additional collection: resource packs, data packs, or shaders. */
 export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
@@ -62,9 +72,11 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
   const [query, setQuery] = useState<ContentQuery>(initialContentQuery);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
-  const [editing, setEditing] = useState<{ item: ContentItem | null } | null>(
-    null,
-  );
+  // `initial` holds prefilled values (from a CurseForge link or an attach action).
+  const [editing, setEditing] = useState<{
+    item: ContentItem | null;
+    initial?: ContentInput;
+  } | null>(null);
   const shownEditing = useRetained(editing);
   const [editorDirty, setEditorDirty] = useState(false);
   const [confirmDiscard, setConfirmDiscard] = useState(false);
@@ -77,6 +89,7 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
   const shownImport = useRetained(pendingImport);
   const fileRef = useRef<HTMLInputElement>(null);
   const [picking, setPicking] = useState(false);
+  const [linking, setLinking] = useState(false);
 
   // Reloading or closing the browser tab would drop unsaved form edits.
   useEffect(() => {
@@ -104,8 +117,8 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
   const submit = (input: ContentInput) => {
     const current = editing?.item;
     const result = current
-      ? updateContentItem(items, current.id, input)
-      : addContentItem(items, input);
+      ? updateContentItem(items, current.id, input, new Date(), type)
+      : addContentItem(items, input, new Date(), type);
     if (!result.ok) return result.errors;
     save(result.items);
     setEditing(null);
@@ -207,6 +220,9 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
           <Button variant="secondary" onClick={() => setPicking(true)}>
             <Search size={16} /> Search Modrinth
           </Button>
+          <Button variant="secondary" onClick={() => setLinking(true)}>
+            <Link2 size={16} /> Add from CurseForge
+          </Button>
           <Button onClick={() => setEditing({ item: null })}>
             <Plus size={17} /> Add {meta.singular}
           </Button>
@@ -297,68 +313,95 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
       ) : (
         <>
           <div className="manage-list">
-            {paged.items.map((item) => (
-              <div className="manage-row" key={item.id}>
-                <ModArtwork name={item.name} imageUrl={item.imageUrl} />
-                <div className="manage-row-main">
-                  <div>
-                    <h3 title={item.name}>{item.name}</h3>
-                    <span className={`status status-${item.status}`}>
-                      {contentStatusLabels[item.status]}
-                    </span>
+            {paged.items.map((item) => {
+              const compat = contentItemCompat(
+                item,
+                type,
+                data.modpack.minecraftVersion,
+              );
+              return (
+                <div className="manage-row" key={item.id}>
+                  <ModArtwork name={item.name} imageUrl={item.imageUrl} />
+                  <div className="manage-row-main">
+                    <div>
+                      <h3 title={item.name}>{item.name}</h3>
+                      <span className={`status status-${item.status}`}>
+                        {contentStatusLabels[item.status]}
+                      </span>
+                      <CompatBadge
+                        status={compat.status}
+                        label={contentStatusLabel(compat)}
+                        source={contentVerificationText(compat)}
+                        compact
+                      />
+                    </div>
+                    <p>
+                      {contentSourceText(item, contentSourceLabels)}
+                      {item.version && (
+                        <>
+                          {" "}
+                          <span>·</span> v{item.version}
+                        </>
+                      )}
+                      {item.minecraftVersions.length > 0 && (
+                        <>
+                          {" "}
+                          <span>·</span> MC {item.minecraftVersions.join(", ")}
+                        </>
+                      )}
+                      {item.sourceUrl && (
+                        <>
+                          {" "}
+                          <span>·</span>{" "}
+                          <a
+                            href={item.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Source <ArrowUpRight size={12} />
+                          </a>
+                        </>
+                      )}
+                      {item.curseforge &&
+                        item.curseforge.url !== item.sourceUrl && (
+                          <>
+                            {" "}
+                            <span>·</span>{" "}
+                            <a
+                              href={item.curseforge.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              CurseForge <ArrowUpRight size={12} />
+                            </a>
+                          </>
+                        )}
+                    </p>
                   </div>
-                  <p>
-                    {contentSourceLabels[item.source]}
-                    {item.version && (
-                      <>
-                        {" "}
-                        <span>·</span> v{item.version}
-                      </>
-                    )}
-                    {item.minecraftVersions.length > 0 && (
-                      <>
-                        {" "}
-                        <span>·</span> MC {item.minecraftVersions.join(", ")}
-                      </>
-                    )}
-                    {item.sourceUrl && (
-                      <>
-                        {" "}
-                        <span>·</span>{" "}
-                        <a
-                          href={item.sourceUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Source <ArrowUpRight size={12} />
-                        </a>
-                      </>
-                    )}
-                  </p>
+                  <div className="row-actions">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Edit ${item.name}`}
+                      title="Edit"
+                      onClick={() => setEditing({ item })}
+                    >
+                      <Pencil size={17} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="row-delete"
+                      aria-label={`Delete ${item.name}`}
+                      title="Delete"
+                      onClick={() => setDeleting(item)}
+                    >
+                      <Trash2 size={17} />
+                    </Button>
+                  </div>
                 </div>
-                <div className="row-actions">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label={`Edit ${item.name}`}
-                    title="Edit"
-                    onClick={() => setEditing({ item })}
-                  >
-                    <Pencil size={17} />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="row-delete"
-                    aria-label={`Delete ${item.name}`}
-                    title="Delete"
-                    onClick={() => setDeleting(item)}
-                  >
-                    <Trash2 size={17} />
-                  </Button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <Pagination
             label={`${meta.title} pages`}
@@ -388,10 +431,12 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
           <ContentEditor
             key={shownEditing.item?.id ?? "new"}
             initial={
-              shownEditing.item
+              shownEditing.initial ??
+              (shownEditing.item
                 ? inputFromItem(shownEditing.item)
-                : emptyContentInput()
+                : emptyContentInput())
             }
+            prefilled={Boolean(shownEditing.initial)}
             itemId={shownEditing.item?.id}
             singular={meta.singular}
             versionSuggestions={versionSuggestions}
@@ -420,6 +465,47 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
               setEditing({ item });
             }}
             onCancel={() => setPicking(false)}
+          />
+        )}
+      </Dialog>
+
+      <Dialog
+        open={linking}
+        onOpenChange={setLinking}
+        title={`Add ${meta.singular} from CurseForge`}
+        description="Paste the CurseForge link. Nothing is downloaded or fetched; you enter and confirm the details."
+        size="wide"
+      >
+        {linking && (
+          <CurseForgeLink
+            type={type}
+            items={items}
+            collectionTitle={meta.title}
+            onCancel={() => setLinking(false)}
+            onReview={(item) => {
+              setLinking(false);
+              setEditing({ item });
+            }}
+            onAttach={(item, link) => {
+              setLinking(false);
+              setEditing({
+                item,
+                initial: { ...inputFromItem(item), curseforgeUrl: link.url },
+              });
+            }}
+            onContinue={(link) => {
+              setLinking(false);
+              setEditing({
+                item: null,
+                initial: {
+                  ...emptyContentInput(),
+                  name: nameFromSlug(link.slug),
+                  source: "curseforge",
+                  sourceUrl: link.url,
+                  curseforgeUrl: link.url,
+                },
+              });
+            }}
           />
         )}
       </Dialog>

@@ -8,7 +8,9 @@ import {
   type ContentInput,
 } from "../../lib/content";
 import { contentSources, contentStatuses } from "../../lib/schema";
+import { contentVerificationMatches } from "../../lib/contentVerification";
 import { SupportedVersionsField } from "../manage/CompatibilityFields";
+import { ManualVerificationSection } from "../manage/ManualVerification";
 
 type Errors = Partial<Record<keyof ContentInput, string>>;
 
@@ -33,8 +35,11 @@ export function ContentEditor({
   onSubmit,
   onCancel,
   onDirtyChange,
+  prefilled = false,
 }: {
   initial: ContentInput;
+  /** Values came from a CurseForge link or an attach action, so they are unsaved from the start. */
+  prefilled?: boolean;
   /** Shown read-only when editing; IDs never change after creation. */
   itemId?: string;
   singular: string;
@@ -55,7 +60,8 @@ export function ContentEditor({
       .map((tag) => tag.trim())
       .filter(Boolean),
   };
-  const dirty = JSON.stringify(input) !== JSON.stringify(initial);
+  const dirty = prefilled || JSON.stringify(input) !== JSON.stringify(initial);
+  const snapshot = values.manualVerification;
   useEffect(() => {
     onDirtyChange(dirty);
   }, [dirty, onDirtyChange]);
@@ -63,7 +69,7 @@ export function ContentEditor({
   const set = <K extends keyof ContentInput>(key: K, value: ContentInput[K]) =>
     setValues((current) => ({ ...current, [key]: value }));
   const text = (
-    key: "name" | "version" | "sourceUrl" | "imageUrl",
+    key: "name" | "version" | "sourceUrl" | "imageUrl" | "curseforgeUrl",
     label: string,
     props: React.InputHTMLAttributes<HTMLInputElement> = {},
   ) => (
@@ -148,6 +154,12 @@ export function ContentEditor({
           type: "url",
           placeholder: "https://modrinth.com/… or https://www.curseforge.com/…",
         })}
+        {text("curseforgeUrl", "CurseForge URL", {
+          type: "url",
+          placeholder: "https://www.curseforge.com/minecraft/…",
+          title:
+            "The CurseForge page for this entry. Kept next to any Modrinth link; nothing is fetched.",
+        })}
         {text("imageUrl", "Image URL", {
           type: "url",
           placeholder: "https://…",
@@ -186,6 +198,26 @@ export function ContentEditor({
             onChange={(event) => set("notes", event.target.value)}
           />
         </label>
+        <ManualVerificationSection
+          withLoaders={false}
+          current={snapshot}
+          matches={contentVerificationMatches(input, snapshot)}
+          active={{
+            version: values.version,
+            gameVersions: values.minecraftVersions,
+            loaders: [],
+          }}
+          suggestions={versionSuggestions}
+          onConfirm={({ loaders: _loaders, ...confirmed }) => {
+            void _loaders;
+            setValues((current) => ({
+              ...current,
+              version: confirmed.version,
+              minecraftVersions: confirmed.gameVersions,
+              manualVerification: confirmed,
+            }));
+          }}
+        />
         {itemId && (
           <p className="form-field-wide support-hint">
             ID: <code>{itemId}</code> (stays the same when you edit)

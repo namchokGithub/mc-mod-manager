@@ -36,9 +36,10 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 }
 
 /**
- * Manual verification in the mod editor. Shows whether the snapshot on record still matches the
- * form's version and support values, and lets the user confirm new values. Confirming only
- * changes the editor; the mod is saved with the editor's own Save button.
+ * Manual verification in the mod editor (and, without modloaders, the content editor). Shows
+ * whether the snapshot on record still matches the form's version and support values, and lets
+ * the user confirm new values. Confirming only changes the editor; the entry is saved with the
+ * editor's own Save button.
  */
 export function ManualVerificationSection({
   current,
@@ -46,13 +47,17 @@ export function ManualVerificationSection({
   active,
   suggestions,
   onConfirm,
+  withLoaders = true,
 }: {
-  current?: Snapshot;
+  /** Snapshots without modloaders (content entries) have no `loaders`. */
+  current?: Omit<Snapshot, "loaders"> & { loaders?: string[] };
   /** The snapshot covers the form's version, Minecraft versions, and modloaders. */
   matches: boolean;
   active: { version: string; gameVersions: string[]; loaders: string[] };
   suggestions: string[];
   onConfirm: (snapshot: Snapshot) => void;
+  /** False for resource packs, data packs, and shaders, which have no modloader. */
+  withLoaders?: boolean;
 }) {
   const id = useId();
   const [open, setOpen] = useState(false);
@@ -74,7 +79,7 @@ export function ManualVerificationSection({
     setInput((value) => (value ? { ...value, ...next } : value));
   const confirm = () => {
     if (!input) return;
-    const result = buildManualVerification(input);
+    const result = buildManualVerification(input, new Date(), withLoaders);
     if (result.errors) {
       setErrors(result.errors);
       return;
@@ -104,8 +109,11 @@ export function ManualVerificationSection({
               <ShieldQuestion size={15} aria-hidden="true" />
               <span>
                 Needs Reverification. The earlier check covered version{" "}
-                {current.version}; the version, Minecraft versions, or
-                modloaders have changed. It is kept as evidence.
+                {current.version}; the version
+                {withLoaders
+                  ? ", Minecraft versions, or modloaders have"
+                  : " or Minecraft versions have"}{" "}
+                changed. It is kept as evidence.
               </span>
             </p>
           )
@@ -163,7 +171,7 @@ export function ManualVerificationSection({
             <label
               className={`form-field${errors.version ? " has-error" : ""}`}
             >
-              <span>Verified mod version</span>
+              <span>Verified {withLoaders ? "mod " : ""}version</span>
               <input
                 value={input.version}
                 placeholder="e.g. 2.1.71"
@@ -186,16 +194,25 @@ export function ManualVerificationSection({
               />
               <FieldError id={`${id}-mc-error`} message={errors.gameVersions} />
             </div>
-            <div className={`form-field${errors.loaders ? " has-error" : ""}`}>
-              <span id={`${id}-loaders`}>Supported modloaders</span>
-              <SupportedLoadersField
-                value={input.loaders}
-                onChange={(loaders) => update({ loaders })}
-                labelledBy={`${id}-loaders`}
-                describedBy={errors.loaders ? `${id}-loaders-error` : undefined}
-              />
-              <FieldError id={`${id}-loaders-error`} message={errors.loaders} />
-            </div>
+            {withLoaders && (
+              <div
+                className={`form-field${errors.loaders ? " has-error" : ""}`}
+              >
+                <span id={`${id}-loaders`}>Supported modloaders</span>
+                <SupportedLoadersField
+                  value={input.loaders}
+                  onChange={(loaders) => update({ loaders })}
+                  labelledBy={`${id}-loaders`}
+                  describedBy={
+                    errors.loaders ? `${id}-loaders-error` : undefined
+                  }
+                />
+                <FieldError
+                  id={`${id}-loaders-error`}
+                  message={errors.loaders}
+                />
+              </div>
+            )}
             <label
               className={`form-field form-field-wide${errors.evidenceUrl ? " has-error" : ""}`}
             >
@@ -203,7 +220,7 @@ export function ManualVerificationSection({
               <input
                 type="url"
                 value={input.evidenceUrl}
-                placeholder="https://www.curseforge.com/minecraft/mc-mods/…"
+                placeholder="https://www.curseforge.com/minecraft/…"
                 aria-invalid={errors.evidenceUrl ? true : undefined}
                 aria-describedby={errors.evidenceUrl ? `${id}-url` : undefined}
                 onChange={(event) =>
@@ -240,7 +257,7 @@ export function ManualVerificationSection({
           </div>
           <p className="mr-hint">
             Confirming updates this form's version and supported values. Save
-            the mod to keep it.
+            the form to keep it.
           </p>
         </div>
       )}

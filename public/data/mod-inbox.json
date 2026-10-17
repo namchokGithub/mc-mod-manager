@@ -114,6 +114,12 @@
       "name": "Loot Integrations: ChoiceTheorem's Overhauled Village & Immersive Structures",
       "notes": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-choicetheorems-overhauled/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
       "createdAt": "2026-10-17T21:56:04.889Z"
+    },
+    {
+      "id": "armor-damage-scaling",
+      "name": "Armor Damage Scaling",
+      "notes": "",
+      "createdAt": "2026-10-17T22:09:25.237Z"
     }
   ]
 }

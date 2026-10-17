@@ -1,6 +1,13 @@
 import { useId, useState } from "react";
 import { ArrowUpRight, Box, Search, X } from "lucide-react";
+import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
+import {
+  contentItemCompat,
+  contentSourceText,
+  contentStatusLabel,
+  contentVerificationText,
+} from "../../lib/contentVerification";
 import { Pagination } from "../../components/Pagination";
 import { Select } from "../../components/ui/select";
 import {
@@ -17,9 +24,11 @@ import {
   type PageSize,
 } from "../../lib/pagination";
 import {
+  contentCollections,
   contentKeys,
   contentStatuses,
   type Collection,
+  type ContentItem,
   type ContentKey,
 } from "../../lib/schema";
 
@@ -33,6 +42,9 @@ export function ContentPreview({ data }: { data: Collection }) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
   const meta = contentMeta[active];
+  const type = contentCollections[active].type;
+  const compatOf = (item: ContentItem) =>
+    contentItemCompat(item, type, data.modpack.minecraftVersion);
   const items = data[active].items;
   const shown = queryContent(items, query);
   const paged = paginate(shown, page, pageSize);
@@ -162,51 +174,93 @@ export function ContentPreview({ data }: { data: Collection }) {
         ) : (
           <>
             <div className="mod-collection mod-grid">
-              {paged.items.map((item) => (
-                <article className="mod-card content-card" key={item.id}>
-                  <div className="mod-card-top">
-                    <ModArtwork name={item.name} imageUrl={item.imageUrl} />
-                    <span className="card-badges">
-                      <span className={`status status-${item.status}`}>
-                        {contentStatusLabels[item.status]}
-                      </span>
-                    </span>
-                  </div>
-                  <div className="mod-card-body">
-                    <span className="mod-category">
-                      {contentSourceLabels[item.source]}
-                    </span>
-                    <h3>{item.name}</h3>
-                    <p>{item.description || "No description yet."}</p>
-                    {item.tags.length > 0 && (
-                      <p className="content-tags">{item.tags.join(" · ")}</p>
-                    )}
-                  </div>
-                  <div className="mod-card-footer">
-                    <span className="mod-card-meta">
-                      {item.minecraftVersions.length
-                        ? `MC ${item.minecraftVersions.join(", ")}`
-                        : "Minecraft version not listed"}
-                      {item.version && (
-                        <span className="mod-card-version" title={item.version}>
-                          {" "}
-                          · v{item.version}
+              {paged.items.map((item) => {
+                const compat = compatOf(item);
+                return (
+                  <article className="mod-card content-card" key={item.id}>
+                    <div className="mod-card-top">
+                      <ModArtwork name={item.name} imageUrl={item.imageUrl} />
+                      <span className="card-badges">
+                        <CompatBadge
+                          status={compat.status}
+                          label={contentStatusLabel(compat)}
+                          source={contentVerificationText(compat)}
+                          compact
+                        />
+                        <span className={`status status-${item.status}`}>
+                          {contentStatusLabels[item.status]}
                         </span>
+                      </span>
+                    </div>
+                    <div className="mod-card-body">
+                      <span className="mod-category">
+                        {contentSourceText(item, contentSourceLabels)}
+                      </span>
+                      <h3>{item.name}</h3>
+                      <p>{item.description || "No description yet."}</p>
+                      {item.tags.length > 0 && (
+                        <p className="content-tags">{item.tags.join(" · ")}</p>
                       )}
-                    </span>
-                    {item.sourceUrl && (
-                      <a
-                        className="mod-card-cta"
-                        href={item.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Source <ArrowUpRight size={15} />
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
+                      <p className="content-tags">
+                        {contentVerificationText(compat)}
+                        {compat.evidence && (
+                          <>
+                            {" · "}
+                            <a
+                              href={compat.evidence?.evidenceUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {compat.verification === "manual-verified"
+                                ? "Evidence"
+                                : "Earlier evidence"}
+                            </a>
+                          </>
+                        )}
+                        {item.curseforge &&
+                          item.curseforge.url !== item.sourceUrl && (
+                            <>
+                              {" · "}
+                              <a
+                                href={item.curseforge.url}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                CurseForge
+                              </a>
+                            </>
+                          )}
+                      </p>
+                    </div>
+                    <div className="mod-card-footer">
+                      <span className="mod-card-meta">
+                        {item.minecraftVersions.length
+                          ? `MC ${item.minecraftVersions.join(", ")}`
+                          : "Minecraft version not listed"}
+                        {item.version && (
+                          <span
+                            className="mod-card-version"
+                            title={item.version}
+                          >
+                            {" "}
+                            · v{item.version}
+                          </span>
+                        )}
+                      </span>
+                      {item.sourceUrl && (
+                        <a
+                          className="mod-card-cta"
+                          href={item.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Source <ArrowUpRight size={15} />
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
             <Pagination
               label={`${meta.title} pages`}
