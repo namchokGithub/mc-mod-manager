@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { collectionSchema, modsSchema, type Collection } from "../lib/schema";
 import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
+import { removeMods } from "../lib/mods";
 import { DataContext, type DataContextValue } from "./DataContext";
 
 // Drafts belong to the editor, which only runs in `pnpm dev`. Production always shows the
@@ -148,6 +149,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     },
     deleteMod: (id) =>
       change({ ...data, mods: data.mods.filter((mod) => mod.id !== id) }),
+    deleteMods: (ids) => change({ ...data, mods: removeMods(data.mods, ids) }),
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),
     reset: () => {

@@ -14,6 +14,8 @@ import {
   ArrowDownToLine,
   ArrowRight,
   ArrowUpFromLine,
+  ChevronLeft,
+  ChevronRight,
   CircleAlert,
   Copy,
   FileJson2,
@@ -50,6 +52,16 @@ import { normalizeLoader } from "../../lib/modrinth/mapping";
 import { type UpdateResult } from "../../lib/updates";
 import { JarImportDialog } from "../import/JarImportDialog";
 import { filterMods, uniqueId, type Filters } from "../../lib/mods";
+import {
+  DEFAULT_PAGE_SIZE,
+  PAGE_SIZES,
+  pageSelectionState,
+  paginate,
+  pruneSelection,
+  setPageSelected,
+  toggleSelected,
+  type PageSize,
+} from "../../lib/pagination";
 import {
   modSchema,
   modsSchema,
@@ -743,6 +755,7 @@ export function Manage() {
     saveState,
     saveMod,
     deleteMod,
+    deleteMods,
     updateModpack,
     importMods,
   } = useCollection();
@@ -766,6 +779,13 @@ export function Manage() {
   const [checking, setChecking] = useState(false);
   const shownEditing = useRetained(editing);
   const shownDeleting = useRetained(deleting);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
+  // Selection is keyed by mod ID and survives page and filter changes.
+  const [selected, setSelected] = useState<Set<string>>(() => new Set());
+  // IDs captured when the bulk confirm opens, so the dialog cannot change underneath it.
+  const [bulkDelete, setBulkDelete] = useState<string[] | null>(null);
+  const shownBulkDelete = useRetained(bulkDelete);
   const shownPicking = useRetained(picking);
   const [editorDirty, setEditorDirty] = useState(false);
   const [settingsDirty, setSettingsDirty] = useState(false);
@@ -874,6 +894,54 @@ export function Manage() {
     () => filterMods(data.mods, filters),
     [data.mods, filters],
   );
+  // IDs of deleted or replaced mods drop out of the selection automatically.
+  const selection = useMemo(
+    () =>
+      pruneSelection(
+        selected,
+        data.mods.map((mod) => mod.id),
+      ),
+    [selected, data.mods],
+  );
+  const paged = paginate(filtered, page, pageSize);
+  const pageIds = paged.items.map((mod) => mod.id);
+  const pageState = pageSelectionState(selection, pageIds);
+  const filteredIds = new Set(filtered.map((mod) => mod.id));
+  const hiddenSelected = [...selection].filter(
+    (id) => !filteredIds.has(id),
+  ).length;
+  const changeFilters = (next: Filters) => {
+    setFilters(next);
+    setPage(1);
+  };
+  const confirmBulkDelete = () => {
+    if (!bulkDelete) return;
+    const names = data.mods
+      .filter((mod) => bulkDelete.includes(mod.id))
+      .map((mod) => mod.name);
+    try {
+      deleteMods(bulkDelete);
+    } catch {
+      notify({
+        kind: "error",
+        title: "Mods not deleted",
+        description: "Your draft was not changed.",
+      });
+      setBulkDelete(null);
+      return;
+    }
+    setSelected((current) => {
+      const next = new Set(current);
+      for (const id of bulkDelete) next.delete(id);
+      return next;
+    });
+    notify({
+      kind: "info",
+      title: `Deleted ${names.length} ${names.length === 1 ? "mod" : "mods"}`,
+      description: "Removed from your local draft.",
+    });
+    setBulkDelete(null);
+  };
   // Layout animation gets costly for big collections, so it turns off there.
   const animateLayout = filtered.length <= 60;
   const persistMod = (mod: Mod, originalId?: string, title?: string) => {
@@ -1025,16 +1093,70 @@ export function Manage() {
                   />
                   <ModFilters
                     filters={filters}
-                    onChange={setFilters}
+                    onChange={changeFilters}
                     categories={categories}
                     count={filtered.length}
                     total={data.mods.length}
                     showView={false}
                   />
+                  {selection.size > 0 && (
+                    <div
+                      className="bulk-bar"
+                      role="region"
+                      aria-label="Bulk actions"
+                    >
+                      <span role="status">
+                        <strong>{selection.size}</strong> selected
+                        {hiddenSelected > 0 &&
+                          ` (${hiddenSelected} hidden by filters)`}
+                      </span>
+                      <div className="bulk-bar-actions">
+                        <Button
+                          variant="ghost"
+                          size="small"
+                          onClick={() => setSelected(new Set())}
+                        >
+                          Clear selection
+                        </Button>
+                        <Button
+                          variant="danger"
+                          size="small"
+                          onClick={() => setBulkDelete([...selection])}
+                        >
+                          <Trash2 size={15} /> Delete selected
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                   {filtered.length ? (
                     <div className="manage-list">
+                      <label className="manage-list-head">
+                        <input
+                          type="checkbox"
+                          className="row-check"
+                          ref={(element) => {
+                            if (element)
+                              element.indeterminate = pageState === "some";
+                          }}
+                          checked={pageState === "all"}
+                          onChange={(event) =>
+                            setSelected((current) =>
+                              setPageSelected(
+                                current,
+                                pageIds,
+                                event.target.checked,
+                              ),
+                            )
+                          }
+                        />
+                        <span>
+                          {pageState === "all"
+                            ? `All ${pageIds.length} on this page selected`
+                            : `Select all ${pageIds.length} on this page`}
+                        </span>
+                      </label>
                       <AnimatePresence mode="popLayout" initial={false}>
-                        {filtered.map((mod) => (
+                        {paged.items.map((mod) => (
                           <motion.div
                             layout={animateLayout ? "position" : false}
                             className={
@@ -1055,6 +1177,17 @@ export function Manage() {
                               mod.id === highlightId && setHighlightId(null)
                             }
                           >
+                            <input
+                              type="checkbox"
+                              className="row-check"
+                              checked={selection.has(mod.id)}
+                              onChange={() =>
+                                setSelected((current) =>
+                                  toggleSelected(current, mod.id),
+                                )
+                              }
+                              aria-label={`Select ${mod.name}`}
+                            />
                             <ModArtwork
                               name={mod.name}
                               imageUrl={mod.imageUrl}
@@ -1162,7 +1295,7 @@ export function Manage() {
                           <p>Try adjusting your search or filters.</p>
                           <Button
                             variant="secondary"
-                            onClick={() => setFilters(initialFilters)}
+                            onClick={() => changeFilters(initialFilters)}
                           >
                             Clear filters
                           </Button>
@@ -1177,6 +1310,54 @@ export function Manage() {
                         </>
                       )}
                     </motion.div>
+                  )}
+                  {filtered.length > 0 && (
+                    <nav className="pagination" aria-label="Mod list pages">
+                      <span className="pagination-summary" role="status">
+                        Showing {paged.from}–{paged.to} of {paged.total}{" "}
+                        {paged.total === 1 ? "mod" : "mods"}
+                      </span>
+                      <div className="pagination-controls">
+                        <Select
+                          aria-label="Mods per page"
+                          size="sm"
+                          variant="compact"
+                          className="pagination-size"
+                          value={String(pageSize)}
+                          onValueChange={(value) => {
+                            setPageSize(Number(value) as PageSize);
+                            setPage(1);
+                          }}
+                          options={PAGE_SIZES.map((size) => ({
+                            value: String(size),
+                            label: `${size} per page`,
+                          }))}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="small"
+                          disabled={paged.page <= 1}
+                          onClick={() => setPage(paged.page - 1)}
+                          aria-label="Previous page"
+                        >
+                          <ChevronLeft size={15} />
+                          <span className="pagination-label">Previous</span>
+                        </Button>
+                        <span className="pagination-page">
+                          Page {paged.page} of {paged.pageCount}
+                        </span>
+                        <Button
+                          variant="ghost"
+                          size="small"
+                          disabled={paged.page >= paged.pageCount}
+                          onClick={() => setPage(paged.page + 1)}
+                          aria-label="Next page"
+                        >
+                          <span className="pagination-label">Next</span>
+                          <ChevronRight size={15} />
+                        </Button>
+                      </div>
+                    </nav>
                   )}
                 </>
               )}
@@ -1288,6 +1469,30 @@ export function Manage() {
             }}
           >
             <Trash2 size={16} /> Delete mod
+          </Button>
+        </div>
+      </Dialog>
+      <Dialog
+        open={bulkDelete !== null}
+        onOpenChange={(open) => !open && setBulkDelete(null)}
+        title={`Delete ${shownBulkDelete?.length ?? 0} ${shownBulkDelete?.length === 1 ? "mod" : "mods"}?`}
+        description={(() => {
+          const ids = shownBulkDelete ?? [];
+          const names = data.mods
+            .filter((mod) => ids.includes(mod.id))
+            .map((mod) => mod.name);
+          const listed = names.slice(0, 5).join(", ");
+          const more = names.length > 5 ? ` and ${names.length - 5} more` : "";
+          return `This removes ${listed}${more} from your local draft. You can reset to published data before exporting if needed.`;
+        })()}
+      >
+        <div className="dialog-actions dialog-actions-flush">
+          <Button variant="ghost" onClick={() => setBulkDelete(null)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={confirmBulkDelete}>
+            <Trash2 size={16} /> Delete {shownBulkDelete?.length ?? 0}{" "}
+            {shownBulkDelete?.length === 1 ? "mod" : "mods"}
           </Button>
         </div>
       </Dialog>

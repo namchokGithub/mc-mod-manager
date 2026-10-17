@@ -42,3 +42,9 @@ export function uniqueId(name: string, mods: Mod[]): string {
   while (ids.has(`${base}-${suffix}`)) suffix += 1;
   return `${base}-${suffix}`;
 }
+
+/** Removes every mod whose ID is listed, in one pass; unknown IDs are ignored. */
+export function removeMods(mods: Mod[], ids: Iterable<string>): Mod[] {
+  const remove = new Set(ids);
+  return mods.filter((mod) => !remove.has(mod.id));
+}

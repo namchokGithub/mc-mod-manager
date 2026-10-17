@@ -12,6 +12,8 @@ export type DataContextValue = {
   updateModpack: (modpack: Modpack) => void;
   saveMod: (mod: Mod, originalId?: string) => void;
   deleteMod: (id: string) => void;
+  /** Deletes several mods in a single draft update. */
+  deleteMods: (ids: string[]) => void;
   importModpack: (modpack: Modpack) => void;
   importMods: (mods: Mod[]) => void;
   reset: () => void;

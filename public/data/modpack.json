@@ -1,10 +1,10 @@
 {
-  "name": "Helloworld: Beyond the Descendant",
+  "name": "HelloWorld: Beyond the Descendant",
   "description": "A fantasy adventure and survival modpack that expands Minecraft with diverse biomes, mysterious structures, dangerous dungeons, powerful equipment, and challenging enemies.",
   "version": "0.1.0",
   "minecraftVersion": "26.1.2",
   "modloader": "NeoForge",
-  "modloaderVersion": "",
+  "modloaderVersion": "NeoForge 26.1.2.122",
   "author": "Namchok and Moo's",
   "updatedAt": "2026-10-17",
   "heroImageUrl": "public/assets/theme/winter_slime_adventure_in_the_snow.png"
