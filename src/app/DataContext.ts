@@ -4,6 +4,8 @@ import type {
   Batch,
   BatchFile,
   Collection,
+  ContentFile,
+  ContentKey,
   InboxEntry,
   Mod,
   Modpack,
@@ -32,6 +34,8 @@ export type DataContextValue = {
    * changes nothing) when the new mods do not validate.
    */
   promoteInbox: (created: Mod[], promotedIds: string[]) => void;
+  /** Replaces one content collection (resource packs, data packs, or shaders). Throws on invalid data. */
+  updateContent: (key: ContentKey, file: ContentFile) => void;
   importModpack: (modpack: Modpack) => void;
   importMods: (mods: Mod[]) => void;
   reset: () => void;

@@ -18,7 +18,10 @@ import {
   Copy,
   HardDriveDownload,
   FileJson2,
+  Database,
   Inbox,
+  Palette,
+  Sparkles,
   Info,
   LayoutDashboard,
   ListChecks,
@@ -69,11 +72,13 @@ import {
   type PageSize,
 } from "../../lib/pagination";
 import {
+  contentKeys,
   modSchema,
   modsSchema,
   modpackSchema,
   parseJsonFile,
   type BatchFile,
+  type ContentKey,
   type Mod,
   type Modpack,
 } from "../../lib/schema";
@@ -90,13 +95,22 @@ import { inboxEntriesFromNames } from "../../lib/inbox";
 import { CompatibilityPanel } from "./CompatibilityPanel";
 import { IgnoredDependenciesField } from "./IgnoredDependencies";
 import { ManualVerificationSection } from "./ManualVerification";
+import { ContentPanel } from "../content/ContentPanel";
+import { contentMeta, isContentKey } from "../../lib/content";
 import {
   SupportedLoadersField,
   SupportedVersionsField,
 } from "./CompatibilityFields";
 import { UpdateBadge } from "./UpdateBadge";
 
-type Tab = "dashboard" | "mods" | "inbox" | "settings" | "plan" | "data";
+type Tab =
+  "dashboard" | "mods" | "inbox" | "settings" | "plan" | "data" | ContentKey;
+
+const contentIcons: Record<ContentKey, typeof Inbox> = {
+  resourcePacks: Palette,
+  dataPacks: Database,
+  shaders: Sparkles,
+};
 const initialFilters: Filters = {
   query: "",
   category: "",
@@ -1438,6 +1452,22 @@ export function Manage() {
             <ListChecks size={18} /> Build plan{" "}
             <span>{data.batches.batches.length}</span>
           </button>
+          <div className="sidebar-heading">OTHER CONTENT</div>
+          {contentKeys.map((key) => {
+            const Icon = contentIcons[key];
+            return (
+              <button
+                key={key}
+                type="button"
+                className={tab === key ? "sidebar-item active" : "sidebar-item"}
+                aria-current={tab === key ? "page" : undefined}
+                onClick={() => changeTab(key)}
+              >
+                <Icon size={18} /> {contentMeta[key].title}{" "}
+                <span>{data[key].items.length}</span>
+              </button>
+            );
+          })}
           <button
             type="button"
             className={tab === "data" ? "sidebar-item active" : "sidebar-item"}
@@ -1788,6 +1818,7 @@ export function Manage() {
                 />
               )}
               {tab === "data" && <DataTools />}
+              {isContentKey(tab) && <ContentPanel key={tab} contentKey={tab} />}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -1898,7 +1929,7 @@ export function Manage() {
         description={
           shownLocalSave?.conflict
             ? `${shownLocalSave.conflict} Overwriting replaces those changes with your draft.`
-            : `This overwrites public/data/modpack.json and public/data/mods.json with your draft (${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"}).${settingsDirty || editorDirty ? " Unsaved form edits are not included." : ""}`
+            : `This overwrites the JSON files in public/data/ (pack, mods, build plan, inbox, resource packs, data packs, and shaders) with your draft (${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"}).${settingsDirty || editorDirty ? " Unsaved form edits are not included." : ""}`
         }
       >
         {shownLocalSave?.error && (

@@ -1,24 +1,32 @@
 import { serializeJson } from "./json";
-import { collectionSchema, type Collection } from "./schema";
+import {
+  collectionSchema,
+  contentKeys,
+  type Collection,
+  type ContentKey,
+} from "./schema";
 
 export const DRAFT_KEY = "mc-mod-manager:draft:v1";
 
 /**
  * Parses stored draft text; returns null when it is not a valid collection. Drafts saved before
- * the build plan or the inbox existed lack those sections; they take them from `fallback` (the
- * published data) so nothing is lost.
+ * the build plan, the inbox, or the content collections existed lack those sections; they take
+ * them from `fallback` (the published data) so nothing is lost.
  */
 export function parseDraft(
   raw: string,
-  fallback?: Pick<Collection, "batches" | "inbox">,
+  fallback?: Pick<Collection, "batches" | "inbox" | ContentKey>,
 ): Collection | null {
   try {
     const value = JSON.parse(raw) as unknown;
     const filled =
       fallback && value && typeof value === "object" && !Array.isArray(value)
         ? {
-            ...("batches" in value ? {} : { batches: fallback.batches }),
-            ...("inbox" in value ? {} : { inbox: fallback.inbox }),
+            ...Object.fromEntries(
+              (["batches", "inbox", ...contentKeys] as const)
+                .filter((key) => !(key in value))
+                .map((key) => [key, fallback[key]]),
+            ),
             ...value,
           }
         : value;

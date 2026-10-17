@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { withOrder } from "./batches";
 import { planningDashboard } from "./planningDashboard";
-import type { Batch, Collection, Mod } from "./schema";
+import { emptyContent, type Batch, type Collection, type Mod } from "./schema";
 
 function mod(id: string, extra: Partial<Mod> = {}): Mod {
   return {
@@ -46,6 +46,7 @@ const batch = (id: string, modIds: string[]): Batch => ({
 
 function collection(mods: Mod[], batches: Batch[]): Collection {
   return {
+    ...emptyContent(),
     modpack: {
       name: "Pack",
       description: "",

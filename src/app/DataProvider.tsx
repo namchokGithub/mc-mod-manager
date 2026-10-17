@@ -5,6 +5,9 @@ import {
   type Collection,
   batchFileSchema,
   inboxFileSchema,
+  contentCollections,
+  contentFileSchema,
+  contentKeys,
 } from "../lib/schema";
 import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
 import {
@@ -53,14 +56,20 @@ export function DataProvider({ children }: { children: ReactNode }) {
     let active = true;
     async function load() {
       try {
-        const [responses, batchesResponse, inboxResponse] = await Promise.all([
-          Promise.all([
-            fetch(jsonUrl("modpack.json")),
-            fetch(jsonUrl("mods.json")),
-          ]),
-          fetch(jsonUrl("batches.json")),
-          fetch(jsonUrl("mod-inbox.json")),
-        ]);
+        const [responses, batchesResponse, inboxResponse, contentResponses] =
+          await Promise.all([
+            Promise.all([
+              fetch(jsonUrl("modpack.json")),
+              fetch(jsonUrl("mods.json")),
+            ]),
+            fetch(jsonUrl("batches.json")),
+            fetch(jsonUrl("mod-inbox.json")),
+            Promise.all(
+              contentKeys.map((key) =>
+                fetch(jsonUrl(contentCollections[key].file)),
+              ),
+            ),
+          ]);
         if (responses.some((response) => !response.ok))
           throw new Error("Published JSON files could not be loaded.");
         const values = await Promise.all(
@@ -74,11 +83,24 @@ export function DataProvider({ children }: { children: ReactNode }) {
         const inbox: unknown = inboxResponse.ok
           ? await inboxResponse.json()
           : undefined;
+        // Content files are optional as well: a missing file is an empty collection.
+        const content = Object.fromEntries(
+          await Promise.all(
+            contentKeys.map(async (key, index) => {
+              const response = contentResponses[index];
+              return [
+                key,
+                response?.ok ? ((await response.json()) as unknown) : undefined,
+              ] as const;
+            }),
+          ),
+        );
         const result = collectionSchema.safeParse({
           modpack: values[0],
           mods: values[1],
           batches,
           inbox,
+          ...content,
         });
         if (!result.success)
           throw new Error("Published JSON files have invalid data.");
@@ -223,6 +245,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
         },
       });
     },
+    updateContent: (key, file) =>
+      change({
+        ...data,
+        [key]: contentFileSchema(contentCollections[key].type).parse(file),
+      }),
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),
     markSaved: (saved) => {

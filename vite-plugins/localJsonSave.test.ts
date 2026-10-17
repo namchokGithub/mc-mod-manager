@@ -29,6 +29,10 @@ const baseline = {
   batches: fingerprint(serializeJson(published.batches)),
   // No mod-inbox.json on disk counts as an empty inbox.
   inbox: fingerprint(serializeJson(published.inbox)),
+  // Missing content files count as empty collections.
+  resourcePacks: fingerprint(serializeJson(published.resourcePacks)),
+  dataPacks: fingerprint(serializeJson(published.dataPacks)),
+  shaders: fingerprint(serializeJson(published.shaders)),
 };
 
 describe("trusted requests", () => {
@@ -106,6 +110,9 @@ describe("planning a save", () => {
       "mods",
       "batches",
       "inbox",
+      "resourcePacks",
+      "dataPacks",
+      "shaders",
     ]);
     expect(plan.body).toMatchObject({
       ok: true,
@@ -313,5 +320,61 @@ describe("atomic file writes", () => {
     ).rejects.toThrow();
     expect(await readFile(a, "utf8")).toBe("old");
     expect(await readdir(dir)).toEqual(["mods.json"]);
+  });
+});
+
+describe("saving content collections", () => {
+  const shaders = {
+    version: 1,
+    type: "shader",
+    items: [{ id: "bsl", name: "BSL", status: "planned" }],
+  };
+  const emptyShaders = fingerprint(
+    serializeJson({ version: 1, type: "shader", items: [] }),
+  );
+  const request = (extra: Record<string, unknown> = {}) => ({
+    modpack: published.modpack,
+    mods: published.mods,
+    shaders,
+    baseline: { ...baseline, shaders: emptyShaders },
+    ...extra,
+  });
+
+  it("writes a content file when it is sent, treating a missing file as empty", () => {
+    const plan = planSave(request(), onDisk);
+    expect(plan.status).toBe(200);
+    expect(JSON.parse(plan.files?.shaders ?? "null")).toMatchObject({
+      type: "shader",
+      items: [{ id: "bsl", source: "manual" }],
+    });
+    expect(plan.files?.resourcePacks).toBeUndefined();
+    expect(plan.body.shaders).toMatchObject({ items: [{ id: "bsl" }] });
+  });
+
+  it("rejects invalid content before writing anything", () => {
+    const plan = planSave(
+      request({ shaders: { ...shaders, type: "datapack" } }),
+      onDisk,
+    );
+    expect(plan.status).toBe(400);
+    expect(plan.files).toBeUndefined();
+    expect(String(plan.body.error)).toContain("shaders.json");
+  });
+
+  it("refuses when the content file changed on disk", () => {
+    const plan = planSave(request(), {
+      ...onDisk,
+      shaders: serializeJson(shaders),
+    });
+    expect(plan.status).toBe(409);
+  });
+
+  it("still saves requests without content files", () => {
+    const plan = planSave(
+      { modpack: published.modpack, mods: published.mods, baseline },
+      onDisk,
+    );
+    expect(plan.status).toBe(200);
+    expect(plan.files?.shaders).toBeUndefined();
   });
 });

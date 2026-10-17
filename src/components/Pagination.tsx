@@ -15,6 +15,7 @@ export function Pagination({
   onPageChange,
   onPageSizeChange,
   label,
+  noun = { one: "mod", many: "mods" },
 }: {
   page: Page<unknown>;
   pageSize: PageSize;
@@ -22,6 +23,8 @@ export function Pagination({
   onPageSizeChange: (size: PageSize) => void;
   /** Accessible name for the navigation landmark. */
   label: string;
+  /** What is being paged; defaults to mods. */
+  noun?: { one: string; many: string };
 }) {
   const atStart = page.page <= 1;
   const atEnd = page.page >= page.pageCount;
@@ -29,11 +32,11 @@ export function Pagination({
     <nav className="pagination" aria-label={label}>
       <span className="pagination-summary" role="status">
         Showing {page.from}–{page.to} of {page.total}{" "}
-        {page.total === 1 ? "mod" : "mods"}
+        {page.total === 1 ? noun.one : noun.many}
       </span>
       <div className="pagination-controls">
         <Select
-          aria-label="Mods per page"
+          aria-label={`${noun.many.charAt(0).toUpperCase()}${noun.many.slice(1)} per page`}
           size="sm"
           variant="compact"
           className="pagination-size"

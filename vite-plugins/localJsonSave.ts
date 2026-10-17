@@ -14,6 +14,11 @@ import {
   emptyBatchFile,
   inboxFileSchema,
   emptyInboxFile,
+  contentCollections,
+  contentFileSchema,
+  contentKeys,
+  emptyContentFile,
+  type ContentKey,
 } from "../src/lib/schema";
 
 const MAX_BODY_BYTES = 5 * 1024 * 1024;
@@ -69,13 +74,29 @@ export type CurrentFiles = {
   mods: string | null;
   batches?: string | null;
   inbox?: string | null;
-};
+} & Partial<Record<ContentKey, string | null>>;
 export type SavePlan = {
   status: number;
   body: Record<string, unknown>;
-  /** Present only when the files should be written; `batches` only when the request has a plan. */
-  files?: { modpack: string; mods: string; batches?: string; inbox?: string };
+  /** Present only when the files should be written; optional files only when the request has them. */
+  files?: {
+    modpack: string;
+    mods: string;
+    batches?: string;
+    inbox?: string;
+  } & Partial<Record<ContentKey, string>>;
 };
+
+// A missing content file is the same as an empty collection of that type.
+function contentFingerprint(
+  key: ContentKey,
+  text: string | null | undefined,
+): string | null {
+  const { type } = contentCollections[key];
+  return text === null || text === undefined
+    ? fingerprint(serializeJson(emptyContentFile(type)))
+    : diskFingerprint(text, contentFileSchema(type));
+}
 
 // A missing mod-inbox.json is the same as an empty inbox.
 function inboxFingerprint(text: string | null | undefined): string | null {
@@ -106,14 +127,9 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
     mods?: unknown;
     batches?: unknown;
     inbox?: unknown;
-    baseline?: {
-      modpack?: unknown;
-      mods?: unknown;
-      batches?: unknown;
-      inbox?: unknown;
-    };
+    baseline?: Record<string, unknown>;
     force?: unknown;
-  };
+  } & Partial<Record<ContentKey, unknown>>;
   const modpack = modpackSchema.safeParse(request.modpack);
   if (!modpack.success)
     return {
@@ -144,6 +160,22 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       status: 400,
       body: { error: `mod-inbox.json: ${formatValidationError(inbox.error)}` },
     };
+  // Content files are optional in the request, so older pages can still save.
+  const content: Partial<Record<ContentKey, unknown>> = {};
+  for (const key of contentKeys) {
+    if (request[key] === undefined) continue;
+    const { type, file } = contentCollections[key];
+    const parsed = contentFileSchema(type).safeParse(request[key]);
+    if (!parsed.success)
+      return {
+        status: 400,
+        body: { error: `${file}: ${formatValidationError(parsed.error)}` },
+      };
+    content[key] = parsed.data;
+  }
+  const contentChanged = (Object.keys(content) as ContentKey[]).some(
+    (key) => request.baseline?.[key] !== contentFingerprint(key, current[key]),
+  );
   if (request.force !== true) {
     const disk = {
       modpack: diskFingerprint(current.modpack, modpackSchema),
@@ -157,7 +189,8 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       (batches !== undefined &&
         request.baseline?.batches !== batchesFingerprint(current.batches)) ||
       (inbox !== undefined &&
-        request.baseline?.inbox !== inboxFingerprint(current.inbox))
+        request.baseline?.inbox !== inboxFingerprint(current.inbox)) ||
+      contentChanged
     )
       return {
         status: 409,
@@ -173,6 +206,12 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
     mods: serializeJson(mods.data),
     ...(batches && { batches: serializeJson(batches.data) }),
     ...(inbox && { inbox: serializeJson(inbox.data) }),
+    ...Object.fromEntries(
+      Object.entries(content).map(([key, value]) => [
+        key,
+        serializeJson(value),
+      ]),
+    ),
   };
   return {
     status: 200,
@@ -182,6 +221,7 @@ export function planSave(input: unknown, current: CurrentFiles): SavePlan {
       mods: mods.data,
       ...(batches && { batches: batches.data }),
       ...(inbox && { inbox: inbox.data }),
+      ...content,
       fingerprints: {
         modpack: fingerprint(files.modpack),
         mods: fingerprint(files.mods),
@@ -253,7 +293,8 @@ function send(response: ServerResponse, status: number, body: unknown) {
 }
 
 /**
- * Dev-only endpoint that writes public/data/modpack.json, mods.json, batches.json, and mod-inbox.json. `apply: "serve"` keeps it
+ * Dev-only endpoint that writes public/data/modpack.json, mods.json, batches.json, mod-inbox.json,
+ * resource-packs.json, data-packs.json, and shaders.json. `apply: "serve"` keeps it
  * out of production builds, and the target paths are fixed here, never taken from the client.
  */
 export function localJsonSave(): Plugin {
@@ -268,6 +309,12 @@ export function localJsonSave(): Plugin {
         batches: path.join(dataDir, "batches.json"),
         inbox: path.join(dataDir, "mod-inbox.json"),
       };
+      const contentTargets = Object.fromEntries(
+        contentKeys.map((key) => [
+          key,
+          path.join(dataDir, contentCollections[key].file),
+        ]),
+      ) as Record<ContentKey, string>;
       let saving = false;
       server.middlewares.use(SAVE_ENDPOINT, (request, response) => {
         void (async () => {
@@ -308,6 +355,14 @@ export function localJsonSave(): Plugin {
               mods: await readOptional(targets.mods),
               batches: await readOptional(targets.batches),
               inbox: await readOptional(targets.inbox),
+              ...Object.fromEntries(
+                await Promise.all(
+                  contentKeys.map(
+                    async (key) =>
+                      [key, await readOptional(contentTargets[key])] as const,
+                  ),
+                ),
+              ),
             });
             if (plan.files)
               await commitFiles([
@@ -319,6 +374,12 @@ export function localJsonSave(): Plugin {
                 ...(plan.files.inbox === undefined
                   ? []
                   : [{ target: targets.inbox, text: plan.files.inbox }]),
+                ...contentKeys.flatMap((key) => {
+                  const text = plan.files?.[key];
+                  return text === undefined
+                    ? []
+                    : [{ target: contentTargets[key], text }];
+                }),
               ]);
             send(response, plan.status, plan.body);
           } catch (error) {

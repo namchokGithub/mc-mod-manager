@@ -7,7 +7,7 @@ import {
   guideFilename,
   safeUrl,
 } from "./buildGuide";
-import type { Batch, Collection, Mod } from "./schema";
+import { emptyContent, type Batch, type Collection, type Mod } from "./schema";
 
 const generatedAt = new Date("2026-10-17T12:00:00Z");
 
@@ -46,6 +46,7 @@ const batch = (
 
 function collection(mods: Mod[], batches: Batch[]): Collection {
   return {
+    ...emptyContent(),
     modpack: {
       name: "Helloworld: Beyond the Descendant",
       description: "A fantasy pack.",

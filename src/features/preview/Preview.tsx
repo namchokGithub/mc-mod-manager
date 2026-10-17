@@ -19,6 +19,7 @@ import { ModFilters } from "../../components/ModFilters";
 import { formatStat } from "../../lib/countUp";
 import { useCountUp } from "./useCountUp";
 import { BuildPlanGuide } from "./BuildPlanGuide";
+import { ContentPreview } from "./ContentPreview";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import {
@@ -363,6 +364,7 @@ export function Preview() {
             />
           )}
         </section>
+        <ContentPreview data={data} />
         <BuildPlanGuide
           plan={data.batches}
           mods={data.mods}

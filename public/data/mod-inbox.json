@@ -3,56 +3,8 @@
   "entries": [
     {
       "id": "ftb-library",
-      "name": "FTB Library",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-teams",
-      "name": "FTB Teams",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-chunks",
-      "name": "FTB Chunks",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-quests",
-      "name": "FTB Quests",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-xmod-compat",
-      "name": "FTB XMod Compat",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-ultimine",
-      "name": "FTB Ultimine",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-essentials",
-      "name": "FTB Essentials",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-backups-2",
-      "name": "FTB Backups 2",
-      "notes": "",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
-      "id": "ftb-filter-system",
-      "name": "FTB Filter System",
-      "notes": "",
+      "name": "FTB Project",
+      "notes": "https://www.curseforge.com/members/ftb/projects",
       "createdAt": "2026-10-17T16:13:06.894Z"
     },
     {
@@ -96,6 +48,66 @@
       "name": "Botany Pots",
       "notes": "",
       "createdAt": "2026-10-17T19:30:35.638Z"
+    },
+    {
+      "id": "measurements-https-www-curseforge-com-minecraft-mc-mods-measurements",
+      "name": "Measurements",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/measurements/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
+      "createdAt": "2026-10-17T20:26:57.526Z"
+    },
+    {
+      "id": "overloaded-armor-bar",
+      "name": "Overloaded Armor Bar",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/overloaded-armor-bar",
+      "createdAt": "2026-10-17T20:30:58.110Z"
+    },
+    {
+      "id": "croptopia",
+      "name": "Croptopia",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/croptopia",
+      "createdAt": "2026-10-17T20:44:24.429Z"
+    },
+    {
+      "id": "yung-s-mods",
+      "name": "YUNG's Mods",
+      "notes": "",
+      "createdAt": "2026-10-17T20:50:47.642Z"
+    },
+    {
+      "id": "botany-pots-tiers",
+      "name": "Botany Pots Tiers",
+      "notes": "",
+      "createdAt": "2026-10-17T20:56:31.530Z"
+    },
+    {
+      "id": "modmenu",
+      "name": "modmenu",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/modmenu",
+      "createdAt": "2026-10-17T21:02:40.801Z"
+    },
+    {
+      "id": "more-villagers",
+      "name": "More Villagers",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/more-villagers/files",
+      "createdAt": "2026-10-17T21:06:05.218Z"
+    },
+    {
+      "id": "animal-feeding-trough-fabric-forge-quilt-neoforge",
+      "name": "Animal Feeding Trough [Fabric | Forge | Quilt | NeoForge]",
+      "notes": "",
+      "createdAt": "2026-10-17T21:08:37.558Z"
+    },
+    {
+      "id": "fuzs",
+      "name": "ของ Fuzs",
+      "notes": "https://www.curseforge.com/members/fuzs/projects?page=1&classIds=6%2C432",
+      "createdAt": "2026-10-17T21:09:59.696Z"
+    },
+    {
+      "id": "rpg-series",
+      "name": "RPG Series",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/paladins-and-priests",
+      "createdAt": "2026-10-17T21:10:47.246Z"
     }
   ]
 }

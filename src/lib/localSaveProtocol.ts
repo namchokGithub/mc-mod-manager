@@ -8,4 +8,7 @@ export type SaveFingerprints = {
   mods: string;
   batches: string;
   inbox: string;
+  resourcePacks: string;
+  dataPacks: string;
+  shaders: string;
 };

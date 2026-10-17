@@ -4110,3 +4110,55 @@ main:focus {
     grid-template-columns: 1fr;
   }
 }
+
+/* Resource packs, data packs, and shaders */
+.content-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.content-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.content-tab span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.content-tab.active {
+  border-color: var(--primary);
+  background: var(--accent-soft);
+  color: var(--primary);
+}
+.content-tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.content-description {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.content-card {
+  cursor: default;
+}
+.content-card .content-tags {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.content-card a.mod-card-cta {
+  color: var(--primary);
+  text-decoration: none;
+}

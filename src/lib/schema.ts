@@ -239,12 +239,99 @@ export const emptyInboxFile = (): z.infer<typeof inboxFileSchema> => ({
   entries: [],
 });
 
+// Additional content (public/data/resource-packs.json, data-packs.json, shaders.json). Separate
+// from mods: no modloader, dependency, or compatibility fields. Entered by hand, never verified.
+export const contentTypes = ["resourcepack", "datapack", "shader"] as const;
+export const contentSources = [
+  "modrinth",
+  "curseforge",
+  "manual",
+  "other",
+] as const;
+export const contentStatuses = ["planned", "testing", "installed"] as const;
+
+// Loose: fields this version does not know are kept through import, edit, and save.
+export const contentItemSchema = z.looseObject({
+  id: z.string().trim().min(1, "ID is required"),
+  name: z.string().trim().min(1, "Name is required"),
+  status: z.enum(contentStatuses),
+  version: z.string().default(""),
+  description: z.string().default(""),
+  source: z.enum(contentSources).default("manual"),
+  sourceUrl: optionalUrl.default(""),
+  imageUrl: optionalUrl.default(""),
+  minecraftVersions: z.array(z.string().trim().min(1)).default([]),
+  tags: z.array(z.string().trim().min(1)).default([]),
+  notes: z.string().default(""),
+  createdAt: z.iso.datetime().optional(),
+  updatedAt: z.iso.datetime().optional(),
+});
+
+export const contentItemsSchema = z
+  .array(contentItemSchema)
+  .superRefine((items, context) => {
+    const seen = new Set<string>();
+    items.forEach((item, index) => {
+      if (seen.has(item.id))
+        context.addIssue({
+          code: "custom",
+          path: [index, "id"],
+          message: `Duplicate ID: ${item.id}`,
+        });
+      seen.add(item.id);
+    });
+  });
+
+export type ContentType = (typeof contentTypes)[number];
+
+export const emptyContentFile = (type: ContentType) => ({
+  version: 1 as const,
+  type,
+  items: [],
+});
+
+/** One content file; `type` must match, so a shaders file cannot load as resource packs. */
+export function contentFileSchema(type: ContentType) {
+  return z.object({
+    version: z.literal(1),
+    type: z.literal(type, {
+      error: `This is not a ${type} file (expected "type": "${type}").`,
+    }),
+    items: contentItemsSchema,
+  });
+}
+
+/** Empty resource pack, data pack, and shader collections. */
+export const emptyContent = () => ({
+  resourcePacks: emptyContentFile("resourcepack"),
+  dataPacks: emptyContentFile("datapack"),
+  shaders: emptyContentFile("shader"),
+});
+
+/** Collection key, content type, and file name for each additional collection. */
+export const contentCollections = {
+  resourcePacks: { type: "resourcepack", file: "resource-packs.json" },
+  dataPacks: { type: "datapack", file: "data-packs.json" },
+  shaders: { type: "shader", file: "shaders.json" },
+} as const satisfies Record<string, { type: ContentType; file: string }>;
+export type ContentKey = keyof typeof contentCollections;
+export const contentKeys = Object.keys(contentCollections) as ContentKey[];
+
 export const collectionSchema = z.object({
   modpack: modpackSchema,
   mods: modsSchema,
   // Optional in stored data so older drafts and collections without a plan still load.
   batches: batchFileSchema.default(emptyBatchFile),
   inbox: inboxFileSchema.default(emptyInboxFile),
+  resourcePacks: contentFileSchema("resourcepack").default(() =>
+    emptyContentFile("resourcepack"),
+  ),
+  dataPacks: contentFileSchema("datapack").default(() =>
+    emptyContentFile("datapack"),
+  ),
+  shaders: contentFileSchema("shader").default(() =>
+    emptyContentFile("shader"),
+  ),
 });
 
 export type Modpack = z.infer<typeof modpackSchema>;
@@ -261,6 +348,12 @@ export type Batch = z.infer<typeof batchSchema>;
 export type ChecklistItem = z.infer<typeof checklistItemSchema>;
 export type InboxFile = z.infer<typeof inboxFileSchema>;
 export type InboxEntry = z.infer<typeof inboxEntrySchema>;
+export type ContentItem = z.infer<typeof contentItemSchema>;
+export type ContentFile = {
+  version: 1;
+  type: ContentType;
+  items: ContentItem[];
+};
 
 export function formatValidationError(error: z.ZodError): string {
   return error.issues

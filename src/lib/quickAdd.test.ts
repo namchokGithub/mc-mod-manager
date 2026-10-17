@@ -12,7 +12,7 @@ import {
   parseQuickAdd,
   quickAddMods,
 } from "./quickAdd";
-import { modsSchema, type Collection, type Mod } from "./schema";
+import { emptyContent, modsSchema, type Collection, type Mod } from "./schema";
 
 const existing = quickAddMods(["Sodium"], []);
 
@@ -84,6 +84,7 @@ describe("creating name-only mods", () => {
 describe("integration with planning", () => {
   const added = quickAddMods(["Create", "JEI"], []);
   const collection: Collection = {
+    ...emptyContent(),
     modpack: {
       name: "Pack",
       description: "",

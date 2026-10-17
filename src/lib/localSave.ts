@@ -1,6 +1,6 @@
 import { serializeJson } from "./json";
 import { SAVE_ENDPOINT, SAVE_HEADER } from "./localSaveProtocol";
-import { collectionSchema, type Collection } from "./schema";
+import { collectionSchema, contentKeys, type Collection } from "./schema";
 
 export type LocalSaveResult =
   | { kind: "saved"; collection: Collection }
@@ -38,11 +38,19 @@ export async function saveToLocalJson(
         mods: collection.mods,
         batches: collection.batches,
         inbox: collection.inbox,
+        ...Object.fromEntries(contentKeys.map((key) => [key, collection[key]])),
         baseline: {
           modpack: await fingerprint(baseline.modpack),
           mods: await fingerprint(baseline.mods),
           batches: await fingerprint(baseline.batches),
           inbox: await fingerprint(baseline.inbox),
+          ...Object.fromEntries(
+            await Promise.all(
+              contentKeys.map(
+                async (key) => [key, await fingerprint(baseline[key])] as const,
+              ),
+            ),
+          ),
         },
         force,
       }),
@@ -74,6 +82,7 @@ export async function saveToLocalJson(
       mods: data.mods,
       batches: data.batches,
       inbox: data.inbox,
+      ...Object.fromEntries(contentKeys.map((key) => [key, data[key]])),
     });
     if (saved.success) return { kind: "saved", collection: saved.data };
     return {

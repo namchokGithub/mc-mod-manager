@@ -4,7 +4,13 @@ import { checkCompatibility } from "../compatibility";
 import { inboxEntriesFromNames } from "../inbox";
 import { planningDashboard } from "../planningDashboard";
 import { quickAddMods } from "../quickAdd";
-import { modsSchema, type Collection, type Mod, type Modpack } from "../schema";
+import {
+  emptyContent,
+  modsSchema,
+  type Collection,
+  type Mod,
+  type Modpack,
+} from "../schema";
 import {
   createModrinthClient,
   type ProjectResponse,
@@ -472,6 +478,7 @@ describe("planning the import", () => {
 
   it("leaves batches and the inbox alone when applied", () => {
     const collection: Collection = {
+      ...emptyContent(),
       modpack,
       mods: existing,
       batches: withOrder([

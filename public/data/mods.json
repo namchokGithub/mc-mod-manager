@@ -3281,5 +3281,3063 @@
       ],
       "syncedAt": "2026-10-17T19:43:28.498Z"
     }
+  },
+  {
+    "id": "mutant-monsters",
+    "name": "Mutant Monsters",
+    "version": "26.1.3",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mutant-monsters",
+    "description": "The mutants are back! Face scary creatures and powerful beasts like never before.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/derP0ten/56c47fb666da324d4c094465b6544fe970e0e064_96.webp",
+    "modrinth": {
+      "projectId": "derP0ten",
+      "slug": "mutant-monsters",
+      "versionId": "2pSpOnHz",
+      "versionNumber": "26.1.3",
+      "versionType": "release",
+      "datePublished": "2026-08-31T08:17:15.489615Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:50:51.717Z"
+    }
+  },
+  {
+    "id": "puzzles-lib",
+    "name": "Puzzles Lib",
+    "version": "26.1.16",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/puzzles-lib",
+    "description": "Why is it called Puzzles? That's the puzzle.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/QAGBst4M/c78216c61f65b6ce82593e4e92e9c358402bb524_96.webp",
+    "modrinth": {
+      "projectId": "QAGBst4M",
+      "slug": "puzzles-lib",
+      "versionId": "ntQknrEC",
+      "versionNumber": "26.1.16",
+      "versionType": "release",
+      "datePublished": "2026-10-11T13:41:36.784095Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:51:16.149Z"
+    }
+  },
+  {
+    "id": "collective",
+    "name": "Collective",
+    "version": "26.1.2-8.32-fabric+forge+neo",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/collective",
+    "description": "🎓 Collective is a shared library with common code for all of Serilum's mods.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/e0M1UDsY/f5e4fe9ac298e2c14591920d6bda937c566accd0_96.webp",
+    "modrinth": {
+      "projectId": "e0M1UDsY",
+      "slug": "collective",
+      "versionId": "iXqgYZEw",
+      "versionNumber": "26.1.2-8.32-fabric+forge+neo",
+      "versionType": "release",
+      "datePublished": "2026-06-25T11:38:51.753761Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:53:56.882Z"
+    }
+  },
+  {
+    "id": "get-it-together-drops",
+    "name": "Get It Together, Drops!",
+    "version": "v1.5",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/get-it-together-drops",
+    "description": "Adds tags and configuration options for defining how dropped items should combine.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/T0OUgf8P/0db08b635bd5ad7eea705f5e8640e8757fa5c556_96.webp",
+    "modrinth": {
+      "projectId": "T0OUgf8P",
+      "slug": "get-it-together-drops",
+      "versionId": "G2xEhDC1",
+      "versionNumber": "v1.5",
+      "versionType": "release",
+      "datePublished": "2026-04-06T12:36:52.010462Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:59:32.319Z"
+    }
+  },
+  {
+    "id": "toms-storage",
+    "name": "Tom's Simple Storage Mod",
+    "version": "26.1-2.10.3",
+    "category": "Storage",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/toms-storage",
+    "description": "Simple vanilla style storage mod",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XZNI4Cpy/1949d7adbf962ac86912608edfb93fa5342bffd6_96.webp",
+    "modrinth": {
+      "projectId": "XZNI4Cpy",
+      "slug": "toms-storage",
+      "versionId": "6dinsQOX",
+      "versionNumber": "26.1-2.10.3",
+      "versionType": "release",
+      "datePublished": "2026-10-15T18:40:13.744209Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nfn13YXA",
+          "versionId": null,
+          "type": "optional",
+          "name": "Roughly Enough Items (REI)"
+        },
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        },
+        {
+          "projectId": "fRiHVvU7",
+          "versionId": null,
+          "type": "optional",
+          "name": "EMI"
+        },
+        {
+          "projectId": "hMlaZH8f",
+          "versionId": null,
+          "type": "optional",
+          "name": "Sophisticated Storage"
+        },
+        {
+          "projectId": "tagwiZkJ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Polymorph"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:03:00.924Z"
+    }
+  },
+  {
+    "id": "rei",
+    "name": "Roughly Enough Items (REI)",
+    "version": "26.1.819+neoforge",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/rei",
+    "description": "Clean and Customizable. Alternative to Just Enough Items/JEI.",
+    "dependencies": [
+      "Cloth Config API",
+      "Architectury API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/nfn13YXA/54ac5daa4166011bae713448e84413987316433a_96.webp",
+    "modrinth": {
+      "projectId": "nfn13YXA",
+      "slug": "rei",
+      "versionId": "isd1MxO2",
+      "versionNumber": "26.1.819+neoforge",
+      "versionType": "beta",
+      "datePublished": "2026-06-18T08:30:10.748332Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "required",
+          "name": "Cloth Config API"
+        },
+        {
+          "projectId": "lhGA9TYQ",
+          "versionId": null,
+          "type": "required",
+          "name": "Architectury API"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:03:31.762Z"
+    }
+  },
+  {
+    "id": "rhino",
+    "name": "Rhino",
+    "version": "2101.2.7-build.85+Rhino-1.21",
+    "category": "Library",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/rhino",
+    "description": "A fork of Mozilla's Rhino library, modified for use in mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/sk9knFPE/fd4ab05472a7e28fbd62054e5640ef61308cc4a6_96.webp",
+    "modrinth": {
+      "projectId": "sk9knFPE",
+      "slug": "rhino",
+      "versionId": "cQ4POTah",
+      "versionNumber": "2101.2.7-build.85+Rhino-1.21",
+      "versionType": "release",
+      "datePublished": "2026-06-08T22:08:50.636541Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:04:16.856Z"
+    }
+  },
+  {
+    "id": "better-advanced-tooltips",
+    "name": "Better Advanced Tooltips",
+    "version": "2601.1.0-build.11",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/better-advanced-tooltips",
+    "description": "Adds tag, component and other tooltips to items in F3+H mode",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/iHLDc0eo/c9d197ad33e03f6aea3bcb566f885f24193141a0_96.webp",
+    "modrinth": {
+      "projectId": "iHLDc0eo",
+      "slug": "better-advanced-tooltips",
+      "versionId": "DKhR2dA5",
+      "versionNumber": "2601.1.0-build.11",
+      "versionType": "release",
+      "datePublished": "2026-10-12T20:54:36.729061Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:04:45.649Z"
+    }
+  },
+  {
+    "id": "supermartijn642s-config-lib",
+    "name": "SuperMartijn642's Config Lib",
+    "version": "1.1.8-neoforge-mc26.1",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/supermartijn642s-config-lib",
+    "description": "Config Lib makes dealing with config files just a bit easier.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LN9BxssP/ad25597dd1b10b49cdfbc97c70d401e3158000f7_96.webp",
+    "modrinth": {
+      "projectId": "LN9BxssP",
+      "slug": "supermartijn642s-config-lib",
+      "versionId": "gD2yQaPN",
+      "versionNumber": "1.1.8-neoforge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-06-23T14:35:44.969004Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:04:57.853Z"
+    }
+  },
+  {
+    "id": "architectury-api",
+    "name": "Architectury API",
+    "version": "20.1.17+neoforge",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/architectury-api",
+    "description": "An intermediary api aimed to ease developing multiplatform mods.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/lhGA9TYQ/05fe3a61c28faaccaec3533b92e1b321edde7bf6_96.webp",
+    "modrinth": {
+      "projectId": "lhGA9TYQ",
+      "slug": "architectury-api",
+      "versionId": "fyNzvIcr",
+      "versionNumber": "20.1.17+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-09T19:18:26.813179Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:05:18.024Z"
+    }
+  },
+  {
+    "id": "max-health-fix",
+    "name": "Max Health Fix",
+    "version": "26.1.2.3",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/max-health-fix",
+    "description": "Fixes a bug with max health in Minecraft.",
+    "dependencies": [
+      "Prickle"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/mH8wdmqr/fdea4e7ae92a45f6f9742865d260a284a8585e35_96.webp",
+    "modrinth": {
+      "projectId": "mH8wdmqr",
+      "slug": "max-health-fix",
+      "versionId": "nzc3Elfx",
+      "versionNumber": "26.1.2.3",
+      "versionType": "release",
+      "datePublished": "2026-06-18T00:33:26.071882Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "aaRl8GiW",
+          "versionId": null,
+          "type": "required",
+          "name": "Prickle"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:07:31.132Z"
+    }
+  },
+  {
+    "id": "xp-tome",
+    "name": "XP Tome",
+    "version": "v2.5.1",
+    "category": "Adventure",
+    "tags": [
+      "Storage",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/xp-tome",
+    "description": "Adds a book that can store a configurable amount of XP.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/AnpW69o3/03da4b754816b4491c26b5c7d52792e228c10503.png",
+    "modrinth": {
+      "projectId": "AnpW69o3",
+      "slug": "xp-tome",
+      "versionId": "wM2OXCPi",
+      "versionNumber": "v2.5.1",
+      "versionType": "release",
+      "datePublished": "2026-04-28T20:44:17.780473Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:09:53.767Z"
+    }
+  },
+  {
+    "id": "corpse-x-curios-api-compat",
+    "name": "Corpse x Curios API Compat",
+    "version": "4.2.0",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/corpse-x-curios-api-compat",
+    "description": "This little mod allows you to directly equip your Curios items to the respective slots",
+    "dependencies": [
+      "Corpse",
+      "Curios API",
+      "BaguetteLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/pJGcKPh1/5e2a59a14b112aa7814260b71adb09617cc4e4bf_96.webp",
+    "modrinth": {
+      "projectId": "pJGcKPh1",
+      "slug": "corpse-x-curios-api-compat",
+      "versionId": "MM3dxPZG",
+      "versionNumber": "4.2.0",
+      "versionType": "beta",
+      "datePublished": "2026-10-11T20:39:13.257658Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "WrpuIfhw",
+          "versionId": null,
+          "type": "required",
+          "name": "Corpse"
+        },
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "required",
+          "name": "Curios API"
+        },
+        {
+          "projectId": "OfKzpbRU",
+          "versionId": null,
+          "type": "required",
+          "name": "BaguetteLib"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:10:23.891Z"
+    }
+  },
+  {
+    "id": "baguettelib",
+    "name": "BaguetteLib",
+    "version": "2.0.7",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/baguettelib",
+    "description": "Ever tried to make a mod that needs proper death handling or inventory tracking? Yeah, NeoForge events suck for that.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/OfKzpbRU/d007c3afd229b8e796f41174ceacd7c8f0f436cc_96.webp",
+    "modrinth": {
+      "projectId": "OfKzpbRU",
+      "slug": "baguettelib",
+      "versionId": "cbReuxq7",
+      "versionNumber": "2.0.7",
+      "versionType": "release",
+      "datePublished": "2026-09-15T16:41:40.069455Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:10:27.346Z"
+    }
+  },
+  {
+    "id": "chunky",
+    "name": "Chunky",
+    "version": "1.5.4",
+    "category": "Optimization",
+    "tags": [
+      "Utility",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/chunky",
+    "description": "Pre-generates chunks, quickly and efficiently",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/fALzjamp/e1954413665e57b7bae1feef44eda530270c7d47_96.webp",
+    "modrinth": {
+      "projectId": "fALzjamp",
+      "slug": "chunky",
+      "versionId": "EyCqftOK",
+      "versionNumber": "1.5.4",
+      "versionType": "release",
+      "datePublished": "2026-07-23T04:22:28.142267Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:11:17.221Z"
+    }
+  },
+  {
+    "id": "inventoryhudplus",
+    "name": "InventoryHUD+",
+    "version": "3.4.31",
+    "category": "Adventure",
+    "tags": [
+      "Management",
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/inventoryhudplus",
+    "description": "Adds your main inventory, potion effects and your equipments to your HUD. And few other features.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Kp2uclYl/9a7a5546c3e77ecac35c07bf5ea3ec7e71c9a8f3_96.webp",
+    "modrinth": {
+      "projectId": "Kp2uclYl",
+      "slug": "inventoryhudplus",
+      "versionId": "75AwlbZ1",
+      "versionNumber": "3.4.31",
+      "versionType": "release",
+      "datePublished": "2026-04-19T10:47:23.901407Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:11:49.287Z"
+    }
+  },
+  {
+    "id": "skills",
+    "name": "Pufferfish's Skills",
+    "version": "0.19.2",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/skills",
+    "description": "Adds a fully configurable skill system to the game.\nผู้พัฒนามี Online Skill Tree Editor สำหรับจัดวางตำแหน่งสกิลและเส้นเชื่อม ทำให้ง่ายกว่าการแก้ JSON ด้วยมือทั้งหมด\nริ่มได้จาก:\n- เว็บไซต์ Pufferfish's Skills https://puffish.net/skillsmod/\n- คู่มือสร้าง Skill Tree https://puffish.net/skillsmod/docs/creators/tutorials/creating-skill-trees\n- โครงสร้าง Config https://puffish.net/skillsmod/docs/creators/configuration/categories",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/hqQqvaa4/03ee8cc78c05ab021cfc96664741dd66fc69e515.png",
+    "modrinth": {
+      "projectId": "hqQqvaa4",
+      "slug": "skills",
+      "versionId": "Jf88wm2X",
+      "versionNumber": "0.19.2",
+      "versionType": "beta",
+      "datePublished": "2026-10-08T19:22:22.085117Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:13:37.658Z"
+    }
+  },
+  {
+    "id": "attributes",
+    "name": "Pufferfish's Attributes",
+    "version": "0.8.2",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/attributes",
+    "description": "A Minecraft mod that adds more attributes to the game.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FCFcFw09/f25e0000aca9f043997af84f44d33099f7c6b8ef.png",
+    "modrinth": {
+      "projectId": "FCFcFw09",
+      "slug": "attributes",
+      "versionId": "gyoJ3TXS",
+      "versionNumber": "0.8.2",
+      "versionType": "release",
+      "datePublished": "2026-03-28T18:06:24.513772Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:13:49.795Z"
+    }
+  },
+  {
+    "id": "durability-tooltip",
+    "name": "Durability Tooltip",
+    "version": "1.2.0-neoforge-mc26.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/durability-tooltip",
+    "description": "Durability Tooltip shows you the durability of an item!",
+    "dependencies": [
+      "SuperMartijn642's Config Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/smUP7V3r/icon.png",
+    "modrinth": {
+      "projectId": "smUP7V3r",
+      "slug": "durability-tooltip",
+      "versionId": "y4hLyMf8",
+      "versionNumber": "1.2.0-neoforge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-09-07T13:56:24.233639Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "LN9BxssP",
+          "versionId": null,
+          "type": "required",
+          "name": "SuperMartijn642's Config Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:18:53.327Z"
+    }
+  },
+  {
+    "id": "universal-sawmill",
+    "name": "Sawmill",
+    "version": "26.1.2-1.9.1",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/universal-sawmill",
+    "description": "Ultimate Woodcutter. As it was intented, compatible with any mod, automatically. Includes Carpenter Villager",
+    "dependencies": [
+      "Moonlight Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/WRaRZdTd/788d1346e7cda9cfca2233473cfa817593d5464f_96.webp",
+    "modrinth": {
+      "projectId": "WRaRZdTd",
+      "slug": "universal-sawmill",
+      "versionId": "gSK6WEYe",
+      "versionNumber": "26.1.2-1.9.1",
+      "versionType": "release",
+      "datePublished": "2026-09-06T19:33:40.320562Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "twkfQtEc",
+          "versionId": null,
+          "type": "required",
+          "name": "Moonlight Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:19:38.609Z"
+    }
+  },
+  {
+    "id": "baubley-heart-canisters",
+    "name": "Baubley Heart Canisters",
+    "version": "26.1.2-1.7.3",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/baubley-heart-canisters",
+    "description": "This mod adds back the old Tinkers' Construct heart canisters in a new and reimagined way to become Baubles/Curios!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/fPdy2fCM/6c97109810cecbba58f6e2e81bb785d32a54f433_96.webp",
+    "modrinth": {
+      "projectId": "fPdy2fCM",
+      "slug": "baubley-heart-canisters",
+      "versionId": "h2Ip8yE1",
+      "versionNumber": "26.1.2-1.7.3",
+      "versionType": "release",
+      "datePublished": "2026-04-27T20:15:38.989467Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:22:08.284Z"
+    }
+  },
+  {
+    "id": "trade-cycling",
+    "name": "Trade Cycling",
+    "version": "neoforge-1.0.23+26.1.2",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/trade-cycling",
+    "description": "Refresh villager trades without needing to break workstations",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/qpPoAL6m/91dcbfba1d821a7a9248ec8191359d842332cc97.png",
+    "modrinth": {
+      "projectId": "qpPoAL6m",
+      "slug": "trade-cycling",
+      "versionId": "nPBBou4F",
+      "versionNumber": "neoforge-1.0.23+26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-13T09:49:00.355915Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AhllI99f",
+          "versionId": null,
+          "type": "optional",
+          "name": "Visible Traders"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:25:18.171Z"
+    }
+  },
+  {
+    "id": "visible-traders",
+    "name": "Visible Traders",
+    "version": "2.4.0",
+    "category": "Economy",
+    "tags": [
+      "Game Mechanics",
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/visible-traders",
+    "description": "A mod that allows the player to view locked villager trades",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/AhllI99f/dba9c9307ecf529c142fbf213a865a10888246e0_96.webp",
+    "modrinth": {
+      "projectId": "AhllI99f",
+      "slug": "visible-traders",
+      "versionId": "FJtHZc7C",
+      "versionNumber": "2.4.0",
+      "versionType": "release",
+      "datePublished": "2026-06-17T13:08:29.372611Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:25:25.040Z"
+    }
+  },
+  {
+    "id": "ecologics",
+    "name": "Ecologics",
+    "version": "2.5.5-NeoFab",
+    "category": "Food",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ecologics",
+    "description": "Simple vanilla biome updates, with fun mobs, blocks, and more!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/NCKpPR0Z/1f03abae2fdfb2bbab34e8bd26b41b5bca68488e_96.webp",
+    "modrinth": {
+      "projectId": "NCKpPR0Z",
+      "slug": "ecologics",
+      "versionId": "lG4Nfk6a",
+      "versionNumber": "2.5.5-NeoFab",
+      "versionType": "release",
+      "datePublished": "2026-10-13T13:27:34.356321Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:28:33.195Z"
+    }
+  },
+  {
+    "id": "dis-enchanting-table",
+    "name": "Dis-Enchanting Table",
+    "version": "6.0.2",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/dis-enchanting-table",
+    "description": "Recover enchantments from enchanted weapons or books!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9BgYgXE4/27f2f5bbbb37a9e517b1d8beefba4d4dad95b0b2_96.webp",
+    "modrinth": {
+      "projectId": "9BgYgXE4",
+      "slug": "dis-enchanting-table",
+      "versionId": "PHWzc288",
+      "versionNumber": "6.0.2",
+      "versionType": "release",
+      "datePublished": "2026-07-14T10:26:00.764192Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:29:11.024Z"
+    }
+  },
+  {
+    "id": "combat-roll",
+    "name": "Combat Roll",
+    "version": "3.0.1+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Library"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/combat-roll",
+    "description": "🧶 Adds combat roll ability, with related attributes and enchantments.",
+    "dependencies": [
+      "Cloth Config API",
+      "Player Animation Library"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/wGKYL7st/0958df960eca663066fa1cd821e75ff9c44ab716_96.webp",
+    "modrinth": {
+      "projectId": "wGKYL7st",
+      "slug": "combat-roll",
+      "versionId": "st64SArf",
+      "versionNumber": "3.0.1+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-07-18T08:24:09.094450Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "required",
+          "name": "Cloth Config API"
+        },
+        {
+          "projectId": "ha1mEyJS",
+          "versionId": null,
+          "type": "required",
+          "name": "Player Animation Library"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:29:37.061Z"
+    }
+  },
+  {
+    "id": "immersive-melodies",
+    "name": "Immersive Melodies",
+    "version": "0.8.0+26.1.2",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Social"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/immersive-melodies",
+    "description": "Play custom melodies on various instruments and annoy your friends!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/TaSmHw8V/0a6a64c671e15a657e18d623f2912a9b0a058809_96.webp",
+    "modrinth": {
+      "projectId": "TaSmHw8V",
+      "slug": "immersive-melodies",
+      "versionId": "i6WklMUt",
+      "versionNumber": "0.8.0+26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-09T06:55:28.908679Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:31:56.560Z"
+    }
+  },
+  {
+    "id": "friends-and-foes-forge",
+    "name": "Friends&Foes (Forge/NeoForge)",
+    "version": "neoforge-5.0.2+mc26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Mobs",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/friends-and-foes-forge",
+    "description": "Adds outvoted and forgotten mobs from the mob vote, expanding on their original concepts and adding new vanilla-like features. The mod includes: Copper Golem, Crab, Glare, Moobloom, Iceologer, Rascal, Tuff Golem, Wildfire, Illusioner, Zombie Horse",
+    "dependencies": [
+      "Resourceful Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/BOCJKD49/0d5db692d86ca2f99935ebc01123d4c55a714122_96.webp",
+    "modrinth": {
+      "projectId": "BOCJKD49",
+      "slug": "friends-and-foes-forge",
+      "versionId": "N8tX8i7P",
+      "versionNumber": "neoforge-5.0.2+mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-09T15:27:07.884713Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        },
+        {
+          "projectId": "G1hIVOrD",
+          "versionId": null,
+          "type": "required",
+          "name": "Resourceful Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:37:15.828Z"
+    }
+  },
+  {
+    "id": "resourceful-lib",
+    "name": "Resourceful Lib",
+    "version": "4.0.1",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/resourceful-lib",
+    "description": "Resourceful Lib",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/G1hIVOrD/52130f41d05162ce6d7d1832a47d3c238d102632_96.webp",
+    "modrinth": {
+      "projectId": "G1hIVOrD",
+      "slug": "resourceful-lib",
+      "versionId": "B94F6bCN",
+      "versionNumber": "4.0.1",
+      "versionType": "release",
+      "datePublished": "2026-04-14T20:01:40.099460Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:37:26.333Z"
+    }
+  },
+  {
+    "id": "neat",
+    "name": "Neat",
+    "version": "26.1.2-48-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/neat",
+    "description": " Functional minimalistic Unit Frames for the modern Minecrafter ",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Ins7SzzR/a2b99cc9bc355ae461f71dff13f9a6808827d399_96.webp",
+    "modrinth": {
+      "projectId": "Ins7SzzR",
+      "slug": "neat",
+      "versionId": "rGejqbK8",
+      "versionNumber": "26.1.2-48-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-06-19T18:41:04.883741Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:37:49.426Z"
+    }
+  },
+  {
+    "id": "friends-and-foes-beekeeper-hut-forge",
+    "name": "Friends&Foes - Beekeeper Hut (Forge/NeoForge)",
+    "version": "neoforge-3.0.4+mc26.1.2",
+    "category": "Worldgen",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/friends-and-foes-beekeeper-hut-forge",
+    "description": "An addon for the Friends&Foes mod, adding a beekeeper hut structure.",
+    "dependencies": [
+      "Friends&Foes (Forge/NeoForge)"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/K62sN7Sd/91f7325ef5a1a9a1458a8695dde533225b6188fb_96.webp",
+    "modrinth": {
+      "projectId": "K62sN7Sd",
+      "slug": "friends-and-foes-beekeeper-hut-forge",
+      "versionId": "aGEqyf24",
+      "versionNumber": "neoforge-3.0.4+mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-09T12:04:35.379807Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "BOCJKD49",
+          "versionId": null,
+          "type": "required",
+          "name": "Friends&Foes (Forge/NeoForge)"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:40:32.305Z"
+    }
+  },
+  {
+    "id": "villages-and-pillages",
+    "name": "Villages&Pillages",
+    "version": "neoforge-2.0.0+mc26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/villages-and-pillages",
+    "description": "Structure mod that brings an exciting twist to Minecraft by introducing hostile and unfriendly pillages, providing a thrilling contrast to the peaceful villages.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/klXONLDA/7024d0a02747e4bff45849c98776c3c8a2facca6_96.webp",
+    "modrinth": {
+      "projectId": "klXONLDA",
+      "slug": "villages-and-pillages",
+      "versionId": "cSgCb0gE",
+      "versionNumber": "neoforge-2.0.0+mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-01T14:20:45.228167Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:40:48.198Z"
+    }
+  },
+  {
+    "id": "variants-and-ventures",
+    "name": "Variants&Ventures",
+    "version": "neoforge-1.0.28+mc26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Mobs",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/variants-and-ventures",
+    "description": "Adds multiple new mob variants seamlessly integrated into your Minecraft world.",
+    "dependencies": [
+      "Resourceful Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/lNDRiXkY/bd6e91737946cf99c155c94108e98df8248e3078_96.webp",
+    "modrinth": {
+      "projectId": "lNDRiXkY",
+      "slug": "variants-and-ventures",
+      "versionId": "lvR0uepX",
+      "versionNumber": "neoforge-1.0.28+mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-26T16:50:04.058694Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "G1hIVOrD",
+          "versionId": null,
+          "type": "required",
+          "name": "Resourceful Lib"
+        },
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:41:15.049Z"
+    }
+  },
+  {
+    "id": "yacl",
+    "name": "YetAnotherConfigLib (YACL)",
+    "version": "3.9.7+26.1-neoforge",
+    "category": "Library",
+    "tags": [
+      "Management",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yacl",
+    "description": "A builder-based configuration library for Minecraft!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/1eAoo2KR/08c0cd32515e260f4bb20bbc0696510041523f9a_96.webp",
+    "modrinth": {
+      "projectId": "1eAoo2KR",
+      "slug": "yacl",
+      "versionId": "B1mfgQmD",
+      "versionNumber": "3.9.7+26.1-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-20T23:11:39.651667Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:41:25.638Z"
+    }
+  },
+  {
+    "id": "friends-and-foes-flowery-mooblooms-forge",
+    "name": "Friends&Foes - Flowery Mooblooms (Forge/NeoForge)",
+    "version": "neoforge-3.0.3+mc26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Mobs",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/friends-and-foes-flowery-mooblooms-forge",
+    "description": "An addon for the Friends&Foes mod, adding one moobloom variant for each flower.",
+    "dependencies": [
+      "Friends&Foes (Forge/NeoForge)"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/wYtDgIUZ/45609df2bfffd5c2ee794bfb6cd050a76b27ebb2_96.webp",
+    "modrinth": {
+      "projectId": "wYtDgIUZ",
+      "slug": "friends-and-foes-flowery-mooblooms-forge",
+      "versionId": "iIbvdJIH",
+      "versionNumber": "neoforge-3.0.3+mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-05-27T20:50:41.683732Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "BOCJKD49",
+          "versionId": null,
+          "type": "required",
+          "name": "Friends&Foes (Forge/NeoForge)"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:41:44.526Z"
+    }
+  },
+  {
+    "id": "irons-jewelry",
+    "name": "Iron's Gems 'n Jewelry",
+    "version": "26.1.2-2.0.2.1",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/irons-jewelry",
+    "description": "Introducing modular jewelcrafting, featuring gems and jewelry!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/cTagjDuu/86b433beb057a7fa71946d67369d35b99bbf5d4e_96.webp",
+    "modrinth": {
+      "projectId": "cTagjDuu",
+      "slug": "irons-jewelry",
+      "versionId": "H4YV2yG3",
+      "versionNumber": "26.1.2-2.0.2.1",
+      "versionType": "release",
+      "datePublished": "2026-08-17T18:05:24.443518Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:43:31.345Z"
+    }
+  },
+  {
+    "id": "worldedit",
+    "name": "WorldEdit",
+    "version": "7.4.3",
+    "category": "Library",
+    "tags": [
+      "Management",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/worldedit",
+    "description": "A Minecraft Map Editor... that runs in-game!\nWith selections, schematics, copy and paste, brushes, and scripting.\nUse it in creative, or use it temporarily in survival.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/1u6JkXh5/30698991048ced77e60c4e8284007d3782f2e6a3_96.webp",
+    "modrinth": {
+      "projectId": "1u6JkXh5",
+      "slug": "worldedit",
+      "versionId": "gjsLvJfW",
+      "versionNumber": "7.4.3",
+      "versionType": "release",
+      "datePublished": "2026-05-04T11:31:48.820119Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:45:26.278Z"
+    }
+  },
+  {
+    "id": "transmog",
+    "name": "Transmog",
+    "version": "neoforge-1.8.0+26.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/transmog",
+    "description": "Change the appearance of your items without modifying their behavior/stats!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Th33t82F/b8f808327ab556369ce2d6546529cce2ae4779c7.png",
+    "modrinth": {
+      "projectId": "Th33t82F",
+      "slug": "transmog",
+      "versionId": "XARWL6p2",
+      "versionNumber": "neoforge-1.8.0+26.1",
+      "versionType": "release",
+      "datePublished": "2026-05-21T23:01:38.850467Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:46:27.308Z"
+    }
+  },
+  {
+    "id": "sophisticated-storage-in-motion",
+    "name": "Sophisticated Storage in Motion",
+    "version": "26.1.2-0.10.37.378",
+    "category": "Storage",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sophisticated-storage-in-motion",
+    "description": "A Sophisticated Storage add on which allows using storage blocks with minecarts and in the future with other entities",
+    "dependencies": [
+      "Sophisticated Core",
+      "Sophisticated Storage"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/6vtFbyaJ/87bc5544f61f06ddc30dc07c7564647ca5f0f8a8_96.webp",
+    "modrinth": {
+      "projectId": "6vtFbyaJ",
+      "slug": "sophisticated-storage-in-motion",
+      "versionId": "HPci8xXX",
+      "versionNumber": "26.1.2-0.10.37.378",
+      "versionType": "release",
+      "datePublished": "2026-10-13T09:21:14.778160Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nmoqTijg",
+          "versionId": null,
+          "type": "required",
+          "name": "Sophisticated Core"
+        },
+        {
+          "projectId": "hMlaZH8f",
+          "versionId": null,
+          "type": "required",
+          "name": "Sophisticated Storage"
+        },
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:52:07.975Z"
+    }
+  },
+  {
+    "id": "im-fast",
+    "name": "I'm Fast",
+    "version": "1.0.3",
+    "category": "Game Mechanics",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/im-fast",
+    "description": "A mod to remove minecraft moved too quickly! and moved wrongly (speed limits)",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/PaUMOeP0/aa01c08190d68edf4c681e692901dbfba3259964.webp",
+    "modrinth": {
+      "projectId": "PaUMOeP0",
+      "slug": "im-fast",
+      "versionId": "hEVfzyua",
+      "versionNumber": "1.0.3",
+      "versionType": "release",
+      "datePublished": "2026-04-16T20:14:46.807591Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:53:05.356Z"
+    }
+  },
+  {
+    "id": "immersive-armors",
+    "name": "Immersive Armors",
+    "version": "1.8.2+26.1.2",
+    "category": "Equipment",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/immersive-armors",
+    "description": "A lot of unique and vanilla-faithful armor sets.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/eE2Db4YU/94c4471369d8b9aa9674450b83cc245b9d8ffddc_96.webp",
+    "modrinth": {
+      "projectId": "eE2Db4YU",
+      "slug": "immersive-armors",
+      "versionId": "1FTqwOHX",
+      "versionNumber": "1.8.2+26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-07-28T20:11:45.040355Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:53:33.061Z"
+    }
+  },
+  {
+    "id": "inventory-profiles-next",
+    "name": "Inventory Profiles Next",
+    "version": "neoforge-26.1-2.3.8",
+    "category": "Storage",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/inventory-profiles-next",
+    "description": "Take control over your inventory. Sort. Move matching Items. Throw all. Locked slots. Gear sets! And much more.",
+    "dependencies": [
+      "libIPN"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/O7RBXm3n/04cdecd37b4c7409f70d36fcdc85722ebf14aab8_96.webp",
+    "modrinth": {
+      "projectId": "O7RBXm3n",
+      "slug": "inventory-profiles-next",
+      "versionId": "vNg0KMkb",
+      "versionNumber": "neoforge-26.1-2.3.8",
+      "versionType": "release",
+      "datePublished": "2026-09-27T13:31:45.334184Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "onSQdWhM",
+          "versionId": null,
+          "type": "required",
+          "name": "libIPN"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:54:24.711Z"
+    }
+  },
+  {
+    "id": "libipn",
+    "name": "libIPN",
+    "version": "neoforge-26.1.2-6.9.0",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/libipn",
+    "description": "Inventory Profiles Next GUI/Config library",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/onSQdWhM/feb2d62d9f150539bfd2a69d373866b1e643545c_96.webp",
+    "modrinth": {
+      "projectId": "onSQdWhM",
+      "slug": "libipn",
+      "versionId": "bm1OYABy",
+      "versionNumber": "neoforge-26.1.2-6.9.0",
+      "versionType": "release",
+      "datePublished": "2026-09-27T13:10:13.732462Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:54:28.642Z"
+    }
+  },
+  {
+    "id": "silents-gems",
+    "name": "Silent's Gems",
+    "version": "5.1.4",
+    "category": "Decoration",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/silents-gems",
+    "description": "Adds many colorful gemstones and building blocks. Compatible with Silent Gear.",
+    "dependencies": [
+      "Silent Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Y036wakZ/acbf920fd2b81e53986fb53b986afc8ce676e2b7.png",
+    "modrinth": {
+      "projectId": "Y036wakZ",
+      "slug": "silents-gems",
+      "versionId": "GF1jsWHo",
+      "versionNumber": "5.1.4",
+      "versionType": "release",
+      "datePublished": "2026-05-17T14:14:48.833735Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "73mSSnCf",
+          "versionId": null,
+          "type": "optional",
+          "name": "Silent Gear"
+        },
+        {
+          "projectId": "BQhuHQo4",
+          "versionId": null,
+          "type": "required",
+          "name": "Silent Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T20:55:29.438Z"
+    }
+  },
+  {
+    "id": "silent-lib",
+    "name": "Silent Lib",
+    "version": "11.2.0",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/silent-lib",
+    "description": "A library used by some SilentChaos512 mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/BQhuHQo4/0f19e292ab52b54fc3f51bdeb9f43b54721d29c7_96.webp",
+    "modrinth": {
+      "projectId": "BQhuHQo4",
+      "slug": "silent-lib",
+      "versionId": "Rc4eCDXl",
+      "versionNumber": "11.2.0",
+      "versionType": "release",
+      "datePublished": "2026-04-16T17:02:52.592490Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:56:08.292Z"
+    }
+  },
+  {
+    "id": "chimes",
+    "name": "Chimes",
+    "version": "2.1.2",
+    "category": "Decoration",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/chimes",
+    "description": "Wind chimes that create ambient noises for your base.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/mjGOuygR/aae69f12e1927aa477b83c133147d4a979eec5ca_96.webp",
+    "modrinth": {
+      "projectId": "mjGOuygR",
+      "slug": "chimes",
+      "versionId": "OHJZldZs",
+      "versionNumber": "2.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-03T00:19:32.934927Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T20:59:09.342Z"
+    }
+  },
+  {
+    "id": "keybindspurger",
+    "name": "KeybindsPurger",
+    "version": "1.4.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/keybindspurger",
+    "description": "Unset all keybinds for a clean slate",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/iaH7LvLy/340b862dde40cce7d78bd6ede28d19bca68eda62_96.webp",
+    "modrinth": {
+      "projectId": "iaH7LvLy",
+      "slug": "keybindspurger",
+      "versionId": "mUGIE5g2",
+      "versionNumber": "1.4.0",
+      "versionType": "release",
+      "datePublished": "2026-07-14T18:24:51.167559Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:00:10.008Z"
+    }
+  },
+  {
+    "id": "bl4cks-sit",
+    "name": "Sit",
+    "version": "v1.5.2",
+    "category": "Game Mechanics",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/bl4cks-sit",
+    "description": "Allows you to sit on slabs and stairs.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/VKXzIykF/053a3ab20c35ea80dd4de8378202bf37f8b0d08d_96.webp",
+    "modrinth": {
+      "projectId": "VKXzIykF",
+      "slug": "bl4cks-sit",
+      "versionId": "eZTSuFZ9",
+      "versionNumber": "v1.5.2",
+      "versionType": "release",
+      "datePublished": "2026-04-24T16:29:15.592503Z",
+      "gameVersions": [
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:00:38.969Z"
+    }
+  },
+  {
+    "id": "immersive-paintings",
+    "name": "Immersive Paintings",
+    "version": "0.7.9+26.1.2",
+    "category": "Decoration",
+    "tags": [
+      "Social"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/immersive-paintings",
+    "description": "Drag and drop, pixelate and hang up beautiful art. On servers too.",
+    "dependencies": [
+      "Fzzy Config"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/6txNkua3/8c7abdd0a185dace29d4c4a0476f2d8af29475a9_96.webp",
+    "modrinth": {
+      "projectId": "6txNkua3",
+      "slug": "immersive-paintings",
+      "versionId": "uFeTHh2F",
+      "versionNumber": "0.7.9+26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-13T10:56:11.426422Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "hYykXjDp",
+          "versionId": null,
+          "type": "required",
+          "name": "Fzzy Config"
+        },
+        {
+          "projectId": "mOgUt4GM",
+          "versionId": null,
+          "type": "optional",
+          "name": "Mod Menu"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:01:16.451Z"
+    }
+  },
+  {
+    "id": "fzzy-config",
+    "name": "Fzzy Config",
+    "version": "0.7.7+26.1+neoforge",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fzzy-config",
+    "description": "Config API with automatic GUIs, powerful validation options, server-client sync, and more!",
+    "dependencies": [
+      "Kotlin for Forge"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/hYykXjDp/11f469b1bf1f201a95c2e3ddc09ca47d85c3ed53.png",
+    "modrinth": {
+      "projectId": "hYykXjDp",
+      "slug": "fzzy-config",
+      "versionId": "HXARGQ9W",
+      "versionNumber": "0.7.7+26.1+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-15T01:28:55.352503Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "ordsPcFz",
+          "versionId": null,
+          "type": "required",
+          "name": "Kotlin for Forge"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:01:44.569Z"
+    }
+  },
+  {
+    "id": "kotlin-for-forge",
+    "name": "Kotlin for Forge",
+    "version": "6.4.0",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/kotlin-for-forge",
+    "description": "Adds a Kotlin language loader and provides some optional utilities.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ordsPcFz/064b8f129b776eb303f7f8b1a610e21d153c74b9_96.webp",
+    "modrinth": {
+      "projectId": "ordsPcFz",
+      "slug": "kotlin-for-forge",
+      "versionId": "9fo5CJQk",
+      "versionNumber": "6.4.0",
+      "versionType": "release",
+      "datePublished": "2026-10-10T22:33:36.687267Z",
+      "gameVersions": [
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:02:13.566Z"
+    }
+  },
+  {
+    "id": "item-borders",
+    "name": "Item Borders",
+    "version": "1.3.1",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/item-borders",
+    "description": "Add colored borders to inventory slots to make your rare items stand out!",
+    "dependencies": [
+      "Iceberg",
+      "Prism"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/b1fMg6sH/8d57c0d614101a1ebaa9c6cebb90bd1940fb1083.png",
+    "modrinth": {
+      "projectId": "b1fMg6sH",
+      "slug": "item-borders",
+      "versionId": "TSwH97aN",
+      "versionNumber": "1.3.1",
+      "versionType": "release",
+      "datePublished": "2026-06-23T19:53:48.022842Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "5faXoLqX",
+          "versionId": null,
+          "type": "required",
+          "name": "Iceberg"
+        },
+        {
+          "projectId": "1OE8wbN0",
+          "versionId": null,
+          "type": "required",
+          "name": "Prism"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:03:47.727Z"
+    }
+  },
+  {
+    "id": "the-one-probe",
+    "name": "The One Probe",
+    "version": "26.1.2_neo-14.0.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/the-one-probe",
+    "description": "TOP, a WAILA alternative that shows information about what you're looking at",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Eyw0UxEx/dd47ea7f2da6c76cb4a4bbec513bb83beb66c65f_96.webp",
+    "modrinth": {
+      "projectId": "Eyw0UxEx",
+      "slug": "the-one-probe",
+      "versionId": "NOrwYJkt",
+      "versionNumber": "26.1.2_neo-14.0.0",
+      "versionType": "release",
+      "datePublished": "2026-09-03T05:08:56.987361Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:05:19.998Z"
+    }
+  },
+  {
+    "id": "tiny-skeletons",
+    "name": "Tiny Skeletons",
+    "version": "26.1.1",
+    "category": "Adventure",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/tiny-skeletons",
+    "description": "Teeny, tiny skeletons, send shivers down your spine...",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/A2xcMSUn/97c81f9c59f750725ad2177c74fa1d04f703287b_96.webp",
+    "modrinth": {
+      "projectId": "A2xcMSUn",
+      "slug": "tiny-skeletons",
+      "versionId": "Mi8CjNTD",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-08-20T06:49:49.810553Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:09:19.245Z"
+    }
+  },
+  {
+    "id": "starcatcher",
+    "name": "Starcatcher",
+    "version": "3.3.10-NEOFORGE-26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Minigame"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/starcatcher",
+    "description": "A fishing mod with lots of fishes and secrets!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/h2jXvxNR/71c75fa1fb2fbd0c7d3ed6e17d6b8b96bb2810b2.png",
+    "modrinth": {
+      "projectId": "h2jXvxNR",
+      "slug": "starcatcher",
+      "versionId": "i4CC5uZW",
+      "versionNumber": "3.3.10-NEOFORGE-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-16T07:01:54.043243Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:13:32.083Z"
+    }
+  },
+  {
+    "id": "playerrevive",
+    "name": "PlayerRevive",
+    "version": "2.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/playerrevive",
+    "description": "Revive your friends.",
+    "dependencies": [
+      "CreativeCore"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ABIMzABM/90095b71739ffdb88626df50c4a9ecc937488f6b_96.webp",
+    "modrinth": {
+      "projectId": "ABIMzABM",
+      "slug": "playerrevive",
+      "versionId": "2xdBrH21",
+      "versionNumber": "2.1.2",
+      "versionType": "release",
+      "datePublished": "2026-05-08T12:53:08.489753Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "OsZiaDHq",
+          "versionId": null,
+          "type": "required",
+          "name": "CreativeCore"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:15:41.579Z"
+    }
+  },
+  {
+    "id": "creativecore",
+    "name": "CreativeCore",
+    "version": "2.14.16",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/creativecore",
+    "description": "A core mod",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/OsZiaDHq/4953ecd3c0c8b185b2a56d64cdb104b03f3e5038_96.webp",
+    "modrinth": {
+      "projectId": "OsZiaDHq",
+      "slug": "creativecore",
+      "versionId": "OqoUKynf",
+      "versionNumber": "2.14.16",
+      "versionType": "release",
+      "datePublished": "2026-05-22T11:49:29.475616Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:15:44.706Z"
+    }
+  },
+  {
+    "id": "animal-feeding-trough",
+    "name": "Animal Feeding Trough",
+    "version": "1.2.1+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Mobs",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal_feeding_trough",
+    "description": "Mobs self feed with feeding trough",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/bRFWnJ87/1914b673b80b2c6ff8d99e3f047ab3275ad30d2a_96.webp",
+    "modrinth": {
+      "projectId": "bRFWnJ87",
+      "slug": "animal_feeding_trough",
+      "versionId": "CNejDxr9",
+      "versionNumber": "1.2.1+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-05-23T21:58:28.960462Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:17:31.716Z"
+    }
+  },
+  {
+    "id": "animalpens",
+    "name": "Animal Pens",
+    "version": "2.5.1-26.1",
+    "category": "Decoration",
+    "tags": [
+      "Optimization",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animalpens",
+    "description": "Reduce lag and keep your animals neatly stored while maintaining full interactivity!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/K5CAV4wi/e99e9c12231e65cb5403766aae1f9b16eb076c1e_96.webp",
+    "modrinth": {
+      "projectId": "K5CAV4wi",
+      "slug": "animalpens",
+      "versionId": "wWFUTO2H",
+      "versionNumber": "2.5.1-26.1",
+      "versionType": "release",
+      "datePublished": "2026-10-06T14:55:36.615765Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "optional",
+          "name": "Cloth Config API"
+        },
+        {
+          "projectId": "nU0bVIaL",
+          "versionId": null,
+          "type": "optional",
+          "name": "Patchouli"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:17:46.427Z"
+    }
+  },
+  {
+    "id": "nbt-autocomplete",
+    "name": "NBT Autocomplete",
+    "version": "2.1-neoforge-26.1.2",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/nbt-autocomplete",
+    "description": "Adds suggestions for NBT tags in commands",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/UR0ocuEt/3114a4cea537fed3e2d86156b555a5b3d7bdd5ca.png",
+    "modrinth": {
+      "projectId": "UR0ocuEt",
+      "slug": "nbt-autocomplete",
+      "versionId": "yQKDfflh",
+      "versionNumber": "2.1-neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-20T21:27:34.737848Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:18:06.849Z"
+    }
+  },
+  {
+    "id": "achievements-optimizer",
+    "name": "Achievements Optimizer",
+    "version": "2.1.2",
+    "category": "Optimization",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/achievements-optimizer",
+    "description": "Improved achievement performance",
+    "dependencies": [
+      "Architectury API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/SvXrP8rT/2fdb79fcf873f3962a89943c8d7ac57ecc05a7cb.png",
+    "modrinth": {
+      "projectId": "SvXrP8rT",
+      "slug": "achievements-optimizer",
+      "versionId": "hK5jDfqJ",
+      "versionNumber": "2.1.2",
+      "versionType": "release",
+      "datePublished": "2026-06-08T13:55:13.908019Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "lhGA9TYQ",
+          "versionId": null,
+          "type": "required",
+          "name": "Architectury API"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:18:30.213Z"
+    }
+  },
+  {
+    "id": "inventory-totem",
+    "name": "Inventory Totem",
+    "version": "26.1.2-3.4-fabric+forge+neo",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/inventory-totem",
+    "description": "🎴 Makes the totem of undying effect work when it's anywhere in the inventory.",
+    "dependencies": [
+      "Collective"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/yQj7xqEM/icon.png",
+    "modrinth": {
+      "projectId": "yQj7xqEM",
+      "slug": "inventory-totem",
+      "versionId": "YmqR8FpG",
+      "versionNumber": "26.1.2-3.4-fabric+forge+neo",
+      "versionType": "release",
+      "datePublished": "2026-04-09T23:22:01.054627Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [
+        {
+          "projectId": "e0M1UDsY",
+          "versionId": null,
+          "type": "required",
+          "name": "Collective"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:19:25.437Z"
+    }
+  },
+  {
+    "id": "adorable-eggs",
+    "name": "Adorable Eggs",
+    "version": "1.0.3",
+    "category": "Decoration",
+    "tags": [
+      "Game Mechanics",
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/adorable-eggs",
+    "description": "Play with the new Minecraft 1.21.5 egg textures in previous versions, and get new placeable plushies!",
+    "dependencies": [
+      "Cloth Config API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/v1NZJevY/3ab3c9c471c0b897c89540bdb28be12e862ab084_96.webp",
+    "modrinth": {
+      "projectId": "v1NZJevY",
+      "slug": "adorable-eggs",
+      "versionId": "IOfmZale",
+      "versionNumber": "1.0.3",
+      "versionType": "release",
+      "datePublished": "2026-05-16T09:17:34.599834Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "required",
+          "name": "Cloth Config API"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:19:49.691Z"
+    }
+  },
+  {
+    "id": "golden-foods",
+    "name": "Golden Foods!",
+    "version": "2.4.0",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Food"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/golden-foods",
+    "description": "In the style of Golden Apples and Enchanted Golden Apples, this mod incorporates different gold-dipped vanilla foods, as well as enchanted gold versions.",
+    "dependencies": [
+      "MonoLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/zUg53pQP/1053b6a62d2a28057b7764971bde356f515e6f56_96.webp",
+    "modrinth": {
+      "projectId": "zUg53pQP",
+      "slug": "golden-foods",
+      "versionId": "l58V0aH1",
+      "versionNumber": "2.4.0",
+      "versionType": "release",
+      "datePublished": "2026-08-23T20:27:21.425986Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9leXt4A5",
+          "versionId": null,
+          "type": "required",
+          "name": "MonoLib"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:20:20.931Z"
+    }
+  },
+  {
+    "id": "monolib",
+    "name": "MonoLib",
+    "version": "neoforge-26.1.2-4.1.2",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/monolib",
+    "description": "A non-invasive library mod for Fabric, Forge, and NeoForge.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9leXt4A5/66e274ada03733e74a2a7d7fede36e6523ba3da8_96.webp",
+    "modrinth": {
+      "projectId": "9leXt4A5",
+      "slug": "monolib",
+      "versionId": "ebNCmuNN",
+      "versionNumber": "neoforge-26.1.2-4.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-03T19:17:26.207086Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:20:24.042Z"
+    }
+  },
+  {
+    "id": "loading-backgrounds",
+    "name": "Loading Backgrounds",
+    "version": "1.8.1",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Management"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/loading-backgrounds",
+    "description": "With this mod you will be able to customize the background of the loading screens of the Minecraft games, placing any type of customizable image.",
+    "dependencies": [],
+    "notes": "ทำภาพพื้นหลัง 1920×1080 (16:9) สัก 3–5 ภาพ แล้วใส่ชื่อ Modpack หรือภาพโลกแฟนตาซีลงไป",
+    "imageUrl": "https://cdn.modrinth.com/data/dH40biZd/a13d8f9cb6a18d0a021ab7dec0d20b50477adedb_96.webp",
+    "modrinth": {
+      "projectId": "dH40biZd",
+      "slug": "loading-backgrounds",
+      "versionId": "cRFwz1oS",
+      "versionNumber": "1.8.1",
+      "versionType": "release",
+      "datePublished": "2026-05-11T11:15:19.052196Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:23:48.042Z"
+    }
+  },
+  {
+    "id": "more-beautiful-torches",
+    "name": "More Beautiful Torches",
+    "version": "3.1.1",
+    "category": "Decoration",
+    "tags": [
+      "Technology",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/more-beautiful-torches",
+    "description": "The goal of More Beautiful Torches is to increase the decorative possibilities of the games, and for this, it currently adds more than 900 variants of torches.",
+    "dependencies": [
+      "MonoLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/C341qvJ5/66dac66d0ce72f80b05e60eeb534602738a803ce_96.webp",
+    "modrinth": {
+      "projectId": "C341qvJ5",
+      "slug": "more-beautiful-torches",
+      "versionId": "dGv4fEow",
+      "versionNumber": "3.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-27T09:56:08.594988Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9leXt4A5",
+          "versionId": null,
+          "type": "required",
+          "name": "MonoLib"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:26:59.126Z"
+    }
+  },
+  {
+    "id": "new-slab-variants",
+    "name": "New Slab Variants",
+    "version": "3.1.0",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/new-slab-variants",
+    "description": "Shouldn't every block have a slab? From now on, players will have more than 200 new slabs, with textures similar to the game's vanilla blocks!",
+    "dependencies": [
+      "MonoLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ns0BvMIG/b960c40390fbb57d403af185e05d358bd38a96f5_96.webp",
+    "modrinth": {
+      "projectId": "ns0BvMIG",
+      "slug": "new-slab-variants",
+      "versionId": "ZkYqRXxd",
+      "versionNumber": "3.1.0",
+      "versionType": "release",
+      "datePublished": "2026-06-08T14:33:28.217750Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9leXt4A5",
+          "versionId": null,
+          "type": "required",
+          "name": "MonoLib"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:27:15.062Z"
+    }
+  },
+  {
+    "id": "new-shield-variants",
+    "name": "New Shield Variants",
+    "version": "2.2.0",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/new-shield-variants",
+    "description": "This mod adds new variants to shields, created from a wide range of materials! Obviously, they get stronger the more expensive the shield is.",
+    "dependencies": [
+      "MonoLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/w5Fni7I5/95805c6346a1b9065e54eef2ab2f6316dc7a71b1_96.webp",
+    "modrinth": {
+      "projectId": "w5Fni7I5",
+      "slug": "new-shield-variants",
+      "versionId": "9ZVQQt3a",
+      "versionNumber": "2.2.0",
+      "versionType": "release",
+      "datePublished": "2026-06-25T18:28:33.585830Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9leXt4A5",
+          "versionId": null,
+          "type": "required",
+          "name": "MonoLib"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:27:30.082Z"
+    }
+  },
+  {
+    "id": "healing-campfire",
+    "name": "Healing Campfire",
+    "version": "26.1.2-6.2-fabric+forge+neo",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/healing-campfire",
+    "description": "🔥🩹 Creates an area around the (soul) campfire where players and passive mobs receive regeneration.",
+    "dependencies": [
+      "Collective"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kOuPUitF/b85e2aa910202cffc6a5b9569dbd578480decad8_96.webp",
+    "modrinth": {
+      "projectId": "kOuPUitF",
+      "slug": "healing-campfire",
+      "versionId": "Gor9X15r",
+      "versionNumber": "26.1.2-6.2-fabric+forge+neo",
+      "versionType": "release",
+      "datePublished": "2026-04-09T23:31:47.937255Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [
+        {
+          "projectId": "e0M1UDsY",
+          "versionId": null,
+          "type": "required",
+          "name": "Collective"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:27:45.284Z"
+    }
+  },
+  {
+    "id": "inventory-particles",
+    "name": "Inventory Particles",
+    "version": "3.2.0+26.1+neoforge",
+    "category": "Cursed",
+    "tags": [
+      "Decoration",
+      "Game Mechanics"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/inventory-particles",
+    "description": "Beautiful particles for your inventory items! Make your inventory more alive and dynamic! \n✨ Now with modded items support! ✨",
+    "dependencies": [
+      "MossyLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XYnKrsxH/e6973926d0f896e2bf7df8d69a7e53e78502606f_96.webp",
+    "modrinth": {
+      "projectId": "XYnKrsxH",
+      "slug": "inventory-particles",
+      "versionId": "PnKFrhm5",
+      "versionNumber": "3.2.0+26.1+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-21T12:04:02.387664Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "PLAGcSFJ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Particle Effects"
+        },
+        {
+          "projectId": "FCzmUKBr",
+          "versionId": null,
+          "type": "optional",
+          "name": "Inventory Interactions"
+        },
+        {
+          "projectId": "ffLDUGbm",
+          "versionId": null,
+          "type": "required",
+          "name": "MossyLib"
+        },
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:28:12.188Z"
+    }
+  },
+  {
+    "id": "mossylib",
+    "name": "MossyLib",
+    "version": "1.6.0+26.1+neoforge",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mossylib",
+    "description": "Library with basic utilities for Mossy projects.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ffLDUGbm/1787470c1ca81b2d0e0b3a9370d6f039d4f13207_96.webp",
+    "modrinth": {
+      "projectId": "ffLDUGbm",
+      "slug": "mossylib",
+      "versionId": "da72hUYm",
+      "versionNumber": "1.6.0+26.1+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-21T11:18:52.592761Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:28:27.163Z"
+    }
+  },
+  {
+    "id": "inventory-interactions",
+    "name": "Inventory Interactions",
+    "version": "2.2.0+26.1+neoforge",
+    "category": "Cursed",
+    "tags": [
+      "Game Mechanics",
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/inventory-interactions",
+    "description": "Inventory Particles Add-on which adds a lot of new item interactions! For example, physics!",
+    "dependencies": [
+      "MossyLib",
+      "Inventory Particles"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FCzmUKBr/589027e6f84620dbc7c969edad54793b1c19c050_96.webp",
+    "modrinth": {
+      "projectId": "FCzmUKBr",
+      "slug": "inventory-interactions",
+      "versionId": "8Jv0yIp9",
+      "versionNumber": "2.2.0+26.1+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-21T15:00:11.861968Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        },
+        {
+          "projectId": "ffLDUGbm",
+          "versionId": null,
+          "type": "required",
+          "name": "MossyLib"
+        },
+        {
+          "projectId": "XYnKrsxH",
+          "versionId": null,
+          "type": "required",
+          "name": "Inventory Particles"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:28:27.163Z"
+    }
+  },
+  {
+    "id": "particle-effects",
+    "name": "Particle Effects",
+    "version": "1.6.0+26.1+neoforge",
+    "category": "Decoration",
+    "tags": [
+      "Game Mechanics",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/particle-effects",
+    "description": "Visual Mod which adds unique textured particles for every effect in vanilla Minecraft!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/PLAGcSFJ/a1c206381f51a0fb2bf5e5e38bb850392b31141b_96.webp",
+    "modrinth": {
+      "projectId": "PLAGcSFJ",
+      "slug": "particle-effects",
+      "versionId": "keuWiYBb",
+      "versionNumber": "1.6.0+26.1+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-22T17:25:57.523235Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "1eAoo2KR",
+          "versionId": null,
+          "type": "optional",
+          "name": "YetAnotherConfigLib (YACL)"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:28:27.163Z"
+    }
+  },
+  {
+    "id": "leons-spooky-paintings",
+    "name": "Leon's Spooky Paintings",
+    "version": "1.0.0",
+    "category": "Adventure",
+    "tags": [
+      "Decoration"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/leons-spooky-paintings",
+    "description": "Adds 27 new spooky paintings",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/zO2AAKf6/627de7501c6d4e3a6e721cd18c551986aa08f1dd_96.webp",
+    "modrinth": {
+      "projectId": "zO2AAKf6",
+      "slug": "leons-spooky-paintings",
+      "versionId": "56s0IMhP",
+      "versionNumber": "1.0.0",
+      "versionType": "release",
+      "datePublished": "2026-07-06T01:01:45.570446Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T21:35:18.168Z"
+    }
+  },
+  {
+    "id": "default-skill-trees",
+    "name": "Default Skill Trees",
+    "version": "1.1",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/default-skill-trees",
+    "description": "The default skill trees for Pufferfish's Skills mod.",
+    "dependencies": [
+      "Pufferfish's Attributes",
+      "Pufferfish's Skills"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/4w7YR25f/36a28d1795e27541342e7e85b90d12c1943b1caa.png",
+    "modrinth": {
+      "projectId": "4w7YR25f",
+      "slug": "default-skill-trees",
+      "versionId": "qq3rD8sL",
+      "versionNumber": "1.1",
+      "versionType": "release",
+      "datePublished": "2025-12-05T17:26:46.160893Z",
+      "gameVersions": [
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "FCFcFw09",
+          "versionId": null,
+          "type": "required",
+          "name": "Pufferfish's Attributes"
+        },
+        {
+          "projectId": "hqQqvaa4",
+          "versionId": null,
+          "type": "required",
+          "name": "Pufferfish's Skills"
+        }
+      ],
+      "syncedAt": "2026-10-17T21:36:14.689Z"
+    }
   }
 ]
