@@ -3170,3 +3170,23 @@ main:focus {
     flex: 1 1 auto;
   }
 }
+
+/* Compatibility: verification source and per-check results */
+.compat-checks {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+.compat-source {
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--text-muted);
+}
+.compat-checks ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

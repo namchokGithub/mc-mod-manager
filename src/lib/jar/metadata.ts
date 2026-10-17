@@ -28,6 +28,8 @@ export type JarMetadata = {
   homepage?: string;
   side: "client" | "server" | "both" | null;
   loaders: JarLoader[];
+  /** True when the loader was guessed (plain mods.toml without a forge/neoforge dependency). */
+  loadersInferred?: boolean;
   minecraftRange?: string;
   dependencies: JarDependency[];
   warnings: string[];
@@ -298,9 +300,10 @@ export function parseModsToml(
     loaders.push("neoforge");
   if (all.some((dependency) => dependency.modId === "forge"))
     loaders.push("forge");
+  const loadersInferred = !loaders.length && format === "mods.toml";
   if (!loaders.length) {
     loaders.push(format === "neoforge.mods.toml" ? "neoforge" : "forge");
-    if (format === "mods.toml")
+    if (loadersInferred)
       warnings.push(
         "The loader was inferred from mods.toml; NeoForge 1.20.1 mods use the same file.",
       );
@@ -315,6 +318,7 @@ export function parseModsToml(
     homepage: httpUrl(mod.displayURL) ?? httpUrl(doc.displayURL),
     side: null,
     loaders,
+    ...(loadersInferred && { loadersInferred }),
     ...splitPlatform(all),
     warnings,
   };
@@ -421,6 +425,10 @@ export async function parseJar(
     fileName,
     readable: true,
     loaders,
+    // Any guessed loader in a multi-loader JAR makes the whole loader list a guess.
+    ...(results.some((result) => result.loadersInferred) && {
+      loadersInferred: true,
+    }),
     warnings,
   };
   if (!metadata.version) {

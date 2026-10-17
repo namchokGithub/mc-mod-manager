@@ -84,6 +84,33 @@ export const modSchema = z.object({
         .regex(/^[0-9a-f]{40}$/)
         .optional(),
       modId: z.string().optional(),
+      // Metadata read from the JAR, kept so compatibility can be checked without the file.
+      format: z
+        .enum([
+          "fabric.mod.json",
+          "quilt.mod.json",
+          "neoforge.mods.toml",
+          "mods.toml",
+          "filename",
+        ])
+        .optional(),
+      loaders: z.array(z.string()).optional(),
+      loadersInferred: z.boolean().optional(),
+      minecraftRange: z.string().optional(),
+      dependencies: z
+        .array(
+          z.object({
+            modId: z.string().trim().min(1),
+            kind: z.enum([
+              "required",
+              "optional",
+              "incompatible",
+              "discouraged",
+            ]),
+            versionRange: z.string().optional(),
+          }),
+        )
+        .optional(),
     })
     .optional(),
 });

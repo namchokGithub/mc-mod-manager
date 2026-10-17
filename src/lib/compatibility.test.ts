@@ -111,7 +111,7 @@ describe("missing metadata", () => {
     const result = check([mod("manual")]).get("manual")!;
     expect(result).toMatchObject({ status: "unknown", source: "none" });
     expect(result.reasons[0]?.message).toContain(
-      "without Modrinth version metadata",
+      "without Modrinth or JAR metadata",
     );
   });
 
@@ -298,5 +298,198 @@ describe("schema backward compatibility", () => {
         "mods",
       ),
     ).toThrow();
+  });
+});
+
+describe("local JAR fallback", () => {
+  const neoPack: Modpack = {
+    ...pack,
+    minecraftVersion: "26.1.2",
+    modloader: "NeoForge",
+  };
+  const jarMod = (
+    file: NonNullable<Mod["file"]>,
+    id = "jarmod",
+    extra: Partial<Mod> = {},
+  ) => mod(id, undefined, { source: "CurseForge", file, ...extra });
+  const neoforgeJar: NonNullable<Mod["file"]> = {
+    name: "jarmod.jar",
+    modId: "jarmod",
+    format: "neoforge.mods.toml",
+    loaders: ["neoforge"],
+    minecraftRange: "[26.1,26.2)",
+  };
+
+  it("verifies a mod that is not on Modrinth from its JAR metadata", () => {
+    expect(check([jarMod(neoforgeJar)], neoPack).get("jarmod")).toMatchObject({
+      status: "compatible",
+      verification: "jar",
+      checks: { minecraft: "pass", loader: "pass", dependencies: "pass" },
+    });
+  });
+
+  it("flags a Minecraft range or loader the JAR declares against the pack", () => {
+    const wrongVersion = check(
+      [jarMod({ ...neoforgeJar, minecraftRange: "[1.20.1,1.21)" })],
+      neoPack,
+    ).get("jarmod")!;
+    expect(wrongVersion).toMatchObject({
+      status: "incompatible",
+      checks: { minecraft: "fail" },
+    });
+    const fabric = check(
+      [
+        jarMod({
+          ...neoforgeJar,
+          format: "fabric.mod.json",
+          loaders: ["fabric"],
+          minecraftRange: "~26.1",
+        }),
+      ],
+      neoPack,
+    ).get("jarmod")!;
+    expect(fabric.checks).toEqual({
+      minecraft: "pass",
+      loader: "fail",
+      dependencies: "pass",
+    });
+  });
+
+  it("stays unknown when the JAR does not declare enough", () => {
+    const noRange = check(
+      [jarMod({ ...neoforgeJar, minecraftRange: undefined })],
+      neoPack,
+    ).get("jarmod")!;
+    expect(noRange).toMatchObject({
+      status: "unknown",
+      checks: { minecraft: "unknown", loader: "pass", dependencies: "pass" },
+    });
+    expect(noRange.reasons[0]?.message).toContain("does not declare");
+  });
+
+  it("does not trust a loader guessed from a plain mods.toml", () => {
+    const guessed = check(
+      [
+        jarMod({
+          ...neoforgeJar,
+          format: "mods.toml",
+          loaders: ["forge"],
+          loadersInferred: true,
+        }),
+      ],
+      neoPack,
+    ).get("jarmod")!;
+    expect(guessed.checks.loader).toBe("unknown");
+    expect(guessed.status).toBe("unknown");
+  });
+
+  it("checks required dependencies by JAR mod ID without failing on unknown IDs", () => {
+    const withDeps = {
+      ...neoforgeJar,
+      dependencies: [{ modId: "geckolib", kind: "required" as const }],
+    };
+    const missing = check([jarMod(withDeps)], neoPack).get("jarmod")!;
+    expect(missing).toMatchObject({
+      status: "warning",
+      checks: { dependencies: "warn" },
+    });
+    const present = check(
+      [
+        jarMod(withDeps),
+        jarMod(
+          { ...neoforgeJar, name: "g.jar", modId: "geckolib" },
+          "geckolib-neo",
+        ),
+      ],
+      neoPack,
+    ).get("jarmod")!;
+    expect(present.checks.dependencies).toBe("pass");
+    const disabled = check(
+      [
+        jarMod(withDeps),
+        jarMod({ ...neoforgeJar, modId: "geckolib" }, "geckolib-neo", {
+          status: "disabled",
+        }),
+      ],
+      neoPack,
+    ).get("jarmod")!;
+    expect(disabled.checks.dependencies).toBe("fail");
+  });
+
+  it("flags declared incompatibilities that are present", () => {
+    const result = check(
+      [
+        jarMod({
+          ...neoforgeJar,
+          dependencies: [{ modId: "optifine", kind: "incompatible" }],
+        }),
+        jarMod({ ...neoforgeJar, modId: "optifine" }, "optifine"),
+      ],
+      neoPack,
+    ).get("jarmod")!;
+    expect(result).toMatchObject({
+      status: "incompatible",
+      checks: { dependencies: "fail" },
+    });
+  });
+
+  it("separates file-name guesses from verified metadata", () => {
+    const result = check(
+      [jarMod({ name: "cool-mod-1.0.jar", format: "filename" })],
+      neoPack,
+    ).get("jarmod")!;
+    expect(result).toMatchObject({
+      status: "unknown",
+      verification: "filename",
+      checks: {
+        minecraft: "unknown",
+        loader: "unknown",
+        dependencies: "unknown",
+      },
+    });
+  });
+
+  it("prefers Modrinth facts over JAR metadata", () => {
+    const both = mod(
+      "both",
+      { gameVersions: ["26.1.2"], loaders: ["neoforge"] },
+      {
+        file: { ...neoforgeJar, minecraftRange: "[1.20,1.21)" },
+      },
+    );
+    expect(check([both], neoPack).get("both")).toMatchObject({
+      status: "compatible",
+      verification: "modrinth",
+    });
+  });
+
+  it("marks manual and pre-metadata imports as unknown, never incompatible", () => {
+    expect(check([mod("manual")], neoPack).get("manual")).toMatchObject({
+      status: "unknown",
+      verification: "manual",
+    });
+    const old = check(
+      [jarMod({ name: "old.jar", modId: "old" }, "old")],
+      neoPack,
+    ).get("old")!;
+    expect(old.status).toBe("unknown");
+    expect(old.reasons[0]?.message).toContain("Import the file again");
+  });
+});
+
+describe("JAR metadata in JSON", () => {
+  it("round-trips the optional file fields", () => {
+    const withJar = mod("j", undefined, {
+      file: {
+        name: "j.jar",
+        modId: "j",
+        format: "mods.toml",
+        loaders: ["forge"],
+        loadersInferred: true,
+        minecraftRange: "[1.20.1,1.21)",
+        dependencies: [{ modId: "x", kind: "required", versionRange: "[1,)" }],
+      },
+    });
+    expect(parseJsonFile(JSON.stringify([withJar]), "mods")).toEqual([withJar]);
   });
 });

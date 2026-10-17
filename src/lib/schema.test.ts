@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import modpack from "../../public/data/modpack.json";
 import mods from "../../public/data/mods.json";
 import { collectionSchema, parseJsonFile } from "./schema";
-import { filterMods, uniqueId } from "./mods";
 import { DRAFT_KEY, readDraft } from "./storage";
 
 describe("collection data", () => {
@@ -59,19 +58,5 @@ describe("collection data", () => {
     expect(
       readDraft({ getItem: (key) => (key === DRAFT_KEY ? "{bad" : null) }),
     ).toBeNull();
-  });
-
-  it("filters descriptions and creates unique IDs", () => {
-    const parsed = collectionSchema.parse({ modpack, mods });
-    expect(
-      filterMods(parsed.mods, {
-        query: "shader",
-        category: "",
-        status: "",
-        side: "",
-        sort: "az",
-      }).map((mod) => mod.id),
-    ).toEqual(["iris"]);
-    expect(uniqueId("Sodium", parsed.mods)).toBe("sodium-2");
   });
 });

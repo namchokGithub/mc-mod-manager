@@ -48,5 +48,30 @@
       "dependencies": [],
       "syncedAt": "2026-10-17T09:04:53.813Z"
     }
+  },
+  {
+    "id": "mcwholidays",
+    "name": "Macaw's Holidays",
+    "version": "1.1.2",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/macaws-holidays",
+    "description": "Adds 250+ Christmas Decorations and 80+ Halloween Decorations",
+    "dependencies": [],
+    "notes": "Imported from mcw-holidays-1.1.2-mc26.1neoforge.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/922/691/64/64/638388433298976722.png",
+    "file": {
+      "name": "mcw-holidays-1.1.2-mc26.1neoforge.jar",
+      "modId": "mcwholidays",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ]
+    }
   }
 ]

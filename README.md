@@ -125,6 +125,8 @@ The app calls the public Modrinth API (`https://api.modrinth.com/v2`) directly f
 - Without metadata, the file name is used as an unverified hint.
 - The preview flags duplicates (same file, same Modrinth project, same mod ID, or same name) and lets you choose what to import.
 - **Match files** is optional. It sends only SHA-1 hashes to Modrinth to identify exact versions and attach verified metadata.
+- The metadata read from each JAR (loaders, declared Minecraft range, and dependencies) is saved in the mod's optional `file` field, so the JAR is not needed afterwards.
+- Compatibility prefers Modrinth data. For mods that are not on Modrinth (for example from CurseForge), it checks the saved JAR metadata instead: Maven ranges from `mods.toml`/`neoforge.mods.toml`, Fabric/Quilt version predicates, the declared loader, and required or incompatible mod IDs. Being absent from Modrinth is never a problem by itself. Anything the JAR does not declare, a loader guessed from a plain `mods.toml`, and file-name-only imports stay **Unknown**. Each result shows its source (Modrinth, Local JAR, File name only, or Manual) and separate Minecraft version, Modloader, and Dependencies checks.
 
 ## Deploying to GitHub Pages
 

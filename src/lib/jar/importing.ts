@@ -98,12 +98,25 @@ export function candidateToMod(
     name: metadata.fileName.replace(/^.*[\\/]/, ""),
     ...(sha1 && { sha1 }),
     ...(metadata.modId && { modId: metadata.modId }),
+    format: metadata.format,
+    ...(metadata.loaders.length > 0 && { loaders: metadata.loaders }),
+    ...(metadata.loadersInferred && { loadersInferred: true }),
+    ...(metadata.minecraftRange && { minecraftRange: metadata.minecraftRange }),
+    ...(metadata.dependencies.length > 0 && {
+      dependencies: metadata.dependencies.map((dependency) => ({
+        modId: dependency.modId,
+        kind: dependency.kind,
+        ...(dependency.versionRange && {
+          versionRange: dependency.versionRange,
+        }),
+      })),
+    }),
   };
   const notes = `Imported from ${file.name}.`;
   if (match)
     return {
       ...modFromModrinth(match.project, match.version, existing, syncedAt),
-      status: "installed",
+      status: "planned",
       notes,
       file,
     };
@@ -113,11 +126,11 @@ export function candidateToMod(
     id: uniqueId(metadata.modId ?? name, existing),
     name,
     version: metadata.version ?? "",
-    category: "Imported",
+    category: "Uncategorized",
     tags: metadata.loaders.map(
       (loader) => loader.charAt(0).toUpperCase() + loader.slice(1),
     ),
-    status: "installed",
+    status: "planned",
     side: metadata.side ?? "both",
     source: "Other",
     sourceUrl: metadata.homepage ?? "",

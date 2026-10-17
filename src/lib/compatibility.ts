@@ -1,5 +1,6 @@
 import { loaderLabels, normalizeLoader } from "./modrinth/mapping";
 import type { Mod, ModrinthDependency, Modpack } from "./schema";
+import { matchMinecraftRange } from "./versionRange";
 
 export type CompatStatus =
   "compatible" | "warning" | "incompatible" | "unknown";
@@ -9,10 +10,41 @@ export type CompatReason = {
   message: string;
 };
 
+/** Where the evidence came from. Source identification (e.g. CurseForge) is separate. */
+export type Verification = "modrinth" | "jar" | "filename" | "manual";
+export type CheckState = "pass" | "warn" | "fail" | "unknown";
+export type CompatChecks = {
+  minecraft: CheckState;
+  loader: CheckState;
+  dependencies: CheckState;
+};
+
 export type CompatResult = {
   status: CompatStatus;
   reasons: CompatReason[];
   source: "live" | "stored" | "none";
+  verification: Verification;
+  checks: CompatChecks;
+};
+
+export const verificationLabels: Record<Verification, string> = {
+  modrinth: "Modrinth",
+  jar: "Local JAR",
+  filename: "File name only",
+  manual: "Manual",
+};
+
+const checkFromLevel: Record<CompatReason["level"], CheckState | null> = {
+  error: "fail",
+  warning: "warn",
+  unknown: "unknown",
+  info: null,
+};
+const checkRank: Record<CheckState, number> = {
+  pass: 0,
+  unknown: 1,
+  warn: 2,
+  fail: 3,
 };
 
 export type VersionFacts = {
@@ -122,65 +154,94 @@ export function checkCompatibility(
   );
   const results = new Map<string, CompatResult>();
 
+  // Mods found by their JAR mod ID, for dependencies declared in JAR metadata.
+  const byModId = new Map<string, Mod[]>();
+  for (const mod of mods)
+    for (const key of new Set(
+      [mod.id, mod.file?.modId, mod.modrinth?.slug].filter(
+        (value): value is string => Boolean(value),
+      ),
+    ))
+      byModId.set(key, [...(byModId.get(key) ?? []), mod]);
+
   for (const mod of active) {
     const { facts, source, missing } = resolved.get(mod.id)!;
     const reasons: CompatReason[] = [];
+    const checks: CompatChecks = {
+      minecraft: "pass",
+      loader: "pass",
+      dependencies: "pass",
+    };
+    const add = (
+      check: keyof CompatChecks | null,
+      level: CompatReason["level"],
+      message: string,
+    ) => {
+      reasons.push({ level, message });
+      const state = checkFromLevel[level];
+      if (check && state && checkRank[state] > checkRank[checks[check]])
+        checks[check] = state;
+    };
+    const unknownAll = (message: string) => {
+      add(null, "unknown", message);
+      checks.minecraft = checks.loader = checks.dependencies = "unknown";
+    };
+    const jar = mod.file?.format ? mod.file : undefined;
+    let verification: Verification = facts ? "modrinth" : "manual";
 
     if (missing)
-      reasons.push({
-        level: "warning",
-        message:
-          "The selected Modrinth version was not found. It may have been deleted; choose another version.",
-      });
-    else if (!facts)
-      reasons.push({
-        level: "unknown",
-        message: mod.modrinth
-          ? "No Modrinth version is selected, so compatibility cannot be verified."
-          : "Added without Modrinth version metadata, so compatibility cannot be verified.",
-      });
+      add(
+        null,
+        "warning",
+        "The selected Modrinth version was not found. It may have been deleted; choose another version.",
+      );
 
     if (facts) {
       if (!minecraft)
-        reasons.push({
-          level: "unknown",
-          message: "Set the pack's Minecraft version to check this mod.",
-        });
+        add(
+          "minecraft",
+          "unknown",
+          "Set the pack's Minecraft version to check this mod.",
+        );
       else if (!facts.gameVersions.includes(minecraft))
-        reasons.push({
-          level: "error",
-          message: `Selected version supports Minecraft ${summarizeVersions(facts.gameVersions)}, not ${minecraft}.`,
-        });
+        add(
+          "minecraft",
+          "error",
+          `Selected version supports Minecraft ${summarizeVersions(facts.gameVersions)}, not ${minecraft}.`,
+        );
 
       if (!loader)
-        reasons.push({
-          level: "unknown",
-          message: modpack.modloader.trim()
+        add(
+          "loader",
+          "unknown",
+          modpack.modloader.trim()
             ? `The pack modloader “${modpack.modloader}” is not recognized, so the loader cannot be checked.`
             : "Set the pack's modloader to check this mod.",
-        });
+        );
       else if (!facts.loaders.includes(loader)) {
         if (loader === "quilt" && facts.loaders.includes("fabric"))
-          reasons.push({
-            level: "warning",
-            message:
-              "Selected version is for Fabric. Quilt usually loads Fabric mods, but this is not guaranteed.",
-          });
+          add(
+            "loader",
+            "warning",
+            "Selected version is for Fabric. Quilt usually loads Fabric mods, but this is not guaranteed.",
+          );
         else
-          reasons.push({
-            level: "error",
-            message: `Selected version is for ${facts.loaders.map(loaderName).join(", ") || "no listed loader"}, not ${loaderLabels[loader]}.`,
-          });
+          add(
+            "loader",
+            "error",
+            `Selected version is for ${facts.loaders.map(loaderName).join(", ") || "no listed loader"}, not ${loaderLabels[loader]}.`,
+          );
       }
 
       for (const dependency of facts.dependencies) {
         if (dependency.type === "embedded") continue;
         if (!dependency.projectId) {
           if (dependency.type === "required")
-            reasons.push({
-              level: "warning",
-              message: `A required dependency (${label(dependency)}) could not be identified on Modrinth.`,
-            });
+            add(
+              "dependencies",
+              "warning",
+              `A required dependency (${label(dependency)}) could not be identified on Modrinth.`,
+            );
           continue;
         }
         const providers = byProject.get(dependency.projectId) ?? [];
@@ -195,34 +256,160 @@ export function checkCompatibility(
                 label(dependency).toLowerCase(),
           );
           if (inactive)
-            reasons.push({
-              level: "error",
-              message: `Requires ${label(dependency)}, which is ${inactive.status} in this pack.`,
-            });
+            add(
+              "dependencies",
+              "error",
+              `Requires ${label(dependency)}, which is ${inactive.status} in this pack.`,
+            );
           else if (nameMatch)
-            reasons.push({
-              level: "warning",
-              message: `Requires ${label(dependency)}. “${nameMatch.name}” may provide it, but it has no Modrinth link to confirm.`,
-            });
+            add(
+              "dependencies",
+              "warning",
+              `Requires ${label(dependency)}. “${nameMatch.name}” may provide it, but it has no Modrinth link to confirm.`,
+            );
           else
-            reasons.push({
-              level: "error",
-              message: `Missing required dependency: ${label(dependency)}.`,
-            });
+            add(
+              "dependencies",
+              "error",
+              `Missing required dependency: ${label(dependency)}.`,
+            );
         } else if (dependency.type === "optional") {
           if (!activeProvider)
-            reasons.push({
-              level: "info",
-              message: `Optional dependency ${label(dependency)} is not in the pack.`,
-            });
+            add(
+              "dependencies",
+              "info",
+              `Optional dependency ${label(dependency)} is not in the pack.`,
+            );
         } else if (activeProvider) {
-          reasons.push({
-            level: "error",
-            message: `Declared incompatible with ${activeProvider.name}, which is in this pack.`,
-          });
+          add(
+            "dependencies",
+            "error",
+            `Declared incompatible with ${activeProvider.name}, which is in this pack.`,
+          );
         }
       }
-    }
+    } else if (jar && jar.format !== "filename") {
+      // No Modrinth facts: fall back to what the JAR itself declares. Not being on Modrinth is
+      // never a problem by itself.
+      verification = "jar";
+      const format = jar.format ?? "";
+      if (!minecraft)
+        add(
+          "minecraft",
+          "unknown",
+          "Set the pack's Minecraft version to check this mod.",
+        );
+      else if (!jar.minecraftRange)
+        add(
+          "minecraft",
+          "unknown",
+          "The JAR does not declare which Minecraft versions it supports.",
+        );
+      else {
+        const result = matchMinecraftRange(
+          jar.minecraftRange,
+          minecraft,
+          format,
+        );
+        if (result === "mismatch")
+          add(
+            "minecraft",
+            "error",
+            `The JAR declares Minecraft ${jar.minecraftRange}; the pack uses ${minecraft}.`,
+          );
+        else if (result === "unknown")
+          add(
+            "minecraft",
+            "unknown",
+            `The JAR's Minecraft range “${jar.minecraftRange}” could not be checked against ${minecraft}.`,
+          );
+      }
+
+      const jarLoaders = jar.loaders ?? [];
+      if (!loader)
+        add(
+          "loader",
+          "unknown",
+          modpack.modloader.trim()
+            ? `The pack modloader “${modpack.modloader}” is not recognized, so the loader cannot be checked.`
+            : "Set the pack's modloader to check this mod.",
+        );
+      else if (!jarLoaders.length)
+        add(
+          "loader",
+          "unknown",
+          "The JAR does not say which modloader it needs.",
+        );
+      else if (jar.loadersInferred)
+        add(
+          "loader",
+          "unknown",
+          `The JAR only has a mods.toml without a loader dependency, so Forge and NeoForge cannot be told apart.`,
+        );
+      else if (!jarLoaders.includes(loader)) {
+        if (loader === "quilt" && jarLoaders.includes("fabric"))
+          add(
+            "loader",
+            "warning",
+            "The JAR is for Fabric. Quilt usually loads Fabric mods, but this is not guaranteed.",
+          );
+        else
+          add(
+            "loader",
+            "error",
+            `The JAR is for ${jarLoaders.map(loaderName).join(", ")}, not ${loaderLabels[loader]}.`,
+          );
+      }
+
+      for (const dependency of jar.dependencies ?? []) {
+        const providers = (byModId.get(dependency.modId) ?? []).filter(
+          (other) => other.id !== mod.id,
+        );
+        const activeProvider = providers.find(isActive);
+        if (dependency.kind === "required") {
+          if (activeProvider) continue;
+          if (providers[0])
+            add(
+              "dependencies",
+              "error",
+              `Requires ${dependency.modId}, which is ${providers[0].status} in this pack.`,
+            );
+          else
+            add(
+              "dependencies",
+              "warning",
+              `Requires mod ID “${dependency.modId}”, and no mod with that ID is in the pack. It may be listed under another name.`,
+            );
+        } else if (dependency.kind === "optional") {
+          if (!activeProvider)
+            add(
+              "dependencies",
+              "info",
+              `Optional dependency ${dependency.modId} is not in the pack.`,
+            );
+        } else if (activeProvider)
+          add(
+            "dependencies",
+            dependency.kind === "incompatible" ? "error" : "warning",
+            dependency.kind === "incompatible"
+              ? `Declared incompatible with ${activeProvider.name}, which is in this pack.`
+              : `Discourages using ${activeProvider.name}, which is in this pack.`,
+          );
+      }
+    } else if (jar) {
+      verification = "filename";
+      unknownAll(
+        "Only the JAR's file name is known, so the Minecraft version, loader, and dependencies cannot be verified.",
+      );
+    } else if (!missing) {
+      unknownAll(
+        mod.modrinth
+          ? "No Modrinth version is selected, so compatibility cannot be verified."
+          : mod.file
+            ? "Imported from a JAR before its metadata was saved. Import the file again to check it."
+            : "Added without Modrinth or JAR metadata, so compatibility cannot be verified.",
+      );
+    } else checks.minecraft = checks.loader = checks.dependencies = "unknown";
 
     const projectId = mod.modrinth?.projectId;
     if (projectId) {
@@ -236,22 +423,30 @@ export function checkCompatibility(
               dependency.projectId === projectId,
           )
         )
-          reasons.push({
-            level: "error",
-            message: `${other.name} declares itself incompatible with this mod.`,
-          });
+          add(
+            "dependencies",
+            "error",
+            `${other.name} declares itself incompatible with this mod.`,
+          );
       }
       const duplicates = (byProject.get(projectId) ?? []).filter(
         (other) => other.id !== mod.id && isActive(other),
       );
       if (duplicates.length)
-        reasons.push({
-          level: "warning",
-          message: `Same Modrinth project as ${duplicates.map((other) => other.name).join(", ")}.`,
-        });
+        add(
+          null,
+          "warning",
+          `Same Modrinth project as ${duplicates.map((other) => other.name).join(", ")}.`,
+        );
     }
 
-    results.set(mod.id, { status: statusOf(reasons), reasons, source });
+    results.set(mod.id, {
+      status: statusOf(reasons),
+      reasons,
+      source,
+      verification,
+      checks,
+    });
   }
   return results;
 }
