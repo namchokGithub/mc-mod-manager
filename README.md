@@ -28,7 +28,7 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 
 ## Tech stack
 
-React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, Select, and Popover with cmdk for searchable dropdowns, React Hook Form with Zod, Motion for React, lucide-react icons, self-hosted fonts from Fontsource (Inter for the UI, Pixelify Sans for display accents, and Noto Sans Thai for Thai), and Vitest. No backend, database, or authentication; a small Vite dev-server plugin handles local saving.
+React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, Select, and Popover with cmdk for searchable dropdowns, React Hook Form with Zod, Motion for React, lucide-react icons, self-hosted fonts (Inter and Noto Sans Thai from Fontsource for the UI and Thai text, and the Minecraft font for display accents), and Vitest. No backend, database, or authentication; a small Vite dev-server plugin handles local saving.
 
 Code layout:
 
@@ -159,6 +159,12 @@ Then open `http://localhost:4173/mc-mod-manager/`.
 - Update and live compatibility results are not saved. They reset when the page reloads.
 - If two tabs edit within about half a second of each other, the later saved draft wins.
 - CurseForge, automatic downloads, and dependency installation are not supported.
+
+## Credits
+
+- Display font: [Minecraft](https://www.dafont.com/minecraft.font) by Craftron Gaming (`public/assets/fonts/Minecraft.ttf`).
+- UI fonts: [Inter](https://rsms.me/inter/) and [Noto Sans Thai](https://fonts.google.com/noto/specimen/Noto+Sans+Thai), via [Fontsource](https://fontsource.org/).
+- Mod data and version metadata: [Modrinth](https://modrinth.com/).
 
 ---
 

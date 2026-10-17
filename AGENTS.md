@@ -30,7 +30,7 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - Never download or install mods, and never call a backend or use secrets.
 - Style with theme tokens from `src/styles.css` (`:root` for light, `:root[data-theme="dark"]` for dark). Do not hardcode colors in components or rules. Add a token to both themes instead.
 - Use the shared `Select` (`src/components/ui/select.tsx`) or, for long lists, `Combobox` (`combobox.tsx`) instead of native `<select>`. In React Hook Form, bind them with `Controller`.
-- Typography: Inter (`--font-sans`, the default) for all UI text. Pixelify Sans (`--font-display` / `font-display`) only for the brand, hero title, major section headings, stat numbers, and small decorative labels. Never use it for long or dense text.
+- Typography: Inter (`--font-sans`, the default) for all UI text. the Minecraft font by Craftron Gaming (`public/assets/fonts/Minecraft.ttf`, one regular weight; `--font-display` / `font-display`) only for the brand, hero title, major section headings, stat numbers, and small decorative labels. Never use it for long or dense text.
 - Respect `prefers-reduced-motion`; app-wide Motion settings use `MotionConfig reducedMotion="user"`.
 
 ## Working Conventions
