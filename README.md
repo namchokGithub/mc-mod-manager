@@ -28,7 +28,7 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 
 ## Tech stack
 
-React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, Select, and Popover with cmdk for searchable dropdowns, React Hook Form with Zod, Motion for React, lucide-react icons, and Vitest. No backend, database, or authentication; a small Vite dev-server plugin handles local saving.
+React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, Select, and Popover with cmdk for searchable dropdowns, React Hook Form with Zod, Motion for React, lucide-react icons, self-hosted fonts from Fontsource (Inter for the UI, Pixelify Sans for display accents, and Noto Sans Thai for Thai), and Vitest. No backend, database, or authentication; a small Vite dev-server plugin handles local saving.
 
 Code layout:
 
