@@ -2504,5 +2504,589 @@
       "dependencies": [],
       "syncedAt": "2026-10-17T19:14:03.184Z"
     }
+  },
+  {
+    "id": "ct-overhaul-village",
+    "name": "ChoiceTheorem's Overhauled Village",
+    "version": "4.0.0",
+    "category": "Adventure",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ct-overhaul-village",
+    "description": "Enhances and creates new villages and pillager outposts, that perfectly fit into your Minecraft world.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/fgmhI8kH/9c616710df27b0bc60281a7ad69a2a6f77ea2d72_96.webp",
+    "modrinth": {
+      "projectId": "fgmhI8kH",
+      "slug": "ct-overhaul-village",
+      "versionId": "THd1WMTj",
+      "versionNumber": "4.0.0",
+      "versionType": "release",
+      "datePublished": "2026-07-31T13:43:21.785674Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:23:04.978Z"
+    }
+  },
+  {
+    "id": "structory",
+    "name": "Structory",
+    "version": "1.3.17",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/structory",
+    "description": "A seasonally updated and atmospheric structure mod with light lore",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/aKCwCJlY/81c79a9d58c605ad79c4a8da15c865902bec8d42_96.webp",
+    "modrinth": {
+      "projectId": "aKCwCJlY",
+      "slug": "structory",
+      "versionId": "TUbwu7eG",
+      "versionNumber": "1.3.17",
+      "versionType": "release",
+      "datePublished": "2026-07-08T22:09:05.844755Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:23:23.127Z"
+    }
+  },
+  {
+    "id": "structory-towers",
+    "name": "Structory: Towers",
+    "version": "1.0.17",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/structory-towers",
+    "description": "Adds immersive biome-themed towers to the world, as a standalone option or add-on to Structory",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/j3FONRYr/e7d6877a7b7a03680383fd1a1fdd3496604e372a_96.webp",
+    "modrinth": {
+      "projectId": "j3FONRYr",
+      "slug": "structory-towers",
+      "versionId": "ziO4YIv1",
+      "versionNumber": "1.0.17",
+      "versionType": "release",
+      "datePublished": "2026-07-08T22:10:33.882442Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:23:33.206Z"
+    }
+  },
+  {
+    "id": "shoulder-surfing-reloaded",
+    "name": "Shoulder Surfing Reloaded",
+    "version": "26.1.2-5.1.1+neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/shoulder-surfing-reloaded",
+    "description": "Highly configurable third person camera mod",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kepjj2sy/4e83375b655b3a9f0e981bd747b095a4009df4e9_96.webp",
+    "modrinth": {
+      "projectId": "kepjj2sy",
+      "slug": "shoulder-surfing-reloaded",
+      "versionId": "v4OrD6wT",
+      "versionNumber": "26.1.2-5.1.1+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-22T21:54:36.299179Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "GaaqfxoS",
+          "versionId": null,
+          "type": "incompatible",
+          "name": "YDM's Custom Camera View"
+        },
+        {
+          "projectId": "G1s2WpNo",
+          "versionId": null,
+          "type": "incompatible",
+          "name": "Better Third Person"
+        },
+        {
+          "projectId": "Q5UvqqQd",
+          "versionId": null,
+          "type": "incompatible",
+          "name": "Nimble"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:24:57.787Z"
+    }
+  },
+  {
+    "id": "easy-villagers",
+    "name": "Easy Villagers",
+    "version": "neoforge-1.1.47+26.1.2",
+    "category": "Technology",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/easy-villagers",
+    "description": "Never get annoyed by villagers again!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Kaov2qgi/ceb583c0f27eaca42f6dfbe79ddec5e6142f1766_96.webp",
+    "modrinth": {
+      "projectId": "Kaov2qgi",
+      "slug": "easy-villagers",
+      "versionId": "TeB6839y",
+      "versionNumber": "neoforge-1.1.47+26.1.2",
+      "versionType": "beta",
+      "datePublished": "2026-10-11T07:19:45.444369Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nvQzSEkH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Jade 🔍"
+        },
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:25:36.511Z"
+    }
+  },
+  {
+    "id": "easy-piglins",
+    "name": "Easy Piglins",
+    "version": "neoforge-1.1.7+26.1.2",
+    "category": "Technology",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/easy-piglins",
+    "description": "Never get annoyed by bartering anymore!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/l6n94pax/0e7460e4bfb1a3a7cc36b1e53ce676820a630ae5_96.webp",
+    "modrinth": {
+      "projectId": "l6n94pax",
+      "slug": "easy-piglins",
+      "versionId": "xfaJhTPC",
+      "versionNumber": "neoforge-1.1.7+26.1.2",
+      "versionType": "beta",
+      "datePublished": "2026-04-10T12:17:53.712784Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:26:15.039Z"
+    }
+  },
+  {
+    "id": "lmd",
+    "name": "Let Me Despawn",
+    "version": "1.26.10.2",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/lmd",
+    "description": "Improves performance by tweaking mob despawn rules. Say bye to pesky unintentional persistent mobs.",
+    "dependencies": [
+      "Almanac"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/vE2FN5qn/2609f745e46bd92e57a67e1da07319eb2154c6f7.png",
+    "modrinth": {
+      "projectId": "vE2FN5qn",
+      "slug": "lmd",
+      "versionId": "ykaE6izA",
+      "versionNumber": "1.26.10.2",
+      "versionType": "release",
+      "datePublished": "2026-10-17T04:27:11.077480Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Gi02250Z",
+          "versionId": null,
+          "type": "required",
+          "name": "Almanac"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:27:19.422Z"
+    }
+  },
+  {
+    "id": "almanac",
+    "name": "Almanac",
+    "version": "1.26.10.2",
+    "category": "Library",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/almanac",
+    "description": "Almanac is a library used by my mods with mostly loader independent shared code between multiple mods to avoid duplication of code.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Gi02250Z/f0bb3148fcb735bb989ef5723d199114e1f24542.png",
+    "modrinth": {
+      "projectId": "Gi02250Z",
+      "slug": "almanac",
+      "versionId": "NTnMOYjD",
+      "versionNumber": "1.26.10.2",
+      "versionType": "release",
+      "datePublished": "2026-10-15T22:40:22.787484Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "7C0Yf4dy",
+          "versionId": null,
+          "type": "embedded"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:27:22.019Z"
+    }
+  },
+  {
+    "id": "farming-for-blockheads",
+    "name": "Farming for Blockheads",
+    "version": "26.1.2.5+neoforge-26.1.2",
+    "category": "Food",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/farming-for-blockheads",
+    "description": "Adds a customizable market, shipping bin, sprinklers and more farming utilities.",
+    "dependencies": [
+      "Balm"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/4WJZr8JU/066c84672d99120ae5b54e555875340d50bd5cb6_96.webp",
+    "modrinth": {
+      "projectId": "4WJZr8JU",
+      "slug": "farming-for-blockheads",
+      "versionId": "R7W5cHID",
+      "versionNumber": "26.1.2.5+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-25T06:05:23.676646Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "MBAkmtvl",
+          "versionId": null,
+          "type": "required",
+          "name": "Balm"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:30:57.906Z"
+    }
+  },
+  {
+    "id": "lootjs",
+    "name": "LootJS: KubeJS Addon",
+    "version": "26.1.2-4.0.0+neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/lootjs",
+    "description": "A Minecraft mod for packdevs to easily modify the loot system with KubeJS.",
+    "dependencies": [
+      "KubeJS"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/fJFETWDN/icon.png",
+    "modrinth": {
+      "projectId": "fJFETWDN",
+      "slug": "lootjs",
+      "versionId": "s94MpbR3",
+      "versionNumber": "26.1.2-4.0.0+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-08-03T13:25:31.348451Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "umyGl7zF",
+          "versionId": null,
+          "type": "required",
+          "name": "KubeJS"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:33:48.880Z"
+    }
+  },
+  {
+    "id": "kubejs",
+    "name": "KubeJS",
+    "version": "26.1.2-8.0.7+neoforge",
+    "category": "Library",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/kubejs",
+    "description": "Edit recipes, add new custom items, script world events, all in JavaScript!",
+    "dependencies": [
+      "Rhino",
+      "Better Advanced Tooltips"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/umyGl7zF/ced768ee05e293837a24eacf00838061e02964a0_96.webp",
+    "modrinth": {
+      "projectId": "umyGl7zF",
+      "slug": "kubejs",
+      "versionId": "7Vil8vwK",
+      "versionNumber": "26.1.2-8.0.7+neoforge",
+      "versionType": "beta",
+      "datePublished": "2026-10-15T13:49:06.185450Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nfn13YXA",
+          "versionId": null,
+          "type": "optional",
+          "name": "Roughly Enough Items (REI)"
+        },
+        {
+          "projectId": "fRiHVvU7",
+          "versionId": null,
+          "type": "optional",
+          "name": "EMI"
+        },
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        },
+        {
+          "projectId": "sk9knFPE",
+          "versionId": null,
+          "type": "required",
+          "name": "Rhino"
+        },
+        {
+          "projectId": "iHLDc0eo",
+          "versionId": null,
+          "type": "required",
+          "name": "Better Advanced Tooltips"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:33:53.180Z"
+    }
+  },
+  {
+    "id": "lambdynamiclights",
+    "name": "LambDynamicLights - Dynamic Lights",
+    "version": "4.11.2+26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/lambdynamiclights",
+    "description": "Adds dynamic lights to Minecraft as the most feature-complete and optimized dynamic lighting mod.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/yBW8D80W/d4f5c3ff8df7caf024178b04eca6d69f95979cfe_96.webp",
+    "modrinth": {
+      "projectId": "yBW8D80W",
+      "slug": "lambdynamiclights",
+      "versionId": "USlEyPPR",
+      "versionNumber": "4.11.2+26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-08-31T19:33:43.972415Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [
+        {
+          "projectId": "PxQSWIcD",
+          "versionId": null,
+          "type": "incompatible",
+          "name": "Sodium Dynamic Lights"
+        },
+        {
+          "projectId": "reCfnRvJ",
+          "versionId": null,
+          "type": "incompatible",
+          "name": "RyoamicLights"
+        },
+        {
+          "projectId": "P7dR8mSH",
+          "versionId": null,
+          "type": "required",
+          "name": "Fabric API"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:39:58.868Z"
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "4.11.2+26.1.2",
+      "gameVersions": [
+        "26.1.2",
+        "26.1.1",
+        "26.1"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge",
+        "quilt"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights/files/all?page=1&pageSize=20&version=26.1.2&gameVersionTypeId=6&showAlphaFiles=hide",
+      "verifiedAt": "2026-10-17T19:41:38.685Z"
+    }
   }
 ]

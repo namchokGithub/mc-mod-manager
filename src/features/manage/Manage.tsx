@@ -104,6 +104,9 @@ const initialFilters: Filters = {
   sort: "az",
 };
 
+// Keep duplication available for a future editor workflow without showing it in the row actions.
+const SHOW_DUPLICATE_ACTION = false;
+
 const formSchema = modSchema
   .omit({ tags: true, dependencies: true, id: true })
   .extend({
@@ -1647,15 +1650,17 @@ export function Manage() {
                               >
                                 <RefreshCw size={16} />
                               </Button>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                aria-label={`Duplicate ${mod.name}`}
-                                title="Duplicate"
-                                onClick={() => duplicate(mod)}
-                              >
-                                <Copy size={17} />
-                              </Button>
+                              {SHOW_DUPLICATE_ACTION && (
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  aria-label={`Duplicate ${mod.name}`}
+                                  title="Duplicate"
+                                  onClick={() => duplicate(mod)}
+                                >
+                                  <Copy size={17} />
+                                </Button>
+                              )}
                               <Button
                                 variant="ghost"
                                 size="icon"
