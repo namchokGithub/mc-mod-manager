@@ -16,9 +16,15 @@ import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
+import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { checkCompatibility } from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
+import {
+  DEFAULT_PAGE_SIZE,
+  paginate,
+  type PageSize,
+} from "../../lib/pagination";
 import { resolveHeroImageUrl } from "../../lib/heroImage";
 import type { Mod } from "../../lib/schema";
 
@@ -34,6 +40,13 @@ export function Preview() {
   const { data } = useCollection();
   const reduceMotion = useReducedMotion();
   const [filters, setFilters] = useState(initialFilters);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
+  // Search, filters, and sort change the result set, so they start again from page 1.
+  const changeFilters = (next: Filters) => {
+    setFilters(next);
+    setPage(1);
+  };
   const [view, setView] = useState<"grid" | "list">("grid");
   const [selected, setSelected] = useState<Mod | null>(null);
   const categories = useMemo(
@@ -49,8 +62,16 @@ export function Preview() {
     () => filterMods(data.mods, filters),
     [data.mods, filters],
   );
-  // Layout animation gets costly for big collections, so it turns off there.
-  const animateLayout = !reduceMotion && filtered.length <= 60;
+  // Filtering and sorting happen first; paginate also clamps a page that no longer exists.
+  const paged = paginate(filtered, page, pageSize);
+  const goToPage = (next: number) => {
+    setPage(next);
+    document
+      .getElementById("collection")
+      ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  // Layout animation gets costly for big pages, so it turns off there.
+  const animateLayout = !reduceMotion && paged.items.length <= 60;
   const stats = [
     { label: "TOTAL MODS", value: data.mods.length, icon: Box },
     {
@@ -76,8 +97,7 @@ export function Preview() {
                 backgroundImage: `var(--hero-overlay), url(${JSON.stringify(resolveHeroImageUrl(data.modpack.heroImageUrl, import.meta.env.BASE_URL))})`,
               }
             : undefined
-        }
-      >
+        }>
         <div className="hero-decor hero-decor-one" />
         <div className="hero-decor hero-decor-two" />
         <div className="hero-grid" />
@@ -85,8 +105,7 @@ export function Preview() {
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
+            transition={{ duration: 0.55 }}>
             <div className="eyebrow">
               <span className="eyebrow-dot" /> THE MODPACK COLLECTION{" "}
               <span className="eyebrow-rule" />
@@ -159,7 +178,7 @@ export function Preview() {
           </div>
           <ModFilters
             filters={filters}
-            onChange={setFilters}
+            onChange={changeFilters}
             categories={categories}
             count={filtered.length}
             total={data.mods.length}
@@ -168,10 +187,9 @@ export function Preview() {
           />
           {filtered.length ? (
             <div
-              className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}
-            >
+              className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}>
               <AnimatePresence mode="popLayout">
-                {filtered.map((mod, index) => (
+                {paged.items.map((mod, index) => (
                   <motion.button
                     layout={animateLayout ? "position" : false}
                     key={mod.id}
@@ -197,8 +215,7 @@ export function Preview() {
                         delay: Math.min(index, 8) * 0.03,
                       },
                       layout: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
-                    }}
-                  >
+                    }}>
                     <div className="mod-card-top">
                       <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
                       <span className="card-badges">
@@ -226,8 +243,7 @@ export function Preview() {
                         {mod.version && (
                           <span
                             className="mod-card-version"
-                            title={mod.version}
-                          >
+                            title={mod.version}>
                             {" "}
                             · v{mod.version}
                           </span>
@@ -246,8 +262,7 @@ export function Preview() {
               className="empty-state"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-            >
+              transition={{ duration: 0.2 }}>
               <div className="empty-icon">
                 <Box size={26} />
               </div>
@@ -261,8 +276,7 @@ export function Preview() {
                   </p>
                   <Button
                     variant="secondary"
-                    onClick={() => setFilters(initialFilters)}
-                  >
+                    onClick={() => changeFilters(initialFilters)}>
                     Clear filters
                   </Button>
                 </>
@@ -287,6 +301,18 @@ export function Preview() {
                 </>
               )}
             </motion.div>
+          )}
+          {filtered.length > 0 && (
+            <Pagination
+              label="Mod collection pages"
+              page={paged}
+              pageSize={pageSize}
+              onPageChange={goToPage}
+              onPageSizeChange={(size) => {
+                setPageSize(size);
+                setPage(1);
+              }}
+            />
           )}
         </section>
       </div>

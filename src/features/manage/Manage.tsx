@@ -14,8 +14,6 @@ import {
   ArrowDownToLine,
   ArrowRight,
   ArrowUpFromLine,
-  ChevronLeft,
-  ChevronRight,
   CircleAlert,
   Copy,
   HardDriveDownload,
@@ -36,6 +34,7 @@ import { useToast } from "../../app/ToastContext";
 import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModFilters } from "../../components/ModFilters";
+import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { Dialog } from "../../components/ui/dialog";
 import { Select, type SelectOption } from "../../components/ui/select";
@@ -55,7 +54,6 @@ import { JarImportDialog } from "../import/JarImportDialog";
 import { filterMods, uniqueId, type Filters } from "../../lib/mods";
 import {
   DEFAULT_PAGE_SIZE,
-  PAGE_SIZES,
   pageSelectionState,
   paginate,
   pruneSelection,
@@ -1373,52 +1371,16 @@ export function Manage() {
                     </motion.div>
                   )}
                   {filtered.length > 0 && (
-                    <nav className="pagination" aria-label="Mod list pages">
-                      <span className="pagination-summary" role="status">
-                        Showing {paged.from}–{paged.to} of {paged.total}{" "}
-                        {paged.total === 1 ? "mod" : "mods"}
-                      </span>
-                      <div className="pagination-controls">
-                        <Select
-                          aria-label="Mods per page"
-                          size="sm"
-                          variant="compact"
-                          className="pagination-size"
-                          value={String(pageSize)}
-                          onValueChange={(value) => {
-                            setPageSize(Number(value) as PageSize);
-                            setPage(1);
-                          }}
-                          options={PAGE_SIZES.map((size) => ({
-                            value: String(size),
-                            label: `${size} per page`,
-                          }))}
-                        />
-                        <Button
-                          variant="ghost"
-                          size="small"
-                          disabled={paged.page <= 1}
-                          onClick={() => setPage(paged.page - 1)}
-                          aria-label="Previous page"
-                        >
-                          <ChevronLeft size={15} />
-                          <span className="pagination-label">Previous</span>
-                        </Button>
-                        <span className="pagination-page">
-                          Page {paged.page} of {paged.pageCount}
-                        </span>
-                        <Button
-                          variant="ghost"
-                          size="small"
-                          disabled={paged.page >= paged.pageCount}
-                          onClick={() => setPage(paged.page + 1)}
-                          aria-label="Next page"
-                        >
-                          <span className="pagination-label">Next</span>
-                          <ChevronRight size={15} />
-                        </Button>
-                      </div>
-                    </nav>
+                    <Pagination
+                      label="Mod list pages"
+                      page={paged}
+                      pageSize={pageSize}
+                      onPageChange={setPage}
+                      onPageSizeChange={(size) => {
+                        setPageSize(size);
+                        setPage(1);
+                      }}
+                    />
                   )}
                 </>
               )}
