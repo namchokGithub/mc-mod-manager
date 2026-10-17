@@ -1,15 +1,13 @@
 import { z } from "zod";
 import { isPublicAssetPath } from "./heroImage";
 
-const optionalUrl = z.union([
-  z
-    .url()
-    .refine(
-      (value) => value.startsWith("https://") || value.startsWith("http://"),
-      "Use an http or https URL",
-    ),
-  z.literal(""),
-]);
+const httpUrl = z
+  .url()
+  .refine(
+    (value) => value.startsWith("https://") || value.startsWith("http://"),
+    "Use an http or https URL",
+  );
+const optionalUrl = z.union([httpUrl, z.literal("")]);
 const heroImage = z
   .string()
   .refine(
@@ -58,6 +56,23 @@ export const modrinthMetaSchema = z.object({
     )
     .optional(),
   syncedAt: z.string().optional(),
+});
+
+export const verificationSources = ["curseforge", "official", "other"] as const;
+
+// What the user confirmed by hand for one exact version. Evidence for these values only, never
+// for dependencies; it applies only while the mod's active values still match it.
+export const manualVerificationSchema = z.object({
+  source: z.enum(verificationSources),
+  version: z.string().trim().min(1, "Version is required"),
+  gameVersions: z
+    .array(z.string().trim().min(1))
+    .min(1, "Add at least one Minecraft version"),
+  loaders: z
+    .array(z.string().trim().min(1))
+    .min(1, "Add at least one modloader"),
+  evidenceUrl: httpUrl,
+  verifiedAt: z.iso.datetime(),
 });
 
 export const modSchema = z.object({
@@ -120,6 +135,7 @@ export const modSchema = z.object({
       loaders: z.array(z.string().trim().min(1)),
     })
     .optional(),
+  manualVerification: manualVerificationSchema.optional(),
 });
 
 export const modsSchema = z.array(modSchema).superRefine((mods, context) => {
@@ -224,6 +240,7 @@ export const collectionSchema = z.object({
 export type Modpack = z.infer<typeof modpackSchema>;
 export type Mod = z.infer<typeof modSchema>;
 export type ModrinthMeta = z.infer<typeof modrinthMetaSchema>;
+export type ManualVerification = z.infer<typeof manualVerificationSchema>;
 export type ModrinthDependency = NonNullable<
   ModrinthMeta["dependencies"]
 >[number];

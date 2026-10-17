@@ -46,6 +46,7 @@ import {
   checkCompatibility,
   findByProject,
   statusLabel,
+  verificationText,
   type LiveFacts,
 } from "../../lib/compatibility";
 import { modrinth, ModrinthError } from "../../lib/modrinth/api";
@@ -87,6 +88,7 @@ import { QuickAddDialog } from "./QuickAddDialog";
 import { InboxPanel } from "./InboxPanel";
 import { inboxEntriesFromNames } from "../../lib/inbox";
 import { CompatibilityPanel } from "./CompatibilityPanel";
+import { ManualVerificationSection } from "./ManualVerification";
 import {
   SupportedLoadersField,
   SupportedVersionsField,
@@ -301,6 +303,7 @@ function ModEditor({
     handleSubmit,
     control,
     setError,
+    setValue,
     formState: { errors, isDirty },
   } = useForm<ModFields>({
     resolver: zodResolver(formSchema),
@@ -317,6 +320,22 @@ function ModEditor({
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
   const linked = useWatch({ control, name: "modrinth" });
+  const [activeVersion, activeVersions, activeLoaders, snapshot] = useWatch({
+    control,
+    name: [
+      "version",
+      "supportedVersions",
+      "supportedLoaders",
+      "manualVerification",
+    ],
+  });
+  // Compared with the form's own values, which mirror the mod's active values.
+  const snapshotMatches = Boolean(
+    snapshot &&
+    snapshot.version.trim() === activeVersion.trim() &&
+    sameValues(snapshot.gameVersions, activeVersions) &&
+    sameValues(snapshot.loaders, activeLoaders),
+  );
   // Saved only when it adds something: unedited prefills from verified data are not copied.
   const manualFrom = (gameVersions: string[], loaders: string[]) => {
     const versions = sortMinecraftVersions(
@@ -334,7 +353,7 @@ function ModEditor({
   };
   const supportHint =
     verified?.source === "modrinth"
-      ? "Prefilled from Modrinth (verified). Compatibility uses Modrinth's data; changes here are kept as manual notes only."
+      ? "Prefilled from Modrinth (verified). Compatibility uses Modrinth's data while the Version matches it; otherwise these values need manual verification."
       : verified?.source === "jar"
         ? `Prefilled from the JAR (verified)${verified.range ? `, which declares Minecraft ${verified.range}` : ""}. Manual values only fill what the JAR does not declare.`
         : "Entered manually and not verified. Used when no Modrinth or JAR data is available.";
@@ -515,6 +534,23 @@ function ModEditor({
         >
           {supportHint}
         </small>
+        <ManualVerificationSection
+          current={snapshot}
+          matches={snapshotMatches}
+          active={{
+            version: activeVersion,
+            gameVersions: activeVersions,
+            loaders: activeLoaders,
+          }}
+          suggestions={versionSuggestions}
+          onConfirm={(confirmed) => {
+            const options = { shouldDirty: true };
+            setValue("version", confirmed.version, options);
+            setValue("supportedVersions", confirmed.gameVersions, options);
+            setValue("supportedLoaders", confirmed.loaders, options);
+            setValue("manualVerification", confirmed, options);
+          }}
+        />
       </div>
       <div className="dialog-actions dialog-actions-sticky">
         <UnsavedHint show={unsaved} />
@@ -1554,6 +1590,9 @@ export function Manage() {
                                   <CompatBadge
                                     status={compat.get(mod.id)!.status}
                                     label={statusLabel(compat.get(mod.id)!)}
+                                    source={verificationText(
+                                      compat.get(mod.id)!,
+                                    )}
                                     compact
                                   />
                                 )}

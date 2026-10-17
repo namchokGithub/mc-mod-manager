@@ -2,6 +2,7 @@ import { CircleCheck, CircleHelp, CircleX, TriangleAlert } from "lucide-react";
 import {
   compatLabels,
   verificationLabels,
+  verificationText,
   type CheckState,
   type CompatChecks,
   type CompatReason,
@@ -28,19 +29,33 @@ const checkLabels: Record<CheckState, string> = {
   unknown: "Unknown",
 };
 
-// Manual entries and file-name guesses are never described as verified.
-const sourceText: Record<CompatResult["verification"], string> = {
-  modrinth: `Verified with ${verificationLabels.modrinth}`,
-  jar: `Verified with ${verificationLabels.jar} metadata`,
-  filename: `${verificationLabels.filename} (not verified)`,
-  manual: "Entered manually (not verified)",
-};
+const dateFormat = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
+
+/** The manual verification on record: its link and date, marked as earlier evidence when it no longer applies. */
+function Evidence({ result }: { result: CompatResult }) {
+  const evidence = result.evidence;
+  if (!evidence) return null;
+  const date = Date.parse(evidence.verifiedAt);
+  const current = result.verification === "manual-verified";
+  return (
+    <span className="compat-evidence">
+      {current
+        ? "User-confirmed"
+        : `Earlier manual check (${evidence.version})`}
+      {Number.isFinite(date) ? ` on ${dateFormat.format(date)}` : ""} ·{" "}
+      <a href={evidence.evidenceUrl} target="_blank" rel="noreferrer">
+        Evidence
+      </a>
+    </span>
+  );
+}
 
 /** Verification source plus one chip per check, so partial results stay visible. */
 function CompatChecksRow({ result }: { result: CompatResult }) {
   return (
     <div className="compat-checks">
-      <span className="compat-source">{sourceText[result.verification]}</span>
+      <span className="compat-source">{verificationText(result)}</span>
+      <Evidence result={result} />
       <ul aria-label="Compatibility checks">
         {(Object.keys(checkNames) as (keyof CompatChecks)[]).map((check) => {
           const state = result.checks[check];
@@ -52,9 +67,10 @@ function CompatChecksRow({ result }: { result: CompatResult }) {
             >
               <Icon size={12} aria-hidden="true" />
               {checkNames[check]}: {checkLabels[state]}
-              {result.checkSources[check] === "manual" &&
-                result.verification !== "manual" &&
-                " (manual)"}
+              {result.checkSources[check] !== result.verification &&
+                (result.checkSources[check] === "manual"
+                  ? " (manual)"
+                  : ` (${verificationLabels[result.checkSources[check]]})`)}
             </li>
           );
         })}
@@ -73,23 +89,27 @@ const icons = {
 export function CompatBadge({
   status,
   label,
+  source,
   compact = false,
 }: {
   status: CompatStatus;
   /** Overrides the status text, e.g. "Manual Match" from statusLabel(). */
   label?: string;
+  /** Verification source, e.g. from verificationText(); added to the compact tooltip. */
+  source?: string;
   compact?: boolean;
 }) {
   const Icon = icons[status];
   const text = label ?? compatLabels[status];
+  const full = source && compact ? `${text} · ${source}` : text;
   const manual = text.startsWith("Manual");
   return (
     <span
       className={`compat-badge compat-${status}${compact ? " compat-compact" : ""}${manual ? " compat-manual" : ""}`}
-      title={compact ? text : undefined}
+      title={compact ? full : undefined}
     >
       <Icon size={13} aria-hidden="true" />
-      <span className={compact ? "sr-only" : undefined}>{text}</span>
+      <span className={compact ? "sr-only" : undefined}>{full}</span>
     </span>
   );
 }

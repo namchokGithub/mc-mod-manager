@@ -21,7 +21,11 @@ import { useCountUp } from "./useCountUp";
 import { BuildPlanGuide } from "./BuildPlanGuide";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
-import { checkCompatibility, statusLabel } from "../../lib/compatibility";
+import {
+  checkCompatibility,
+  statusLabel,
+  verificationText,
+} from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
 import {
   DEFAULT_PAGE_SIZE,
@@ -267,6 +271,7 @@ export function Preview() {
                             <CompatBadge
                               status={compat.get(mod.id)!.status}
                               label={statusLabel(compat.get(mod.id)!)}
+                              source={verificationText(compat.get(mod.id)!)}
                               compact
                             />
                           )}

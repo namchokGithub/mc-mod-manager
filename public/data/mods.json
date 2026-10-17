@@ -2,7 +2,7 @@
   {
     "id": "1123439",
     "name": "Thai Font (สระไม่ลอย)",
-    "version": "",
+    "version": "1.21",
     "category": "Font",
     "tags": [],
     "status": "planned",
@@ -20,6 +20,18 @@
       "loaders": [
         "neoforge"
       ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.21",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/texture-packs/font-thaifix/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
+      "verifiedAt": "2026-10-17T19:15:51.233Z"
     }
   },
   {
@@ -2274,6 +2286,223 @@
         }
       ],
       "syncedAt": "2026-10-17T18:53:29.978Z"
+    }
+  },
+  {
+    "id": "when-dungeons-arise",
+    "name": "When Dungeons Arise",
+    "version": "2.1.71",
+    "category": "Adventure",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "CurseForge",
+    "sourceUrl": "https://modrinth.com/mod/when-dungeons-arise",
+    "description": "Adds various elegant -and likely hostile- roguelike dungeons and structures that generate on your worlds!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/8DfbfASn/4240773f6aa5f8c69f44a5e2e0ff313f98ff3389_96.webp",
+    "modrinth": {
+      "projectId": "8DfbfASn",
+      "slug": "when-dungeons-arise",
+      "versionId": "XIRJSFQ0",
+      "versionNumber": "2.1.68",
+      "versionType": "release",
+      "datePublished": "2025-10-26T05:50:30.931292Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T18:56:37.042Z"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "2.1.71",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/when-dungeons-arise/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
+      "verifiedAt": "2026-10-17T19:14:58.239Z"
+    }
+  },
+  {
+    "id": "jade-addons-forge",
+    "name": "Jade Addons (Neo/Forge)",
+    "version": "26.0.2+neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jade-addons-forge",
+    "description": "Jade 🔍's additional mod supports for Neo/Forge",
+    "dependencies": [
+      "Jade 🔍"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/xuDOzCLy/b04217bc2b7dc524c4d12f81ff42cc1cefb9b0fc_96.webp",
+    "modrinth": {
+      "projectId": "xuDOzCLy",
+      "slug": "jade-addons-forge",
+      "versionId": "jQGJ817a",
+      "versionNumber": "26.0.2+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T05:56:59.709250Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nvQzSEkH",
+          "versionId": null,
+          "type": "required",
+          "name": "Jade 🔍"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:05:19.397Z"
+    }
+  },
+  {
+    "id": "betterf3",
+    "name": "BetterF3",
+    "version": "18.0.2",
+    "category": "Decoration",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/betterf3",
+    "description": "BetterF3 is a mod that replaces Minecraft's original debug HUD with a highly customizable, more human-readable HUD.",
+    "dependencies": [
+      "Cloth Config API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/8shC1gFX/icon.png",
+    "modrinth": {
+      "projectId": "8shC1gFX",
+      "slug": "betterf3",
+      "versionId": "qX8kcwKf",
+      "versionNumber": "18.0.2",
+      "versionType": "release",
+      "datePublished": "2026-04-29T04:31:42.923458Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "required",
+          "name": "Cloth Config API"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:06:14.552Z"
+    }
+  },
+  {
+    "id": "cooking-for-blockheads",
+    "name": "Cooking for Blockheads",
+    "version": "26.1.2.6+neoforge-26.1.2",
+    "category": "Decoration",
+    "tags": [
+      "Food",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/cooking-for-blockheads",
+    "description": "Adds a multiblock kitchen that shows recipes you can make with what ingredients you have available.",
+    "dependencies": [
+      "Balm"
+    ],
+    "notes": "Farmer's Delight\tCooking Pot, Stove และสูตรอาหาร\tต้องทดสอบ Integration",
+    "imageUrl": "https://cdn.modrinth.com/data/vJnhuDde/811d0c55230d84d9e182df1b0bd631ddebecc0ad_96.webp",
+    "modrinth": {
+      "projectId": "vJnhuDde",
+      "slug": "cooking-for-blockheads",
+      "versionId": "qR2BKmSz",
+      "versionNumber": "26.1.2.6+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-10-02T06:29:26.577475Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "MBAkmtvl",
+          "versionId": null,
+          "type": "required",
+          "name": "Balm"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:09:05.018Z"
+    }
+  },
+  {
+    "id": "iron-furnaces",
+    "name": "Iron Furnaces",
+    "version": "4.4.2",
+    "category": "Storage",
+    "tags": [
+      "Technology"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/iron-furnaces",
+    "description": "Inspired by cpw's Iron Chests mod, adds a few different tiers of furnace.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/yPlaLxD1/8788274b9d09dba7bfc99b29d9d0a708ba5e4e74.png",
+    "modrinth": {
+      "projectId": "yPlaLxD1",
+      "slug": "iron-furnaces",
+      "versionId": "kUNp0q7z",
+      "versionNumber": "4.4.2",
+      "versionType": "release",
+      "datePublished": "2026-06-25T23:48:47.265616Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:14:03.184Z"
     }
   }
 ]

@@ -1,3 +1,4 @@
+import { manualVerificationMatches } from "./compatibility";
 import type { Mod } from "./schema";
 
 export type FieldChange = {
@@ -70,6 +71,20 @@ export function describeChanges(before: Mod, after: Mod): FieldChange[] {
       from: jar(before),
       to: jar(after),
       overwrites: Boolean(before.file),
+    });
+  // The evidence is kept, but it stops applying; shown so the conflict is reviewed, not silent.
+  const snapshot = before.manualVerification;
+  if (
+    snapshot &&
+    manualVerificationMatches(before) &&
+    !manualVerificationMatches(after)
+  )
+    changes.push({
+      field: "manualVerification",
+      label: "Manual verification",
+      from: `Version ${snapshot.version} (verified by you)`,
+      to: "Kept as evidence, but needs reverification",
+      overwrites: true,
     });
   return changes;
 }

@@ -3366,6 +3366,55 @@ main:focus {
   line-height: 1.45;
   color: var(--text-muted);
 }
+.manual-verify {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px dashed var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.manual-verify-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.manual-verify-status {
+  display: flex;
+  align-items: start;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--primary);
+}
+.manual-verify-status.stale {
+  color: var(--warning);
+}
+.manual-verify-status svg {
+  flex: none;
+  margin-top: 2px;
+}
+.manual-verify-form {
+  display: grid;
+  gap: 10px;
+}
+.manual-verify-form h4 {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.manual-verify-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.compat-evidence {
+  font-size: 11px;
+  color: var(--text-muted);
+}
 /* Manually entered results keep their colour but get a dashed outline. */
 .compat-badge.compat-manual {
   outline: 1px dashed currentColor;

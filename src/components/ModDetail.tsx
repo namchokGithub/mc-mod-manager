@@ -84,16 +84,17 @@ export function ModDetail({
             {shownCompat ? (
               <>
                 <CompatReasons result={shownCompat} />
-                {shown.modrinth?.versionNumber && (
-                  <p className="detail-compat-source">
-                    Checked against Modrinth version{" "}
-                    {shown.modrinth.versionNumber}
-                    {shown.modrinth.syncedAt
-                      ? `, saved ${new Date(shown.modrinth.syncedAt).toLocaleDateString()}`
-                      : ""}
-                    .
-                  </p>
-                )}
+                {shown.modrinth?.versionNumber &&
+                  shownCompat.verification === "modrinth" && (
+                    <p className="detail-compat-source">
+                      Checked against Modrinth version{" "}
+                      {shown.modrinth.versionNumber}
+                      {shown.modrinth.syncedAt
+                        ? `, saved ${new Date(shown.modrinth.syncedAt).toLocaleDateString()}`
+                        : ""}
+                      .
+                    </p>
+                  )}
               </>
             ) : (
               <p>Not checked because this mod is {shown.status}.</p>
