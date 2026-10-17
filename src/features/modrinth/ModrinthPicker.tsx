@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,6 +13,8 @@ import {
 import { CompatBadge, CompatReasons } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { Button } from "../../components/ui/button";
+import { Combobox } from "../../components/ui/combobox";
+import { Select } from "../../components/ui/select";
 import { checkCompatibility, findByProject } from "../../lib/compatibility";
 import { modrinth, type ModrinthError } from "../../lib/modrinth/api";
 import {
@@ -128,6 +130,7 @@ export function ModrinthPicker({
     showAll: false,
   };
   const [filter, setFilter] = useState<VersionFilter>(packFilter);
+  const filterId = useId();
   const [versionLimit, setVersionLimit] = useState(30);
   const [versionId, setVersionId] = useState<string | null>(
     target.kind === "refresh" ? (target.preselectVersionId ?? null) : null,
@@ -430,40 +433,45 @@ export function ModrinthPicker({
       <fieldset className="mr-versions">
         <legend>Choose a version</legend>
         <div className="mr-filters">
-          <label className="mr-filter">
-            <span>Game version</span>
-            <select
+          <div className="mr-filter">
+            <span id={`${filterId}-game`}>Game version</span>
+            <Combobox
+              aria-labelledby={`${filterId}-game`}
+              size="sm"
+              disabled={filter.showAll}
               value={filter.gameVersion}
+              onValueChange={(value) => updateFilter({ gameVersion: value })}
+              searchPlaceholder="Search versions…"
+              emptyText="No game versions match."
+              options={[
+                { value: "", label: "Any version" },
+                ...filterOptions.gameVersions.map((value) => ({
+                  value,
+                  label: value === minecraft ? `${value} (pack)` : value,
+                })),
+              ]}
+            />
+          </div>
+          <div className="mr-filter">
+            <span id={`${filterId}-loader`}>Modloader</span>
+            <Select
+              aria-labelledby={`${filterId}-loader`}
+              size="sm"
               disabled={filter.showAll}
-              onChange={(event) =>
-                updateFilter({ gameVersion: event.target.value })
-              }
-            >
-              <option value="">Any version</option>
-              {filterOptions.gameVersions.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                  {value === minecraft ? " (pack)" : ""}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="mr-filter">
-            <span>Modloader</span>
-            <select
               value={filter.loader}
-              disabled={filter.showAll}
-              onChange={(event) => updateFilter({ loader: event.target.value })}
-            >
-              <option value="">Any loader</option>
-              {filterOptions.loaders.map((value) => (
-                <option key={value} value={value}>
-                  {loaderLabel(value)}
-                  {value === loader ? " (pack)" : ""}
-                </option>
-              ))}
-            </select>
-          </label>
+              onValueChange={(value) => updateFilter({ loader: value })}
+              options={[
+                { value: "", label: "Any loader" },
+                ...filterOptions.loaders.map((value) => ({
+                  value,
+                  label:
+                    value === loader
+                      ? `${loaderLabel(value)} (pack)`
+                      : loaderLabel(value),
+                })),
+              ]}
+            />
+          </div>
           <label className="mr-check">
             <input
               type="checkbox"

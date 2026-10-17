@@ -8,7 +8,7 @@ import {
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useWatch } from "react-hook-form";
+import { Controller, useForm, useWatch, type Control } from "react-hook-form";
 import { z } from "zod";
 import {
   ArrowDownToLine,
@@ -35,6 +35,7 @@ import { ModArtwork } from "../../components/ModArtwork";
 import { ModFilters } from "../../components/ModFilters";
 import { Button } from "../../components/ui/button";
 import { Dialog } from "../../components/ui/dialog";
+import { Select, type SelectOption } from "../../components/ui/select";
 import {
   checkCompatibility,
   findByProject,
@@ -124,6 +125,58 @@ function Field({
         </small>
       )}
     </label>
+  );
+}
+
+const statusOptions: SelectOption[] = [
+  "planned",
+  "testing",
+  "installed",
+  "disabled",
+  "removed",
+].map((value) => ({
+  value,
+  label: value.charAt(0).toUpperCase() + value.slice(1),
+}));
+const sideOptions: SelectOption[] = [
+  { value: "both", label: "Both" },
+  { value: "client", label: "Client" },
+  { value: "server", label: "Server" },
+];
+const sourceOptions: SelectOption[] = [
+  "Modrinth",
+  "CurseForge",
+  "GitHub",
+  "Other",
+].map((value) => ({ value, label: value }));
+
+/** Shared Select bound to the mod form; Field passes its aria attributes through. */
+function FormSelect({
+  control,
+  name,
+  options,
+  ...aria
+}: React.AriaAttributes & {
+  control: Control<ModFields>;
+  name: "status" | "side" | "source";
+  options: SelectOption[];
+}) {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <Select
+          ref={field.ref}
+          name={field.name}
+          value={field.value}
+          onValueChange={field.onChange}
+          onBlur={field.onBlur}
+          options={options}
+          {...aria}
+        />
+      )}
+    />
   );
 }
 
@@ -273,31 +326,13 @@ function ModEditor({
           <input placeholder="e.g. Performance" {...register("category")} />
         </Field>
         <Field label="Status" error={errors.status?.message}>
-          <select {...register("status")}>
-            {["planned", "testing", "installed", "disabled", "removed"].map(
-              (value) => (
-                <option key={value} value={value}>
-                  {value.charAt(0).toUpperCase() + value.slice(1)}
-                </option>
-              ),
-            )}
-          </select>
+          <FormSelect control={control} name="status" options={statusOptions} />
         </Field>
         <Field label="Installation side" error={errors.side?.message}>
-          <select {...register("side")}>
-            <option value="both">Both</option>
-            <option value="client">Client</option>
-            <option value="server">Server</option>
-          </select>
+          <FormSelect control={control} name="side" options={sideOptions} />
         </Field>
         <Field label="Source" error={errors.source?.message}>
-          <select {...register("source")}>
-            {["Modrinth", "CurseForge", "GitHub", "Other"].map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
+          <FormSelect control={control} name="source" options={sourceOptions} />
         </Field>
         <Field label="Source URL" error={errors.sourceUrl?.message}>
           <input

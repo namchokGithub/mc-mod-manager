@@ -8,6 +8,24 @@ import {
   X,
 } from "lucide-react";
 import type { Filters } from "../lib/mods";
+import { Select } from "./ui/select";
+
+const statusOptions = [
+  "planned",
+  "testing",
+  "installed",
+  "disabled",
+  "removed",
+].map((status) => ({
+  value: status,
+  label: status.charAt(0).toUpperCase() + status.slice(1),
+}));
+
+const sideOptions = [
+  { value: "client", label: "Client" },
+  { value: "server", label: "Server" },
+  { value: "both", label: "Both" },
+];
 
 export function ModFilters({
   filters,
@@ -121,61 +139,54 @@ export function ModFilters({
         <span className="filter-label">
           <SlidersHorizontal size={15} aria-hidden="true" /> Filter by
         </span>
-        <label>
-          <span className="sr-only">Category</span>
-          <select
-            className={filters.category ? "is-active" : undefined}
-            value={filters.category}
-            onChange={(event) => set("category", event.target.value)}
-          >
-            <option value="">All categories</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span className="sr-only">Status</span>
-          <select
-            className={filters.status ? "is-active" : undefined}
-            value={filters.status}
-            onChange={(event) => set("status", event.target.value)}
-          >
-            <option value="">All statuses</option>
-            {["planned", "testing", "installed", "disabled", "removed"].map(
-              (status) => (
-                <option key={status} value={status}>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </option>
-              ),
-            )}
-          </select>
-        </label>
-        <label>
-          <span className="sr-only">Installation side</span>
-          <select
-            className={filters.side ? "is-active" : undefined}
-            value={filters.side}
-            onChange={(event) => set("side", event.target.value)}
-          >
-            <option value="">All sides</option>
-            <option value="client">Client</option>
-            <option value="server">Server</option>
-            <option value="both">Both</option>
-          </select>
-        </label>
-        <label>
-          <span className="sr-only">Sort order</span>
-          <select
-            value={filters.sort}
-            onChange={(event) => set("sort", event.target.value)}
-          >
-            <option value="az">Name: A–Z</option>
-            <option value="za">Name: Z–A</option>
-          </select>
-        </label>
+        <Select
+          aria-label="Category"
+          size="sm"
+          variant="compact"
+          className="filter-select"
+          active={Boolean(filters.category)}
+          value={filters.category}
+          onValueChange={(value) => set("category", value)}
+          options={[
+            { value: "", label: "All categories" },
+            ...categories.map((category) => ({
+              value: category,
+              label: category,
+            })),
+          ]}
+        />
+        <Select
+          aria-label="Status"
+          size="sm"
+          variant="compact"
+          className="filter-select"
+          active={Boolean(filters.status)}
+          value={filters.status}
+          onValueChange={(value) => set("status", value)}
+          options={[{ value: "", label: "All statuses" }, ...statusOptions]}
+        />
+        <Select
+          aria-label="Installation side"
+          size="sm"
+          variant="compact"
+          className="filter-select"
+          active={Boolean(filters.side)}
+          value={filters.side}
+          onValueChange={(value) => set("side", value)}
+          options={[{ value: "", label: "All sides" }, ...sideOptions]}
+        />
+        <Select
+          aria-label="Sort order"
+          size="sm"
+          variant="compact"
+          className="filter-select"
+          value={filters.sort}
+          onValueChange={(value) => set("sort", value)}
+          options={[
+            { value: "az", label: "Name: A–Z" },
+            { value: "za", label: "Name: Z–A" },
+          ]}
+        />
         {activeCount > 0 && (
           <button type="button" className="filter-reset" onClick={clearFilters}>
             <RotateCcw size={13} aria-hidden="true" /> Clear {activeCount}{" "}

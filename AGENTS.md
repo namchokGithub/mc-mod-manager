@@ -8,7 +8,7 @@ Static Minecraft modpack showcase and local editor (v1.0). Published data lives 
 
 ## Tech Stack (quick reference)
 
-React 19, Vite, strict TypeScript (`noUncheckedIndexedAccess` is on), Tailwind CSS 4 plus `src/styles.css`, shadcn-style components on Radix Dialog, React Hook Form + Zod, Motion for React, Vitest, pnpm. GitHub Pages uses hash routing (`#/`, `#/manage`) and the Vite base `/mc-mod-manager/` when `GITHUB_PAGES=true`.
+React 19, Vite, strict TypeScript (`noUncheckedIndexedAccess` is on), Tailwind CSS 4 plus `src/styles.css`, shadcn-style components on Radix Dialog, Select, and Popover (plus cmdk), React Hook Form + Zod, Motion for React, Vitest, pnpm. GitHub Pages uses hash routing (`#/`, `#/manage`) and the Vite base `/mc-mod-manager/` when `GITHUB_PAGES=true`.
 
 Layout: `src/app` (shell, data provider, toasts, theme), `src/features` (`preview`, `manage`, `modrinth`, `import`), `src/components` (shared UI), `src/lib` (non-UI logic and its tests).
 
@@ -27,6 +27,7 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - JAR files are parsed locally (`src/lib/jar/`): never execute or upload them. Only SHA-1 hashes may be sent to Modrinth, and only when the user asks.
 - Never download or install mods, and never call a backend or use secrets.
 - Style with theme tokens from `src/styles.css` (`:root` for light, `:root[data-theme="dark"]` for dark). Do not hardcode colors in components or rules. Add a token to both themes instead.
+- Use the shared `Select` (`src/components/ui/select.tsx`) or, for long lists, `Combobox` (`combobox.tsx`) instead of native `<select>`. In React Hook Form, bind them with `Controller`.
 - Respect `prefers-reduced-motion`; app-wide Motion settings use `MotionConfig reducedMotion="user"`.
 
 ## Working Conventions
