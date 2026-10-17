@@ -43,6 +43,8 @@ export const modrinthMetaSchema = z.object({
   slug: z.string().optional(),
   versionId: z.string().trim().min(1).optional(),
   versionNumber: z.string().optional(),
+  versionType: z.string().optional(),
+  datePublished: z.string().optional(),
   gameVersions: z.array(z.string()).optional(),
   loaders: z.array(z.string()).optional(),
   dependencies: z
@@ -73,6 +75,17 @@ export const modSchema = z.object({
   notes: z.string(),
   imageUrl: optionalUrl,
   modrinth: modrinthMetaSchema.optional(),
+  // Set when the entry came from a local .jar; used to spot re-imports of the same file.
+  file: z
+    .object({
+      name: z.string(),
+      sha1: z
+        .string()
+        .regex(/^[0-9a-f]{40}$/)
+        .optional(),
+      modId: z.string().optional(),
+    })
+    .optional(),
 });
 
 export const modsSchema = z.array(modSchema).superRefine((mods, context) => {

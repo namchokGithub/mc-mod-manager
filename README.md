@@ -1,6 +1,10 @@
 # MC Mod Manager
 
+---
+
 A static Minecraft modpack showcase and local editor. Phase 1 uses example data; check each mod's upstream page for actual compatibility before installing.
+
+![Sample](public/assets/readme/image-beautified.png)
 
 ## Development
 
@@ -36,3 +40,5 @@ In repository settings, set **Pages → Build and deployment → Source** to **G
 Phase 1 includes a showcase, local mod and pack editing, filtering, details, JSON import/export, and static deployment. It has no account system, backend, or automatic dependency resolution.
 
 Manage can search Modrinth from the browser (public API, no key) to fill in a mod and pick a version. The chosen version's Minecraft versions, loaders, and dependencies are saved in the mod's optional `modrinth` field, so Preview checks compatibility offline. **Check compatibility** in Manage fetches current version metadata from Modrinth. The checker is read-only and never changes or downloads mods. Mods without Modrinth version metadata show as Unknown.
+
+**Import mods** reads selected `.jar` files (or a mods folder in Chromium browsers) locally to find `fabric.mod.json`, `quilt.mod.json`, `META-INF/mods.toml`, or `META-INF/neoforge.mods.toml`. Files are never run or uploaded. **Match files** is optional and sends only SHA-1 hashes to Modrinth to identify exact versions. **Check updates** compares linked mods with the versions Modrinth lists for the pack's Minecraft version and loader, using version IDs and publish dates. Changing a version always goes through review and Save; nothing is downloaded.

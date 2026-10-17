@@ -2413,3 +2413,291 @@ main:focus {
     width: 100%;
   }
 }
+
+/* Phase 4: file import and updates */
+.mr-chip-muted {
+  background: #283029;
+  color: #a9b8ac;
+}
+.mr-version-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mr-version > .mr-chip {
+  align-self: start;
+}
+.update-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  border: 0;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+  background: #283029;
+  color: #a9b8ac;
+}
+.update-badge.update-available {
+  padding: 4px 8px;
+  background: #26394d;
+  color: #a9c3e8;
+  cursor: pointer;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.update-badge.update-available:hover {
+  background: #2f4862;
+}
+.update-badge.update-up-to-date {
+  background: #1f3a28;
+  color: #9bdbad;
+}
+.compat-count.update-update-available {
+  color: #a9c3e8;
+  background: #26394d;
+}
+.compat-count.update-up-to-date {
+  color: #9bdbad;
+  background: #1f3a28;
+}
+.compat-count.update-unknown {
+  color: #a9b8ac;
+  background: #283029;
+}
+.compat-panel-head > .button + .button {
+  margin-left: -4px;
+}
+.mod-card-meta {
+  display: inline-flex;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.mod-card-version {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: none;
+  max-width: 120px;
+}
+.detail-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+.jar-import {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.jar-drop {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 34px 18px;
+  border: 1px dashed #3d5a45;
+  border-radius: 10px;
+  background: var(--surface);
+  transition:
+    border-color 0.18s,
+    background 0.18s;
+}
+.jar-drop.dragging {
+  border-color: var(--accent);
+  background: #18281d;
+}
+.jar-drop h3 {
+  margin: 14px 0 0;
+  font-size: 16px;
+}
+.jar-drop p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.jar-drop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.jar-progress {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 40px 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.jar-progress p {
+  margin: 0;
+}
+.jar-progress-bar {
+  width: min(320px, 100%);
+  height: 6px;
+  border-radius: 999px;
+  background: #222c25;
+  overflow: hidden;
+}
+.jar-progress-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease-out;
+}
+.jar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.jar-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.jar-match {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border: 1px solid #36543b;
+  border-radius: 8px;
+  background: #19291e;
+}
+.jar-match > div {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.jar-match strong {
+  font-size: 13px;
+  color: #cfe9d6;
+}
+.jar-match p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #9fc1a8;
+}
+.jar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  max-height: min(48vh, 460px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+}
+.jar-row {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-sunken);
+  transition:
+    border-color 0.18s,
+    background 0.18s;
+}
+.jar-row.selected {
+  border-color: #4f7d5c;
+  background: #15211a;
+}
+.jar-row-main {
+  display: flex;
+  align-items: start;
+  gap: 11px;
+  padding: 11px 12px;
+  cursor: pointer;
+}
+.jar-row-main input {
+  accent-color: var(--accent);
+  margin-top: 3px;
+  flex: none;
+}
+.jar-row:has(input:focus-visible) {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+.jar-row-body {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.jar-row-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.jar-row-title strong {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.jar-version {
+  font-size: 12px;
+  color: #b8e6c2;
+  overflow-wrap: anywhere;
+}
+.jar-row-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.jar-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.jar-chips .mr-chip {
+  text-transform: none;
+}
+.jar-warning,
+.jar-note {
+  display: flex;
+  align-items: start;
+  gap: 6px;
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.jar-warning {
+  color: var(--warning);
+}
+.jar-warning svg {
+  flex: none;
+  margin-top: 2px;
+}
+.jar-warning.jar-duplicate {
+  color: #f1b1a8;
+}
+.jar-note {
+  color: #82938a;
+}
+@media (max-width: 650px) {
+  .compat-panel-head > .button {
+    flex: 1 1 auto;
+  }
+  .compat-panel-head > .button + .button {
+    margin-left: 0;
+  }
+  .jar-list {
+    max-height: 45vh;
+  }
+  .update-badge.update-available {
+    max-width: 140px;
+  }
+}

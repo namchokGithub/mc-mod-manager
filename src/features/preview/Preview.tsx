@@ -220,7 +220,18 @@ export function Preview() {
                       <p>{mod.description || "No description yet."}</p>
                     </div>
                     <div className="mod-card-footer">
-                      <span>{mod.side} side</span>
+                      <span className="mod-card-meta">
+                        {mod.side} side
+                        {mod.version && (
+                          <span
+                            className="mod-card-version"
+                            title={mod.version}
+                          >
+                            {" "}
+                            · v{mod.version}
+                          </span>
+                        )}
+                      </span>
                       <span className="mod-card-cta">
                         View details <ArrowRight size={15} />
                       </span>

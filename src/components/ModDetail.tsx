@@ -40,7 +40,19 @@ export function ModDetail({
           <dl className="detail-list">
             <div>
               <dt>Version</dt>
-              <dd>{shown.version || "Not specified"}</dd>
+              <dd>
+                {shown.version || "Not specified"}
+                {shown.modrinth?.versionType && (
+                  <small className="detail-sub">
+                    {shown.modrinth.versionType}
+                    {shown.modrinth.datePublished &&
+                      Number.isFinite(
+                        Date.parse(shown.modrinth.datePublished),
+                      ) &&
+                      ` · released ${new Date(shown.modrinth.datePublished).toLocaleDateString()}`}
+                  </small>
+                )}
+              </dd>
             </div>
             <div>
               <dt>Source</dt>

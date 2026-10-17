@@ -17,7 +17,6 @@ import { checkCompatibility, findByProject } from "../../lib/compatibility";
 import { modrinth, type ModrinthError } from "../../lib/modrinth/api";
 import {
   loaderLabels,
-  mapVersion,
   mergeModrinthIntoMod,
   modFromModrinth,
   normalizeLoader,
@@ -25,11 +24,22 @@ import {
   projectFromResponse,
   type ModrinthProject,
 } from "../../lib/modrinth/mapping";
-import { resolveDependencies } from "../../lib/modrinth/service";
+import {
+  cachedProjectVersions,
+  resolveDependencies,
+} from "../../lib/modrinth/service";
+import { pickLatest } from "../../lib/updates";
 import type { Mod, Modpack } from "../../lib/schema";
 import { useModrinthRequest } from "./useModrinthRequest";
 
-export type PickerTarget = { kind: "add" } | { kind: "refresh"; mod: Mod };
+export type PickerTarget =
+  { kind: "add" } | { kind: "refresh"; mod: Mod; preselectVersionId?: string };
+
+const dateFormat = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
+const formatDate = (value: string) => {
+  const parsed = Date.parse(value);
+  return Number.isFinite(parsed) ? dateFormat.format(parsed) : null;
+};
 
 const compactNumber = new Intl.NumberFormat("en", { notation: "compact" });
 
@@ -106,7 +116,9 @@ export function ModrinthPicker({
   const [picked, setPicked] = useState<ModrinthProject | null>(null);
   const [allVersions, setAllVersions] = useState(false);
   const [versionLimit, setVersionLimit] = useState(30);
-  const [versionId, setVersionId] = useState<string | null>(null);
+  const [versionId, setVersionId] = useState<string | null>(
+    target.kind === "refresh" ? (target.preselectVersionId ?? null) : null,
+  );
 
   const linked = useModrinthRequest(
     linkedProjectId && !browsing && !picked
@@ -135,10 +147,24 @@ export function ModrinthPicker({
   const versions = useModrinthRequest(
     project ? JSON.stringify({ id: project.id, ...versionFilters }) : null,
     (signal) =>
-      modrinth
-        .projectVersions(project?.id ?? "", versionFilters, signal)
-        .then((list) => list.map(mapVersion)),
+      // Shared cache with the update checker; the signal only stops this view from waiting.
+      Promise.race([
+        cachedProjectVersions(modrinth, project?.id ?? "", versionFilters),
+        new Promise<never>((_, reject) =>
+          signal.addEventListener("abort", () =>
+            reject(new DOMException("Aborted", "AbortError")),
+          ),
+        ),
+      ]),
   );
+  const currentVersionId = existing?.modrinth?.versionId;
+  const latestId = allVersions
+    ? undefined
+    : pickLatest(
+        versions.data ?? [],
+        versions.data?.find((version) => version.id === currentVersionId)
+          ?.versionType ?? existing?.modrinth?.versionType,
+      ).latest?.id;
   const selectedVersion =
     versions.data?.find((version) => version.id === versionId) ?? null;
   const details = useModrinthRequest(
@@ -328,7 +354,12 @@ export function ModrinthPicker({
       </div>
     );
 
-  const shownVersions = versions.data?.slice(0, versionLimit) ?? [];
+  const shownVersions = [...(versions.data ?? [])]
+    .sort(
+      (a, b) =>
+        (Date.parse(b.datePublished) || 0) - (Date.parse(a.datePublished) || 0),
+    )
+    .slice(0, versionLimit);
   return (
     <div className="mr-picker">
       <div className="mr-project">
@@ -403,8 +434,17 @@ export function ModrinthPicker({
                   onChange={() => setVersionId(version.id)}
                 />
                 <span className="mr-version-main">
-                  <strong>{version.versionNumber}</strong>
+                  <span className="mr-version-title">
+                    <strong>{version.versionNumber}</strong>
+                    {version.id === currentVersionId && (
+                      <span className="mr-chip mr-chip-muted">Current</span>
+                    )}
+                    {version.id === latestId && (
+                      <span className="mr-chip">Latest compatible</span>
+                    )}
+                  </span>
                   <span>
+                    {formatDate(version.datePublished) ?? "Date unknown"} ·{" "}
                     {version.loaders
                       .map((value) => {
                         const known = normalizeLoader(value);
@@ -415,11 +455,15 @@ export function ModrinthPicker({
                     {version.gameVersions.length > 3 ? " …" : ""}
                   </span>
                 </span>
-                {version.versionType !== "release" && (
-                  <span className="mr-chip mr-chip-warn">
-                    {version.versionType}
-                  </span>
-                )}
+                <span
+                  className={
+                    version.versionType === "release"
+                      ? "mr-chip mr-chip-muted"
+                      : "mr-chip mr-chip-warn"
+                  }
+                >
+                  {version.versionType}
+                </span>
               </label>
             ))}
             {(versions.data?.length ?? 0) > versionLimit && (

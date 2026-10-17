@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, LoaderCircle, ShieldCheck } from "lucide-react";
+import {
+  ArrowUpCircle,
+  ChevronDown,
+  LoaderCircle,
+  ShieldCheck,
+} from "lucide-react";
 import { CompatBadge, CompatReasons } from "../../components/CompatBadge";
 import { Button } from "../../components/ui/button";
 import {
@@ -10,6 +15,19 @@ import {
   type CompatStatus,
 } from "../../lib/compatibility";
 import type { Mod } from "../../lib/schema";
+import {
+  updateLabels,
+  type UpdateResult,
+  type UpdateStatus,
+} from "../../lib/updates";
+
+const updateOrder: UpdateStatus[] = [
+  "update-available",
+  "up-to-date",
+  "unknown",
+];
+const timeOf = (date: Date) =>
+  date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
 const order: CompatStatus[] = [
   "incompatible",
@@ -24,15 +42,34 @@ export function CompatibilityPanel({
   checking,
   checkedAt,
   onCheck,
+  updates,
+  updatesCheckedAt,
+  checkingUpdates,
+  onCheckUpdates,
 }: {
   mods: Mod[];
   results: Map<string, CompatResult>;
   checking: boolean;
   checkedAt: Date | null;
   onCheck: () => void;
+  updates: Map<string, UpdateResult> | null;
+  updatesCheckedAt: Date | null;
+  checkingUpdates: boolean;
+  onCheckUpdates: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const counts = countByStatus(results);
+  // Only linked mods can be checked, and a result is dropped once that mod changes version.
+  const updateCounts = { "update-available": 0, "up-to-date": 0, unknown: 0 };
+  for (const mod of mods) {
+    const result = updates?.get(mod.id);
+    if (
+      mod.modrinth &&
+      result &&
+      result.checkedVersionId === mod.modrinth.versionId
+    )
+      updateCounts[result.status] += 1;
+  }
   const issues = mods
     .flatMap((mod) => {
       const result = results.get(mod.id);
@@ -50,11 +87,13 @@ export function CompatibilityPanel({
         <div className="compat-panel-title">
           <ShieldCheck size={18} aria-hidden="true" />
           <div>
-            <h3>Compatibility</h3>
+            <h3>Compatibility & updates</h3>
             <p>
               {checkedAt
-                ? `Checked live on Modrinth at ${checkedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.`
-                : "Based on saved Modrinth metadata. Disabled and removed mods are skipped."}
+                ? `Compatibility checked live on Modrinth at ${timeOf(checkedAt)}.`
+                : "Compatibility uses saved Modrinth metadata. Disabled and removed mods are skipped."}
+              {updatesCheckedAt &&
+                ` Updates checked at ${timeOf(updatesCheckedAt)}.`}
             </p>
           </div>
         </div>
@@ -71,6 +110,19 @@ export function CompatibilityPanel({
           )}
           {checking ? "Checking…" : "Check compatibility"}
         </Button>
+        <Button
+          variant="secondary"
+          size="small"
+          disabled={checkingUpdates}
+          onClick={onCheckUpdates}
+        >
+          {checkingUpdates ? (
+            <LoaderCircle className="spin" size={15} aria-hidden="true" />
+          ) : (
+            <ArrowUpCircle size={15} aria-hidden="true" />
+          )}
+          {checkingUpdates ? "Checking…" : "Check updates"}
+        </Button>
       </div>
       <div className="compat-counts" role="status">
         {order.map((status) => (
@@ -79,6 +131,15 @@ export function CompatibilityPanel({
           </span>
         ))}
       </div>
+      {updates && (
+        <div className="compat-counts" role="status">
+          {updateOrder.map((status) => (
+            <span key={status} className={`compat-count update-${status}`}>
+              <strong>{updateCounts[status]}</strong> {updateLabels[status]}
+            </span>
+          ))}
+        </div>
+      )}
       {issues.length > 0 && (
         <>
           <button

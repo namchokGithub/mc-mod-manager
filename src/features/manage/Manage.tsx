@@ -19,6 +19,7 @@ import {
   Search,
   Settings2,
   Trash2,
+  Upload,
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
 import { useToast } from "../../app/ToastContext";
@@ -33,10 +34,17 @@ import {
   type LiveFacts,
 } from "../../lib/compatibility";
 import { modrinth, ModrinthError } from "../../lib/modrinth/api";
-import { fetchLiveVersionFacts } from "../../lib/modrinth/service";
+import {
+  checkUpdates,
+  fetchLiveVersionFacts,
+} from "../../lib/modrinth/service";
+import { normalizeLoader } from "../../lib/modrinth/mapping";
+import { type UpdateResult } from "../../lib/updates";
+import { JarImportDialog } from "../import/JarImportDialog";
 import { filterMods, uniqueId, type Filters } from "../../lib/mods";
 import {
   modSchema,
+  modsSchema,
   modpackSchema,
   parseJsonFile,
   type Mod,
@@ -46,6 +54,7 @@ import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { CompatibilityPanel } from "./CompatibilityPanel";
+import { UpdateBadge } from "./UpdateBadge";
 
 type Tab = "mods" | "settings" | "data";
 const initialFilters: Filters = {
@@ -631,9 +640,22 @@ function DataTools() {
 }
 
 export function Manage() {
-  const { data, dirty, saveState, saveMod, deleteMod, updateModpack } =
-    useCollection();
+  const {
+    data,
+    dirty,
+    saveState,
+    saveMod,
+    deleteMod,
+    updateModpack,
+    importMods,
+  } = useCollection();
   const notify = useToast();
+  const [importingJars, setImportingJars] = useState(false);
+  const [updates, setUpdates] = useState<{
+    results: Map<string, UpdateResult>;
+    at: Date;
+  } | null>(null);
+  const [checkingUpdates, setCheckingUpdates] = useState(false);
   const [highlightId, setHighlightId] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("mods");
   const [filters, setFilters] = useState(initialFilters);
@@ -676,6 +698,52 @@ export function Manage() {
     } finally {
       setChecking(false);
     }
+  };
+  const runUpdateCheck = async () => {
+    setCheckingUpdates(true);
+    try {
+      const { results, error } = await checkUpdates(modrinth, data.mods, {
+        gameVersion: data.modpack.minecraftVersion.trim() || undefined,
+        loader: normalizeLoader(data.modpack.modloader) ?? undefined,
+      });
+      setUpdates({ results, at: new Date() });
+      const available = [...results.values()].filter(
+        (result) => result.status === "update-available",
+      ).length;
+      if (error)
+        notify({
+          kind: "error",
+          title: "Update check incomplete",
+          description: `${error.message} Mods that were not checked show as Unknown.`,
+        });
+      else
+        notify({
+          kind: "info",
+          title: "Updates checked",
+          description: available
+            ? `${available} ${available === 1 ? "mod has" : "mods have"} a newer compatible version. Nothing was changed.`
+            : "No newer compatible versions were found.",
+        });
+    } finally {
+      setCheckingUpdates(false);
+    }
+  };
+  const importJars = (created: Mod[]) => {
+    try {
+      importMods(modsSchema.parse([...data.mods, ...created]));
+    } catch {
+      notify({
+        kind: "error",
+        title: "Import failed",
+        description: "The imported entries did not pass validation.",
+      });
+      return false;
+    }
+    notify({
+      title: `Imported ${created.length} ${created.length === 1 ? "mod" : "mods"}`,
+      description: "Added to your local draft as installed.",
+    });
+    return true;
   };
   const categories = useMemo(
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
@@ -808,6 +876,12 @@ export function Manage() {
                     <div className="section-head-actions">
                       <Button
                         variant="secondary"
+                        onClick={() => setImportingJars(true)}
+                      >
+                        <Upload size={16} /> Import mods
+                      </Button>
+                      <Button
+                        variant="secondary"
                         onClick={() => setPicking({ kind: "add" })}
                       >
                         <Search size={16} /> Search Modrinth
@@ -823,6 +897,10 @@ export function Manage() {
                     checking={checking}
                     checkedAt={live?.at ?? null}
                     onCheck={() => void runCheck()}
+                    updates={updates?.results ?? null}
+                    updatesCheckedAt={updates?.at ?? null}
+                    checkingUpdates={checkingUpdates}
+                    onCheckUpdates={() => void runUpdateCheck()}
                   />
                   <ModFilters
                     filters={filters}
@@ -872,6 +950,17 @@ export function Manage() {
                                     compact
                                   />
                                 )}
+                                <UpdateBadge
+                                  mod={mod}
+                                  result={updates?.results.get(mod.id)}
+                                  onUpdate={(versionId) =>
+                                    setPicking({
+                                      kind: "refresh",
+                                      mod,
+                                      preselectVersionId: versionId,
+                                    })
+                                  }
+                                />
                               </div>
                               <p>
                                 {mod.category} <span>·</span> {mod.side} side{" "}
@@ -1077,6 +1166,20 @@ export function Manage() {
             <Trash2 size={16} /> Delete mod
           </Button>
         </div>
+      </Dialog>
+      <Dialog
+        open={importingJars}
+        onOpenChange={setImportingJars}
+        title="Import mods from files"
+        description="Select .jar files or a mods folder, review what was found, then choose what to add."
+        size="wide"
+      >
+        <JarImportDialog
+          mods={data.mods}
+          modpack={data.modpack}
+          onImport={importJars}
+          onCancel={() => setImportingJars(false)}
+        />
       </Dialog>
     </div>
   );

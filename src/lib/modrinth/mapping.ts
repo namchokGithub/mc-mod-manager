@@ -187,6 +187,8 @@ export function metaFromVersion(
     slug: project.slug,
     versionId: version.id,
     versionNumber: version.versionNumber,
+    ...(version.versionType && { versionType: version.versionType }),
+    ...(version.datePublished && { datePublished: version.datePublished }),
     gameVersions: version.gameVersions,
     loaders: version.loaders,
     dependencies: version.dependencies,

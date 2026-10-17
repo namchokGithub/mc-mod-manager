@@ -123,13 +123,24 @@ export function createModrinthClient(
     url: string,
     schema: z.ZodType<T>,
     signal?: AbortSignal,
+    requestBody?: unknown,
   ): Promise<T> {
     let response: Response;
     try {
-      response = await fetchImpl(url, {
-        signal,
-        headers: { Accept: "application/json" },
-      });
+      response = await fetchImpl(
+        url,
+        requestBody === undefined
+          ? { signal, headers: { Accept: "application/json" } }
+          : {
+              signal,
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            },
+      );
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError")
         throw error;
@@ -228,6 +239,25 @@ export function createModrinthClient(
       bulk("projects", ids, projectSchema, signal),
     versions: (ids: string[], signal?: AbortSignal) =>
       bulk("versions", ids, versionSchema, signal),
+    /** Looks up versions by SHA-1 file hash. Only the hashes are sent, never the files. */
+    versionsByHashes: async (hashes: string[], signal?: AbortSignal) => {
+      const unique = [...new Set(hashes)];
+      const found: Record<string, VersionResponse> = {};
+      for (let index = 0; index < unique.length; index += BULK_CHUNK)
+        Object.assign(
+          found,
+          await request(
+            `${MODRINTH_API}/version_files`,
+            z.record(z.string(), versionSchema),
+            signal,
+            {
+              hashes: unique.slice(index, index + BULK_CHUNK),
+              algorithm: "sha1",
+            },
+          ),
+        );
+      return found;
+    },
   };
 }
 
