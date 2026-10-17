@@ -424,5 +424,141 @@
       "dependencies": [],
       "syncedAt": "2026-10-17T15:23:10.143Z"
     }
+  },
+  {
+    "id": "geckolib",
+    "name": "Geckolib",
+    "version": "5.5.2",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/geckolib",
+    "description": "A 3D animation library for entities, blocks, items, armor, and more!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/8BmcQJ2H/012d1aadbc754995de66e8c149a56aa10b63fe05_96.webp",
+    "modrinth": {
+      "projectId": "8BmcQJ2H",
+      "slug": "geckolib",
+      "versionId": "xfVfPcoC",
+      "versionNumber": "5.5.2",
+      "versionType": "release",
+      "datePublished": "2026-06-27T03:10:38.819524Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:24:23.512Z"
+    }
+  },
+  {
+    "id": "cloth-config",
+    "name": "Cloth Config API",
+    "version": "26.1.154+neoforge",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/cloth-config",
+    "description": "Configuration Library for Minecraft Mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9s6osm5g/ed8a2316cbb6f4fc5f510e8e13a59a85cbbbff4d_96.webp",
+    "modrinth": {
+      "projectId": "9s6osm5g",
+      "slug": "cloth-config",
+      "versionId": "TimoYzse",
+      "versionNumber": "26.1.154+neoforge",
+      "versionType": "release",
+      "datePublished": "2026-03-26T16:04:39.594678Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:24:58.288Z"
+    }
+  },
+  {
+    "id": "clumps",
+    "name": "Clumps",
+    "version": "26.1.2.1",
+    "category": "Storage",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/clumps",
+    "description": "Clumps XP orbs together to reduce lag",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Wnxd13zP/6a965bb7974c3e759a53a1c89c35de4acd4cf86a_96.webp",
+    "modrinth": {
+      "projectId": "Wnxd13zP",
+      "slug": "clumps",
+      "versionId": "MYKeTBJr",
+      "versionNumber": "26.1.2.1",
+      "versionType": "release",
+      "datePublished": "2026-04-11T19:04:58.498383Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:25:10.541Z"
+    }
+  },
+  {
+    "id": "curios",
+    "name": "Curios API",
+    "version": "15.0.0+26.1.2",
+    "category": "Equipment",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/curios",
+    "description": "A flexible and expandable accessory/equipment API for users and developers.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/vvuO3ImH/2a7323ca80849de0bcb50299e18acdf8bf394682.png",
+    "modrinth": {
+      "projectId": "vvuO3ImH",
+      "slug": "curios",
+      "versionId": "dRnRThvD",
+      "versionNumber": "15.0.0+26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-07-19T09:02:12.956461Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:25:34.430Z"
+    }
   }
 ]

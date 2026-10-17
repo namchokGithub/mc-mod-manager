@@ -93,9 +93,16 @@ export function saveDraft(
 }
 
 export function downloadJson(filename: string, value: unknown): void {
-  const blob = new Blob([serializeJson(value)], {
-    type: "application/json",
-  });
+  downloadText(filename, serializeJson(value), "application/json");
+}
+
+/** Saves text as a UTF-8 file in the browser; the temporary object URL is revoked afterwards. */
+export function downloadText(
+  filename: string,
+  text: string,
+  type: string,
+): void {
+  const blob = new Blob([text], { type: `${type};charset=utf-8` });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;

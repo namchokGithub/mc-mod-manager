@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, ChevronDown, Circle, CircleCheck } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Circle,
+  CircleCheck,
+  FileDown,
+} from "lucide-react";
+import { useCollection } from "../../app/DataContext";
+import { ExportGuideDialog } from "../../components/ExportGuideDialog";
+import { Button } from "../../components/ui/button";
 import { CompatBadge } from "../../components/CompatBadge";
 import { DependencyOverview } from "../../components/DependencyOverview";
 import { ModArtwork } from "../../components/ModArtwork";
@@ -23,8 +32,11 @@ export function BuildPlanGuide({
   compat: Map<string, CompatResult>;
   onOpenMod: (mod: Mod) => void;
 }) {
+  const { data: collection } = useCollection();
   const batches = orderedBatches(plan);
   const [open, setOpen] = useState<Set<string>>(() => new Set());
+  // null: closed; "": all batches; otherwise the batch it was opened from.
+  const [exportFor, setExportFor] = useState<string | null>(null);
   if (!batches.length) return null;
   const toggle = (id: string) =>
     setOpen((current) => {
@@ -48,6 +60,9 @@ export function BuildPlanGuide({
           </h2>
           <p>Install the pack batch by batch, checking each step as you go.</p>
         </div>
+        <Button variant="secondary" onClick={() => setExportFor("")}>
+          <FileDown size={16} /> Export guide
+        </Button>
       </div>
       <ol className="plan-list">
         {batches.map((batch, index) => {
@@ -163,6 +178,15 @@ export function BuildPlanGuide({
                         mods={mods}
                         onOpenMod={onOpenMod}
                       />
+                      <div>
+                        <Button
+                          variant="ghost"
+                          size="small"
+                          onClick={() => setExportFor(batch.id)}
+                        >
+                          <FileDown size={15} /> Export this batch
+                        </Button>
+                      </div>
                       {batch.checklist.length > 0 && (
                         <ol className="plan-steps plan-steps-readonly">
                           {batch.checklist.map((item) => (
@@ -193,6 +217,12 @@ export function BuildPlanGuide({
           );
         })}
       </ol>
+      <ExportGuideDialog
+        open={exportFor !== null}
+        onOpenChange={(value) => !value && setExportFor(null)}
+        collection={collection}
+        currentBatchId={exportFor || null}
+      />
     </section>
   );
 }

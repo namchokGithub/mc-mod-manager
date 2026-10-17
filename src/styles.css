@@ -3634,3 +3634,46 @@ main:focus {
   color: var(--text-muted);
   line-height: 1.45;
 }
+
+/* Build guide export dialog */
+.guide-export {
+  display: grid;
+  gap: 12px;
+}
+.guide-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.guide-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+.guide-preview {
+  display: grid;
+  gap: 6px;
+}
+.guide-preview pre {
+  max-height: 280px;
+  margin: 0;
+  padding: 12px 14px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.guide-preview pre:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+@media (max-width: 650px) {
+  .guide-options {
+    grid-template-columns: 1fr;
+  }
+}

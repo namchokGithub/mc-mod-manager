@@ -4,6 +4,7 @@ import {
   ArrowDown,
   ArrowUp,
   ChevronDown,
+  FileDown,
   ListChecks,
   Pencil,
   Plus,
@@ -26,6 +27,7 @@ import {
   unassignMod,
 } from "../../lib/batches";
 import { DependencyOverview } from "../../components/DependencyOverview";
+import { ExportGuideDialog } from "../../components/ExportGuideDialog";
 import type { Batch, ChecklistItem, Mod } from "../../lib/schema";
 import { useRetained } from "../../lib/useRetained";
 
@@ -269,6 +271,8 @@ export function BuildPlanEditor({
   const notify = useToast();
   const batches = orderedBatches(data.batches);
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
+  // null: closed; "" : all batches; otherwise the batch the export was opened from.
+  const [exportFor, setExportFor] = useState<string | null>(null);
   const [form, setForm] = useState<{
     batch: Batch | null;
     name: string;
@@ -332,11 +336,20 @@ export function BuildPlanEditor({
             after each one.
           </p>
         </div>
-        <Button
-          onClick={() => setForm({ batch: null, name: "", description: "" })}
-        >
-          <Plus size={17} /> New batch
-        </Button>
+        <div className="section-head-actions">
+          <Button
+            variant="secondary"
+            disabled={!batches.length}
+            onClick={() => setExportFor("")}
+          >
+            <FileDown size={16} /> Export guide
+          </Button>
+          <Button
+            onClick={() => setForm({ batch: null, name: "", description: "" })}
+          >
+            <Plus size={17} /> New batch
+          </Button>
+        </div>
       </div>
       {batches.length ? (
         <ol className="plan-list">
@@ -404,6 +417,15 @@ export function BuildPlanEditor({
                       }
                     >
                       <Pencil size={16} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Export a guide for ${batch.name}`}
+                      title="Export guide"
+                      onClick={() => setExportFor(batch.id)}
+                    >
+                      <FileDown size={16} />
                     </Button>
                     <Button
                       variant="ghost"
@@ -562,6 +584,12 @@ export function BuildPlanEditor({
           </Button>
         </div>
       </Dialog>
+      <ExportGuideDialog
+        open={exportFor !== null}
+        onOpenChange={(open) => !open && setExportFor(null)}
+        collection={data}
+        currentBatchId={exportFor || null}
+      />
     </div>
   );
 }
