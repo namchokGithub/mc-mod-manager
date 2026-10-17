@@ -1528,6 +1528,7 @@ main:focus {
   border-top: 1px solid var(--border);
 }
 /* Confirm dialogs have no body: the heading's border already separates the buttons. */
+.dialog-actions.dialog-actions-flush,
 .dialog-heading + .dialog-actions {
   margin-top: 0;
   padding-top: 0;

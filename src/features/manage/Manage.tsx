@@ -654,7 +654,7 @@ function DataTools() {
         title="Discard your local draft?"
         description="This will replace your edits with the currently published data. Export first if you want to keep them."
       >
-        <div className="dialog-actions">
+        <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setConfirmReset(false)}>
             Cancel
           </Button>
@@ -688,7 +688,7 @@ function DataTools() {
             : `${shownImport?.fileName ?? "This file"} will replace the name, description, versions, and hero image in your draft.`
         }
       >
-        <div className="dialog-actions">
+        <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setPendingImport(null)}>
             Cancel
           </Button>
@@ -1234,7 +1234,7 @@ export function Manage() {
         title={`Delete ${shownDeleting?.name ?? "mod"}?`}
         description="This removes the mod from your local draft. You can reset to published data before exporting if needed."
       >
-        <div className="dialog-actions">
+        <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setDeleting(null)}>
             Cancel
           </Button>
@@ -1284,7 +1284,7 @@ export function Manage() {
             : "This mod has changes that have not been saved. Closing the editor will lose them."
         }
       >
-        <div className="dialog-actions">
+        <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setConfirmDiscard(null)}>
             Keep editing
           </Button>
