@@ -20,7 +20,7 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 
 - Keep data validation and draft persistence separate from presentation.
 - Validate JSON before importing it; failed imports must leave the current data unchanged.
-- Never attempt to write repository JSON files from the browser. Exported files must be committed to publish them.
+- The browser never writes files itself. The only file-writing path is the dev-only Vite plugin `vite-plugins/localJsonSave.ts` (`apply: "serve"`). It writes only `public/data/modpack.json` and `mods.json`, after schema validation, from loopback same-origin requests, atomically, and with a conflict check. Never add another write path, accept file paths from clients, or let it reach production builds. Files must still be committed to publish them.
 - Keep Preview and Manage on a single shared data state.
 - New JSON fields must be optional so existing files and drafts keep loading. Schemas live in `src/lib/schema.ts`.
 - Keep Modrinth code split: `src/lib/modrinth/api.ts` (requests and response validation), `mapping.ts` (pure mapping), `service.ts` (orchestration and caching). Compatibility (`src/lib/compatibility.ts`) and update status (`src/lib/updates.ts`) stay pure and read-only; they never modify mods.

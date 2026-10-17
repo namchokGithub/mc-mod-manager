@@ -1,7 +1,6 @@
 # MC Mod Manager
 
 [![Deploy](https://github.com/namchokGithub/mc-mod-manager/actions/workflows/deploy.yml/badge.svg)](https://github.com/namchokGithub/mc-mod-manager/actions/workflows/deploy.yml)
-[![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-347A58)](https://namchokgithub.github.io/mc-mod-manager/)
 [![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev/)
 ![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-62B47A?logo=minecraft&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -81,8 +80,15 @@ The schemas are in `src/lib/schema.ts`.
 **Editing in the browser never changes the published site.** The workflow is:
 
 1. Run `pnpm dev` and edit in **Manage**. Changes are saved as a draft in this browser's LocalStorage about half a second after each change. Preview in the same browser shows the draft.
-2. When ready, open **Manage → Data & export** and export `modpack.json` and `mods.json`.
-3. Replace the files in `public/data/` with the exported ones, commit, and push. The site updates after the GitHub Pages workflow finishes.
+2. When ready, click **Save to local JSON** at the top of Manage and confirm. The dev server writes `public/data/modpack.json` and `public/data/mods.json` directly, and the draft is cleared. Exporting from **Manage → Data & export** and replacing the files by hand still works as a backup.
+3. Commit and push the JSON files. The site updates after the GitHub Pages workflow finishes.
+
+Saving to local JSON:
+
+- It exists only while `pnpm dev` runs (a Vite dev-server plugin). Production builds and GitHub Pages have no write endpoint.
+- It accepts requests only from this computer, from the app's own localhost page. It writes only those two files, after validating them with the same schemas as import, and writes atomically (temporary file, then rename).
+- If the files changed on disk since the page loaded (for example, edited in an editor or by `git pull`), it shows a conflict and only overwrites after you confirm.
+- It never runs automatically. Edits keep autosaving to the browser draft until you click Save.
 
 Details:
 

@@ -17,6 +17,8 @@ export type DataContextValue = {
   importModpack: (modpack: Modpack) => void;
   importMods: (mods: Mod[]) => void;
   reset: () => void;
+  /** After the dev server wrote the files: they become the new published baseline. */
+  markSaved: (saved: Collection) => void;
 };
 
 export const DataContext = createContext<DataContextValue | null>(null);

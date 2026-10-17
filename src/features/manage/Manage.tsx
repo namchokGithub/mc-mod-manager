@@ -18,6 +18,7 @@ import {
   ChevronRight,
   CircleAlert,
   Copy,
+  HardDriveDownload,
   FileJson2,
   Info,
   LoaderCircle,
@@ -70,6 +71,7 @@ import {
   type Mod,
   type Modpack,
 } from "../../lib/schema";
+import { saveToLocalJson } from "../../lib/localSave";
 import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
@@ -577,8 +579,9 @@ function DataTools() {
       <div className="data-note">
         <Info size={18} />
         <p>
-          Changes are saved only in this browser. Export both JSON files and
-          commit them to the repository to update the published site.
+          Changes are saved only in this browser. Use “Save to local JSON” at
+          the top of Manage to write public/data/*.json directly, or export both
+          files here as a backup. Commit the files to update the published site.
         </p>
       </div>
       <AnimatePresence initial={false}>
@@ -758,6 +761,8 @@ export function Manage() {
     deleteMods,
     updateModpack,
     importMods,
+    published,
+    markSaved,
   } = useCollection();
   const notify = useToast();
   const [importingJars, setImportingJars] = useState(false);
@@ -786,6 +791,44 @@ export function Manage() {
   // IDs captured when the bulk confirm opens, so the dialog cannot change underneath it.
   const [bulkDelete, setBulkDelete] = useState<string[] | null>(null);
   const shownBulkDelete = useRetained(bulkDelete);
+  // Writing public/data/*.json through the dev server. The ref blocks double submits
+  // even before React re-renders the disabled button.
+  const [localSave, setLocalSave] = useState<{
+    conflict?: string;
+    error?: string;
+  } | null>(null);
+  const shownLocalSave = useRetained(localSave);
+  const [savingLocal, setSavingLocal] = useState(false);
+  const savingLocalRef = useRef(false);
+  const runLocalSave = async (force: boolean) => {
+    if (savingLocalRef.current) return;
+    savingLocalRef.current = true;
+    setSavingLocal(true);
+    try {
+      const result = await saveToLocalJson(data, published, force);
+      if (result.kind === "saved") {
+        markSaved(result.collection);
+        setLocalSave(null);
+        notify({
+          title: "Saved to public/data",
+          description:
+            "modpack.json and mods.json were updated. Commit them to publish.",
+        });
+      } else if (result.kind === "conflict")
+        setLocalSave({ conflict: result.message });
+      else {
+        setLocalSave((current) => ({ ...current, error: result.message }));
+        notify({
+          kind: "error",
+          title: "Not saved",
+          description: result.message,
+        });
+      }
+    } finally {
+      savingLocalRef.current = false;
+      setSavingLocal(false);
+    }
+  };
   const shownPicking = useRetained(picking);
   const [editorDirty, setEditorDirty] = useState(false);
   const [settingsDirty, setSettingsDirty] = useState(false);
@@ -1001,6 +1044,22 @@ export function Manage() {
           <a className="button button-secondary" href="#/">
             View preview <ArrowRight size={16} />
           </a>
+          <Button
+            disabled={!dirty || savingLocal}
+            title={
+              dirty
+                ? "Write the draft to public/data/*.json"
+                : "No changes to save"
+            }
+            onClick={() => setLocalSave({})}
+          >
+            {savingLocal ? (
+              <LoaderCircle className="spin" size={16} aria-hidden="true" />
+            ) : (
+              <HardDriveDownload size={16} aria-hidden="true" />
+            )}
+            {savingLocal ? "Saving…" : "Save to local JSON"}
+          </Button>
         </div>
       </div>
       <div className="manage-layout">
@@ -1469,6 +1528,58 @@ export function Manage() {
             }}
           >
             <Trash2 size={16} /> Delete mod
+          </Button>
+        </div>
+      </Dialog>
+      <Dialog
+        open={localSave !== null}
+        onOpenChange={(open) => !open && !savingLocal && setLocalSave(null)}
+        title={
+          shownLocalSave?.conflict
+            ? "Files changed on disk"
+            : "Save to local JSON files?"
+        }
+        description={
+          shownLocalSave?.conflict
+            ? `${shownLocalSave.conflict} Overwriting replaces those changes with your draft.`
+            : `This overwrites public/data/modpack.json and public/data/mods.json with your draft (${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"}).${settingsDirty || editorDirty ? " Unsaved form edits are not included." : ""}`
+        }
+      >
+        {shownLocalSave?.error && (
+          <div className="inline-message error" role="alert">
+            <CircleAlert size={16} aria-hidden="true" />
+            <span>{shownLocalSave.error}</span>
+          </div>
+        )}
+        <div
+          className={
+            shownLocalSave?.error
+              ? "dialog-actions"
+              : "dialog-actions dialog-actions-flush"
+          }
+        >
+          <Button
+            variant="ghost"
+            disabled={savingLocal}
+            onClick={() => setLocalSave(null)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant={shownLocalSave?.conflict ? "danger" : "default"}
+            disabled={savingLocal}
+            onClick={() => void runLocalSave(Boolean(shownLocalSave?.conflict))}
+          >
+            {savingLocal ? (
+              <LoaderCircle className="spin" size={16} aria-hidden="true" />
+            ) : (
+              <HardDriveDownload size={16} aria-hidden="true" />
+            )}
+            {savingLocal
+              ? "Saving…"
+              : shownLocalSave?.conflict
+                ? "Overwrite files"
+                : "Save files"}
           </Button>
         </div>
       </Dialog>

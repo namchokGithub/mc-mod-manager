@@ -1,3 +1,4 @@
+import { serializeJson } from "./json";
 import { collectionSchema, type Collection } from "./schema";
 
 export const DRAFT_KEY = "mc-mod-manager:draft:v1";
@@ -67,9 +68,7 @@ export function loadDraft(
   return { draft, issue: null };
 }
 
-export function serializeJson(value: unknown): string {
-  return `${JSON.stringify(value, null, 2)}\n`;
-}
+export { serializeJson };
 
 export function saveDraft(
   storage: Pick<Storage, "setItem">,

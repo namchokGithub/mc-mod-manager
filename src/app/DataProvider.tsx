@@ -152,6 +152,17 @@ export function DataProvider({ children }: { children: ReactNode }) {
     deleteMods: (ids) => change({ ...data, mods: removeMods(data.mods, ids) }),
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),
+    markSaved: (saved) => {
+      try {
+        window.localStorage.removeItem(DRAFT_KEY);
+      } catch {
+        // Nothing to clear when storage is blocked.
+      }
+      setPublished(saved);
+      setData(saved);
+      setDirty(false);
+      setSaveState("saved");
+    },
     reset: () => {
       try {
         window.localStorage.removeItem(DRAFT_KEY);
