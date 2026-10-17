@@ -88,6 +88,7 @@ import { QuickAddDialog } from "./QuickAddDialog";
 import { InboxPanel } from "./InboxPanel";
 import { inboxEntriesFromNames } from "../../lib/inbox";
 import { CompatibilityPanel } from "./CompatibilityPanel";
+import { IgnoredDependenciesField } from "./IgnoredDependencies";
 import { ManualVerificationSection } from "./ManualVerification";
 import {
   SupportedLoadersField,
@@ -253,6 +254,7 @@ function ModEditor({
   onCancel,
   onDirtyChange,
   packMinecraftVersion,
+  packModloader,
 }: {
   mod: Mod | null;
   initialValues?: Mod;
@@ -262,6 +264,7 @@ function ModEditor({
   onCancel: () => void;
   onDirtyChange: (dirty: boolean) => void;
   packMinecraftVersion: string;
+  packModloader: string;
 }) {
   const start = initialValues ?? mod;
   const verified = verifiedSupport(start);
@@ -381,6 +384,12 @@ function ModEditor({
         values.supportedVersions,
         values.supportedLoaders,
       ),
+      ignoredDependencies: values.ignoredDependencies?.length
+        ? values.ignoredDependencies.map((entry) => ({
+            id: entry.id,
+            reason: entry.reason.trim(),
+          }))
+        : undefined,
     };
     const validation = modSchema.safeParse(candidate);
     if (!validation.success) {
@@ -553,6 +562,25 @@ function ModEditor({
             setValue("supportedLoaders", confirmed.loaders, options);
             setValue("manualVerification", confirmed, options);
           }}
+        />
+        <Controller
+          control={control}
+          name="ignoredDependencies"
+          render={({ field }) => (
+            <IgnoredDependenciesField
+              mod={{ modrinth: linked, file: start?.file }}
+              value={field.value ?? []}
+              onChange={field.onChange}
+              defaultReason={
+                packModloader.trim()
+                  ? `Only needed by another loader's build; this pack uses ${packModloader.trim()}.`
+                  : "Only needed by another loader's build."
+              }
+              errors={errors.ignoredDependencies?.map?.(
+                (item) => item?.reason?.message,
+              )}
+            />
+          )}
         />
       </div>
       <div className="dialog-actions dialog-actions-sticky">
@@ -1788,6 +1816,7 @@ export function Manage() {
             onCancel={closeEditor}
             onDirtyChange={setEditorDirty}
             packMinecraftVersion={data.modpack.minecraftVersion.trim()}
+            packModloader={data.modpack.modloader}
           />
         )}
       </Dialog>

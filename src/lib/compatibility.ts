@@ -371,10 +371,35 @@ export function checkCompatibility(
           );
       }
     };
+    const ignored = new Map(
+      (mod.ignoredDependencies ?? []).map((entry) => [entry.id, entry.reason]),
+    );
+    // Only requirements can be set aside; declared conflicts always stay.
+    const skipIgnored = (
+      id: string | null | undefined,
+      kind: string,
+      name: string,
+    ) => {
+      const reason =
+        id && (kind === "required" || kind === "optional")
+          ? ignored.get(id)
+          : undefined;
+      if (reason === undefined) return false;
+      add(
+        null,
+        "info",
+        `${name} is marked not needed for this pack: ${reason}`,
+      );
+      return true;
+    };
     const checkModrinthDependencies = (dependencies: ModrinthDependency[]) => {
       sources.dependencies = "modrinth";
       for (const dependency of dependencies) {
         if (dependency.type === "embedded") continue;
+        if (
+          skipIgnored(dependency.projectId, dependency.type, label(dependency))
+        )
+          continue;
         if (!dependency.projectId) {
           if (dependency.type === "required")
             add(
@@ -432,6 +457,8 @@ export function checkCompatibility(
     const checkJarDependencies = (file: NonNullable<Mod["file"]>) => {
       sources.dependencies = "jar";
       for (const dependency of file.dependencies ?? []) {
+        if (skipIgnored(dependency.modId, dependency.kind, dependency.modId))
+          continue;
         const providers = (byModId.get(dependency.modId) ?? []).filter(
           (other) => other.id !== mod.id,
         );

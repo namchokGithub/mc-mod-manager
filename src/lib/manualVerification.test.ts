@@ -396,3 +396,115 @@ describe("verification form", () => {
     expect(isEvidenceUrl("ftp://x.org")).toBe(false);
   });
 });
+
+describe("dependencies not needed for this pack", () => {
+  // LambDynamicLights: one Modrinth version for Fabric, NeoForge, and Quilt lists Fabric API.
+  const lamb: Mod = {
+    ...base,
+    id: "lambdynamiclights",
+    name: "LambDynamicLights",
+    version: "4.11.2+26.1.2",
+    modrinth: {
+      projectId: "yBW8D80W",
+      versionId: "USlEyPPR",
+      versionNumber: "4.11.2+26.1.2",
+      gameVersions: ["26.1", "26.1.1", "26.1.2"],
+      loaders: ["fabric", "neoforge", "quilt"],
+      dependencies: [
+        {
+          projectId: "PxQSWIcD",
+          versionId: null,
+          type: "incompatible",
+          name: "Sodium Dynamic Lights",
+        },
+        {
+          projectId: "P7dR8mSH",
+          versionId: null,
+          type: "required",
+          name: "Fabric API",
+        },
+      ],
+    },
+  };
+  const ignoring: Mod = {
+    ...lamb,
+    ignoredDependencies: [
+      { id: "P7dR8mSH", reason: "Only needed by the Fabric build." },
+    ],
+  };
+
+  it("reports the listed requirement until it is marked not needed", () => {
+    expect(check([lamb]).status).toBe("incompatible");
+    const result = check([ignoring]);
+    expect(result.status).toBe("compatible");
+    expect(result.checks.dependencies).toBe("pass");
+    expect(result.reasons).toEqual([
+      {
+        level: "info",
+        message:
+          "Fabric API is marked not needed for this pack: Only needed by the Fabric build.",
+      },
+    ]);
+  });
+
+  it("never hides declared conflicts", () => {
+    const conflict: Mod = {
+      ...lamb,
+      id: "sodium-dl",
+      modrinth: {
+        projectId: "PxQSWIcD",
+        versionId: "x",
+        gameVersions: ["26.1.2"],
+        loaders: ["neoforge"],
+        dependencies: [],
+      },
+    };
+    const result = check([
+      {
+        ...ignoring,
+        ignoredDependencies: [
+          ...ignoring.ignoredDependencies!,
+          { id: "PxQSWIcD", reason: "x" },
+        ],
+      },
+      conflict,
+    ]);
+    expect(result.status).toBe("incompatible");
+  });
+
+  it("works with manual verification and survives JSON", () => {
+    const both: Mod = {
+      ...ignoring,
+      manualVerification: {
+        ...curseforge,
+        version: lamb.version,
+        gameVersions: ["26.1", "26.1.1", "26.1.2"],
+        loaders: ["fabric", "neoforge", "quilt"],
+      },
+    };
+    const parsed = parseJsonFile(serializeJson([both]), "mods") as Mod[];
+    expect(parsed[0]?.ignoredDependencies).toEqual(
+      ignoring.ignoredDependencies,
+    );
+    expect(check(parsed)).toMatchObject({
+      verification: "manual-verified",
+      status: "compatible",
+    });
+    expect(() =>
+      parseJsonFile(
+        serializeJson([
+          { ...lamb, ignoredDependencies: [{ id: "P7dR8mSH", reason: " " }] },
+        ]),
+        "mods",
+      ),
+    ).toThrow();
+  });
+
+  it("is left out of the dependency overview and dashboard", () => {
+    const missing = (mod: Mod) =>
+      planningDashboard(collectionSchema.parse({ modpack: pack, mods: [mod] }))
+        .health.requiredMissing;
+    expect(missing(lamb)).toBe(1);
+    expect(missing(ignoring)).toBe(0);
+  });
+});

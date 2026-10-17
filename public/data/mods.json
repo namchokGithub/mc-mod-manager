@@ -3072,6 +3072,16 @@
       ],
       "syncedAt": "2026-10-17T19:39:58.868Z"
     },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2",
+        "26.1.1",
+        "26.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
     "manualVerification": {
       "source": "curseforge",
       "version": "4.11.2+26.1.2",
@@ -3087,6 +3097,189 @@
       ],
       "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights/files/all?page=1&pageSize=20&version=26.1.2&gameVersionTypeId=6&showAlphaFiles=hide",
       "verifiedAt": "2026-10-17T19:41:38.685Z"
+    },
+    "ignoredDependencies": [
+      {
+        "id": "P7dR8mSH",
+        "reason": "Only needed by another loader's build; this pack uses NeoForge."
+      }
+    ]
+  },
+  {
+    "id": "connected-glass",
+    "name": "Connected Glass",
+    "version": "1.1.14-neoforge-mc26.1",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/connected-glass",
+    "description": "Connected Glass adds new types of glass with connecting textures!",
+    "dependencies": [
+      "SuperMartijn642's Core Lib",
+      "Fusion (Connected Textures)"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DghO0R02/icon.png",
+    "modrinth": {
+      "projectId": "DghO0R02",
+      "slug": "connected-glass",
+      "versionId": "TVXgEaL7",
+      "versionNumber": "1.1.14-neoforge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-07-08T13:47:09.859393Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "rOUBggPv",
+          "versionId": null,
+          "type": "required",
+          "name": "SuperMartijn642's Core Lib"
+        },
+        {
+          "projectId": "p19vrgc2",
+          "versionId": null,
+          "type": "required",
+          "name": "Fusion (Connected Textures)"
+        },
+        {
+          "projectId": "B0g2vT6l",
+          "versionId": null,
+          "type": "optional",
+          "name": "Rechiseled"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:43:12.376Z"
+    }
+  },
+  {
+    "id": "fusion-connected-textures",
+    "name": "Fusion (Connected Textures)",
+    "version": "1.3.16-neoforge-mc26.1",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fusion-connected-textures",
+    "description": "Fusion allows resource packs to use additional texture and model types such as connected textures!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/p19vrgc2/8a9940a468bb536f7402b389d583e7f070ee14fb_96.webp",
+    "modrinth": {
+      "projectId": "p19vrgc2",
+      "slug": "fusion-connected-textures",
+      "versionId": "8g0jpGRQ",
+      "versionNumber": "1.3.16-neoforge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-10-05T15:23:45.151969Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:43:28.498Z"
+    }
+  },
+  {
+    "id": "supermartijn642s-core-lib",
+    "name": "SuperMartijn642's Core Lib",
+    "version": "1.1.25-neoforge-mc26.1",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/supermartijn642s-core-lib",
+    "description": "SuperMartijn642's Core Lib adds lots of basic implementations that allow for similar code between different Minecraft versions!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/rOUBggPv/e745e719d7fe2aa0335d819ca9c97defbf2e0bcb_96.webp",
+    "modrinth": {
+      "projectId": "rOUBggPv",
+      "slug": "supermartijn642s-core-lib",
+      "versionId": "hQ4d4zUa",
+      "versionNumber": "1.1.25-neoforge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-10-06T20:42:15.121972Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T19:43:28.498Z"
+    }
+  },
+  {
+    "id": "rechiseled",
+    "name": "Rechiseled",
+    "version": "1.2.6-neoforge-mc26.1",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/rechiseled",
+    "description": "Rechiseled allows you to chisel blocks into various decorative blocks with connected textures!",
+    "dependencies": [
+      "SuperMartijn642's Core Lib",
+      "Fusion (Connected Textures)",
+      "SuperMartijn642's Config Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/B0g2vT6l/b3d1c0f2ed2ec55eed1d6cd59c3ceb8f23b6eba3_96.webp",
+    "modrinth": {
+      "projectId": "B0g2vT6l",
+      "slug": "rechiseled",
+      "versionId": "V6Edgo0h",
+      "versionNumber": "1.2.6-neoforge-mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-09-13T23:31:38.981485Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "rOUBggPv",
+          "versionId": null,
+          "type": "required",
+          "name": "SuperMartijn642's Core Lib"
+        },
+        {
+          "projectId": "p19vrgc2",
+          "versionId": null,
+          "type": "required",
+          "name": "Fusion (Connected Textures)"
+        },
+        {
+          "projectId": "LN9BxssP",
+          "versionId": null,
+          "type": "required",
+          "name": "SuperMartijn642's Config Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T19:43:28.498Z"
     }
   }
 ]

@@ -3411,6 +3411,31 @@ main:focus {
   justify-content: flex-end;
   gap: 8px;
 }
+.ignored-deps {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+.ignored-deps legend {
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-secondary);
+}
+.ignored-deps ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ignored-deps li {
+  display: grid;
+  gap: 6px;
+}
 .compat-evidence {
   font-size: 11px;
   color: var(--text-muted);

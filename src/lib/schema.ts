@@ -136,6 +136,16 @@ export const modSchema = z.object({
     })
     .optional(),
   manualVerification: manualVerificationSchema.optional(),
+  // Required or optional dependencies the user marked as not needed for this pack, e.g. Fabric
+  // API listed on a multi-loader Modrinth version. `id` is a Modrinth project ID or JAR mod ID.
+  ignoredDependencies: z
+    .array(
+      z.object({
+        id: z.string().trim().min(1),
+        reason: z.string().trim().min(1, "Give a reason for ignoring it"),
+      }),
+    )
+    .optional(),
 });
 
 export const modsSchema = z.array(modSchema).superRefine((mods, context) => {
@@ -241,6 +251,7 @@ export type Modpack = z.infer<typeof modpackSchema>;
 export type Mod = z.infer<typeof modSchema>;
 export type ModrinthMeta = z.infer<typeof modrinthMetaSchema>;
 export type ManualVerification = z.infer<typeof manualVerificationSchema>;
+export type IgnoredDependency = NonNullable<Mod["ignoredDependencies"]>[number];
 export type ModrinthDependency = NonNullable<
   ModrinthMeta["dependencies"]
 >[number];

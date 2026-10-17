@@ -79,6 +79,30 @@ function readDependencies(mod: Mod): {
   source: DependencySource;
   dependencies: RawDependency[];
 } {
+  const read = readAllDependencies(mod);
+  const ignored = new Set(
+    (mod.ignoredDependencies ?? []).map((entry) => entry.id),
+  );
+  if (!ignored.size) return read;
+  // Requirements the user marked as not needed for this pack are left out; conflicts stay.
+  return {
+    ...read,
+    dependencies: read.dependencies.filter(
+      (dependency) =>
+        !(
+          dependency.identifier &&
+          ignored.has(dependency.identifier) &&
+          (dependency.relation === "required" ||
+            dependency.relation === "optional")
+        ),
+    ),
+  };
+}
+
+function readAllDependencies(mod: Mod): {
+  source: DependencySource;
+  dependencies: RawDependency[];
+} {
   const meta = mod.modrinth;
   if (meta?.versionId && meta.dependencies)
     return {
