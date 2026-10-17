@@ -454,13 +454,17 @@ main:focus {
 }
 .hero-decor {
   position: absolute;
+  pointer-events: none;
   border: 1px solid rgb(52 122 88 / 22%);
   transform: rotate(-30deg) skew(18deg, 18deg);
+  --hero-decor-opacity: 1;
+  opacity: var(--hero-decor-opacity);
   box-shadow:
     40px 38px 0 -1px var(--accent-light),
     40px 38px 0 0 rgb(52 122 88 / 18%),
     80px 76px 0 -1px var(--surface-alt),
     80px 76px 0 0 rgb(52 122 88 / 12%);
+  animation: hero-decor-enter 700ms ease-out both;
 }
 .hero-decor-one {
   width: 190px;
@@ -472,6 +476,9 @@ main:focus {
     var(--accent-light-strong),
     var(--accent-light)
   );
+  animation:
+    hero-decor-enter 700ms ease-out both,
+    hero-decor-one-float 7.6s ease-in-out 700ms infinite;
 }
 .hero-decor-two {
   width: 96px;
@@ -479,7 +486,38 @@ main:focus {
   right: 28%;
   bottom: 13px;
   background: var(--accent-light);
-  opacity: 0.45;
+  --hero-decor-opacity: 0.45;
+  animation:
+    hero-decor-enter 860ms ease-out 120ms both,
+    hero-decor-two-float 9.8s ease-in-out 980ms infinite;
+}
+@keyframes hero-decor-enter {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  to {
+    opacity: var(--hero-decor-opacity);
+    translate: 0 0;
+  }
+}
+@keyframes hero-decor-one-float {
+  0%,
+  100% {
+    transform: rotate(-30deg) skew(18deg, 18deg);
+  }
+  50% {
+    transform: translate(4px, -7px) rotate(-30deg) skew(18deg, 18deg);
+  }
+}
+@keyframes hero-decor-two-float {
+  0%,
+  100% {
+    transform: rotate(-30deg) skew(18deg, 18deg);
+  }
+  50% {
+    transform: translate(-3px, 5px) rotate(-30deg) skew(18deg, 18deg);
+  }
 }
 .hero-inner {
   position: relative;
@@ -1846,7 +1884,7 @@ main:focus {
     font-size: 38px;
   }
   .hero-decor {
-    opacity: 0.24;
+    --hero-decor-opacity: 0.24;
   }
   .hero-corner {
     display: none;
@@ -2056,6 +2094,10 @@ main:focus {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  .hero-decor {
+    animation: none;
+    translate: none;
   }
 }
 
