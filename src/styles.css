@@ -4162,3 +4162,36 @@ main:focus {
   color: var(--primary);
   text-decoration: none;
 }
+.content-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0;
+  padding: 0;
+  list-style: none;
+}
+.content-review {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+.content-review div {
+  display: grid;
+  grid-template-columns: minmax(110px, auto) 1fr;
+  gap: 10px;
+  font-size: 12px;
+}
+.content-review dt {
+  color: var(--text-muted);
+  font-weight: 650;
+}
+.content-review dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 520px) {
+  .content-review div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

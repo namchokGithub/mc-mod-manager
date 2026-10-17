@@ -265,6 +265,9 @@ export const contentItemSchema = z.looseObject({
   notes: z.string().default(""),
   createdAt: z.iso.datetime().optional(),
   updatedAt: z.iso.datetime().optional(),
+  // Provider snapshot from a Modrinth import, same shape as for mods. For shaders, `loaders`
+  // holds shader runtimes (e.g. iris), not modloaders. Never treated as manually verified.
+  modrinth: modrinthMetaSchema.optional(),
 });
 
 export const contentItemsSchema = z

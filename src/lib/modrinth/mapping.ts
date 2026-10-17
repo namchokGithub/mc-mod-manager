@@ -83,8 +83,11 @@ export function normalizeLoader(value: string): Loader | null {
   return null;
 }
 
-export function projectUrl(slug: string): string {
-  return `https://modrinth.com/mod/${encodeURIComponent(slug)}`;
+export function projectUrl(
+  slug: string,
+  type: "mod" | "resourcepack" | "datapack" | "shader" = "mod",
+): string {
+  return `https://modrinth.com/${type}/${encodeURIComponent(slug)}`;
 }
 
 export function projectFromHit(hit: SearchHit): ModrinthProject {

@@ -47,6 +47,8 @@ import {
 import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ContentEditor } from "./ContentEditor";
+import { ContentModrinthPicker } from "../modrinth/ContentModrinthPicker";
+import { findContentDuplicate } from "../../lib/modrinth/contentImport";
 
 /** Manage page for one additional collection: resource packs, data packs, or shaders. */
 export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
@@ -74,6 +76,7 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
   } | null>(null);
   const shownImport = useRetained(pendingImport);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [picking, setPicking] = useState(false);
 
   // Reloading or closing the browser tab would drop unsaved form edits.
   useEffect(() => {
@@ -113,6 +116,41 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
       description: "Stored in this browser’s draft.",
     });
     return null;
+  };
+  // Checked again on confirm, so a project added meanwhile (e.g. in another tab) is not duplicated.
+  const addFromModrinth = (item: ContentItem) => {
+    const project = item.modrinth;
+    const duplicate = project
+      ? findContentDuplicate(items, {
+          id: project.projectId,
+          slug: project.slug ?? project.projectId,
+          title: item.name,
+        })
+      : undefined;
+    if (duplicate && duplicate.match !== "name") {
+      notify({
+        kind: "error",
+        title: "Not added",
+        description: `${meta.title} already has this project as “${duplicate.item.name}”.`,
+      });
+      return false;
+    }
+    try {
+      save([...items, item]);
+    } catch {
+      notify({
+        kind: "error",
+        title: "Not added",
+        description: "The entry did not pass validation. Nothing was changed.",
+      });
+      return false;
+    }
+    setPicking(false);
+    notify({
+      title: `${item.name} added to ${meta.title.toLowerCase()}`,
+      description: "Planned, stored in this browser’s draft.",
+    });
+    return true;
   };
   const closeEditor = () =>
     editorDirty ? setConfirmDiscard(true) : setEditing(null);
@@ -165,6 +203,9 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
             }}
           >
             <ArrowDownToLine size={16} /> Export
+          </Button>
+          <Button variant="secondary" onClick={() => setPicking(true)}>
+            <Search size={16} /> Search Modrinth
           </Button>
           <Button onClick={() => setEditing({ item: null })}>
             <Plus size={17} /> Add {meta.singular}
@@ -357,6 +398,28 @@ export function ContentPanel({ contentKey }: { contentKey: ContentKey }) {
             onSubmit={submit}
             onCancel={closeEditor}
             onDirtyChange={setEditorDirty}
+          />
+        )}
+      </Dialog>
+
+      <Dialog
+        open={picking}
+        onOpenChange={setPicking}
+        title={`Search Modrinth ${meta.title.toLowerCase()}`}
+        description={`Find a ${meta.singular}, pick a version, then review it before adding. Only ${meta.title.toLowerCase()} are searched.`}
+        size="wide"
+      >
+        {picking && (
+          <ContentModrinthPicker
+            contentKey={contentKey}
+            items={items}
+            modpack={data.modpack}
+            onAdd={addFromModrinth}
+            onOpenExisting={(item) => {
+              setPicking(false);
+              setEditing({ item });
+            }}
+            onCancel={() => setPicking(false)}
           />
         )}
       </Dialog>

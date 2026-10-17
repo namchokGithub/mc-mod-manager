@@ -79,8 +79,13 @@ export type ProjectResponse = z.infer<typeof projectSchema>;
 export type VersionResponse = z.infer<typeof versionSchema>;
 export type SearchResponse = z.infer<typeof searchResponseSchema>;
 
+/** Modrinth `project_type` search facet values used by this app. */
+export type SearchProjectType = "mod" | "resourcepack" | "datapack" | "shader";
+
 export type SearchParams = {
   query: string;
+  /** Defaults to "mod". Data packs are found by the "datapack" facet even though their hits report "mod". */
+  projectType?: SearchProjectType;
   gameVersion?: string;
   loader?: string;
   offset?: number;
@@ -99,12 +104,13 @@ function retryAfterSeconds(response: Response): number | undefined {
 
 export function searchUrl({
   query,
+  projectType = "mod",
   gameVersion,
   loader,
   offset = 0,
   limit = 20,
 }: SearchParams): string {
-  const facets: string[][] = [["project_type:mod"]];
+  const facets: string[][] = [[`project_type:${projectType}`]];
   if (gameVersion) facets.push([`versions:${gameVersion}`]);
   if (loader) facets.push([`categories:${loader}`]);
   const params = new URLSearchParams({

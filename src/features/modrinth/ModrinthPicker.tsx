@@ -70,7 +70,7 @@ const formatDate = (value: string) => {
 
 const compactNumber = new Intl.NumberFormat("en", { notation: "compact" });
 
-function RequestError({
+export function RequestError({
   error,
   onRetry,
 }: {
@@ -93,7 +93,7 @@ function RequestError({
   );
 }
 
-function LoadingRows({ label }: { label: string }) {
+export function LoadingRows({ label }: { label: string }) {
   return (
     <div className="mr-loading" role="status">
       <span className="sr-only">{label}</span>
