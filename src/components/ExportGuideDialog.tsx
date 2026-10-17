@@ -47,7 +47,7 @@ function ExportGuideForm({
     const filename = guideFilename(
       collection.modpack.name,
       options.format,
-      options.batchId ? current?.name : undefined,
+      batches.find((batch) => batch.id === options.batchId)?.name,
     );
     try {
       downloadText(
@@ -96,9 +96,11 @@ function ExportGuideForm({
           onValueChange={(value) => set({ batchId: value || null })}
           options={[
             { value: "", label: `All batches (${batches.length})` },
-            ...(current
-              ? [{ value: current.id, label: `This batch: ${current.name}` }]
-              : []),
+            // Every batch can be chosen; opening from a batch only preselects it.
+            ...batches.map((batch, index) => ({
+              value: batch.id,
+              label: `Batch ${index + 1}: ${batch.name}`,
+            })),
           ]}
         />
         <Select
