@@ -7,6 +7,8 @@ export type DataContextValue = {
   dirty: boolean;
   saveState: "saved" | "saving" | "error";
   draftIssue: "backed-up" | "unreadable" | null;
+  /** Increments each time another browser tab changes the draft. */
+  externalUpdate: number;
   updateModpack: (modpack: Modpack) => void;
   saveMod: (mod: Mod, originalId?: string) => void;
   deleteMod: (id: string) => void;

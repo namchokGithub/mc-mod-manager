@@ -1,4 +1,11 @@
-import { cloneElement, useId, useMemo, useRef, useState } from "react";
+import {
+  cloneElement,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
@@ -126,12 +133,16 @@ function ModEditor({
   mods,
   onSave,
   onClose,
+  onCancel,
+  onDirtyChange,
 }: {
   mod: Mod | null;
   initialValues?: Mod;
   mods: Mod[];
   onSave: (mod: Mod, originalId?: string) => boolean;
   onClose: () => void;
+  onCancel: () => void;
+  onDirtyChange: (dirty: boolean) => void;
 }) {
   const start = initialValues ?? mod;
   const initial: ModFields = start
@@ -166,6 +177,12 @@ function ModEditor({
     defaultValues: initial,
   });
   const notify = useToast();
+  // Values prefilled from Modrinth or a JAR are unsaved too, even before any typing.
+  const unsaved = isDirty || initialValues !== undefined;
+  useEffect(() => {
+    onDirtyChange(unsaved);
+    return () => onDirtyChange(false);
+  }, [unsaved, onDirtyChange]);
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
   const linked = useWatch({ control, name: "modrinth" });
@@ -326,7 +343,7 @@ function ModEditor({
       </div>
       <div className="dialog-actions dialog-actions-sticky">
         <UnsavedHint show={isDirty} />
-        <Button type="button" variant="ghost" onClick={onClose}>
+        <Button type="button" variant="ghost" onClick={onCancel}>
           Cancel
         </Button>
         <Button type="submit">
@@ -358,9 +375,11 @@ function UnsavedHint({ show }: { show: boolean }) {
 function SettingsForm({
   modpack,
   onSave,
+  onDirtyChange,
 }: {
   modpack: Modpack;
   onSave: (modpack: Modpack) => void;
+  onDirtyChange: (dirty: boolean) => void;
 }) {
   const {
     register,
@@ -371,6 +390,10 @@ function SettingsForm({
     resolver: zodResolver(modpackSchema),
     defaultValues: modpack,
   });
+  useEffect(() => {
+    onDirtyChange(isDirty);
+    return () => onDirtyChange(false);
+  }, [isDirty, onDirtyChange]);
   return (
     <form className="settings-form" noValidate onSubmit={handleSubmit(onSave)}>
       <div className="settings-intro">
@@ -709,6 +732,30 @@ export function Manage() {
   const shownEditing = useRetained(editing);
   const shownDeleting = useRetained(deleting);
   const shownPicking = useRetained(picking);
+  const [editorDirty, setEditorDirty] = useState(false);
+  const [settingsDirty, setSettingsDirty] = useState(false);
+  const [confirmDiscard, setConfirmDiscard] = useState<
+    { kind: "editor" } | { kind: "tab"; next: Tab } | null
+  >(null);
+  const shownDiscard = useRetained(confirmDiscard);
+  const closeEditor = () =>
+    editorDirty ? setConfirmDiscard({ kind: "editor" }) : setEditing(null);
+  const changeTab = (next: Tab) =>
+    tab === "settings" && next !== "settings" && settingsDirty
+      ? setConfirmDiscard({ kind: "tab", next })
+      : setTab(next);
+  const discard = () => {
+    if (confirmDiscard?.kind === "editor") setEditing(null);
+    if (confirmDiscard?.kind === "tab") setTab(confirmDiscard.next);
+    setConfirmDiscard(null);
+  };
+  // Closing or reloading the browser tab would also drop unsaved form edits.
+  useEffect(() => {
+    if (!editorDirty && !settingsDirty) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => event.preventDefault();
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [editorDirty, settingsDirty]);
   const compat = useMemo(
     () => checkCompatibility(data.mods, data.modpack, live?.facts),
     [data.mods, data.modpack, live],
@@ -860,7 +907,7 @@ export function Manage() {
             type="button"
             className={tab === "mods" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "mods" ? "page" : undefined}
-            onClick={() => setTab("mods")}
+            onClick={() => changeTab("mods")}
           >
             <FileJson2 size={18} /> Mod collection{" "}
             <span>{data.mods.length}</span>
@@ -871,7 +918,7 @@ export function Manage() {
               tab === "settings" ? "sidebar-item active" : "sidebar-item"
             }
             aria-current={tab === "settings" ? "page" : undefined}
-            onClick={() => setTab("settings")}
+            onClick={() => changeTab("settings")}
           >
             <Settings2 size={18} /> Pack settings
           </button>
@@ -879,7 +926,7 @@ export function Manage() {
             type="button"
             className={tab === "data" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "data" ? "page" : undefined}
-            onClick={() => setTab("data")}
+            onClick={() => changeTab("data")}
           >
             <ArrowDownToLine size={18} /> Data & export
             {dirty && (
@@ -1102,6 +1149,7 @@ export function Manage() {
                 <SettingsForm
                   key={JSON.stringify(data.modpack)}
                   modpack={data.modpack}
+                  onDirtyChange={setSettingsDirty}
                   onSave={(modpack) => {
                     updateModpack(modpack);
                     notify({
@@ -1118,7 +1166,7 @@ export function Manage() {
       </div>
       <Dialog
         open={editing !== null}
-        onOpenChange={(open) => !open && setEditing(null)}
+        onOpenChange={(open) => !open && closeEditor()}
         title={
           shownEditing?.mod
             ? `Edit ${shownEditing.mod.name}`
@@ -1137,6 +1185,8 @@ export function Manage() {
             mods={data.mods}
             onSave={persistMod}
             onClose={() => setEditing(null)}
+            onCancel={closeEditor}
+            onDirtyChange={setEditorDirty}
           />
         )}
       </Dialog>
@@ -1219,6 +1269,29 @@ export function Manage() {
           onImport={importJars}
           onCancel={() => setImportingJars(false)}
         />
+      </Dialog>
+      <Dialog
+        open={confirmDiscard !== null}
+        onOpenChange={(open) => !open && setConfirmDiscard(null)}
+        title={
+          shownDiscard?.kind === "tab"
+            ? "Discard unsaved settings?"
+            : "Discard unsaved changes?"
+        }
+        description={
+          shownDiscard?.kind === "tab"
+            ? "Your edits to the pack settings have not been saved. Leaving this section will lose them."
+            : "This mod has changes that have not been saved. Closing the editor will lose them."
+        }
+      >
+        <div className="dialog-actions">
+          <Button variant="ghost" onClick={() => setConfirmDiscard(null)}>
+            Keep editing
+          </Button>
+          <Button variant="danger" onClick={discard}>
+            Discard changes
+          </Button>
+        </div>
       </Dialog>
     </div>
   );

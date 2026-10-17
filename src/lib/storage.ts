@@ -2,14 +2,22 @@ import { collectionSchema, type Collection } from "./schema";
 
 export const DRAFT_KEY = "mc-mod-manager:draft:v1";
 
+/** Parses stored draft text; returns null when it is not a valid collection. */
+export function parseDraft(raw: string): Collection | null {
+  try {
+    const parsed = collectionSchema.safeParse(JSON.parse(raw) as unknown);
+    return parsed.success ? parsed.data : null;
+  } catch {
+    return null;
+  }
+}
+
 export function readDraft(
   storage: Pick<Storage, "getItem">,
 ): Collection | null {
   try {
     const raw = storage.getItem(DRAFT_KEY);
-    if (!raw) return null;
-    const parsed = collectionSchema.safeParse(JSON.parse(raw) as unknown);
-    return parsed.success ? parsed.data : null;
+    return raw ? parseDraft(raw) : null;
   } catch {
     return null;
   }

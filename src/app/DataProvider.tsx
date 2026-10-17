@@ -1,6 +1,6 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { collectionSchema, modsSchema, type Collection } from "../lib/schema";
-import { DRAFT_KEY, loadDraft, saveDraft } from "../lib/storage";
+import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
 import { DataContext, type DataContextValue } from "./DataContext";
 
 function jsonUrl(file: string): string {
@@ -18,6 +18,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [draftIssue, setDraftIssue] = useState<
     "backed-up" | "unreadable" | null
   >(null);
+  const [externalUpdate, setExternalUpdate] = useState(0);
+  // Set when a draft arrives from another tab, so it is not written straight back.
+  const skipNextSave = useRef(false);
 
   useEffect(() => {
     let active = true;
@@ -57,8 +60,37 @@ export function DataProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // Another tab saved or reset the draft: show its version instead of overwriting it later.
+  useEffect(() => {
+    if (!published) return;
+    const onStorage = (event: StorageEvent) => {
+      if (event.storageArea !== window.localStorage) return;
+      if (event.key !== DRAFT_KEY && event.key !== null) return;
+      if (event.key === null || event.newValue === null) {
+        setData(published);
+        setDirty(false);
+        setSaveState("saved");
+        setExternalUpdate((count) => count + 1);
+        return;
+      }
+      const next = parseDraft(event.newValue);
+      if (!next) return;
+      skipNextSave.current = true;
+      setData(next);
+      setDirty(true);
+      setSaveState("saved");
+      setExternalUpdate((count) => count + 1);
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [published]);
+
   useEffect(() => {
     if (!data || !dirty) return;
+    if (skipNextSave.current) {
+      skipNextSave.current = false;
+      return;
+    }
     const timer = window.setTimeout(() => {
       try {
         saveDraft(window.localStorage, data);
@@ -98,6 +130,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     dirty,
     saveState,
     draftIssue,
+    externalUpdate,
     updateModpack: (modpack) => change({ ...data, modpack }),
     saveMod: (mod, originalId) => {
       const nextMods = originalId

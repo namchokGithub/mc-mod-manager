@@ -25,7 +25,8 @@ function currentPage(): "preview" | "manage" {
 
 export function App() {
   const [page, setPage] = useState(currentPage);
-  const { data, dirty, saveState, draftIssue } = useCollection();
+  const { data, dirty, saveState, draftIssue, externalUpdate } =
+    useCollection();
   const notify = useToast();
   const [theme, toggleTheme] = useTheme();
   useEffect(() => {
@@ -62,6 +63,15 @@ export function App() {
             : "Showing the published data instead. The old draft was left untouched in LocalStorage.",
       });
   }, [draftIssue, notify]);
+  useEffect(() => {
+    if (externalUpdate)
+      notify({
+        kind: "info",
+        title: "Draft changed in another tab",
+        description:
+          "Showing the latest saved version so neither tab overwrites the other.",
+      });
+  }, [externalUpdate, notify]);
 
   const draftLabel =
     saveState === "saving"
