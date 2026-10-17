@@ -41,6 +41,7 @@ import { Select, type SelectOption } from "../../components/ui/select";
 import {
   checkCompatibility,
   findByProject,
+  statusLabel,
   type LiveFacts,
 } from "../../lib/compatibility";
 import { modrinth, ModrinthError } from "../../lib/modrinth/api";
@@ -49,6 +50,7 @@ import {
   fetchLiveVersionFacts,
 } from "../../lib/modrinth/service";
 import { normalizeLoader } from "../../lib/modrinth/mapping";
+import { sortMinecraftVersions } from "../../lib/modrinth/versionFilters";
 import { type UpdateResult } from "../../lib/updates";
 import { JarImportDialog } from "../import/JarImportDialog";
 import { filterMods, uniqueId, type Filters } from "../../lib/mods";
@@ -75,6 +77,10 @@ import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { CompatibilityPanel } from "./CompatibilityPanel";
+import {
+  SupportedLoadersField,
+  SupportedVersionsField,
+} from "./CompatibilityFields";
 import { UpdateBadge } from "./UpdateBadge";
 
 type Tab = "mods" | "settings" | "data";
@@ -92,8 +98,38 @@ const formSchema = modSchema
     id: z.string(),
     tagsText: z.string(),
     dependenciesText: z.string(),
+    supportedVersions: z.array(z.string()),
+    supportedLoaders: z.array(z.string()),
   });
 type ModFields = z.infer<typeof formSchema>;
+
+/** Verified support data the editor can prefill from; manual values never come from here unedited. */
+function verifiedSupport(mod: Mod | null): {
+  source: "modrinth" | "jar";
+  gameVersions: string[];
+  loaders: string[];
+  range?: string;
+} | null {
+  const meta = mod?.modrinth;
+  if (meta?.versionId && meta.gameVersions && meta.loaders)
+    return {
+      source: "modrinth",
+      gameVersions: sortMinecraftVersions(meta.gameVersions),
+      loaders: meta.loaders,
+    };
+  const file = mod?.file;
+  if (file?.format && file.format !== "filename")
+    return {
+      source: "jar",
+      gameVersions: [],
+      loaders: file.loadersInferred ? [] : (file.loaders ?? []),
+      range: file.minecraftRange,
+    };
+  return null;
+}
+
+const sameValues = (a: string[], b: string[]) =>
+  a.length === b.length && [...a].sort().join("|") === [...b].sort().join("|");
 
 function Field({
   label,
@@ -201,6 +237,7 @@ function ModEditor({
   onClose,
   onCancel,
   onDirtyChange,
+  packMinecraftVersion,
 }: {
   mod: Mod | null;
   initialValues?: Mod;
@@ -209,13 +246,21 @@ function ModEditor({
   onClose: () => void;
   onCancel: () => void;
   onDirtyChange: (dirty: boolean) => void;
+  packMinecraftVersion: string;
 }) {
   const start = initialValues ?? mod;
+  const verified = verifiedSupport(start);
   const initial: ModFields = start
     ? {
         ...start,
         tagsText: start.tags.join(", "),
         dependenciesText: start.dependencies.join(", "),
+        supportedVersions:
+          start.manualCompatibility?.gameVersions ??
+          verified?.gameVersions ??
+          [],
+        supportedLoaders:
+          start.manualCompatibility?.loaders ?? verified?.loaders ?? [],
       }
     : {
         id: "",
@@ -231,7 +276,16 @@ function ModEditor({
         dependenciesText: "",
         notes: "",
         imageUrl: "",
+        supportedVersions: [],
+        supportedLoaders: [],
       };
+  const versionSuggestions = [
+    ...(packMinecraftVersion ? [packMinecraftVersion] : []),
+    ...mods.flatMap((item) => [
+      ...(item.modrinth?.gameVersions ?? []),
+      ...(item.manualCompatibility?.gameVersions ?? []),
+    ]),
+  ];
   const {
     register,
     handleSubmit,
@@ -243,6 +297,7 @@ function ModEditor({
     defaultValues: initial,
   });
   const notify = useToast();
+  const supportId = useId();
   // Values prefilled from Modrinth or a JAR are unsaved too, even before any typing.
   const unsaved = isDirty || initialValues !== undefined;
   useEffect(() => {
@@ -252,6 +307,27 @@ function ModEditor({
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
   const linked = useWatch({ control, name: "modrinth" });
+  // Saved only when it adds something: unedited prefills from verified data are not copied.
+  const manualFrom = (gameVersions: string[], loaders: string[]) => {
+    const versions = sortMinecraftVersions(
+      gameVersions.map((value) => value.trim()).filter(Boolean),
+    );
+    const modloaders = [...new Set(loaders)];
+    if (!versions.length && !modloaders.length) return undefined;
+    if (
+      verified &&
+      sameValues(versions, verified.gameVersions) &&
+      sameValues(modloaders, verified.loaders)
+    )
+      return undefined;
+    return { gameVersions: versions, loaders: modloaders };
+  };
+  const supportHint =
+    verified?.source === "modrinth"
+      ? "Prefilled from Modrinth (verified). Compatibility uses Modrinth's data; changes here are kept as manual notes only."
+      : verified?.source === "jar"
+        ? `Prefilled from the JAR (verified)${verified.range ? `, which declares Minecraft ${verified.range}` : ""}. Manual values only fill what the JAR does not declare.`
+        : "Entered manually and not verified. Used when no Modrinth or JAR data is available.";
   const submit = (values: ModFields) => {
     const candidate: Mod = {
       ...values,
@@ -269,6 +345,10 @@ function ModEditor({
         .split(",")
         .map((dep) => dep.trim())
         .filter(Boolean),
+      manualCompatibility: manualFrom(
+        values.supportedVersions,
+        values.supportedLoaders,
+      ),
     };
     const validation = modSchema.safeParse(candidate);
     if (!validation.success) {
@@ -388,6 +468,43 @@ function ModEditor({
             {...register("notes")}
           />
         </Field>
+        <div className="form-field">
+          <span id={`${supportId}-versions`}>Supported Minecraft versions</span>
+          <Controller
+            control={control}
+            name="supportedVersions"
+            render={({ field }) => (
+              <SupportedVersionsField
+                value={field.value}
+                onChange={field.onChange}
+                suggestions={versionSuggestions}
+                labelledBy={`${supportId}-versions`}
+                describedBy={`${supportId}-hint`}
+              />
+            )}
+          />
+        </div>
+        <div className="form-field">
+          <span id={`${supportId}-loaders`}>Supported modloaders</span>
+          <Controller
+            control={control}
+            name="supportedLoaders"
+            render={({ field }) => (
+              <SupportedLoadersField
+                value={field.value}
+                onChange={field.onChange}
+                labelledBy={`${supportId}-loaders`}
+                describedBy={`${supportId}-hint`}
+              />
+            )}
+          />
+        </div>
+        <small
+          id={`${supportId}-hint`}
+          className="form-field-wide support-hint"
+        >
+          {supportHint}
+        </small>
       </div>
       <div className="dialog-actions dialog-actions-sticky">
         <UnsavedHint show={unsaved} />
@@ -701,7 +818,7 @@ function DataTools() {
         open={confirmReset}
         onOpenChange={setConfirmReset}
         title="Discard your local draft?"
-        description="This will replace your edits with the currently published data. Export first if you want to keep them."
+        description="This replaces your edits with the data in public/data. Save to local JSON or export first if you want to keep them."
       >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setConfirmReset(false)}>
@@ -733,7 +850,7 @@ function DataTools() {
         }
         description={
           shownImport?.kind === "mods"
-            ? `${shownImport.fileName} has ${shownImport.value.length} ${shownImport.value.length === 1 ? "mod" : "mods"}. They will replace the ${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"} in your draft, including notes. Export first if you want to keep the current list.`
+            ? `${shownImport.fileName} has ${shownImport.value.length} ${shownImport.value.length === 1 ? "mod" : "mods"}. They will replace the ${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"} in your draft, including notes. Save to local JSON or export first if you want to keep the current list.`
             : `${shownImport?.fileName ?? "This file"} will replace the name, description, versions, and hero image in your draft.`
         }
       >
@@ -1101,7 +1218,7 @@ export function Manage() {
             <span className="eyebrow-dot" />
             <strong>LOCAL WORKSPACE</strong>
             <p>
-              Your edits stay in this browser until you export and publish them.
+              Your edits stay in this browser until you save them to local JSON.
             </p>
           </div>
         </aside>
@@ -1260,6 +1377,7 @@ export function Manage() {
                                 {compat.get(mod.id) && (
                                   <CompatBadge
                                     status={compat.get(mod.id)!.status}
+                                    label={statusLabel(compat.get(mod.id)!)}
                                     compact
                                   />
                                 )}
@@ -1413,7 +1531,7 @@ export function Manage() {
               ? `Add ${shownEditing.initial.name}`
               : "Add a mod"
         }
-        description="Fields marked * are required. Changes stay in this browser until you export."
+        description="Fields marked * are required. Changes stay in this browser until you save to local JSON."
         size="wide"
       >
         {shownEditing && (
@@ -1426,6 +1544,7 @@ export function Manage() {
             onClose={() => setEditing(null)}
             onCancel={closeEditor}
             onDirtyChange={setEditorDirty}
+            packMinecraftVersion={data.modpack.minecraftVersion.trim()}
           />
         )}
       </Dialog>
@@ -1471,7 +1590,7 @@ export function Manage() {
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
         title={`Delete ${shownDeleting?.name ?? "mod"}?`}
-        description="This removes the mod from your local draft. You can reset to published data before exporting if needed."
+        description="This removes the mod from your local draft. You can reset the draft before saving to local JSON if needed."
       >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setDeleting(null)}>
@@ -1558,7 +1677,7 @@ export function Manage() {
             .map((mod) => mod.name);
           const listed = names.slice(0, 5).join(", ");
           const more = names.length > 5 ? ` and ${names.length - 5} more` : "";
-          return `This removes ${listed}${more} from your local draft. You can reset to published data before exporting if needed.`;
+          return `This removes ${listed}${more} from your local draft. You can reset the draft before saving to local JSON if needed.`;
         })()}
       >
         <div className="dialog-actions dialog-actions-flush">

@@ -5,6 +5,7 @@ import {
   checkCompatibility,
   countByStatus,
   findByProject,
+  statusLabel,
 } from "./compatibility";
 import {
   collectionSchema,
@@ -491,5 +492,133 @@ describe("JAR metadata in JSON", () => {
       },
     });
     expect(parseJsonFile(JSON.stringify([withJar]), "mods")).toEqual([withJar]);
+  });
+});
+
+describe("manually entered compatibility", () => {
+  const neoPack: Modpack = {
+    ...pack,
+    minecraftVersion: "26.1.2",
+    modloader: "NeoForge",
+  };
+  const manual = (
+    gameVersions: string[],
+    loaders: string[],
+    extra: Partial<Mod> = {},
+  ) =>
+    mod("cf", undefined, {
+      source: "CurseForge",
+      manualCompatibility: { gameVersions, loaders },
+      ...extra,
+    });
+
+  it("reports a manual match without calling it verified", () => {
+    const result = check([manual(["26.1.2"], ["neoforge"])], neoPack).get(
+      "cf",
+    )!;
+    expect(result).toMatchObject({
+      status: "compatible",
+      verification: "manual",
+      checks: { minecraft: "pass", loader: "pass", dependencies: "unknown" },
+      checkSources: { minecraft: "manual", loader: "manual" },
+    });
+    expect(statusLabel(result)).toBe("Manual Match");
+  });
+
+  it("reports a manual mismatch for the version or the loader", () => {
+    const version = check([manual(["1.20.1"], ["neoforge"])], neoPack).get(
+      "cf",
+    )!;
+    expect(version.checks.minecraft).toBe("fail");
+    expect(statusLabel(version)).toBe("Manual Mismatch");
+    const loader = check([manual(["26.1.2"], ["fabric"])], neoPack).get("cf")!;
+    expect(loader.checks.loader).toBe("fail");
+    expect(statusLabel(loader)).toBe("Manual Mismatch");
+  });
+
+  it("stays unknown when only part of the data was entered", () => {
+    const result = check([manual(["26.1.2"], [])], neoPack).get("cf")!;
+    expect(result.status).toBe("unknown");
+    expect(result.checks).toMatchObject({
+      minecraft: "pass",
+      loader: "unknown",
+    });
+    expect(statusLabel(result)).toBe("Unknown");
+  });
+
+  it("keeps dependencies separate from the version check", () => {
+    const result = check([manual(["26.1.2"], ["neoforge"])], neoPack).get(
+      "cf",
+    )!;
+    expect(result.checks.dependencies).toBe("unknown");
+    expect(result.reasons.some((reason) => reason.level === "unknown")).toBe(
+      false,
+    );
+  });
+
+  it("never lets manual data override Modrinth or JAR metadata", () => {
+    const modrinth = mod(
+      "m",
+      { gameVersions: ["26.1.2"], loaders: ["neoforge"] },
+      { manualCompatibility: { gameVersions: ["1.12"], loaders: ["forge"] } },
+    );
+    expect(check([modrinth], neoPack).get("m")).toMatchObject({
+      status: "compatible",
+      verification: "modrinth",
+    });
+    const jar = mod("j", undefined, {
+      file: {
+        name: "j.jar",
+        format: "neoforge.mods.toml",
+        loaders: ["neoforge"],
+        minecraftRange: "[1.20,1.21)",
+      },
+      manualCompatibility: { gameVersions: ["26.1.2"], loaders: ["neoforge"] },
+    });
+    const result = check([jar], neoPack).get("j")!;
+    expect(result.checks.minecraft).toBe("fail");
+    expect(result.checkSources.minecraft).toBe("jar");
+    expect(statusLabel(result)).toBe("Incompatible");
+  });
+
+  it("fills gaps in JAR metadata and marks that check as manual", () => {
+    const jar = mod("j", undefined, {
+      file: {
+        name: "j.jar",
+        format: "mods.toml",
+        loaders: ["forge"],
+        loadersInferred: true,
+      },
+      manualCompatibility: { gameVersions: ["26.1.2"], loaders: ["neoforge"] },
+    });
+    const result = check([jar], neoPack).get("j")!;
+    expect(result).toMatchObject({
+      status: "compatible",
+      verification: "jar",
+      checks: { minecraft: "pass", loader: "pass" },
+      checkSources: {
+        minecraft: "manual",
+        loader: "manual",
+        dependencies: "jar",
+      },
+    });
+    expect(statusLabel(result)).toBe("Manual Match");
+  });
+
+  it("ignores file-name guesses when manual data exists", () => {
+    const result = check(
+      [
+        manual(["26.1.2"], ["neoforge"], {
+          file: { name: "x-26.1.2.jar", format: "filename" },
+        }),
+      ],
+      neoPack,
+    ).get("cf")!;
+    expect(result.verification).toBe("manual");
+  });
+
+  it("round-trips through JSON import", () => {
+    const entry = manual(["26.1.2", "26.1.1"], ["neoforge"], { notes: "Keep" });
+    expect(parseJsonFile(JSON.stringify([entry]), "mods")).toEqual([entry]);
   });
 });

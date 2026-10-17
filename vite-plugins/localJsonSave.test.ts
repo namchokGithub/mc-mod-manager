@@ -120,6 +120,25 @@ describe("planning a save", () => {
     expect(JSON.parse(plan.files?.mods ?? "[]")).toEqual(withMeta.mods);
   });
 
+  it("keeps manually entered compatibility", () => {
+    const manual = {
+      ...published,
+      mods: [
+        {
+          ...published.mods[0]!,
+          notes: "From CurseForge",
+          manualCompatibility: {
+            gameVersions: ["26.1.2"],
+            loaders: ["neoforge"],
+          },
+        },
+      ],
+    };
+    const plan = planSave({ ...manual, baseline }, onDisk);
+    expect(plan.status).toBe(200);
+    expect(JSON.parse(plan.files?.mods ?? "[]")).toEqual(manual.mods);
+  });
+
   it("rejects invalid data without writing", () => {
     const badPack = planSave(
       { ...published, modpack: { ...published.modpack, name: "" }, baseline },

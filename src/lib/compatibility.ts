@@ -25,6 +25,8 @@ export type CompatResult = {
   source: "live" | "stored" | "none";
   verification: Verification;
   checks: CompatChecks;
+  /** Where each check's evidence came from; manual entries can fill gaps in JAR metadata. */
+  checkSources: Record<keyof CompatChecks, Verification>;
 };
 
 export const verificationLabels: Record<Verification, string> = {
@@ -187,6 +189,53 @@ export function checkCompatibility(
       checks.minecraft = checks.loader = checks.dependencies = "unknown";
     };
     const jar = mod.file?.format ? mod.file : undefined;
+    const sources: Partial<Record<keyof CompatChecks, Verification>> = {};
+    const manualVersions = mod.manualCompatibility?.gameVersions ?? [];
+    const manualLoaders = mod.manualCompatibility?.loaders ?? [];
+    const checkManualMinecraft = () => {
+      sources.minecraft = "manual";
+      if (!minecraft)
+        add(
+          "minecraft",
+          "unknown",
+          "Set the pack's Minecraft version to check this mod.",
+        );
+      else if (!manualVersions.includes(minecraft))
+        add(
+          "minecraft",
+          "error",
+          `The manually entered Minecraft versions (${summarizeVersions(manualVersions)}) do not include ${minecraft}.`,
+        );
+      else
+        add(
+          null,
+          "info",
+          `Minecraft ${minecraft} is in the manually entered versions (not verified).`,
+        );
+    };
+    const checkManualLoader = () => {
+      sources.loader = "manual";
+      if (!loader)
+        add("loader", "unknown", "Set the pack's modloader to check this mod.");
+      else if (manualLoaders.includes(loader))
+        add(
+          null,
+          "info",
+          `${loaderLabels[loader]} is in the manually entered modloaders (not verified).`,
+        );
+      else if (loader === "quilt" && manualLoaders.includes("fabric"))
+        add(
+          "loader",
+          "warning",
+          "Entered manually as a Fabric mod. Quilt usually loads Fabric mods, but this is not guaranteed.",
+        );
+      else
+        add(
+          "loader",
+          "error",
+          `The manually entered modloaders (${manualLoaders.map(loaderName).join(", ")}) do not include ${loaderLabels[loader]}.`,
+        );
+    };
     let verification: Verification = facts ? "modrinth" : "manual";
 
     if (missing)
@@ -299,13 +348,15 @@ export function checkCompatibility(
           "unknown",
           "Set the pack's Minecraft version to check this mod.",
         );
-      else if (!jar.minecraftRange)
-        add(
-          "minecraft",
-          "unknown",
-          "The JAR does not declare which Minecraft versions it supports.",
-        );
-      else {
+      else if (!jar.minecraftRange) {
+        if (manualVersions.length) checkManualMinecraft();
+        else
+          add(
+            "minecraft",
+            "unknown",
+            "The JAR does not declare which Minecraft versions it supports.",
+          );
+      } else {
         const result = matchMinecraftRange(
           jar.minecraftRange,
           minecraft,
@@ -317,12 +368,15 @@ export function checkCompatibility(
             "error",
             `The JAR declares Minecraft ${jar.minecraftRange}; the pack uses ${minecraft}.`,
           );
-        else if (result === "unknown")
-          add(
-            "minecraft",
-            "unknown",
-            `The JAR's Minecraft range “${jar.minecraftRange}” could not be checked against ${minecraft}.`,
-          );
+        else if (result === "unknown") {
+          if (manualVersions.length) checkManualMinecraft();
+          else
+            add(
+              "minecraft",
+              "unknown",
+              `The JAR's Minecraft range “${jar.minecraftRange}” could not be checked against ${minecraft}.`,
+            );
+        }
       }
 
       const jarLoaders = jar.loaders ?? [];
@@ -334,6 +388,11 @@ export function checkCompatibility(
             ? `The pack modloader “${modpack.modloader}” is not recognized, so the loader cannot be checked.`
             : "Set the pack's modloader to check this mod.",
         );
+      else if (
+        (!jarLoaders.length || jar.loadersInferred) &&
+        manualLoaders.length
+      )
+        checkManualLoader();
       else if (!jarLoaders.length)
         add(
           "loader",
@@ -396,6 +455,25 @@ export function checkCompatibility(
               : `Discourages using ${activeProvider.name}, which is in this pack.`,
           );
       }
+    } else if (manualVersions.length || manualLoaders.length) {
+      // Entered by hand: compared like other data but never presented as verified. File-name
+      // guesses are ignored here.
+      verification = "manual";
+      if (manualVersions.length) checkManualMinecraft();
+      else
+        add(
+          "minecraft",
+          "unknown",
+          "No supported Minecraft versions were entered.",
+        );
+      if (manualLoaders.length) checkManualLoader();
+      else add("loader", "unknown", "No supported modloaders were entered.");
+      checks.dependencies = "unknown";
+      add(
+        null,
+        "info",
+        "Dependencies are not checked for manually entered compatibility.",
+      );
     } else if (jar) {
       verification = "filename";
       unknownAll(
@@ -446,9 +524,37 @@ export function checkCompatibility(
       source,
       verification,
       checks,
+      checkSources: {
+        minecraft: sources.minecraft ?? verification,
+        loader: sources.loader ?? verification,
+        dependencies: sources.dependencies ?? verification,
+      },
     });
   }
   return results;
+}
+
+/**
+ * Display label. Results decided by manually entered data read "Manual Match" or
+ * "Manual Mismatch" so they are never mistaken for verified results.
+ */
+export function statusLabel(result: CompatResult): string {
+  const checkKeys = Object.keys(result.checks) as (keyof CompatChecks)[];
+  const usesManual = checkKeys.some(
+    (check) => result.checkSources[check] === "manual",
+  );
+  if (result.status === "compatible" && usesManual) return "Manual Match";
+  if (result.status === "incompatible") {
+    const failing = checkKeys.filter(
+      (check) => result.checks[check] === "fail",
+    );
+    if (
+      failing.length &&
+      failing.every((check) => result.checkSources[check] === "manual")
+    )
+      return "Manual Mismatch";
+  }
+  return compatLabels[result.status];
 }
 
 export function countByStatus(

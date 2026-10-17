@@ -28,13 +28,19 @@ const checkLabels: Record<CheckState, string> = {
   unknown: "Unknown",
 };
 
+// Manual entries and file-name guesses are never described as verified.
+const sourceText: Record<CompatResult["verification"], string> = {
+  modrinth: `Verified with ${verificationLabels.modrinth}`,
+  jar: `Verified with ${verificationLabels.jar} metadata`,
+  filename: `${verificationLabels.filename} (not verified)`,
+  manual: "Entered manually (not verified)",
+};
+
 /** Verification source plus one chip per check, so partial results stay visible. */
 function CompatChecksRow({ result }: { result: CompatResult }) {
   return (
     <div className="compat-checks">
-      <span className="compat-source">
-        Verified with {verificationLabels[result.verification]}
-      </span>
+      <span className="compat-source">{sourceText[result.verification]}</span>
       <ul aria-label="Compatibility checks">
         {(Object.keys(checkNames) as (keyof CompatChecks)[]).map((check) => {
           const state = result.checks[check];
@@ -46,6 +52,9 @@ function CompatChecksRow({ result }: { result: CompatResult }) {
             >
               <Icon size={12} aria-hidden="true" />
               {checkNames[check]}: {checkLabels[state]}
+              {result.checkSources[check] === "manual" &&
+                result.verification !== "manual" &&
+                " (manual)"}
             </li>
           );
         })}
@@ -63,21 +72,24 @@ const icons = {
 
 export function CompatBadge({
   status,
+  label,
   compact = false,
 }: {
   status: CompatStatus;
+  /** Overrides the status text, e.g. "Manual Match" from statusLabel(). */
+  label?: string;
   compact?: boolean;
 }) {
   const Icon = icons[status];
+  const text = label ?? compatLabels[status];
+  const manual = text.startsWith("Manual");
   return (
     <span
-      className={`compat-badge compat-${status}${compact ? " compat-compact" : ""}`}
-      title={compact ? compatLabels[status] : undefined}
+      className={`compat-badge compat-${status}${compact ? " compat-compact" : ""}${manual ? " compat-manual" : ""}`}
+      title={compact ? text : undefined}
     >
       <Icon size={13} aria-hidden="true" />
-      <span className={compact ? "sr-only" : undefined}>
-        {compatLabels[status]}
-      </span>
+      <span className={compact ? "sr-only" : undefined}>{text}</span>
     </span>
   );
 }

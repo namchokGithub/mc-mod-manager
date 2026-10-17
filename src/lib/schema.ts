@@ -113,6 +113,13 @@ export const modSchema = z.object({
         .optional(),
     })
     .optional(),
+  // Entered by hand in the editor when no verified data exists. Never treated as verified.
+  manualCompatibility: z
+    .object({
+      gameVersions: z.array(z.string().trim().min(1)),
+      loaders: z.array(z.string().trim().min(1)),
+    })
+    .optional(),
 });
 
 export const modsSchema = z.array(modSchema).superRefine((mods, context) => {

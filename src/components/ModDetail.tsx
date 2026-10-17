@@ -1,5 +1,5 @@
 import { ArrowUpRight, Link2 } from "lucide-react";
-import type { CompatResult } from "../lib/compatibility";
+import { statusLabel, type CompatResult } from "../lib/compatibility";
 import type { Mod } from "../lib/schema";
 import { CompatBadge, CompatReasons } from "./CompatBadge";
 import { Dialog } from "./ui/dialog";
@@ -74,7 +74,12 @@ export function ModDetail({
           <section className="detail-note detail-compat">
             <div className="detail-compat-head">
               <h3>Compatibility</h3>
-              {shownCompat && <CompatBadge status={shownCompat.status} />}
+              {shownCompat && (
+                <CompatBadge
+                  status={shownCompat.status}
+                  label={statusLabel(shownCompat)}
+                />
+              )}
             </div>
             {shownCompat ? (
               <>

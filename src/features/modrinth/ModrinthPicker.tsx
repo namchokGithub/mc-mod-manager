@@ -15,7 +15,11 @@ import { ModArtwork } from "../../components/ModArtwork";
 import { Button } from "../../components/ui/button";
 import { Combobox } from "../../components/ui/combobox";
 import { Select } from "../../components/ui/select";
-import { checkCompatibility, findByProject } from "../../lib/compatibility";
+import {
+  checkCompatibility,
+  findByProject,
+  statusLabel,
+} from "../../lib/compatibility";
 import { modrinth, type ModrinthError } from "../../lib/modrinth/api";
 import {
   loaderLabels,
@@ -622,7 +626,7 @@ export function ModrinthPicker({
             <RequestError error={details.error} onRetry={details.retry} />
           ) : compat ? (
             <>
-              <CompatBadge status={compat.status} />
+              <CompatBadge status={compat.status} label={statusLabel(compat)} />
               <CompatReasons result={compat} />
             </>
           ) : candidate ? (

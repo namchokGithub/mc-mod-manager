@@ -13,6 +13,8 @@ type ComboboxProps = AriaAttributes & {
   placeholder?: string;
   searchPlaceholder?: string;
   emptyText?: string;
+  /** Validates typed text that is not an option; when it returns true, offers to add it. */
+  allowCustom?: (text: string) => boolean;
   disabled?: boolean;
   invalid?: boolean;
   active?: boolean;
@@ -33,6 +35,7 @@ export function Combobox({
   placeholder = "Select…",
   searchPlaceholder = "Search…",
   emptyText = "No matches.",
+  allowCustom,
   disabled,
   invalid,
   active,
@@ -44,10 +47,22 @@ export function Combobox({
   ...aria
 }: ComboboxProps) {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const custom = search.trim();
+  const showCustom =
+    Boolean(allowCustom && custom && allowCustom(custom)) &&
+    !options.some((option) => option.value === custom);
   const selectedLabel = labelFor(options, value);
   return (
     // Modal so the popover keeps focus correctly when it opens inside a dialog.
-    <PopoverPrimitive.Root open={open} onOpenChange={setOpen} modal>
+    <PopoverPrimitive.Root
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setSearch("");
+      }}
+      modal
+    >
       <PopoverPrimitive.Trigger asChild disabled={disabled}>
         <button
           type="button"
@@ -103,6 +118,8 @@ export function Combobox({
               <Command.Input
                 className="control-search-input"
                 placeholder={searchPlaceholder}
+                value={search}
+                onValueChange={setSearch}
               />
             </div>
             <Command.List className="control-viewport">
@@ -131,6 +148,20 @@ export function Combobox({
                   )}
                 </Command.Item>
               ))}
+              {showCustom && (
+                <Command.Item
+                  value={`__custom__${custom}`}
+                  keywords={[custom]}
+                  className="control-item"
+                  onSelect={() => {
+                    onValueChange(custom);
+                    setOpen(false);
+                    setSearch("");
+                  }}
+                >
+                  <span className="control-item-text">Add “{custom}”</span>
+                </Command.Item>
+              )}
             </Command.List>
           </Command>
         </PopoverPrimitive.Content>

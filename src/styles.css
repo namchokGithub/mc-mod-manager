@@ -2,7 +2,7 @@
 
 /*
  * Typography tokens. Tailwind turns these into the `font-sans` and `font-display` utilities.
- * Inter is the UI font. Minecraft (by Craftron Gaming, public/assets/fonts/Minecraft.ttf) is a
+ * Inter is the UI font. Minecraft is a
  * display accent only, never for long or dense text. It has one weight and no Thai glyphs.
  * Noto Sans Thai covers Thai; its files load only when Thai characters appear (unicode-range).
  */
@@ -18,7 +18,7 @@
 /* Single regular weight; the public path gets the Vite base prefix at build time. */
 @font-face {
   font-family: "Minecraft";
-  src: url("/assets/fonts/Minecraft.ttf") format("truetype");
+  src: url("/assets/fonts/minecraft_font.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -3236,4 +3236,53 @@ main:focus {
 /* Preview: the shared pager sits a little further from the cards than in Manage. */
 .collection-section .pagination {
   margin-top: 22px;
+}
+
+/* Mod editor: supported versions and modloaders */
+.value-field {
+  display: grid;
+  gap: 8px;
+}
+.value-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.value-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 9px;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 650;
+}
+.value-chip button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+}
+.value-chip button:hover {
+  background: var(--accent-light-strong);
+}
+.support-hint {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+/* Manually entered results keep their colour but get a dashed outline. */
+.compat-badge.compat-manual {
+  outline: 1px dashed currentColor;
+  outline-offset: -1px;
 }

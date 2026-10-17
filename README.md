@@ -127,6 +127,7 @@ The app calls the public Modrinth API (`https://api.modrinth.com/v2`) directly f
 - **Match files** is optional. It sends only SHA-1 hashes to Modrinth to identify exact versions and attach verified metadata.
 - The metadata read from each JAR (loaders, declared Minecraft range, and dependencies) is saved in the mod's optional `file` field, so the JAR is not needed afterwards.
 - Compatibility prefers Modrinth data. For mods that are not on Modrinth (for example from CurseForge), it checks the saved JAR metadata instead: Maven ranges from `mods.toml`/`neoforge.mods.toml`, Fabric/Quilt version predicates, the declared loader, and required or incompatible mod IDs. Being absent from Modrinth is never a problem by itself. Anything the JAR does not declare, a loader guessed from a plain `mods.toml`, and file-name-only imports stay **Unknown**. Each result shows its source (Modrinth, Local JAR, File name only, or Manual) and separate Minecraft version, Modloader, and Dependencies checks.
+- When neither Modrinth nor the JAR says enough, enter **Supported Minecraft versions** and **Supported modloaders** in the mod editor. They are saved in the optional `manualCompatibility` field and compared with Pack settings, and the result reads **Manual Match** or **Manual Mismatch**, never Compatible or Incompatible. Manual values never override Modrinth data. With a JAR, they only fill what the JAR does not declare. Dependencies are not checked from manual entries.
 
 ## Deploying to GitHub Pages
 
@@ -165,7 +166,9 @@ Then open `http://localhost:4173/mc-mod-manager/`.
 
 ## Credits
 
-- Display font: [Minecraft](https://www.dafont.com/minecraft.font) by Craftron Gaming (`public/assets/fonts/Minecraft.ttf`).
+- Display font
+  - [Minecraft](https://www.dafont.com/minecraft.font) by Craftron Gaming (`public/assets/fonts/Minecraft.ttf`).
+  - [Minecraft](https://fontmeme.com/fonts/minecraft-font/) By Pwnage Block (`public/assets/fonts/minecraft_font.ttf`).
 - UI fonts: [Inter](https://rsms.me/inter/) and [Noto Sans Thai](https://fonts.google.com/noto/specimen/Noto+Sans+Thai), via [Fontsource](https://fontsource.org/).
 - Mod data and version metadata: [Modrinth](https://modrinth.com/).
 

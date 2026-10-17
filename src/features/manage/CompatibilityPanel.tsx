@@ -11,6 +11,7 @@ import { Button } from "../../components/ui/button";
 import {
   compatLabels,
   countByStatus,
+  statusLabel,
   type CompatResult,
   type CompatStatus,
 } from "../../lib/compatibility";
@@ -170,7 +171,10 @@ export function CompatibilityPanel({
                   <li key={mod.id}>
                     <div className="compat-issue-head">
                       <strong>{mod.name}</strong>
-                      <CompatBadge status={result.status} />
+                      <CompatBadge
+                        status={result.status}
+                        label={statusLabel(result)}
+                      />
                     </div>
                     <CompatReasons result={result} />
                   </li>

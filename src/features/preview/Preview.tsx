@@ -18,7 +18,7 @@ import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
-import { checkCompatibility } from "../../lib/compatibility";
+import { checkCompatibility, statusLabel } from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
 import {
   DEFAULT_PAGE_SIZE,
@@ -253,6 +253,7 @@ export function Preview() {
                           compat.get(mod.id)!.status !== "unknown" && (
                             <CompatBadge
                               status={compat.get(mod.id)!.status}
+                              label={statusLabel(compat.get(mod.id)!)}
                               compact
                             />
                           )}
