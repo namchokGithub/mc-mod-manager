@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import {
+  Check,
   CircleAlert,
   GitFork,
   LayoutDashboard,
@@ -13,6 +14,7 @@ import { useCollection } from "./DataContext";
 import { MANAGE_ENABLED, resolveRoute, type Page } from "./routes";
 import { useTheme } from "./theme";
 import { useToast } from "./ToastContext";
+import { saveStatusLabels } from "../lib/saveStatus";
 import { DRAFT_BACKUP_KEY } from "../lib/storage";
 import { Preview } from "../features/preview/Preview";
 
@@ -37,7 +39,7 @@ function currentPage(): Page {
 
 export function App() {
   const [page, setPage] = useState(currentPage);
-  const { data, dirty, saveState, draftIssue, externalUpdate } =
+  const { data, saveState, saveStatus, draftIssue, externalUpdate } =
     useCollection();
   const notify = useToast();
   const [theme, toggleTheme] = useTheme();
@@ -85,20 +87,14 @@ export function App() {
       });
   }, [externalUpdate, notify]);
 
-  const draftLabel =
-    saveState === "saving"
-      ? "Saving draft…"
-      : saveState === "error"
-        ? "Draft not saved"
-        : "Unpublished draft";
-
   return (
     <MotionConfig reducedMotion="user">
       <div className="app-shell">
         <button
           type="button"
           className="skip-link"
-          onClick={() => document.getElementById("main-content")?.focus()}>
+          onClick={() => document.getElementById("main-content")?.focus()}
+        >
           Skip to content
         </button>
         <header className="site-header">
@@ -121,32 +117,37 @@ export function App() {
               <a
                 className={page === "preview" ? "nav-link active" : "nav-link"}
                 href="#/"
-                aria-current={page === "preview" ? "page" : undefined}>
+                aria-current={page === "preview" ? "page" : undefined}
+              >
                 <LayoutDashboard size={17} /> Preview
               </a>
               {MANAGE_ENABLED && (
                 <a
                   className={page === "manage" ? "nav-link active" : "nav-link"}
                   href="#/manage"
-                  aria-current={page === "manage" ? "page" : undefined}>
+                  aria-current={page === "manage" ? "page" : undefined}
+                >
                   <PencilLine size={17} /> Manage
                 </a>
               )}
             </nav>
             <div className="header-end">
               <AnimatePresence>
-                {dirty && (
+                {saveStatus && (
                   <motion.span
                     key="draft"
-                    className={`draft-indicator draft-${saveState}`}
-                    title="Edits are saved in this browser. Export JSON to publish them."
+                    className={`draft-indicator ${saveStatus === "failed" ? "draft-error" : ""}`}
+                    title="Status of public/data/*.json. Use Save to local JSON in Manage to write changes."
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.18 }}>
-                    {saveState === "error" ? (
+                    transition={{ duration: 0.18 }}
+                  >
+                    {saveStatus === "failed" ? (
                       <CircleAlert size={13} aria-hidden="true" />
-                    ) : saveState === "saving" ? (
+                    ) : saveStatus === "saved" ? (
+                      <Check size={13} aria-hidden="true" />
+                    ) : saveStatus === "saving" ? (
                       <LoaderCircle
                         className="spin"
                         size={13}
@@ -155,7 +156,9 @@ export function App() {
                     ) : (
                       <span className="draft-dot" aria-hidden="true" />
                     )}
-                    <span className="draft-label">{draftLabel}</span>
+                    <span className="draft-label">
+                      {saveStatusLabels[saveStatus]}
+                    </span>
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -168,7 +171,8 @@ export function App() {
                     ? "Switch to light theme"
                     : "Switch to dark theme"
                 }
-                title={theme === "dark" ? "Light theme" : "Dark theme"}>
+                title={theme === "dark" ? "Light theme" : "Dark theme"}
+              >
                 {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
               </button>
               <a
@@ -176,7 +180,8 @@ export function App() {
                 href="https://github.com/namchokGithub/mc-mod-manager"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="GitHub">
+                aria-label="GitHub"
+              >
                 <GitFork size={18} />
               </a>
             </div>
@@ -189,7 +194,8 @@ export function App() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}>
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
               {page === "manage" && Manage ? (
                 <Suspense
                   fallback={
@@ -197,7 +203,8 @@ export function App() {
                       <div className="loading-orb" />
                       <p>Opening the editor…</p>
                     </div>
-                  }>
+                  }
+                >
                   <Manage />
                 </Suspense>
               ) : (

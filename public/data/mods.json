@@ -1,180 +1,52 @@
 [
   {
-    "id": "sodium",
-    "name": "Sodium",
+    "id": "1123439",
+    "name": "Thai Font (สระไม่ลอย)",
     "version": "",
-    "category": "Performance",
-    "tags": [
-      "Rendering",
-      "Client"
-    ],
-    "status": "installed",
-    "side": "client",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/sodium",
-    "description": "A rendering optimization mod for a smoother client experience.",
-    "dependencies": [],
-    "notes": "Example entry. Check the project page for a release compatible with your exact game and loader versions.",
-    "imageUrl": ""
-  },
-  {
-    "id": "iris",
-    "name": "Iris Shaders",
-    "version": "",
-    "category": "Visuals",
-    "tags": [
-      "Shaders",
-      "Client"
-    ],
-    "status": "testing",
-    "side": "client",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/iris",
-    "description": "Adds shader support for players who want a more atmospheric world.",
-    "dependencies": [
-      "sodium"
-    ],
-    "notes": "Example dependency for planning only; verify current requirements upstream.",
-    "imageUrl": ""
-  },
-  {
-    "id": "lithium",
-    "name": "Lithium",
-    "version": "",
-    "category": "Performance",
-    "tags": [
-      "Optimization"
-    ],
-    "status": "installed",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/lithium",
-    "description": "General game logic optimizations for an efficient modpack.",
-    "dependencies": [],
-    "notes": "Example entry. Confirm current compatibility before installing.",
-    "imageUrl": ""
-  },
-  {
-    "id": "xaeros-minimap",
-    "name": "Xaero's Minimap",
-    "version": "",
-    "category": "Exploration",
-    "tags": [
-      "Navigation",
-      "Map"
-    ],
-    "status": "planned",
-    "side": "client",
-    "source": "CurseForge",
-    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/xaeros-minimap",
-    "description": "A compact map to help navigate new terrain.",
-    "dependencies": [],
-    "notes": "Check licensing and distribution rules before packaging.",
-    "imageUrl": ""
-  },
-  {
-    "id": "jade",
-    "name": "Jade",
-    "version": "",
-    "category": "Utilities",
-    "tags": [
-      "Information"
-    ],
-    "status": "installed",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/jade",
-    "description": "Displays useful information about blocks and entities in view.",
-    "dependencies": [],
-    "notes": "Example entry; review side requirements for your setup.",
-    "imageUrl": ""
-  },
-  {
-    "id": "emi",
-    "name": "EMI",
-    "version": "",
-    "category": "Utilities",
-    "tags": [
-      "Recipes"
-    ],
-    "status": "testing",
-    "side": "client",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/emi",
-    "description": "A recipe and item browser for discovering crafting paths.",
-    "dependencies": [],
-    "notes": "Test with the final mod list before marking installed.",
-    "imageUrl": ""
-  },
-  {
-    "id": "farmers-delight",
-    "name": "Farmer's Delight",
-    "version": "",
-    "category": "Gameplay",
-    "tags": [
-      "Food",
-      "Farming"
-    ],
-    "status": "planned",
-    "side": "both",
-    "source": "CurseForge",
-    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/farmers-delight",
-    "description": "Expands cooking and farming with more hands-on activities.",
-    "dependencies": [],
-    "notes": "Example entry; check whether a loader-specific port is needed.",
-    "imageUrl": ""
-  },
-  {
-    "id": "betterend",
-    "name": "BetterEnd",
-    "version": "",
-    "category": "Worldgen",
-    "tags": [
-      "Dimension",
-      "Exploration"
-    ],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/betterend",
-    "description": "Reimagines the End with new environments to explore.",
-    "dependencies": [],
-    "notes": "Disabled while evaluating world generation and pack size.",
-    "imageUrl": ""
-  },
-  {
-    "id": "waystones",
-    "name": "Waystones",
-    "version": "",
-    "category": "Exploration",
-    "tags": [
-      "Travel"
-    ],
+    "category": "Font",
+    "tags": [],
     "status": "planned",
     "side": "both",
     "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/waystones",
-    "description": "Travel between discovered waystones across the world.",
+    "sourceUrl": "https://www.curseforge.com/minecraft/texture-packs/font-thaifix/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
+    "description": "Have you ever been annoyed with Thai fonts that float?",
     "dependencies": [],
-    "notes": "Example entry. Verify dependencies on the source page.",
-    "imageUrl": ""
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1102/263/64/64/638650253815005923.png"
   },
   {
     "id": "appleskin",
     "name": "AppleSkin",
-    "version": "",
-    "category": "Utilities",
+    "version": "3.0.9+mc26.1",
+    "category": "Food",
     "tags": [
-      "Food",
-      "Client"
+      "Utility"
     ],
-    "status": "installed",
-    "side": "client",
+    "status": "planned",
+    "side": "both",
     "source": "Modrinth",
-    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/appleskin",
-    "description": "Shows additional food and hunger information in the interface.",
+    "sourceUrl": "https://modrinth.com/mod/appleskin",
+    "description": "Food/hunger-related HUD improvements",
     "dependencies": [],
-    "notes": "Example of a removed entry retained for planning history.",
-    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/47/527/64/64/636066936394500688.png"
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/EsAfCjCV/icon.png",
+    "modrinth": {
+      "projectId": "EsAfCjCV",
+      "slug": "appleskin",
+      "versionId": "i8MiVItH",
+      "versionNumber": "3.0.9+mc26.1",
+      "versionType": "release",
+      "datePublished": "2026-04-01T04:52:23.143854Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T09:04:53.813Z"
+    }
   }
 ]

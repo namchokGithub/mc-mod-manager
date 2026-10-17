@@ -72,6 +72,7 @@ import {
   type Modpack,
 } from "../../lib/schema";
 import { saveToLocalJson } from "../../lib/localSave";
+import { saveStatusLabels } from "../../lib/saveStatus";
 import { downloadJson } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
@@ -754,8 +755,6 @@ function DataTools() {
 export function Manage() {
   const {
     data,
-    dirty,
-    saveState,
     saveMod,
     deleteMod,
     deleteMods,
@@ -763,6 +762,8 @@ export function Manage() {
     importMods,
     published,
     markSaved,
+    saveStatus,
+    setFileSavePhase,
   } = useCollection();
   const notify = useToast();
   const [importingJars, setImportingJars] = useState(false);
@@ -804,6 +805,7 @@ export function Manage() {
     if (savingLocalRef.current) return;
     savingLocalRef.current = true;
     setSavingLocal(true);
+    setFileSavePhase("saving");
     try {
       const result = await saveToLocalJson(data, published, force);
       if (result.kind === "saved") {
@@ -814,9 +816,12 @@ export function Manage() {
           description:
             "modpack.json and mods.json were updated. Commit them to publish.",
         });
-      } else if (result.kind === "conflict")
+      } else if (result.kind === "conflict") {
+        // Waiting for the user's decision, not a failure.
+        setFileSavePhase("idle");
         setLocalSave({ conflict: result.message });
-      else {
+      } else {
+        setFileSavePhase("failed");
         setLocalSave((current) => ({ ...current, error: result.message }));
         notify({
           kind: "error",
@@ -1016,13 +1021,6 @@ export function Manage() {
       undefined,
       `Duplicated ${mod.name}`,
     );
-  const saveCaption = !dirty
-    ? "Viewing published data"
-    : saveState === "saving"
-      ? "Saving draft…"
-      : saveState === "error"
-        ? "Unable to save draft"
-        : "All changes saved locally";
   return (
     <div className="container manage-page">
       <div className="manage-title">
@@ -1034,21 +1032,25 @@ export function Manage() {
           <p>Shape the pack. Keep every detail in one place.</p>
         </div>
         <div className="manage-title-actions">
-          <span
-            className={`save-caption save-${dirty ? saveState : "published"}`}
-            role="status"
-          >
-            <span className="draft-dot" aria-hidden="true" />
-            {saveCaption}
-          </span>
+          {saveStatus && (
+            <span
+              className={`save-caption save-${saveStatus === "failed" ? "error" : saveStatus}`}
+              role="status"
+            >
+              <span className="draft-dot" aria-hidden="true" />
+              {saveStatusLabels[saveStatus]}
+            </span>
+          )}
           <a className="button button-secondary" href="#/">
             View preview <ArrowRight size={16} />
           </a>
           <Button
-            disabled={!dirty || savingLocal}
+            disabled={
+              savingLocal || saveStatus === null || saveStatus === "saved"
+            }
             title={
-              dirty
-                ? "Write the draft to public/data/*.json"
+              saveStatus === "unsaved" || saveStatus === "failed"
+                ? "Write your changes to public/data/*.json"
                 : "No changes to save"
             }
             onClick={() => setLocalSave({})}
@@ -1091,9 +1093,9 @@ export function Manage() {
             onClick={() => changeTab("data")}
           >
             <ArrowDownToLine size={18} /> Data & export
-            {dirty && (
-              <span className="sidebar-dot" title="Draft has changes to export">
-                <span className="sr-only">(changes to export)</span>
+            {(saveStatus === "unsaved" || saveStatus === "failed") && (
+              <span className="sidebar-dot" title="Unsaved changes">
+                <span className="sr-only">(unsaved changes)</span>
               </span>
             )}
           </button>

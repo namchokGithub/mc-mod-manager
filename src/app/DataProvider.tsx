@@ -1,7 +1,12 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { collectionSchema, modsSchema, type Collection } from "../lib/schema";
 import { DRAFT_KEY, loadDraft, parseDraft, saveDraft } from "../lib/storage";
 import { removeMods } from "../lib/mods";
+import {
+  deriveSaveStatus,
+  hasUnsavedChanges,
+  type FileSavePhase,
+} from "../lib/saveStatus";
 import { DataContext, type DataContextValue } from "./DataContext";
 
 // Drafts belong to the editor, which only runs in `pnpm dev`. Production always shows the
@@ -24,6 +29,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
     "backed-up" | "unreadable" | null
   >(null);
   const [externalUpdate, setExternalUpdate] = useState(0);
+  const [fileSavePhase, setFileSavePhase] = useState<FileSavePhase>("idle");
+  // `published` is the last JSON read from or written to public/data.
+  const unsaved = useMemo(
+    () => Boolean(data && published && hasUnsavedChanges(data, published)),
+    [data, published],
+  );
   // Set when a draft arrives from another tab, so it is not written straight back.
   const skipNextSave = useRef(false);
 
@@ -162,7 +173,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
       setData(saved);
       setDirty(false);
       setSaveState("saved");
+      setFileSavePhase("saved");
     },
+    saveStatus: deriveSaveStatus(fileSavePhase, unsaved),
+    setFileSavePhase,
     reset: () => {
       try {
         window.localStorage.removeItem(DRAFT_KEY);

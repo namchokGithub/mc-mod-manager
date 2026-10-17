@@ -99,7 +99,8 @@ Details:
 - **Reset draft** (with confirmation) discards the draft and returns to the published data.
 - **Import** validates the file first. An invalid file changes nothing and shows why. A valid file asks for confirmation before it replaces the current mods or settings.
 - If a stored draft can no longer be read, the app shows the published data, keeps the old draft under the LocalStorage key `mc-mod-manager:draft:v1:unreadable`, and tells you.
-- A draft that matches the published data exactly is cleared on load, so the "Unpublished draft" badge disappears after you publish.
+- A draft that matches the JSON files exactly is cleared on load.
+- The status badge in the header and Manage tracks `public/data/*.json`, not the browser draft. It shows **Unsaved changes** while your data differs from the last saved JSON, **Saving...** during a write, **Saved locally** after a successful write, and **Save failed** if a write fails (your changes stay unsaved). Importing JSON or autosaving the draft never counts as saved.
 - The theme choice is stored separately under `mc-mod-manager:theme` and is never part of exported data.
 - With several tabs open, a tab follows drafts saved or reset in another tab instead of overwriting them.
 - Closing the mod editor, leaving unsaved pack settings, or reloading the page with unsaved form edits asks for confirmation first.
