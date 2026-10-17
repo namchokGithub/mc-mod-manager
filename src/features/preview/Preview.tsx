@@ -72,7 +72,7 @@ export function Preview() {
         style={
           data.modpack.heroImageUrl
             ? {
-                backgroundImage: `linear-gradient(90deg, #0b1511 0%, rgba(11,21,17,.94) 38%, rgba(11,21,17,.54) 100%), url(${JSON.stringify(resolveHeroImageUrl(data.modpack.heroImageUrl, import.meta.env.BASE_URL))})`,
+                backgroundImage: `var(--hero-overlay), url(${JSON.stringify(resolveHeroImageUrl(data.modpack.heroImageUrl, import.meta.env.BASE_URL))})`,
               }
             : undefined
         }

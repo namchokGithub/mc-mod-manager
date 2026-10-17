@@ -5,9 +5,12 @@ import {
   CircleAlert,
   LayoutDashboard,
   LoaderCircle,
+  Moon,
   PencilLine,
+  Sun,
 } from "lucide-react";
 import { useCollection } from "./DataContext";
+import { useTheme } from "./theme";
 import { useToast } from "./ToastContext";
 import { DRAFT_BACKUP_KEY } from "../lib/storage";
 import { Preview } from "../features/preview/Preview";
@@ -24,6 +27,7 @@ export function App() {
   const [page, setPage] = useState(currentPage);
   const { data, dirty, saveState, draftIssue } = useCollection();
   const notify = useToast();
+  const [theme, toggleTheme] = useTheme();
   useEffect(() => {
     const update = () => setPage(currentPage());
     window.addEventListener("hashchange", update);
@@ -132,6 +136,19 @@ export function App() {
                   </motion.span>
                 )}
               </AnimatePresence>
+              <button
+                type="button"
+                className="theme-toggle"
+                onClick={toggleTheme}
+                aria-label={
+                  theme === "dark"
+                    ? "Switch to light theme"
+                    : "Switch to dark theme"
+                }
+                title={theme === "dark" ? "Light theme" : "Dark theme"}
+              >
+                {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+              </button>
               <a
                 className="header-github"
                 href="https://github.com/namchokGithub/mc-mod-manager"

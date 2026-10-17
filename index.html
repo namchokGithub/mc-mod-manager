@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0c100f" />
+    <meta name="theme-color" content="#f8faf8" />
     <link
       rel="icon"
       type="image/png"
@@ -17,6 +17,17 @@
       href="%BASE_URL%assets/Glossy%20Minecraft%20Slime%20Mod%20Manager-16x16.png"
     />
     <title>MC Mod Manager</title>
+    <script>
+      // Apply a saved dark theme before first paint; light is the default.
+      try {
+        if (localStorage.getItem("mc-mod-manager:theme") === "dark") {
+          document.documentElement.dataset.theme = "dark";
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", "#0b0f0e");
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

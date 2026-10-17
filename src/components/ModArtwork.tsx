@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Box } from "lucide-react";
 
-const colors = ["#80bfa5", "#9ab4d0", "#d1b585", "#ad9fcc", "#b7c79c"];
+// Tints are theme tokens (--art-1 … --art-5) defined in styles.css.
+const colors = [1, 2, 3, 4, 5].map((index) => `var(--art-${index})`);
 
 export function ModArtwork({
   name,
