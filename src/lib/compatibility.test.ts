@@ -76,7 +76,7 @@ describe("version and loader checks", () => {
   it("flags a Minecraft version mismatch", () => {
     const result = check([mod("a", { gameVersions: ["1.21.1"] })]).get("a")!;
     expect(result.status).toBe("incompatible");
-    expect(result.reasons[0].message).toContain("1.21.1, not 1.20.1");
+    expect(result.reasons[0]?.message).toContain("1.21.1, not 1.20.1");
   });
 
   it("flags a loader mismatch with readable names", () => {
@@ -85,7 +85,7 @@ describe("version and loader checks", () => {
       modloader: "NeoForge",
     }).get("a")!;
     expect(result.status).toBe("incompatible");
-    expect(result.reasons[0].message).toBe(
+    expect(result.reasons[0]?.message).toBe(
       "Selected version is for Forge, not NeoForge.",
     );
   });
@@ -110,7 +110,7 @@ describe("missing metadata", () => {
   it("never marks a manual mod as compatible", () => {
     const result = check([mod("manual")]).get("manual")!;
     expect(result).toMatchObject({ status: "unknown", source: "none" });
-    expect(result.reasons[0].message).toContain(
+    expect(result.reasons[0]?.message).toContain(
       "without Modrinth version metadata",
     );
   });
@@ -159,7 +159,9 @@ describe("dependencies", () => {
   it("flags a missing required dependency", () => {
     const result = check([requires("required")]).get("a")!;
     expect(result.status).toBe("incompatible");
-    expect(result.reasons[0].message).toBe("Missing required dependency: Dep.");
+    expect(result.reasons[0]?.message).toBe(
+      "Missing required dependency: Dep.",
+    );
   });
 
   it("flags a required dependency that is disabled", () => {
@@ -168,7 +170,7 @@ describe("dependencies", () => {
       mod("dep", {}, { status: "disabled" }),
     ]).get("a")!;
     expect(result.status).toBe("incompatible");
-    expect(result.reasons[0].message).toContain("disabled in this pack");
+    expect(result.reasons[0]?.message).toContain("disabled in this pack");
   });
 
   it("warns when a manual mod only matches by name", () => {
@@ -194,7 +196,7 @@ describe("dependencies", () => {
   it("flags declared incompatibilities on both mods", () => {
     const results = check([requires("incompatible"), mod("dep", {})]);
     expect(results.get("a")?.status).toBe("incompatible");
-    expect(results.get("dep")?.reasons[0].message).toBe(
+    expect(results.get("dep")?.reasons[0]?.message).toBe(
       "A declares itself incompatible with this mod.",
     );
   });
@@ -251,7 +253,7 @@ describe("duplicates and live data", () => {
       "a",
     )!;
     expect(result.status).toBe("warning");
-    expect(result.reasons[0].message).toContain("not found");
+    expect(result.reasons[0]?.message).toContain("not found");
   });
 
   it("does not modify the mods", () => {

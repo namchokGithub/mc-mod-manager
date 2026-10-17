@@ -6,6 +6,7 @@ export type DataContextValue = {
   published: Collection;
   dirty: boolean;
   saveState: "saved" | "saving" | "error";
+  draftIssue: "backed-up" | "unreadable" | null;
   updateModpack: (modpack: Modpack) => void;
   saveMod: (mod: Mod, originalId?: string) => void;
   deleteMod: (id: string) => void;

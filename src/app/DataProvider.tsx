@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { collectionSchema, modsSchema, type Collection } from "../lib/schema";
-import { DRAFT_KEY, readDraft, saveDraft } from "../lib/storage";
+import { DRAFT_KEY, loadDraft, saveDraft } from "../lib/storage";
 import { DataContext, type DataContextValue } from "./DataContext";
 
 function jsonUrl(file: string): string {
@@ -15,6 +15,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
     "saved",
   );
   const [loadError, setLoadError] = useState("");
+  const [draftIssue, setDraftIssue] = useState<
+    "backed-up" | "unreadable" | null
+  >(null);
 
   useEffect(() => {
     let active = true;
@@ -37,9 +40,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
           throw new Error("Published JSON files have invalid data.");
         if (!active) return;
         setPublished(result.data);
-        const draft = readDraft(window.localStorage);
+        const { draft, issue } = loadDraft(window.localStorage, result.data);
         setData(draft ?? result.data);
         setDirty(Boolean(draft));
+        setDraftIssue(issue);
       } catch (error) {
         if (active)
           setLoadError(
@@ -93,6 +97,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     published,
     dirty,
     saveState,
+    draftIssue,
     updateModpack: (modpack) => change({ ...data, modpack }),
     saveMod: (mod, originalId) => {
       const nextMods = originalId
@@ -105,7 +110,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
     importModpack: (modpack) => change({ ...data, modpack }),
     importMods: (mods) => change({ ...data, mods }),
     reset: () => {
-      window.localStorage.removeItem(DRAFT_KEY);
+      try {
+        window.localStorage.removeItem(DRAFT_KEY);
+      } catch {
+        // Blocked storage has no draft to remove.
+      }
       setData(published);
       setDirty(false);
       setSaveState("saved");

@@ -287,7 +287,7 @@ describe("hash matching", () => {
       hash,
       "d".repeat(40),
     ]);
-    const init = fetchMock.mock.calls[0][1];
+    const init = fetchMock.mock.calls[0]?.[1];
     expect(init?.method).toBe("POST");
     expect(JSON.parse(String(init?.body))).toEqual({
       hashes: [hash, "d".repeat(40)],

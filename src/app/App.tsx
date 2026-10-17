@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useCollection } from "./DataContext";
 import { useToast } from "./ToastContext";
+import { DRAFT_BACKUP_KEY } from "../lib/storage";
 import { Preview } from "../features/preview/Preview";
 
 const Manage = lazy(async () => ({
@@ -21,7 +22,7 @@ function currentPage(): "preview" | "manage" {
 
 export function App() {
   const [page, setPage] = useState(currentPage);
-  const { data, dirty, saveState } = useCollection();
+  const { data, dirty, saveState, draftIssue } = useCollection();
   const notify = useToast();
   useEffect(() => {
     const update = () => setPage(currentPage());
@@ -43,6 +44,17 @@ export function App() {
           "This browser could not write to LocalStorage. Export your changes to keep them.",
       });
   }, [saveState, notify]);
+  useEffect(() => {
+    if (draftIssue)
+      notify({
+        kind: "error",
+        title: "Saved draft could not be opened",
+        description:
+          draftIssue === "backed-up"
+            ? `Showing the published data instead. The old draft was kept in LocalStorage under “${DRAFT_BACKUP_KEY}”.`
+            : "Showing the published data instead. The old draft was left untouched in LocalStorage.",
+      });
+  }, [draftIssue, notify]);
 
   const draftLabel =
     saveState === "saving"

@@ -15,6 +15,42 @@ import {
 } from "./mapping";
 
 /**
+ * Modrinth sometimes names a dependency only by version ID. This resolves those to project IDs
+ * with one bulk request for all given versions.
+ */
+async function fillDependencyProjects(
+  client: ModrinthClient,
+  versions: ModrinthVersion[],
+  signal?: AbortSignal,
+): Promise<ModrinthVersion[]> {
+  const missing = versions.flatMap((version) =>
+    version.dependencies.flatMap((dependency) =>
+      !dependency.projectId && dependency.versionId
+        ? [dependency.versionId]
+        : [],
+    ),
+  );
+  if (!missing.length) return versions;
+  const projectByVersion = new Map(
+    (await client.versions(missing, signal)).map((item) => [
+      item.id,
+      item.project_id,
+    ]),
+  );
+  return versions.map((version) => ({
+    ...version,
+    dependencies: version.dependencies.map((dependency) =>
+      dependency.projectId || !dependency.versionId
+        ? dependency
+        : {
+            ...dependency,
+            projectId: projectByVersion.get(dependency.versionId) ?? null,
+          },
+    ),
+  }));
+}
+
+/**
  * Fills dependency project IDs that Modrinth only gave as version IDs, and adds display names.
  * Name lookup is best effort; a failed lookup keeps the IDs.
  */
@@ -23,22 +59,8 @@ export async function resolveDependencies(
   version: ModrinthVersion,
   signal?: AbortSignal,
 ): Promise<ModrinthVersion> {
-  const missing = version.dependencies
-    .filter((dependency) => !dependency.projectId && dependency.versionId)
-    .map((dependency) => dependency.versionId as string);
-  const projectByVersion = new Map<string, string>();
-  if (missing.length) {
-    for (const item of await client.versions(missing, signal))
-      projectByVersion.set(item.id, item.project_id);
-  }
-  const dependencies = version.dependencies.map((dependency) =>
-    dependency.projectId || !dependency.versionId
-      ? dependency
-      : {
-          ...dependency,
-          projectId: projectByVersion.get(dependency.versionId) ?? null,
-        },
-  );
+  const [filled] = await fillDependencyProjects(client, [version], signal);
+  const dependencies = filled?.dependencies ?? version.dependencies;
   const projectIds = dependencies
     .filter((dependency) => dependency.type !== "embedded")
     .flatMap((dependency) =>
@@ -81,33 +103,17 @@ export async function fetchLiveVersionFacts(
     versionIds.map((id) => [id, null]),
   );
   if (!versionIds.length) return facts;
-  const versions = (await client.versions(versionIds, signal)).map(mapVersion);
-  const unresolved = versions.flatMap((version) =>
-    version.dependencies.flatMap((dependency) =>
-      !dependency.projectId && dependency.versionId
-        ? [dependency.versionId]
-        : [],
-    ),
+  const versions = await fillDependencyProjects(
+    client,
+    (await client.versions(versionIds, signal)).map(mapVersion),
+    signal,
   );
-  const projectByVersion = new Map<string, string>();
-  if (unresolved.length) {
-    for (const item of await client.versions(unresolved, signal))
-      projectByVersion.set(item.id, item.project_id);
-  }
-  for (const version of versions) {
+  for (const version of versions)
     facts.set(version.id, {
       gameVersions: version.gameVersions,
       loaders: version.loaders,
-      dependencies: version.dependencies.map((dependency) =>
-        dependency.projectId || !dependency.versionId
-          ? dependency
-          : {
-              ...dependency,
-              projectId: projectByVersion.get(dependency.versionId) ?? null,
-            },
-      ),
+      dependencies: version.dependencies,
     });
-  }
   return facts;
 }
 
@@ -184,6 +190,7 @@ export async function checkUpdates(
   const worker = async () => {
     while (!stopped && next < projectIds.length) {
       const projectId = projectIds[next++];
+      if (projectId === undefined) break;
       try {
         lists.set(
           projectId,
@@ -264,37 +271,17 @@ export async function matchFilesByHash(
   signal?: AbortSignal,
 ): Promise<Map<string, HashMatch>> {
   const byHash = await client.versionsByHashes(hashes, signal);
-  const entries = Object.entries(byHash).map(
-    ([hash, version]) => [hash, mapVersion(version)] as const,
+  const entries = Object.entries(byHash);
+  const versions = await fillDependencyProjects(
+    client,
+    entries.map(([, version]) => mapVersion(version)),
+    signal,
   );
-  const unresolved = entries.flatMap(([, version]) =>
-    version.dependencies.flatMap((dependency) =>
-      !dependency.projectId && dependency.versionId
-        ? [dependency.versionId]
-        : [],
-    ),
-  );
-  const projectByVersion = new Map<string, string>();
-  if (unresolved.length)
-    for (const item of await client.versions(unresolved, signal))
-      projectByVersion.set(item.id, item.project_id);
-  const resolved = entries.map(
-    ([hash, version]) =>
-      [
-        hash,
-        {
-          ...version,
-          dependencies: version.dependencies.map((dependency) =>
-            dependency.projectId || !dependency.versionId
-              ? dependency
-              : {
-                  ...dependency,
-                  projectId: projectByVersion.get(dependency.versionId) ?? null,
-                },
-          ),
-        },
-      ] as const,
-  );
+  // fillDependencyProjects keeps input order, so versions line up with entries.
+  const resolved = entries.flatMap(([hash], index) => {
+    const version = versions[index];
+    return version ? [[hash, version] as const] : [];
+  });
   const projectIds = resolved.flatMap(([, version]) => [
     version.projectId,
     ...version.dependencies.flatMap((dependency) =>

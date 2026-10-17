@@ -61,6 +61,7 @@ export function JarImportDialog({
   const [matching, setMatching] = useState<"hashing" | "matching" | null>(null);
   const [matchError, setMatchError] = useState("");
   const [skipped, setSkipped] = useState(0);
+  const [overLimit, setOverLimit] = useState(0);
   const [dragging, setDragging] = useState(false);
   const packLoader = normalizeLoader(modpack.modloader);
 
@@ -76,10 +77,10 @@ export function JarImportDialog({
 
   const readFiles = async (list: FileList | File[]) => {
     const all = Array.from(list);
-    const jars = all
-      .filter((file) => /\.jar$/i.test(file.name))
-      .slice(0, MAX_FILES);
-    setSkipped(all.length - jars.length);
+    const allJars = all.filter((file) => /\.jar$/i.test(file.name));
+    const jars = allJars.slice(0, MAX_FILES);
+    setSkipped(all.length - allJars.length);
+    setOverLimit(allJars.length - jars.length);
     if (!jars.length) return;
     setProgress({ done: 0, total: jars.length });
     const parsed: Row[] = [];
@@ -286,6 +287,7 @@ export function JarImportDialog({
           {rows.length} {rows.length === 1 ? "file" : "files"} read ·{" "}
           {selected.size} selected
           {lookedUp ? ` · ${matchedCount} matched on Modrinth` : ""}
+          {skipped > 0 ? ` · ${skipped} non-JAR skipped` : ""}
         </span>
         <div className="jar-toolbar-actions">
           <Button
@@ -345,6 +347,15 @@ export function JarImportDialog({
                 : "Match files"}
         </Button>
       </div>
+      {overLimit > 0 && (
+        <div className="inline-message error" role="alert">
+          <CircleAlert size={16} aria-hidden="true" />
+          <span>
+            Only the first {MAX_FILES} JAR files were read; {overLimit} more
+            were left out. Import the rest in another batch.
+          </span>
+        </div>
+      )}
       {matchError && (
         <div className="inline-message error" role="alert">
           <CircleAlert size={16} aria-hidden="true" />

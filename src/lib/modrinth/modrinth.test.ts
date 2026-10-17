@@ -153,11 +153,11 @@ describe("Modrinth client errors", () => {
         loader: "fabric",
       },
     );
-    const url = new URL(fetchMock.mock.calls[0][0]);
+    const url = new URL(fetchMock.mock.calls[0]?.[0] ?? "");
     expect(url.pathname).toBe("/v2/project/iris/version");
     expect(url.searchParams.get("loaders")).toBe('["fabric"]');
     expect(url.searchParams.get("game_versions")).toBe('["1.20.1"]');
-    expect(versions[0].id).toBe("s5eFLITc");
+    expect(versions[0]?.id).toBe("s5eFLITc");
   });
 
   it("splits bulk requests into chunks", async () => {

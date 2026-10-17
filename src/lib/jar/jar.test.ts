@@ -268,10 +268,11 @@ describe("JAR reading", () => {
       { name: "a.txt", data: "stored" },
       { name: "b.txt", data: "deflated ".repeat(50), deflate: true },
     ]);
-    const entries = await listEntries(jar);
+    const [stored, deflated] = await listEntries(jar);
+    if (!stored || !deflated) throw new Error("entries missing");
     const decoder = new TextDecoder();
-    expect(decoder.decode(await readEntry(jar, entries[0]))).toBe("stored");
-    expect(decoder.decode(await readEntry(jar, entries[1]))).toBe(
+    expect(decoder.decode(await readEntry(jar, stored))).toBe("stored");
+    expect(decoder.decode(await readEntry(jar, deflated))).toBe(
       "deflated ".repeat(50),
     );
   });
@@ -351,6 +352,7 @@ describe("JAR reading", () => {
       { name: "big.txt", data: "a".repeat(5000), deflate: true },
     ]);
     const [entry] = await listEntries(jar);
+    if (!entry) throw new Error("entry missing");
     // Lie about the size so only the streaming limit can catch it.
     await expect(readEntry(jar, { ...entry, size: 10 }, 1000)).rejects.toThrow(
       "unexpectedly large",

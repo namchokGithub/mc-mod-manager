@@ -447,6 +447,12 @@ function DataTools() {
   const [importError, setImportError] = useState("");
   const [importing, setImporting] = useState<"modpack" | "mods" | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [pendingImport, setPendingImport] = useState<
+    | { kind: "modpack"; fileName: string; value: Modpack }
+    | { kind: "mods"; fileName: string; value: Mod[] }
+    | null
+  >(null);
+  const shownImport = useRetained(pendingImport);
   const modpackFileRef = useRef<HTMLInputElement>(null);
   const modsFileRef = useRef<HTMLInputElement>(null);
   const onImport = async (kind: "modpack" | "mods", file?: File) => {
@@ -454,13 +460,13 @@ function DataTools() {
     setImporting(kind);
     try {
       const parsed = parseJsonFile(await file.text(), kind);
-      if (kind === "modpack") importModpack(parsed as Modpack);
-      else importMods(parsed as Mod[]);
       setImportError("");
-      notify({
-        title: `${file.name} imported`,
-        description: "The data is now in your local draft.",
-      });
+      // Valid files still replace current data, so they wait for confirmation.
+      setPendingImport(
+        kind === "modpack"
+          ? { kind, fileName: file.name, value: parsed as Modpack }
+          : { kind, fileName: file.name, value: parsed as Mod[] },
+      );
     } catch (error) {
       setImportError(
         `${file.name}: ${error instanceof Error ? error.message : "Import failed."}`,
@@ -473,6 +479,16 @@ function DataTools() {
     } finally {
       setImporting(null);
     }
+  };
+  const applyImport = () => {
+    if (!pendingImport) return;
+    if (pendingImport.kind === "modpack") importModpack(pendingImport.value);
+    else importMods(pendingImport.value);
+    notify({
+      title: `${pendingImport.fileName} imported`,
+      description: "The data is now in your local draft.",
+    });
+    setPendingImport(null);
   };
   const onExport = (filename: string, value: unknown) => {
     downloadJson(filename, value);
@@ -632,6 +648,29 @@ function DataTools() {
             }}
           >
             Discard draft
+          </Button>
+        </div>
+      </Dialog>
+      <Dialog
+        open={pendingImport !== null}
+        onOpenChange={(open) => !open && setPendingImport(null)}
+        title={
+          shownImport?.kind === "mods"
+            ? "Replace the mod collection?"
+            : "Replace the pack settings?"
+        }
+        description={
+          shownImport?.kind === "mods"
+            ? `${shownImport.fileName} has ${shownImport.value.length} ${shownImport.value.length === 1 ? "mod" : "mods"}. They will replace the ${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"} in your draft, including notes. Export first if you want to keep the current list.`
+            : `${shownImport?.fileName ?? "This file"} will replace the name, description, versions, and hero image in your draft.`
+        }
+      >
+        <div className="dialog-actions">
+          <Button variant="ghost" onClick={() => setPendingImport(null)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={applyImport}>
+            <ArrowUpFromLine size={16} /> Replace with file
           </Button>
         </div>
       </Dialog>

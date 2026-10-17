@@ -46,7 +46,7 @@ export function parseToml(text: string): TomlTable {
   };
 
   function parseEscape(): string {
-    const char = source[index + 1];
+    const char = source[index + 1] ?? "";
     index += 2;
     const simple: Record<string, string> = {
       b: "\b",
@@ -57,7 +57,8 @@ export function parseToml(text: string): TomlTable {
       '"': '"',
       "\\": "\\",
     };
-    if (char in simple) return simple[char];
+    const mapped = simple[char];
+    if (mapped !== undefined) return mapped;
     if (char === "u" || char === "U") {
       const length = char === "u" ? 4 : 8;
       const hex = source.slice(index, index + length);
@@ -169,7 +170,7 @@ export function parseToml(text: string): TomlTable {
       }
     }
     const start = index;
-    while (index < source.length && !/[,\]}\n#]/.test(source[index]))
+    while (index < source.length && !/[,\]}\n#]/.test(source[index] ?? ""))
       index += 1;
     const raw = source.slice(start, index).trim();
     if (!raw) fail("Expected a value");
@@ -189,7 +190,7 @@ export function parseToml(text: string): TomlTable {
       else if (isTable(next)) target = next;
       else fail(`Key ${key.join(".")} conflicts with an existing value`);
     }
-    const last = key[key.length - 1];
+    const last = key[key.length - 1] ?? fail("Expected a key");
     if (last in target) fail(`Duplicate key ${key.join(".")}`);
     target[last] = value;
   }
@@ -216,7 +217,7 @@ export function parseToml(text: string): TomlTable {
       if (!peek("]]")) fail("Expected ]]");
       index += 2;
       const parent = navigate(path.slice(0, -1));
-      const last = path[path.length - 1];
+      const last = path[path.length - 1] ?? fail("Expected a table name");
       const existing = parent[last];
       const table: TomlTable = {};
       if (existing === undefined) parent[last] = [table];

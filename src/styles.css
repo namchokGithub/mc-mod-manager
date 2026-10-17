@@ -1321,10 +1321,6 @@ main:focus {
   flex: none;
   margin-top: 1px;
 }
-.inline-message.success {
-  background: #1c3825;
-  color: #b3e5bd;
-}
 .inline-message.error {
   background: var(--danger-soft);
   color: #f1b1a8;

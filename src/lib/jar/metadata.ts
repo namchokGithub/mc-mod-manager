@@ -73,7 +73,8 @@ export function parseManifest(source: string): Record<string, string> {
   let last = "";
   for (const line of source.replace(/\r\n/g, "\n").split("\n")) {
     // Manifest lines wrap at 72 bytes; continuation lines start with one space.
-    if (line.startsWith(" ") && last) fields[last] += line.slice(1);
+    if (line.startsWith(" ") && last)
+      fields[last] = (fields[last] ?? "") + line.slice(1);
     else {
       const separator = line.indexOf(":");
       if (separator > 0) {
@@ -91,7 +92,7 @@ export function filenameHints(fileName: string): {
 } {
   const base = fileName.replace(/^.*[\\/]/, "").replace(/\.jar$/i, "");
   const match = base.match(/^(.+?)[-_ ]v?(\d[\w.+-]*)$/);
-  const name = (match ? match[1] : base).replace(/[-_]+/g, " ").trim();
+  const name = (match?.[1] ?? base).replace(/[-_]+/g, " ").trim();
   return { name: name || undefined, version: match?.[2] };
 }
 
@@ -254,8 +255,8 @@ export function parseModsToml(
 ): Parsed {
   const doc = parseToml(source);
   const mods = Array.isArray(doc.mods) ? doc.mods.filter(isTable) : [];
-  if (!mods.length) throw new Error(`${format} has no [[mods]] entry`);
   const mod = mods[0];
+  if (!mod) throw new Error(`${format} has no [[mods]] entry`);
   const warnings: string[] = [];
   const modId = text(mod.modId);
   if (!modId) warnings.push(`${format} has no modId.`);
@@ -408,6 +409,7 @@ export async function parseJar(
     results.find(
       (result) => preferredLoader && result.loaders.includes(preferredLoader),
     ) ?? results[0];
+  if (!primary) return fromFilename(fileName, true, errors);
   const loaders = [...new Set(results.flatMap((result) => result.loaders))];
   const warnings = [...errors, ...primary.warnings];
   if (results.length > 1)
