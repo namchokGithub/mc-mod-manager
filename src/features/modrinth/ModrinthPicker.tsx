@@ -29,6 +29,14 @@ import {
   resolveDependencies,
 } from "../../lib/modrinth/service";
 import { pickLatest } from "../../lib/updates";
+import {
+  filterVersions,
+  loaderLabel,
+  packMismatches,
+  sortMinecraftVersions,
+  versionFilterOptions,
+  type VersionFilter,
+} from "../../lib/modrinth/versionFilters";
 import type { Mod, Modpack } from "../../lib/schema";
 import { useModrinthRequest } from "./useModrinthRequest";
 
@@ -114,7 +122,12 @@ export function ModrinthPicker({
   const [limit, setLimit] = useState(20);
   const [browsing, setBrowsing] = useState(false);
   const [picked, setPicked] = useState<ModrinthProject | null>(null);
-  const [allVersions, setAllVersions] = useState(false);
+  const packFilter: VersionFilter = {
+    gameVersion: minecraft,
+    loader: loader ?? "",
+    showAll: false,
+  };
+  const [filter, setFilter] = useState<VersionFilter>(packFilter);
   const [versionLimit, setVersionLimit] = useState(30);
   const [versionId, setVersionId] = useState<string | null>(
     target.kind === "refresh" ? (target.preselectVersionId ?? null) : null,
@@ -143,13 +156,14 @@ export function ModrinthPicker({
   const searchData =
     search.data ?? (search.loading ? search.latest : undefined);
 
-  const versionFilters = allVersions ? {} : packFilters;
+  // The full list is fetched once (and cached) so filters, including "Show all versions",
+  // work locally without new requests.
   const versions = useModrinthRequest(
-    project ? JSON.stringify({ id: project.id, ...versionFilters }) : null,
+    project ? `versions:${project.id}` : null,
     (signal) =>
       // Shared cache with the update checker; the signal only stops this view from waiting.
       Promise.race([
-        cachedProjectVersions(modrinth, project?.id ?? "", versionFilters),
+        cachedProjectVersions(modrinth, project?.id ?? ""),
         new Promise<never>((_, reject) =>
           signal.addEventListener("abort", () =>
             reject(new DOMException("Aborted", "AbortError")),
@@ -157,16 +171,44 @@ export function ModrinthPicker({
         ),
       ]),
   );
+  const allFetched = useMemo(() => versions.data ?? [], [versions.data]);
+  const matching = useMemo(
+    () => filterVersions(allFetched, filter),
+    [allFetched, filter],
+  );
+  const filterOptions = useMemo(
+    () =>
+      versionFilterOptions(allFetched, {
+        gameVersion: minecraft || undefined,
+        loader: loader ?? undefined,
+      }),
+    [allFetched, minecraft, loader],
+  );
   const currentVersionId = existing?.modrinth?.versionId;
-  const latestId = allVersions
-    ? undefined
-    : pickLatest(
-        versions.data ?? [],
-        versions.data?.find((version) => version.id === currentVersionId)
-          ?.versionType ?? existing?.modrinth?.versionType,
-      ).latest?.id;
+  // "Latest" always refers to the pack's own settings, whatever the filters show.
+  const latestId = pickLatest(
+    filterVersions(allFetched, packFilter),
+    allFetched.find((version) => version.id === currentVersionId)
+      ?.versionType ?? existing?.modrinth?.versionType,
+  ).latest?.id;
+  // A selection hidden by the filters counts as no selection.
   const selectedVersion =
-    versions.data?.find((version) => version.id === versionId) ?? null;
+    matching.find((version) => version.id === versionId) ?? null;
+  const filtersDiffer =
+    !filter.showAll &&
+    (filter.gameVersion !== packFilter.gameVersion ||
+      filter.loader !== packFilter.loader);
+  const updateFilter = (next: Partial<VersionFilter>) => {
+    const merged = { ...filter, ...next };
+    setFilter(merged);
+    if (
+      versionId &&
+      !filterVersions(allFetched, merged).some(
+        (version) => version.id === versionId,
+      )
+    )
+      setVersionId(null);
+  };
   const details = useModrinthRequest(
     selectedVersion ? `deps:${selectedVersion.id}` : null,
     (signal) =>
@@ -354,12 +396,10 @@ export function ModrinthPicker({
       </div>
     );
 
-  const shownVersions = [...(versions.data ?? [])]
-    .sort(
-      (a, b) =>
-        (Date.parse(b.datePublished) || 0) - (Date.parse(a.datePublished) || 0),
-    )
-    .slice(0, versionLimit);
+  const shownVersions = matching.slice(0, versionLimit);
+  const mismatches = selectedVersion
+    ? packMismatches(selectedVersion, packFilters)
+    : [];
   return (
     <div className="mr-picker">
       <div className="mr-project">
@@ -388,33 +428,112 @@ export function ModrinthPicker({
         </div>
       )}
       <fieldset className="mr-versions">
-        <legend>
-          Choose a version
-          {packLabel && (
-            <label className="mr-check">
-              <input
-                type="checkbox"
-                checked={allVersions}
-                onChange={(event) => {
-                  setAllVersions(event.target.checked);
-                  setVersionId(null);
-                }}
-              />
-              Show all versions
-            </label>
-          )}
-        </legend>
+        <legend>Choose a version</legend>
+        <div className="mr-filters">
+          <label className="mr-filter">
+            <span>Game version</span>
+            <select
+              value={filter.gameVersion}
+              disabled={filter.showAll}
+              onChange={(event) =>
+                updateFilter({ gameVersion: event.target.value })
+              }
+            >
+              <option value="">Any version</option>
+              {filterOptions.gameVersions.map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                  {value === minecraft ? " (pack)" : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="mr-filter">
+            <span>Modloader</span>
+            <select
+              value={filter.loader}
+              disabled={filter.showAll}
+              onChange={(event) => updateFilter({ loader: event.target.value })}
+            >
+              <option value="">Any loader</option>
+              {filterOptions.loaders.map((value) => (
+                <option key={value} value={value}>
+                  {loaderLabel(value)}
+                  {value === loader ? " (pack)" : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="mr-check">
+            <input
+              type="checkbox"
+              checked={filter.showAll}
+              onChange={(event) =>
+                updateFilter({ showAll: event.target.checked })
+              }
+            />
+            Show all versions
+          </label>
+        </div>
+        {versions.data && (
+          <p className="mr-hint mr-filter-count" role="status">
+            {matching.length} of {allFetched.length}{" "}
+            {allFetched.length === 1 ? "version" : "versions"}
+            {filter.showAll ? " (filters off)" : ""}
+          </p>
+        )}
+        {filtersDiffer && packLabel && (
+          <p className="mr-hint mr-filter-note">
+            <Info size={14} aria-hidden="true" />
+            Filters differ from Pack settings ({packLabel}). Listed versions are
+            not checked against the pack until you pick one.
+            <button
+              type="button"
+              className="filter-reset"
+              onClick={() => updateFilter(packFilter)}
+            >
+              <RotateCcw size={13} aria-hidden="true" /> Use pack settings
+            </button>
+          </p>
+        )}
         {versions.loading ? (
           <LoadingRows label="Loading versions…" />
         ) : versions.error ? (
           <RequestError error={versions.error} onRetry={versions.retry} />
+        ) : !allFetched.length ? (
+          <div className="mr-empty">
+            <p>This project has no published versions.</p>
+          </div>
         ) : !shownVersions.length ? (
           <div className="mr-empty">
             <p>
-              {allVersions || !packLabel
-                ? "This project has no published versions."
-                : `No versions are listed for ${packLabel}. Turn on “Show all versions” to see others.`}
+              No versions are listed for{" "}
+              {[
+                filter.gameVersion
+                  ? `Minecraft ${filter.gameVersion}`
+                  : "any Minecraft version",
+                filter.loader ? loaderLabel(filter.loader) : "any loader",
+              ].join(" with ")}
+              .
             </p>
+            <div className="mr-empty-actions">
+              {filtersDiffer && (
+                <Button
+                  variant="ghost"
+                  size="small"
+                  onClick={() => updateFilter(packFilter)}
+                >
+                  Use pack settings
+                </Button>
+              )}
+              <Button
+                variant="secondary"
+                size="small"
+                onClick={() => updateFilter({ showAll: true })}
+              >
+                Show all versions
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="mr-version-list">
@@ -440,18 +559,15 @@ export function ModrinthPicker({
                       <span className="mr-chip mr-chip-muted">Current</span>
                     )}
                     {version.id === latestId && (
-                      <span className="mr-chip">Latest compatible</span>
+                      <span className="mr-chip">Latest for pack</span>
                     )}
                   </span>
                   <span>
                     {formatDate(version.datePublished) ?? "Date unknown"} ·{" "}
-                    {version.loaders
-                      .map((value) => {
-                        const known = normalizeLoader(value);
-                        return known ? loaderLabels[known] : value;
-                      })
-                      .join(", ")}{" "}
-                    · MC {version.gameVersions.slice(-3).join(", ")}
+                    {version.loaders.map(loaderLabel).join(", ")} · MC{" "}
+                    {sortMinecraftVersions(version.gameVersions)
+                      .slice(0, 3)
+                      .join(", ")}
                     {version.gameVersions.length > 3 ? " …" : ""}
                   </span>
                 </span>
@@ -466,7 +582,7 @@ export function ModrinthPicker({
                 </span>
               </label>
             ))}
-            {(versions.data?.length ?? 0) > versionLimit && (
+            {matching.length > versionLimit && (
               <Button
                 variant="ghost"
                 size="small"
@@ -482,6 +598,13 @@ export function ModrinthPicker({
       {selectedVersion && (
         <section className="mr-compat" aria-live="polite">
           <h4>Compatibility with this pack</h4>
+          {mismatches.length > 0 && (
+            <p className="jar-warning">
+              <Info size={13} aria-hidden="true" />
+              This version is not listed for {mismatches.join(" or ")} from Pack
+              settings.
+            </p>
+          )}
           {details.loading ? (
             <p className="mr-hint">
               <LoaderCircle className="spin" size={14} aria-hidden="true" />{" "}

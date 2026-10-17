@@ -728,7 +728,8 @@ main:focus {
   font-weight: 750;
   margin-right: 4px;
 }
-.filters-bottom select {
+.filters-bottom select,
+.mr-filter select {
   appearance: none;
   border: 1px solid var(--border);
   border-radius: 5px;
@@ -742,7 +743,8 @@ main:focus {
   cursor: pointer;
   transition: border-color 0.18s;
 }
-.filters-bottom select:hover {
+.filters-bottom select:hover,
+.mr-filter select:hover:not(:disabled) {
   border-color: var(--border-strong);
 }
 .filters-bottom select.is-active {
@@ -1525,6 +1527,12 @@ main:focus {
   padding-top: 18px;
   border-top: 1px solid var(--border);
 }
+/* Confirm dialogs have no body: the heading's border already separates the buttons. */
+.dialog-heading + .dialog-actions {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
 .dialog-actions-sticky {
   position: sticky;
   bottom: 0;
@@ -2294,6 +2302,53 @@ main:focus {
 }
 .mr-empty p {
   margin: 0;
+}
+.mr-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+.mr-filters {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-bottom: 8px;
+}
+.mr-filter {
+  display: grid;
+  gap: 4px;
+  flex: 1 1 150px;
+  min-width: 0;
+}
+.mr-filter > span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.mr-filter select {
+  width: 100%;
+}
+.mr-filter select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.mr-filters .mr-check {
+  min-height: 34px;
+}
+.mr-filter-count {
+  margin-bottom: 8px;
+}
+.mr-filter-note {
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.mr-filter-note .filter-reset {
+  min-height: 26px;
+}
+.mr-compat .jar-warning {
+  margin: 0 0 8px;
 }
 .mr-list {
   list-style: none;
