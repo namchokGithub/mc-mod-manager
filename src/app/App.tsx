@@ -33,6 +33,9 @@ export function App() {
     window.addEventListener("hashchange", update);
     return () => window.removeEventListener("hashchange", update);
   }, []);
+  useEffect(() => {
+    document.title = data.modpack.name;
+  }, [data.modpack.name]);
   const previousPage = useRef(page);
   useEffect(() => {
     if (previousPage.current === page) return;
