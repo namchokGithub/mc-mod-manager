@@ -560,5 +560,468 @@
       "dependencies": [],
       "syncedAt": "2026-10-17T15:25:34.430Z"
     }
+  },
+  {
+    "id": "waystones",
+    "name": "Waystones",
+    "version": "26.1.2.16+neoforge-26.1.2",
+    "category": "Adventure",
+    "tags": [
+      "Magic",
+      "Transportation"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/waystones",
+    "description": "Teleport from waystone to waystone or craft magical scrolls to warp.",
+    "dependencies": [
+      "Balm",
+      "Shogi"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LOpKHB2A/d56c030a875582aff5bab477ddcfec317a1610f0_96.webp",
+    "modrinth": {
+      "projectId": "LOpKHB2A",
+      "slug": "waystones",
+      "versionId": "VaeMtOuU",
+      "versionNumber": "26.1.2.16+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-08T13:19:06.534340Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "MBAkmtvl",
+          "versionId": null,
+          "type": "required",
+          "name": "Balm"
+        },
+        {
+          "projectId": "bi4iCmsw",
+          "versionId": null,
+          "type": "required",
+          "name": "Shogi"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:35:35.525Z"
+    }
+  },
+  {
+    "id": "balm",
+    "name": "Balm",
+    "version": "26.1.2.15+neoforge-26.1.2",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/balm",
+    "description": "Abstraction Layer for Multi-Loader Mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/MBAkmtvl/285b7bcfd6e525c043e640b08f3efc0cde90f7dd_96.webp",
+    "modrinth": {
+      "projectId": "MBAkmtvl",
+      "slug": "balm",
+      "versionId": "FgDdQRa6",
+      "versionNumber": "26.1.2.15+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-25T06:01:27.597485Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:36:14.246Z"
+    }
+  },
+  {
+    "id": "shogi",
+    "name": "Shogi",
+    "version": "26.1.2.12+neoforge-26.1.2",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/shogi",
+    "description": "Rule-based, contextually dynamic configuration options for supported mods.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/bi4iCmsw/b790dcba3a85283635a66e8940da5880f3baee0e_96.webp",
+    "modrinth": {
+      "projectId": "bi4iCmsw",
+      "slug": "shogi",
+      "versionId": "kt43miwb",
+      "versionNumber": "26.1.2.12+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-26T06:46:33.875022Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:36:26.486Z"
+    }
+  },
+  {
+    "id": "sophisticated-backpacks",
+    "name": "Sophisticated Backpacks",
+    "version": "26.1.2-3.26.13.2207",
+    "category": "Storage",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sophisticated-backpacks",
+    "description": "Yet another backpack mod this time with backpack you can place in world, color in different color combinations, upgrade with more inventory and enhance with many functional upgrades",
+    "dependencies": [
+      "Sophisticated Core"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/TyCTlI4b/e31c7e2f8769d317339e25b2a8d1b40fbf312729_96.webp",
+    "modrinth": {
+      "projectId": "TyCTlI4b",
+      "slug": "sophisticated-backpacks",
+      "versionId": "LlztJyLf",
+      "versionNumber": "26.1.2-3.26.13.2207",
+      "versionType": "release",
+      "datePublished": "2026-10-13T07:58:47.271312Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "nmoqTijg",
+          "versionId": null,
+          "type": "required",
+          "name": "Sophisticated Core"
+        },
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        },
+        {
+          "projectId": "vRYk0bv7",
+          "versionId": null,
+          "type": "optional",
+          "name": "TrashSlot"
+        },
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Curios API"
+        },
+        {
+          "projectId": "WRaRZdTd",
+          "versionId": null,
+          "type": "optional",
+          "name": "Sawmill"
+        },
+        {
+          "projectId": "DMu0oBKf",
+          "versionId": null,
+          "type": "optional",
+          "name": "Crafting Tweaks"
+        },
+        {
+          "projectId": "BAscRYKm",
+          "versionId": null,
+          "type": "optional",
+          "name": "Chipped"
+        },
+        {
+          "projectId": "b1fMg6sH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Item Borders"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:43:51.917Z"
+    }
+  },
+  {
+    "id": "sophisticated-core",
+    "name": "Sophisticated Core",
+    "version": "26.1.2-1.5.14.2408",
+    "category": "Library",
+    "tags": [
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sophisticated-core",
+    "description": "Library mod for Sophisticated mods",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/nmoqTijg/83f980596761b59f5c3e4e4d2c90d031d9d69ff6.png",
+    "modrinth": {
+      "projectId": "nmoqTijg",
+      "slug": "sophisticated-core",
+      "versionId": "Re9ZAxyC",
+      "versionNumber": "26.1.2-1.5.14.2408",
+      "versionType": "release",
+      "datePublished": "2026-10-15T22:02:28.756852Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:44:40.208Z"
+    }
+  },
+  {
+    "id": "iris",
+    "name": "Iris Shaders",
+    "version": "1.11.4+26.1-neoforge",
+    "category": "Decoration",
+    "tags": [
+      "Optimization"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/iris",
+    "description": "A modern shader pack loader for Minecraft intended to be compatible with existing OptiFine shader packs",
+    "dependencies": [
+      "Sodium"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/YL57xq9U/18d0e7f076d3d6ed5bedd472b853909aac5da202_96.webp",
+    "modrinth": {
+      "projectId": "YL57xq9U",
+      "slug": "iris",
+      "versionId": "qE5Y7GrZ",
+      "versionNumber": "1.11.4+26.1-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-13T00:01:49.834738Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AANobbMI",
+          "versionId": "zg4YQ9EL",
+          "type": "required",
+          "name": "Sodium"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:45:09.069Z"
+    }
+  },
+  {
+    "id": "enchantment-descriptions",
+    "name": "Enchantment Descriptions",
+    "version": "26.1.2.6",
+    "category": "Magic",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/enchantment-descriptions",
+    "description": "Provides a way to get enchantment descriptions from enchanted books.",
+    "dependencies": [
+      "Prickle"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/UVtY3ZAC/1f857baf3d1f78e40343925176c084838c91a891_96.webp",
+    "modrinth": {
+      "projectId": "UVtY3ZAC",
+      "slug": "enchantment-descriptions",
+      "versionId": "MMZecuPQ",
+      "versionNumber": "26.1.2.6",
+      "versionType": "release",
+      "datePublished": "2026-08-20T17:10:33.285578Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "aaRl8GiW",
+          "versionId": null,
+          "type": "required",
+          "name": "Prickle"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:45:48.152Z"
+    }
+  },
+  {
+    "id": "prickle",
+    "name": "Prickle",
+    "version": "26.1.2.6",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/prickle",
+    "description": "Prickle is a JSON based configuration file format brought to Minecraft.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/aaRl8GiW/36749d1d2d87d14d7f703b18e8726c7b78057abb.png",
+    "modrinth": {
+      "projectId": "aaRl8GiW",
+      "slug": "prickle",
+      "versionId": "FzfKD3xX",
+      "versionNumber": "26.1.2.6",
+      "versionType": "release",
+      "datePublished": "2026-07-08T23:38:26.686263Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:46:02.137Z"
+    }
+  },
+  {
+    "id": "entitytexturefeatures",
+    "name": "[ETF] Entity Texture Features",
+    "version": "7.2.6-neoforge-26.1",
+    "category": "Decoration",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/entitytexturefeatures",
+    "description": "Emissive, Random & Custom texture support for entities in resourcepacks just like Optifine but for Fabric",
+    "dependencies": [],
+    "notes": "ต้องใช้ Resource Pack ที่รองรับร่วมด้วย",
+    "imageUrl": "https://cdn.modrinth.com/data/BVzZfTc1/af683d206d50b05258d865b0d6e4aa2f2cee12f2_96.webp",
+    "modrinth": {
+      "projectId": "BVzZfTc1",
+      "slug": "entitytexturefeatures",
+      "versionId": "a7uMZcFz",
+      "versionNumber": "7.2.6-neoforge-26.1",
+      "versionType": "release",
+      "datePublished": "2026-10-15T06:55:52.259801Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:47:40.448Z"
+    }
+  },
+  {
+    "id": "entity-model-features",
+    "name": "[EMF] Entity Model Features",
+    "version": "3.3.12-neoforge-26.1",
+    "category": "Mobs",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/entity-model-features",
+    "description": "EMF is an, OptiFine format, Custom Entity Model replacement mod available for Fabric and Forge.",
+    "dependencies": [
+      "[ETF] Entity Texture Features"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/4I1XuqiY/6e5bbd0d06b1741bfdab6c0cfab6de8fdaf0064c_96.webp",
+    "modrinth": {
+      "projectId": "4I1XuqiY",
+      "slug": "entity-model-features",
+      "versionId": "v73lmOrj",
+      "versionNumber": "3.3.12-neoforge-26.1",
+      "versionType": "release",
+      "datePublished": "2026-10-15T07:13:18.180881Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "BVzZfTc1",
+          "versionId": null,
+          "type": "required",
+          "name": "[ETF] Entity Texture Features"
+        }
+      ],
+      "syncedAt": "2026-10-17T15:50:22.310Z"
+    }
+  },
+  {
+    "id": "natures-compass",
+    "name": "Nature's Compass",
+    "version": "26.1-3.3.0-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/natures-compass",
+    "description": "Allows you to locate biomes anywhere in the world.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/fPetb5Kh/95e4110a4cf600843c4ba9d545cc1b60e2c00eaa.png",
+    "modrinth": {
+      "projectId": "fPetb5Kh",
+      "slug": "natures-compass",
+      "versionId": "FKGBa8Rq",
+      "versionNumber": "26.1-3.3.0-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-03-25T01:21:55.470498Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T15:50:39.713Z"
+    }
   }
 ]

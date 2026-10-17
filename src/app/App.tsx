@@ -1,6 +1,12 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import {
+  AnimatePresence,
+  MotionConfig,
+  motion,
+  useReducedMotion,
+} from "motion/react";
+import {
+  ArrowUp,
   Check,
   CircleAlert,
   GitFork,
@@ -39,10 +45,12 @@ function currentPage(): Page {
 
 export function App() {
   const [page, setPage] = useState(currentPage);
+  const [showGoToTop, setShowGoToTop] = useState(false);
   const { data, saveState, saveStatus, draftIssue, externalUpdate } =
     useCollection();
   const notify = useToast();
   const [theme, toggleTheme] = useTheme();
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
     const update = () => setPage(currentPage());
     window.addEventListener("hashchange", update);
@@ -51,6 +59,12 @@ export function App() {
   useEffect(() => {
     document.title = data.modpack.name;
   }, [data.modpack.name]);
+  useEffect(() => {
+    const updateVisibility = () => setShowGoToTop(window.scrollY > 400);
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", updateVisibility);
+  }, []);
   const previousPage = useRef(page);
   useEffect(() => {
     if (previousPage.current === page) return;
@@ -213,6 +227,28 @@ export function App() {
             </motion.div>
           </AnimatePresence>
         </main>
+        <AnimatePresence>
+          {showGoToTop && (
+            <motion.button
+              type="button"
+              className="go-to-top"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: reduceMotion ? "auto" : "smooth",
+                })
+              }
+              aria-label="Go to top"
+              title="Go to top"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.18 }}
+            >
+              <ArrowUp size={18} aria-hidden="true" />
+            </motion.button>
+          )}
+        </AnimatePresence>
         <footer className="site-footer">
           <span>
             BLOCK/LIST <span>·</span> {data.modpack.name}
