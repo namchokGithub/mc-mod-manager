@@ -4,11 +4,13 @@ Instructions for AI coding agents working in the MC Mod Manager repository. Appl
 
 ## Project Summary
 
-Static Minecraft modpack showcase and local editor. Published data lives in `public/data/`; browser edits stay in LocalStorage until the user exports JSON and commits it.
+Static Minecraft modpack showcase and local editor (v1.0). Published data lives in `public/data/`; browser edits stay in LocalStorage until the user exports JSON and commits it. Manage also searches Modrinth, checks compatibility and updates, and imports local `.jar` files. The app has light (default) and dark themes.
 
 ## Tech Stack (quick reference)
 
-React, Vite, strict TypeScript, Tailwind CSS, shadcn-style components, pnpm. GitHub Pages uses hash routing and the Vite repository base path.
+React 19, Vite, strict TypeScript (`noUncheckedIndexedAccess` is on), Tailwind CSS 4 plus `src/styles.css`, shadcn-style components on Radix Dialog, React Hook Form + Zod, Motion for React, Vitest, pnpm. GitHub Pages uses hash routing (`#/`, `#/manage`) and the Vite base `/mc-mod-manager/` when `GITHUB_PAGES=true`.
+
+Layout: `src/app` (shell, data provider, toasts, theme), `src/features` (`preview`, `manage`, `modrinth`, `import`), `src/components` (shared UI), `src/lib` (non-UI logic and its tests).
 
 ## Commands
 
@@ -20,6 +22,12 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - Validate JSON before importing it; failed imports must leave the current data unchanged.
 - Never attempt to write repository JSON files from the browser. Exported files must be committed to publish them.
 - Keep Preview and Manage on a single shared data state.
+- New JSON fields must be optional so existing files and drafts keep loading. Schemas live in `src/lib/schema.ts`.
+- Keep Modrinth code split: `src/lib/modrinth/api.ts` (requests and response validation), `mapping.ts` (pure mapping), `service.ts` (orchestration and caching). Compatibility (`src/lib/compatibility.ts`) and update status (`src/lib/updates.ts`) stay pure and read-only; they never modify mods.
+- JAR files are parsed locally (`src/lib/jar/`): never execute or upload them. Only SHA-1 hashes may be sent to Modrinth, and only when the user asks.
+- Never download or install mods, and never call a backend or use secrets.
+- Style with theme tokens from `src/styles.css` (`:root` for light, `:root[data-theme="dark"]` for dark). Do not hardcode colors in components or rules. Add a token to both themes instead.
+- Respect `prefers-reduced-motion`; app-wide Motion settings use `MotionConfig reducedMotion="user"`.
 
 ## Working Conventions
 

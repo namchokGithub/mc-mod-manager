@@ -1,5 +1,11 @@
 # MC Mod Manager
 
+[![Deploy](https://github.com/namchokGithub/mc-mod-manager/actions/workflows/deploy.yml/badge.svg)](https://github.com/namchokGithub/mc-mod-manager/actions/workflows/deploy.yml)
+[![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-347A58)](https://namchokgithub.github.io/mc-mod-manager/)
+[![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev/)
+![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-62B47A?logo=minecraft&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A static Minecraft modpack showcase with a local, in-browser editor. The public **Preview** page shows the pack and its mods; the **Manage** page lets you edit them, check compatibility, and prepare JSON files to publish. It runs entirely in the browser and deploys to GitHub Pages with no backend.
 
 ![Sample](public/assets/readme/image-beautified.png)
@@ -16,10 +22,20 @@ A static Minecraft modpack showcase with a local, in-browser editor. The public 
 - **Compatibility checker** (read-only): Minecraft version, modloader, required and incompatible dependencies, duplicate projects, and missing metadata. Results are Compatible, Warning, Incompatible, or Unknown.
 - **Update checker**: compares each linked mod with the versions Modrinth lists for the pack. Results are Up to date, Update available, or Unknown.
 - **JAR import**: reads `.jar` files or a mods folder locally, with an import preview and duplicate warnings.
+- **Light and dark themes**: light by default, with a toggle in the header. The choice is remembered in this browser.
+- **Toasts, confirmations, and reduced motion**: clear feedback for every change, confirmation before destructive actions, and animations that respect `prefers-reduced-motion`.
 
 ## Tech stack
 
-React 19, TypeScript (strict), Vite, Tailwind CSS 4 with custom CSS, Radix Dialog, React Hook Form with Zod, Motion for React, lucide-react icons, and Vitest. No backend, database, or authentication.
+React 19, TypeScript (strict), Vite, Tailwind CSS 4 with a custom stylesheet built on CSS variables, Radix Dialog, React Hook Form with Zod, Motion for React, lucide-react icons, and Vitest. No backend, database, or authentication.
+
+Code layout:
+
+- `src/app`: app shell, routing, data provider, toasts, and theme.
+- `src/features`: the `preview`, `manage`, `modrinth` (search and version picker), and `import` (JAR) screens.
+- `src/components`: shared UI such as dialogs, buttons, badges, and mod artwork.
+- `src/lib`: logic without UI. This covers schemas (`schema.ts`), drafts and export (`storage.ts`), filtering, compatibility, updates, the Modrinth client (`modrinth/api.ts`, `mapping.ts`, `service.ts`), and JAR parsing (`jar/`).
+- `src/styles.css`: all styling. Colors come from theme tokens on `:root` (light) and `:root[data-theme="dark"]`.
 
 ## Requirements
 
@@ -75,6 +91,7 @@ Details:
 - **Import** validates the file first. An invalid file changes nothing and shows why. A valid file asks for confirmation before it replaces the current mods or settings.
 - If a stored draft can no longer be read, the app shows the published data, keeps the old draft under the LocalStorage key `mc-mod-manager:draft:v1:unreadable`, and tells you.
 - A draft that matches the published data exactly is cleared on load, so the "Unpublished draft" badge disappears after you publish.
+- The theme choice is stored separately under `mc-mod-manager:theme` and is never part of exported data.
 
 ## Modrinth integration
 
@@ -129,6 +146,6 @@ Then open `http://localhost:4173/mc-mod-manager/`.
 - Update and live compatibility results are not saved. They reset when the page reloads.
 - CurseForge, automatic downloads, and dependency installation are not supported.
 
-## License
+---
 
-See [LICENSE](LICENSE).
+© _2026 Namchok Singhachai_. MC Mod Manager is released under the [MIT License](LICENSE).
