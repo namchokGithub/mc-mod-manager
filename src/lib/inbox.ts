@@ -19,6 +19,28 @@ export function inboxEntriesFromNames(
   return created;
 }
 
+/**
+ * Adds one typed name to the inbox (Mod Inbox "Add Row"). Empty names and names already in the
+ * inbox are refused, so nothing blank or accidentally repeated is stored. Never touches mods.
+ */
+export function addInboxEntry(
+  entries: InboxEntry[],
+  input: { name: string; notes: string },
+  now = new Date(),
+):
+  | { ok: true; entries: InboxEntry[]; entry: InboxEntry }
+  | { ok: false; error: string } {
+  const name = input.name.trim().replace(/\s+/g, " ");
+  if (!name) return { ok: false, error: "Enter a mod name." };
+  const key = normalizeName(name);
+  const existing = entries.find((entry) => normalizeName(entry.name) === key);
+  if (existing)
+    return { ok: false, error: `Already in the inbox as “${existing.name}”.` };
+  const [created] = inboxEntriesFromNames([name], entries, now);
+  const entry = { ...created!, notes: input.notes.trim() };
+  return { ok: true, entries: [...entries, entry], entry };
+}
+
 /** The collection mod with the same normalized name, if any. */
 export function collectionMatch(
   entry: { name: string },

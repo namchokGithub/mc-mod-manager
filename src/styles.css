@@ -4001,15 +4001,6 @@ main:focus {
   display: grid;
   gap: 12px;
 }
-.quick-add-options {
-  display: flex;
-  align-items: end;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-}
-.quick-add-options .form-field {
-  flex: 1 1 220px;
-}
 .quick-add-preview {
   display: grid;
   gap: 6px;
@@ -4088,6 +4079,18 @@ main:focus {
 }
 .inbox-row .row-check {
   margin-top: 10px;
+}
+/* A row typed with Add Row that is not in the inbox yet. */
+.inbox-row-new {
+  border-style: dashed;
+}
+.inbox-row-new > .row-check {
+  flex: none;
+  width: 16px;
+  visibility: hidden;
+}
+.inbox-fields .field-error {
+  grid-column: 1 / -1;
 }
 .inbox-fields {
   display: grid;

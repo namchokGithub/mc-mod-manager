@@ -1,11 +1,24 @@
-import { useId, useMemo, useState } from "react";
-import { Inbox, ListPlus, PackagePlus, Search, Trash2, X } from "lucide-react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  CircleAlert,
+  Inbox,
+  PackagePlus,
+  Plus,
+  Search,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useCollection } from "../../app/DataContext";
 import { useToast } from "../../app/ToastContext";
 import { Button } from "../../components/ui/button";
 import { Dialog } from "../../components/ui/dialog";
 import { Select } from "../../components/ui/select";
-import { collectionMatch, inboxRepeats, promoteInbox } from "../../lib/inbox";
+import {
+  addInboxEntry,
+  collectionMatch,
+  inboxRepeats,
+  promoteInbox,
+} from "../../lib/inbox";
 import { DEFAULT_CATEGORY, normalizeName } from "../../lib/quickAdd";
 import type { InboxEntry } from "../../lib/schema";
 import { useRetained } from "../../lib/useRetained";
@@ -87,8 +100,85 @@ function InboxRow({
   );
 }
 
+/** A new row that is not in the inbox yet; it exists only on this page until it has a valid name. */
+type DraftRow = { key: string; name: string; notes: string; error?: string };
+
+function NewRow({
+  row,
+  focus,
+  onChange,
+  onCommit,
+  onDiscard,
+}: {
+  row: DraftRow;
+  focus: boolean;
+  onChange: (row: DraftRow) => void;
+  /** `next`: Enter was pressed, so another row follows. */
+  onCommit: (next: boolean) => void;
+  onDiscard: () => void;
+}) {
+  const nameRef = useRef<HTMLInputElement>(null);
+  const errorId = useId();
+  useEffect(() => {
+    if (focus) nameRef.current?.focus();
+  }, [focus]);
+  return (
+    <li
+      className="inbox-row inbox-row-new"
+      onBlur={(event) => {
+        // Only when focus leaves the whole row, not when moving from name to notes.
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null))
+          onCommit(false);
+      }}
+    >
+      <span className="row-check" aria-hidden="true" />
+      <div className="inbox-fields">
+        <input
+          ref={nameRef}
+          className="plan-step-input"
+          value={row.name}
+          placeholder="Mod name"
+          aria-label="New mod name"
+          aria-invalid={row.error ? true : undefined}
+          aria-describedby={row.error ? errorId : undefined}
+          onChange={(event) =>
+            onChange({ ...row, name: event.target.value, error: undefined })
+          }
+          onKeyDown={(event) => {
+            if (event.key !== "Enter" || event.nativeEvent.isComposing) return;
+            event.preventDefault();
+            onCommit(true);
+          }}
+        />
+        <input
+          className="plan-step-input inbox-notes"
+          value={row.notes}
+          placeholder="Notes (optional)"
+          aria-label="Notes for the new mod"
+          onChange={(event) => onChange({ ...row, notes: event.target.value })}
+        />
+        {row.error && (
+          <small id={errorId} className="field-error" role="alert">
+            <CircleAlert size={12} aria-hidden="true" /> {row.error}
+          </small>
+        )}
+      </div>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="row-delete"
+        aria-label="Discard this new row"
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={onDiscard}
+      >
+        <X size={16} />
+      </Button>
+    </li>
+  );
+}
+
 /** Manage → Mod Inbox: names waiting to become mods. Separate from the collection. */
-export function InboxPanel({ onQuickAdd }: { onQuickAdd: () => void }) {
+export function InboxPanel() {
   const { data, updateInbox, promoteInbox: applyPromotion } = useCollection();
   const notify = useToast();
   const entries = data.inbox.entries;
@@ -100,6 +190,51 @@ export function InboxPanel({ onQuickAdd }: { onQuickAdd: () => void }) {
   const shownPromoting = useRetained(promoting);
   const [category, setCategory] = useState(DEFAULT_CATEGORY);
   const categoryId = useId();
+  const [drafts, setDrafts] = useState<DraftRow[]>([]);
+  const [focusKey, setFocusKey] = useState<string | null>(null);
+  const nextKey = useRef(0);
+
+  const newRow = () => {
+    // Reuse an empty new row instead of stacking blank ones on repeated clicks.
+    const blank = drafts.find((row) => !row.name.trim() && !row.notes.trim());
+    if (blank) {
+      setFocusKey(null);
+      queueMicrotask(() => setFocusKey(blank.key));
+      return;
+    }
+    const key = `new-${(nextKey.current += 1)}`;
+    setDrafts((current) => [...current, { key, name: "", notes: "" }]);
+    setFocusKey(key);
+  };
+  const updateDraft = (row: DraftRow) =>
+    setDrafts((current) =>
+      current.map((other) => (other.key === row.key ? row : other)),
+    );
+  const discardDraft = (key: string) =>
+    setDrafts((current) => current.filter((row) => row.key !== key));
+  // Stores the row once it has a valid, non-duplicate name. Blank rows are never stored.
+  const commitDraft = (row: DraftRow, next: boolean) => {
+    if (!row.name.trim()) {
+      if (!next && !row.notes.trim()) discardDraft(row.key);
+      else if (next) updateDraft({ ...row, error: "Enter a mod name first." });
+      return;
+    }
+    const result = addInboxEntry(entries, row);
+    if (!result.ok) {
+      updateDraft({ ...row, error: result.error });
+      return;
+    }
+    updateInbox(result.entries);
+    discardDraft(row.key);
+    if (next) {
+      const key = `new-${(nextKey.current += 1)}`;
+      setDrafts((current) => [
+        ...current.filter((other) => other.key !== row.key),
+        { key, name: "", notes: "" },
+      ]);
+      setFocusKey(key);
+    }
+  };
 
   const repeats = useMemo(() => inboxRepeats(entries), [entries]);
   // Selection only keeps IDs that still exist.
@@ -177,8 +312,8 @@ export function InboxPanel({ onQuickAdd }: { onQuickAdd: () => void }) {
             you add them.
           </p>
         </div>
-        <Button onClick={onQuickAdd}>
-          <ListPlus size={17} /> Quick add to inbox
+        <Button onClick={newRow}>
+          <Plus size={17} /> Add Row
         </Button>
       </div>
 
@@ -231,18 +366,18 @@ export function InboxPanel({ onQuickAdd }: { onQuickAdd: () => void }) {
         </div>
       )}
 
-      {entries.length === 0 ? (
+      {entries.length === 0 && drafts.length === 0 ? (
         <div className="empty-state">
           <div className="empty-icon">
             <Inbox size={24} />
           </div>
           <h3>The inbox is empty</h3>
-          <p>Paste mod names here to sort through later.</p>
-          <Button onClick={onQuickAdd}>
-            <ListPlus size={17} /> Quick add to inbox
+          <p>Add mod names here to sort through later.</p>
+          <Button onClick={newRow}>
+            <Plus size={17} /> Add Row
           </Button>
         </div>
-      ) : shown.length === 0 ? (
+      ) : shown.length === 0 && drafts.length === 0 ? (
         <p className="mr-hint">No inbox entries match “{query}”.</p>
       ) : (
         <ul className="inbox-list">
@@ -256,6 +391,16 @@ export function InboxPanel({ onQuickAdd }: { onQuickAdd: () => void }) {
               onToggle={() => toggle(entry.id)}
               onChange={replace}
               onDelete={() => setDeleting([entry.id])}
+            />
+          ))}
+          {drafts.map((row) => (
+            <NewRow
+              key={row.key}
+              row={row}
+              focus={row.key === focusKey}
+              onChange={updateDraft}
+              onCommit={(next) => commitDraft(row, next)}
+              onDiscard={() => discardDraft(row.key)}
             />
           ))}
         </ul>

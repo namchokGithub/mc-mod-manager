@@ -8418,5 +8418,591 @@
       ],
       "syncedAt": "2026-10-17T22:57:33.905Z"
     }
+  },
+  {
+    "id": "jobsplus",
+    "name": "Jobs+",
+    "version": "20.2.7",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jobsplus",
+    "description": "Adds 10 jobs to Minecraft. You can now add your own jobs!",
+    "dependencies": [
+      "UI Lib",
+      "Arc Lib",
+      "Item Restrictions",
+      "Knot",
+      "YAML Config"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/hxGLlCnq/40f7535fb59f43662cd545a9ae96031c31908297_96.webp",
+    "modrinth": {
+      "projectId": "hxGLlCnq",
+      "slug": "jobsplus",
+      "versionId": "j8e0bLhO",
+      "versionNumber": "20.2.7",
+      "versionType": "release",
+      "datePublished": "2026-08-28T16:56:22.949557Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AOEDs9Al",
+          "versionId": null,
+          "type": "required",
+          "name": "UI Lib"
+        },
+        {
+          "projectId": "H3eKhxi7",
+          "versionId": null,
+          "type": "required",
+          "name": "Arc Lib"
+        },
+        {
+          "projectId": "rU60qFq2",
+          "versionId": null,
+          "type": "required",
+          "name": "Item Restrictions"
+        },
+        {
+          "projectId": "V9WxBDCZ",
+          "versionId": null,
+          "type": "required",
+          "name": "Knot"
+        },
+        {
+          "projectId": "L1FFB418",
+          "versionId": null,
+          "type": "required",
+          "name": "YAML Config"
+        }
+      ],
+      "syncedAt": "2026-10-17T23:01:52.468Z"
+    }
+  },
+  {
+    "id": "arc",
+    "name": "Arc Lib",
+    "version": "20.2.10",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/arc",
+    "description": "Data driven action, reward, condition library.",
+    "dependencies": [
+      "YAML Config",
+      "UI Lib",
+      "Knot"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/H3eKhxi7/205f9e24cf5cbc61c1af5d5a5c326544cc1b9e5d_96.webp",
+    "modrinth": {
+      "projectId": "H3eKhxi7",
+      "slug": "arc",
+      "versionId": "7FGXfZwc",
+      "versionNumber": "20.2.10",
+      "versionType": "release",
+      "datePublished": "2026-08-03T07:02:54.953679Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "L1FFB418",
+          "versionId": null,
+          "type": "required",
+          "name": "YAML Config"
+        },
+        {
+          "projectId": "AOEDs9Al",
+          "versionId": null,
+          "type": "required",
+          "name": "UI Lib"
+        },
+        {
+          "projectId": "V9WxBDCZ",
+          "versionId": null,
+          "type": "required",
+          "name": "Knot"
+        }
+      ],
+      "syncedAt": "2026-10-17T23:01:56.525Z"
+    }
+  },
+  {
+    "id": "item-restrictions",
+    "name": "Item Restrictions",
+    "version": "20.1.2",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/item-restrictions",
+    "description": "Data driven item restriction library based on Arc Lib.",
+    "dependencies": [
+      "Arc Lib",
+      "YAML Config",
+      "UI Lib",
+      "Knot"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/rU60qFq2/58d04b871247d5cc1825f6baf9d22f61eb1da7af_96.webp",
+    "modrinth": {
+      "projectId": "rU60qFq2",
+      "slug": "item-restrictions",
+      "versionId": "zqNy7nje",
+      "versionNumber": "20.1.2",
+      "versionType": "release",
+      "datePublished": "2026-06-14T22:51:44.493440Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "H3eKhxi7",
+          "versionId": null,
+          "type": "required",
+          "name": "Arc Lib"
+        },
+        {
+          "projectId": "L1FFB418",
+          "versionId": null,
+          "type": "required",
+          "name": "YAML Config"
+        },
+        {
+          "projectId": "AOEDs9Al",
+          "versionId": null,
+          "type": "required",
+          "name": "UI Lib"
+        },
+        {
+          "projectId": "V9WxBDCZ",
+          "versionId": null,
+          "type": "required",
+          "name": "Knot"
+        }
+      ],
+      "syncedAt": "2026-10-17T23:01:56.525Z"
+    }
+  },
+  {
+    "id": "knot",
+    "name": "Knot",
+    "version": "20.2.10",
+    "category": "Library",
+    "tags": [
+      "Management",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/knot",
+    "description": "Tie Fabric and NeoForge together. Knot a problem.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/V9WxBDCZ/f7213539e3d38928264357f9adcf10e9ec654077_96.webp",
+    "modrinth": {
+      "projectId": "V9WxBDCZ",
+      "slug": "knot",
+      "versionId": "4hgg3iwP",
+      "versionNumber": "20.2.10",
+      "versionType": "release",
+      "datePublished": "2026-09-05T10:50:39.702161Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T23:01:56.525Z"
+    }
+  },
+  {
+    "id": "ui-lib",
+    "name": "UI Lib",
+    "version": "20.1.4",
+    "category": "Library",
+    "tags": [
+      "Management"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ui-lib",
+    "description": "A user interface library for Minecraft modding.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/AOEDs9Al/859c52866b7fb0b187ef448ab9940b10523fda19_96.webp",
+    "modrinth": {
+      "projectId": "AOEDs9Al",
+      "slug": "ui-lib",
+      "versionId": "6dVlt4Oi",
+      "versionNumber": "20.1.4",
+      "versionType": "release",
+      "datePublished": "2026-07-04T21:03:27.687706Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T23:01:56.525Z"
+    }
+  },
+  {
+    "id": "yaml-config",
+    "name": "YAML Config",
+    "version": "20.1.2",
+    "category": "Library",
+    "tags": [
+      "Management",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yaml-config",
+    "description": "Config library with GUI based on the YAML format.",
+    "dependencies": [
+      "UI Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/L1FFB418/3d5e95ffa3e17657983b6e0ae24af4a9b7519dcd_96.webp",
+    "modrinth": {
+      "projectId": "L1FFB418",
+      "slug": "yaml-config",
+      "versionId": "3n1ue28Z",
+      "versionNumber": "20.1.2",
+      "versionType": "release",
+      "datePublished": "2026-06-02T22:29:07.496517Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AOEDs9Al",
+          "versionId": null,
+          "type": "required",
+          "name": "UI Lib"
+        }
+      ],
+      "syncedAt": "2026-10-17T23:01:56.525Z"
+    }
+  },
+  {
+    "id": "jobsplustools",
+    "name": "Jobs+ Tools",
+    "version": "20.1.1",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jobsplustools",
+    "description": "Adds tools to the Jobs of the Jobs+ mod.",
+    "dependencies": [
+      "Knot"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DVunHUgc/40f7535fb59f43662cd545a9ae96031c31908297_96.webp",
+    "modrinth": {
+      "projectId": "DVunHUgc",
+      "slug": "jobsplustools",
+      "versionId": "aJADYYV2",
+      "versionNumber": "20.1.1",
+      "versionType": "release",
+      "datePublished": "2026-05-25T07:57:13.356082Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "V9WxBDCZ",
+          "versionId": null,
+          "type": "required",
+          "name": "Knot"
+        }
+      ],
+      "syncedAt": "2026-10-17T23:02:06.837Z"
+    }
+  },
+  {
+    "id": "neo-origins",
+    "name": "Neo Origins",
+    "version": "v2.2.30+26.1",
+    "category": "Game Mechanics",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/neo-origins",
+    "description": "A modern port of the classic fabric Origins mod. Backwards compatible with most of your favorite origins expansions.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/RUtQ9kfe/b01c7c3ea3fcd5307dd71363bc1ebe6aeb8ad7ca.png",
+    "modrinth": {
+      "projectId": "RUtQ9kfe",
+      "slug": "neo-origins",
+      "versionId": "Aq5zAkXB",
+      "versionNumber": "v2.2.30+26.1",
+      "versionType": "release",
+      "datePublished": "2026-10-11T02:04:15.153338Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        },
+        {
+          "projectId": "nvQzSEkH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Jade 🔍"
+        }
+      ],
+      "syncedAt": "2026-10-17T23:06:59.455Z"
+    }
+  },
+  {
+    "id": "gear-tinkering",
+    "name": "Gear Tinkering",
+    "version": "1.0.3+mod",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/gear-tinkering",
+    "description": "Adds new uses for the smithing table : repair cost resetting, trim removal, curse removal, enchantment transferring and book unsigning!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LZIfwEFj/4671f289793bca5e8d3a02649d86b9a4750c2b93.png",
+    "modrinth": {
+      "projectId": "LZIfwEFj",
+      "slug": "gear-tinkering",
+      "versionId": "Lg5lVTje",
+      "versionNumber": "1.0.3+mod",
+      "versionType": "release",
+      "datePublished": "2026-09-30T03:33:54.909Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-17T23:12:27.847Z"
+    }
+  },
+  {
+    "id": "ly-life-steal-enchantment",
+    "name": "Life Steal Enchantment",
+    "version": "v1.1.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-life-steal-enchantment",
+    "description": "New enchantment for weapons thats steal life from victims!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/2VmJJJnd/64d36e4c65b8d8dae27b6c22bf1b893a72101ce5.png",
+    "modrinth": {
+      "projectId": "2VmJJJnd",
+      "slug": "ly-life-steal-enchantment",
+      "versionId": "OCrpQgs8",
+      "versionNumber": "v1.1.0+mod",
+      "versionType": "release",
+      "datePublished": "2025-11-24T06:44:37.197327Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T04:18:40.454Z"
+    }
+  },
+  {
+    "id": "the-grave-scrolls",
+    "name": "The Grave Scrolls",
+    "version": "1.0.3",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/the-grave-scrolls",
+    "description": "Scrolls that Teleport to your last death in many ways",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FTCqx8HM/0b0d83e71dcf608b7c4abe952cde793cf3e5a5a0_96.webp",
+    "modrinth": {
+      "projectId": "FTCqx8HM",
+      "slug": "the-grave-scrolls",
+      "versionId": "Mv9w0hBV",
+      "versionNumber": "1.0.3",
+      "versionType": "release",
+      "datePublished": "2026-08-15T15:50:28.951Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T04:21:16.511Z"
+    }
+  },
+  {
+    "id": "cursorcentered-fix",
+    "name": "CursorCentered Fix",
+    "version": "1.4.1",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/cursorcentered-fix",
+    "description": "A Minecraft mod that fixes the cursor centering issue that occasionally happens when opening a GUI.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3Vf97jLY/cf7de00e4556d40066c11f1424f5f712dde768c4_96.webp",
+    "modrinth": {
+      "projectId": "3Vf97jLY",
+      "slug": "cursorcentered-fix",
+      "versionId": "H7TUpa5v",
+      "versionNumber": "1.4.1",
+      "versionType": "release",
+      "datePublished": "2026-10-01T02:13:53.527317Z",
+      "gameVersions": [
+        "1.20.5",
+        "1.20.6",
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T04:23:09.731Z"
+    }
   }
 ]

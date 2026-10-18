@@ -6,51 +6,10 @@ import { mergeCandidateIntoMod, type ImportCandidate } from "./jar/importing";
 import { describeChanges } from "./modChanges";
 import { mergeModrinthIntoMod } from "./modrinth/mapping";
 import { planningDashboard } from "./planningDashboard";
-import {
-  DEFAULT_CATEGORY,
-  normalizeName,
-  parseQuickAdd,
-  quickAddMods,
-} from "./quickAdd";
+import { DEFAULT_CATEGORY, quickAddMods } from "./quickAdd";
 import { emptyContent, modsSchema, type Collection, type Mod } from "./schema";
 
 const existing = quickAddMods(["Sodium"], []);
-
-describe("parsing pasted names", () => {
-  it("trims lines and ignores blanks", () => {
-    expect(
-      parseQuickAdd("  Create  \n\n\tJEI\n   \n", {
-        inbox: [],
-        collection: [],
-      }).map((line) => line.name),
-    ).toEqual(["Create", "JEI"]);
-  });
-
-  it("flags duplicates in the paste, the inbox, and the collection, case-insensitively", () => {
-    const lines = parseQuickAdd("sodium\nCreate\ncreate\nCREATE  \nJEI", {
-      inbox: [{ name: "jei" }],
-      collection: existing,
-    });
-    expect(lines.map((line) => [line.name, line.duplicate])).toEqual([
-      ["sodium", "collection"],
-      ["Create", null],
-      ["create", "repeat"],
-      ["CREATE", "repeat"],
-      ["JEI", "inbox"],
-    ]);
-    expect(lines[0]?.existingName).toBe("Sodium");
-  });
-
-  it("does not treat similar names as duplicates", () => {
-    expect(
-      parseQuickAdd("Sodium Extra\nSodium-Extra", {
-        inbox: [],
-        collection: existing,
-      }).map((line) => line.duplicate),
-    ).toEqual([null, null]);
-    expect(normalizeName("  Sodium   Extra ")).toBe("sodium extra");
-  });
-});
 
 describe("creating name-only mods", () => {
   it("uses the existing unknown conventions and validates", () => {

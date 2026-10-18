@@ -5,13 +5,14 @@ import inboxJson from "../../public/data/mod-inbox.json";
 import { withOrder } from "./batches";
 import { checkCompatibility } from "./compatibility";
 import {
+  addInboxEntry,
   collectionMatch,
   inboxEntriesFromNames,
   inboxRepeats,
   promoteInbox,
 } from "./inbox";
 import { planningDashboard } from "./planningDashboard";
-import { quickAddMods } from "./quickAdd";
+import { normalizeName, quickAddMods } from "./quickAdd";
 import {
   collectionSchema,
   inboxFileSchema,
@@ -119,6 +120,57 @@ describe("adding names to the inbox", () => {
     expect([...inboxRepeats(entries)]).toEqual(["jei-2"]);
     expect(collectionMatch(entries[2]!, collectionMods)?.name).toBe("Sodium");
     expect(collectionMatch(entries[0]!, collectionMods)).toBeUndefined();
+  });
+});
+
+describe("Add Row", () => {
+  const existing = inboxEntriesFromNames(["Create"], [], now);
+
+  it("adds one entry with a stable ID, timestamp, and notes", () => {
+    const result = addInboxEntry(
+      existing,
+      { name: "  Farmer's   Delight ", notes: " Food " },
+      now,
+    );
+    expect(result).toEqual({
+      ok: true,
+      entry: {
+        id: "farmer-s-delight",
+        name: "Farmer's Delight",
+        notes: "Food",
+        createdAt: now.toISOString(),
+      },
+      entries: [
+        ...existing,
+        expect.objectContaining({ id: "farmer-s-delight" }),
+      ],
+    });
+    expect(
+      result.ok &&
+        inboxFileSchema.safeParse({ version: 1, entries: result.entries })
+          .success,
+    ).toBe(true);
+  });
+
+  it("refuses blank names, so empty rows are never stored", () => {
+    expect(addInboxEntry(existing, { name: "   ", notes: "x" }, now)).toEqual({
+      ok: false,
+      error: "Enter a mod name.",
+    });
+  });
+
+  it("refuses a name already in the inbox, ignoring case and spacing", () => {
+    expect(normalizeName("  CREATE ")).toBe("create");
+    expect(
+      addInboxEntry(existing, { name: " create ", notes: "" }, now),
+    ).toEqual({ ok: false, error: "Already in the inbox as “Create”." });
+  });
+
+  it("keeps existing entries and never touches the collection", () => {
+    const before = JSON.stringify([existing, collectionMods]);
+    const result = addInboxEntry(existing, { name: "Jade", notes: "" }, now);
+    expect(result.ok && result.entries[0]).toBe(existing[0]);
+    expect(JSON.stringify([existing, collectionMods])).toBe(before);
   });
 });
 

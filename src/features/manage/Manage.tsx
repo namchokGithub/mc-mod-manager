@@ -25,7 +25,6 @@ import {
   Info,
   LayoutDashboard,
   ListChecks,
-  ListPlus,
   LoaderCircle,
   Pencil,
   Plus,
@@ -89,9 +88,7 @@ import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { BuildPlanEditor } from "./BuildPlanEditor";
 import { PlanningDashboard } from "./PlanningDashboard";
-import { QuickAddDialog } from "./QuickAddDialog";
 import { InboxPanel } from "./InboxPanel";
-import { inboxEntriesFromNames } from "../../lib/inbox";
 import { CompatibilityPanel } from "./CompatibilityPanel";
 import { IgnoredDependenciesField } from "./IgnoredDependencies";
 import { ManualVerificationSection } from "./ManualVerification";
@@ -1029,7 +1026,6 @@ export function Manage() {
     deleteMods,
     updateModpack,
     importMods,
-    updateInbox,
     published,
     markSaved,
     saveStatus,
@@ -1037,7 +1033,6 @@ export function Manage() {
   } = useCollection();
   const notify = useToast();
   const [importingJars, setImportingJars] = useState(false);
-  const [quickAdding, setQuickAdding] = useState(false);
   const [updates, setUpdates] = useState<{
     results: Map<string, UpdateResult>;
     at: Date;
@@ -1251,26 +1246,6 @@ export function Manage() {
     return true;
   };
   // Quick Add only writes to the Mod Inbox; the collection is never touched here.
-  const addToInbox = (names: string[]) => {
-    try {
-      updateInbox([
-        ...data.inbox.entries,
-        ...inboxEntriesFromNames(names, data.inbox.entries),
-      ]);
-    } catch {
-      notify({
-        kind: "error",
-        title: "Not added to the inbox",
-        description: "The names did not pass validation.",
-      });
-      return false;
-    }
-    notify({
-      title: `Added ${names.length} to the inbox`,
-      description: "Add them to the collection from Mod inbox when ready.",
-    });
-    return true;
-  };
   const categories = useMemo(
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
     [data.mods],
@@ -1508,12 +1483,6 @@ export function Manage() {
                       <p>Add, edit, and organize the mods in your pack.</p>
                     </div>
                     <div className="section-head-actions">
-                      <Button
-                        variant="secondary"
-                        onClick={() => setQuickAdding(true)}
-                      >
-                        <ListPlus size={16} /> Quick add to inbox
-                      </Button>
                       <Button
                         variant="secondary"
                         onClick={() => setImportingJars(true)}
@@ -1796,9 +1765,7 @@ export function Manage() {
                   }}
                 />
               )}
-              {tab === "inbox" && (
-                <InboxPanel onQuickAdd={() => setQuickAdding(true)} />
-              )}
+              {tab === "inbox" && <InboxPanel />}
               {tab === "plan" && (
                 <BuildPlanEditor
                   onOpenMod={(mod) => setEditing({ mod })}
@@ -2021,13 +1988,6 @@ export function Manage() {
           onCancel={() => setImportingJars(false)}
         />
       </Dialog>
-      <QuickAddDialog
-        open={quickAdding}
-        onOpenChange={setQuickAdding}
-        mods={data.mods}
-        inbox={data.inbox.entries}
-        onAdd={addToInbox}
-      />
       <Dialog
         open={confirmDiscard !== null}
         onOpenChange={(open) => !open && setConfirmDiscard(null)}
