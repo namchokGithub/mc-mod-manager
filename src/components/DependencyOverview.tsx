@@ -45,7 +45,9 @@ function entryBadge(entry: DependencyEntry): { text: string; tone: string } {
       ? { text: "Missing", tone: "incompatible" }
       : { text: "Not in the list", tone: "unknown" };
   if (entry.laterOnly) return { text: "Later batch", tone: "warning" };
-  return { text: "Found", tone: "compatible" };
+  return entry.linked
+    ? { text: "Found (linked)", tone: "compatible" }
+    : { text: "Found", tone: "compatible" };
 }
 
 function matches(entry: DependencyEntry, filter: Filter): boolean {

@@ -24,6 +24,10 @@ import { modrinth, ModrinthError } from "../../lib/modrinth/api";
 import { loaderLabels, normalizeLoader } from "../../lib/modrinth/mapping";
 import { matchFilesByHash } from "../../lib/modrinth/service";
 import { modSchema, type Mod, type Modpack } from "../../lib/schema";
+import {
+  applyDependencyLinks,
+  suggestDependencyLinks,
+} from "../../lib/dependencyLinks";
 
 const MAX_FILES = 500;
 
@@ -68,6 +72,8 @@ export function JarImportDialog({
   const [skipped, setSkipped] = useState(0);
   const [overLimit, setOverLimit] = useState(0);
   const [dragging, setDragging] = useState(false);
+  // Suggested dependency links the user unticked, as "<mod id>:<dependency id>".
+  const [declined, setDeclined] = useState<Set<string>>(new Set());
   const packLoader = normalizeLoader(modpack.modloader);
 
   const duplicates = useMemo(() => {
@@ -187,8 +193,8 @@ export function JarImportDialog({
     });
   };
 
-  const confirm = () => {
-    const syncedAt = new Date().toISOString();
+  // The mods this import would create or update, before any dependency links.
+  const planImport = (syncedAt?: string) => {
     const created: Mod[] = [];
     const updated: Mod[] = [];
     for (const row of rows) {
@@ -205,6 +211,45 @@ export function JarImportDialog({
       const parsed = modSchema.safeParse(mod);
       if (parsed.success) created.push(parsed.data);
     }
+    return { created, updated };
+  };
+  /**
+   * Dependencies whose IDs differ from the mod that provides them in the list (existing mods or
+   * this import). Only exact single matches are offered; they are linked unless unticked.
+   */
+  const linkSuggestions = (plan: { created: Mod[]; updated: Mod[] }) => {
+    const byId = new Map(plan.updated.map((mod) => [mod.id, mod]));
+    const all = [
+      ...mods.map((mod) => byId.get(mod.id) ?? mod),
+      ...plan.created,
+    ];
+    return [...plan.created, ...plan.updated].flatMap((mod) =>
+      suggestDependencyLinks(mod, all).map((suggestion) => ({
+        ...suggestion,
+        mod,
+        key: `${mod.id}:${suggestion.dependency.id}`,
+      })),
+    );
+  };
+  const suggestions = rows.length ? linkSuggestions(planImport()) : [];
+
+  const confirm = () => {
+    const plan = planImport(new Date().toISOString());
+    const accepted = linkSuggestions(plan).filter(
+      (suggestion) => !declined.has(suggestion.key),
+    );
+    const withLinks = (mod: Mod) =>
+      applyDependencyLinks(
+        mod,
+        accepted
+          .filter((suggestion) => suggestion.mod.id === mod.id)
+          .map((suggestion) => ({
+            id: suggestion.dependency.id,
+            modId: suggestion.provider.id,
+          })),
+      );
+    const created = plan.created.map(withLinks);
+    const updated = plan.updated.map(withLinks);
     if ((created.length || updated.length) && onImport(created, updated))
       onCancel();
   };
@@ -547,6 +592,42 @@ export function JarImportDialog({
           );
         })}
       </ul>
+      {suggestions.length > 0 && (
+        <section className="jar-links" aria-labelledby="jar-links-title">
+          <h4 id="jar-links-title">Dependencies already in your list</h4>
+          <p className="mr-hint">
+            Their IDs differ from the mod that provides them, so they are linked
+            only while ticked. Untick any that are wrong.
+          </p>
+          <ul>
+            {suggestions.map((suggestion) => (
+              <li key={suggestion.key}>
+                <label className="mr-check">
+                  <input
+                    type="checkbox"
+                    checked={!declined.has(suggestion.key)}
+                    onChange={() =>
+                      setDeclined((current) => {
+                        const next = new Set(current);
+                        if (next.has(suggestion.key))
+                          next.delete(suggestion.key);
+                        else next.add(suggestion.key);
+                        return next;
+                      })
+                    }
+                  />
+                  <span>
+                    {suggestion.mod.name} needs{" "}
+                    <code>{suggestion.dependency.id}</code> →{" "}
+                    <strong>{suggestion.provider.name}</strong>
+                    {suggestion.ignored && " (now marked not needed)"}
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <div className="dialog-actions dialog-actions-sticky">
         <Button variant="ghost" onClick={onCancel}>
           Cancel

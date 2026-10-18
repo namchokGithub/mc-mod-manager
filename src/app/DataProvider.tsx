@@ -17,6 +17,7 @@ import {
 } from "../lib/batches";
 import { removeMods, stampSavedMod, withAddedAt } from "../lib/mods";
 import { removeContentFromBatches } from "../lib/batchContent";
+import { renameModInLinks } from "../lib/dependencyLinks";
 import {
   deriveSaveStatus,
   hasUnsavedChanges,
@@ -210,7 +211,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
         : undefined;
       const mod = stampSavedMod(input, previous, new Date());
       const nextMods = originalId
-        ? data.mods.map((item) => (item.id === originalId ? mod : item))
+        ? renameModInLinks(
+            data.mods.map((item) => (item.id === originalId ? mod : item)),
+            originalId,
+            mod.id,
+          )
         : [...data.mods, mod];
       change({
         ...data,

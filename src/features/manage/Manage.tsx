@@ -337,6 +337,10 @@ function ModEditor({
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
   const linked = useWatch({ control, name: "modrinth" });
+  const [ignoredDeps, dependencyLinks] = useWatch({
+    control,
+    name: ["ignoredDependencies", "dependencyLinks"],
+  });
   const [activeVersion, activeVersions, activeLoaders, snapshot] = useWatch({
     control,
     name: [
@@ -400,6 +404,9 @@ function ModEditor({
             id: entry.id,
             reason: entry.reason.trim(),
           }))
+        : undefined,
+      dependencyLinks: values.dependencyLinks?.length
+        ? values.dependencyLinks
         : undefined,
     };
     const validation = modSchema.safeParse(candidate);
@@ -574,23 +581,24 @@ function ModEditor({
             setValue("manualVerification", confirmed, options);
           }}
         />
-        <Controller
-          control={control}
-          name="ignoredDependencies"
-          render={({ field }) => (
-            <IgnoredDependenciesField
-              mod={{ modrinth: linked, file: start?.file }}
-              value={field.value ?? []}
-              onChange={field.onChange}
-              defaultReason={
-                packModloader.trim()
-                  ? `Only needed by another loader's build; this pack uses ${packModloader.trim()}.`
-                  : "Only needed by another loader's build."
-              }
-              errors={errors.ignoredDependencies?.map?.(
-                (item) => item?.reason?.message,
-              )}
-            />
+        <IgnoredDependenciesField
+          mod={{ id: mod?.id ?? id, modrinth: linked, file: start?.file }}
+          mods={mods}
+          value={ignoredDeps ?? []}
+          onChange={(next) =>
+            setValue("ignoredDependencies", next, { shouldDirty: true })
+          }
+          links={dependencyLinks ?? []}
+          onLinksChange={(next) =>
+            setValue("dependencyLinks", next, { shouldDirty: true })
+          }
+          defaultReason={
+            packModloader.trim()
+              ? `Only needed by another loader's build; this pack uses ${packModloader.trim()}.`
+              : "Only needed by another loader's build."
+          }
+          errors={errors.ignoredDependencies?.map?.(
+            (item) => item?.reason?.message,
           )}
         />
       </div>

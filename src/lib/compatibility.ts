@@ -392,12 +392,50 @@ export function checkCompatibility(
       );
       return true;
     };
+    const links = new Map(
+      (mod.dependencyLinks ?? []).map((link) => [link.id, link.modId]),
+    );
+    const byListId = new Map(mods.map((other) => [other.id, other]));
+    // A requirement the user linked to a mod in the list: resolved while that mod is active.
+    const checkLinked = (
+      id: string | null | undefined,
+      kind: string,
+      name: string,
+    ) => {
+      const linkedId =
+        id && (kind === "required" || kind === "optional")
+          ? links.get(id)
+          : undefined;
+      if (linkedId === undefined) return false;
+      const provider = byListId.get(linkedId);
+      if (provider && provider.id !== mod.id && isActive(provider)) return true;
+      if (kind === "required")
+        add(
+          "dependencies",
+          "error",
+          provider
+            ? `Requires ${name}, linked to ${provider.name}, which is ${provider.status} in this pack.`
+            : `Requires ${name}, linked to “${linkedId}”, which is no longer in the mod list.`,
+        );
+      else
+        add(
+          "dependencies",
+          "info",
+          `Optional dependency ${name} is linked to “${provider?.name ?? linkedId}”, which is not active in the pack.`,
+        );
+      return true;
+    };
     const checkModrinthDependencies = (dependencies: ModrinthDependency[]) => {
       sources.dependencies = "modrinth";
       for (const dependency of dependencies) {
         if (dependency.type === "embedded") continue;
         if (
-          skipIgnored(dependency.projectId, dependency.type, label(dependency))
+          skipIgnored(
+            dependency.projectId,
+            dependency.type,
+            label(dependency),
+          ) ||
+          checkLinked(dependency.projectId, dependency.type, label(dependency))
         )
           continue;
         if (!dependency.projectId) {
@@ -457,7 +495,10 @@ export function checkCompatibility(
     const checkJarDependencies = (file: NonNullable<Mod["file"]>) => {
       sources.dependencies = "jar";
       for (const dependency of file.dependencies ?? []) {
-        if (skipIgnored(dependency.modId, dependency.kind, dependency.modId))
+        if (
+          skipIgnored(dependency.modId, dependency.kind, dependency.modId) ||
+          checkLinked(dependency.modId, dependency.kind, dependency.modId)
+        )
           continue;
         const providers = (byModId.get(dependency.modId) ?? []).filter(
           (other) => other.id !== mod.id,

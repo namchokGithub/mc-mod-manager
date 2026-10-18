@@ -150,6 +150,21 @@ export const modSchema = z.object({
       }),
     )
     .optional(),
+  // Dependencies confirmed to be provided by another mod in the list, when IDs do not match on
+  // their own (e.g. JAR mod ID "sophisticatedcore" vs. list ID "sophisticated-core"). `id` is
+  // the Modrinth project ID or JAR mod ID; `modId` is the providing mod's ID in this list.
+  dependencyLinks: z
+    .array(
+      z.object({
+        id: z.string().trim().min(1),
+        modId: z.string().trim().min(1),
+      }),
+    )
+    .refine(
+      (links) => new Set(links.map((link) => link.id)).size === links.length,
+      "A dependency is linked twice",
+    )
+    .optional(),
 });
 
 export const modsSchema = z.array(modSchema).superRefine((mods, context) => {
@@ -380,6 +395,7 @@ export type Mod = z.infer<typeof modSchema>;
 export type ModrinthMeta = z.infer<typeof modrinthMetaSchema>;
 export type ManualVerification = z.infer<typeof manualVerificationSchema>;
 export type IgnoredDependency = NonNullable<Mod["ignoredDependencies"]>[number];
+export type DependencyLink = NonNullable<Mod["dependencyLinks"]>[number];
 export type ModrinthDependency = NonNullable<
   ModrinthMeta["dependencies"]
 >[number];

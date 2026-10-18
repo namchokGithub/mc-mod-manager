@@ -176,7 +176,8 @@ function dependencyText(entry: DependencyEntry): string {
   else if (conflict) status = `Warning: in the pack (${placementText(entry)})`;
   else if (entry.laterOnly)
     status = `Warning: only in a later batch (${placementText(entry)})`;
-  else status = `Found (${placementText(entry)})`;
+  else
+    status = `Found${entry.linked ? ", linked" : ""} (${placementText(entry)})`;
   return `${relationVerb[entry.relation]} ${name} — ${status}`;
 }
 

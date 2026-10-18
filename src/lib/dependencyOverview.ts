@@ -27,6 +27,8 @@ export type DependencyEntry = {
   inCurrentBatch: boolean;
   /** A required dependency that is only in batches after the current one. */
   laterOnly: boolean;
+  /** Matched through a link the user confirmed (`dependencyLinks`), not by ID alone. */
+  linked?: boolean;
 };
 
 export type ModDependencies = {
@@ -194,6 +196,9 @@ export function batchDependencyOverview(
       continue;
     }
     const entries = new Map<string, DependencyEntry>();
+    const links = new Map(
+      (mod.dependencyLinks ?? []).map((link) => [link.id, link.modId]),
+    );
     for (const dependency of dependencies) {
       const own = identifierOf(mod, dependency.identifierKind);
       if (dependency.identifier && own === dependency.identifier) continue; // self-reference
@@ -206,14 +211,21 @@ export function batchDependencyOverview(
       )
         continue;
 
-      const matches = dependency.identifier
-        ? mods.filter(
-            (other) =>
-              other.id !== mod.id &&
-              identifierOf(other, dependency.identifierKind) ===
-                dependency.identifier,
-          )
-        : [];
+      const linkedId =
+        dependency.identifier && dependency.identifierKind !== "mod-id"
+          ? links.get(dependency.identifier)
+          : undefined;
+      const matches =
+        linkedId !== undefined
+          ? mods.filter((other) => other.id !== mod.id && other.id === linkedId)
+          : dependency.identifier
+            ? mods.filter(
+                (other) =>
+                  other.id !== mod.id &&
+                  identifierOf(other, dependency.identifierKind) ===
+                    dependency.identifier,
+              )
+            : [];
       const target = matches.length === 1 ? matches[0] : undefined;
       let status: DependencyStatus = "resolved";
       let reason: string | undefined;
@@ -223,6 +235,9 @@ export function batchDependencyOverview(
       } else if (matches.length > 1) {
         status = "unresolved";
         reason = `${matches.length} mods share this ID (${matches.map((other) => other.name).join(", ")}).`;
+      } else if (!target && linkedId !== undefined) {
+        status = "missing";
+        reason = `Linked to “${linkedId}”, which is no longer in the mod list.`;
       } else if (!target) {
         if (dependency.identifierKind === "mod-id") {
           status = "unresolved";
@@ -265,6 +280,7 @@ export function batchDependencyOverview(
         batches: otherBatches,
         inCurrentBatch,
         laterOnly,
+        ...(linkedId !== undefined && target && { linked: true }),
       });
     }
     const list = [...entries.values()];
