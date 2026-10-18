@@ -12736,5 +12736,224 @@
       "syncedAt": "2026-10-18T14:45:09.466Z"
     },
     "addedAt": "2026-10-18T14:45:11.821Z"
+  },
+  {
+    "id": "mrcrayfishs-furniture-mod-tools-refurbished",
+    "name": "MrCrayfish's Furniture Mod Tools: Refurbished",
+    "version": "neoforge-26.1.1-26.1.2",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/mrcrayfishs-furniture-mod-tools-refurbished",
+    "description": "Adds tools for MrCrayfish's Furniture Mod: Refurbished!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/wjNYBh7l/f799ff77447890db08024b2e913cda856702473c_96.webp",
+    "modrinth": {
+      "projectId": "wjNYBh7l",
+      "slug": "mrcrayfishs-furniture-mod-tools-refurbished",
+      "versionId": "UCONKGxi",
+      "versionNumber": "neoforge-26.1.1-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-04-23T11:25:44.847550Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T14:49:24.298Z"
+    },
+    "addedAt": "2026-10-18T14:49:26.700Z"
+  },
+  {
+    "id": "refurbished-furniture-neoforge",
+    "name": "MrCrayfish's Furniture Mod: Refurbished",
+    "version": "26.1.2-1.0.23",
+    "category": "Cosmetic",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
+    "description": "",
+    "dependencies": [],
+    "notes": "Imported from refurbished_furniture-neoforge-26.1.2-1.0.23.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/934/904/64/64/638411339753659456.png",
+    "file": {
+      "name": "refurbished_furniture-neoforge-26.1.2-1.0.23.jar",
+      "format": "filename"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "26.1.2-1.0.23",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
+      "verifiedAt": "2026-10-18T14:55:25.415Z"
+    },
+    "addedAt": "2026-10-18T14:53:14.887Z"
+  },
+  {
+    "id": "dusk",
+    "name": "Dusk",
+    "version": "",
+    "category": "Mobs & Difficulty",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:05:42.920Z"
+  },
+  {
+    "id": "shield-mechanics",
+    "name": "Shield Mechanics",
+    "version": "",
+    "category": "Combat",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:06:27.259Z"
+  },
+  {
+    "id": "loot-integrations",
+    "name": "Loot Integrations",
+    "version": "",
+    "category": "Loot",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:07:02.512Z"
+  },
+  {
+    "id": "yung-structures-addon",
+    "name": "Yung Structures Addon",
+    "version": "",
+    "category": "Structures",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:07:18.425Z"
+  },
+  {
+    "id": "stoneholm-loot-integration",
+    "name": "Stoneholm Loot Integration",
+    "version": "",
+    "category": "Loot",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:07:41.724Z"
+  },
+  {
+    "id": "connectivity",
+    "name": "Connectivity",
+    "version": "",
+    "category": "Performance",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:08:02.410Z"
+  },
+  {
+    "id": "dynamic-view-and-simulation-distances",
+    "name": "Dynamic View and Simulation Distances",
+    "version": "",
+    "category": "Performance",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:08:25.019Z"
+  },
+  {
+    "id": "fast-async-world-save",
+    "name": "Fast Async World Save",
+    "version": "",
+    "category": "Performance",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:09:03.197Z"
+  },
+  {
+    "id": "ftb-library-neoforge",
+    "name": "FTB Library (NeoForge)",
+    "version": "",
+    "category": "API and Library",
+    "tags": [],
+    "status": "disabled",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "",
+    "addedAt": "2026-10-18T15:11:21.858Z"
   }
 ]

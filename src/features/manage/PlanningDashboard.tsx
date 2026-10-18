@@ -13,6 +13,9 @@ import { Button } from "../../components/ui/button";
 import { sourceLabels } from "../../lib/dependencyOverview";
 import { planningDashboard } from "../../lib/planningDashboard";
 import { planTypeLabels } from "../../lib/batchContent";
+import { sideClassLabels, type SideClass } from "../../lib/side";
+
+const sideOrder: SideClass[] = ["client", "both", "server", "unknown"];
 import { contentMeta } from "../../lib/content";
 import { contentKeys } from "../../lib/schema";
 import type { Mod } from "../../lib/schema";
@@ -203,6 +206,51 @@ export function PlanningDashboard({
               : "No items in any collection yet."}{" "}
             Mods, resource packs, data packs, and shaders together. Planning
             only, not installation.
+          </p>
+        </section>
+
+        <section className="dash-card" aria-labelledby="dash-sides-title">
+          <h3 id="dash-sides-title">Installation sides</h3>
+          <p className="dash-big">{dashboard.sides.total}</p>
+          {/* Widths are shares of the total; an empty collection shows an empty bar. */}
+          <div className="dash-side-bar" aria-hidden="true">
+            {sideOrder.map((side) =>
+              dashboard.sides[side] ? (
+                <span
+                  key={side}
+                  className={`dash-side-${side}`}
+                  style={{
+                    width: `${(dashboard.sides[side] / dashboard.sides.total) * 100}%`,
+                  }}
+                />
+              ) : null,
+            )}
+          </div>
+          <ul className="dash-side-legend">
+            {sideOrder.map((side) => (
+              <li key={side}>
+                <span
+                  className={`dash-side-swatch dash-side-${side}`}
+                  aria-hidden="true"
+                />
+                {sideClassLabels[side]} <strong>{dashboard.sides[side]}</strong>
+              </li>
+            ))}
+          </ul>
+          <ul className="dash-combined">
+            <li>
+              Client Pack <strong>{dashboard.sides.clientPack}</strong>
+            </li>
+            <li>
+              Server Pack <strong>{dashboard.sides.serverPack}</strong>
+            </li>
+          </ul>
+          <p className="mr-hint">
+            All {dashboard.sides.total} mods, every status, from each mod’s
+            listed side. Client Pack is Client Only + Both Sides; Server Pack is
+            Server Only + Both Sides, so they overlap.
+            {dashboard.sides.unknown > 0 &&
+              ` ${dashboard.sides.unknown} with an unknown side ${dashboard.sides.unknown === 1 ? "is" : "are"} in neither pack.`}
           </p>
         </section>
 

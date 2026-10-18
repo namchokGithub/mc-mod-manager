@@ -35,6 +35,15 @@ import {
 } from "../../lib/pagination";
 import { resolveHeroImageUrl } from "../../lib/heroImage";
 import type { Mod } from "../../lib/schema";
+import {
+  matchesSideView,
+  sideCounts,
+  sideViewCounts,
+  sideViewLabels,
+  type SideView,
+} from "../../lib/side";
+
+const sideViews: SideView[] = ["players", "server", "all"];
 
 const initialFilters: Filters = {
   query: "",
@@ -50,6 +59,8 @@ export function Preview() {
   const heroRef = useRef<HTMLElement | null>(null);
   const heroHasLeftViewport = useRef(false);
   const [filters, setFilters] = useState(initialFilters);
+  // Presentation only: which mods a player or a server installs. Not saved anywhere.
+  const [sideView, setSideView] = useState<SideView>("players");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
   const [heroAnimationCycle, setHeroAnimationCycle] = useState(0);
@@ -88,9 +99,18 @@ export function Preview() {
     () => checkCompatibility(data.mods, data.modpack),
     [data.mods, data.modpack],
   );
+  // Counted over the whole collection, the same population the list draws from.
+  const sides = useMemo(() => sideCounts(data.mods), [data.mods]);
+  const viewCounts = sideViewCounts(sides);
   const filtered = useMemo(
-    () => filterMods(data.mods, filters),
-    [data.mods, filters],
+    () =>
+      filterMods(
+        sideView === "all"
+          ? data.mods
+          : data.mods.filter((mod) => matchesSideView(mod, sideView)),
+        filters,
+      ),
+    [data.mods, filters, sideView],
   );
   // Filtering and sorting happen first; paginate also clamps a page that no longer exists.
   const paged = paginate(filtered, page, pageSize);
@@ -223,14 +243,59 @@ export function Preview() {
               })}
             </div>
           </div>
+          <div className="side-views">
+            <div
+              className="side-view-toggle"
+              role="group"
+              aria-label="Installation side">
+              {sideViews.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  aria-pressed={sideView === option}
+                  className={sideView === option ? "selected" : ""}
+                  onClick={() => {
+                    setSideView(option);
+                    setPage(1);
+                  }}>
+                  {sideViewLabels[option]}{" "}
+                  <span className="side-view-count">{viewCounts[option]}</span>
+                </button>
+              ))}
+            </div>
+            <p className="side-view-note">
+              {sideView === "players"
+                ? "Client-only and both-side mods, from each mod's listed side."
+                : sideView === "server"
+                  ? "Server-only and both-side mods, from each mod's listed side."
+                  : `Every mod in the collection (${sides.total}).`}
+            </p>
+            {sideView !== "all" && sides.unknown > 0 && (
+              <p className="side-view-note side-view-unknown" role="status">
+                {sides.unknown} {sides.unknown === 1 ? "mod has" : "mods have"}{" "}
+                an unknown installation side.{" "}
+                <button
+                  type="button"
+                  className="filter-reset"
+                  onClick={() => {
+                    setSideView("all");
+                    setPage(1);
+                  }}>
+                  View All Mods
+                </button>{" "}
+                to review {sides.unknown === 1 ? "it" : "them"}.
+              </p>
+            )}
+          </div>
           <ModFilters
             filters={filters}
             onChange={changeFilters}
             categories={categories}
             count={filtered.length}
-            total={data.mods.length}
+            total={viewCounts[sideView]}
             view={view}
             onViewChange={setView}
+            showSide={false}
           />
           {filtered.length ? (
             <div
@@ -325,7 +390,11 @@ export function Preview() {
                   </p>
                   <Button
                     variant="secondary"
-                    onClick={() => changeFilters(initialFilters)}>
+                    onClick={() => {
+                      // The side view is a filter too; All Mods hides nothing.
+                      setSideView("all");
+                      changeFilters(initialFilters);
+                    }}>
                     Clear filters
                   </Button>
                 </>

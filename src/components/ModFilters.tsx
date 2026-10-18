@@ -36,6 +36,7 @@ export function ModFilters({
   view,
   onViewChange,
   showView = true,
+  showSide = true,
 }: {
   filters: Filters;
   onChange: (filters: Filters) => void;
@@ -45,6 +46,8 @@ export function ModFilters({
   view?: "grid" | "list";
   onViewChange?: (view: "grid" | "list") => void;
   showView?: boolean;
+  /** False where a separate side control (Preview's For Players / For Server) is shown. */
+  showSide?: boolean;
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
@@ -165,16 +168,18 @@ export function ModFilters({
           onValueChange={(value) => set("status", value)}
           options={[{ value: "", label: "All statuses" }, ...statusOptions]}
         />
-        <Select
-          aria-label="Installation side"
-          size="sm"
-          variant="compact"
-          className="filter-select"
-          active={Boolean(filters.side)}
-          value={filters.side}
-          onValueChange={(value) => set("side", value)}
-          options={[{ value: "", label: "All sides" }, ...sideOptions]}
-        />
+        {showSide && (
+          <Select
+            aria-label="Installation side"
+            size="sm"
+            variant="compact"
+            className="filter-select"
+            active={Boolean(filters.side)}
+            value={filters.side}
+            onValueChange={(value) => set("side", value)}
+            options={[{ value: "", label: "All sides" }, ...sideOptions]}
+          />
+        )}
         <Select
           aria-label="Sort order"
           size="sm"

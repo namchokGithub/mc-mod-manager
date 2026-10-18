@@ -5,6 +5,7 @@ import {
   type DependencySource,
 } from "./dependencyOverview";
 import { batchContent, contentKeyByType, contentRefsOf } from "./batchContent";
+import { sideCounts, type SideCounts } from "./side";
 import {
   contentKeys,
   contentTypes,
@@ -40,6 +41,8 @@ export type PlanningDashboard = {
   assignedMods: number;
   unassigned: Mod[];
   totalBatches: number;
+  /** Installation sides of the same mods as `totalMods` (every status). */
+  sides: SideCounts;
   /** Unique assigned mods / total mods × 100, rounded; null when there are no mods. */
   coverage: number | null;
   health: {
@@ -224,6 +227,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
     assignedMods: assigned.size,
     unassigned,
     totalBatches: batches.length,
+    sides: sideCounts(mods),
     coverage: mods.length
       ? Math.round((assigned.size / mods.length) * 100)
       : null,
