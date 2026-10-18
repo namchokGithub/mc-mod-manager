@@ -137,6 +137,9 @@ export const modSchema = z.object({
     })
     .optional(),
   manualVerification: manualVerificationSchema.optional(),
+  // When the mod was first added (ISO 8601, UTC). Set once and never changed by edits or updates;
+  // optional so older mods.json files still load.
+  addedAt: z.iso.datetime().optional(),
   // Required or optional dependencies the user marked as not needed for this pack, e.g. Fabric
   // API listed on a multi-loader Modrinth version. `id` is a Modrinth project ID or JAR mod ID.
   ignoredDependencies: z

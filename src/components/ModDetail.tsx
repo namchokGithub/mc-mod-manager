@@ -58,6 +58,16 @@ export function ModDetail({
               <dt>Source</dt>
               <dd>{shown.source}</dd>
             </div>
+            {shown.addedAt && (
+              <div>
+                <dt>Added at</dt>
+                <dd>
+                  <time dateTime={shown.addedAt}>
+                    {new Date(shown.addedAt).toLocaleString()}
+                  </time>
+                </dd>
+              </div>
+            )}
             <div>
               <dt>Tags</dt>
               <dd>{shown.tags.length ? shown.tags.join(", ") : "None"}</dd>

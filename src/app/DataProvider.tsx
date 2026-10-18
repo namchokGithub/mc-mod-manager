@@ -15,7 +15,7 @@ import {
   renameModInBatches,
   withOrder,
 } from "../lib/batches";
-import { removeMods } from "../lib/mods";
+import { removeMods, stampSavedMod, withAddedAt } from "../lib/mods";
 import { removeContentFromBatches } from "../lib/batchContent";
 import {
   deriveSaveStatus,
@@ -112,8 +112,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
           return;
         }
         const { draft, issue } = loadDraft(window.localStorage, result.data);
-        setData(draft ?? result.data);
-        setDirty(Boolean(draft));
+        const loaded = draft ?? result.data;
+        // One-time backfill with a single timestamp. It becomes an unsaved draft change, so it
+        // is written to mods.json only by Save to Local JSON; the draft keeps it across reloads.
+        const mods = withAddedAt(loaded.mods, new Date());
+        setData(mods === loaded.mods ? loaded : { ...loaded, mods });
+        setDirty(Boolean(draft) || mods !== loaded.mods);
         setDraftIssue(issue);
       } catch (error) {
         if (active)
@@ -200,7 +204,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
     draftIssue,
     externalUpdate,
     updateModpack: (modpack) => change({ ...data, modpack }),
-    saveMod: (mod, originalId) => {
+    saveMod: (input, originalId) => {
+      const previous = originalId
+        ? data.mods.find((item) => item.id === originalId)
+        : undefined;
+      const mod = stampSavedMod(input, previous, new Date());
       const nextMods = originalId
         ? data.mods.map((item) => (item.id === originalId ? mod : item))
         : [...data.mods, mod];
@@ -235,7 +243,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
       }),
     promoteInbox: (created, promotedIds) => {
       // Validated before anything changes, so a failure leaves mods and inbox untouched.
-      const mods = modsSchema.parse([...data.mods, ...created]);
+      const mods = modsSchema.parse(
+        withAddedAt([...data.mods, ...created], new Date()),
+      );
       const removed = new Set(promotedIds);
       change({
         ...data,
@@ -259,7 +269,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
           : data.batches,
       }),
     importModpack: (modpack) => change({ ...data, modpack }),
-    importMods: (mods) => change({ ...data, mods }),
+    // Imports and multi-adds: new mods without `addedAt` get it now; existing values are kept.
+    importMods: (mods) =>
+      change({ ...data, mods: withAddedAt(mods, new Date()) }),
     markSaved: (saved) => {
       try {
         window.localStorage.removeItem(DRAFT_KEY);

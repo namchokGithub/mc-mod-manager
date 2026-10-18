@@ -459,7 +459,7 @@ function ModEditor({
                   name,
                   mods.filter((item) => item.id !== mod?.id),
                 )}`
-              : "Stable unique identifier"
+              : `Stable unique identifier${mod?.addedAt ? ` · Added ${new Date(mod.addedAt).toLocaleString()}` : ""}`
           }
         >
           <input placeholder="Auto-generated if empty" {...register("id")} />

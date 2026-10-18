@@ -8,6 +8,31 @@ export type Filters = {
   sort: "az" | "za";
 };
 
+/**
+ * Gives every mod without `addedAt` the same timestamp. Existing values are kept, and the same
+ * array is returned when nothing is missing, so callers can tell whether anything changed.
+ */
+export function withAddedAt(mods: Mod[], now: Date): Mod[] {
+  if (mods.every((mod) => mod.addedAt)) return mods;
+  const at = now.toISOString();
+  return mods.map((mod) => (mod.addedAt ? mod : { ...mod, addedAt: at }));
+}
+
+/**
+ * The mod to store from the editor. A new mod gets `now`; an edited mod keeps the `addedAt` it
+ * already had, whatever the form sent.
+ */
+export function stampSavedMod(
+  mod: Mod,
+  previous: Mod | undefined,
+  now: Date,
+): Mod {
+  const addedAt = previous
+    ? (previous.addedAt ?? mod.addedAt ?? now.toISOString())
+    : now.toISOString();
+  return { ...mod, addedAt };
+}
+
 export function filterMods(mods: Mod[], filters: Filters): Mod[] {
   const query = filters.query.trim().toLocaleLowerCase();
   return mods

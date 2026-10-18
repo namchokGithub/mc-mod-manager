@@ -14,12 +14,6 @@
       "createdAt": "2026-10-17T16:23:25.878Z"
     },
     {
-      "id": "aquaculture-2",
-      "name": "Aquaculture 2",
-      "notes": "",
-      "createdAt": "2026-10-17T16:25:12.804Z"
-    },
-    {
       "id": "macaw-s-series",
       "name": "Macaw's series",
       "notes": "",
@@ -32,58 +26,10 @@
       "createdAt": "2026-10-17T16:31:36.106Z"
     },
     {
-      "id": "trash-cans",
-      "name": "Trash Cans",
-      "notes": "",
-      "createdAt": "2026-10-17T18:49:12.778Z"
-    },
-    {
-      "id": "better-fps-render-distance",
-      "name": "Better FPS - Render Distance",
-      "notes": "",
-      "createdAt": "2026-10-17T19:17:41.144Z"
-    },
-    {
-      "id": "botany-pots",
-      "name": "Botany Pots",
-      "notes": "",
-      "createdAt": "2026-10-17T19:30:35.638Z"
-    },
-    {
-      "id": "measurements-https-www-curseforge-com-minecraft-mc-mods-measurements",
-      "name": "Measurements",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/measurements/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
-      "createdAt": "2026-10-17T20:26:57.526Z"
-    },
-    {
-      "id": "overloaded-armor-bar",
-      "name": "Overloaded Armor Bar",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/overloaded-armor-bar",
-      "createdAt": "2026-10-17T20:30:58.110Z"
-    },
-    {
-      "id": "croptopia",
-      "name": "Croptopia",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/croptopia",
-      "createdAt": "2026-10-17T20:44:24.429Z"
-    },
-    {
       "id": "yung-s-mods",
       "name": "YUNG's Mods",
       "notes": "",
       "createdAt": "2026-10-17T20:50:47.642Z"
-    },
-    {
-      "id": "botany-pots-tiers",
-      "name": "Botany Pots Tiers",
-      "notes": "",
-      "createdAt": "2026-10-17T20:56:31.530Z"
-    },
-    {
-      "id": "modmenu",
-      "name": "modmenu",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/modmenu",
-      "createdAt": "2026-10-17T21:02:40.801Z"
     },
     {
       "id": "more-villagers",
@@ -162,6 +108,36 @@
       "name": "More Tier Upgrade",
       "notes": "https://www.curseforge.com/minecraft/mc-mods/more-tier-upgrade",
       "createdAt": "2026-10-18T04:34:24.961Z"
+    },
+    {
+      "id": "lullaby6-enchantment",
+      "name": "lullaby6 Enchantment",
+      "notes": "https://www.curseforge.com/members/lullaby6/projects",
+      "createdAt": "2026-10-18T04:49:42.849Z"
+    },
+    {
+      "id": "productive-farming",
+      "name": "Productive Farming",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/productivefarming?utm_source=chatgpt.com",
+      "createdAt": "2026-10-18T05:21:07.858Z"
+    },
+    {
+      "id": "ctw-complementary-tools-weapons",
+      "name": "CTW - Complementary Tools & Weapons",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/complementary-tools-weapons/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
+      "createdAt": "2026-10-18T05:25:33.434Z"
+    },
+    {
+      "id": "omni-pots-farm-pot",
+      "name": "Omni Pots - Farm Pot",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/omni-pots?utm_source=chatgpt.com",
+      "createdAt": "2026-10-18T05:29:02.973Z"
+    },
+    {
+      "id": "dynamic-difficulty-neoforge-fabric",
+      "name": "Dynamic Difficulty (Neoforge/Fabric)",
+      "notes": "https://www.curseforge.com/minecraft/mc-mods/dynamic-difficulty-mod?utm_source=chatgpt.com",
+      "createdAt": "2026-10-18T05:30:00.672Z"
     }
   ]
 }
