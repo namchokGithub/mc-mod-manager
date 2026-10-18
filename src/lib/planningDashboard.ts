@@ -6,6 +6,7 @@ import {
 } from "./dependencyOverview";
 import { batchContent, contentKeyByType, contentRefsOf } from "./batchContent";
 import { sideCounts, type SideCounts } from "./side";
+import { requirementCounts, type RequirementCounts } from "./requirement";
 import {
   contentKeys,
   contentTypes,
@@ -43,6 +44,8 @@ export type PlanningDashboard = {
   totalBatches: number;
   /** Installation sides of the same mods as `totalMods` (every status). */
   sides: SideCounts;
+  /** Required / optional (modpack policy) for the same mods, and the player groups. */
+  requirements: RequirementCounts;
   /** Unique assigned mods / total mods × 100, rounded; null when there are no mods. */
   coverage: number | null;
   health: {
@@ -228,6 +231,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
     unassigned,
     totalBatches: batches.length,
     sides: sideCounts(mods),
+    requirements: requirementCounts(mods),
     coverage: mods.length
       ? Math.round((assigned.size / mods.length) * 100)
       : null,

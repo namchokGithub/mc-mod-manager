@@ -4376,3 +4376,40 @@ main:focus {
   height: 10px;
   border-radius: 3px;
 }
+
+/* Installation requirement (Preview grouping) */
+.group-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-muted);
+}
+.mod-group-heading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.mod-group-heading:first-child {
+  margin-top: 0;
+}
+.mod-group-heading span {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-muted);
+}
+.status.status-optional {
+  background: var(--purple-soft);
+  color: var(--purple);
+}
+.mod-card-review {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--warning);
+}

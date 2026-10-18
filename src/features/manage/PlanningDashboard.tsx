@@ -254,6 +254,38 @@ export function PlanningDashboard({
           </p>
         </section>
 
+        <section className="dash-card" aria-labelledby="dash-requirement-title">
+          <h3 id="dash-requirement-title">Installation requirement</h3>
+          <ul className="dash-combined">
+            <li>
+              Required mods <strong>{dashboard.requirements.required}</strong>
+            </li>
+            <li>
+              Optional mods <strong>{dashboard.requirements.optional}</strong>
+            </li>
+          </ul>
+          <ul className="dash-combined">
+            <li>
+              Required for Players{" "}
+              <strong>{dashboard.requirements.forPlayers.required}</strong>
+            </li>
+            <li>
+              Optional for Players{" "}
+              <strong>{dashboard.requirements.forPlayers.optional}</strong>
+            </li>
+            <li>
+              Needs Review{" "}
+              <strong>{dashboard.requirements.forPlayers.review}</strong>
+            </li>
+          </ul>
+          <p className="mr-hint">
+            Modpack policy for all {dashboard.totalMods} mods, every status.
+            Player groups exclude server-only mods. Needs Review covers unknown
+            sides, optional mods on both sides, and optional mods a required mod
+            depends on. Not a measure of installation readiness.
+          </p>
+        </section>
+
         <section
           id="dash-dependencies"
           className="dash-card"

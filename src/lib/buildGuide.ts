@@ -14,6 +14,7 @@ import {
   type PlanItemType,
 } from "./batchContent";
 import { contentSourceLabels } from "./content";
+import { packGroup, packGroupLabels, requiredByOthers } from "./requirement";
 import {
   contentItemCompat,
   contentSourceText,
@@ -199,10 +200,7 @@ function batchNodes(
   const content = batchContent(batch, collection);
   nodes.push({ kind: "paragraph", text: batchCountText(mods.length, content) });
 
-  nodes.push({ kind: "heading", level: 3, text: "Mods" });
-  if (!mods.length)
-    nodes.push({ kind: "paragraph", text: "No mods in this batch yet." });
-  for (const mod of mods) {
+  const pushMod = (mod: Mod, reason?: string) => {
     const url = safeUrl(mod.sourceUrl);
     nodes.push({
       kind: "item",
@@ -215,6 +213,7 @@ function batchNodes(
       ],
     });
     const details = [
+      ...(reason ? [`Review: ${reason}`] : []),
       ...supportLines(mod),
       `Planning status: ${mod.status}`,
       ...(options.includeNotes && mod.notes.trim()
@@ -223,7 +222,33 @@ function batchNodes(
     ];
     for (const detail of details)
       nodes.push({ kind: "item", depth: 1, checkbox: false, parts: [detail] });
-  }
+  };
+  // Batch order and mod order are kept; mods are only split by installation requirement.
+  const requiredBy = requiredByOthers(collection.mods);
+  const grouped = mods.map((mod) => ({ mod, ...packGroup(mod, requiredBy) }));
+  if (grouped.every((item) => item.group === "required")) {
+    // All required (including every mod saved before requirements existed): unchanged layout.
+    nodes.push({ kind: "heading", level: 3, text: "Mods" });
+    if (!mods.length)
+      nodes.push({ kind: "paragraph", text: "No mods in this batch yet." });
+    for (const mod of mods) pushMod(mod);
+  } else
+    for (const group of ["required", "optional", "review"] as const) {
+      const items = grouped.filter((item) => item.group === group);
+      if (!items.length) continue;
+      nodes.push({ kind: "heading", level: 3, text: packGroupLabels[group] });
+      if (group === "optional")
+        nodes.push({
+          kind: "paragraph",
+          text: "Optional in this pack. Leave one out only where the configuration and other mods' dependencies allow it.",
+        });
+      if (group === "review")
+        nodes.push({
+          kind: "paragraph",
+          text: "Check these before deciding whether to install them.",
+        });
+      for (const item of items) pushMod(item.mod, item.reason);
+    }
   if (missing.length)
     nodes.push({
       kind: "paragraph",

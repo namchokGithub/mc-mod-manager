@@ -78,8 +78,7 @@ export function ContentPreview({ data }: { data: Collection }) {
               setActive(key);
               setQuery(initialContentQuery);
               setPage(1);
-            }}
-          >
+            }}>
             {contentMeta[key].title} <span>{data[key].items.length}</span>
           </button>
         ))}
@@ -87,8 +86,7 @@ export function ContentPreview({ data }: { data: Collection }) {
       <div
         role="tabpanel"
         id={`${id}-panel`}
-        aria-labelledby={`${id}-${active}`}
-      >
+        aria-labelledby={`${id}-${active}`}>
         <p className="content-description">{meta.description}</p>
         {items.length > 0 && (
           <div className="filters-panel">
@@ -111,8 +109,7 @@ export function ContentPreview({ data }: { data: Collection }) {
                     type="button"
                     className="search-clear"
                     aria-label="Clear search"
-                    onClick={() => changeQuery({ query: "" })}
-                  >
+                    onClick={() => changeQuery({ query: "" })}>
                     <X size={15} />
                   </button>
                 )}
@@ -209,8 +206,7 @@ export function ContentPreview({ data }: { data: Collection }) {
                             <a
                               href={compat.evidence?.evidenceUrl}
                               target="_blank"
-                              rel="noreferrer"
-                            >
+                              rel="noreferrer">
                               {compat.verification === "manual-verified"
                                 ? "Evidence"
                                 : "Earlier evidence"}
@@ -224,8 +220,7 @@ export function ContentPreview({ data }: { data: Collection }) {
                               <a
                                 href={item.curseforge.url}
                                 target="_blank"
-                                rel="noreferrer"
-                              >
+                                rel="noreferrer">
                                 CurseForge
                               </a>
                             </>
@@ -240,8 +235,7 @@ export function ContentPreview({ data }: { data: Collection }) {
                         {item.version && (
                           <span
                             className="mod-card-version"
-                            title={item.version}
-                          >
+                            title={item.version}>
                             {" "}
                             · v{item.version}
                           </span>
@@ -252,8 +246,7 @@ export function ContentPreview({ data }: { data: Collection }) {
                           className="mod-card-cta"
                           href={item.sourceUrl}
                           target="_blank"
-                          rel="noreferrer"
-                        >
+                          rel="noreferrer">
                           Source <ArrowUpRight size={15} />
                         </a>
                       )}

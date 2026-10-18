@@ -84,6 +84,9 @@ export const modSchema = z.object({
   tags: z.array(z.string().trim().min(1)),
   status: z.enum(["planned", "testing", "installed", "disabled", "removed"]),
   side: z.enum(["client", "server", "both"]),
+  // Modpack policy, separate from side and compatibility. Missing means "required", so older
+  // mods.json files need no rewrite; the editor stores only "optional".
+  requirement: z.enum(["required", "optional"]).optional(),
   source: z.enum(["Modrinth", "CurseForge", "GitHub", "Other"]),
   sourceUrl: optionalUrl,
   description: z.string(),

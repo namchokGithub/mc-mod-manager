@@ -42,6 +42,13 @@ import {
   sideViewLabels,
   type SideView,
 } from "../../lib/side";
+import { groupByLabels, groupMods, type GroupBy } from "../../lib/grouping";
+import { playerGroup, requiredByOthers } from "../../lib/requirement";
+import { Select } from "../../components/ui/select";
+
+const groupByOptions = (
+  ["requirement", "none", "category", "side"] as GroupBy[]
+).map((value) => ({ value, label: groupByLabels[value] }));
 
 const sideViews: SideView[] = ["players", "server", "all"];
 
@@ -61,6 +68,7 @@ export function Preview() {
   const [filters, setFilters] = useState(initialFilters);
   // Presentation only: which mods a player or a server installs. Not saved anywhere.
   const [sideView, setSideView] = useState<SideView>("players");
+  const [groupBy, setGroupBy] = useState<GroupBy>("requirement");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
   const [heroAnimationCycle, setHeroAnimationCycle] = useState(0);
@@ -101,19 +109,41 @@ export function Preview() {
   );
   // Counted over the whole collection, the same population the list draws from.
   const sides = useMemo(() => sideCounts(data.mods), [data.mods]);
-  const viewCounts = sideViewCounts(sides);
+  // Optional mods that a required mod depends on; they go to Needs Review, never Optional.
+  const requiredBy = useMemo(() => requiredByOthers(data.mods), [data.mods]);
+  // For Players also lists unknown-side mods, under Needs Review, so none disappear unexplained.
+  const viewCounts = {
+    ...sideViewCounts(sides),
+    players: sides.clientPack + sides.unknown,
+  };
   const filtered = useMemo(
     () =>
       filterMods(
         sideView === "all"
           ? data.mods
-          : data.mods.filter((mod) => matchesSideView(mod, sideView)),
+          : data.mods.filter((mod) =>
+              sideView === "players"
+                ? playerGroup(mod, requiredBy) !== null
+                : matchesSideView(mod, sideView),
+            ),
         filters,
       ),
-    [data.mods, filters, sideView],
+    [data.mods, filters, sideView, requiredBy],
+  );
+  // Grouping happens after search, filters, and sort, and before pagination.
+  const grouped = useMemo(
+    () =>
+      groupMods(filtered, groupBy, {
+        players: sideView === "players",
+        requiredBy,
+      }),
+    [filtered, groupBy, sideView, requiredBy],
+  );
+  const groupCounts = new Map(
+    grouped.groups.map((group) => [group.key, group]),
   );
   // Filtering and sorting happen first; paginate also clamps a page that no longer exists.
-  const paged = paginate(filtered, page, pageSize);
+  const paged = paginate(grouped.items, page, pageSize);
   const goToPage = (next: number) => {
     setPage(next);
     document
@@ -265,12 +295,12 @@ export function Preview() {
             </div>
             <p className="side-view-note">
               {sideView === "players"
-                ? "Client-only and both-side mods, from each mod's listed side."
+                ? "Client-only and both-side mods, from each mod's listed side. Unknown sides are under Needs Review."
                 : sideView === "server"
                   ? "Server-only and both-side mods, from each mod's listed side."
                   : `Every mod in the collection (${sides.total}).`}
             </p>
-            {sideView !== "all" && sides.unknown > 0 && (
+            {sideView === "server" && sides.unknown > 0 && (
               <p className="side-view-note side-view-unknown" role="status">
                 {sides.unknown} {sides.unknown === 1 ? "mod has" : "mods have"}{" "}
                 an unknown installation side.{" "}
@@ -287,6 +317,21 @@ export function Preview() {
               </p>
             )}
           </div>
+          <label className="group-by">
+            <span>Group by</span>
+            <Select
+              aria-label="Group by"
+              size="sm"
+              variant="compact"
+              className="filter-select"
+              value={groupBy}
+              onValueChange={(value) => {
+                setGroupBy(value as GroupBy);
+                setPage(1);
+              }}
+              options={groupByOptions}
+            />
+          </label>
           <ModFilters
             filters={filters}
             onChange={changeFilters}
@@ -301,7 +346,20 @@ export function Preview() {
             <div
               className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}>
               <AnimatePresence mode="popLayout">
-                {paged.items.map((mod, index) => (
+                {paged.items.map(({ mod, key, reason }, index) => [
+                  // A heading where a group starts on this page, or continues from the last one.
+                  key && paged.items[index - 1]?.key !== key && (
+                    <h3 className="mod-group-heading" key={`group-${key}`}>
+                      {groupCounts.get(key)?.label ?? key}{" "}
+                      <span>
+                        {groupCounts.get(key)?.count ?? 0}
+                        {index === 0 &&
+                        grouped.items[paged.from - 2]?.key === key
+                          ? " · continued"
+                          : ""}
+                      </span>
+                    </h3>
+                  ),
                   <motion.button
                     layout={animateLayout ? "position" : false}
                     key={mod.id}
@@ -344,12 +402,22 @@ export function Preview() {
                         <span className={`status status-${mod.status}`}>
                           {mod.status}
                         </span>
+                        {mod.requirement === "optional" && (
+                          <span className="status status-optional">
+                            optional
+                          </span>
+                        )}
                       </span>
                     </div>
                     <div className="mod-card-body">
                       <span className="mod-category">{mod.category}</span>
                       <h3>{mod.name}</h3>
                       <p>{mod.description || "No description yet."}</p>
+                      {reason && (
+                        <p className="mod-card-review">
+                          Needs review: {reason}
+                        </p>
+                      )}
                     </div>
                     <div className="mod-card-footer">
                       <span className="mod-card-meta">
@@ -367,8 +435,8 @@ export function Preview() {
                         View details <ArrowRight size={15} />
                       </span>
                     </div>
-                  </motion.button>
-                ))}
+                  </motion.button>,
+                ])}
               </AnimatePresence>
             </div>
           ) : (
