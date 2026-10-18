@@ -2,34 +2,10 @@
   "version": 1,
   "entries": [
     {
-      "id": "ftb-library",
-      "name": "FTB Project",
-      "notes": "https://www.curseforge.com/members/ftb/projects",
-      "createdAt": "2026-10-17T16:13:06.894Z"
-    },
-    {
       "id": "mrcrayfish-s-furniture-mod-refurbished",
       "name": "MrCrayfish's Furniture Mod: Refurbished",
       "notes": "",
       "createdAt": "2026-10-17T16:23:25.878Z"
-    },
-    {
-      "id": "macaw-s-series",
-      "name": "Macaw's series",
-      "notes": "",
-      "createdAt": "2026-10-17T16:27:34.183Z"
-    },
-    {
-      "id": "apotheosis",
-      "name": "Apotheosis",
-      "notes": "",
-      "createdAt": "2026-10-17T16:31:36.106Z"
-    },
-    {
-      "id": "yung-s-mods",
-      "name": "YUNG's Mods",
-      "notes": "",
-      "createdAt": "2026-10-17T20:50:47.642Z"
     },
     {
       "id": "fuzs",
@@ -38,22 +14,10 @@
       "createdAt": "2026-10-17T21:09:59.696Z"
     },
     {
-      "id": "rpg-series",
-      "name": "RPG Series",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/paladins-and-priests",
-      "createdAt": "2026-10-17T21:10:47.246Z"
-    },
-    {
       "id": "someaddon",
       "name": "Loot Integrations by someaddon",
       "notes": "https://www.curseforge.com/members/someaddon/projects",
       "createdAt": "2026-10-17T22:21:04.217Z"
-    },
-    {
-      "id": "yung-s-better-nether-fortresses",
-      "name": "YUNG's Better Nether Fortresses",
-      "notes": "Check กับ batter end",
-      "createdAt": "2026-10-17T22:23:53.176Z"
     },
     {
       "id": "freshlx",
@@ -78,6 +42,12 @@
       "name": "lullaby6 Enchantment",
       "notes": "https://www.curseforge.com/members/lullaby6/projects",
       "createdAt": "2026-10-18T04:49:42.849Z"
+    },
+    {
+      "id": "ftb",
+      "name": "FTB",
+      "notes": "https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=popularity&search=FTB&version=26.1.2&gameVersionTypeId=6",
+      "createdAt": "2026-10-18T14:09:43.285Z"
     }
   ]
 }

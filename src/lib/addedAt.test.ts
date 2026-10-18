@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mergeCandidateIntoMod, type ImportCandidate } from "./jar/importing";
 import { serializeJson } from "./json";
 import { mergeModrinthIntoMod } from "./modrinth/mapping";
-import { filterMods, stampSavedMod, withAddedAt } from "./mods";
+import { filterMods, minimalModList, stampSavedMod, withAddedAt } from "./mods";
 import { quickAddMods } from "./quickAdd";
 import { modSchema, parseJsonFile, type Mod } from "./schema";
 
@@ -132,5 +132,37 @@ describe("sorting by addedAt", () => {
     expect(
       filterMods(mods, { ...filters, sort: "az" }).map((mod) => mod.name),
     ).toEqual(["Aardvark", "Alpha", "Beta", "Zed"]);
+  });
+});
+
+describe("minimal export", () => {
+  it("keeps only name, category, side, lowercase source, and URL", () => {
+    const mods: Mod[] = [
+      {
+        ...old,
+        name: "Example Mod",
+        category: "World Generation",
+        side: "both",
+        source: "Modrinth",
+        sourceUrl: "https://modrinth.com/mod/example",
+      },
+      { ...a!, source: "CurseForge", sourceUrl: "" },
+    ];
+    expect(JSON.parse(serializeJson(minimalModList(mods)))).toEqual([
+      {
+        name: "Example Mod",
+        category: "World Generation",
+        side: "both",
+        source: "modrinth",
+        url: "https://modrinth.com/mod/example",
+      },
+      {
+        name: "Alpha",
+        category: a!.category,
+        side: a!.side,
+        source: "curseforge",
+        url: "",
+      },
+    ]);
   });
 });

@@ -34,6 +34,27 @@ export function stampSavedMod(
   return { ...mod, addedAt };
 }
 
+export type MinimalMod = {
+  name: string;
+  category: string;
+  side: Mod["side"];
+  /** Lowercase source, e.g. "modrinth" or "curseforge". */
+  source: string;
+  /** The mod's source URL; "" when it has none. */
+  url: string;
+};
+
+/** A short list for sharing: name, category, side, source, and URL only, in collection order. */
+export function minimalModList(mods: Mod[]): MinimalMod[] {
+  return mods.map((mod) => ({
+    name: mod.name,
+    category: mod.category,
+    side: mod.side,
+    source: mod.source.toLowerCase(),
+    url: mod.sourceUrl,
+  }));
+}
+
 export function filterMods(mods: Mod[], filters: Filters): Mod[] {
   const query = filters.query.trim().toLocaleLowerCase();
   return mods

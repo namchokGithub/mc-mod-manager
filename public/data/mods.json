@@ -8039,38 +8039,6 @@
     "addedAt": "2026-10-18T09:09:12.789Z"
   },
   {
-    "id": "decorative-paths",
-    "name": "Decorative paths",
-    "version": "1.0",
-    "category": "Decoration",
-    "tags": [],
-    "status": "planned",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/decorative-paths",
-    "description": "Paths to decorate your houses and buildings",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "https://cdn.modrinth.com/data/ep4qLPDu/c964129ffb9e61eea1852ff2c37fa731be5ad812_96.webp",
-    "modrinth": {
-      "projectId": "ep4qLPDu",
-      "slug": "decorative-paths",
-      "versionId": "Mw6oETGn",
-      "versionNumber": "1.0",
-      "versionType": "release",
-      "datePublished": "2026-06-22T06:18:56.511513Z",
-      "gameVersions": [
-        "26.1.2"
-      ],
-      "loaders": [
-        "neoforge"
-      ],
-      "dependencies": [],
-      "syncedAt": "2026-10-17T22:37:25.226Z"
-    },
-    "addedAt": "2026-10-18T09:09:12.789Z"
-  },
-  {
     "id": "mutants-and-zombies",
     "name": "Mutants and Zombies",
     "version": "1.3.3-NeoForge-mc26.1",
@@ -10559,5 +10527,2214 @@
         "reason": "Only needed by another loader's build; this pack uses NeoForge."
       }
     ]
+  },
+  {
+    "id": "macaws-windows",
+    "name": "Macaw's Windows",
+    "version": "2.4.2",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-windows",
+    "description": "Adds lots of Windows, Mosaic Glass, Blinds, Shutters, Curtains and more...!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/C7I0BCni/7eb5e7816f887154e69a4001bee5bcc143242b32_96.webp",
+    "modrinth": {
+      "projectId": "C7I0BCni",
+      "slug": "macaws-windows",
+      "versionId": "LeFUseF5",
+      "versionNumber": "2.4.2",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:10:18.303620Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:32:48.262Z"
+    },
+    "addedAt": "2026-10-18T13:32:51.277Z"
+  },
+  {
+    "id": "macaws-fences-and-walls",
+    "name": "Macaw's Fences and Walls",
+    "version": "1.2.1",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-fences-and-walls",
+    "description": "Adds new vanilla styled fences, walls and gates!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/GmwLse2I/ebe4d2375e0a402e5587665ba9da5eb50f37422a_96.webp",
+    "modrinth": {
+      "projectId": "GmwLse2I",
+      "slug": "macaws-fences-and-walls",
+      "versionId": "GRlsvpLQ",
+      "versionNumber": "1.2.1",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:08:59.116008Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:33:07.214Z"
+    },
+    "addedAt": "2026-10-18T13:33:09.910Z"
+  },
+  {
+    "id": "macaws-doors",
+    "name": "Macaw's Doors",
+    "version": "1.1.5",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-doors",
+    "description": "Adds vanilla doors with every wood color and new unique doors!\nSuch as western, garage, shoji and more...!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kNxa8z3e/ced8fa00264400cbe06d622b92a6d1106cedc65d_96.webp",
+    "modrinth": {
+      "projectId": "kNxa8z3e",
+      "slug": "macaws-doors",
+      "versionId": "iQxG0Ckj",
+      "versionNumber": "1.1.5",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:15:41.324082Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:33:22.098Z"
+    },
+    "addedAt": "2026-10-18T13:33:24.191Z"
+  },
+  {
+    "id": "macaws-furniture",
+    "name": "Macaw's Furniture",
+    "version": "3.4.2",
+    "category": "Decoration",
+    "tags": [
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-furniture",
+    "description": "Decorate your world with wardrobes, drawers, chairs, desks, couches, chaise, sinks, tables and more...!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/dtWC90iB/2d2fdc39e9ab4c1cc56c6ce2785b6d60343bb86d_96.webp",
+    "modrinth": {
+      "projectId": "dtWC90iB",
+      "slug": "macaws-furniture",
+      "versionId": "u023zH3J",
+      "versionNumber": "3.4.2",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:15:00.572134Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:33:33.566Z"
+    },
+    "addedAt": "2026-10-18T13:33:35.437Z"
+  },
+  {
+    "id": "macaws-paths-and-pavings",
+    "name": "Macaw's Paths and Pavings",
+    "version": "1.1.1",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-paths-and-pavings",
+    "description": "Adds vanila styled paths and pavings!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/VRLhWB91/4564a530eaf62d3704796e407f700dc1f1fc22f8_96.webp",
+    "modrinth": {
+      "projectId": "VRLhWB91",
+      "slug": "macaws-paths-and-pavings",
+      "versionId": "5uiuhaEh",
+      "versionNumber": "1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:14:38.193801Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:33:48.489Z"
+    },
+    "addedAt": "2026-10-18T13:33:51.153Z"
+  },
+  {
+    "id": "macaws-paintings",
+    "name": "Macaw's Paintings",
+    "version": "1.1.0",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-paintings",
+    "description": "Adds custom drawn paintings to fit in your world!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/okE6QVAY/c3899cf3bd5b780839e98257492a6b68372eca3d_96.webp",
+    "modrinth": {
+      "projectId": "okE6QVAY",
+      "slug": "macaws-paintings",
+      "versionId": "97CySvTp",
+      "versionNumber": "1.1.0",
+      "versionType": "release",
+      "datePublished": "2026-03-30T10:50:36.357812Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:34:00.282Z"
+    },
+    "addedAt": "2026-10-18T13:34:03.242Z"
+  },
+  {
+    "id": "macaws-trapdoors",
+    "name": "Macaw's Trapdoors",
+    "version": "1.1.5",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-trapdoors",
+    "description": "Adds vanila trapdoors in every plank variation, and some new trapdoors too!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/n2fvCDlM/e764bf33a0a9d94fd33af84a63d8a47da7c85561_96.webp",
+    "modrinth": {
+      "projectId": "n2fvCDlM",
+      "slug": "macaws-trapdoors",
+      "versionId": "7zwZ9ZWX",
+      "versionNumber": "1.1.5",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:12:00.454500Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:34:12.818Z"
+    },
+    "addedAt": "2026-10-18T13:34:14.953Z"
+  },
+  {
+    "id": "macaws-lights-and-lamps",
+    "name": "Macaw's Lights and Lamps",
+    "version": "1.1.5",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-lights-and-lamps",
+    "description": "Adds vanilla styled lamps, torches, street lamps, paper lamps, wall lamps, slabs... Make your world brighter!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/w4an97C2/23b3786d03ab6ed8b8df056d1123f20129175b6b_96.webp",
+    "modrinth": {
+      "projectId": "w4an97C2",
+      "slug": "macaws-lights-and-lamps",
+      "versionId": "mr8AEiQp",
+      "versionNumber": "1.1.5",
+      "versionType": "release",
+      "datePublished": "2026-03-25T08:11:26.490399Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:34:43.959Z"
+    },
+    "addedAt": "2026-10-18T13:34:47.156Z"
+  },
+  {
+    "id": "macaws-biomes-o-plenty",
+    "name": "Macaw's Biomes O' Plenty",
+    "version": "26.1.2-1.6",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/macaws-biomes-o-plenty",
+    "description": "A compatibility between Macaw's Mods and the different woods of Biomes O' Plenty",
+    "dependencies": [
+      "TerraBlender",
+      "Biomes O' Plenty",
+      "GlitchCore",
+      "AddonsLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Tanquv9C/eb432f672a6fc809a24f5b29234ef7d697749402_96.webp",
+    "modrinth": {
+      "projectId": "Tanquv9C",
+      "slug": "macaws-biomes-o-plenty",
+      "versionId": "APiXJGHA",
+      "versionNumber": "26.1.2-1.6",
+      "versionType": "release",
+      "datePublished": "2026-06-25T14:51:43.306506Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "n2fvCDlM",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Trapdoors"
+        },
+        {
+          "projectId": "VRLhWB91",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Paths and Pavings"
+        },
+        {
+          "projectId": "iP3wH1ha",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Stairs"
+        },
+        {
+          "projectId": "dtWC90iB",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Furniture"
+        },
+        {
+          "projectId": "kkmrDlKT",
+          "versionId": null,
+          "type": "required",
+          "name": "TerraBlender"
+        },
+        {
+          "projectId": "kNxa8z3e",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Doors"
+        },
+        {
+          "projectId": "GmwLse2I",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Fences and Walls"
+        },
+        {
+          "projectId": "HXF82T3G",
+          "versionId": null,
+          "type": "required",
+          "name": "Biomes O' Plenty"
+        },
+        {
+          "projectId": "s3dmwKy5",
+          "versionId": null,
+          "type": "required",
+          "name": "GlitchCore"
+        },
+        {
+          "projectId": "GURcjz8O",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Bridges"
+        },
+        {
+          "projectId": "C7I0BCni",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Windows"
+        },
+        {
+          "projectId": "cl5ec0Qm",
+          "versionId": null,
+          "type": "required",
+          "name": "AddonsLib"
+        },
+        {
+          "projectId": "B8jaH3P1",
+          "versionId": null,
+          "type": "optional",
+          "name": "Macaw's Roofs"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:35:39.756Z"
+    },
+    "addedAt": "2026-10-18T13:36:00.929Z"
+  },
+  {
+    "id": "addonslib",
+    "name": "AddonsLib",
+    "version": "26.1.2-1.1",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/addonslib",
+    "description": "A library to facilitate registration between mods, in particular macaw's bridges/roofs/fences/etc...",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/cl5ec0Qm/5321c775f2d494d75acd7b2a3fe0905e01314bfe_96.webp",
+    "modrinth": {
+      "projectId": "cl5ec0Qm",
+      "slug": "addonslib",
+      "versionId": "v0ST96hY",
+      "versionNumber": "26.1.2-1.1",
+      "versionType": "release",
+      "datePublished": "2026-07-02T23:32:58.030237Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:35:59.488Z"
+    },
+    "addedAt": "2026-10-18T13:36:00.929Z"
+  },
+  {
+    "id": "glitchcore",
+    "name": "GlitchCore",
+    "version": "26.1.2.0.2",
+    "category": "Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/glitchcore",
+    "description": "A library mod aimed at abstracting mod loaders and providing various utilities for our mods.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/s3dmwKy5/76dd9e7bc737a02b723730ab34f536ab43936980.png",
+    "modrinth": {
+      "projectId": "s3dmwKy5",
+      "slug": "glitchcore",
+      "versionId": "mYUbCfgT",
+      "versionNumber": "26.1.2.0.2",
+      "versionType": "beta",
+      "datePublished": "2026-05-18T17:12:46.648905Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:35:59.488Z"
+    },
+    "addedAt": "2026-10-18T13:36:00.929Z"
+  },
+  {
+    "id": "terrablender",
+    "name": "TerraBlender",
+    "version": "26.1.2.0.3",
+    "category": "Library",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/terrablender",
+    "description": "A library mod for adding biomes in a simple and compatible manner!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kkmrDlKT/ffe690c604b123c63ee77a5baf76cf008cb73663.png",
+    "modrinth": {
+      "projectId": "kkmrDlKT",
+      "slug": "terrablender",
+      "versionId": "cWLGFrxw",
+      "versionNumber": "26.1.2.0.3",
+      "versionType": "beta",
+      "datePublished": "2026-07-07T01:38:29.389584Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:35:59.488Z"
+    },
+    "addedAt": "2026-10-18T13:36:00.929Z"
+  },
+  {
+    "id": "wizards",
+    "name": "Wizards (RPG Series)",
+    "version": "3.1.3.002+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/wizards",
+    "description": "🧙🏻‍♂️ Destroy your enemies with Arcane, Fire and Frost magic",
+    "dependencies": [
+      "Runes",
+      "Armor Model API",
+      "Spell Engine",
+      "Structure Pool API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/NkGaQMDA/06c5350c207bddffefdfea0b6fc80269d683bbd7_96.webp",
+    "modrinth": {
+      "projectId": "NkGaQMDA",
+      "slug": "wizards",
+      "versionId": "9EsYLMIX",
+      "versionNumber": "3.1.3.002+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T18:01:47.172046Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "lP9Yrr1E",
+          "versionId": null,
+          "type": "required",
+          "name": "Runes"
+        },
+        {
+          "projectId": "onz2NN2n",
+          "versionId": null,
+          "type": "required",
+          "name": "Armor Model API"
+        },
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        },
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:51:59.568Z"
+    },
+    "addedAt": "2026-10-18T13:52:10.135Z"
+  },
+  {
+    "id": "armor-model-api",
+    "name": "Armor Model API",
+    "version": "1.1.2+26.1.2-neoforge",
+    "category": "Equipment",
+    "tags": [
+      "Library"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/armor-model-api",
+    "description": "Renders Bedrock/GeckoLib geo armor models through the vanilla armor pipeline.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/onz2NN2n/7e1e6fabf1d2241be986d564d0cced008b028214_96.webp",
+    "modrinth": {
+      "projectId": "onz2NN2n",
+      "slug": "armor-model-api",
+      "versionId": "svadmLPv",
+      "versionNumber": "1.1.2+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-20T10:45:12.456729Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:52:07.827Z"
+    },
+    "addedAt": "2026-10-18T13:52:10.135Z"
+  },
+  {
+    "id": "runes",
+    "name": "Runes",
+    "version": "1.3.2+26.1.2-neoforge",
+    "category": "Magic",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/runes",
+    "description": "🪨 Craft runes to serve as ammo for spells",
+    "dependencies": [
+      "Bundle API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/lP9Yrr1E/d80117583d3b45e7e8d902e3e7e27ef15ee9b4dd_96.webp",
+    "modrinth": {
+      "projectId": "lP9Yrr1E",
+      "slug": "runes",
+      "versionId": "aVRpTnQZ",
+      "versionNumber": "1.3.2+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T14:21:51.759078Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "n8QN6Z1a",
+          "versionId": null,
+          "type": "required",
+          "name": "Bundle API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:07.827Z"
+    },
+    "addedAt": "2026-10-18T13:52:10.135Z"
+  },
+  {
+    "id": "spell-engine",
+    "name": "Spell Engine",
+    "version": "1.10.9+26.1.2-neoforge",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/spell-engine",
+    "description": "🪄 Data driven magic library",
+    "dependencies": [
+      "Player Animation Library",
+      "Cloth Config API",
+      "Curios API",
+      "Spell Power Attributes"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XvoWJaA2/9f3d222d82aebadd5325ae53a927463f1e20abd0.png",
+    "modrinth": {
+      "projectId": "XvoWJaA2",
+      "slug": "spell-engine",
+      "versionId": "g4cQhfsj",
+      "versionNumber": "1.10.9+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T18:28:51.788193Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "ha1mEyJS",
+          "versionId": null,
+          "type": "required",
+          "name": "Player Animation Library"
+        },
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "required",
+          "name": "Cloth Config API"
+        },
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "required",
+          "name": "Curios API"
+        },
+        {
+          "projectId": "8ooWzSQP",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Power Attributes"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:07.827Z"
+    },
+    "addedAt": "2026-10-18T13:52:10.135Z"
+  },
+  {
+    "id": "structure-pool-api",
+    "name": "Structure Pool API",
+    "version": "1.3.0+26.1.2-neoforge",
+    "category": "Library",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/structure-pool-api",
+    "description": "📚 API to inject structures into structure pools.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LrYZi08Q/90488ffba720db0ac727047e5e1ebc9213f53627_96.webp",
+    "modrinth": {
+      "projectId": "LrYZi08Q",
+      "slug": "structure-pool-api",
+      "versionId": "I5pmunAn",
+      "versionNumber": "1.3.0+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T14:17:04.369961Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:52:07.827Z"
+    },
+    "addedAt": "2026-10-18T13:52:10.135Z"
+  },
+  {
+    "id": "jewelry",
+    "name": "Jewelry (RPG Series)",
+    "version": "2.5.1+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/jewelry",
+    "description": "💍 Find precious gems deep down, and craft them into powerful jewelry!",
+    "dependencies": [
+      "Ranged Weapon API",
+      "Curios API",
+      "Spell Power Attributes",
+      "Structure Pool API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/sNJAIjUm/2eece212d22ebb4387f0b64df55d945e496d6e8c_96.webp",
+    "modrinth": {
+      "projectId": "sNJAIjUm",
+      "slug": "jewelry",
+      "versionId": "RHtaSOD4",
+      "versionNumber": "2.5.1+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T18:34:12.806589Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AqaIIO6D",
+          "versionId": null,
+          "type": "required",
+          "name": "Ranged Weapon API"
+        },
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "required",
+          "name": "Curios API"
+        },
+        {
+          "projectId": "8ooWzSQP",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Power Attributes"
+        },
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:16.585Z"
+    },
+    "addedAt": "2026-10-18T13:52:21.146Z"
+  },
+  {
+    "id": "ranged-weapon-api",
+    "name": "Ranged Weapon API",
+    "version": "4.0.0+26.1.2-neoforge",
+    "category": "Equipment",
+    "tags": [
+      "Library"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ranged-weapon-api",
+    "description": "🏹 Create fully functional bows and crossbows, with ease",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/AqaIIO6D/cf4d822d2fa89e72d37eebcfb1113a6389a0abe6_96.webp",
+    "modrinth": {
+      "projectId": "AqaIIO6D",
+      "slug": "ranged-weapon-api",
+      "versionId": "CRB139Ir",
+      "versionNumber": "4.0.0+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T14:17:18.246294Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "fRiHVvU7",
+          "versionId": null,
+          "type": "optional",
+          "name": "EMI"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:20.260Z"
+    },
+    "addedAt": "2026-10-18T13:52:21.146Z"
+  },
+  {
+    "id": "spell-power",
+    "name": "Spell Power Attributes",
+    "version": "1.6.2+26.1.2-neoforge",
+    "category": "Library",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/spell-power",
+    "description": "🔮 Spell Power entity attributes with related status effects and enchantments",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/8ooWzSQP/fb6ef3214dcfddc7d0062f5642e30eb45de6df32_96.webp",
+    "modrinth": {
+      "projectId": "8ooWzSQP",
+      "slug": "spell-power",
+      "versionId": "O9s0d40b",
+      "versionNumber": "1.6.2+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-12T22:15:29.351712Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T13:52:20.260Z"
+    },
+    "addedAt": "2026-10-18T13:52:21.146Z"
+  },
+  {
+    "id": "paladins-and-priests",
+    "name": "Paladins & Priests (RPG Series)",
+    "version": "3.1.3.002+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/paladins-and-priests",
+    "description": "✨ Protect and heal your friends as a Paladin or a Priest",
+    "dependencies": [
+      "Runes",
+      "Armor Model API",
+      "Structure Pool API",
+      "Spell Engine"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FxXkHaLe/0d64c2fad819691a42c9b6e436c4914c6ce4b413_96.webp",
+    "modrinth": {
+      "projectId": "FxXkHaLe",
+      "slug": "paladins-and-priests",
+      "versionId": "85ctJoZB",
+      "versionNumber": "3.1.3.002+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T17:59:28.004846Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "lP9Yrr1E",
+          "versionId": null,
+          "type": "required",
+          "name": "Runes"
+        },
+        {
+          "projectId": "onz2NN2n",
+          "versionId": null,
+          "type": "required",
+          "name": "Armor Model API"
+        },
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        },
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:31.645Z"
+    },
+    "addedAt": "2026-10-18T13:52:36.536Z"
+  },
+  {
+    "id": "archers",
+    "name": "Archers (RPG Series)",
+    "version": "3.1.3.002+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Game Mechanics"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/archers",
+    "description": "🏹 Draw, Release, Conquer - Master the art of Archery!",
+    "dependencies": [
+      "Structure Pool API",
+      "Bundle API",
+      "Armor Model API",
+      "Spell Engine",
+      "Ranged Weapon API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/QgooUXAJ/cd623d827366323dd4d604a25c4b7f74cfda353d_96.webp",
+    "modrinth": {
+      "projectId": "QgooUXAJ",
+      "slug": "archers",
+      "versionId": "P6oURMhk",
+      "versionNumber": "3.1.3.002+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T17:59:54.349940Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        },
+        {
+          "projectId": "n8QN6Z1a",
+          "versionId": null,
+          "type": "required",
+          "name": "Bundle API"
+        },
+        {
+          "projectId": "onz2NN2n",
+          "versionId": null,
+          "type": "required",
+          "name": "Armor Model API"
+        },
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        },
+        {
+          "projectId": "AqaIIO6D",
+          "versionId": null,
+          "type": "required",
+          "name": "Ranged Weapon API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:45.488Z"
+    },
+    "addedAt": "2026-10-18T13:52:49.781Z"
+  },
+  {
+    "id": "bundle-api",
+    "name": "Bundle API",
+    "version": "3.0.0+26.1.2-neoforge",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/bundle-api",
+    "description": "Bundle API allows mod authors to easily add bundles that can hold more than 1 stack of items specified by an item tag.",
+    "dependencies": [
+      "Cloth Config API",
+      "Player Animation Library",
+      "Spell Power Attributes",
+      "Curios API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/n8QN6Z1a/2a66ccc6b5b3e58c1484a411660b81590f356980_96.webp",
+    "modrinth": {
+      "projectId": "n8QN6Z1a",
+      "slug": "bundle-api",
+      "versionId": "jyFiozsX",
+      "versionNumber": "3.0.0+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T12:14:05.415099Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "required",
+          "name": "Cloth Config API"
+        },
+        {
+          "projectId": "ha1mEyJS",
+          "versionId": null,
+          "type": "required",
+          "name": "Player Animation Library"
+        },
+        {
+          "projectId": "8ooWzSQP",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Power Attributes"
+        },
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "required",
+          "name": "Curios API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:52:48.560Z"
+    },
+    "addedAt": "2026-10-18T13:52:49.781Z"
+  },
+  {
+    "id": "gazebos",
+    "name": "Gazebos (RPG Series)",
+    "version": "2.2.0+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Magic",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/gazebos",
+    "description": "⛲️ Village structures hosting small spell libraries",
+    "dependencies": [
+      "Structure Pool API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XIpMGI6r/4194614b15b1c9286bd7e2e3f41110a2e790da5d_96.webp",
+    "modrinth": {
+      "projectId": "XIpMGI6r",
+      "slug": "gazebos",
+      "versionId": "PYZYaIgo",
+      "versionNumber": "2.2.0+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T14:48:24.113281Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:53:13.935Z"
+    },
+    "addedAt": "2026-10-18T13:53:19.016Z"
+  },
+  {
+    "id": "rogues-and-warriors",
+    "name": "Rogues & Warriors (RPG Series)",
+    "version": "3.1.3.002+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/rogues-and-warriors",
+    "description": "🗡️ Silent Blades, Mighty Blows - Dominate with martial skills!",
+    "dependencies": [
+      "Spell Engine",
+      "Armor Model API",
+      "Structure Pool API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3MKqoGuP/5dc4e73e3a2fa08fdcba074961b28bd842847037_96.webp",
+    "modrinth": {
+      "projectId": "3MKqoGuP",
+      "slug": "rogues-and-warriors",
+      "versionId": "l1lSAm0J",
+      "versionNumber": "3.1.3.002+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T18:00:21.716318Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        },
+        {
+          "projectId": "onz2NN2n",
+          "versionId": null,
+          "type": "required",
+          "name": "Armor Model API"
+        },
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:53:34.131Z"
+    },
+    "addedAt": "2026-10-18T13:53:38.788Z"
+  },
+  {
+    "id": "relics-rpg",
+    "name": "Relics (RPG Series)",
+    "version": "1.4.1+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/relics-rpg",
+    "description": "🎖 Unleash your true potential with powerful trinkets! 🔮",
+    "dependencies": [
+      "Spell Engine",
+      "Ranged Weapon API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/BDQucwF0/6aac428c17df067875dfff8a37b6f2a3535ea2cc_96.webp",
+    "modrinth": {
+      "projectId": "BDQucwF0",
+      "slug": "relics-rpg",
+      "versionId": "RZ9E0cCE",
+      "versionNumber": "1.4.1+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T15:07:06.803714Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        },
+        {
+          "projectId": "AqaIIO6D",
+          "versionId": null,
+          "type": "required",
+          "name": "Ranged Weapon API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:53:47.974Z"
+    },
+    "addedAt": "2026-10-18T13:53:50.404Z"
+  },
+  {
+    "id": "arsenal-rpg-series",
+    "name": "Arsenal (RPG Series)",
+    "version": "1.5.1+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/arsenal-rpg-series",
+    "description": "Legendary weapons from the past - not crafted, but conquered.",
+    "dependencies": [
+      "Ranged Weapon API",
+      "Spell Engine"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LiP9Q3KV/522a5c3cd60cca6637599eff5ececf33276029ba_96.webp",
+    "modrinth": {
+      "projectId": "LiP9Q3KV",
+      "slug": "arsenal-rpg-series",
+      "versionId": "zxl9V37x",
+      "versionNumber": "1.5.1+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T15:07:53.619145Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AqaIIO6D",
+          "versionId": null,
+          "type": "required",
+          "name": "Ranged Weapon API"
+        },
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:54:06.751Z"
+    },
+    "addedAt": "2026-10-18T13:54:08.937Z"
+  },
+  {
+    "id": "village-taverns",
+    "name": "Village Taverns (RPG Series)",
+    "version": "1.3.0+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Magic",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/village-taverns",
+    "description": "🍺 Find cozy taverns in villages, have a drink, and maybe some rest.",
+    "dependencies": [
+      "Structure Pool API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/bj4a8NjJ/da775ea634b9344ebd926119e77dfed6ded71928_96.webp",
+    "modrinth": {
+      "projectId": "bj4a8NjJ",
+      "slug": "village-taverns",
+      "versionId": "gafZ1nf0",
+      "versionNumber": "1.3.0+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-05T14:48:54.629942Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "LrYZi08Q",
+          "versionId": null,
+          "type": "required",
+          "name": "Structure Pool API"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:54:21.852Z"
+    },
+    "addedAt": "2026-10-18T13:54:24.127Z"
+  },
+  {
+    "id": "armory-rpg-series",
+    "name": "Armory (RPG Series)",
+    "version": "1.5.3.002+26.1.2-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/armory-rpg-series",
+    "description": "👑 Epic armor sets, with unique designs and set bonuses.",
+    "dependencies": [
+      "Armor Model API",
+      "Ranged Weapon API",
+      "Spell Engine"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/PJvJUdGw/176c39adcee3e73c06265dd02e09a41b03cab9f6_96.webp",
+    "modrinth": {
+      "projectId": "PJvJUdGw",
+      "slug": "armory-rpg-series",
+      "versionId": "JeM2doRL",
+      "versionNumber": "1.5.3.002+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-09-29T18:02:18.953636Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "onz2NN2n",
+          "versionId": null,
+          "type": "required",
+          "name": "Armor Model API"
+        },
+        {
+          "projectId": "AqaIIO6D",
+          "versionId": null,
+          "type": "required",
+          "name": "Ranged Weapon API"
+        },
+        {
+          "projectId": "XvoWJaA2",
+          "versionId": null,
+          "type": "required",
+          "name": "Spell Engine"
+        }
+      ],
+      "syncedAt": "2026-10-18T13:54:35.573Z"
+    },
+    "addedAt": "2026-10-18T13:54:38.313Z"
+  },
+  {
+    "id": "yungs-api",
+    "name": "YUNG's API",
+    "version": "26.1.2-NeoForge-6.1.3",
+    "category": "Library",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-api",
+    "description": "Library mod for YUNG's mods.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Ua7DFN59/0fab1c351bf00926a8e1c91dc64b7c88832c3e1f_96.webp",
+    "modrinth": {
+      "projectId": "Ua7DFN59",
+      "slug": "yungs-api",
+      "versionId": "jPWeixDa",
+      "versionNumber": "26.1.2-NeoForge-6.1.3",
+      "versionType": "release",
+      "datePublished": "2026-09-10T12:48:21.235995Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T14:31:21.117Z"
+    },
+    "addedAt": "2026-10-18T14:31:23.635Z"
+  },
+  {
+    "id": "yungs-better-nether-fortresses",
+    "name": "YUNG's Better Nether Fortresses",
+    "version": "26.1.2-NeoForge-4.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-nether-fortresses",
+    "description": "A complete redesign of Minecraft's Nether fortresses!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Z2mXHnxP/3c88dd70c00b5e47addd9fdeba53a7c96076088d_96.webp",
+    "modrinth": {
+      "projectId": "Z2mXHnxP",
+      "slug": "yungs-better-nether-fortresses",
+      "versionId": "CXSmjEju",
+      "versionNumber": "26.1.2-NeoForge-4.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:31:00.468195Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:31:53.252Z"
+    },
+    "addedAt": "2026-10-18T14:31:57.120Z"
+  },
+  {
+    "id": "yungs-better-dungeons",
+    "name": "YUNG's Better Dungeons",
+    "version": "26.1.2-NeoForge-6.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-dungeons",
+    "description": "A complete redesign of Minecraft's dungeons!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/o1C1Dkj5/9b54b2d932a5a5b6565c93814935c04902f3179b_96.webp",
+    "modrinth": {
+      "projectId": "o1C1Dkj5",
+      "slug": "yungs-better-dungeons",
+      "versionId": "e1qEvr8D",
+      "versionNumber": "26.1.2-NeoForge-6.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:28:16.584070Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:32:17.035Z"
+    },
+    "addedAt": "2026-10-18T14:32:19.400Z"
+  },
+  {
+    "id": "yungs-better-ocean-monuments",
+    "name": "YUNG's Better Ocean Monuments",
+    "version": "26.1.2-NeoForge-5.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-ocean-monuments",
+    "description": "A complete redesign of Minecraft's ocean monuments!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3dT9sgt4/05c04c64ab9e5bf523701fa7bc0ac54adec25337_96.webp",
+    "modrinth": {
+      "projectId": "3dT9sgt4",
+      "slug": "yungs-better-ocean-monuments",
+      "versionId": "HwZo1wRg",
+      "versionNumber": "26.1.2-NeoForge-5.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:48:08.381971Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:32:33.671Z"
+    },
+    "addedAt": "2026-10-18T14:32:44.875Z"
+  },
+  {
+    "id": "yungs-better-mineshafts",
+    "name": "YUNG's Better Mineshafts",
+    "version": "26.1.2-NeoForge-6.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-mineshafts",
+    "description": "A long-awaited and much-needed abandoned mineshaft overhaul!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/HjmxVlSr/4e41ef8344db48b8368cd3d6f35844c8a619f446_96.webp",
+    "modrinth": {
+      "projectId": "HjmxVlSr",
+      "slug": "yungs-better-mineshafts",
+      "versionId": "MXPxqNif",
+      "versionNumber": "26.1.2-NeoForge-6.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:35:21.413642Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:32:59.756Z"
+    },
+    "addedAt": "2026-10-18T14:33:02.512Z"
+  },
+  {
+    "id": "yungs-better-jungle-temples",
+    "name": "YUNG's Better Jungle Temples",
+    "version": "26.1.2-NeoForge-4.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-jungle-temples",
+    "description": "A complete redesign of Minecraft's jungle temples!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/z9Ve58Ih/a142b7d112fe6812592de7db2d2badb1398100a7_96.webp",
+    "modrinth": {
+      "projectId": "z9Ve58Ih",
+      "slug": "yungs-better-jungle-temples",
+      "versionId": "ECcz9HDe",
+      "versionNumber": "26.1.2-NeoForge-4.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:34:35.167467Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:33:11.244Z"
+    },
+    "addedAt": "2026-10-18T14:33:13.545Z"
+  },
+  {
+    "id": "yungs-better-end-island",
+    "name": "YUNG's Better End Island",
+    "version": "26.1.2-NeoForge-4.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-end-island",
+    "description": "An overhaul of the main End Island where the dragon fight takes place!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/2BwBOmBQ/78c665ae3617a5b7e8902242b480d7f71ef04307_96.webp",
+    "modrinth": {
+      "projectId": "2BwBOmBQ",
+      "slug": "yungs-better-end-island",
+      "versionId": "o9zTzuap",
+      "versionNumber": "26.1.2-NeoForge-4.1.0",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:44:47.028330Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:35:49.592Z"
+    },
+    "addedAt": "2026-10-18T14:35:52.763Z"
+  },
+  {
+    "id": "yungs-better-strongholds",
+    "name": "YUNG's Better Strongholds",
+    "version": "26.1.2-NeoForge-6.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-strongholds",
+    "description": "A complete redesign of Minecraft's strongholds!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kidLKymU/bfb3cac4ca4d7d891fbbcb34a1d61eaa1d6f3e9a_96.webp",
+    "modrinth": {
+      "projectId": "kidLKymU",
+      "slug": "yungs-better-strongholds",
+      "versionId": "jRm5H60F",
+      "versionNumber": "26.1.2-NeoForge-6.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:48:37.791444Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:36:01.376Z"
+    },
+    "addedAt": "2026-10-18T14:36:16.173Z"
+  },
+  {
+    "id": "yungs-better-witch-huts",
+    "name": "YUNG's Better Witch Huts",
+    "version": "26.1.2-NeoForge-5.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-witch-huts",
+    "description": "Adds overhauled witch huts to swamps!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/t5FRdP87/20d3e930ec0a010723df61df091160104294e0b0_96.webp",
+    "modrinth": {
+      "projectId": "t5FRdP87",
+      "slug": "yungs-better-witch-huts",
+      "versionId": "FuqDSl5q",
+      "versionNumber": "26.1.2-NeoForge-5.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:49:01.689474Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:36:26.745Z"
+    },
+    "addedAt": "2026-10-18T14:36:28.799Z"
+  },
+  {
+    "id": "yungs-better-desert-temples",
+    "name": "YUNG's Better Desert Temples",
+    "version": "26.1.2-NeoForge-5.1.1",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-better-desert-temples",
+    "description": "A complete redesign of Minecraft's desert temples!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XNlO7sBv/32fc82949e922ad9281ac9a8fe965afc04261848_96.webp",
+    "modrinth": {
+      "projectId": "XNlO7sBv",
+      "slug": "yungs-better-desert-temples",
+      "versionId": "c5C5dZJ8",
+      "versionNumber": "26.1.2-NeoForge-5.1.1",
+      "versionType": "release",
+      "datePublished": "2026-09-10T13:47:20.926557Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:36:43.764Z"
+    },
+    "addedAt": "2026-10-18T14:36:46.068Z"
+  },
+  {
+    "id": "yungs-bridges",
+    "name": "YUNG's Bridges",
+    "version": "26.1.2-NeoForge-6.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-bridges",
+    "description": "Adds beautiful naturally generated bridges throughout the world!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Ht4BfYp6/b465e98ac5f2742cf52292e6649b6abb76665e8f_96.webp",
+    "modrinth": {
+      "projectId": "Ht4BfYp6",
+      "slug": "yungs-bridges",
+      "versionId": "fi6Ilg6W",
+      "versionNumber": "26.1.2-NeoForge-6.1.0",
+      "versionType": "release",
+      "datePublished": "2026-06-24T18:11:15.981260Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:37:42.648Z"
+    },
+    "addedAt": "2026-10-18T14:37:45.127Z"
+  },
+  {
+    "id": "yungs-extras",
+    "name": "YUNG's Extras",
+    "version": "26.1.2-NeoForge-6.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Decoration",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/yungs-extras",
+    "description": "Extra structures, features, and vanilla+ content suitable for any modpack!",
+    "dependencies": [
+      "YUNG's API"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ZYgyPyfq/153c00f1d64b90c8b5fd0c5136df91a65efc1df2_96.webp",
+    "modrinth": {
+      "projectId": "ZYgyPyfq",
+      "slug": "yungs-extras",
+      "versionId": "nxaj9k0R",
+      "versionNumber": "26.1.2-NeoForge-6.1.0",
+      "versionType": "release",
+      "datePublished": "2026-06-24T18:09:59.292522Z",
+      "gameVersions": [
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "Ua7DFN59",
+          "versionId": null,
+          "type": "required",
+          "name": "YUNG's API"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:37:52.257Z"
+    },
+    "addedAt": "2026-10-18T14:37:54.034Z"
+  },
+  {
+    "id": "apotheosis",
+    "name": "Apotheosis",
+    "version": "26.1.2-9.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/apotheosis",
+    "description": "All things that should have been",
+    "dependencies": [
+      "Placebo",
+      "Apothic-Spawners",
+      "Apothic Attributes",
+      "Patchouli",
+      "Apothic-Enchanting"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/rqFWfVlz/28988b67466cf077778c12c7798fbbb0bad97e03_96.webp",
+    "modrinth": {
+      "projectId": "rqFWfVlz",
+      "slug": "apotheosis",
+      "versionId": "EXaIH7Xm",
+      "versionNumber": "26.1.2-9.1.0",
+      "versionType": "release",
+      "datePublished": "2026-10-04T05:17:12.585164Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "tCkE8p2N",
+          "versionId": null,
+          "type": "required",
+          "name": "Placebo"
+        },
+        {
+          "projectId": "DfxVkOAO",
+          "versionId": null,
+          "type": "required",
+          "name": "Apothic-Spawners"
+        },
+        {
+          "projectId": "DGaH8Rh0",
+          "versionId": null,
+          "type": "required",
+          "name": "Apothic Attributes"
+        },
+        {
+          "projectId": "mH8wdmqr",
+          "versionId": null,
+          "type": "optional",
+          "name": "Max Health Fix"
+        },
+        {
+          "projectId": "nvQzSEkH",
+          "versionId": null,
+          "type": "optional",
+          "name": "Jade 🔍"
+        },
+        {
+          "projectId": "u6dRKJwZ",
+          "versionId": null,
+          "type": "optional",
+          "name": "Just Enough Items (JEI)"
+        },
+        {
+          "projectId": "UVtY3ZAC",
+          "versionId": null,
+          "type": "optional",
+          "name": "Enchantment Descriptions"
+        },
+        {
+          "projectId": "nU0bVIaL",
+          "versionId": null,
+          "type": "required",
+          "name": "Patchouli"
+        },
+        {
+          "projectId": "pL8MtgqY",
+          "versionId": null,
+          "type": "required",
+          "name": "Apothic-Enchanting"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:44:42.607Z"
+    },
+    "addedAt": "2026-10-18T14:44:52.410Z"
+  },
+  {
+    "id": "apothic-attributes",
+    "name": "Apothic Attributes",
+    "version": "26.1.2-3.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Library"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/apothic-attributes",
+    "description": "A library that adds the Attributes GUI, alongside a suite of new attributes to work with",
+    "dependencies": [
+      "Placebo"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DGaH8Rh0/00c30ef1f19abd6c9047efeaca489f6cc8b5ac6d.png",
+    "modrinth": {
+      "projectId": "DGaH8Rh0",
+      "slug": "apothic-attributes",
+      "versionId": "lLLTcZXk",
+      "versionNumber": "26.1.2-3.1.0",
+      "versionType": "release",
+      "datePublished": "2026-10-06T05:37:26.912105Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "tCkE8p2N",
+          "versionId": null,
+          "type": "required",
+          "name": "Placebo"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:44:50.911Z"
+    },
+    "addedAt": "2026-10-18T14:44:52.410Z"
+  },
+  {
+    "id": "apothic-enchanting",
+    "name": "Apothic-Enchanting",
+    "version": "26.1.2-2.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/apothic-enchanting",
+    "description": "A huge extension of the Enchanting system",
+    "dependencies": [
+      "Apothic Attributes",
+      "Placebo"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/pL8MtgqY/ce6e2bd43d3800c5ffef5fc5bf1423c95add7300_96.webp",
+    "modrinth": {
+      "projectId": "pL8MtgqY",
+      "slug": "apothic-enchanting",
+      "versionId": "5yksP3X6",
+      "versionNumber": "26.1.2-2.1.0",
+      "versionType": "release",
+      "datePublished": "2026-10-06T05:34:21.765610Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "DGaH8Rh0",
+          "versionId": null,
+          "type": "required",
+          "name": "Apothic Attributes"
+        },
+        {
+          "projectId": "tCkE8p2N",
+          "versionId": null,
+          "type": "required",
+          "name": "Placebo"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:44:50.911Z"
+    },
+    "addedAt": "2026-10-18T14:44:52.410Z"
+  },
+  {
+    "id": "apothic-spawners",
+    "name": "Apothic-Spawners",
+    "version": "26.1.2-2.0.1",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/apothic-spawners",
+    "description": "A mod about moving and modifying Mob Spawners",
+    "dependencies": [
+      "Placebo"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DfxVkOAO/f0dc99bf2e049057f26141eb0b3bb504e2c0047a_96.webp",
+    "modrinth": {
+      "projectId": "DfxVkOAO",
+      "slug": "apothic-spawners",
+      "versionId": "4tD6MEQ3",
+      "versionNumber": "26.1.2-2.0.1",
+      "versionType": "release",
+      "datePublished": "2026-07-28T21:16:10.172394Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "tCkE8p2N",
+          "versionId": null,
+          "type": "required",
+          "name": "Placebo"
+        }
+      ],
+      "syncedAt": "2026-10-18T14:44:50.911Z"
+    },
+    "addedAt": "2026-10-18T14:44:52.410Z"
+  },
+  {
+    "id": "apotheosis-totem",
+    "name": "Apotheosis Totem",
+    "version": "0.0.13-26.1.2.30-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/apotheosis-totem",
+    "description": "This mod adds a new item This special item allows players to store multiple Totems of Undying within it, which can be automatically consumed as needed.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/PfrWAbeb/505ae0d80bf9bbdfd87a5ac6b5f5d746072bcbfd.png",
+    "modrinth": {
+      "projectId": "PfrWAbeb",
+      "slug": "apotheosis-totem",
+      "versionId": "YiRJod2X",
+      "versionNumber": "0.0.13-26.1.2.30-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-06-15T18:30:16.653337Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-18T14:45:09.466Z"
+    },
+    "addedAt": "2026-10-18T14:45:11.821Z"
   }
 ]

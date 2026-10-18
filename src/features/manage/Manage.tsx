@@ -60,7 +60,12 @@ import { normalizeLoader } from "../../lib/modrinth/mapping";
 import { sortMinecraftVersions } from "../../lib/modrinth/versionFilters";
 import { type UpdateResult } from "../../lib/updates";
 import { JarImportDialog } from "../import/JarImportDialog";
-import { filterMods, uniqueId, type Filters } from "../../lib/mods";
+import {
+  filterMods,
+  minimalModList,
+  uniqueId,
+  type Filters,
+} from "../../lib/mods";
 import {
   DEFAULT_PAGE_SIZE,
   pageSelectionState,
@@ -899,6 +904,21 @@ function DataTools() {
               onClick={() => onExport("mods.json", data.mods)}
             >
               <ArrowDownToLine size={15} /> Export
+            </Button>
+            <Button
+              variant="secondary"
+              size="small"
+              title="Name, category, side, source, and URL only"
+              onClick={() => {
+                downloadJson("mods-minimal.json", minimalModList(data.mods));
+                notify({
+                  kind: "info",
+                  title: "mods-minimal.json exported",
+                  description: `${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"} with name, category, side, source, and URL. For sharing only; it cannot be imported back.`,
+                });
+              }}
+            >
+              <ArrowDownToLine size={15} /> Export minimal
             </Button>
           </div>
           <input
