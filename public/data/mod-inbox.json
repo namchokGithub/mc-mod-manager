@@ -32,18 +32,6 @@
       "createdAt": "2026-10-17T20:50:47.642Z"
     },
     {
-      "id": "more-villagers",
-      "name": "More Villagers",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/more-villagers/files",
-      "createdAt": "2026-10-17T21:06:05.218Z"
-    },
-    {
-      "id": "animal-feeding-trough-fabric-forge-quilt-neoforge",
-      "name": "Animal Feeding Trough [Fabric | Forge | Quilt | NeoForge]",
-      "notes": "",
-      "createdAt": "2026-10-17T21:08:37.558Z"
-    },
-    {
       "id": "fuzs",
       "name": "ของ Fuzs",
       "notes": "https://www.curseforge.com/members/fuzs/projects?page=1&classIds=6%2C432",
@@ -54,12 +42,6 @@
       "name": "RPG Series",
       "notes": "https://www.curseforge.com/minecraft/mc-mods/paladins-and-priests",
       "createdAt": "2026-10-17T21:10:47.246Z"
-    },
-    {
-      "id": "armor-damage-scaling",
-      "name": "Armor Damage Scaling",
-      "notes": "",
-      "createdAt": "2026-10-17T22:09:25.237Z"
     },
     {
       "id": "someaddon",
@@ -86,58 +68,16 @@
       "createdAt": "2026-10-17T22:38:01.493Z"
     },
     {
-      "id": "sophisticated-tab",
-      "name": "Sophisticated Tab",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/sophisticated-tab/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
-      "createdAt": "2026-10-17T22:41:07.137Z"
-    },
-    {
-      "id": "elytra-slot",
-      "name": "elytra slot",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/elytra-slot-filip/files/all?page=1&pageSize=20&version=26.1.2&gameVersionTypeId=6&showAlphaFiles=hide",
-      "createdAt": "2026-10-17T23:03:11.686Z"
-    },
-    {
       "id": "aquarius-playz",
       "name": "aquarius_playz",
       "notes": "https://www.curseforge.com/members/aquarius_playz/projects",
       "createdAt": "2026-10-17T23:09:45.789Z"
     },
     {
-      "id": "more-tier-upgrade",
-      "name": "More Tier Upgrade",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/more-tier-upgrade",
-      "createdAt": "2026-10-18T04:34:24.961Z"
-    },
-    {
       "id": "lullaby6-enchantment",
       "name": "lullaby6 Enchantment",
       "notes": "https://www.curseforge.com/members/lullaby6/projects",
       "createdAt": "2026-10-18T04:49:42.849Z"
-    },
-    {
-      "id": "productive-farming",
-      "name": "Productive Farming",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/productivefarming?utm_source=chatgpt.com",
-      "createdAt": "2026-10-18T05:21:07.858Z"
-    },
-    {
-      "id": "ctw-complementary-tools-weapons",
-      "name": "CTW - Complementary Tools & Weapons",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/complementary-tools-weapons/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
-      "createdAt": "2026-10-18T05:25:33.434Z"
-    },
-    {
-      "id": "omni-pots-farm-pot",
-      "name": "Omni Pots - Farm Pot",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/omni-pots?utm_source=chatgpt.com",
-      "createdAt": "2026-10-18T05:29:02.973Z"
-    },
-    {
-      "id": "dynamic-difficulty-neoforge-fabric",
-      "name": "Dynamic Difficulty (Neoforge/Fabric)",
-      "notes": "https://www.curseforge.com/minecraft/mc-mods/dynamic-difficulty-mod?utm_source=chatgpt.com",
-      "createdAt": "2026-10-18T05:30:00.672Z"
     }
   ]
 }

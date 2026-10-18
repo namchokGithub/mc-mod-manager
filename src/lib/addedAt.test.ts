@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mergeCandidateIntoMod, type ImportCandidate } from "./jar/importing";
 import { serializeJson } from "./json";
 import { mergeModrinthIntoMod } from "./modrinth/mapping";
-import { stampSavedMod, withAddedAt } from "./mods";
+import { filterMods, stampSavedMod, withAddedAt } from "./mods";
 import { quickAddMods } from "./quickAdd";
 import { modSchema, parseJsonFile, type Mod } from "./schema";
 
@@ -99,5 +99,38 @@ describe("metadata updates and JSON", () => {
     const parsed = parseJsonFile(serializeJson([old, a]), "mods") as Mod[];
     expect(parsed[0]?.addedAt).toBe(earlier);
     expect(parsed[1]?.addedAt).toBeUndefined();
+  });
+});
+
+describe("sorting by addedAt", () => {
+  const filters = {
+    query: "",
+    category: "",
+    status: "",
+    side: "",
+  } as const;
+  const mods: Mod[] = [
+    { ...a!, name: "Zed", addedAt: "2026-03-01T00:00:00.000Z" },
+    { ...b!, name: "Beta" },
+    { ...c!, name: "Alpha", addedAt: "2026-05-01T00:00:00.000Z" },
+    {
+      ...a!,
+      id: "same-day",
+      name: "Aardvark",
+      addedAt: "2026-03-01T00:00:00.000Z",
+    },
+  ];
+  const names = (sort: "added-desc" | "added-asc") =>
+    filterMods(mods, { ...filters, sort }).map((mod) => mod.name);
+
+  it("puts the newest or oldest first, ties by name, undated last", () => {
+    expect(names("added-desc")).toEqual(["Alpha", "Aardvark", "Zed", "Beta"]);
+    expect(names("added-asc")).toEqual(["Aardvark", "Zed", "Alpha", "Beta"]);
+  });
+
+  it("leaves name sorting as it was", () => {
+    expect(
+      filterMods(mods, { ...filters, sort: "az" }).map((mod) => mod.name),
+    ).toEqual(["Aardvark", "Alpha", "Beta", "Zed"]);
   });
 });

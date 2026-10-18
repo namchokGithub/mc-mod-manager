@@ -185,6 +185,8 @@ export function ModFilters({
           options={[
             { value: "az", label: "Name: A–Z" },
             { value: "za", label: "Name: Z–A" },
+            { value: "added-desc", label: "Added: newest first" },
+            { value: "added-asc", label: "Added: oldest first" },
           ]}
         />
         {activeCount > 0 && (

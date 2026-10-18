@@ -5,7 +5,8 @@ export type Filters = {
   category: string;
   status: string;
   side: string;
-  sort: "az" | "za";
+  /** Name A–Z / Z–A, or by `addedAt` newest / oldest first. */
+  sort: "az" | "za" | "added-desc" | "added-asc";
 };
 
 /**
@@ -47,11 +48,26 @@ export function filterMods(mods: Mod[], filters: Filters): Mod[] {
         (!filters.side || mod.side === filters.side)
       );
     })
-    .sort((a, b) =>
-      filters.sort === "az"
+    .sort((a, b) => {
+      if (filters.sort === "added-desc" || filters.sort === "added-asc") {
+        // Mods without a date go last either way; equal dates fall back to name.
+        const at = (mod: Mod) => (mod.addedAt ? Date.parse(mod.addedAt) : NaN);
+        const left = at(a);
+        const right = at(b);
+        if (Number.isNaN(left) !== Number.isNaN(right))
+          return Number.isNaN(left) ? 1 : -1;
+        const byDate =
+          Number.isNaN(left) || left === right
+            ? 0
+            : filters.sort === "added-desc"
+              ? right - left
+              : left - right;
+        return byDate || a.name.localeCompare(b.name);
+      }
+      return filters.sort === "az"
         ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name),
-    );
+        : b.name.localeCompare(a.name);
+    });
 }
 
 export function uniqueId(name: string, mods: { id: string }[]): string {
