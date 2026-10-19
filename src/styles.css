@@ -126,6 +126,7 @@
   --glass-glow-3: rgb(120 170 220 / 24%);
   /* Preview's page tint behind the glass; the rest of the app keeps --bg. */
   --glass-backdrop-base: #eef4f0;
+  --glass-backdrop-veil: rgb(244 249 246 / 38%);
   --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
   font-family: var(--font-sans);
   color: var(--text);
@@ -197,6 +198,7 @@
   --glass-rim-small-opacity: 0.32;
   --glass-glow-3: transparent;
   --glass-backdrop-base: transparent;
+  --glass-backdrop-veil: rgb(5 10 8 / 42%);
   --glass-blur: 20px;
   --glass-saturation: 125%;
   --glass-glow-1: rgb(46 160 98 / 26%);
@@ -357,11 +359,14 @@ main:focus {
 }
 /* Preview only: fixed glow layer that the glass surfaces blur. */
 .glass-backdrop {
+  /* Set inline by Preview (BASE_URL-aware); this rule picks the one for the theme. */
+  --glass-backdrop-image: var(--glass-image-light, none);
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
+  background-color: var(--glass-backdrop-base);
+  background-image:
     radial-gradient(
       48rem 34rem at 12% 18%,
       var(--glass-glow-1),
@@ -389,7 +394,15 @@ main:focus {
       var(--glass-glow-3),
       transparent 72%
     ),
-    linear-gradient(var(--glass-backdrop-base), var(--glass-backdrop-base));
+    /* A veil keeps text readable over the scene without hiding its colour and shapes. */
+    linear-gradient(var(--glass-backdrop-veil), var(--glass-backdrop-veil)),
+    var(--glass-backdrop-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto, auto, auto, auto, auto, auto, cover;
+}
+:root[data-theme="dark"] .glass-backdrop {
+  --glass-backdrop-image: var(--glass-image-dark, none);
 }
 .glass-subtle::after,
 .glass-pill::after {

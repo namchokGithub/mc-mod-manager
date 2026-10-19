@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowRight,
@@ -62,6 +68,14 @@ const initialFilters: Filters = {
   priority: "",
   sort: "az",
 };
+
+// Scenes behind the glass: pastel for light, neon for dark. Paths follow BASE_URL like the hero.
+const themeImage = (file: string) =>
+  `url(${JSON.stringify(`${import.meta.env.BASE_URL}assets/theme/${file}`)})`;
+const backdropImages = {
+  "--glass-image-light": themeImage("pastel_voxel.png"),
+  "--glass-image-dark": themeImage("neon_voxel.png"),
+} as CSSProperties;
 
 export function Preview() {
   const { data } = useCollection();
@@ -176,7 +190,11 @@ export function Preview() {
   return (
     <>
       {/* Glow the glass surfaces blur; decorative and fixed behind the page. */}
-      <div className="glass-backdrop" aria-hidden="true" />
+      <div
+        className="glass-backdrop"
+        aria-hidden="true"
+        style={backdropImages}
+      />
       <LiquidGlassFilter />
       <section
         ref={heroRef}
