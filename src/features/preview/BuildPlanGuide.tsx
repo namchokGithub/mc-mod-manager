@@ -29,6 +29,7 @@ import {
   contentVerificationText,
 } from "../../lib/contentVerification";
 import { contentTypes, type BatchFile, type Mod } from "../../lib/schema";
+import { liquidLens } from "../../lib/liquidLens";
 
 const plural = (count: number, word: string) =>
   `${count} ${word}${count === 1 ? "" : "s"}`;
@@ -63,8 +64,7 @@ export function BuildPlanGuide({
     <section
       id="build-plan"
       className="build-guide"
-      aria-labelledby="build-plan-title"
-    >
+      aria-labelledby="build-plan-title">
       <div className="section-heading">
         <div>
           <div className="section-kicker">INSTALLATION GUIDE</div>
@@ -83,14 +83,16 @@ export function BuildPlanGuide({
           const { mods: batchList, missing } = batchMods(batch, mods);
           const content = batchContent(batch, collection);
           return (
-            <li key={batch.id} className="plan-batch">
+            <li key={batch.id} className="plan-batch" ref={liquidLens}>
               <button
                 type="button"
                 className="plan-toggle"
                 aria-expanded={expanded}
-                onClick={() => toggle(batch.id)}
-              >
-                <span className="plan-order" aria-hidden="true">
+                onClick={() => toggle(batch.id)}>
+                <span
+                  className="plan-order"
+                  aria-hidden="true"
+                  ref={liquidLens}>
                   {index + 1}
                 </span>
                 <span className="plan-title">
@@ -118,8 +120,7 @@ export function BuildPlanGuide({
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
+                    transition={{ duration: 0.2, ease: "easeOut" }}>
                     <div className="plan-body">
                       {batchList.length > 0 && (
                         <ul className="plan-mods">
@@ -135,8 +136,7 @@ export function BuildPlanGuide({
                                   <button
                                     type="button"
                                     className="plan-mod-open"
-                                    onClick={() => onOpenMod(mod)}
-                                  >
+                                    onClick={() => onOpenMod(mod)}>
                                     {mod.name}
                                   </button>
                                   <span>
@@ -162,8 +162,7 @@ export function BuildPlanGuide({
                                     href={mod.sourceUrl}
                                     target="_blank"
                                     rel="noreferrer"
-                                    aria-label={`Open ${mod.name} on ${mod.source}`}
-                                  >
+                                    aria-label={`Open ${mod.name} on ${mod.source}`}>
                                     {mod.source}
                                     <ArrowUpRight
                                       size={13}
@@ -242,8 +241,7 @@ export function BuildPlanGuide({
                                         href={item.sourceUrl}
                                         target="_blank"
                                         rel="noreferrer"
-                                        aria-label={`Open ${item.name} on ${contentSourceLabels[item.source]}`}
-                                      >
+                                        aria-label={`Open ${item.name} on ${contentSourceLabels[item.source]}`}>
                                         {contentSourceLabels[item.source]}
                                         <ArrowUpRight
                                           size={13}
@@ -276,8 +274,7 @@ export function BuildPlanGuide({
                         <Button
                           variant="ghost"
                           size="small"
-                          onClick={() => setExportFor(batch.id)}
-                        >
+                          onClick={() => setExportFor(batch.id)}>
                           <FileDown size={15} /> Export this batch
                         </Button>
                       </div>
@@ -288,8 +285,7 @@ export function BuildPlanGuide({
                               key={item.id}
                               className={
                                 item.done ? "plan-step done" : "plan-step"
-                              }
-                            >
+                              }>
                               {item.done ? (
                                 <CircleCheck size={15} aria-hidden="true" />
                               ) : (

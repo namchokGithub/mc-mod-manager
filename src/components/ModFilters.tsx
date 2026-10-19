@@ -8,6 +8,7 @@ import {
   X,
 } from "lucide-react";
 import type { Filters } from "../lib/mods";
+import { liquidLens, positionGlassGlow } from "../lib/liquidLens";
 import { modPriorities, priorityLabels } from "../lib/priority";
 import { Select } from "./ui/select";
 
@@ -92,7 +93,18 @@ export function ModFilters({
 
   return (
     <div
+      ref={appearance === "glass" ? liquidLens : undefined}
       className={`filters-panel${appearance === "glass" ? " filters-panel-glass glass-surface" : ""}`}
+      onPointerMove={
+        appearance === "glass"
+          ? (event) =>
+              positionGlassGlow(
+                event.currentTarget,
+                event.clientX,
+                event.clientY,
+              )
+          : undefined
+      }
     >
       <div className="filters-top">
         <label className="search-field">

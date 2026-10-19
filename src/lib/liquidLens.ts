@@ -164,3 +164,48 @@ export function liquidLens(element: HTMLElement | null) {
     element.style.removeProperty("--liquid-lens");
   };
 }
+
+/** Keep one observer for the visible mod cards instead of building a lens for every page item. */
+const visibleLensCleanups = new Map<HTMLElement, (() => void) | undefined>();
+let visibleLensObserver: IntersectionObserver | null = null;
+
+export function liquidLensWhenVisible(element: HTMLElement | null) {
+  if (!element || !lensSupported()) return;
+  visibleLensObserver ??= new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const card = entry.target as HTMLElement;
+        if (!visibleLensCleanups.has(card)) continue;
+        const cleanup = visibleLensCleanups.get(card);
+        if (entry.isIntersecting) {
+          if (!cleanup) visibleLensCleanups.set(card, liquidLens(card));
+        } else {
+          cleanup?.();
+          visibleLensCleanups.set(card, undefined);
+        }
+      }
+    },
+    { rootMargin: "120px" },
+  );
+  visibleLensCleanups.set(element, undefined);
+  visibleLensObserver.observe(element);
+  return () => {
+    visibleLensObserver?.unobserve(element);
+    visibleLensCleanups.get(element)?.();
+    visibleLensCleanups.delete(element);
+    if (visibleLensCleanups.size === 0) {
+      visibleLensObserver?.disconnect();
+      visibleLensObserver = null;
+    }
+  };
+}
+
+export function positionGlassGlow(
+  element: HTMLElement,
+  clientX: number,
+  clientY: number,
+) {
+  const bounds = element.getBoundingClientRect();
+  element.style.setProperty("--stat-glow-x", `${clientX - bounds.left}px`);
+  element.style.setProperty("--stat-glow-y", `${clientY - bounds.top}px`);
+}

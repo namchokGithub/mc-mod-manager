@@ -907,7 +907,9 @@ main:focus {
   min-height: 102px;
   box-shadow: var(--lens-box-shadow);
 }
-.stat-card::after {
+.stat-card::after,
+.filters-panel-glass::after,
+.mod-card::after {
   background:
     radial-gradient(
       170px circle at var(--stat-glow-x, 50%) var(--stat-glow-y, 50%),
@@ -931,14 +933,21 @@ main:focus {
   box-shadow: var(--lens-box-shadow);
 }
 .stat-card:hover::after,
-.stat-card:focus-within::after {
+.stat-card:focus-within::after,
+.filters-panel-glass:hover::after,
+.filters-panel-glass:focus-within::after,
+.mod-card:hover::after,
+.mod-card:focus-visible::after {
   opacity: 1;
 }
 @media (prefers-reduced-motion: reduce) {
-  .stat-card {
+  .stat-card,
+  .mod-card {
     transition: none;
   }
-  .stat-card::after {
+  .stat-card::after,
+  .filters-panel-glass::after,
+  .mod-card::after {
     transition: none;
   }
 }
@@ -1014,9 +1023,21 @@ main:focus {
   box-shadow: var(--shadow-sm);
 }
 .filters-panel.filters-panel-glass {
-  border-color: var(--glass-border);
+  --lens-surface-bg: var(--glass-bg);
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow);
+  border-color: transparent;
   background: var(--glass-bg);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--lens-box-shadow);
+}
+.filters-panel-glass:hover,
+.filters-panel-glass:focus-within {
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow-hover),
+    0 0 18px var(--stat-glow-halo);
+  box-shadow: var(--lens-box-shadow);
 }
 .filters-panel-glass .search-field,
 .filters-panel-glass .view-toggle,
@@ -1173,11 +1194,15 @@ main:focus {
   position: relative;
 }
 .mod-card {
+  --lens-surface-bg: var(--glass-bg);
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow-subtle);
   display: flex;
   flex-direction: column;
   text-align: left;
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid transparent;
   border-radius: 10px;
   padding: 20px 20px 17px;
   color: inherit;
@@ -1191,12 +1216,16 @@ main:focus {
     border-color 0.2s,
     background 0.2s,
     box-shadow 0.2s;
-  box-shadow: var(--glass-shadow-subtle);
+  box-shadow: var(--lens-box-shadow);
 }
 .mod-card:hover {
-  border-color: var(--accent-border);
+  --lens-surface-bg: var(--glass-bg-strong);
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow),
+    0 0 18px var(--stat-glow-halo);
   background: var(--glass-bg-strong);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--lens-box-shadow);
 }
 .mod-card-cta svg {
   transition: transform 0.2s var(--ease-out);
@@ -4450,6 +4479,14 @@ main:focus {
   font-size: 13px;
   font-weight: 650;
   cursor: pointer;
+
+  --lens-surface-bg: var(--glass-bg);
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow-subtle);
+}
+.content-tab:not(.active) {
+  color: var(--text-secondary);
 }
 .content-tab span {
   font-size: 11px;
@@ -4730,9 +4767,8 @@ main:focus {
   color: var(--warning);
 }
 
-/* Refraction (Chromium only): LiquidGlassFilter adds .liquid-refraction to <html> when it can
-   render #liquid-glass. Kept to a few large surfaces; small pills and the 50 mod cards per page
-   stay on plain blur, which is far cheaper and bends too little to notice on small boxes. */
+/* LiquidGlassFilter adds .liquid-refraction to <html> for large surfaces in Chromium.
+   Mod cards use their own lens only while they are near the viewport. */
 .liquid-refraction .stat-card,
 .liquid-refraction .filters-panel-glass {
   -webkit-backdrop-filter: url(#liquid-glass) blur(6px)

@@ -30,7 +30,11 @@ import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { GlassPanel, GlassPill } from "../../components/ui/glass";
 import { LiquidGlassFilter } from "../../components/ui/LiquidGlassFilter";
-import { liquidLens } from "../../lib/liquidLens";
+import {
+  liquidLens,
+  liquidLensWhenVisible,
+  positionGlassGlow,
+} from "../../lib/liquidLens";
 import {
   checkCompatibility,
   statusLabel,
@@ -215,8 +219,7 @@ export function Preview({ theme }: { theme: Theme }) {
                 backgroundImage: `var(--hero-overlay), url(${JSON.stringify(resolveHeroImageUrl(heroImageUrl, import.meta.env.BASE_URL))})`,
               }
             : undefined
-        }
-      >
+        }>
         <div
           className="hero-decor hero-decor-one"
           key={`hero-decor-one-${heroAnimationCycle}`}
@@ -230,8 +233,7 @@ export function Preview({ theme }: { theme: Theme }) {
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
+            transition={{ duration: 0.55 }}>
             <div className="eyebrow">
               <span className="eyebrow-dot" /> THE MODPACK COLLECTION{" "}
               <span className="eyebrow-rule" />
@@ -241,15 +243,13 @@ export function Preview({ theme }: { theme: Theme }) {
             <div className="hero-meta">
               <GlassPill
                 className="hero-meta-item glass-hover-lift"
-                intensity="subtle"
-              >
+                intensity="subtle">
                 <Layers3 size={15} /> Minecraft{" "}
                 {data.modpack.minecraftVersion || "—"}
               </GlassPill>
               <GlassPill
                 className="hero-meta-item glass-hover-lift"
-                intensity="subtle"
-              >
+                intensity="subtle">
                 {data.modpack.modloader || "Modloader not specified"}
                 {data.modpack.modloaderVersion
                   ? ` ${data.modpack.modloaderVersion}`
@@ -257,8 +257,7 @@ export function Preview({ theme }: { theme: Theme }) {
               </GlassPill>
               <GlassPill
                 className="hero-meta-item glass-hover-lift"
-                intensity="subtle"
-              >
+                intensity="subtle">
                 Pack v{data.modpack.version || "—"}
               </GlassPill>
             </div>
@@ -281,25 +280,19 @@ export function Preview({ theme }: { theme: Theme }) {
         <section
           ref={statsRef}
           className="stats-grid"
-          aria-label="Collection statistics"
-        >
+          aria-label="Collection statistics">
           {stats.map(({ label, value, icon: Icon }, index) => (
             <GlassPanel
               ref={liquidLens}
               className="stat-card glass-hover-lift"
               key={label}
-              onPointerMove={(event) => {
-                const bounds = event.currentTarget.getBoundingClientRect();
-                event.currentTarget.style.setProperty(
-                  "--stat-glow-x",
-                  `${event.clientX - bounds.left}px`,
-                );
-                event.currentTarget.style.setProperty(
-                  "--stat-glow-y",
-                  `${event.clientY - bounds.top}px`,
-                );
-              }}
-            >
+              onPointerMove={(event) =>
+                positionGlassGlow(
+                  event.currentTarget,
+                  event.clientX,
+                  event.clientY,
+                )
+              }>
               <div className="stat-icon">
                 <Icon size={19} />
               </div>
@@ -341,8 +334,7 @@ export function Preview({ theme }: { theme: Theme }) {
               ref={liquidLens}
               className="side-view-toggle"
               role="group"
-              aria-label="Installation side"
-            >
+              aria-label="Installation side">
               {sideViews.map((option) => (
                 <button
                   key={option}
@@ -352,8 +344,7 @@ export function Preview({ theme }: { theme: Theme }) {
                   onClick={() => {
                     setSideView(option);
                     setPage(1);
-                  }}
-                >
+                  }}>
                   {sideViewLabels[option]}{" "}
                   <span className="side-view-count">{viewCounts[option]}</span>
                 </button>
@@ -376,8 +367,7 @@ export function Preview({ theme }: { theme: Theme }) {
                   onClick={() => {
                     setSideView("all");
                     setPage(1);
-                  }}
-                >
+                  }}>
                   View All Mods
                 </button>{" "}
                 to review {sides.unknown === 1 ? "it" : "them"}.
@@ -392,6 +382,7 @@ export function Preview({ theme }: { theme: Theme }) {
               variant="compact"
               className="filter-select"
               value={groupBy}
+              ref={liquidLens}
               onValueChange={(value) => {
                 setGroupBy(value as GroupBy);
                 setPage(1);
@@ -412,8 +403,7 @@ export function Preview({ theme }: { theme: Theme }) {
           />
           {filtered.length ? (
             <div
-              className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}
-            >
+              className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}>
               <AnimatePresence mode="popLayout">
                 {paged.items.map(({ mod, key, reason }, index) => [
                   // A heading where a group starts on this page, or continues from the last one.
@@ -430,10 +420,18 @@ export function Preview({ theme }: { theme: Theme }) {
                     </h3>
                   ),
                   <motion.button
+                    ref={liquidLensWhenVisible}
                     layout={animateLayout ? "position" : false}
                     key={mod.id}
                     type="button"
                     className="mod-card"
+                    onPointerMove={(event) =>
+                      positionGlassGlow(
+                        event.currentTarget,
+                        event.clientX,
+                        event.clientY,
+                      )
+                    }
                     onClick={() => setSelected(mod)}
                     initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -454,8 +452,7 @@ export function Preview({ theme }: { theme: Theme }) {
                         delay: Math.min(index, 8) * 0.03,
                       },
                       layout: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
-                    }}
-                  >
+                    }}>
                     <div className="mod-card-top">
                       <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
                       <span className="card-badges">
@@ -495,8 +492,7 @@ export function Preview({ theme }: { theme: Theme }) {
                         {mod.version && (
                           <span
                             className="mod-card-version"
-                            title={mod.version}
-                          >
+                            title={mod.version}>
                             {" "}
                             · v{mod.version}
                           </span>
@@ -515,8 +511,7 @@ export function Preview({ theme }: { theme: Theme }) {
               className="empty-state"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-            >
+              transition={{ duration: 0.2 }}>
               <div className="empty-icon">
                 <Box size={26} />
               </div>
@@ -534,8 +529,7 @@ export function Preview({ theme }: { theme: Theme }) {
                       // The side view is a filter too; All Mods hides nothing.
                       setSideView("all");
                       changeFilters(initialFilters);
-                    }}
-                  >
+                    }}>
                     Clear filters
                   </Button>
                 </>

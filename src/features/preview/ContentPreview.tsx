@@ -31,6 +31,7 @@ import {
   type ContentItem,
   type ContentKey,
 } from "../../lib/schema";
+import { liquidLens } from "../../lib/liquidLens";
 
 /** Read-only browser for resource packs, data packs, and shaders on the public page. */
 export function ContentPreview({ data }: { data: Collection }) {
@@ -73,6 +74,7 @@ export function ContentPreview({ data }: { data: Collection }) {
             id={`${id}-${key}`}
             aria-selected={key === active}
             aria-controls={`${id}-panel`}
+            ref={liquidLens}
             className={key === active ? "content-tab active" : "content-tab"}
             onClick={() => {
               setActive(key);
