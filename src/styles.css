@@ -218,7 +218,8 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: var(--bg);
+  /* No background here: :root paints --bg for the page. A body background would be painted
+     above z-index: -1 layers such as Preview's .glass-backdrop and hide them. */
   overflow-x: clip;
 }
 h1,
