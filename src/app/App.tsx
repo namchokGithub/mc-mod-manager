@@ -200,7 +200,7 @@ export function App() {
           </div>
         </header>
         <main id="main-content" tabIndex={-1}>
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence>
             <motion.div
               key={page}
               initial={{ opacity: 0, y: 8 }}

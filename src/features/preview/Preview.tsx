@@ -41,11 +41,7 @@ import {
   verificationText,
 } from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
-import {
-  DEFAULT_PAGE_SIZE,
-  paginate,
-  type PageSize,
-} from "../../lib/pagination";
+import { paginate, type PageSize } from "../../lib/pagination";
 import { resolveHeroImageUrl } from "../../lib/heroImage";
 import type { Mod } from "../../lib/schema";
 import {
@@ -58,6 +54,7 @@ import {
 import { groupByLabels, groupMods, type GroupBy } from "../../lib/grouping";
 import { playerGroup, requiredByOthers } from "../../lib/requirement";
 import { Select } from "../../components/ui/select";
+import SplitText from "../../components/animations/SplitText";
 
 const groupByOptions = (
   ["requirement", "none", "category", "side"] as GroupBy[]
@@ -239,7 +236,15 @@ export function Preview({ theme }: { theme: Theme }) {
               <span className="eyebrow-dot" /> THE MODPACK COLLECTION{" "}
               <span className="eyebrow-rule" />
             </div>
-            <h1>{data.modpack.name}</h1>
+            <h1 className="text-5xl font-bold">
+              <SplitText
+                text={data.modpack.name}
+                tag="span"
+                trigger="hover"
+                duration={0.5}
+                delay={30}
+              />
+            </h1>
             <p className="hero-description">{data.modpack.description}</p>
             <div className="hero-meta">
               <GlassPill
