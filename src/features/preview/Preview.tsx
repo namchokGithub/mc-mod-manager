@@ -10,11 +10,10 @@ import {
   ArrowRight,
   Box,
   CalendarDays,
-  CircleCheck,
-  FlaskConical,
   FolderOpen,
   Layers3,
   MoveUpRight,
+  Sparkles,
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
 import { MANAGE_ENABLED } from "../../app/routes";
@@ -173,14 +172,14 @@ export function Preview() {
   const stats = [
     { label: "TOTAL MODS", value: data.mods.length, icon: Box },
     {
-      label: "INSTALLED",
-      value: data.mods.filter((mod) => mod.status === "installed").length,
-      icon: CircleCheck,
+      label: "RESOURCE PACKS",
+      value: data.resourcePacks.items.length,
+      icon: Layers3,
     },
     {
-      label: "IN TESTING",
-      value: data.mods.filter((mod) => mod.status === "testing").length,
-      icon: FlaskConical,
+      label: "SHADERS",
+      value: data.shaders.items.length,
+      icon: Sparkles,
     },
     { label: "CATEGORIES", value: categories.length, icon: FolderOpen },
   ];
