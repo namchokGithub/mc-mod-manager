@@ -372,6 +372,7 @@ export function ContentPanel({
                           {" "}
                           <span>·</span>{" "}
                           <a
+                            className="content-source-link"
                             href={item.sourceUrl}
                             target="_blank"
                             rel="noreferrer"
@@ -386,6 +387,7 @@ export function ContentPanel({
                             {" "}
                             <span>·</span>{" "}
                             <a
+                              className="content-source-link"
                               href={item.curseforge.url}
                               target="_blank"
                               rel="noreferrer"

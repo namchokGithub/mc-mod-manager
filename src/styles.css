@@ -1661,6 +1661,13 @@ main:focus {
   margin: 0 5px;
   color: var(--text-subtle);
 }
+.content-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 .row-actions {
   display: flex;
   flex: none;

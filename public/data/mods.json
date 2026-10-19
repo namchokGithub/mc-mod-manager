@@ -12813,86 +12813,6 @@
     "addedAt": "2026-10-18T14:53:14.887Z"
   },
   {
-    "id": "shield-mechanics",
-    "name": "Shield Mechanics",
-    "version": "",
-    "category": "Combat",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:06:27.259Z"
-  },
-  {
-    "id": "loot-integrations",
-    "name": "Loot Integrations",
-    "version": "",
-    "category": "Loot",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:07:02.512Z"
-  },
-  {
-    "id": "yung-structures-addon",
-    "name": "Yung Structures Addon",
-    "version": "",
-    "category": "Structures",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:07:18.425Z"
-  },
-  {
-    "id": "stoneholm-loot-integration",
-    "name": "Stoneholm Loot Integration",
-    "version": "",
-    "category": "Loot",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:07:41.724Z"
-  },
-  {
-    "id": "fast-async-world-save",
-    "name": "Fast Async World Save",
-    "version": "",
-    "category": "Performance",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:09:03.197Z"
-  },
-  {
     "id": "connectivity",
     "name": "Connectivity Mod",
     "version": "7.7",
@@ -13420,5 +13340,1090 @@
       ]
     },
     "addedAt": "2026-10-19T16:15:47.125Z"
+  },
+  {
+    "id": "fastasyncworldsave",
+    "name": "Fast Async World Save",
+    "version": "2.6",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/fast-async-world-save-forge-fabric",
+    "description": "fastasyncworldsave mod",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from fastasyncworldsave-26.1-2.6.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/532/325/64/64/637855720922086407.png",
+    "file": {
+      "name": "fastasyncworldsave-26.1-2.6.jar",
+      "modId": "fastasyncworldsave",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.5,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T17:39:02.355Z"
+  },
+  {
+    "id": "lootintegrations-undergroundvillages",
+    "name": "Loot Integrations: Underground Villages, Stoneholm",
+    "version": "1.2",
+    "category": "Addons",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-underground-villages-stoneholm",
+    "description": "lootintegrations_undergroundvillages mod",
+    "dependencies": [
+      "lootintegrations"
+    ],
+    "notes": "Imported from lootintegrations_undergroundvillages-1.2.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1597/495/64/64/639032444918459869.png",
+    "file": {
+      "name": "lootintegrations_undergroundvillages-1.2.jar",
+      "modId": "lootintegrations_undergroundvillages",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "lootintegrations",
+          "kind": "required",
+          "versionRange": "[0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.2",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-underground-villages-stoneholm",
+      "verifiedAt": "2026-10-19T17:45:16.582Z"
+    },
+    "addedAt": "2026-10-19T17:41:32.005Z"
+  },
+  {
+    "id": "lootintegrations",
+    "name": "Loot Integrations",
+    "version": "4.8",
+    "category": "Addons",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations",
+    "description": "Integrates items from loottables into other loottables for intermod loot compatibility",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from lootintegrations-26.1-4.8.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/531/625/64/64/637853939577730031.png",
+    "file": {
+      "name": "lootintegrations-26.1-4.8.jar",
+      "modId": "lootintegrations",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.2,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T17:43:28.161Z"
+  },
+  {
+    "id": "lootintegrations-yungs",
+    "name": "Yung Structures Addon for Loot Integrations",
+    "version": "1",
+    "category": "Addons",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/yung-structures-addon-for-loot-integrations",
+    "description": "lootintegrations_yungs mod",
+    "dependencies": [
+      "lootintegrations"
+    ],
+    "notes": "Imported from lootintegrations_yungs-1.6.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/989/641/64/64/638502393632519068.png",
+    "file": {
+      "name": "lootintegrations_yungs-1.6.jar",
+      "modId": "lootintegrations_yungs",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "lootintegrations",
+          "kind": "required",
+          "versionRange": "[0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/yung-structures-addon-for-loot-integrations",
+      "verifiedAt": "2026-10-19T17:47:09.676Z"
+    },
+    "addedAt": "2026-10-19T17:46:28.399Z"
+  },
+  {
+    "id": "shieldmechanics",
+    "name": "Shield Mechanics",
+    "version": "5.0",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/shield-mechanics",
+    "description": "Shield mechanics mod which rebalances shields",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from shieldmechanics-26.1-5.0.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/2068/154/64/64/639258771793230256.png",
+    "file": {
+      "name": "shieldmechanics-26.1-5.0.jar",
+      "modId": "shieldmechanics",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.7,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T17:48:04.172Z"
+  },
+  {
+    "id": "ender-zoology",
+    "name": "Ender Zoology",
+    "version": "26.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ender-zoology",
+    "description": "Vanilla themed monsters to add some difficulty to the game. A remake of Ender Zoo.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/CUQhzQjg/bc15cec43e6ed3f055035cf78f3b38417a67ef5f_96.webp",
+    "modrinth": {
+      "projectId": "CUQhzQjg",
+      "slug": "ender-zoology",
+      "versionId": "M2gvL6w0",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-29T23:12:56.792310Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:03:18.890Z"
+    },
+    "addedAt": "2026-10-19T18:03:36.845Z"
+  },
+  {
+    "id": "armored-foes",
+    "name": "Armored Foes",
+    "version": "26.1.0",
+    "category": "Equipment",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/armored-foes",
+    "description": "Give every mob the gear they deserve, from Drowned to Illagers and beyond.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ahTPKYtE/5d94940df885de0996ed6f0f72547749b415e4fc_96.webp",
+    "modrinth": {
+      "projectId": "ahTPKYtE",
+      "slug": "armored-foes",
+      "versionId": "bttWoD7x",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-05-09T09:01:33.619845Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:03:46.117Z"
+    },
+    "addedAt": "2026-10-19T18:03:48.014Z"
+  },
+  {
+    "id": "cut-through",
+    "name": "Cut Through",
+    "version": "26.1.0",
+    "category": "Game Mechanics",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/cut-through",
+    "description": "Cleanly swing through transparent blocks like tall grass to hit mobs without breaking said block.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Dk6su9JN/7d3394c6c15bf9bdfe04fd25b317e237feac6c55_96.webp",
+    "modrinth": {
+      "projectId": "Dk6su9JN",
+      "slug": "cut-through",
+      "versionId": "CyWu1ySk",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-26T09:43:24.227690Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:04:21.461Z"
+    },
+    "addedAt": "2026-10-19T18:04:23.648Z"
+  },
+  {
+    "id": "visual-workbench",
+    "name": "Visual Workbench",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/visual-workbench",
+    "description": "Items stay inside of crafting tables and are also rendered on top. It's really fancy!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kfqD1JRw/e56a31e890d21c82cc454593e023df09f5ae3c36_96.webp",
+    "modrinth": {
+      "projectId": "kfqD1JRw",
+      "slug": "visual-workbench",
+      "versionId": "cIEtLn9n",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-28T11:35:46.775798Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:05:38.774Z"
+    },
+    "addedAt": "2026-10-19T18:05:40.370Z"
+  },
+  {
+    "id": "open-together",
+    "name": "Open Together",
+    "version": "26.1.2",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/open-together",
+    "description": "Open matching double doors, trapdoors, and fence gates with a single click.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ssyvO6WG/24828632af55e53e7af0ae2321a7eee6dcdbbe0e_96.webp",
+    "modrinth": {
+      "projectId": "ssyvO6WG",
+      "slug": "open-together",
+      "versionId": "NLdVw9kF",
+      "versionNumber": "26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-10T19:16:01.784758Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:06:11.975Z"
+    },
+    "addedAt": "2026-10-19T18:06:14.129Z"
+  },
+  {
+    "id": "trading-post",
+    "name": "Trading Post",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/trading-post",
+    "description": "Rule the village! Trade with every villager at once!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/8pcjMDgj/7bed3fc0e6ad184eae72ab2d4352f0f23e933af4_96.webp",
+    "modrinth": {
+      "projectId": "8pcjMDgj",
+      "slug": "trading-post",
+      "versionId": "KyKEGOeC",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-30T07:08:23.858045Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:06:46.975Z"
+    },
+    "addedAt": "2026-10-19T18:06:49.762Z"
+  },
+  {
+    "id": "fast-item-frames",
+    "name": "Fast Item Frames",
+    "version": "26.1.1",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fast-item-frames",
+    "description": "Supercharged item frames! Less lag, better performance, and now they can change color and vanish!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FsoeTIV0/61ec84b804647ef0c09ea49995f86aaec2f28fc8_96.webp",
+    "modrinth": {
+      "projectId": "FsoeTIV0",
+      "slug": "fast-item-frames",
+      "versionId": "hLFhJAU8",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-08-31T08:08:49.129388Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:07:25.630Z"
+    },
+    "addedAt": "2026-10-19T18:07:27.560Z"
+  },
+  {
+    "id": "new-sea-life",
+    "name": "Sea Life",
+    "version": "26.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/new-sea-life",
+    "description": "Bring oceans and rivers to life with new fish, items, and underwater machinery.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/2RxBOoXP/3fc7d661177240e82567d8c45eadd0457e5bccb3_96.webp",
+    "modrinth": {
+      "projectId": "2RxBOoXP",
+      "slug": "new-sea-life",
+      "versionId": "A1ilUHRa",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-29T10:47:47.736154Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:08:29.533Z"
+    },
+    "addedAt": "2026-10-19T18:08:34.205Z"
+  },
+  {
+    "id": "vehicle-upgrade",
+    "name": "Vehicle Upgrade",
+    "version": "26.1.2",
+    "category": "Mobs",
+    "tags": [
+      "Transportation",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/vehicle-upgrade",
+    "description": "Bring tons of quality-of-life improvements to your rides. Enjoy more reliable, and more capable mounts.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9B9c6QcJ/8d0a106288af9c9c91bcb37dddb882df156f3377_96.webp",
+    "modrinth": {
+      "projectId": "9B9c6QcJ",
+      "slug": "vehicle-upgrade",
+      "versionId": "HG6Or8Gz",
+      "versionNumber": "26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-05-20T06:29:27.720510Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:09:34.414Z"
+    },
+    "addedAt": "2026-10-19T18:09:36.408Z"
+  },
+  {
+    "id": "portable-hole",
+    "name": "Portable Hole",
+    "version": "26.1.0",
+    "category": "Equipment",
+    "tags": [
+      "Transportation"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/portable-hole",
+    "description": "Where did the walls go?",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/jckrUoUe/5deeac019f52ee8467974c9d3d1eb998152ced6f_96.webp",
+    "modrinth": {
+      "projectId": "jckrUoUe",
+      "slug": "portable-hole",
+      "versionId": "XzsIWFeT",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-05-04T07:00:22.185412Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:10:05.907Z"
+    },
+    "addedAt": "2026-10-19T18:10:08.282Z"
+  },
+  {
+    "id": "stoneworks",
+    "name": "Stoneworks",
+    "version": "26.1.0",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/stoneworks",
+    "description": "Vanilla stone types in plenty of variations for all your building needs.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FzyTKtVF/c18c5fb3daa800d5d612efac7d658eafdcf51129_96.webp",
+    "modrinth": {
+      "projectId": "FzyTKtVF",
+      "slug": "stoneworks",
+      "versionId": "yI3EuefP",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-26T15:08:57.035059Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:10:25.149Z"
+    },
+    "addedAt": "2026-10-19T18:10:27.395Z"
+  },
+  {
+    "id": "stonecutting-upgrade",
+    "name": "Stonecutting Upgrade",
+    "version": "26.1.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/stonecutting-upgrade",
+    "description": "Bigger stonecutter menus, remembered recipes, and quick refills for speedy crafting.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ZCLuNtSF/22682daf7265b2cca44b931fc4b80d0b8a6e797c_96.webp",
+    "modrinth": {
+      "projectId": "ZCLuNtSF",
+      "slug": "stonecutting-upgrade",
+      "versionId": "RAVuh7wv",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-06-01T20:45:03.155655Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:13:17.625Z"
+    },
+    "addedAt": "2026-10-19T18:13:19.832Z"
+  },
+  {
+    "id": "slot-cycler",
+    "name": "Slot Cycler",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/slot-cycler",
+    "description": "Nine hotbar slots aren't enough for you? Now you can cycle your whole inventory!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3kl8Lmm9/e4fa083bb7b18dda525ac515b14497da7bb210ff_96.webp",
+    "modrinth": {
+      "projectId": "3kl8Lmm9",
+      "slug": "slot-cycler",
+      "versionId": "XOaX5zN4",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-30T11:43:27.488658Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:14:55.413Z"
+    },
+    "addedAt": "2026-10-19T18:14:57.158Z"
+  },
+  {
+    "id": "eternal-nether",
+    "name": "Eternal Nether",
+    "version": "26.1.4",
+    "category": "Adventure",
+    "tags": [
+      "Mobs",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/eternal-nether",
+    "description": "New structures, mobs, and many Nether adventures await! A continuation of Bygone Nether by Izofar.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/s6R4jmL8/cd258579b012c6c7f9088538e88bff8245c6b63c_96.webp",
+    "modrinth": {
+      "projectId": "s6R4jmL8",
+      "slug": "eternal-nether",
+      "versionId": "HrA3jnav",
+      "versionNumber": "26.1.4",
+      "versionType": "release",
+      "datePublished": "2026-06-08T21:16:47.366402Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:15:17.984Z"
+    },
+    "addedAt": "2026-10-19T18:15:20.078Z"
+  },
+  {
+    "id": "new-health-bars",
+    "name": "Health Bars",
+    "version": "26.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/new-health-bars",
+    "description": "See every mob's health in style. In the HUD and in-world. Clean, colorful, and customizable!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/A3VSiTms/2c56fa67128cbca01470969ce86dd0318c0665e8_96.webp",
+    "modrinth": {
+      "projectId": "A3VSiTms",
+      "slug": "new-health-bars",
+      "versionId": "9xmL0eyM",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-06-19T15:29:13.299231Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:15:32.392Z"
+    },
+    "addedAt": "2026-10-19T18:15:34.655Z"
+  },
+  {
+    "id": "easy-magic",
+    "name": "Easy Magic",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/easy-magic",
+    "description": "Enchanting tables as they always should have been! Items stay after closing, and easy re-rolls.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9hx3AbJM/5387d7206ba13438d088d127845d255c1a79b9c2_96.webp",
+    "modrinth": {
+      "projectId": "9hx3AbJM",
+      "slug": "easy-magic",
+      "versionId": "1tUK8U3Z",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-28T12:30:54.302541Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:16:41.004Z"
+    },
+    "addedAt": "2026-10-19T18:16:42.769Z"
+  },
+  {
+    "id": "overflowing-bars",
+    "name": "Overflowing Bars",
+    "version": "26.1.0",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/overflowing-bars",
+    "description": "Expand health, armor and armor toughness bars beyond vanilla. Nice and compact without confusing colors.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XD7XOrAF/d90f38fb48581277f61e9f4bb3e1cb8e9ebe47e1_96.webp",
+    "modrinth": {
+      "projectId": "XD7XOrAF",
+      "slug": "overflowing-bars",
+      "versionId": "lechTFMr",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-28T10:51:57.122809Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:17:30.086Z"
+    },
+    "addedAt": "2026-10-19T18:17:31.649Z"
+  },
+  {
+    "id": "paper-doll",
+    "name": "Paper Doll",
+    "version": "26.1.5",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/paper-doll",
+    "description": "Shows a tiny player model on screen when performing actions like sprinting, swimming, and flying.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/hD0W2Wde/ead1dcec9ef0bbc3975bc163949654c314c17989_96.webp",
+    "modrinth": {
+      "projectId": "hD0W2Wde",
+      "slug": "paper-doll",
+      "versionId": "DNKmln1s",
+      "versionNumber": "26.1.5",
+      "versionType": "release",
+      "datePublished": "2026-09-10T08:52:37.453567Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:18:14.142Z"
+    },
+    "addedAt": "2026-10-19T18:18:16.610Z"
+  },
+  {
+    "id": "pick-up-notifier",
+    "name": "Pick Up Notifier",
+    "version": "26.1.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/pick-up-notifier",
+    "description": "Be notified about all the things you've just collected.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ZX66K16c/769d7c843339981c1f8e5eec5ff983294a3671fb_96.webp",
+    "modrinth": {
+      "projectId": "ZX66K16c",
+      "slug": "pick-up-notifier",
+      "versionId": "OT6grywj",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-28T10:27:11.827171Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:19:23.324Z"
+    },
+    "addedAt": "2026-10-19T18:19:27.206Z"
   }
 ]
