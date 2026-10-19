@@ -99,8 +99,18 @@
   --glass-bg-strong: rgb(255 255 255 / 74%);
   --glass-border: rgb(255 255 255 / 76%);
   --glass-highlight: rgb(255 255 255 / 66%);
-  --glass-shadow: 0 16px 38px rgb(25 42 34 / 12%);
-  --glass-shadow-hover: 0 22px 44px rgb(25 42 34 / 18%);
+  /* Depth: a lit top edge and a faint lower edge for thickness, then a contact and an ambient shadow. */
+  --glass-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 85%), inset 0 -1px 0 rgb(255 255 255 / 30%),
+    0 1px 2px rgb(25 42 34 / 10%), 0 16px 38px rgb(25 42 34 / 12%);
+  --glass-shadow-hover:
+    inset 0 1px 0 rgb(255 255 255 / 90%), inset 0 -1px 0 rgb(255 255 255 / 35%),
+    0 2px 4px rgb(25 42 34 / 10%), 0 22px 44px rgb(25 42 34 / 18%);
+  --glass-shadow-subtle:
+    inset 0 1px 0 rgb(255 255 255 / 80%), 0 1px 2px rgb(25 42 34 / 10%);
+  /* Specular sheen and the iridescent rim. */
+  --glass-sheen: rgb(255 255 255 / 60%);
+  --glass-rim-opacity: 0.55;
   --glass-blur: 18px;
   --glass-saturation: 115%;
   /* Soft light behind Preview's glass; without it backdrop-filter has nothing to blur. */
@@ -164,8 +174,16 @@
   --glass-bg-strong: rgb(22 52 38 / 68%);
   --glass-border: rgb(190 239 204 / 20%);
   --glass-highlight: rgb(229 255 235 / 11%);
-  --glass-shadow: 0 18px 48px rgb(0 0 0 / 34%);
-  --glass-shadow-hover: 0 24px 54px rgb(0 0 0 / 42%);
+  --glass-shadow:
+    inset 0 1px 0 rgb(229 255 235 / 18%), inset 0 -1px 0 rgb(0 0 0 / 30%),
+    0 1px 2px rgb(0 0 0 / 40%), 0 18px 48px rgb(0 0 0 / 34%);
+  --glass-shadow-hover:
+    inset 0 1px 0 rgb(229 255 235 / 24%), inset 0 -1px 0 rgb(0 0 0 / 30%),
+    0 2px 4px rgb(0 0 0 / 40%), 0 24px 54px rgb(0 0 0 / 42%);
+  --glass-shadow-subtle:
+    inset 0 1px 0 rgb(229 255 235 / 16%), 0 1px 2px rgb(0 0 0 / 40%);
+  --glass-sheen: rgb(229 255 235 / 16%);
+  --glass-rim-opacity: 0.32;
   --glass-blur: 20px;
   --glass-saturation: 125%;
   --glass-glow-1: rgb(46 160 98 / 26%);
@@ -258,23 +276,48 @@ main:focus {
   background: var(--glass-surface-bg);
   box-shadow: var(--glass-shadow);
 }
-.glass-surface::before {
+/* Specular highlight: a curved sheen from the top left over a soft top-down fade. */
+.glass-surface::before,
+.mod-card::before {
   position: absolute;
   inset: 0;
   pointer-events: none;
   border-radius: inherit;
-  background: linear-gradient(
-    to bottom,
-    var(--glass-highlight),
-    transparent 38%
-  );
+  background:
+    radial-gradient(120% 85% at 12% -18%, var(--glass-sheen), transparent 52%),
+    linear-gradient(to bottom, var(--glass-highlight), transparent 38%);
   content: "";
   /* Behind the content (the surface is isolated), so text is never washed out. */
   z-index: -1;
 }
+/* Iridescent rim: a 1.5px conic-gradient ring cut out with a mask, like light split at the edge. */
+.glass-surface::after,
+.mod-card::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 1.5px;
+  pointer-events: none;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 210deg,
+    #9fd3ff,
+    #f2b8e6,
+    #fff1b5,
+    #a6f2cf,
+    #9fd3ff
+  );
+  opacity: var(--glass-rim-opacity);
+  content: "";
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
 .glass-subtle {
   --glass-surface-blur: calc(var(--glass-blur) - 8px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow-subtle);
 }
 .glass-default {
   --glass-surface-blur: var(--glass-blur);
@@ -787,7 +830,7 @@ main:focus {
   border: 1px solid var(--glass-border);
   border-radius: 10px;
   min-height: 102px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--glass-shadow);
 }
 .stat-icon {
   width: 44px;
@@ -1032,16 +1075,18 @@ main:focus {
   width: 100%;
   min-width: 0;
   overflow: hidden;
+  position: relative;
+  isolation: isolate;
   transition:
     border-color 0.2s,
     background 0.2s,
     box-shadow 0.2s;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow-subtle);
 }
 .mod-card:hover {
   border-color: var(--accent-border);
   background: var(--glass-bg-strong);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--glass-shadow);
 }
 .mod-card-cta svg {
   transition: transform 0.2s var(--ease-out);
@@ -4573,4 +4618,37 @@ main:focus {
   margin-top: 6px;
   font-size: 11px;
   color: var(--warning);
+}
+
+/* Refraction (Chromium only): LiquidGlassFilter adds .liquid-refraction to <html> when it can
+   render #liquid-glass. Kept to a few large surfaces; small pills and the 50 mod cards per page
+   stay on plain blur, which is far cheaper and bends too little to notice on small boxes. */
+.liquid-refraction .stat-card,
+.liquid-refraction .filters-panel-glass {
+  -webkit-backdrop-filter: url(#liquid-glass) blur(6px)
+    saturate(var(--glass-saturation));
+  backdrop-filter: url(#liquid-glass) blur(6px)
+    saturate(var(--glass-saturation));
+}
+.liquid-glass-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Reduced transparency: solid surfaces, no glow, no blur. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface,
+  .mod-card,
+  .side-view-toggle,
+  .content-tab,
+  .hero-meta span {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass-backdrop {
+    display: none;
+  }
 }

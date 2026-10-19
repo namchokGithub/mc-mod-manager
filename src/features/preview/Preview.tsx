@@ -23,6 +23,7 @@ import { ContentPreview } from "./ContentPreview";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { GlassPanel, GlassPill } from "../../components/ui/glass";
+import { LiquidGlassFilter } from "../../components/ui/LiquidGlassFilter";
 import {
   checkCompatibility,
   statusLabel,
@@ -176,6 +177,7 @@ export function Preview() {
     <>
       {/* Glow the glass surfaces blur; decorative and fixed behind the page. */}
       <div className="glass-backdrop" aria-hidden="true" />
+      <LiquidGlassFilter />
       <section
         ref={heroRef}
         className="hero"
