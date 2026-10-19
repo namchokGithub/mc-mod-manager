@@ -5,6 +5,7 @@ import { CompatBadge, CompatReasons } from "./CompatBadge";
 import { Dialog } from "./ui/dialog";
 import { ModArtwork } from "./ModArtwork";
 import { useRetained } from "../lib/useRetained";
+import { priorityLabels, priorityOf } from "../lib/priority";
 
 export function ModDetail({
   mod,
@@ -57,6 +58,10 @@ export function ModDetail({
             <div>
               <dt>Source</dt>
               <dd>{shown.source}</dd>
+            </div>
+            <div>
+              <dt>Priority</dt>
+              <dd>{priorityLabels[priorityOf(shown)]}</dd>
             </div>
             {shown.addedAt && (
               <div>

@@ -1,3 +1,4 @@
+import { priorityOf, priorityRank } from "./priority";
 import type { Mod } from "./schema";
 
 export type Filters = {
@@ -5,8 +6,11 @@ export type Filters = {
   category: string;
   status: string;
   side: string;
-  /** Name A–Z / Z–A, or by `addedAt` newest / oldest first. */
-  sort: "az" | "za" | "added-desc" | "added-asc";
+  /** A priority value, or "" for all. Optional so older callers keep working. */
+  priority?: string;
+  /** Name A–Z / Z–A, by `addedAt` newest / oldest first, or by priority. */
+  sort:
+    "az" | "za" | "added-desc" | "added-asc" | "priority-desc" | "priority-asc";
 };
 
 /**
@@ -66,10 +70,19 @@ export function filterMods(mods: Mod[], filters: Filters): Mod[] {
         matchesQuery &&
         (!filters.category || mod.category === filters.category) &&
         (!filters.status || mod.status === filters.status) &&
-        (!filters.side || mod.side === filters.side)
+        (!filters.side || mod.side === filters.side) &&
+        (!filters.priority || priorityOf(mod) === filters.priority)
       );
     })
     .sort((a, b) => {
+      if (filters.sort === "priority-desc" || filters.sort === "priority-asc") {
+        // Missing counts as normal; equal priorities fall back to name.
+        const byPriority =
+          filters.sort === "priority-desc"
+            ? priorityRank(a) - priorityRank(b)
+            : priorityRank(b) - priorityRank(a);
+        return byPriority || a.name.localeCompare(b.name);
+      }
       if (filters.sort === "added-desc" || filters.sort === "added-asc") {
         // Mods without a date go last either way; equal dates fall back to name.
         const at = (mod: Mod) => (mod.addedAt ? Date.parse(mod.addedAt) : NaN);

@@ -99,6 +99,7 @@ import { IgnoredDependenciesField } from "./IgnoredDependencies";
 import { ManualVerificationSection } from "./ManualVerification";
 import { ContentPanel } from "../content/ContentPanel";
 import { contentMeta, isContentKey } from "../../lib/content";
+import { modPriorities, priorityLabels, priorityOf } from "../../lib/priority";
 import {
   requirementHints,
   requirementLabels,
@@ -123,6 +124,7 @@ const initialFilters: Filters = {
   category: "",
   status: "",
   side: "",
+  priority: "",
   sort: "az",
 };
 
@@ -228,6 +230,10 @@ const sideOptions: SelectOption[] = [
   { value: "client", label: "Client" },
   { value: "server", label: "Server" },
 ];
+const priorityOptions: SelectOption[] = modPriorities.map((value) => ({
+  value,
+  label: priorityLabels[value],
+}));
 const requirementOptions: SelectOption[] = (
   ["required", "optional"] as const
 ).map((value) => ({ value, label: requirementLabels[value] }));
@@ -246,7 +252,7 @@ function FormSelect({
   ...aria
 }: React.AriaAttributes & {
   control: Control<ModFields>;
-  name: "status" | "side" | "source" | "requirement";
+  name: "status" | "side" | "source" | "requirement" | "priority";
   options: SelectOption[];
 }) {
   return (
@@ -303,6 +309,7 @@ function ModEditor({
         supportedLoaders:
           start.manualCompatibility?.loaders ?? verified?.loaders ?? [],
         requirement: requirementOf(start),
+        priority: priorityOf(start),
       }
     : {
         id: "",
@@ -321,6 +328,7 @@ function ModEditor({
         supportedVersions: [],
         supportedLoaders: [],
         requirement: "required",
+        priority: "normal",
       };
   const versionSuggestions = [
     ...(packMinecraftVersion ? [packMinecraftVersion] : []),
@@ -411,6 +419,11 @@ function ModEditor({
         .filter(Boolean),
       // "Required" is the default, so only "optional" is stored.
       requirement: values.requirement === "optional" ? "optional" : undefined,
+      // "Normal" is the default, so it is not stored.
+      priority:
+        values.priority && values.priority !== "normal"
+          ? values.priority
+          : undefined,
       manualCompatibility: manualFrom(
         values.supportedVersions,
         values.supportedLoaders,
@@ -506,6 +519,16 @@ function ModEditor({
             control={control}
             name="requirement"
             options={requirementOptions}
+          />
+        </Field>
+        <Field
+          label="Priority"
+          error={errors.priority?.message}
+          hint="How important it is to the pack. Normal if not set.">
+          <FormSelect
+            control={control}
+            name="priority"
+            options={priorityOptions}
           />
         </Field>
         <Field label="Source" error={errors.source?.message}>

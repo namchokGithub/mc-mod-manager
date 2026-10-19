@@ -8,6 +8,7 @@ import {
   X,
 } from "lucide-react";
 import type { Filters } from "../lib/mods";
+import { modPriorities, priorityLabels } from "../lib/priority";
 import { Select } from "./ui/select";
 
 const statusOptions = [
@@ -54,9 +55,18 @@ export function ModFilters({
     onChange({ ...filters, [key]: value });
   const activeCount =
     (filters.query.trim() ? 1 : 0) +
-    [filters.category, filters.status, filters.side].filter(Boolean).length;
+    [filters.category, filters.status, filters.side, filters.priority].filter(
+      Boolean,
+    ).length;
   const clearFilters = () =>
-    onChange({ ...filters, query: "", category: "", status: "", side: "" });
+    onChange({
+      ...filters,
+      query: "",
+      category: "",
+      status: "",
+      side: "",
+      priority: "",
+    });
 
   // Press "/" anywhere outside a field to jump to search.
   useEffect(() => {
@@ -181,6 +191,22 @@ export function ModFilters({
           />
         )}
         <Select
+          aria-label="Priority"
+          size="sm"
+          variant="compact"
+          className="filter-select"
+          active={Boolean(filters.priority)}
+          value={filters.priority ?? ""}
+          onValueChange={(value) => set("priority", value)}
+          options={[
+            { value: "", label: "All priorities" },
+            ...modPriorities.map((value) => ({
+              value,
+              label: priorityLabels[value],
+            })),
+          ]}
+        />
+        <Select
           aria-label="Sort order"
           size="sm"
           variant="compact"
@@ -192,6 +218,8 @@ export function ModFilters({
             { value: "za", label: "Name: Z–A" },
             { value: "added-desc", label: "Added: newest first" },
             { value: "added-asc", label: "Added: oldest first" },
+            { value: "priority-desc", label: "Priority: highest first" },
+            { value: "priority-asc", label: "Priority: lowest first" },
           ]}
         />
         {activeCount > 0 && (

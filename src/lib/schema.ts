@@ -87,6 +87,10 @@ export const modSchema = z.object({
   // Modpack policy, separate from side and compatibility. Missing means "required", so older
   // mods.json files need no rewrite; the editor stores only "optional".
   requirement: z.enum(["required", "optional"]).optional(),
+  // Importance to the pack (critical … optional). Missing means "normal"; not backfilled.
+  priority: z
+    .enum(["critical", "high", "normal", "low", "optional"])
+    .optional(),
   source: z.enum(["Modrinth", "CurseForge", "GitHub", "Other"]),
   sourceUrl: optionalUrl,
   description: z.string(),

@@ -57,6 +57,7 @@ const initialFilters: Filters = {
   category: "",
   status: "",
   side: "",
+  priority: "",
   sort: "az",
 };
 
