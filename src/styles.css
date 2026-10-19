@@ -93,6 +93,14 @@
   --surface-sunken: var(--surface-alt);
   --header-bg: rgb(255 255 255 / 92%);
   --chip-glass: rgb(255 255 255 / 82%);
+  /* Liquid glass foundation: warm pearl surfaces with readable non-blur fallbacks. */
+  --glass-bg: rgb(255 255 255 / 86%);
+  --glass-bg-strong: rgb(255 255 255 / 72%);
+  --glass-border: rgb(255 255 255 / 76%);
+  --glass-highlight: rgb(255 255 255 / 66%);
+  --glass-shadow: 0 16px 38px rgb(25 42 34 / 12%);
+  --glass-blur: 18px;
+  --glass-saturation: 115%;
   --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
   font-family: var(--font-sans);
   color: var(--text);
@@ -146,6 +154,14 @@
   );
   --header-bg: rgb(11 15 14 / 92%);
   --chip-glass: rgb(23 53 39 / 61%);
+  /* Liquid glass foundation: deep emerald surfaces with muted mint highlights. */
+  --glass-bg: rgb(19 40 30 / 90%);
+  --glass-bg-strong: rgb(20 57 39 / 74%);
+  --glass-border: rgb(190 239 204 / 20%);
+  --glass-highlight: rgb(229 255 235 / 11%);
+  --glass-shadow: 0 18px 48px rgb(0 0 0 / 34%);
+  --glass-blur: 20px;
+  --glass-saturation: 125%;
   --art-1: #80bfa5;
   --art-2: #9ab4d0;
   --art-3: #d1b585;
@@ -222,6 +238,51 @@ main:focus {
 }
 .app-shell main {
   flex: 1;
+}
+.glass-surface {
+  --glass-surface-bg: var(--glass-bg);
+  --glass-surface-blur: var(--glass-blur);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--glass-surface-bg);
+  box-shadow: var(--glass-shadow);
+}
+.glass-surface::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    var(--glass-highlight),
+    transparent 38%
+  );
+  content: "";
+}
+.glass-subtle {
+  --glass-surface-blur: calc(var(--glass-blur) - 8px);
+  box-shadow: var(--shadow-sm);
+}
+.glass-default {
+  --glass-surface-blur: var(--glass-blur);
+}
+.glass-strong {
+  --glass-surface-bg: var(--glass-bg-strong);
+  --glass-surface-blur: calc(var(--glass-blur) + 6px);
+}
+.glass-pill {
+  border-radius: 999px;
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass-surface {
+    -webkit-backdrop-filter: blur(var(--glass-surface-blur))
+      saturate(var(--glass-saturation));
+    backdrop-filter: blur(var(--glass-surface-blur))
+      saturate(var(--glass-saturation));
+  }
 }
 .go-to-top {
   position: fixed;
