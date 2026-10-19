@@ -129,7 +129,7 @@ export function App() {
             </a>
             <nav aria-label="Main navigation">
               <a
-                className={page === "preview" ? "nav-link active" : "nav-link"}
+                className={`nav-link nav-glass-link glass-surface glass-subtle glass-hover-lift${page === "preview" ? " active" : ""}`}
                 href="#/"
                 aria-current={page === "preview" ? "page" : undefined}
               >
@@ -137,7 +137,7 @@ export function App() {
               </a>
               {MANAGE_ENABLED && (
                 <a
-                  className={page === "manage" ? "nav-link active" : "nav-link"}
+                  className={`nav-link nav-glass-link glass-surface glass-subtle glass-hover-lift${page === "manage" ? " active" : ""}`}
                   href="#/manage"
                   aria-current={page === "manage" ? "page" : undefined}
                 >
@@ -178,7 +178,7 @@ export function App() {
               </AnimatePresence>
               <button
                 type="button"
-                className="theme-toggle"
+                className="theme-toggle glass-control glass-surface glass-subtle glass-hover-lift"
                 onClick={toggleTheme}
                 aria-label={
                   theme === "dark"
@@ -190,7 +190,7 @@ export function App() {
                 {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
               </button>
               <a
-                className="header-github"
+                className="header-github glass-control glass-surface glass-subtle glass-hover-lift"
                 href="https://github.com/namchokGithub/mc-mod-manager"
                 target="_blank"
                 rel="noreferrer"

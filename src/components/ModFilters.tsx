@@ -38,6 +38,7 @@ export function ModFilters({
   onViewChange,
   showView = true,
   showSide = true,
+  appearance = "default",
 }: {
   filters: Filters;
   onChange: (filters: Filters) => void;
@@ -49,6 +50,8 @@ export function ModFilters({
   showView?: boolean;
   /** False where a separate side control (Preview's For Players / For Server) is shown. */
   showSide?: boolean;
+  /** Visual treatment only; Preview opts into glass while Manage retains the default surface. */
+  appearance?: "default" | "glass";
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
@@ -88,7 +91,9 @@ export function ModFilters({
   }, []);
 
   return (
-    <div className="filters-panel">
+    <div
+      className={`filters-panel${appearance === "glass" ? " filters-panel-glass glass-surface" : ""}`}
+    >
       <div className="filters-top">
         <label className="search-field">
           <Search size={18} aria-hidden="true" />

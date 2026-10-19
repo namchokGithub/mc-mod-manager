@@ -22,6 +22,7 @@ import { BuildPlanGuide } from "./BuildPlanGuide";
 import { ContentPreview } from "./ContentPreview";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
+import { GlassPanel, GlassPill } from "../../components/ui/glass";
 import {
   checkCompatibility,
   statusLabel,
@@ -173,6 +174,8 @@ export function Preview() {
 
   return (
     <>
+      {/* Glow the glass surfaces blur; decorative and fixed behind the page. */}
+      <div className="glass-backdrop" aria-hidden="true" />
       <section
         ref={heroRef}
         className="hero"
@@ -182,7 +185,8 @@ export function Preview() {
                 backgroundImage: `var(--hero-overlay), url(${JSON.stringify(resolveHeroImageUrl(data.modpack.heroImageUrl, import.meta.env.BASE_URL))})`,
               }
             : undefined
-        }>
+        }
+      >
         <div
           className="hero-decor hero-decor-one"
           key={`hero-decor-one-${heroAnimationCycle}`}
@@ -196,7 +200,8 @@ export function Preview() {
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}>
+            transition={{ duration: 0.55 }}
+          >
             <div className="eyebrow">
               <span className="eyebrow-dot" /> THE MODPACK COLLECTION{" "}
               <span className="eyebrow-rule" />
@@ -204,17 +209,28 @@ export function Preview() {
             <h1>{data.modpack.name}</h1>
             <p className="hero-description">{data.modpack.description}</p>
             <div className="hero-meta">
-              <span>
+              <GlassPill
+                className="hero-meta-item glass-hover-lift"
+                intensity="subtle"
+              >
                 <Layers3 size={15} /> Minecraft{" "}
                 {data.modpack.minecraftVersion || "—"}
-              </span>
-              <span>
+              </GlassPill>
+              <GlassPill
+                className="hero-meta-item glass-hover-lift"
+                intensity="subtle"
+              >
                 {data.modpack.modloader || "Modloader not specified"}
                 {data.modpack.modloaderVersion
                   ? ` ${data.modpack.modloaderVersion}`
                   : ""}
-              </span>
-              <span>Pack v{data.modpack.version || "—"}</span>
+              </GlassPill>
+              <GlassPill
+                className="hero-meta-item glass-hover-lift"
+                intensity="subtle"
+              >
+                Pack v{data.modpack.version || "—"}
+              </GlassPill>
             </div>
             <div className="hero-actions">
               <a className="button button-primary" href="#collection">
@@ -235,9 +251,10 @@ export function Preview() {
         <section
           ref={statsRef}
           className="stats-grid"
-          aria-label="Collection statistics">
+          aria-label="Collection statistics"
+        >
           {stats.map(({ label, value, icon: Icon }, index) => (
-            <div className="stat-card" key={label}>
+            <GlassPanel className="stat-card glass-hover-lift" key={label}>
               <div className="stat-icon">
                 <Icon size={19} />
               </div>
@@ -249,7 +266,7 @@ export function Preview() {
                 <span className="sr-only">{value}</span>
                 <span>{label}</span>
               </div>
-            </div>
+            </GlassPanel>
           ))}
         </section>
         <section id="collection" className="collection-section">
@@ -278,7 +295,8 @@ export function Preview() {
             <div
               className="side-view-toggle"
               role="group"
-              aria-label="Installation side">
+              aria-label="Installation side"
+            >
               {sideViews.map((option) => (
                 <button
                   key={option}
@@ -288,7 +306,8 @@ export function Preview() {
                   onClick={() => {
                     setSideView(option);
                     setPage(1);
-                  }}>
+                  }}
+                >
                   {sideViewLabels[option]}{" "}
                   <span className="side-view-count">{viewCounts[option]}</span>
                 </button>
@@ -311,7 +330,8 @@ export function Preview() {
                   onClick={() => {
                     setSideView("all");
                     setPage(1);
-                  }}>
+                  }}
+                >
                   View All Mods
                 </button>{" "}
                 to review {sides.unknown === 1 ? "it" : "them"}.
@@ -342,10 +362,12 @@ export function Preview() {
             view={view}
             onViewChange={setView}
             showSide={false}
+            appearance="glass"
           />
           {filtered.length ? (
             <div
-              className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}>
+              className={`mod-collection ${view === "list" ? "mod-list" : "mod-grid"}`}
+            >
               <AnimatePresence mode="popLayout">
                 {paged.items.map(({ mod, key, reason }, index) => [
                   // A heading where a group starts on this page, or continues from the last one.
@@ -386,7 +408,8 @@ export function Preview() {
                         delay: Math.min(index, 8) * 0.03,
                       },
                       layout: { duration: 0.28, ease: [0.25, 1, 0.5, 1] },
-                    }}>
+                    }}
+                  >
                     <div className="mod-card-top">
                       <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
                       <span className="card-badges">
@@ -426,7 +449,8 @@ export function Preview() {
                         {mod.version && (
                           <span
                             className="mod-card-version"
-                            title={mod.version}>
+                            title={mod.version}
+                          >
                             {" "}
                             · v{mod.version}
                           </span>
@@ -445,7 +469,8 @@ export function Preview() {
               className="empty-state"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}>
+              transition={{ duration: 0.2 }}
+            >
               <div className="empty-icon">
                 <Box size={26} />
               </div>
@@ -463,7 +488,8 @@ export function Preview() {
                       // The side view is a filter too; All Mods hides nothing.
                       setSideView("all");
                       changeFilters(initialFilters);
-                    }}>
+                    }}
+                  >
                     Clear filters
                   </Button>
                 </>
