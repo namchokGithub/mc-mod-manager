@@ -108,8 +108,7 @@ export function App() {
         <button
           type="button"
           className="skip-link"
-          onClick={() => document.getElementById("main-content")?.focus()}
-        >
+          onClick={() => document.getElementById("main-content")?.focus()}>
           Skip to content
         </button>
         <header className="site-header">
@@ -133,8 +132,7 @@ export function App() {
                 ref={liquidLens}
                 className={`nav-link nav-glass-link glass-surface glass-subtle glass-hover-lift${page === "preview" ? " active" : ""}`}
                 href="#/"
-                aria-current={page === "preview" ? "page" : undefined}
-              >
+                aria-current={page === "preview" ? "page" : undefined}>
                 <LayoutDashboard size={17} /> Preview
               </a>
               {MANAGE_ENABLED && (
@@ -142,8 +140,7 @@ export function App() {
                   ref={liquidLens}
                   className={`nav-link nav-glass-link glass-surface glass-subtle glass-hover-lift${page === "manage" ? " active" : ""}`}
                   href="#/manage"
-                  aria-current={page === "manage" ? "page" : undefined}
-                >
+                  aria-current={page === "manage" ? "page" : undefined}>
                   <PencilLine size={17} /> Manage
                 </a>
               )}
@@ -158,8 +155,7 @@ export function App() {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.18 }}
-                  >
+                    transition={{ duration: 0.18 }}>
                     {saveStatus === "failed" ? (
                       <CircleAlert size={13} aria-hidden="true" />
                     ) : saveStatus === "saved" ? (
@@ -189,8 +185,7 @@ export function App() {
                     ? "Switch to light theme"
                     : "Switch to dark theme"
                 }
-                title={theme === "dark" ? "Light theme" : "Dark theme"}
-              >
+                title={theme === "dark" ? "Light theme" : "Dark theme"}>
                 {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
               </button>
               <a
@@ -198,8 +193,7 @@ export function App() {
                 href="https://github.com/namchokGithub/mc-mod-manager"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="GitHub"
-              >
+                aria-label="GitHub">
                 <GitFork size={18} />
               </a>
             </div>
@@ -212,8 +206,7 @@ export function App() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
+              transition={{ duration: 0.2, ease: "easeOut" }}>
               {page === "manage" && Manage ? (
                 <Suspense
                   fallback={
@@ -221,8 +214,7 @@ export function App() {
                       <div className="loading-orb" />
                       <p>Opening the editor…</p>
                     </div>
-                  }
-                >
+                  }>
                   <Manage />
                 </Suspense>
               ) : (
@@ -248,8 +240,7 @@ export function App() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.18 }}
-            >
+              transition={{ duration: 0.18 }}>
               <ArrowUp size={18} aria-hidden="true" />
             </motion.button>
           )}

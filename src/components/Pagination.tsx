@@ -53,8 +53,7 @@ export function Pagination({
           disabled={atStart}
           onClick={() => onPageChange(1)}
           aria-label="First page"
-          title="First page"
-        >
+          title="First page">
           <ChevronsLeft size={15} />
         </Button>
         <Button
@@ -62,8 +61,7 @@ export function Pagination({
           size="small"
           disabled={atStart}
           onClick={() => onPageChange(page.page - 1)}
-          aria-label="Previous page"
-        >
+          aria-label="Previous page">
           <ChevronLeft size={15} />
           <span className="pagination-label">Previous</span>
         </Button>
@@ -75,8 +73,7 @@ export function Pagination({
           size="small"
           disabled={atEnd}
           onClick={() => onPageChange(page.page + 1)}
-          aria-label="Next page"
-        >
+          aria-label="Next page">
           <span className="pagination-label">Next</span>
           <ChevronRight size={15} />
         </Button>
@@ -86,8 +83,7 @@ export function Pagination({
           disabled={atEnd}
           onClick={() => onPageChange(page.pageCount)}
           aria-label="Last page"
-          title="Last page"
-        >
+          title="Last page">
           <ChevronsRight size={15} />
         </Button>
       </div>

@@ -101,7 +101,8 @@ export function Preview({ theme }: { theme: Theme }) {
   const [sideView, setSideView] = useState<SideView>("players");
   const [groupBy, setGroupBy] = useState<GroupBy>("requirement");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
+  const PAGE_SIZE: PageSize = 10;
+  const [pageSize, setPageSize] = useState<PageSize>(PAGE_SIZE);
   const [heroAnimationCycle, setHeroAnimationCycle] = useState(0);
   useEffect(() => {
     const hero = heroRef.current;

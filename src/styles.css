@@ -456,12 +456,18 @@ main:focus {
   padding: 0;
   border: 1px solid var(--border-strong);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--surface-alt);
   box-shadow: var(--shadow-md);
   color: var(--primary);
 }
 .go-to-top:hover {
   background: var(--accent-light);
+  color: var(--primary-hover);
+}
+:root[data-theme="light"] .go-to-top {
+  color: var(--border-strong);
+}
+:root[data-theme="light"] .go-to-top:hover {
   color: var(--primary-hover);
 }
 .container {
@@ -1423,6 +1429,11 @@ main:focus {
   padding: 24px max(24px, calc((100vw - 1216px) / 2));
   color: var(--text-muted);
   font-size: 11px;
+
+  --lens-surface-bg: var(--glass-bg);
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow);
 }
 .site-footer span:first-child {
   font-weight: 800;
@@ -3854,6 +3865,9 @@ main:focus {
   color: var(--primary);
   font-family: var(--font-display);
   font-size: 15px;
+}
+:root[data-theme="light"] .build-guide .plan-order {
+  --lens-surface-bg: var(--accent-light);
 }
 .plan-title {
   display: grid;
