@@ -295,6 +295,7 @@ main:focus {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 .app-shell main {
   flex: 1;
@@ -1415,11 +1416,12 @@ main:focus {
 }
 .site-footer {
   border-top: 1px solid var(--border);
+  background: var(--surface-alt);
   display: flex;
   justify-content: space-between;
   gap: 15px;
   padding: 24px max(24px, calc((100vw - 1216px) / 2));
-  color: var(--text-subtle);
+  color: var(--text-muted);
   font-size: 11px;
 }
 .site-footer span:first-child {
@@ -3825,7 +3827,13 @@ main:focus {
   text-align: left;
 }
 .plan-toggle:hover {
-  background: var(--surface-hover);
+  /* background: var(--surface-hover); */
+  background: color-mix(
+    in srgb,
+    var(--glass-bg-strong) 85%,
+    var(--primary) 15%
+  );
+  transition: opacity 180ms ease;
 }
 .plan-toggle svg {
   flex: none;
@@ -4817,4 +4825,11 @@ main:focus {
 }
 .lens-active.lens-active.lens-active.active {
   background: var(--lens-tint-active);
+}
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
