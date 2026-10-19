@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
 import { MANAGE_ENABLED } from "../../app/routes";
+import type { Theme } from "../../app/theme";
 import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
@@ -77,8 +78,17 @@ const backdropImages = {
   "--glass-image-dark": themeImage("neon_voxel.png"),
 } as CSSProperties;
 
-export function Preview() {
+const winterHeroImage =
+  "public/assets/theme/winter_slime_adventure_in_the_snow.png";
+const darkWinterHeroImage =
+  "public/assets/theme/winter_slime_adventure_in_the_snow_dark.png";
+
+export function Preview({ theme }: { theme: Theme }) {
   const { data } = useCollection();
+  const heroImageUrl =
+    theme === "dark" && data.modpack.heroImageUrl === winterHeroImage
+      ? darkWinterHeroImage
+      : data.modpack.heroImageUrl;
   const reduceMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement | null>(null);
   const heroHasLeftViewport = useRef(false);
@@ -200,9 +210,9 @@ export function Preview() {
         ref={heroRef}
         className="hero"
         style={
-          data.modpack.heroImageUrl
+          heroImageUrl
             ? {
-                backgroundImage: `var(--hero-overlay), url(${JSON.stringify(resolveHeroImageUrl(data.modpack.heroImageUrl, import.meta.env.BASE_URL))})`,
+                backgroundImage: `var(--hero-overlay), url(${JSON.stringify(resolveHeroImageUrl(heroImageUrl, import.meta.env.BASE_URL))})`,
               }
             : undefined
         }

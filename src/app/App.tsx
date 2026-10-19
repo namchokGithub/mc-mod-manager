@@ -226,7 +226,7 @@ export function App() {
                   <Manage />
                 </Suspense>
               ) : (
-                <Preview />
+                <Preview theme={theme} />
               )}
             </motion.div>
           </AnimatePresence>

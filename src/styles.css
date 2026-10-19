@@ -77,7 +77,7 @@
     90deg,
     rgb(248 250 248 / 97%) 0%,
     rgb(248 250 248 / 90%) 42%,
-    rgb(248 250 248 / 30%) 100%
+    rgb(248 250 248 / 20%) 100%
   );
   /* Mod artwork tints, picked per mod name. */
   --art-1: #3d8a68;
@@ -701,6 +701,15 @@ main:focus {
   background-position: center;
   background-repeat: no-repeat;
   border-bottom: 1px solid var(--border);
+}
+:root[data-theme="dark"] .hero {
+  background-position:
+    center,
+    center 70%;
+  opacity: 0.8;
+}
+:root[data-theme="light"] .hero {
+  opacity: 0.8;
 }
 .hero-grid {
   position: absolute;
