@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef, ComponentPropsWithoutRef } from "react";
 
 import { cn } from "../../lib/utils";
 
@@ -32,7 +32,7 @@ export function GlassCard({ className, intensity, ...props }: GlassCardProps) {
   );
 }
 
-type GlassPanelProps = ComponentPropsWithoutRef<"div"> &
+type GlassPanelProps = ComponentPropsWithRef<"div"> &
   VariantProps<typeof glassVariants>;
 
 export function GlassPanel({

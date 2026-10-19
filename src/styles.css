@@ -893,15 +893,19 @@ main:focus {
   z-index: 2;
 }
 .stat-card {
+  --lens-surface-bg: var(--glass-bg);
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow);
   display: flex;
   align-items: center;
   gap: 17px;
   padding: 23px 24px;
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid transparent;
   border-radius: 10px;
   min-height: 102px;
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--lens-box-shadow);
 }
 .stat-card::after {
   background:
@@ -920,9 +924,11 @@ main:focus {
 }
 .stat-card:hover,
 .stat-card:focus-within {
-  box-shadow:
-    var(--glass-shadow-hover),
+  --lens-box-shadow:
+    inset 0 1px 1px var(--lens-highlight), inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge), var(--glass-shadow-hover),
     0 0 18px var(--stat-glow-halo);
+  box-shadow: var(--lens-box-shadow);
 }
 .stat-card:hover::after,
 .stat-card:focus-within::after {
@@ -4762,14 +4768,16 @@ main:focus {
    replaces; elsewhere these elements keep their frosted style. */
 .lens-active.lens-active.lens-active {
   border-color: transparent;
-  background: var(--lens-tint);
+  background: var(--lens-surface-bg, var(--lens-tint));
   -webkit-backdrop-filter: var(--liquid-lens) saturate(150%) brightness(1.03);
   backdrop-filter: var(--liquid-lens) saturate(150%) brightness(1.03);
-  box-shadow:
+  box-shadow: var(
+    --lens-box-shadow,
     inset 0 1px 1px var(--lens-highlight),
     inset 0 -1px 1px rgb(0 0 0 / 10%),
     inset 0 0 0 1px var(--lens-edge),
-    var(--lens-shadow);
+    var(--lens-shadow)
+  );
 }
 .lens-active.lens-active.lens-active.active {
   background: var(--lens-tint-active);

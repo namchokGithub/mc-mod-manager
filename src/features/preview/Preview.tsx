@@ -285,6 +285,7 @@ export function Preview({ theme }: { theme: Theme }) {
         >
           {stats.map(({ label, value, icon: Icon }, index) => (
             <GlassPanel
+              ref={liquidLens}
               className="stat-card glass-hover-lift"
               key={label}
               onPointerMove={(event) => {
