@@ -42,6 +42,7 @@ import { ModArtwork } from "../../components/ModArtwork";
 import { ModFilters } from "../../components/ModFilters";
 import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
+import { Combobox } from "../../components/ui/combobox";
 import { Dialog } from "../../components/ui/dialog";
 import { Select, type SelectOption } from "../../components/ui/select";
 import {
@@ -274,6 +275,49 @@ function FormSelect({
   );
 }
 
+function CategoryCombobox({
+  control,
+  categories,
+  ...aria
+}: React.AriaAttributes & {
+  control: Control<ModFields>;
+  categories: string[];
+}) {
+  return (
+    <Controller
+      control={control}
+      name="category"
+      render={({ field }) => {
+        const options = [
+          ...categories,
+          ...(field.value && !categories.includes(field.value)
+            ? [field.value]
+            : []),
+        ].sort();
+        return (
+          <Combobox
+            value={field.value}
+            onValueChange={field.onChange}
+            options={options.map((category) => ({
+              value: category,
+              label: category,
+            }))}
+            placeholder="Select or add a category…"
+            searchPlaceholder="Search or type a category…"
+            emptyText="No categories found."
+            allowCustom={(text) =>
+              !options.some(
+                (category) => category.toLowerCase() === text.toLowerCase(),
+              )
+            }
+            {...aria}
+          />
+        );
+      }}
+    />
+  );
+}
+
 function ModEditor({
   mod,
   initialValues,
@@ -337,6 +381,7 @@ function ModEditor({
       ...(item.manualCompatibility?.gameVersions ?? []),
     ]),
   ];
+  const categories = [...new Set(mods.map((item) => item.category))].sort();
   const {
     register,
     handleSubmit,
@@ -503,7 +548,7 @@ function ModEditor({
           <input placeholder="Optional" {...register("version")} />
         </Field>
         <Field label="Category" required error={errors.category?.message}>
-          <input placeholder="e.g. Performance" {...register("category")} />
+          <CategoryCombobox control={control} categories={categories} />
         </Field>
         <Field label="Status" error={errors.status?.message}>
           <FormSelect control={control} name="status" options={statusOptions} />

@@ -12813,22 +12813,6 @@
     "addedAt": "2026-10-18T14:53:14.887Z"
   },
   {
-    "id": "dusk",
-    "name": "Dusk",
-    "version": "",
-    "category": "Mobs & Difficulty",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:05:42.920Z"
-  },
-  {
     "id": "shield-mechanics",
     "name": "Shield Mechanics",
     "version": "",
@@ -12893,38 +12877,6 @@
     "addedAt": "2026-10-18T15:07:41.724Z"
   },
   {
-    "id": "connectivity",
-    "name": "Connectivity",
-    "version": "",
-    "category": "Performance",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:08:02.410Z"
-  },
-  {
-    "id": "dynamic-view-and-simulation-distances",
-    "name": "Dynamic View and Simulation Distances",
-    "version": "",
-    "category": "Performance",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:08:25.019Z"
-  },
-  {
     "id": "fast-async-world-save",
     "name": "Fast Async World Save",
     "version": "",
@@ -12941,99 +12893,532 @@
     "addedAt": "2026-10-18T15:09:03.197Z"
   },
   {
-    "id": "ftb-library-neoforge",
-    "name": "FTB Library (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
+    "id": "connectivity",
+    "name": "Connectivity Mod",
+    "version": "7.7",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
     "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:11:21.858Z"
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/connectivity",
+    "description": "Lightweight mod which solves connection and packet size issues",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from connectivity-26.1-7.7.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/532/325/64/64/637855720922086407.png",
+    "file": {
+      "name": "connectivity-26.1-7.7.jar",
+      "modId": "connectivity",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.1,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:29:03.721Z"
   },
   {
-    "id": "ftb-library-neoforge-2",
-    "name": "FTB Quests (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
+    "id": "dusk",
+    "name": "Dusk",
+    "version": "4.3",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
     "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:12:45.164Z"
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dusk",
+    "description": "Dusk gives you full control over how dangerous Minecraft nights become.",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from dusk-26.1-4.3.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/367/628/64/64/637534740395651806.png",
+    "file": {
+      "name": "dusk-26.1-4.3.jar",
+      "modId": "dusk",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.5,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:31:21.597Z"
   },
   {
-    "id": "ftb-quests-neoforge",
-    "name": "FTB XMod Compat",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
+    "id": "dynamicviewdist",
+    "name": "Dynamic View and Simulation Distances",
+    "version": "4.1",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
     "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:13:07.046Z"
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dynamic-view",
+    "description": "Dynamic view distance mod which dynamically changes chunk view distance to fit server load",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from dynamicviewdist-26.1-4.1.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/532/325/64/64/637855720922086407.png",
+    "file": {
+      "name": "dynamicviewdist-26.1-4.1.jar",
+      "modId": "dynamicviewdist",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.5,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:43:34.056Z"
   },
   {
-    "id": "ftb-xmod-compat",
-    "name": "FTB Chunks (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:13:29.177Z"
-  },
-  {
-    "id": "ftb-chunks-neoforge",
-    "name": "FTB Ultimine (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:13:43.945Z"
-  },
-  {
-    "id": "ftb-ultimine-neoforge",
+    "id": "ftbbackups3",
     "name": "FTB Backups 3",
-    "version": "",
+    "version": "26.1.2.2",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-backups",
+    "description": "Creates backups of your world",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-backups-3-26.1.2.2.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1330/191/64/64/638864644748882470.png",
+    "file": {
+      "name": "ftb-backups-3-26.1.2.2.jar",
+      "modId": "ftbbackups3",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.7,27)"
+        }
+      ]
+    },
+    "addedAt": "2026-10-19T15:46:34.876Z"
+  },
+  {
+    "id": "ftblibrary",
+    "name": "FTB Library",
+    "version": "26.1.2.9",
     "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
+    "description": "FTB Library adds nothing.",
+    "dependencies": [],
+    "notes": "Imported from ftb-library-neoforge-26.1.2.9.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/575/64/64/638474885844428954.png",
+    "file": {
+      "name": "ftb-library-neoforge-26.1.2.9.jar",
+      "modId": "ftblibrary",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:49:19.713Z"
+  },
+  {
+    "id": "ftbultimine",
+    "name": "FTB Ultimine",
+    "version": "26.1.2.6",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "priority": "high",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-ultimine-forge",
+    "description": "Allows you to break multiple blocks at once",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-ultimine-neoforge-26.1.2.6.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/578/64/64/638474886453116037.png",
+    "file": {
+      "name": "ftb-ultimine-neoforge-26.1.2.6.jar",
+      "modId": "ftbultimine",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.5,27)"
+        },
+        {
+          "modId": "accelerateddecay",
+          "kind": "optional",
+          "versionRange": "[26.1.2.3,27)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:52:26.629Z",
+    "dependencyLinks": [
+      {
+        "id": "accelerateddecay",
+        "modId": "accelerated-decay"
+      }
+    ]
+  },
+  {
+    "id": "accelerated-decay",
+    "name": "Accelerated Decay",
+    "version": "26.1.2.4",
+    "category": "Game Mechanics",
     "tags": [],
-    "status": "disabled",
+    "status": "planned",
     "side": "both",
     "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
+    "sourceUrl": "https://modrinth.com/mod/accelerated-decay",
+    "description": "Speeds up the leaf decaying process",
     "dependencies": [],
     "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:14:16.650Z"
+    "imageUrl": "https://cdn.modrinth.com/data/laX5CckD/f067053f21f651979c1f678548e1383374330b13_96.webp",
+    "modrinth": {
+      "projectId": "laX5CckD",
+      "slug": "accelerated-decay",
+      "versionId": "BSBkvx2x",
+      "versionNumber": "26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-28T11:46:30.947124Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-19T15:54:41.794Z"
+    },
+    "addedAt": "2026-10-19T15:54:46.223Z"
+  },
+  {
+    "id": "ftbchunks",
+    "name": "FTB Chunks",
+    "version": "26.1.2.8",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge",
+    "description": "Claim chunks to protect your base from griefers!",
+    "dependencies": [
+      "ftblibrary",
+      "ftbteams"
+    ],
+    "notes": "Imported from ftb-chunks-neoforge-26.1.2.8.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/573/64/64/638474885347244172.png",
+    "file": {
+      "name": "ftb-chunks-neoforge-26.1.2.8.jar",
+      "modId": "ftbchunks",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.7,)"
+        },
+        {
+          "modId": "ftbteams",
+          "kind": "required",
+          "versionRange": "[26.1.2.4,)"
+        },
+        {
+          "modId": "ftbbackups3",
+          "kind": "optional",
+          "versionRange": "[26.1.2.1,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:58:36.368Z"
+  },
+  {
+    "id": "ftbteams",
+    "name": "FTB Teams",
+    "version": "26.1.2.4",
+    "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
+    "description": "FTB Teams adds ability to create your own teams that can be used for quests etc.",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-teams-neoforge-26.1.2.4.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/581/64/64/638474887222710106.png",
+    "file": {
+      "name": "ftb-teams-neoforge-26.1.2.4.jar",
+      "modId": "ftbteams",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.2,27)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T16:04:30.954Z"
+  },
+  {
+    "id": "ftbxmodcompat",
+    "name": "FTB XMod Compat",
+    "version": "26.1.2.4",
+    "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat",
+    "description": "Provides cross-mod compatibilty/integration for all main FTB mods",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-xmod-compat-neoforge-26.1.2.4.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/850/409/64/64/638251965015898859.png",
+    "file": {
+      "name": "ftb-xmod-compat-neoforge-26.1.2.4.jar",
+      "modId": "ftbxmodcompat",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.7,)"
+        },
+        {
+          "modId": "ftbquests",
+          "kind": "optional",
+          "versionRange": "[26.1.2.3,)"
+        },
+        {
+          "modId": "ftbchunks",
+          "kind": "optional",
+          "versionRange": "[26.1.2.7,)"
+        },
+        {
+          "modId": "ftbranks",
+          "kind": "optional",
+          "versionRange": "[26.1.2.3,)"
+        },
+        {
+          "modId": "jei",
+          "kind": "optional",
+          "versionRange": "[19,)"
+        },
+        {
+          "modId": "kubejs",
+          "kind": "optional",
+          "versionRange": "[26.1.2,)"
+        },
+        {
+          "modId": "luckperms",
+          "kind": "optional",
+          "versionRange": "[5.4.112,)"
+        },
+        {
+          "modId": "waystones",
+          "kind": "optional",
+          "versionRange": "[26.1.2.6,)"
+        },
+        {
+          "modId": "sg_economy",
+          "kind": "optional",
+          "versionRange": "[26.1.0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T16:10:39.249Z"
+  },
+  {
+    "id": "ftbquests",
+    "name": "FTB Quests",
+    "version": "26.1.2.9",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge",
+    "description": "Lets you easily create and play with quests",
+    "dependencies": [
+      "ftblibrary",
+      "ftbteams"
+    ],
+    "notes": "Imported from ftb-quests-neoforge-26.1.2.9.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/571/64/64/638474884805475097.png",
+    "file": {
+      "name": "ftb-quests-neoforge-26.1.2.9.jar",
+      "modId": "ftbquests",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1.2,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.8,)"
+        },
+        {
+          "modId": "ftbteams",
+          "kind": "required",
+          "versionRange": "[26.1.2.4,)"
+        },
+        {
+          "modId": "ftbxmodcompat",
+          "kind": "optional",
+          "versionRange": "[21.1.7,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T16:15:47.125Z"
   }
 ]
