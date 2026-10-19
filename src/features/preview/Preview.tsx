@@ -284,7 +284,21 @@ export function Preview({ theme }: { theme: Theme }) {
           aria-label="Collection statistics"
         >
           {stats.map(({ label, value, icon: Icon }, index) => (
-            <GlassPanel className="stat-card glass-hover-lift" key={label}>
+            <GlassPanel
+              className="stat-card glass-hover-lift"
+              key={label}
+              onPointerMove={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                event.currentTarget.style.setProperty(
+                  "--stat-glow-x",
+                  `${event.clientX - bounds.left}px`,
+                );
+                event.currentTarget.style.setProperty(
+                  "--stat-glow-y",
+                  `${event.clientY - bounds.top}px`,
+                );
+              }}
+            >
               <div className="stat-icon">
                 <Icon size={19} />
               </div>

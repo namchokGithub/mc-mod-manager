@@ -116,6 +116,9 @@
   /* Specular sheen and the iridescent rim. */
   --glass-sheen: rgb(255 255 255 / 60%);
   --glass-rim-opacity: 0.28;
+  --stat-glow-primary: rgb(101 212 158 / 98%);
+  --stat-glow-secondary: rgba(232, 232, 112, 0.9);
+  --stat-glow-halo: rgb(112 185 232 / 30%);
   /* Small controls (nav, toggles, pills): a rainbow rim there reads as a smudge. */
   --glass-rim-small-opacity: 0;
   --glass-blur: 10px;
@@ -202,6 +205,9 @@
     inset 0 1px 0 rgb(229 255 235 / 16%), 0 1px 2px rgb(0 0 0 / 40%);
   --glass-sheen: rgb(229 255 235 / 16%);
   --glass-rim-opacity: 0.32;
+  --stat-glow-primary: rgb(42 205 126 / 98%);
+  --stat-glow-secondary: rgba(232, 232, 112, 0.9);
+  --stat-glow-halo: rgb(41 204 227 / 34%);
   --glass-rim-small-opacity: 0.32;
   --glass-glow-3: transparent;
   --glass-backdrop-base: transparent;
@@ -896,6 +902,39 @@ main:focus {
   border-radius: 10px;
   min-height: 102px;
   box-shadow: var(--glass-shadow);
+}
+.stat-card::after {
+  background:
+    radial-gradient(
+      170px circle at var(--stat-glow-x, 50%) var(--stat-glow-y, 50%),
+      var(--stat-glow-primary),
+      var(--stat-glow-secondary) 40%,
+      transparent 75%
+    ),
+    linear-gradient(
+      135deg,
+      var(--stat-glow-primary),
+      var(--stat-glow-secondary)
+    );
+  transition: opacity 180ms ease;
+}
+.stat-card:hover,
+.stat-card:focus-within {
+  box-shadow:
+    var(--glass-shadow-hover),
+    0 0 18px var(--stat-glow-halo);
+}
+.stat-card:hover::after,
+.stat-card:focus-within::after {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-card {
+    transition: none;
+  }
+  .stat-card::after {
+    transition: none;
+  }
 }
 .stat-icon {
   width: 44px;
