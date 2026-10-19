@@ -96,15 +96,16 @@
   /* Liquid glass foundation: warm pearl surfaces with readable non-blur fallbacks. */
   /* Translucent enough for the backdrop glow to read through the blur. */
   /* A faint mint tint, so white glass does not vanish on a light page. */
-  --glass-bg: rgb(248 252 249 / 52%);
-  --glass-bg-strong: rgb(250 253 251 / 72%);
-  /* On a light page a white edge disappears; a thin dark line keeps the outline. */
-  --glass-border: rgb(25 42 34 / 10%);
+  /* Clear enough to show the scene behind, still milky enough to read text on. */
+  --glass-bg: rgb(248 252 249 / 30%);
+  --glass-bg-strong: rgb(250 253 251 / 50%);
+  /* Over the backdrop image a bright edge reads as the glass's lit rim. */
+  --glass-border: rgb(255 255 255 / 65%);
   --glass-highlight: rgb(255 255 255 / 66%);
   /* Depth: a lit top edge and a faint lower edge for thickness, then a contact and an ambient shadow. */
   /* Light glass reads its thickness from a dark lower edge, not a white one. */
   --glass-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 85%), inset 0 -1px 0 rgb(25 42 34 / 6%),
+    inset 0 1px 0 rgb(255 255 255 / 95%), inset 0 -1px 0 rgb(25 42 34 / 6%),
     0 1px 2px rgb(25 42 34 / 10%), 0 18px 44px rgb(25 42 34 / 14%);
   --glass-shadow-hover:
     inset 0 1px 0 rgb(255 255 255 / 90%), inset 0 -1px 0 rgb(25 42 34 / 8%),
@@ -114,11 +115,11 @@
     0 1px 2px rgb(25 42 34 / 10%);
   /* Specular sheen and the iridescent rim. */
   --glass-sheen: rgb(255 255 255 / 60%);
-  --glass-rim-opacity: 0.2;
+  --glass-rim-opacity: 0.28;
   /* Small controls (nav, toggles, pills): a rainbow rim there reads as a smudge. */
   --glass-rim-small-opacity: 0;
-  --glass-blur: 18px;
-  --glass-saturation: 115%;
+  --glass-blur: 10px;
+  --glass-saturation: 125%;
   /* Soft light behind Preview's glass; without it backdrop-filter has nothing to blur. */
   --glass-glow-1: rgb(52 122 88 / 32%);
   --glass-glow-2: rgb(128 191 165 / 34%);
@@ -126,7 +127,13 @@
   --glass-glow-3: rgb(120 170 220 / 24%);
   /* Preview's page tint behind the glass; the rest of the app keeps --bg. */
   --glass-backdrop-base: #eef4f0;
-  --glass-backdrop-veil: rgb(244 249 246 / 38%);
+  --glass-backdrop-veil: rgb(244 249 246 / 20%);
+  /* Clear lens (Chromium): almost no tint, a bright edge and a soft drop shadow. */
+  --lens-tint: rgb(255 255 255 / 14%);
+  --lens-tint-active: rgb(255 255 255 / 34%);
+  --lens-edge: rgb(255 255 255 / 70%);
+  --lens-highlight: rgb(255 255 255 / 95%);
+  --lens-shadow: 0 10px 28px rgb(25 42 34 / 16%);
   --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
   font-family: var(--font-sans);
   color: var(--text);
@@ -199,6 +206,11 @@
   --glass-glow-3: transparent;
   --glass-backdrop-base: transparent;
   --glass-backdrop-veil: rgb(5 10 8 / 42%);
+  --lens-tint: rgb(255 255 255 / 5%);
+  --lens-tint-active: rgb(167 232 189 / 12%);
+  --lens-edge: rgb(229 255 235 / 28%);
+  --lens-highlight: rgb(229 255 235 / 42%);
+  --lens-shadow: 0 12px 30px rgb(0 0 0 / 40%);
   --glass-blur: 20px;
   --glass-saturation: 125%;
   --glass-glow-1: rgb(46 160 98 / 26%);
@@ -4695,4 +4707,22 @@ main:focus {
   .glass-backdrop {
     display: none;
   }
+}
+
+/* Clear liquid lens (liquidLens ref, Chromium only; .lens-active is set once its filter exists).
+   The repeated class outranks the nav, toggle, and hover rules (up to three classes) it
+   replaces; elsewhere these elements keep their frosted style. */
+.lens-active.lens-active.lens-active {
+  border-color: transparent;
+  background: var(--lens-tint);
+  -webkit-backdrop-filter: var(--liquid-lens) saturate(150%) brightness(1.03);
+  backdrop-filter: var(--liquid-lens) saturate(150%) brightness(1.03);
+  box-shadow:
+    inset 0 1px 1px var(--lens-highlight),
+    inset 0 -1px 1px rgb(0 0 0 / 10%),
+    inset 0 0 0 1px var(--lens-edge),
+    var(--lens-shadow);
+}
+.lens-active.lens-active.lens-active.active {
+  background: var(--lens-tint-active);
 }

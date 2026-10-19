@@ -30,6 +30,7 @@ import { Pagination } from "../../components/Pagination";
 import { Button } from "../../components/ui/button";
 import { GlassPanel, GlassPill } from "../../components/ui/glass";
 import { LiquidGlassFilter } from "../../components/ui/LiquidGlassFilter";
+import { liquidLens } from "../../lib/liquidLens";
 import {
   checkCompatibility,
   statusLabel,
@@ -313,6 +314,7 @@ export function Preview() {
           </div>
           <div className="side-views">
             <div
+              ref={liquidLens}
               className="side-view-toggle"
               role="group"
               aria-label="Installation side"

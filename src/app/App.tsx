@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { liquidLens } from "../lib/liquidLens";
 import {
   AnimatePresence,
   MotionConfig,
@@ -129,6 +130,7 @@ export function App() {
             </a>
             <nav aria-label="Main navigation">
               <a
+                ref={liquidLens}
                 className={`nav-link nav-glass-link glass-surface glass-subtle glass-hover-lift${page === "preview" ? " active" : ""}`}
                 href="#/"
                 aria-current={page === "preview" ? "page" : undefined}
@@ -137,6 +139,7 @@ export function App() {
               </a>
               {MANAGE_ENABLED && (
                 <a
+                  ref={liquidLens}
                   className={`nav-link nav-glass-link glass-surface glass-subtle glass-hover-lift${page === "manage" ? " active" : ""}`}
                   href="#/manage"
                   aria-current={page === "manage" ? "page" : undefined}
@@ -178,6 +181,7 @@ export function App() {
               </AnimatePresence>
               <button
                 type="button"
+                ref={liquidLens}
                 className="theme-toggle glass-control glass-surface glass-subtle glass-hover-lift"
                 onClick={toggleTheme}
                 aria-label={
@@ -231,6 +235,7 @@ export function App() {
           {showGoToTop && (
             <motion.button
               type="button"
+              ref={liquidLens}
               className="go-to-top"
               onClick={() =>
                 window.scrollTo({

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   edgeDisplacementPixels,
+  lensDisplacementPixels,
   supportsBackdropRefraction,
 } from "./liquidGlass";
 
@@ -34,5 +35,36 @@ describe("refraction support", () => {
     ).toBe(true);
     expect(supportsBackdropRefraction({})).toBe(false);
     expect(supportsBackdropRefraction(undefined)).toBe(false);
+  });
+});
+
+describe("lens displacement map", () => {
+  // A 120 × 40 pill: corner radius 20, bevel 12.
+  const width = 120;
+  const height = 40;
+  const map = lensDisplacementPixels(width, height, 20, 12);
+  const at = (x: number, y: number) => {
+    const index = (y * width + x) * 4;
+    return [map[index]!, map[index + 1]!];
+  };
+
+  it("leaves the middle clear", () => {
+    expect(at(60, 20)).toEqual([128, 128]);
+  });
+
+  it("pulls inward along the straight edges", () => {
+    expect(at(60, 0)[1]).toBeGreaterThan(200);
+    expect(at(60, 39)[1]).toBeLessThan(56);
+    expect(at(60, 0)[0]).toBe(128);
+  });
+
+  it("follows the rounded ends diagonally", () => {
+    const [x, y] = at(8, 10);
+    expect(x).toBeGreaterThan(128);
+    expect(y).toBeGreaterThan(128);
+  });
+
+  it("leaves the area outside the corner untouched", () => {
+    expect(at(0, 0)).toEqual([128, 128]);
   });
 });
