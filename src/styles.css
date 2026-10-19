@@ -679,7 +679,7 @@ main:focus {
   letter-spacing: 0.12em;
 }
 .collection-section {
-  padding: 86px 0 112px;
+  padding: 86px 0 0;
 }
 .section-heading {
   display: flex;
@@ -1941,7 +1941,7 @@ main:focus {
     letter-spacing: 0.07em;
   }
   .collection-section {
-    padding: 63px 0 82px;
+    padding: 63px 0 0;
   }
   .section-heading {
     align-items: start;
