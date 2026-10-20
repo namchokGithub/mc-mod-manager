@@ -9048,59 +9048,6 @@
     "addedAt": "2026-10-18T09:09:12.789Z"
   },
   {
-    "id": "ly-life-steal-enchantment",
-    "name": "Life Steal Enchantment",
-    "version": "v1.1.0+mod",
-    "category": "Equipment",
-    "tags": [
-      "Game Mechanics",
-      "Magic"
-    ],
-    "status": "planned",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/ly-life-steal-enchantment",
-    "description": "New enchantment for weapons thats steal life from victims!",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "https://cdn.modrinth.com/data/2VmJJJnd/64d36e4c65b8d8dae27b6c22bf1b893a72101ce5.png",
-    "modrinth": {
-      "projectId": "2VmJJJnd",
-      "slug": "ly-life-steal-enchantment",
-      "versionId": "OCrpQgs8",
-      "versionNumber": "v1.1.0+mod",
-      "versionType": "release",
-      "datePublished": "2025-11-24T06:44:37.197327Z",
-      "gameVersions": [
-        "1.21",
-        "1.21.1",
-        "1.21.2",
-        "1.21.3",
-        "1.21.4",
-        "1.21.5",
-        "1.21.6",
-        "1.21.7",
-        "1.21.8",
-        "1.21.9",
-        "1.21.10",
-        "1.21.11",
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-        "26.2"
-      ],
-      "loaders": [
-        "fabric",
-        "forge",
-        "neoforge",
-        "quilt"
-      ],
-      "dependencies": [],
-      "syncedAt": "2026-10-18T04:18:40.454Z"
-    },
-    "addedAt": "2026-10-18T09:09:12.789Z"
-  },
-  {
     "id": "the-grave-scrolls",
     "name": "The Grave Scrolls",
     "version": "1.0.3",
@@ -12609,7 +12556,7 @@
   },
   {
     "id": "apothic-enchanting",
-    "name": "Apothic-Enchanting",
+    "name": "Apothic Enchanting",
     "version": "26.1.2-2.1.0",
     "category": "Adventure",
     "tags": [
@@ -12660,7 +12607,7 @@
   },
   {
     "id": "apothic-spawners",
-    "name": "Apothic-Spawners",
+    "name": "Apothic Spawners",
     "version": "26.1.2-2.0.1",
     "category": "Adventure",
     "tags": [
@@ -12813,227 +12760,3555 @@
     "addedAt": "2026-10-18T14:53:14.887Z"
   },
   {
+    "id": "connectivity",
+    "name": "Connectivity Mod",
+    "version": "7.7",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/connectivity",
+    "description": "Lightweight mod which solves connection and packet size issues",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from connectivity-26.1-7.7.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/532/325/64/64/637855720922086407.png",
+    "file": {
+      "name": "connectivity-26.1-7.7.jar",
+      "modId": "connectivity",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.1,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:29:03.721Z"
+  },
+  {
     "id": "dusk",
     "name": "Dusk",
-    "version": "",
-    "category": "Mobs & Difficulty",
-    "tags": [],
-    "status": "disabled",
+    "version": "4.3",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
     "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:05:42.920Z"
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dusk",
+    "description": "Dusk gives you full control over how dangerous Minecraft nights become.",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from dusk-26.1-4.3.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/367/628/64/64/637534740395651806.png",
+    "file": {
+      "name": "dusk-26.1-4.3.jar",
+      "modId": "dusk",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.5,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:31:21.597Z"
   },
   {
-    "id": "shield-mechanics",
-    "name": "Shield Mechanics",
-    "version": "",
-    "category": "Combat",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:06:27.259Z"
-  },
-  {
-    "id": "loot-integrations",
-    "name": "Loot Integrations",
-    "version": "",
-    "category": "Loot",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:07:02.512Z"
-  },
-  {
-    "id": "yung-structures-addon",
-    "name": "Yung Structures Addon",
-    "version": "",
-    "category": "Structures",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:07:18.425Z"
-  },
-  {
-    "id": "stoneholm-loot-integration",
-    "name": "Stoneholm Loot Integration",
-    "version": "",
-    "category": "Loot",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:07:41.724Z"
-  },
-  {
-    "id": "connectivity",
-    "name": "Connectivity",
-    "version": "",
-    "category": "Performance",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:08:02.410Z"
-  },
-  {
-    "id": "dynamic-view-and-simulation-distances",
+    "id": "dynamicviewdist",
     "name": "Dynamic View and Simulation Distances",
-    "version": "",
-    "category": "Performance",
-    "tags": [],
-    "status": "disabled",
+    "version": "4.1",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
     "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:08:25.019Z"
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dynamic-view",
+    "description": "Dynamic view distance mod which dynamically changes chunk view distance to fit server load",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from dynamicviewdist-26.1-4.1.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/532/325/64/64/637855720922086407.png",
+    "file": {
+      "name": "dynamicviewdist-26.1-4.1.jar",
+      "modId": "dynamicviewdist",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.5,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:43:34.056Z"
   },
   {
-    "id": "fast-async-world-save",
-    "name": "Fast Async World Save",
-    "version": "",
-    "category": "Performance",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:09:03.197Z"
-  },
-  {
-    "id": "ftb-library-neoforge",
-    "name": "FTB Library (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:11:21.858Z"
-  },
-  {
-    "id": "ftb-library-neoforge-2",
-    "name": "FTB Quests (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:12:45.164Z"
-  },
-  {
-    "id": "ftb-quests-neoforge",
-    "name": "FTB XMod Compat",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:13:07.046Z"
-  },
-  {
-    "id": "ftb-xmod-compat",
-    "name": "FTB Chunks (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:13:29.177Z"
-  },
-  {
-    "id": "ftb-chunks-neoforge",
-    "name": "FTB Ultimine (NeoForge)",
-    "version": "",
-    "category": "API and Library",
-    "tags": [],
-    "status": "disabled",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:13:43.945Z"
-  },
-  {
-    "id": "ftb-ultimine-neoforge",
+    "id": "ftbbackups3",
     "name": "FTB Backups 3",
-    "version": "",
+    "version": "26.1.2.2",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-backups",
+    "description": "Creates backups of your world",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-backups-3-26.1.2.2.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1330/191/64/64/638864644748882470.png",
+    "file": {
+      "name": "ftb-backups-3-26.1.2.2.jar",
+      "modId": "ftbbackups3",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.7,27)"
+        }
+      ]
+    },
+    "addedAt": "2026-10-19T15:46:34.876Z"
+  },
+  {
+    "id": "ftblibrary",
+    "name": "FTB Library",
+    "version": "26.1.2.9",
     "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
+    "description": "FTB Library adds nothing.",
+    "dependencies": [],
+    "notes": "Imported from ftb-library-neoforge-26.1.2.9.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/575/64/64/638474885844428954.png",
+    "file": {
+      "name": "ftb-library-neoforge-26.1.2.9.jar",
+      "modId": "ftblibrary",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:49:19.713Z"
+  },
+  {
+    "id": "ftbultimine",
+    "name": "FTB Ultimine",
+    "version": "26.1.2.6",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "priority": "high",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-ultimine-forge",
+    "description": "Allows you to break multiple blocks at once",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-ultimine-neoforge-26.1.2.6.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/578/64/64/638474886453116037.png",
+    "file": {
+      "name": "ftb-ultimine-neoforge-26.1.2.6.jar",
+      "modId": "ftbultimine",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.5,27)"
+        },
+        {
+          "modId": "accelerateddecay",
+          "kind": "optional",
+          "versionRange": "[26.1.2.3,27)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:52:26.629Z",
+    "dependencyLinks": [
+      {
+        "id": "accelerateddecay",
+        "modId": "accelerated-decay"
+      }
+    ]
+  },
+  {
+    "id": "accelerated-decay",
+    "name": "Accelerated Decay",
+    "version": "26.1.2.4",
+    "category": "Game Mechanics",
     "tags": [],
-    "status": "disabled",
+    "status": "planned",
     "side": "both",
     "source": "Modrinth",
-    "sourceUrl": "",
-    "description": "",
+    "sourceUrl": "https://modrinth.com/mod/accelerated-decay",
+    "description": "Speeds up the leaf decaying process",
     "dependencies": [],
     "notes": "",
-    "imageUrl": "",
-    "addedAt": "2026-10-18T15:14:16.650Z"
+    "imageUrl": "https://cdn.modrinth.com/data/laX5CckD/f067053f21f651979c1f678548e1383374330b13_96.webp",
+    "modrinth": {
+      "projectId": "laX5CckD",
+      "slug": "accelerated-decay",
+      "versionId": "BSBkvx2x",
+      "versionNumber": "26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-28T11:46:30.947124Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-19T15:54:41.794Z"
+    },
+    "addedAt": "2026-10-19T15:54:46.223Z"
+  },
+  {
+    "id": "ftbchunks",
+    "name": "FTB Chunks",
+    "version": "26.1.2.8",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge",
+    "description": "Claim chunks to protect your base from griefers!",
+    "dependencies": [
+      "ftblibrary",
+      "ftbteams"
+    ],
+    "notes": "Imported from ftb-chunks-neoforge-26.1.2.8.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/573/64/64/638474885347244172.png",
+    "file": {
+      "name": "ftb-chunks-neoforge-26.1.2.8.jar",
+      "modId": "ftbchunks",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.7,)"
+        },
+        {
+          "modId": "ftbteams",
+          "kind": "required",
+          "versionRange": "[26.1.2.4,)"
+        },
+        {
+          "modId": "ftbbackups3",
+          "kind": "optional",
+          "versionRange": "[26.1.2.1,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T15:58:36.368Z"
+  },
+  {
+    "id": "ftbteams",
+    "name": "FTB Teams",
+    "version": "26.1.2.4",
+    "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
+    "description": "FTB Teams adds ability to create your own teams that can be used for quests etc.",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-teams-neoforge-26.1.2.4.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/581/64/64/638474887222710106.png",
+    "file": {
+      "name": "ftb-teams-neoforge-26.1.2.4.jar",
+      "modId": "ftbteams",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.2,27)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T16:04:30.954Z"
+  },
+  {
+    "id": "ftbxmodcompat",
+    "name": "FTB XMod Compat",
+    "version": "26.1.2.4",
+    "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat",
+    "description": "Provides cross-mod compatibilty/integration for all main FTB mods",
+    "dependencies": [
+      "ftblibrary"
+    ],
+    "notes": "Imported from ftb-xmod-compat-neoforge-26.1.2.4.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/850/409/64/64/638251965015898859.png",
+    "file": {
+      "name": "ftb-xmod-compat-neoforge-26.1.2.4.jar",
+      "modId": "ftbxmodcompat",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.7,)"
+        },
+        {
+          "modId": "ftbquests",
+          "kind": "optional",
+          "versionRange": "[26.1.2.3,)"
+        },
+        {
+          "modId": "ftbchunks",
+          "kind": "optional",
+          "versionRange": "[26.1.2.7,)"
+        },
+        {
+          "modId": "ftbranks",
+          "kind": "optional",
+          "versionRange": "[26.1.2.3,)"
+        },
+        {
+          "modId": "jei",
+          "kind": "optional",
+          "versionRange": "[19,)"
+        },
+        {
+          "modId": "kubejs",
+          "kind": "optional",
+          "versionRange": "[26.1.2,)"
+        },
+        {
+          "modId": "luckperms",
+          "kind": "optional",
+          "versionRange": "[5.4.112,)"
+        },
+        {
+          "modId": "waystones",
+          "kind": "optional",
+          "versionRange": "[26.1.2.6,)"
+        },
+        {
+          "modId": "sg_economy",
+          "kind": "optional",
+          "versionRange": "[26.1.0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T16:10:39.249Z"
+  },
+  {
+    "id": "ftbquests",
+    "name": "FTB Quests",
+    "version": "26.1.2.9",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge",
+    "description": "Lets you easily create and play with quests",
+    "dependencies": [
+      "ftblibrary",
+      "ftbteams"
+    ],
+    "notes": "Imported from ftb-quests-neoforge-26.1.2.9.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/972/571/64/64/638474884805475097.png",
+    "file": {
+      "name": "ftb-quests-neoforge-26.1.2.9.jar",
+      "modId": "ftbquests",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1.2,27)",
+      "dependencies": [
+        {
+          "modId": "ftblibrary",
+          "kind": "required",
+          "versionRange": "[26.1.2.8,)"
+        },
+        {
+          "modId": "ftbteams",
+          "kind": "required",
+          "versionRange": "[26.1.2.4,)"
+        },
+        {
+          "modId": "ftbxmodcompat",
+          "kind": "optional",
+          "versionRange": "[21.1.7,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T16:15:47.125Z"
+  },
+  {
+    "id": "fastasyncworldsave",
+    "name": "Fast Async World Save",
+    "version": "2.6",
+    "category": "Server Utility",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/fast-async-world-save-forge-fabric",
+    "description": "fastasyncworldsave mod",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from fastasyncworldsave-26.1-2.6.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/532/325/64/64/637855720922086407.png",
+    "file": {
+      "name": "fastasyncworldsave-26.1-2.6.jar",
+      "modId": "fastasyncworldsave",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.5,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T17:39:02.355Z"
+  },
+  {
+    "id": "lootintegrations-undergroundvillages",
+    "name": "Loot Integrations: Underground Villages, Stoneholm",
+    "version": "1.2",
+    "category": "Addons",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-underground-villages-stoneholm",
+    "description": "lootintegrations_undergroundvillages mod",
+    "dependencies": [
+      "lootintegrations"
+    ],
+    "notes": "Imported from lootintegrations_undergroundvillages-1.2.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1597/495/64/64/639032444918459869.png",
+    "file": {
+      "name": "lootintegrations_undergroundvillages-1.2.jar",
+      "modId": "lootintegrations_undergroundvillages",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "lootintegrations",
+          "kind": "required",
+          "versionRange": "[0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.2",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-underground-villages-stoneholm",
+      "verifiedAt": "2026-10-19T17:45:16.582Z"
+    },
+    "addedAt": "2026-10-19T17:41:32.005Z"
+  },
+  {
+    "id": "lootintegrations",
+    "name": "Loot Integrations",
+    "version": "4.8",
+    "category": "Addons",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations",
+    "description": "Integrates items from loottables into other loottables for intermod loot compatibility",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from lootintegrations-26.1-4.8.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/531/625/64/64/637853939577730031.png",
+    "file": {
+      "name": "lootintegrations-26.1-4.8.jar",
+      "modId": "lootintegrations",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.2,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T17:43:28.161Z"
+  },
+  {
+    "id": "lootintegrations-yungs",
+    "name": "Yung Structures Addon for Loot Integrations",
+    "version": "1",
+    "category": "Addons",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/yung-structures-addon-for-loot-integrations",
+    "description": "lootintegrations_yungs mod",
+    "dependencies": [
+      "lootintegrations"
+    ],
+    "notes": "Imported from lootintegrations_yungs-1.6.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/989/641/64/64/638502393632519068.png",
+    "file": {
+      "name": "lootintegrations_yungs-1.6.jar",
+      "modId": "lootintegrations_yungs",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "lootintegrations",
+          "kind": "required",
+          "versionRange": "[0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/yung-structures-addon-for-loot-integrations",
+      "verifiedAt": "2026-10-19T17:47:09.676Z"
+    },
+    "addedAt": "2026-10-19T17:46:28.399Z"
+  },
+  {
+    "id": "shieldmechanics",
+    "name": "Shield Mechanics",
+    "version": "5.0",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/shield-mechanics",
+    "description": "Shield mechanics mod which rebalances shields",
+    "dependencies": [
+      "cupboard"
+    ],
+    "notes": "Imported from shieldmechanics-26.1-5.0.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/2068/154/64/64/639258771793230256.png",
+    "file": {
+      "name": "shieldmechanics-26.1-5.0.jar",
+      "modId": "shieldmechanics",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,27)",
+      "dependencies": [
+        {
+          "modId": "cupboard",
+          "kind": "required",
+          "versionRange": "[3.7,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-19T17:48:04.172Z"
+  },
+  {
+    "id": "ender-zoology",
+    "name": "Ender Zoology",
+    "version": "26.1.0",
+    "category": "Adventure",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ender-zoology",
+    "description": "Vanilla themed monsters to add some difficulty to the game. A remake of Ender Zoo.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/CUQhzQjg/bc15cec43e6ed3f055035cf78f3b38417a67ef5f_96.webp",
+    "modrinth": {
+      "projectId": "CUQhzQjg",
+      "slug": "ender-zoology",
+      "versionId": "M2gvL6w0",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-29T23:12:56.792310Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:03:18.890Z"
+    },
+    "addedAt": "2026-10-19T18:03:36.845Z"
+  },
+  {
+    "id": "armored-foes",
+    "name": "Armored Foes",
+    "version": "26.1.0",
+    "category": "Equipment",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/armored-foes",
+    "description": "Give every mob the gear they deserve, from Drowned to Illagers and beyond.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ahTPKYtE/5d94940df885de0996ed6f0f72547749b415e4fc_96.webp",
+    "modrinth": {
+      "projectId": "ahTPKYtE",
+      "slug": "armored-foes",
+      "versionId": "bttWoD7x",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-05-09T09:01:33.619845Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:03:46.117Z"
+    },
+    "addedAt": "2026-10-19T18:03:48.014Z"
+  },
+  {
+    "id": "cut-through",
+    "name": "Cut Through",
+    "version": "26.1.0",
+    "category": "Game Mechanics",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/cut-through",
+    "description": "Cleanly swing through transparent blocks like tall grass to hit mobs without breaking said block.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Dk6su9JN/7d3394c6c15bf9bdfe04fd25b317e237feac6c55_96.webp",
+    "modrinth": {
+      "projectId": "Dk6su9JN",
+      "slug": "cut-through",
+      "versionId": "CyWu1ySk",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-26T09:43:24.227690Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:04:21.461Z"
+    },
+    "addedAt": "2026-10-19T18:04:23.648Z"
+  },
+  {
+    "id": "visual-workbench",
+    "name": "Visual Workbench",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/visual-workbench",
+    "description": "Items stay inside of crafting tables and are also rendered on top. It's really fancy!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/kfqD1JRw/e56a31e890d21c82cc454593e023df09f5ae3c36_96.webp",
+    "modrinth": {
+      "projectId": "kfqD1JRw",
+      "slug": "visual-workbench",
+      "versionId": "cIEtLn9n",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-28T11:35:46.775798Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:05:38.774Z"
+    },
+    "addedAt": "2026-10-19T18:05:40.370Z"
+  },
+  {
+    "id": "open-together",
+    "name": "Open Together",
+    "version": "26.1.2",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/open-together",
+    "description": "Open matching double doors, trapdoors, and fence gates with a single click.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ssyvO6WG/24828632af55e53e7af0ae2321a7eee6dcdbbe0e_96.webp",
+    "modrinth": {
+      "projectId": "ssyvO6WG",
+      "slug": "open-together",
+      "versionId": "NLdVw9kF",
+      "versionNumber": "26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-10T19:16:01.784758Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:06:11.975Z"
+    },
+    "addedAt": "2026-10-19T18:06:14.129Z"
+  },
+  {
+    "id": "trading-post",
+    "name": "Trading Post",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/trading-post",
+    "description": "Rule the village! Trade with every villager at once!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/8pcjMDgj/7bed3fc0e6ad184eae72ab2d4352f0f23e933af4_96.webp",
+    "modrinth": {
+      "projectId": "8pcjMDgj",
+      "slug": "trading-post",
+      "versionId": "KyKEGOeC",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-30T07:08:23.858045Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:06:46.975Z"
+    },
+    "addedAt": "2026-10-19T18:06:49.762Z"
+  },
+  {
+    "id": "fast-item-frames",
+    "name": "Fast Item Frames",
+    "version": "26.1.1",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fast-item-frames",
+    "description": "Supercharged item frames! Less lag, better performance, and now they can change color and vanish!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FsoeTIV0/61ec84b804647ef0c09ea49995f86aaec2f28fc8_96.webp",
+    "modrinth": {
+      "projectId": "FsoeTIV0",
+      "slug": "fast-item-frames",
+      "versionId": "hLFhJAU8",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-08-31T08:08:49.129388Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:07:25.630Z"
+    },
+    "addedAt": "2026-10-19T18:07:27.560Z"
+  },
+  {
+    "id": "new-sea-life",
+    "name": "Sea Life",
+    "version": "26.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/new-sea-life",
+    "description": "Bring oceans and rivers to life with new fish, items, and underwater machinery.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/2RxBOoXP/3fc7d661177240e82567d8c45eadd0457e5bccb3_96.webp",
+    "modrinth": {
+      "projectId": "2RxBOoXP",
+      "slug": "new-sea-life",
+      "versionId": "A1ilUHRa",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-29T10:47:47.736154Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:08:29.533Z"
+    },
+    "addedAt": "2026-10-19T18:08:34.205Z"
+  },
+  {
+    "id": "vehicle-upgrade",
+    "name": "Vehicle Upgrade",
+    "version": "26.1.2",
+    "category": "Mobs",
+    "tags": [
+      "Transportation",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/vehicle-upgrade",
+    "description": "Bring tons of quality-of-life improvements to your rides. Enjoy more reliable, and more capable mounts.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9B9c6QcJ/8d0a106288af9c9c91bcb37dddb882df156f3377_96.webp",
+    "modrinth": {
+      "projectId": "9B9c6QcJ",
+      "slug": "vehicle-upgrade",
+      "versionId": "HG6Or8Gz",
+      "versionNumber": "26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-05-20T06:29:27.720510Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:09:34.414Z"
+    },
+    "addedAt": "2026-10-19T18:09:36.408Z"
+  },
+  {
+    "id": "portable-hole",
+    "name": "Portable Hole",
+    "version": "26.1.0",
+    "category": "Equipment",
+    "tags": [
+      "Transportation"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/portable-hole",
+    "description": "Where did the walls go?",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/jckrUoUe/5deeac019f52ee8467974c9d3d1eb998152ced6f_96.webp",
+    "modrinth": {
+      "projectId": "jckrUoUe",
+      "slug": "portable-hole",
+      "versionId": "XzsIWFeT",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-05-04T07:00:22.185412Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:10:05.907Z"
+    },
+    "addedAt": "2026-10-19T18:10:08.282Z"
+  },
+  {
+    "id": "stoneworks",
+    "name": "Stoneworks",
+    "version": "26.1.0",
+    "category": "Decoration",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/stoneworks",
+    "description": "Vanilla stone types in plenty of variations for all your building needs.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FzyTKtVF/c18c5fb3daa800d5d612efac7d658eafdcf51129_96.webp",
+    "modrinth": {
+      "projectId": "FzyTKtVF",
+      "slug": "stoneworks",
+      "versionId": "yI3EuefP",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-26T15:08:57.035059Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:10:25.149Z"
+    },
+    "addedAt": "2026-10-19T18:10:27.395Z"
+  },
+  {
+    "id": "stonecutting-upgrade",
+    "name": "Stonecutting Upgrade",
+    "version": "26.1.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/stonecutting-upgrade",
+    "description": "Bigger stonecutter menus, remembered recipes, and quick refills for speedy crafting.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ZCLuNtSF/22682daf7265b2cca44b931fc4b80d0b8a6e797c_96.webp",
+    "modrinth": {
+      "projectId": "ZCLuNtSF",
+      "slug": "stonecutting-upgrade",
+      "versionId": "RAVuh7wv",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-06-01T20:45:03.155655Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:13:17.625Z"
+    },
+    "addedAt": "2026-10-19T18:13:19.832Z"
+  },
+  {
+    "id": "slot-cycler",
+    "name": "Slot Cycler",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/slot-cycler",
+    "description": "Nine hotbar slots aren't enough for you? Now you can cycle your whole inventory!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3kl8Lmm9/e4fa083bb7b18dda525ac515b14497da7bb210ff_96.webp",
+    "modrinth": {
+      "projectId": "3kl8Lmm9",
+      "slug": "slot-cycler",
+      "versionId": "XOaX5zN4",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-30T11:43:27.488658Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:14:55.413Z"
+    },
+    "addedAt": "2026-10-19T18:14:57.158Z"
+  },
+  {
+    "id": "eternal-nether",
+    "name": "Eternal Nether",
+    "version": "26.1.4",
+    "category": "Adventure",
+    "tags": [
+      "Mobs",
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/eternal-nether",
+    "description": "New structures, mobs, and many Nether adventures await! A continuation of Bygone Nether by Izofar.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/s6R4jmL8/cd258579b012c6c7f9088538e88bff8245c6b63c_96.webp",
+    "modrinth": {
+      "projectId": "s6R4jmL8",
+      "slug": "eternal-nether",
+      "versionId": "HrA3jnav",
+      "versionNumber": "26.1.4",
+      "versionType": "release",
+      "datePublished": "2026-06-08T21:16:47.366402Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:15:17.984Z"
+    },
+    "addedAt": "2026-10-19T18:15:20.078Z"
+  },
+  {
+    "id": "new-health-bars",
+    "name": "Health Bars",
+    "version": "26.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/new-health-bars",
+    "description": "See every mob's health in style. In the HUD and in-world. Clean, colorful, and customizable!",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/A3VSiTms/2c56fa67128cbca01470969ce86dd0318c0665e8_96.webp",
+    "modrinth": {
+      "projectId": "A3VSiTms",
+      "slug": "new-health-bars",
+      "versionId": "9xmL0eyM",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-06-19T15:29:13.299231Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:15:32.392Z"
+    },
+    "addedAt": "2026-10-19T18:15:34.655Z"
+  },
+  {
+    "id": "easy-magic",
+    "name": "Easy Magic",
+    "version": "26.1.0",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/easy-magic",
+    "description": "Enchanting tables as they always should have been! Items stay after closing, and easy re-rolls.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9hx3AbJM/5387d7206ba13438d088d127845d255c1a79b9c2_96.webp",
+    "modrinth": {
+      "projectId": "9hx3AbJM",
+      "slug": "easy-magic",
+      "versionId": "1tUK8U3Z",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-28T12:30:54.302541Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:16:41.004Z"
+    },
+    "addedAt": "2026-10-19T18:16:42.769Z"
+  },
+  {
+    "id": "overflowing-bars",
+    "name": "Overflowing Bars",
+    "version": "26.1.0",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/overflowing-bars",
+    "description": "Expand health, armor and armor toughness bars beyond vanilla. Nice and compact without confusing colors.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XD7XOrAF/d90f38fb48581277f61e9f4bb3e1cb8e9ebe47e1_96.webp",
+    "modrinth": {
+      "projectId": "XD7XOrAF",
+      "slug": "overflowing-bars",
+      "versionId": "lechTFMr",
+      "versionNumber": "26.1.0",
+      "versionType": "release",
+      "datePublished": "2026-04-28T10:51:57.122809Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:17:30.086Z"
+    },
+    "addedAt": "2026-10-19T18:17:31.649Z"
+  },
+  {
+    "id": "paper-doll",
+    "name": "Paper Doll",
+    "version": "26.1.5",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/paper-doll",
+    "description": "Shows a tiny player model on screen when performing actions like sprinting, swimming, and flying.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/hD0W2Wde/ead1dcec9ef0bbc3975bc163949654c314c17989_96.webp",
+    "modrinth": {
+      "projectId": "hD0W2Wde",
+      "slug": "paper-doll",
+      "versionId": "DNKmln1s",
+      "versionNumber": "26.1.5",
+      "versionType": "release",
+      "datePublished": "2026-09-10T08:52:37.453567Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:18:14.142Z"
+    },
+    "addedAt": "2026-10-19T18:18:16.610Z"
+  },
+  {
+    "id": "pick-up-notifier",
+    "name": "Pick Up Notifier",
+    "version": "26.1.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/pick-up-notifier",
+    "description": "Be notified about all the things you've just collected.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ZX66K16c/769d7c843339981c1f8e5eec5ff983294a3671fb_96.webp",
+    "modrinth": {
+      "projectId": "ZX66K16c",
+      "slug": "pick-up-notifier",
+      "versionId": "OT6grywj",
+      "versionNumber": "26.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-28T10:27:11.827171Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-19T18:19:23.324Z"
+    },
+    "addedAt": "2026-10-19T18:19:27.206Z"
+  },
+  {
+    "id": "citadel",
+    "name": "Citadel (NeoForge)",
+    "version": "26.1-1.1.0",
+    "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://github.com/astryxion/Citadel-NeoForge",
+    "description": "Citadel library",
+    "dependencies": [],
+    "notes": "Imported from citadelneoforge-26.1-1.1.0.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1754/252/64/64/639116378750819689.png",
+    "file": {
+      "name": "citadelneoforge-26.1-1.1.0.jar",
+      "modId": "citadel",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,)"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "26.1-1.1.0",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/citadel-neoforge",
+      "verifiedAt": "2026-10-20T09:26:05.625Z"
+    },
+    "addedAt": "2026-10-20T09:25:31.658Z"
+  },
+  {
+    "id": "alexsmobs",
+    "name": "Alex's Mobs (NeoForge)",
+    "version": "26.1-1.3.1",
+    "category": "Adventure",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/alexs-mobs-neoforge",
+    "description": "New, original, engaging, and aesthetic mobs for Minecraft.",
+    "dependencies": [
+      "citadel"
+    ],
+    "notes": "Imported from alexsmobsneoforge-26.1-1.3.1.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1881/73/64/64/639177764266855639.png",
+    "file": {
+      "name": "alexsmobsneoforge-26.1-1.3.1.jar",
+      "modId": "alexsmobs",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,)",
+      "dependencies": [
+        {
+          "modId": "citadel",
+          "kind": "required",
+          "versionRange": "[1.0.0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-20T09:27:31.006Z"
+  },
+  {
+    "id": "animalgarden-snowleopard",
+    "name": "Animal Garden - Snow Leopard",
+    "version": "1.0.1-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "Imported from animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1703/664/64/64/639082185387477904_animated.gif",
+    "modrinth": {
+      "projectId": "dC08F5P8",
+      "slug": "animal-garden-snow-leopard",
+      "versionId": "LqgV8Wt3",
+      "versionNumber": "1.0.1-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-03T13:58:17.688079Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:56.987Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:13:32.399Z"
+  },
+  {
+    "id": "Animal Garden - Bull Shark",
+    "name": "Animal Garden - Bull Shark",
+    "version": "1.1.1-neoforge-26.1.1.10",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-bull-shark",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1475/844/64/64/638958039405346403_animated.gif",
+    "modrinth": {
+      "projectId": "d83mmflQ",
+      "slug": "animal-garden-bull-shark",
+      "versionId": "v0PyD81d",
+      "versionNumber": "1.1.1-neoforge-26.1.1.10",
+      "versionType": "release",
+      "datePublished": "2026-04-06T15:42:08.353818Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:49.479Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:15:18.712Z"
+  },
+  {
+    "id": "Animal Garden - Crocodile",
+    "name": "Animal Garden - Crocodile",
+    "version": "1.1.0-neoforge-26.1.2.7",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-crocodile",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1675/223/64/64/639065214468270939_animated.gif",
+    "modrinth": {
+      "projectId": "Gg7RMAJ0",
+      "slug": "animal-garden-crocodile",
+      "versionId": "3ltEjqQT",
+      "versionNumber": "1.1.0-neoforge-26.1.2.7",
+      "versionType": "release",
+      "datePublished": "2026-04-14T18:47:42.089827Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:42.605Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:16:10.097Z"
+  },
+  {
+    "id": "Animal Garden - Sea Otter",
+    "name": "Animal Garden - Sea Otter",
+    "version": "1.1.1-neoforge-26.2.0.6",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-sea-otter",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-sea-otter",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1505/391/64/64/638977712001303546_animated.gif",
+    "modrinth": {
+      "projectId": "PFr3jBbA",
+      "slug": "animal-garden-sea-otter",
+      "versionId": "haekpNc7",
+      "versionNumber": "1.1.1-neoforge-26.2.0.6",
+      "versionType": "release",
+      "datePublished": "2026-06-19T14:51:51.175918Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:37.020Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:16:59.473Z"
+  },
+  {
+    "id": "Animal Garden - Porcupine",
+    "name": "Animal Garden - Porcupine",
+    "version": "1.0.5-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-porcupine",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1148/359/64/64/638715271630150874.png",
+    "modrinth": {
+      "projectId": "m0TRBPCH",
+      "slug": "animal-garden-porcupine",
+      "versionId": "QCQ5YTWa",
+      "versionNumber": "1.0.5-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-15T16:39:32.847891Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:31.019Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:17:50.215Z"
+  },
+  {
+    "id": "Animal Garden - Harp Seal",
+    "name": "Animal Garden - Harp Seal",
+    "version": "1.0.1-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-harp-seal",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1696/446/64/64/639077085424642879_animated.gif",
+    "modrinth": {
+      "projectId": "NvaiT3Fr",
+      "slug": "animal-garden-harp-seal",
+      "versionId": "6PaYumu9",
+      "versionNumber": "1.0.1-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-03T17:47:48.206926Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:24.569Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:18:11.805Z"
+  },
+  {
+    "id": "Animal Garden - Western Gorilla",
+    "name": "Animal Garden - Western Gorilla",
+    "version": "1.0.1-neoforge-26.1.2.7",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-western-gorilla",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1544/502/64/64/639002352268201669_animated.gif",
+    "modrinth": {
+      "projectId": "OezYkPKQ",
+      "slug": "animal-garden-western-gorilla",
+      "versionId": "ugGLjX1p",
+      "versionNumber": "1.0.1-neoforge-26.1.2.7",
+      "versionType": "release",
+      "datePublished": "2026-04-12T08:59:44.949704Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:18.695Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:18:39.008Z"
+  },
+  {
+    "id": "Animal Garden - Red Panda",
+    "name": "Animal Garden - Red Panda",
+    "version": "1.1.3-neoforge-26.1.2.4",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-red-panda",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1453/799/64/64/638943377236658167_animated.gif",
+    "modrinth": {
+      "projectId": "7mT3pD13",
+      "slug": "animal-garden-red-panda",
+      "versionId": "A6FuAyQq",
+      "versionNumber": "1.1.3-neoforge-26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-11T17:59:08.693430Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:12.475Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:19:03.434Z"
+  },
+  {
+    "id": "Animal Garden - Hippopotamus",
+    "name": "Animal Garden - Hippopotamus",
+    "version": "1.0.2-neoforge-26.1.1.10",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-hippopotamus",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1660/170/64/64/639057523535254585_animated.gif",
+    "modrinth": {
+      "projectId": "PbzaJXgX",
+      "slug": "animal-garden-hippopotamus",
+      "versionId": "R0rMCpaI",
+      "versionNumber": "1.0.2-neoforge-26.1.1.10",
+      "versionType": "release",
+      "datePublished": "2026-04-08T18:36:22.822268Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:04.440Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:19:52.304Z"
+  },
+  {
+    "id": "animal-garden-white-rhinoceros",
+    "name": "Animal Garden - White Rhinoceros",
+    "version": "1.0.1-neoforge-26.1.1.8",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-white-rhinoceros",
+    "description": "This mod adds the White Rhino to the game to bring more life to the savanna biomes.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LTMmsfd4/0b12eb7a77e2a6626ee613d24836cf2ad3fb6f24_96.webp",
+    "modrinth": {
+      "projectId": "LTMmsfd4",
+      "slug": "animal-garden-white-rhinoceros",
+      "versionId": "vObiE5QM",
+      "versionNumber": "1.0.1-neoforge-26.1.1.8",
+      "versionType": "release",
+      "datePublished": "2026-04-06T12:28:46.323505Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:20:25.407Z"
+    },
+    "addedAt": "2026-10-20T10:20:39.362Z"
+  },
+  {
+    "id": "aquarius-libs-2",
+    "name": "Aquarius Libs",
+    "version": "1.2.0-neoforge-26.2.0.2",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/aquarius-libs",
+    "description": "Aquarius Libs is an essential modding library for some mods from aquariusplayz.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/KkHnyaL6/7d506caf48d26f964f4f789553ce757cfe868742_96.webp",
+    "modrinth": {
+      "projectId": "KkHnyaL6",
+      "slug": "aquarius-libs",
+      "versionId": "Gi2usHZL",
+      "versionNumber": "1.2.0-neoforge-26.2.0.2",
+      "versionType": "release",
+      "datePublished": "2026-06-18T14:02:16.511300Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T10:20:37.693Z"
+    },
+    "addedAt": "2026-10-20T10:20:39.362Z"
+  },
+  {
+    "id": "animal-garden-lion",
+    "name": "Animal Garden - Lion",
+    "version": "1.0.3-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-lion",
+    "description": "This mod adds lions as tamable animals to your world.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/dA4X7lKe/525cef04cf1b993960f53fac05b6a93a8d47185e_96.webp",
+    "modrinth": {
+      "projectId": "dA4X7lKe",
+      "slug": "animal-garden-lion",
+      "versionId": "4lSRj2MX",
+      "versionNumber": "1.0.3-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-05T21:13:21.751221Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:22:18.091Z"
+    },
+    "addedAt": "2026-10-20T10:22:22.561Z"
+  },
+  {
+    "id": "animal-garden-bison",
+    "name": "Animal Garden - Bison",
+    "version": "1.0.0-neoforge-26.2.0.54",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-bison",
+    "description": "Adds the bison, a massive and powerful herbivore into the game.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/qDwwnqvr/121fcfd211fb901910225f05f1c975f8934f10ef_96.webp",
+    "modrinth": {
+      "projectId": "qDwwnqvr",
+      "slug": "animal-garden-bison",
+      "versionId": "kPfTJyeF",
+      "versionNumber": "1.0.0-neoforge-26.2.0.54",
+      "versionType": "release",
+      "datePublished": "2026-08-10T16:55:12.272680Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:22:53.846Z"
+    },
+    "addedAt": "2026-10-20T10:22:55.479Z"
+  },
+  {
+    "id": "animal-garden-common-raccoon",
+    "name": "Animal Garden - Common Raccoon",
+    "version": "1.0.0-neoforge-26.2.0.75",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-common-raccoon",
+    "description": "This mod adds the masked bandit, the Common Raccoon into the game.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/U8RR1qbb/bba76b928da0311eeeec6d1765554719f13013b0_96.webp",
+    "modrinth": {
+      "projectId": "U8RR1qbb",
+      "slug": "animal-garden-common-raccoon",
+      "versionId": "P98YYmt0",
+      "versionNumber": "1.0.0-neoforge-26.2.0.75",
+      "versionType": "release",
+      "datePublished": "2026-09-09T09:00:49.985498Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:23:07.258Z"
+    },
+    "addedAt": "2026-10-20T10:23:09.714Z"
+  },
+  {
+    "id": "animal-garden-capybara",
+    "name": "Animal Garden - Capybara",
+    "version": "1.0.0-neoforge-26.2.0.88",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-capybara",
+    "description": "This mod adds the Greater Capybara into the game.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Sgv9MA7q/a4f09120c2b83aa088a379029c1aebe929d60287_96.webp",
+    "modrinth": {
+      "projectId": "Sgv9MA7q",
+      "slug": "animal-garden-capybara",
+      "versionId": "6xF7WUmq",
+      "versionNumber": "1.0.0-neoforge-26.2.0.88",
+      "versionType": "release",
+      "datePublished": "2026-09-19T19:23:11.111929Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:23:19.657Z"
+    },
+    "addedAt": "2026-10-20T10:23:21.808Z"
+  },
+  {
+    "id": "animal-garden-spectacled-bear",
+    "name": "Animal Garden - Spectacled Bear",
+    "version": "1.0.0-neoforge-26.2.0.93",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-spectacled-bear",
+    "description": "This mod adds the Greater Capybara into the game.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/attachments/2072/904/andean-bear-cf-logo.gif",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.0-neoforge-26.2.0.93",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-spectacled-bear",
+      "verifiedAt": "2026-10-20T10:37:28.488Z"
+    },
+    "addedAt": "2026-10-20T10:34:58.979Z"
+  },
+  {
+    "id": "animal-garden-owl",
+    "name": "Animal Garden - Owl",
+    "version": "1.2.8-neoforge-26.1.2.4",
+    "category": "Decoration",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-owl",
+    "description": "Adds owls into the game, that can dance and take a rest on your shoulder.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/gMz0rZEq/8bab3fdd424dd79d2b040ab8ac4aeea40cdc7971_96.webp",
+    "modrinth": {
+      "projectId": "gMz0rZEq",
+      "slug": "animal-garden-owl",
+      "versionId": "KVP4PkDH",
+      "versionNumber": "1.2.8-neoforge-26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-11T10:43:40.638430Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:48:54.703Z"
+    },
+    "addedAt": "2026-10-20T10:48:57.009Z"
+  },
+  {
+    "id": "animal-garden-mouse",
+    "name": "Animal Garden - Mouse",
+    "version": "1.0.6-neoforge-26.1.2.4",
+    "category": "Mobs",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-mouse",
+    "description": "Adds tamable mice into the game, that will fight and protect you.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Mm8Kzdc6/3fc2f59ab1cf9db4fb1b0e3a745a0cc1b9d8c807_96.webp",
+    "modrinth": {
+      "projectId": "Mm8Kzdc6",
+      "slug": "animal-garden-mouse",
+      "versionId": "GipYxlPN",
+      "versionNumber": "1.0.6-neoforge-26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-11T15:38:45.307854Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:49:07.579Z"
+    },
+    "addedAt": "2026-10-20T10:49:09.404Z"
+  },
+  {
+    "id": "animal-garden-narwhal",
+    "name": "Animal Garden - Narwhal",
+    "version": "1.0.1-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-narwhal",
+    "description": "This mod adds the unicorns of the sea, the narwhals to the frozen ocean biomes.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/L6u2gHW6/22debd39b865cf51be6e1ba3679f11814ee78630_96.webp",
+    "modrinth": {
+      "projectId": "L6u2gHW6",
+      "slug": "animal-garden-narwhal",
+      "versionId": "bIvSxMky",
+      "versionNumber": "1.0.1-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-03T12:05:54.348249Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:49:50.565Z"
+    },
+    "addedAt": "2026-10-20T10:49:53.175Z"
+  },
+  {
+    "id": "animal-garden-red-river-hog",
+    "name": "Animal Garden - Red River Hog",
+    "version": "1.0.0-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-red-river-hog",
+    "description": "This mod adds the Red River Hogs as tamable animals into the savanna biomes.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LnGMw7NO/c3ee4da8d401936fea0fdf0e1e183cf5510eae4c_96.webp",
+    "modrinth": {
+      "projectId": "LnGMw7NO",
+      "slug": "animal-garden-red-river-hog",
+      "versionId": "Uzlruzz4",
+      "versionNumber": "1.0.0-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-02T18:35:32.476161Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:50:08.448Z"
+    },
+    "addedAt": "2026-10-20T10:50:10.248Z"
+  },
+  {
+    "id": "configurable-despawn-timer",
+    "name": "Configurable Despawn Timer",
+    "version": "26.1.2-4.5-fabric+forge+neo",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/configurable-despawn-timer",
+    "description": "✏️ Allows items and experience orbs to remain longer, shorter or infinitely on the ground",
+    "dependencies": [
+      "Collective"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9olMJ5Qp/cf2ca6592168d7ab20cc8eed021b1826bebc4d37_96.webp",
+    "modrinth": {
+      "projectId": "9olMJ5Qp",
+      "slug": "configurable-despawn-timer",
+      "versionId": "PWSecNmd",
+      "versionNumber": "26.1.2-4.5-fabric+forge+neo",
+      "versionType": "release",
+      "datePublished": "2026-06-07T17:18:40.366945Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [
+        {
+          "projectId": "e0M1UDsY",
+          "versionId": null,
+          "type": "required",
+          "name": "Collective"
+        }
+      ],
+      "syncedAt": "2026-10-20T11:28:06.988Z"
+    },
+    "addedAt": "2026-10-20T11:28:11.751Z"
+  },
+  {
+    "id": "quad",
+    "name": "Quad",
+    "version": "1.2.16+26.1-Neo",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/quad",
+    "description": "Tags, more of them, giving the power to the player in a vanilla style",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/7jzrCiK0/696b5d372353d2abdf8e745332bc3f3a6f3728a0_96.webp",
+    "modrinth": {
+      "projectId": "7jzrCiK0",
+      "slug": "quad",
+      "versionId": "OW0C6rpv",
+      "versionNumber": "1.2.16+26.1-Neo",
+      "versionType": "release",
+      "datePublished": "2026-03-31T21:11:20.071758Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T11:28:28.538Z"
+    },
+    "addedAt": "2026-10-20T11:28:31.962Z"
+  },
+  {
+    "id": "tense-enchantment",
+    "name": "Tense Enchantment",
+    "version": "1.0.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/tense-enchantment",
+    "description": "New bow enchantment that increases damage based on how long you draw the bow!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/UMSKR7Oe/75f9153f0c5f0a812c7ea78c0983932578a625ef.png",
+    "modrinth": {
+      "projectId": "UMSKR7Oe",
+      "slug": "tense-enchantment",
+      "versionId": "sw7zetF7",
+      "versionNumber": "1.0.0+mod",
+      "versionType": "release",
+      "datePublished": "2026-10-09T13:35:12.952234Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T13:51:29.350Z"
+    },
+    "addedAt": "2026-10-20T13:51:31.615Z"
+  },
+  {
+    "id": "sniper-enchantment",
+    "name": "Sniper Enchantment",
+    "version": "1.0.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sniper-enchantment",
+    "description": "New bow enchantment that increases damage based on the distance to your target!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/b1hthfvn/63d71b583f01e7928af6f7231b8905c5e19d1dbe.png",
+    "modrinth": {
+      "projectId": "b1hthfvn",
+      "slug": "sniper-enchantment",
+      "versionId": "q66qxthN",
+      "versionNumber": "1.0.0+mod",
+      "versionType": "release",
+      "datePublished": "2026-10-09T13:38:30.305686Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T13:51:42.523Z"
+    },
+    "addedAt": "2026-10-20T13:51:47.268Z"
+  },
+  {
+    "id": "protection-grace-enchantment",
+    "name": "Protection Grace Enchantment",
+    "version": "1.0.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/protection-grace-enchantment",
+    "description": "New chestplate enchantment that protects you from the first hit!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/59fioS1j/5a330167eded79514c9e86997066df7ace679c9b.png",
+    "modrinth": {
+      "projectId": "59fioS1j",
+      "slug": "protection-grace-enchantment",
+      "versionId": "HtnmTMPF",
+      "versionNumber": "1.0.0+mod",
+      "versionType": "release",
+      "datePublished": "2026-10-09T13:41:56.912780Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T13:52:02.338Z"
+    },
+    "addedAt": "2026-10-20T13:52:04.636Z"
+  },
+  {
+    "id": "ly-knowledge-book",
+    "name": "Knowledge Book",
+    "version": "v1.1.2+mod",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-knowledge-book",
+    "description": "A book thats give all recipes!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Re96YqoB/2518df365f46d790046c62b9f388909b6fb475ab_96.webp",
+    "modrinth": {
+      "projectId": "Re96YqoB",
+      "slug": "ly-knowledge-book",
+      "versionId": "HAUEzCad",
+      "versionNumber": "v1.1.2+mod",
+      "versionType": "release",
+      "datePublished": "2025-07-20T22:03:13.422718Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:01:35.646Z"
+    },
+    "addedAt": "2026-10-20T14:01:37.272Z"
+  },
+  {
+    "id": "ly-experience-book",
+    "name": "Experience Book",
+    "version": "v1.3.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-experience-book",
+    "description": "Save your experience points in a book!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FU47S17U/0393b931a1537fd00ffa815b800c276aa8606537.png",
+    "modrinth": {
+      "projectId": "FU47S17U",
+      "slug": "ly-experience-book",
+      "versionId": "IAQMkPIk",
+      "versionNumber": "v1.3.0+mod",
+      "versionType": "release",
+      "datePublished": "2025-06-20T14:30:11.684876Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:01:53.849Z"
+    },
+    "addedAt": "2026-10-20T14:01:56.119Z"
+  },
+  {
+    "id": "rpg-enchantments",
+    "name": "RPG Enchantments",
+    "version": "1.1.2+mod",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Game Mechanics"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/rpg-enchantments",
+    "description": "New enchantments designed to create distinct RPG roles!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/rAL0zAZC/4bf4e35388dcd2aeaea578700ae6df6bf133fd66_96.webp",
+    "modrinth": {
+      "projectId": "rAL0zAZC",
+      "slug": "rpg-enchantments",
+      "versionId": "kBpRoIKe",
+      "versionNumber": "1.1.2+mod",
+      "versionType": "release",
+      "datePublished": "2026-01-22T04:00:00.903936Z",
+      "gameVersions": [
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:03:08.779Z"
+    },
+    "addedAt": "2026-10-20T14:03:10.886Z"
+  },
+  {
+    "id": "ly-recall-potion",
+    "name": "Recall Potion",
+    "version": "v1.0.1+mod",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-recall-potion",
+    "description": "Teleport to your respawn point!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/JkREXTEy/b84b3d2dd82fb5705aef99b72a03d8a92198b9b0.png",
+    "modrinth": {
+      "projectId": "JkREXTEy",
+      "slug": "ly-recall-potion",
+      "versionId": "5liYiwnb",
+      "versionNumber": "v1.0.1+mod",
+      "versionType": "release",
+      "datePublished": "2025-07-01T21:05:00.872743Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:03:15.859Z"
+    },
+    "addedAt": "2026-10-20T14:03:19.873Z"
+  },
+  {
+    "id": "ly-lucky-blocks",
+    "name": "Lucky Blocks",
+    "version": "v1.3.3+mod",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-lucky-blocks",
+    "description": "Lucky Blocks in Vanilla Minecraft!\n \n(no resourcepack!)",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/eYz1XI70/5fa1f8827a23dca21205121ba2fa9613d8f355e9.png",
+    "modrinth": {
+      "projectId": "eYz1XI70",
+      "slug": "ly-lucky-blocks",
+      "versionId": "W0d259j1",
+      "versionNumber": "v1.3.3+mod",
+      "versionType": "release",
+      "datePublished": "2025-09-30T17:44:05.542144Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:04:08.396Z"
+    },
+    "addedAt": "2026-10-20T14:04:10.745Z"
+  },
+  {
+    "id": "lucky-blocks-world",
+    "name": "Lucky Blocks World Add-on",
+    "version": "v1.0.1+mod",
+    "category": "Adventure",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/lucky-blocks-world",
+    "description": "Lucky Blocks Add-on, find lucky blocks around the overworld!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ATMwZJNF/2d69f0e40524d8cc515e0728b8c6e23daa8c184c_96.webp",
+    "modrinth": {
+      "projectId": "ATMwZJNF",
+      "slug": "lucky-blocks-world",
+      "versionId": "jWc8v0ry",
+      "versionNumber": "v1.0.1+mod",
+      "versionType": "release",
+      "datePublished": "2025-10-08T14:39:02.985926Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:04:16.439Z"
+    },
+    "addedAt": "2026-10-20T14:04:18.524Z"
+  },
+  {
+    "id": "enchantments-expansion",
+    "name": "Enchantments Expansion",
+    "version": "v1.2.0+mod",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/enchantments-expansion",
+    "description": "New vanilla-friendly enchantments that enhance combat, mining, movement and utility, bringing new ways to explore, fight and progress in survival!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/mXL7Z0zq/cee835ca1c581228bcb69d8f39ba6df85d457c9a_96.webp",
+    "modrinth": {
+      "projectId": "mXL7Z0zq",
+      "slug": "enchantments-expansion",
+      "versionId": "kjzZws3E",
+      "versionNumber": "v1.2.0+mod",
+      "versionType": "release",
+      "datePublished": "2025-12-13T18:49:13.856326Z",
+      "gameVersions": [
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:04:56.182Z"
+    },
+    "addedAt": "2026-10-20T14:04:59.690Z"
+  },
+  {
+    "id": "dragon-enchants",
+    "name": "Dragon Enchants",
+    "version": "1.0.3",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dragon-enchants",
+    "description": "A reimagined version of my old dragon enchantments mod, brought to the latest version of Minecraft. Compatibility with some of my other projects is planned.",
+    "dependencies": [],
+    "notes": "Imported from dragon_enchants-1.0.3.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/731/741/64/64/638083221897713023.png",
+    "file": {
+      "name": "dragon_enchants-1.0.3.jar",
+      "modId": "dragon_enchants",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1.2]"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-20T14:15:11.308Z"
   }
 ]

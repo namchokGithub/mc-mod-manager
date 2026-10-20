@@ -33,8 +33,8 @@ function mod(id: string, name = id, category = "Utilities"): Mod {
 }
 
 describe("pagination", () => {
-  it("offers 20, 50, and 100 per page, defaulting to 50", () => {
-    expect(PAGE_SIZES).toEqual([20, 50, 100]);
+  it("offers 10, 20, 50, and 100 per page, defaulting to 50", () => {
+    expect(PAGE_SIZES).toEqual([10, 20, 50, 100]);
     expect(DEFAULT_PAGE_SIZE).toBe(50);
   });
 

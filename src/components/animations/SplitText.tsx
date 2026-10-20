@@ -450,15 +450,15 @@ export default function SplitText({
           if (revealed) return;
           intro = reveal(true, {
             scrollTrigger:
-              trigger === "load"
-                ? undefined
-                : {
+              trigger === "view"
+                ? {
                     trigger: el,
                     start,
                     once: true,
                     fastScrollEnd: true,
                     anticipatePin: 0.4,
-                  },
+                  }
+                : undefined,
             onComplete: () => {
               revealed = true;
               intro = null;
@@ -542,7 +542,8 @@ export default function SplitText({
         color,
         cursor: trigger === "click" ? "pointer" : undefined,
         visibility: ready ? undefined : "hidden",
-      }}>
+      }}
+    >
       {text}
     </TagComponent>
   );
