@@ -62,6 +62,7 @@ import { sortMinecraftVersions } from "../../lib/modrinth/versionFilters";
 import { type UpdateResult } from "../../lib/updates";
 import { JarImportDialog } from "../import/JarImportDialog";
 import {
+  duplicateMod,
   filterMods,
   minimalModList,
   uniqueId,
@@ -404,6 +405,9 @@ function ModEditor({
   const name = useWatch({ control, name: "name" });
   const id = useWatch({ control, name: "id" });
   const linked = useWatch({ control, name: "modrinth" });
+  const linkedFile = useWatch({ control, name: "file" });
+  const activeVerified =
+    verified?.source === "modrinth" && !linked ? null : verified;
   const [ignoredDeps, dependencyLinks] = useWatch({
     control,
     name: ["ignoredDependencies", "dependencyLinks"],
@@ -432,18 +436,18 @@ function ModEditor({
     const modloaders = [...new Set(loaders)];
     if (!versions.length && !modloaders.length) return undefined;
     if (
-      verified &&
-      sameValues(versions, verified.gameVersions) &&
-      sameValues(modloaders, verified.loaders)
+      activeVerified &&
+      sameValues(versions, activeVerified.gameVersions) &&
+      sameValues(modloaders, activeVerified.loaders)
     )
       return undefined;
     return { gameVersions: versions, loaders: modloaders };
   };
   const supportHint =
-    verified?.source === "modrinth"
+    activeVerified?.source === "modrinth"
       ? "Prefilled from Modrinth (verified). Compatibility uses Modrinth's data while the Version matches it; otherwise these values need manual verification."
-      : verified?.source === "jar"
-        ? `Prefilled from the JAR (verified)${verified.range ? `, which declares Minecraft ${verified.range}` : ""}. Manual values only fill what the JAR does not declare.`
+      : activeVerified?.source === "jar"
+        ? `Prefilled from the JAR (verified)${activeVerified.range ? `, which declares Minecraft ${activeVerified.range}` : ""}. Manual values only fill what the JAR does not declare.`
         : "Entered manually and not verified. Used when no Modrinth or JAR data is available.";
   const submit = (values: ModFields) => {
     const candidate: Mod = {
@@ -516,15 +520,38 @@ function ModEditor({
       {linked && (
         <div className="data-note mr-linked">
           <Info size={18} aria-hidden="true" />
-          <p>
-            Linked to Modrinth
-            {linked.slug ? ` (${linked.slug})` : ""}
-            {linked.versionNumber
-              ? `, version ${linked.versionNumber}.`
-              : ", but no version is selected."}{" "}
-            Compatibility uses that version’s metadata. Use “Update from
-            Modrinth” in the mod list to change it.
-          </p>
+          <div>
+            <p>
+              Linked to Modrinth
+              {linked.slug ? ` (${linked.slug})` : ""}
+              {linked.versionNumber
+                ? `, version ${linked.versionNumber}.`
+                : ", but no version is selected."}{" "}
+              Compatibility uses that version’s metadata. Use “Update from
+              Modrinth” in the mod list to change it.
+            </p>
+            <Button
+              type="button"
+              variant="secondary"
+              size="small"
+              className="mr-unlink"
+              onClick={() => {
+                const options = { shouldDirty: true };
+                setValue("modrinth", undefined, options);
+                setValue("file", undefined, options);
+                setValue("version", "", options);
+                setValue("sourceUrl", "", options);
+                setValue("imageUrl", "", options);
+                setValue("dependenciesText", "", options);
+                setValue("supportedVersions", [], options);
+                setValue("supportedLoaders", [], options);
+                setValue("manualVerification", undefined, options);
+                setValue("ignoredDependencies", undefined, options);
+                setValue("dependencyLinks", undefined, options);
+              }}>
+              Use as a different mod
+            </Button>
+          </div>
         </div>
       )}
       <div className="form-grid">
@@ -672,7 +699,7 @@ function ModEditor({
           }}
         />
         <IgnoredDependenciesField
-          mod={{ id: mod?.id ?? id, modrinth: linked, file: start?.file }}
+          mod={{ id: mod?.id ?? id, modrinth: linked, file: linkedFile }}
           mods={mods}
           value={ignoredDeps ?? []}
           onChange={(next) =>
@@ -1419,16 +1446,7 @@ export function Manage() {
     return true;
   };
   const duplicate = (mod: Mod) =>
-    persistMod(
-      {
-        ...mod,
-        id: uniqueId(mod.name, data.mods),
-        name: `${mod.name} (copy)`,
-        status: "planned",
-      },
-      undefined,
-      `Duplicated ${mod.name}`,
-    );
+    persistMod(duplicateMod(mod, data.mods), undefined, `Duplicated ${mod.name}`);
   return (
     <div className="container manage-page">
       <div className="manage-title">

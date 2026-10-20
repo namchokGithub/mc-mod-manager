@@ -2686,6 +2686,9 @@ main:focus {
 .mr-linked {
   margin-bottom: 16px;
 }
+.mr-unlink {
+  margin-top: 10px;
+}
 .mr-picker {
   display: grid;
   gap: 12px;

@@ -118,6 +118,27 @@ export function uniqueId(name: string, mods: { id: string }[]): string {
   return `${base}-${suffix}`;
 }
 
+/** Copy editable details without carrying the original mod's project or file identity. */
+export function duplicateMod(mod: Mod, existing: Mod[]): Mod {
+  return {
+    ...mod,
+    id: uniqueId(mod.name, existing),
+    name: `${mod.name} (copy)`,
+    status: "planned",
+    version: "",
+    sourceUrl: "",
+    imageUrl: "",
+    dependencies: [],
+    modrinth: undefined,
+    file: undefined,
+    manualCompatibility: undefined,
+    manualVerification: undefined,
+    ignoredDependencies: undefined,
+    dependencyLinks: undefined,
+    addedAt: undefined,
+  };
+}
+
 /** Removes every mod whose ID is listed, in one pass; unknown IDs are ignored. */
 export function removeMods(mods: Mod[], ids: Iterable<string>): Mod[] {
   const remove = new Set(ids);

@@ -14516,5 +14516,1068 @@
       ]
     },
     "addedAt": "2026-10-20T09:27:31.006Z"
+  },
+  {
+    "id": "animalgarden-snowleopard",
+    "name": "Animal Garden - Snow Leopard",
+    "version": "1.0.1-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "Imported from animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1703/664/64/64/639082185387477904_animated.gif",
+    "modrinth": {
+      "projectId": "dC08F5P8",
+      "slug": "animal-garden-snow-leopard",
+      "versionId": "LqgV8Wt3",
+      "versionNumber": "1.0.1-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-03T13:58:17.688079Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:56.987Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:13:32.399Z"
+  },
+  {
+    "id": "Animal Garden - Bull Shark",
+    "name": "Animal Garden - Bull Shark",
+    "version": "1.1.1-neoforge-26.1.1.10",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-bull-shark",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1475/844/64/64/638958039405346403_animated.gif",
+    "modrinth": {
+      "projectId": "d83mmflQ",
+      "slug": "animal-garden-bull-shark",
+      "versionId": "v0PyD81d",
+      "versionNumber": "1.1.1-neoforge-26.1.1.10",
+      "versionType": "release",
+      "datePublished": "2026-04-06T15:42:08.353818Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:49.479Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:15:18.712Z"
+  },
+  {
+    "id": "Animal Garden - Crocodile",
+    "name": "Animal Garden - Crocodile",
+    "version": "1.1.0-neoforge-26.1.2.7",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-crocodile",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1675/223/64/64/639065214468270939_animated.gif",
+    "modrinth": {
+      "projectId": "Gg7RMAJ0",
+      "slug": "animal-garden-crocodile",
+      "versionId": "3ltEjqQT",
+      "versionNumber": "1.1.0-neoforge-26.1.2.7",
+      "versionType": "release",
+      "datePublished": "2026-04-14T18:47:42.089827Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:42.605Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:16:10.097Z"
+  },
+  {
+    "id": "Animal Garden - Sea Otter",
+    "name": "Animal Garden - Sea Otter",
+    "version": "1.1.1-neoforge-26.2.0.6",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-sea-otter",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-sea-otter",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1505/391/64/64/638977712001303546_animated.gif",
+    "modrinth": {
+      "projectId": "PFr3jBbA",
+      "slug": "animal-garden-sea-otter",
+      "versionId": "haekpNc7",
+      "versionNumber": "1.1.1-neoforge-26.2.0.6",
+      "versionType": "release",
+      "datePublished": "2026-06-19T14:51:51.175918Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:37.020Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:16:59.473Z"
+  },
+  {
+    "id": "Animal Garden - Porcupine",
+    "name": "Animal Garden - Porcupine",
+    "version": "1.0.5-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-porcupine",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1148/359/64/64/638715271630150874.png",
+    "modrinth": {
+      "projectId": "m0TRBPCH",
+      "slug": "animal-garden-porcupine",
+      "versionId": "QCQ5YTWa",
+      "versionNumber": "1.0.5-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-15T16:39:32.847891Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:31.019Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:17:50.215Z"
+  },
+  {
+    "id": "Animal Garden - Harp Seal",
+    "name": "Animal Garden - Harp Seal",
+    "version": "1.0.1-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-harp-seal",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1696/446/64/64/639077085424642879_animated.gif",
+    "modrinth": {
+      "projectId": "NvaiT3Fr",
+      "slug": "animal-garden-harp-seal",
+      "versionId": "6PaYumu9",
+      "versionNumber": "1.0.1-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-03T17:47:48.206926Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:24.569Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:18:11.805Z"
+  },
+  {
+    "id": "Animal Garden - Western Gorilla",
+    "name": "Animal Garden - Western Gorilla",
+    "version": "1.0.1-neoforge-26.1.2.7",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-western-gorilla",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1544/502/64/64/639002352268201669_animated.gif",
+    "modrinth": {
+      "projectId": "OezYkPKQ",
+      "slug": "animal-garden-western-gorilla",
+      "versionId": "ugGLjX1p",
+      "versionNumber": "1.0.1-neoforge-26.1.2.7",
+      "versionType": "release",
+      "datePublished": "2026-04-12T08:59:44.949704Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:18.695Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:18:39.008Z"
+  },
+  {
+    "id": "Animal Garden - Red Panda",
+    "name": "Animal Garden - Red Panda",
+    "version": "1.1.3-neoforge-26.1.2.4",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-red-panda",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1453/799/64/64/638943377236658167_animated.gif",
+    "modrinth": {
+      "projectId": "7mT3pD13",
+      "slug": "animal-garden-red-panda",
+      "versionId": "A6FuAyQq",
+      "versionNumber": "1.1.3-neoforge-26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-11T17:59:08.693430Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:12.475Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:19:03.434Z"
+  },
+  {
+    "id": "Animal Garden - Hippopotamus",
+    "name": "Animal Garden - Hippopotamus",
+    "version": "1.0.2-neoforge-26.1.1.10",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge",
+      "Forge",
+      "Fabric"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-hippopotamus",
+    "description": "More info at the website.",
+    "dependencies": [
+      "aquarius_libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1660/170/64/64/639057523535254585_animated.gif",
+    "modrinth": {
+      "projectId": "PbzaJXgX",
+      "slug": "animal-garden-hippopotamus",
+      "versionId": "R0rMCpaI",
+      "versionNumber": "1.0.2-neoforge-26.1.1.10",
+      "versionType": "release",
+      "datePublished": "2026-04-08T18:36:22.822268Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:21:04.440Z"
+    },
+    "file": {
+      "name": "animalgarden-snowleopard-1.0.1-neoforge-26.1.1.1.jar",
+      "modId": "animalgarden_snowleopard",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge",
+        "forge",
+        "fabric"
+      ],
+      "loadersInferred": true,
+      "dependencies": [
+        {
+          "modId": "aquarius_libs",
+          "kind": "required",
+          "versionRange": "[1.2.0,]"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
+      "verifiedAt": "2026-10-20T10:14:11.467Z"
+    },
+    "addedAt": "2026-10-20T10:19:52.304Z"
+  },
+  {
+    "id": "animal-garden-white-rhinoceros",
+    "name": "Animal Garden - White Rhinoceros",
+    "version": "1.0.1-neoforge-26.1.1.8",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-white-rhinoceros",
+    "description": "This mod adds the White Rhino to the game to bring more life to the savanna biomes.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LTMmsfd4/0b12eb7a77e2a6626ee613d24836cf2ad3fb6f24_96.webp",
+    "modrinth": {
+      "projectId": "LTMmsfd4",
+      "slug": "animal-garden-white-rhinoceros",
+      "versionId": "vObiE5QM",
+      "versionNumber": "1.0.1-neoforge-26.1.1.8",
+      "versionType": "release",
+      "datePublished": "2026-04-06T12:28:46.323505Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:20:25.407Z"
+    },
+    "addedAt": "2026-10-20T10:20:39.362Z"
+  },
+  {
+    "id": "aquarius-libs-2",
+    "name": "Aquarius Libs",
+    "version": "1.2.0-neoforge-26.2.0.2",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/aquarius-libs",
+    "description": "Aquarius Libs is an essential modding library for some mods from aquariusplayz.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/KkHnyaL6/7d506caf48d26f964f4f789553ce757cfe868742_96.webp",
+    "modrinth": {
+      "projectId": "KkHnyaL6",
+      "slug": "aquarius-libs",
+      "versionId": "Gi2usHZL",
+      "versionNumber": "1.2.0-neoforge-26.2.0.2",
+      "versionType": "release",
+      "datePublished": "2026-06-18T14:02:16.511300Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T10:20:37.693Z"
+    },
+    "addedAt": "2026-10-20T10:20:39.362Z"
+  },
+  {
+    "id": "animal-garden-lion",
+    "name": "Animal Garden - Lion",
+    "version": "1.0.3-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-lion",
+    "description": "This mod adds lions as tamable animals to your world.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/dA4X7lKe/525cef04cf1b993960f53fac05b6a93a8d47185e_96.webp",
+    "modrinth": {
+      "projectId": "dA4X7lKe",
+      "slug": "animal-garden-lion",
+      "versionId": "4lSRj2MX",
+      "versionNumber": "1.0.3-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-05T21:13:21.751221Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:22:18.091Z"
+    },
+    "addedAt": "2026-10-20T10:22:22.561Z"
+  },
+  {
+    "id": "animal-garden-bison",
+    "name": "Animal Garden - Bison",
+    "version": "1.0.0-neoforge-26.2.0.54",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-bison",
+    "description": "Adds the bison, a massive and powerful herbivore into the game.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/qDwwnqvr/121fcfd211fb901910225f05f1c975f8934f10ef_96.webp",
+    "modrinth": {
+      "projectId": "qDwwnqvr",
+      "slug": "animal-garden-bison",
+      "versionId": "kPfTJyeF",
+      "versionNumber": "1.0.0-neoforge-26.2.0.54",
+      "versionType": "release",
+      "datePublished": "2026-08-10T16:55:12.272680Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:22:53.846Z"
+    },
+    "addedAt": "2026-10-20T10:22:55.479Z"
+  },
+  {
+    "id": "animal-garden-common-raccoon",
+    "name": "Animal Garden - Common Raccoon",
+    "version": "1.0.0-neoforge-26.2.0.75",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-common-raccoon",
+    "description": "This mod adds the masked bandit, the Common Raccoon into the game.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/U8RR1qbb/bba76b928da0311eeeec6d1765554719f13013b0_96.webp",
+    "modrinth": {
+      "projectId": "U8RR1qbb",
+      "slug": "animal-garden-common-raccoon",
+      "versionId": "P98YYmt0",
+      "versionNumber": "1.0.0-neoforge-26.2.0.75",
+      "versionType": "release",
+      "datePublished": "2026-09-09T09:00:49.985498Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:23:07.258Z"
+    },
+    "addedAt": "2026-10-20T10:23:09.714Z"
+  },
+  {
+    "id": "animal-garden-capybara",
+    "name": "Animal Garden - Capybara",
+    "version": "1.0.0-neoforge-26.2.0.88",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-capybara",
+    "description": "This mod adds the Greater Capybara into the game.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Sgv9MA7q/a4f09120c2b83aa088a379029c1aebe929d60287_96.webp",
+    "modrinth": {
+      "projectId": "Sgv9MA7q",
+      "slug": "animal-garden-capybara",
+      "versionId": "6xF7WUmq",
+      "versionNumber": "1.0.0-neoforge-26.2.0.88",
+      "versionType": "release",
+      "datePublished": "2026-09-19T19:23:11.111929Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:23:19.657Z"
+    },
+    "addedAt": "2026-10-20T10:23:21.808Z"
+  },
+  {
+    "id": "animal-garden-spectacled-bear",
+    "name": "Animal Garden - Spectacled Bear",
+    "version": "1.0.0-neoforge-26.2.0.93",
+    "category": "Mobs",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-spectacled-bear",
+    "description": "This mod adds the Greater Capybara into the game.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/attachments/2072/904/andean-bear-cf-logo.gif",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.0.0-neoforge-26.2.0.93",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-spectacled-bear",
+      "verifiedAt": "2026-10-20T10:36:42.952Z"
+    },
+    "addedAt": "2026-10-20T10:34:58.979Z"
   }
 ]
