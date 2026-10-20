@@ -130,7 +130,7 @@ const initialFilters: Filters = {
 };
 
 // Keep duplication available for a future editor workflow without showing it in the row actions.
-const SHOW_DUPLICATE_ACTION = false;
+const SHOW_DUPLICATE_ACTION = true;
 
 const formSchema = modSchema
   .omit({ tags: true, dependencies: true, id: true })

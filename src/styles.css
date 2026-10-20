@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@source not "../public/data";
+
 /*
  * Typography tokens. Tailwind turns these into the `font-sans` and `font-display` utilities.
  * Inter is the UI font. Minecraft is a [Minecraft](https://www.fontspace.com/minecraft-font-f28180)
