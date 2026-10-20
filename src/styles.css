@@ -3515,7 +3515,6 @@ main:focus {
 .control-item[data-state="checked"] {
   font-weight: 650;
 }
-.control-item[data-disabled],
 .control-item[data-disabled="true"] {
   opacity: 0.45;
   cursor: not-allowed;

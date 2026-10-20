@@ -14425,5 +14425,96 @@
       "syncedAt": "2026-10-19T18:19:23.324Z"
     },
     "addedAt": "2026-10-19T18:19:27.206Z"
+  },
+  {
+    "id": "citadel",
+    "name": "Citadel (NeoForge)",
+    "version": "26.1-1.1.0",
+    "category": "API and Library",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://github.com/astryxion/Citadel-NeoForge",
+    "description": "Citadel library",
+    "dependencies": [],
+    "notes": "Imported from citadelneoforge-26.1-1.1.0.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1754/252/64/64/639116378750819689.png",
+    "file": {
+      "name": "citadelneoforge-26.1-1.1.0.jar",
+      "modId": "citadel",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,)"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "26.1-1.1.0",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/citadel-neoforge",
+      "verifiedAt": "2026-10-20T09:26:05.625Z"
+    },
+    "addedAt": "2026-10-20T09:25:31.658Z"
+  },
+  {
+    "id": "alexsmobs",
+    "name": "Alex's Mobs (NeoForge)",
+    "version": "26.1-1.3.1",
+    "category": "Adventure",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Other",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/alexs-mobs-neoforge",
+    "description": "New, original, engaging, and aesthetic mobs for Minecraft.",
+    "dependencies": [
+      "citadel"
+    ],
+    "notes": "Imported from alexsmobsneoforge-26.1-1.3.1.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1881/73/64/64/639177764266855639.png",
+    "file": {
+      "name": "alexsmobsneoforge-26.1-1.3.1.jar",
+      "modId": "alexsmobs",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1,)",
+      "dependencies": [
+        {
+          "modId": "citadel",
+          "kind": "required",
+          "versionRange": "[1.0.0,)"
+        }
+      ]
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-20T09:27:31.006Z"
   }
 ]
