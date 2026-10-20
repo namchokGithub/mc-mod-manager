@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import { withOrder } from "./batches";
 import { checkCompatibility } from "./compatibility";
 import {
@@ -132,8 +132,17 @@ describe("linked dependencies", () => {
         name: "B",
         description: "",
         order: 1,
-        modIds: ["sophisticated-backpacks", "sophisticated-core"],
-        checklist: [],
+        steps: [
+          {
+            id: "install",
+            name: "Install",
+            description: "",
+            done: false,
+            itemRefs: ["sophisticated-backpacks", "sophisticated-core"].map(
+              (id) => ({ type: "mod" as const, id }),
+            ),
+          },
+        ],
       },
     ]);
     const entry = batchDependencyOverview("b", plan, [linked, core]).mods[0]
@@ -159,8 +168,18 @@ describe("linked dependencies", () => {
         name: "B",
         description: "",
         order: 1,
-        modIds: ["sophisticated-backpacks"],
-        checklist: [],
+        steps: [
+          {
+            id: "install",
+            name: "Install",
+            description: "",
+            done: false,
+            itemRefs: ["sophisticated-backpacks"].map((id) => ({
+              type: "mod" as const,
+              id,
+            })),
+          },
+        ],
       },
     ]);
     expect(
@@ -175,16 +194,36 @@ describe("linked dependencies", () => {
         name: "A",
         description: "",
         order: 1,
-        modIds: ["sophisticated-backpacks"],
-        checklist: [],
+        steps: [
+          {
+            id: "install",
+            name: "Install",
+            description: "",
+            done: false,
+            itemRefs: ["sophisticated-backpacks"].map((id) => ({
+              type: "mod" as const,
+              id,
+            })),
+          },
+        ],
       },
       {
         id: "b",
         name: "B",
         description: "",
         order: 2,
-        modIds: ["sophisticated-core"],
-        checklist: [],
+        steps: [
+          {
+            id: "install",
+            name: "Install",
+            description: "",
+            done: false,
+            itemRefs: ["sophisticated-core"].map((id) => ({
+              type: "mod" as const,
+              id,
+            })),
+          },
+        ],
       },
     ]);
     expect(

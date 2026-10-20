@@ -37,7 +37,7 @@ export type GuideOptions = {
   format: GuideFormat;
   includeDependencies: boolean;
   includeNotes: boolean;
-  includeChecklist: boolean;
+  includeSteps: boolean;
 };
 
 export const defaultGuideOptions: GuideOptions = {
@@ -45,7 +45,7 @@ export const defaultGuideOptions: GuideOptions = {
   format: "markdown",
   includeDependencies: true,
   includeNotes: true,
-  includeChecklist: true,
+  includeSteps: true,
 };
 
 type Part = string | { label: string; url: string };
@@ -85,7 +85,7 @@ export function guideFilename(
   const slug = (value: string) =>
     value
       .normalize("NFKD")
-      .replace(/[̀-ͯ]/g, "")
+      .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
@@ -205,7 +205,7 @@ function batchNodes(
     nodes.push({
       kind: "item",
       depth: 0,
-      checkbox: options.includeChecklist,
+      checkbox: options.includeSteps,
       parts: [
         mod.version ? `${mod.name} ${mod.version}` : mod.name,
         " — ",
@@ -265,7 +265,7 @@ function batchNodes(
       nodes.push({
         kind: "item",
         depth: 0,
-        checkbox: options.includeChecklist,
+        checkbox: options.includeSteps,
         parts: [
           item.version ? `${item.name} ${item.version}` : item.name,
           " — ",
@@ -379,16 +379,19 @@ function batchNodes(
     });
   }
 
-  if (options.includeChecklist && batch.checklist.length) {
-    nodes.push({ kind: "heading", level: 3, text: "Testing checklist" });
+  if (options.includeSteps && batch.steps.length) {
+    nodes.push({ kind: "heading", level: 3, text: "Installation steps" });
     // Exported unchecked: the guide is for a future install, not a copy of planning progress.
-    for (const step of batch.checklist)
+    for (const step of batch.steps) {
       nodes.push({
         kind: "item",
         depth: 0,
         checkbox: true,
-        parts: [step.text],
+        parts: [step.name],
       });
+      if (step.description)
+        nodes.push({ kind: "paragraph", text: step.description });
+    }
   }
   return nodes;
 }
@@ -443,7 +446,7 @@ function render(nodes: Node[], format: GuideFormat): string {
 
 /**
  * Builds the installation guide from current data. Pure and read-only: it never changes
- * mods, batches, or checklist progress.
+ * mods, batches, or Step progress.
  */
 export function buildGuide(
   collection: Collection,

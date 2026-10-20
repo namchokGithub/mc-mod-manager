@@ -1,4 +1,4 @@
-import { batchMods, orderedBatches, withOrder } from "./batches";
+import { batchMods, modIdsOf, orderedBatches, withOrder } from "./batches";
 import {
   batchDependencyOverview,
   type DependencyEntry,
@@ -11,7 +11,6 @@ import {
   contentKeys,
   contentTypes,
   type Batch,
-  type BatchContentRef,
   type Collection,
   type ContentKey,
   type Mod,
@@ -32,7 +31,7 @@ export type BatchSummary = {
   /** Resource packs, data packs, and shaders in this batch that still exist. */
   contentCount: number;
   /** Their references whose entry no longer exists. */
-  missingContent: BatchContentRef[];
+  missingContent: ReturnType<typeof contentRefsOf>;
 };
 
 export type PlanningDashboard = {
@@ -83,7 +82,7 @@ export type PlanningDashboard = {
     deletedContentRefs: {
       batch: Batch;
       position: number;
-      refs: BatchContentRef[];
+      refs: ReturnType<typeof contentRefsOf>;
     }[];
   };
 };
@@ -100,7 +99,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
   const batches = orderedBatches(collection.batches);
   const known = new Set(mods.map((mod) => mod.id));
   const assigned = new Set(
-    batches.flatMap((batch) => batch.modIds.filter((id) => known.has(id))),
+    batches.flatMap((batch) => modIdsOf(batch).filter((id) => known.has(id))),
   );
   const unassigned = mods.filter((mod) => !assigned.has(mod.id));
 
@@ -114,8 +113,15 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
         name: "All mods",
         description: "",
         order: 1,
-        modIds: mods.map((mod) => mod.id),
-        checklist: [],
+        steps: [
+          {
+            id: "all-mods",
+            name: "All mods",
+            description: "",
+            done: false,
+            itemRefs: mods.map((mod) => ({ type: "mod" as const, id: mod.id })),
+          },
+        ],
       },
     ]),
     mods,

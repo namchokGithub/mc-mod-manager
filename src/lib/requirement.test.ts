@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import { withOrder } from "./batches";
 import { buildGuide, defaultGuideOptions } from "./buildGuide";
 import { groupMods } from "./grouping";
@@ -164,8 +164,17 @@ describe("dashboard and guide", () => {
         name: "Batch",
         description: "",
         order: 1,
-        modIds: ["minimap", "zoom", "emotes", "flywheel", "create"],
-        checklist: [],
+        steps: [
+          {
+            id: "install",
+            name: "Install",
+            description: "",
+            done: false,
+            itemRefs: ["minimap", "zoom", "emotes", "flywheel", "create"].map(
+              (id) => ({ type: "mod" as const, id }),
+            ),
+          },
+        ],
       },
     ]),
   });

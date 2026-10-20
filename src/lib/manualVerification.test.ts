@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import { withOrder } from "./batches";
 import {
   activeSupport,
@@ -330,8 +330,18 @@ describe("planning and IDs", () => {
           name: "B",
           description: "",
           order: 1,
-          modIds: ["dungeons-arise"],
-          checklist: [],
+          steps: [
+            {
+              id: "install",
+              name: "Install",
+              description: "",
+              done: false,
+              itemRefs: ["dungeons-arise"].map((id) => ({
+                type: "mod" as const,
+                id,
+              })),
+            },
+          ],
         },
       ]),
     });

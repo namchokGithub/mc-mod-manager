@@ -40,8 +40,15 @@ export function requiredByOthers(mods: Mod[]): Map<string, string[]> {
         name: "All",
         description: "",
         order: 1,
-        modIds: mods.map((mod) => mod.id),
-        checklist: [],
+        steps: [
+          {
+            id: "all-mods",
+            name: "All mods",
+            description: "",
+            done: false,
+            itemRefs: mods.map((mod) => ({ type: "mod" as const, id: mod.id })),
+          },
+        ],
       },
     ]),
     mods,

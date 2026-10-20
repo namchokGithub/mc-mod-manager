@@ -191,49 +191,46 @@ export const modsSchema = z.array(modSchema).superRefine((mods, context) => {
 const uniqueStrings = (values: string[]) =>
   new Set(values).size === values.length;
 
-// Build plan (public/data/batches.json): ordered installation batches that reference mods by ID.
-export const checklistItemSchema = z.object({
-  id: z.string().trim().min(1),
-  text: z.string().trim().min(1, "Checklist step is empty"),
-  /** Planning progress only; it never changes a mod's status. */
-  done: z.boolean(),
-});
-
 export const contentTypes = ["resourcepack", "datapack", "shader"] as const;
 
-// A batch reference to a resource pack, data pack, or shader. Mods stay in `modIds`.
-export const batchContentRefSchema = z.object({
-  type: z.enum(contentTypes),
+export const planItemTypes = ["mod", ...contentTypes] as const;
+
+/** A Step reference to an installable item. It never copies the item itself. */
+export const stepItemRefSchema = z.object({
+  type: z.enum(planItemTypes),
   id: z.string().trim().min(1),
 });
 
+export const stepSchema = z.object({
+  id: z.string().trim().min(1),
+  name: z.string().trim().min(1, "Step name is required"),
+  description: z.string().default(""),
+  /** Planning progress only; it never changes an item's status. */
+  done: z.boolean(),
+  itemRefs: z
+    .array(stepItemRefSchema)
+    .refine(
+      (refs) => uniqueStrings(refs.map((ref) => `${ref.type}:${ref.id}`)),
+      "An item is listed twice in this step",
+    ),
+});
+
+// Build plan (public/data/batches.json): ordered installation batches with Steps.
 export const batchSchema = z.object({
   id: z.string().trim().min(1),
   name: z.string().trim().min(1, "Batch name is required"),
   description: z.string().default(""),
   order: z.number().int().min(1),
-  modIds: z
-    .array(z.string().trim().min(1))
-    .refine(uniqueStrings, "A mod is listed twice in this batch"),
-  // Optional, so batches.json files from before other content existed load unchanged.
-  // Unique by type + ID; the same ID may exist in different collections.
-  contentRefs: z
-    .array(batchContentRefSchema)
-    .refine(
-      (refs) => uniqueStrings(refs.map((ref) => `${ref.type}:${ref.id}`)),
-      "An item is listed twice in this batch",
-    )
-    .optional(),
-  checklist: z
-    .array(checklistItemSchema)
+  steps: z
+    .array(stepSchema)
     .refine(
       (items) => uniqueStrings(items.map((item) => item.id)),
-      "Checklist step IDs must be unique",
+      "Step IDs must be unique",
     ),
 });
 
 export const batchFileSchema = z.object({
-  version: z.literal(1),
+  version: z.literal(2),
   batches: z.array(batchSchema).superRefine((batches, context) => {
     const seen = new Set<string>();
     batches.forEach((batch, index) => {
@@ -249,7 +246,7 @@ export const batchFileSchema = z.object({
 });
 
 export const emptyBatchFile = (): z.infer<typeof batchFileSchema> => ({
-  version: 1,
+  version: 2,
   batches: [],
 });
 
@@ -409,8 +406,8 @@ export type ModrinthDependency = NonNullable<
 export type Collection = z.infer<typeof collectionSchema>;
 export type BatchFile = z.infer<typeof batchFileSchema>;
 export type Batch = z.infer<typeof batchSchema>;
-export type ChecklistItem = z.infer<typeof checklistItemSchema>;
-export type BatchContentRef = z.infer<typeof batchContentRefSchema>;
+export type Step = z.infer<typeof stepSchema>;
+export type StepItemRef = z.infer<typeof stepItemRefSchema>;
 export type InboxFile = z.infer<typeof inboxFileSchema>;
 export type InboxEntry = z.infer<typeof inboxEntrySchema>;
 export type ContentItem = z.infer<typeof contentItemSchema>;

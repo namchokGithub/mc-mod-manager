@@ -64,7 +64,8 @@ export function BuildPlanGuide({
     <section
       id="build-plan"
       className="build-guide"
-      aria-labelledby="build-plan-title">
+      aria-labelledby="build-plan-title"
+    >
       <div className="section-heading">
         <div>
           <div className="section-kicker">INSTALLATION GUIDE</div>
@@ -88,19 +89,21 @@ export function BuildPlanGuide({
                 type="button"
                 className="plan-toggle"
                 aria-expanded={expanded}
-                onClick={() => toggle(batch.id)}>
+                onClick={() => toggle(batch.id)}
+              >
                 <span
                   className="plan-order"
                   aria-hidden="true"
-                  ref={liquidLens}>
+                  ref={liquidLens}
+                >
                   {index + 1}
                 </span>
                 <span className="plan-title">
                   <strong>{batch.name}</strong>
                   <span>
                     {batchCountText(batchList.length, content)}
-                    {batch.checklist.length
-                      ? ` · ${plural(batch.checklist.length, "step")}`
+                    {batch.steps.length
+                      ? ` · ${plural(batch.steps.length, "step")}`
                       : ""}
                   </span>
                 </span>
@@ -120,7 +123,8 @@ export function BuildPlanGuide({
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}>
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  >
                     <div className="plan-body">
                       {batchList.length > 0 && (
                         <ul className="plan-mods">
@@ -136,7 +140,8 @@ export function BuildPlanGuide({
                                   <button
                                     type="button"
                                     className="plan-mod-open"
-                                    onClick={() => onOpenMod(mod)}>
+                                    onClick={() => onOpenMod(mod)}
+                                  >
                                     {mod.name}
                                   </button>
                                   <span>
@@ -162,7 +167,8 @@ export function BuildPlanGuide({
                                     href={mod.sourceUrl}
                                     target="_blank"
                                     rel="noreferrer"
-                                    aria-label={`Open ${mod.name} on ${mod.source}`}>
+                                    aria-label={`Open ${mod.name} on ${mod.source}`}
+                                  >
                                     {mod.source}
                                     <ArrowUpRight
                                       size={13}
@@ -241,7 +247,8 @@ export function BuildPlanGuide({
                                         href={item.sourceUrl}
                                         target="_blank"
                                         rel="noreferrer"
-                                        aria-label={`Open ${item.name} on ${contentSourceLabels[item.source]}`}>
+                                        aria-label={`Open ${item.name} on ${contentSourceLabels[item.source]}`}
+                                      >
                                         {contentSourceLabels[item.source]}
                                         <ArrowUpRight
                                           size={13}
@@ -274,24 +281,26 @@ export function BuildPlanGuide({
                         <Button
                           variant="ghost"
                           size="small"
-                          onClick={() => setExportFor(batch.id)}>
+                          onClick={() => setExportFor(batch.id)}
+                        >
                           <FileDown size={15} /> Export this batch
                         </Button>
                       </div>
-                      {batch.checklist.length > 0 && (
+                      {batch.steps.length > 0 && (
                         <ol className="plan-steps plan-steps-readonly">
-                          {batch.checklist.map((item) => (
+                          {batch.steps.map((item) => (
                             <li
                               key={item.id}
                               className={
                                 item.done ? "plan-step done" : "plan-step"
-                              }>
+                              }
+                            >
                               {item.done ? (
                                 <CircleCheck size={15} aria-hidden="true" />
                               ) : (
                                 <Circle size={15} aria-hidden="true" />
                               )}
-                              <span>{item.text}</span>
+                              <span>{item.name}</span>
                               {item.done && (
                                 <span className="sr-only">(done)</span>
                               )}

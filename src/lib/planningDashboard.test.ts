@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import { withOrder } from "./batches";
 import { planningDashboard } from "./planningDashboard";
 import { emptyContent, type Batch, type Collection, type Mod } from "./schema";
@@ -40,8 +40,15 @@ const batch = (id: string, modIds: string[]): Batch => ({
   name: id,
   description: "",
   order: 1,
-  modIds,
-  checklist: [],
+  steps: [
+    {
+      id: "install",
+      name: "Install",
+      description: "",
+      done: false,
+      itemRefs: modIds.map((id) => ({ type: "mod" as const, id })),
+    },
+  ],
 });
 
 function collection(mods: Mod[], batches: Batch[]): Collection {

@@ -1,4 +1,4 @@
-import { orderedBatches } from "./batches";
+import { modIdsOf, orderedBatches } from "./batches";
 import type { BatchFile, Mod } from "./schema";
 
 export type DependencyRelation =
@@ -187,13 +187,13 @@ export function batchDependencyOverview(
   const byId = new Map(mods.map((mod) => [mod.id, mod]));
   const batchesOf = (modId: string): BatchRef[] =>
     batches.flatMap((batch, index) =>
-      batch.modIds.includes(modId)
+      modIdsOf(batch).includes(modId)
         ? [{ id: batch.id, name: batch.name, position: index + 1 }]
         : [],
     );
 
   const result: ModDependencies[] = [];
-  for (const modId of current.modIds) {
+  for (const modId of modIdsOf(current)) {
     const mod = byId.get(modId);
     if (!mod) continue;
     const { source, dependencies } = readDependencies(mod);
@@ -310,15 +310,25 @@ export function collectionDependencyLookup(
   const overview = batchDependencyOverview(
     "collection-lookup",
     {
-      version: 1,
+      version: 2,
       batches: [
         {
           id: "collection-lookup",
           name: "Collection",
           description: "",
           order: 1,
-          modIds: mods.map((mod) => mod.id),
-          checklist: [],
+          steps: [
+            {
+              id: "all-mods",
+              name: "All mods",
+              description: "",
+              done: false,
+              itemRefs: mods.map((mod) => ({
+                type: "mod" as const,
+                id: mod.id,
+              })),
+            },
+          ],
         },
       ],
     },

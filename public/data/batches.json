@@ -1,58 +1,104 @@
 {
-  "version": 1,
+  "version": 2,
   "batches": [
     {
       "id": "batch-1-foundation",
-      "name": "Batch 1 — Foundation",
-      "description": "Performance, Libraries, APIs, QoL พื้นฐาน และตรวจว่าเกมเปิดได้ปกติ",
+      "name": "Batch 1 — Foundation & Performance",
+      "description": "ระบบพื้นฐานและประสิทธิภาพ\n\nเปิด Client/Server → ตรวจภาพและเมนู → เก็บค่า FPS/RAM/TPS ตั้งต้น",
       "order": 1,
-      "modIds": [
-        "appleskin"
-      ],
-      "checklist": [
+      "steps": [
         {
           "id": "step-1",
-          "text": "A",
-          "done": false
+          "name": "1.1 Baseline",
+          "description": "เปิด NeoForge 26.1.2 ทั้ง Client และ Server → เข้าโลก → ออกแล้วเข้าใหม่ → บันทึกเวลาเปิดเกม, FPS, RAM และสภาพ Server ไว้เทียบ",
+          "done": false,
+          "itemRefs": []
         },
         {
           "id": "step-2",
-          "text": "B",
-          "done": false
+          "name": "1.2 Core & XP",
+          "description": "เพิ่มทีละตัวและเปิดเกมหลังเพิ่มแต่ละตัว → ทดสอบโหลดโลกและเก็บ XP จำนวนมาก → ตรวจว่า XP ที่ได้รับถูกต้อง",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-3",
+          "name": "1.3 Recipes & Furnaces",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-4",
+          "name": "1.4 Client Rendering",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-5",
+          "name": "1.5 Integration",
+          "description": "",
+          "done": false,
+          "itemRefs": []
         }
       ]
     },
     {
       "id": "batch-2-world-exploration",
-      "name": "Batch 2 — World & Exploration",
-      "description": "Biomes, Structures, Dungeons และ World Generation โดยควรทดสอบกับโลกใหม่",
+      "name": "Batch 2 — Interface & Player Utilities",
+      "description": "HUD, Tooltip, Inventory, แผนที่\n\nตรวจ HUD/Tooltip → ลองจัด Inventory → ทดสอบแผนที่และ Waypoint",
       "order": 2,
-      "modIds": [],
-      "checklist": []
+      "steps": []
     },
     {
       "id": "batch-3-combat-progression",
-      "name": "Batch 3 — Combat & Progression",
-      "description": "Weapons, Armor, Mobs, Bosses, Enchantments และระบบความยาก",
+      "name": "Batch 3 — Biomes & Dimensions",
+      "description": "Biome, ภูมิประเทศ, Nether/End\n\nสร้างโลกทดสอบใหม่ → สำรวจ Biome → เข้า Nether/End → ตรวจการสร้าง Chunk",
       "order": 3,
-      "modIds": [],
-      "checklist": []
+      "steps": []
     },
     {
       "id": "batch-4-decoration-quality-of-life",
-      "name": "Batch 4 — Decoration & Quality of Life",
-      "description": "Furniture, Storage, Farming, Maps และการตกแต่ง",
+      "name": "Batch 4 — Structures & Exploration",
+      "description": "หมู่บ้าน สิ่งก่อสร้าง Dungeon\n\nหา Structure ในโลกใหม่ → ตรวจการเกิดซ้อน → ตรวจ Chest/Loot → สำรวจพร้อมกัน",
       "order": 4,
-      "modIds": [],
-      "checklist": []
+      "steps": []
     },
     {
       "id": "batch-5-balance-configuration",
-      "name": "Batch 5 — Balance & Configuration",
-      "description": "ปรับ Loot, Damage Scaling, Spawn Rates, Progression และ Config ให้เล่นสนุกกับเพื่อน",
+      "name": "Batch 5 — Storage, Farming & Economy",
+      "description": "กระเป๋า คลัง อาหาร ฟาร์ม การค้า\n\nคราฟต์และใช้งาน → โอน Item → ทดสอบฟาร์ม/การค้า → ออกเข้าใหม่ตรวจข้อมูล",
       "order": 5,
-      "modIds": [],
-      "checklist": []
+      "steps": []
+    },
+    {
+      "id": "batch-6-mobs-wildlife",
+      "name": "Batch 6 — Mobs & Wildlife",
+      "description": "สัตว์ ศัตรู และระบบ Entity\n\nตรวจ Spawn → AI/Pathfinding → ต่อสู้/เลี้ยงสัตว์ → สังเกต TPS เมื่อ Entity เพิ่ม",
+      "order": 6,
+      "steps": []
+    },
+    {
+      "id": "7-combat-magic-progression",
+      "name": "Batch 7 — Combat, Magic & Progression",
+      "description": "อาวุธ เกราะ เวท Skills Enchantments\n\nตรวจ Animation/Hit → ใช้ Skill/Spell → ทดสอบ Enchant/Gear → ตรวจ Damage และ Progression",
+      "order": 7,
+      "steps": []
+    },
+    {
+      "id": "8-decoration-immersion",
+      "name": "Batch 8 — Decoration & Immersion",
+      "description": "Furniture, Building, ภาพ เสียง และท่าทาง\n\nวาง/ทุบ/โต้ตอบ → ตรวจภาพ/เสียง → ตรวจว่าผู้เล่นอื่นเห็นตรงกัน → โหลดโลกกลับ",
+      "order": 8,
+      "steps": []
+    },
+    {
+      "id": "batch-9-balance-full-multiplayer-integration",
+      "name": "Batch 9 — Balance & Full Multiplayer Integration",
+      "description": "ปรับสมดุล Config และทดสอบทั้งแพ็ก\n\nตรวจ Loot/Spawn/Damage → เล่นจริง 3–6 คน → เดินทางแยกกัน → Restart และตรวจข้อมูลคงอยู่",
+      "order": 9,
+      "steps": []
     }
   ]
 }
