@@ -9048,59 +9048,6 @@
     "addedAt": "2026-10-18T09:09:12.789Z"
   },
   {
-    "id": "ly-life-steal-enchantment",
-    "name": "Life Steal Enchantment",
-    "version": "v1.1.0+mod",
-    "category": "Equipment",
-    "tags": [
-      "Game Mechanics",
-      "Magic"
-    ],
-    "status": "planned",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/ly-life-steal-enchantment",
-    "description": "New enchantment for weapons thats steal life from victims!",
-    "dependencies": [],
-    "notes": "",
-    "imageUrl": "https://cdn.modrinth.com/data/2VmJJJnd/64d36e4c65b8d8dae27b6c22bf1b893a72101ce5.png",
-    "modrinth": {
-      "projectId": "2VmJJJnd",
-      "slug": "ly-life-steal-enchantment",
-      "versionId": "OCrpQgs8",
-      "versionNumber": "v1.1.0+mod",
-      "versionType": "release",
-      "datePublished": "2025-11-24T06:44:37.197327Z",
-      "gameVersions": [
-        "1.21",
-        "1.21.1",
-        "1.21.2",
-        "1.21.3",
-        "1.21.4",
-        "1.21.5",
-        "1.21.6",
-        "1.21.7",
-        "1.21.8",
-        "1.21.9",
-        "1.21.10",
-        "1.21.11",
-        "26.1",
-        "26.1.1",
-        "26.1.2",
-        "26.2"
-      ],
-      "loaders": [
-        "fabric",
-        "forge",
-        "neoforge",
-        "quilt"
-      ],
-      "dependencies": [],
-      "syncedAt": "2026-10-18T04:18:40.454Z"
-    },
-    "addedAt": "2026-10-18T09:09:12.789Z"
-  },
-  {
     "id": "the-grave-scrolls",
     "name": "The Grave Scrolls",
     "version": "1.0.3",
@@ -12609,7 +12556,7 @@
   },
   {
     "id": "apothic-enchanting",
-    "name": "Apothic-Enchanting",
+    "name": "Apothic Enchanting",
     "version": "26.1.2-2.1.0",
     "category": "Adventure",
     "tags": [
@@ -12660,7 +12607,7 @@
   },
   {
     "id": "apothic-spawners",
-    "name": "Apothic-Spawners",
+    "name": "Apothic Spawners",
     "version": "26.1.2-2.0.1",
     "category": "Adventure",
     "tags": [
@@ -15576,8 +15523,792 @@
         "neoforge"
       ],
       "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-spectacled-bear",
-      "verifiedAt": "2026-10-20T10:36:42.952Z"
+      "verifiedAt": "2026-10-20T10:37:28.488Z"
     },
     "addedAt": "2026-10-20T10:34:58.979Z"
+  },
+  {
+    "id": "animal-garden-owl",
+    "name": "Animal Garden - Owl",
+    "version": "1.2.8-neoforge-26.1.2.4",
+    "category": "Decoration",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-owl",
+    "description": "Adds owls into the game, that can dance and take a rest on your shoulder.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/gMz0rZEq/8bab3fdd424dd79d2b040ab8ac4aeea40cdc7971_96.webp",
+    "modrinth": {
+      "projectId": "gMz0rZEq",
+      "slug": "animal-garden-owl",
+      "versionId": "KVP4PkDH",
+      "versionNumber": "1.2.8-neoforge-26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-11T10:43:40.638430Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:48:54.703Z"
+    },
+    "addedAt": "2026-10-20T10:48:57.009Z"
+  },
+  {
+    "id": "animal-garden-mouse",
+    "name": "Animal Garden - Mouse",
+    "version": "1.0.6-neoforge-26.1.2.4",
+    "category": "Mobs",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-mouse",
+    "description": "Adds tamable mice into the game, that will fight and protect you.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Mm8Kzdc6/3fc2f59ab1cf9db4fb1b0e3a745a0cc1b9d8c807_96.webp",
+    "modrinth": {
+      "projectId": "Mm8Kzdc6",
+      "slug": "animal-garden-mouse",
+      "versionId": "GipYxlPN",
+      "versionNumber": "1.0.6-neoforge-26.1.2.4",
+      "versionType": "release",
+      "datePublished": "2026-04-11T15:38:45.307854Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:49:07.579Z"
+    },
+    "addedAt": "2026-10-20T10:49:09.404Z"
+  },
+  {
+    "id": "animal-garden-narwhal",
+    "name": "Animal Garden - Narwhal",
+    "version": "1.0.1-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-narwhal",
+    "description": "This mod adds the unicorns of the sea, the narwhals to the frozen ocean biomes.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/L6u2gHW6/22debd39b865cf51be6e1ba3679f11814ee78630_96.webp",
+    "modrinth": {
+      "projectId": "L6u2gHW6",
+      "slug": "animal-garden-narwhal",
+      "versionId": "bIvSxMky",
+      "versionNumber": "1.0.1-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-03T12:05:54.348249Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:49:50.565Z"
+    },
+    "addedAt": "2026-10-20T10:49:53.175Z"
+  },
+  {
+    "id": "animal-garden-red-river-hog",
+    "name": "Animal Garden - Red River Hog",
+    "version": "1.0.0-neoforge-26.1.1.1",
+    "category": "Mobs",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/animal-garden-red-river-hog",
+    "description": "This mod adds the Red River Hogs as tamable animals into the savanna biomes.",
+    "dependencies": [
+      "Aquarius Libs"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/LnGMw7NO/c3ee4da8d401936fea0fdf0e1e183cf5510eae4c_96.webp",
+    "modrinth": {
+      "projectId": "LnGMw7NO",
+      "slug": "animal-garden-red-river-hog",
+      "versionId": "Uzlruzz4",
+      "versionNumber": "1.0.0-neoforge-26.1.1.1",
+      "versionType": "release",
+      "datePublished": "2026-04-02T18:35:32.476161Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "KkHnyaL6",
+          "versionId": null,
+          "type": "required",
+          "name": "Aquarius Libs"
+        }
+      ],
+      "syncedAt": "2026-10-20T10:50:08.448Z"
+    },
+    "addedAt": "2026-10-20T10:50:10.248Z"
+  },
+  {
+    "id": "configurable-despawn-timer",
+    "name": "Configurable Despawn Timer",
+    "version": "26.1.2-4.5-fabric+forge+neo",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "server",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/configurable-despawn-timer",
+    "description": "✏️ Allows items and experience orbs to remain longer, shorter or infinitely on the ground",
+    "dependencies": [
+      "Collective"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9olMJ5Qp/cf2ca6592168d7ab20cc8eed021b1826bebc4d37_96.webp",
+    "modrinth": {
+      "projectId": "9olMJ5Qp",
+      "slug": "configurable-despawn-timer",
+      "versionId": "PWSecNmd",
+      "versionNumber": "26.1.2-4.5-fabric+forge+neo",
+      "versionType": "release",
+      "datePublished": "2026-06-07T17:18:40.366945Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [
+        {
+          "projectId": "e0M1UDsY",
+          "versionId": null,
+          "type": "required",
+          "name": "Collective"
+        }
+      ],
+      "syncedAt": "2026-10-20T11:28:06.988Z"
+    },
+    "addedAt": "2026-10-20T11:28:11.751Z"
+  },
+  {
+    "id": "quad",
+    "name": "Quad",
+    "version": "1.2.16+26.1-Neo",
+    "category": "Game Mechanics",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/quad",
+    "description": "Tags, more of them, giving the power to the player in a vanilla style",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/7jzrCiK0/696b5d372353d2abdf8e745332bc3f3a6f3728a0_96.webp",
+    "modrinth": {
+      "projectId": "7jzrCiK0",
+      "slug": "quad",
+      "versionId": "OW0C6rpv",
+      "versionNumber": "1.2.16+26.1-Neo",
+      "versionType": "release",
+      "datePublished": "2026-03-31T21:11:20.071758Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T11:28:28.538Z"
+    },
+    "addedAt": "2026-10-20T11:28:31.962Z"
+  },
+  {
+    "id": "tense-enchantment",
+    "name": "Tense Enchantment",
+    "version": "1.0.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/tense-enchantment",
+    "description": "New bow enchantment that increases damage based on how long you draw the bow!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/UMSKR7Oe/75f9153f0c5f0a812c7ea78c0983932578a625ef.png",
+    "modrinth": {
+      "projectId": "UMSKR7Oe",
+      "slug": "tense-enchantment",
+      "versionId": "sw7zetF7",
+      "versionNumber": "1.0.0+mod",
+      "versionType": "release",
+      "datePublished": "2026-10-09T13:35:12.952234Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T13:51:29.350Z"
+    },
+    "addedAt": "2026-10-20T13:51:31.615Z"
+  },
+  {
+    "id": "sniper-enchantment",
+    "name": "Sniper Enchantment",
+    "version": "1.0.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/sniper-enchantment",
+    "description": "New bow enchantment that increases damage based on the distance to your target!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/b1hthfvn/63d71b583f01e7928af6f7231b8905c5e19d1dbe.png",
+    "modrinth": {
+      "projectId": "b1hthfvn",
+      "slug": "sniper-enchantment",
+      "versionId": "q66qxthN",
+      "versionNumber": "1.0.0+mod",
+      "versionType": "release",
+      "datePublished": "2026-10-09T13:38:30.305686Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T13:51:42.523Z"
+    },
+    "addedAt": "2026-10-20T13:51:47.268Z"
+  },
+  {
+    "id": "protection-grace-enchantment",
+    "name": "Protection Grace Enchantment",
+    "version": "1.0.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/protection-grace-enchantment",
+    "description": "New chestplate enchantment that protects you from the first hit!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/59fioS1j/5a330167eded79514c9e86997066df7ace679c9b.png",
+    "modrinth": {
+      "projectId": "59fioS1j",
+      "slug": "protection-grace-enchantment",
+      "versionId": "HtnmTMPF",
+      "versionNumber": "1.0.0+mod",
+      "versionType": "release",
+      "datePublished": "2026-10-09T13:41:56.912780Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T13:52:02.338Z"
+    },
+    "addedAt": "2026-10-20T13:52:04.636Z"
+  },
+  {
+    "id": "ly-knowledge-book",
+    "name": "Knowledge Book",
+    "version": "v1.1.2+mod",
+    "category": "Game Mechanics",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-knowledge-book",
+    "description": "A book thats give all recipes!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Re96YqoB/2518df365f46d790046c62b9f388909b6fb475ab_96.webp",
+    "modrinth": {
+      "projectId": "Re96YqoB",
+      "slug": "ly-knowledge-book",
+      "versionId": "HAUEzCad",
+      "versionNumber": "v1.1.2+mod",
+      "versionType": "release",
+      "datePublished": "2025-07-20T22:03:13.422718Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:01:35.646Z"
+    },
+    "addedAt": "2026-10-20T14:01:37.272Z"
+  },
+  {
+    "id": "ly-experience-book",
+    "name": "Experience Book",
+    "version": "v1.3.0+mod",
+    "category": "Equipment",
+    "tags": [
+      "Game Mechanics",
+      "Storage"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-experience-book",
+    "description": "Save your experience points in a book!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/FU47S17U/0393b931a1537fd00ffa815b800c276aa8606537.png",
+    "modrinth": {
+      "projectId": "FU47S17U",
+      "slug": "ly-experience-book",
+      "versionId": "IAQMkPIk",
+      "versionNumber": "v1.3.0+mod",
+      "versionType": "release",
+      "datePublished": "2025-06-20T14:30:11.684876Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:01:53.849Z"
+    },
+    "addedAt": "2026-10-20T14:01:56.119Z"
+  },
+  {
+    "id": "rpg-enchantments",
+    "name": "RPG Enchantments",
+    "version": "1.1.2+mod",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Game Mechanics"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/rpg-enchantments",
+    "description": "New enchantments designed to create distinct RPG roles!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/rAL0zAZC/4bf4e35388dcd2aeaea578700ae6df6bf133fd66_96.webp",
+    "modrinth": {
+      "projectId": "rAL0zAZC",
+      "slug": "rpg-enchantments",
+      "versionId": "kBpRoIKe",
+      "versionNumber": "1.1.2+mod",
+      "versionType": "release",
+      "datePublished": "2026-01-22T04:00:00.903936Z",
+      "gameVersions": [
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:03:08.779Z"
+    },
+    "addedAt": "2026-10-20T14:03:10.886Z"
+  },
+  {
+    "id": "ly-recall-potion",
+    "name": "Recall Potion",
+    "version": "v1.0.1+mod",
+    "category": "Other",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-recall-potion",
+    "description": "Teleport to your respawn point!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/JkREXTEy/b84b3d2dd82fb5705aef99b72a03d8a92198b9b0.png",
+    "modrinth": {
+      "projectId": "JkREXTEy",
+      "slug": "ly-recall-potion",
+      "versionId": "5liYiwnb",
+      "versionNumber": "v1.0.1+mod",
+      "versionType": "release",
+      "datePublished": "2025-07-01T21:05:00.872743Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:03:15.859Z"
+    },
+    "addedAt": "2026-10-20T14:03:19.873Z"
+  },
+  {
+    "id": "ly-lucky-blocks",
+    "name": "Lucky Blocks",
+    "version": "v1.3.3+mod",
+    "category": "Adventure",
+    "tags": [
+      "Game Mechanics",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ly-lucky-blocks",
+    "description": "Lucky Blocks in Vanilla Minecraft!\n \n(no resourcepack!)",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/eYz1XI70/5fa1f8827a23dca21205121ba2fa9613d8f355e9.png",
+    "modrinth": {
+      "projectId": "eYz1XI70",
+      "slug": "ly-lucky-blocks",
+      "versionId": "W0d259j1",
+      "versionNumber": "v1.3.3+mod",
+      "versionType": "release",
+      "datePublished": "2025-09-30T17:44:05.542144Z",
+      "gameVersions": [
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:04:08.396Z"
+    },
+    "addedAt": "2026-10-20T14:04:10.745Z"
+  },
+  {
+    "id": "lucky-blocks-world",
+    "name": "Lucky Blocks World Add-on",
+    "version": "v1.0.1+mod",
+    "category": "Adventure",
+    "tags": [
+      "Worldgen"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/lucky-blocks-world",
+    "description": "Lucky Blocks Add-on, find lucky blocks around the overworld!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ATMwZJNF/2d69f0e40524d8cc515e0728b8c6e23daa8c184c_96.webp",
+    "modrinth": {
+      "projectId": "ATMwZJNF",
+      "slug": "lucky-blocks-world",
+      "versionId": "jWc8v0ry",
+      "versionNumber": "v1.0.1+mod",
+      "versionType": "release",
+      "datePublished": "2025-10-08T14:39:02.985926Z",
+      "gameVersions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:04:16.439Z"
+    },
+    "addedAt": "2026-10-20T14:04:18.524Z"
+  },
+  {
+    "id": "enchantments-expansion",
+    "name": "Enchantments Expansion",
+    "version": "v1.2.0+mod",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Magic"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/enchantments-expansion",
+    "description": "New vanilla-friendly enchantments that enhance combat, mining, movement and utility, bringing new ways to explore, fight and progress in survival!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/mXL7Z0zq/cee835ca1c581228bcb69d8f39ba6df85d457c9a_96.webp",
+    "modrinth": {
+      "projectId": "mXL7Z0zq",
+      "slug": "enchantments-expansion",
+      "versionId": "kjzZws3E",
+      "versionNumber": "v1.2.0+mod",
+      "versionType": "release",
+      "datePublished": "2025-12-13T18:49:13.856326Z",
+      "gameVersions": [
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge",
+        "quilt"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-20T14:04:56.182Z"
+    },
+    "addedAt": "2026-10-20T14:04:59.690Z"
+  },
+  {
+    "id": "dragon-enchants",
+    "name": "Dragon Enchants",
+    "version": "1.0.3",
+    "category": "Uncategorized",
+    "tags": [
+      "Neoforge"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dragon-enchants",
+    "description": "A reimagined version of my old dragon enchantments mod, brought to the latest version of Minecraft. Compatibility with some of my other projects is planned.",
+    "dependencies": [],
+    "notes": "Imported from dragon_enchants-1.0.3.jar.",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/731/741/64/64/638083221897713023.png",
+    "file": {
+      "name": "dragon_enchants-1.0.3.jar",
+      "modId": "dragon_enchants",
+      "format": "neoforge.mods.toml",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraftRange": "[26.1.2]"
+    },
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-20T14:15:11.308Z"
   }
 ]

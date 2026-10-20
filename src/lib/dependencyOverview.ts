@@ -52,6 +52,13 @@ export type BatchDependencyOverview = {
   counts: DependencyCounts;
 };
 
+export type CollectionDependencyLookup = {
+  mod: Mod;
+  source: DependencySource;
+  dependencies: DependencyEntry[];
+  usedBy: { mod: Mod; entry: DependencyEntry }[];
+};
+
 type RawDependency = {
   relation: DependencyRelation;
   identifier: string | null;
@@ -293,6 +300,45 @@ export function batchDependencyOverview(
     result.push({ mod, source, entries: list });
   }
   return { mods: result, counts };
+}
+
+/** Uses the same ID-based matching as the batch view across the whole mod collection. */
+export function collectionDependencyLookup(
+  modId: string,
+  mods: Mod[],
+): CollectionDependencyLookup | undefined {
+  const overview = batchDependencyOverview(
+    "collection-lookup",
+    {
+      version: 1,
+      batches: [
+        {
+          id: "collection-lookup",
+          name: "Collection",
+          description: "",
+          order: 1,
+          modIds: mods.map((mod) => mod.id),
+          checklist: [],
+        },
+      ],
+    },
+    mods,
+  );
+  const selected = overview.mods.find(({ mod }) => mod.id === modId);
+  if (!selected) return undefined;
+  return {
+    mod: selected.mod,
+    source: selected.source,
+    dependencies: selected.entries,
+    usedBy: overview.mods.flatMap(({ mod, entries }) =>
+      entries.flatMap((entry) =>
+        entry.target?.id === modId &&
+        (entry.relation === "required" || entry.relation === "optional")
+          ? [{ mod, entry }]
+          : [],
+      ),
+    ),
+  };
 }
 
 /** Short, human-readable location of a resolved dependency. */

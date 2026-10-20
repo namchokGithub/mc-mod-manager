@@ -18,6 +18,7 @@ import {
   Copy,
   HardDriveDownload,
   FileJson2,
+  GitBranch,
   Database,
   Inbox,
   Palette,
@@ -97,6 +98,7 @@ import { BuildPlanEditor } from "./BuildPlanEditor";
 import { PlanningDashboard } from "./PlanningDashboard";
 import { InboxPanel } from "./InboxPanel";
 import { CompatibilityPanel } from "./CompatibilityPanel";
+import { DependencyLookup } from "./DependencyLookup";
 import { IgnoredDependenciesField } from "./IgnoredDependencies";
 import { ManualVerificationSection } from "./ManualVerification";
 import { ContentPanel } from "../content/ContentPanel";
@@ -114,7 +116,14 @@ import {
 import { UpdateBadge } from "./UpdateBadge";
 
 type Tab =
-  "dashboard" | "mods" | "inbox" | "settings" | "plan" | "data" | ContentKey;
+  | "dashboard"
+  | "mods"
+  | "dependencies"
+  | "inbox"
+  | "settings"
+  | "plan"
+  | "data"
+  | ContentKey;
 
 const contentIcons: Record<ContentKey, typeof Inbox> = {
   resourcePacks: Palette,
@@ -1511,6 +1520,15 @@ export function Manage() {
           <button
             type="button"
             className={
+              tab === "dependencies" ? "sidebar-item active" : "sidebar-item"
+            }
+            aria-current={tab === "dependencies" ? "page" : undefined}
+            onClick={() => changeTab("dependencies")}>
+            <GitBranch size={18} /> Dependency lookup
+          </button>
+          <button
+            type="button"
+            className={
               tab === "settings" ? "sidebar-item active" : "sidebar-item"
             }
             aria-current={tab === "settings" ? "page" : undefined}
@@ -1858,6 +1876,12 @@ export function Manage() {
                 />
               )}
               {tab === "inbox" && <InboxPanel />}
+              {tab === "dependencies" && (
+                <DependencyLookup
+                  mods={data.mods}
+                  onOpenMod={(mod) => setEditing({ mod })}
+                />
+              )}
               {tab === "plan" && (
                 <BuildPlanEditor
                   onOpenMod={(mod) => setEditing({ mod })}

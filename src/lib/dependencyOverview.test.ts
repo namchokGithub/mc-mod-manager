@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 import batchesJson from "../../public/data/batches.json";
 import modsJson from "../../public/data/mods.json";
 import { withOrder } from "./batches";
-import { batchDependencyOverview, placementText } from "./dependencyOverview";
+import {
+  batchDependencyOverview,
+  collectionDependencyLookup,
+  placementText,
+} from "./dependencyOverview";
 import { batchFileSchema, modsSchema, type Batch, type Mod } from "./schema";
 
 function mod(id: string, extra: Partial<Mod> = {}): Mod {
@@ -45,6 +49,72 @@ const requires = (projectId: string | null, type = "required" as const) => ({
   projectId,
   versionId: null,
   type,
+});
+
+describe("collection dependency lookup", () => {
+  it("shows both dependencies and mods that use the selected mod", () => {
+    const library = linked("library");
+    const addon = linked("addon", [
+      requires("p-library"),
+      { ...requires("p-missing"), type: "optional" },
+    ]);
+    const mods = [library, addon];
+
+    const outgoing = collectionDependencyLookup("addon", mods);
+    expect(
+      outgoing?.dependencies.map((entry) => [
+        entry.relation,
+        entry.target?.id,
+        entry.status,
+      ]),
+    ).toEqual([
+      ["required", "library", "resolved"],
+      ["optional", undefined, "missing"],
+    ]);
+    expect(
+      collectionDependencyLookup("library", mods)?.usedBy.map(
+        ({ mod, entry }) => [mod.id, entry.relation],
+      ),
+    ).toEqual([["addon", "required"]]);
+  });
+
+  it("does not infer a reverse link from a matching name or unknown metadata", () => {
+    const library = mod("library", { name: "Aquarius Libs" });
+    const manual = mod("manual", { dependencies: ["Aquarius Libs"] });
+    const unknown = mod("unknown");
+    const mods = [library, manual, unknown];
+
+    expect(collectionDependencyLookup("library", mods)?.usedBy).toEqual([]);
+    expect(
+      collectionDependencyLookup("manual", mods)?.dependencies[0]?.status,
+    ).toBe("unresolved");
+    expect(collectionDependencyLookup("unknown", mods)?.source).toBe("unknown");
+  });
+
+  it("respects ignored dependencies and confirmed links", () => {
+    const library = mod("library");
+    const addon = linked("addon", [requires("p-lib"), requires("p-ignored")]);
+    addon.dependencyLinks = [{ id: "p-lib", modId: "library" }];
+    addon.ignoredDependencies = [{ id: "p-ignored", reason: "Not needed" }];
+
+    const result = collectionDependencyLookup("library", [library, addon]);
+    expect(
+      result?.usedBy.map(({ mod, entry }) => [mod.id, entry.linked]),
+    ).toEqual([["addon", true]]);
+    expect(
+      collectionDependencyLookup("addon", [library, addon])?.dependencies,
+    ).toHaveLength(1);
+  });
+
+  it("does not describe an incompatibility as a mod using the target", () => {
+    const library = linked("library");
+    const conflict = linked("conflict", [
+      { ...requires("p-library"), type: "incompatible" },
+    ]);
+    expect(
+      collectionDependencyLookup("library", [library, conflict])?.usedBy,
+    ).toEqual([]);
+  });
 });
 
 describe("required and optional dependencies", () => {
