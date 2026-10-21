@@ -4,6 +4,7 @@ import batchesJson from "../../public/data/batches.json";
 import {
   assignItem,
   batchMods,
+  modAssignmentLocations,
   moveItem,
   moveItemToStep,
   newBatchId,
@@ -167,6 +168,41 @@ describe("batch helpers", () => {
         { type: "mod", id: "sodium" },
       ],
     ]);
+  });
+
+  it("derives every mod's ordered Batch and Step assignments", () => {
+    const locations = modAssignmentLocations({
+      version: 2,
+      batches: [
+        batch("later", 2, [step("verify", [{ type: "mod", id: "sodium" }])]),
+        batch("first", 1, [
+          step("install", [
+            { type: "mod", id: "sodium" },
+            { type: "resourcepack", id: "faithful" },
+          ]),
+          step("render", [{ type: "mod", id: "iris" }]),
+        ]),
+      ],
+    });
+
+    expect(locations.get("sodium")).toEqual([
+      {
+        batchId: "first",
+        batchName: "first",
+        batchPosition: 1,
+        stepId: "install",
+        stepName: "install",
+      },
+      {
+        batchId: "later",
+        batchName: "later",
+        batchPosition: 2,
+        stepId: "verify",
+        stepName: "verify",
+      },
+    ]);
+    expect(locations.get("iris")?.[0]?.batchId).toBe("first");
+    expect(locations.has("faithful")).toBe(false);
   });
 
   it("renames, removes, and resolves mods across Steps", () => {

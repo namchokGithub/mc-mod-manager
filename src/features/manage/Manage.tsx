@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, useWatch, type Control } from "react-hook-form";
 import { z } from "zod";
@@ -69,6 +70,10 @@ import {
   uniqueId,
   type Filters,
 } from "../../lib/mods";
+import {
+  modAssignmentLocations,
+  type ModAssignmentLocation,
+} from "../../lib/batches";
 import {
   DEFAULT_PAGE_SIZE,
   pageSelectionState,
@@ -141,6 +146,55 @@ const initialFilters: Filters = {
 
 // Keep duplication available for a future editor workflow without showing it in the row actions.
 const SHOW_DUPLICATE_ACTION = true;
+
+type AssignmentFilter = "" | "assigned" | "unassigned";
+
+function ModPlanAssignment({
+  locations,
+}: {
+  locations: ModAssignmentLocation[];
+}) {
+  if (!locations.length)
+    return <span className="plan-assignment-badge">Not in plan</span>;
+
+  const batchCount = new Set(locations.map((location) => location.batchId))
+    .size;
+  return (
+    <PopoverPrimitive.Root>
+      <PopoverPrimitive.Trigger asChild>
+        <button
+          type="button"
+          className="plan-assignment-badge plan-assignment-trigger"
+          aria-label={`Show ${locations.length} Build plan assignment${locations.length === 1 ? "" : "s"}`}
+        >
+          <ListChecks size={12} aria-hidden="true" /> In plan · {batchCount}{" "}
+          {batchCount === 1 ? "batch" : "batches"}
+        </button>
+      </PopoverPrimitive.Trigger>
+      <PopoverPrimitive.Portal>
+        <PopoverPrimitive.Content
+          className="plan-assignment-popover"
+          side="bottom"
+          align="start"
+          sideOffset={6}
+          collisionPadding={12}
+        >
+          <strong>Build plan assignments</strong>
+          <ul>
+            {locations.map((location) => (
+              <li key={`${location.batchId}:${location.stepId}`}>
+                <span>
+                  Batch {location.batchPosition} · {location.batchName}
+                </span>
+                <small>{location.stepName}</small>
+              </li>
+            ))}
+          </ul>
+        </PopoverPrimitive.Content>
+      </PopoverPrimitive.Portal>
+    </PopoverPrimitive.Root>
+  );
+}
 
 const formSchema = modSchema
   .omit({ tags: true, dependencies: true, id: true })
@@ -1204,6 +1258,8 @@ export function Manage() {
   // Entry to open when a collection is reached from the build plan.
   const [contentFocus, setContentFocus] = useState<string | null>(null);
   const [filters, setFilters] = useState(initialFilters);
+  const [assignmentFilter, setAssignmentFilter] =
+    useState<AssignmentFilter>("");
   const [editing, setEditing] = useState<{
     mod: Mod | null;
     initial?: Mod;
@@ -1409,10 +1465,19 @@ export function Manage() {
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
     [data.mods],
   );
-  const filtered = useMemo(
-    () => filterMods(data.mods, filters),
-    [data.mods, filters],
+  const assignmentLocations = useMemo(
+    () => modAssignmentLocations(data.batches),
+    [data.batches],
   );
+  const filtered = useMemo(() => {
+    const matching = filterMods(data.mods, filters);
+    if (!assignmentFilter) return matching;
+    return matching.filter((mod) =>
+      assignmentFilter === "assigned"
+        ? assignmentLocations.has(mod.id)
+        : !assignmentLocations.has(mod.id),
+    );
+  }, [data.mods, filters, assignmentFilter, assignmentLocations]);
   // IDs of deleted or replaced mods drop out of the selection automatically.
   const selection = useMemo(
     () =>
@@ -1431,6 +1496,15 @@ export function Manage() {
   ).length;
   const changeFilters = (next: Filters) => {
     setFilters(next);
+    setPage(1);
+  };
+  const changeAssignmentFilter = (next: AssignmentFilter) => {
+    setAssignmentFilter(next);
+    setPage(1);
+  };
+  const clearModFilters = () => {
+    setFilters(initialFilters);
+    setAssignmentFilter("");
     setPage(1);
   };
   const confirmBulkDelete = () => {
@@ -1682,6 +1756,8 @@ export function Manage() {
                     count={filtered.length}
                     total={data.mods.length}
                     showView={false}
+                    assignment={assignmentFilter}
+                    onAssignmentChange={changeAssignmentFilter}
                   />
                   {selection.size > 0 && (
                     <div
@@ -1782,6 +1858,11 @@ export function Manage() {
                                 <span className={`status status-${mod.status}`}>
                                   {mod.status}
                                 </span>
+                                <ModPlanAssignment
+                                  locations={
+                                    assignmentLocations.get(mod.id) ?? []
+                                  }
+                                />
                                 {compat.get(mod.id) && (
                                   <CompatBadge
                                     status={compat.get(mod.id)!.status}
@@ -1883,10 +1964,7 @@ export function Manage() {
                         <>
                           <h3>No mods match your filters</h3>
                           <p>Try adjusting your search or filters.</p>
-                          <Button
-                            variant="secondary"
-                            onClick={() => changeFilters(initialFilters)}
-                          >
+                          <Button variant="secondary" onClick={clearModFilters}>
                             Clear filters
                           </Button>
                         </>

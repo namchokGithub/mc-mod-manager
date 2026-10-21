@@ -55,6 +55,38 @@ export function modIdsOf(batch: Batch): string[] {
     .map((ref) => ref.id);
 }
 
+export type ModAssignmentLocation = {
+  batchId: string;
+  batchName: string;
+  batchPosition: number;
+  stepId: string;
+  stepName: string;
+};
+
+/** Every Batch and Step that references each mod, in plan order. Read-only. */
+export function modAssignmentLocations(
+  file: BatchFile,
+): Map<string, ModAssignmentLocation[]> {
+  const locations = new Map<string, ModAssignmentLocation[]>();
+  orderedBatches(file).forEach((batch, batchIndex) => {
+    batch.steps.forEach((step) => {
+      step.itemRefs.forEach((ref) => {
+        if (ref.type !== "mod") return;
+        const assignments = locations.get(ref.id) ?? [];
+        assignments.push({
+          batchId: batch.id,
+          batchName: batch.name,
+          batchPosition: batchIndex + 1,
+          stepId: step.id,
+          stepName: step.name,
+        });
+        locations.set(ref.id, assignments);
+      });
+    });
+  });
+  return locations;
+}
+
 const sameRef = (a: StepItemRef, b: StepItemRef) =>
   a.type === b.type && a.id === b.id;
 

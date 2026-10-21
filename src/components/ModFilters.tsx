@@ -40,6 +40,8 @@ export function ModFilters({
   showView = true,
   showSide = true,
   appearance = "default",
+  assignment,
+  onAssignmentChange,
 }: {
   filters: Filters;
   onChange: (filters: Filters) => void;
@@ -53,6 +55,9 @@ export function ModFilters({
   showSide?: boolean;
   /** Visual treatment only; Preview opts into glass while Manage retains the default surface. */
   appearance?: "default" | "glass";
+  /** Optional because assignment is derived from the Build plan, not a generic mod field. */
+  assignment?: "" | "assigned" | "unassigned";
+  onAssignmentChange?: (value: "" | "assigned" | "unassigned") => void;
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
@@ -61,8 +66,9 @@ export function ModFilters({
     (filters.query.trim() ? 1 : 0) +
     [filters.category, filters.status, filters.side, filters.priority].filter(
       Boolean,
-    ).length;
-  const clearFilters = () =>
+    ).length +
+    (assignment ? 1 : 0);
+  const clearFilters = () => {
     onChange({
       ...filters,
       query: "",
@@ -71,6 +77,8 @@ export function ModFilters({
       side: "",
       priority: "",
     });
+    onAssignmentChange?.("");
+  };
 
   // Press "/" anywhere outside a field to jump to search.
   useEffect(() => {
@@ -185,6 +193,24 @@ export function ModFilters({
             })),
           ]}
         />
+        {onAssignmentChange && (
+          <Select
+            aria-label="Plan assignment"
+            size="sm"
+            variant="compact"
+            className="filter-select"
+            active={Boolean(assignment)}
+            value={assignment ?? ""}
+            onValueChange={(value) =>
+              onAssignmentChange(value as "" | "assigned" | "unassigned")
+            }
+            options={[
+              { value: "", label: "All plan assignments" },
+              { value: "assigned", label: "In plan" },
+              { value: "unassigned", label: "Not in plan" },
+            ]}
+          />
+        )}
         <Select
           aria-label="Status"
           size="sm"

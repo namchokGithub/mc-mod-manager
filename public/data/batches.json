@@ -51,22 +51,50 @@
           ]
         },
         {
-          "id": "step-4",
-          "name": "1.4 Client Rendering",
-          "description": "เพิ่มบน Client ทีละตัว → ตรวจหน้าเมนู ภาพในโลก HUD และ FPS → เชื่อมต่อ Server ที่ทดสอบใน Step ก่อน",
+          "id": "step-7",
+          "name": "1.6 Server Performance",
+          "description": "โหลดโลก เล่นตามปกติ และเปรียบเทียบ TPS/MSPT",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
-              "id": "sodium"
+              "id": "ai-improvements"
             },
             {
               "type": "mod",
-              "id": "sodium-extra"
+              "id": "achievements-optimizer"
             },
             {
               "type": "mod",
-              "id": "immediatelyfast-2"
+              "id": "im-fast"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "1.7 Dropped Items",
+          "description": "โยนของ เก็บของ และตรวจจำนวนไอเทม",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "get-it-together-drops"
+            }
+          ]
+        },
+        {
+          "id": "step-9",
+          "name": "1.8 Entity Despawn",
+          "description": "ตรวจการหายของม็อบ รวมถึงม็อบตั้งชื่อและม็อบเลี้ยง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "almanac"
+            },
+            {
+              "type": "mod",
+              "id": "lmd"
             }
           ]
         },
@@ -130,10 +158,6 @@
             {
               "type": "mod",
               "id": "trashslot"
-            },
-            {
-              "type": "mod",
-              "id": "mouse-tweaks"
             }
           ]
         },
@@ -260,6 +284,14 @@
             {
               "type": "mod",
               "id": "xp-tome"
+            },
+            {
+              "type": "mod",
+              "id": "curios"
+            },
+            {
+              "type": "mod",
+              "id": "baguettelib"
             }
           ]
         },
@@ -1113,8 +1145,8 @@
     },
     {
       "id": "8-decoration-immersion",
-      "name": "Batch XX — Decoration & Immersion",
-      "description": "Furniture, Building, ภาพ เสียง และท่าทาง\n\nวาง/ทุบ/โต้ตอบ → ตรวจภาพ/เสียง → ตรวจว่าผู้เล่นอื่นเห็นตรงกัน → โหลดโลกกลับ",
+      "name": "Batch 11 — Remaining Mods & Final Integration",
+      "description": "พิ่มม็อดที่เหลือจาก Batch 1–10 ทีละกลุ่ม โดยเรียง dependency ก่อนม็อดที่เรียกใช้ ทดสอบการทำงานร่วมกับชุดสะสมและสำรองโลกกับ config ก่อนแต่ละ Step แล้วปิดท้ายด้วยการทดสอบม็อดแพ็กครบชุดใน Multiplayer 3–6 คน",
       "order": 11,
       "steps": []
     }
