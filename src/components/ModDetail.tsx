@@ -1,5 +1,6 @@
 import { ArrowUpRight, Link2 } from "lucide-react";
 import { statusLabel, type CompatResult } from "../lib/compatibility";
+import { modStatusLabels } from "../lib/schema";
 import type { Mod } from "../lib/schema";
 import { CompatBadge, CompatReasons } from "./CompatBadge";
 import { Dialog } from "./ui/dialog";
@@ -31,7 +32,7 @@ export function ModDetail({
             <ModArtwork name={shown.name} imageUrl={shown.imageUrl} large />
             <div>
               <span className={`status status-${shown.status}`}>
-                {shown.status}
+                {modStatusLabels[shown.status]}
               </span>
               <p>
                 {shown.category} · {shown.side} side
@@ -112,7 +113,9 @@ export function ModDetail({
                   )}
               </>
             ) : (
-              <p>Not checked because this mod is {shown.status}.</p>
+              <p>
+                Not checked because this mod is {modStatusLabels[shown.status]}.
+              </p>
             )}
           </section>
           {shown.notes && (

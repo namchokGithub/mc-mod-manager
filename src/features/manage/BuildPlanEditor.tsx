@@ -53,21 +53,17 @@ import {
   type ContentKey,
   type Mod,
   type Step,
+  modStatusLabels,
+  modStatuses,
 } from "../../lib/schema";
 import { useRetained } from "../../lib/useRetained";
 
 const plural = (count: number, word: string) =>
   `${count} ${word}${count === 1 ? "" : "s"}`;
 
-const modStatusOptions = [
-  "planned",
-  "testing",
-  "installed",
-  "disabled",
-  "removed",
-].map((value) => ({
+const modStatusOptions = modStatuses.map((value) => ({
   value,
-  label: value.charAt(0).toUpperCase() + value.slice(1),
+  label: modStatusLabels[value],
 }));
 
 function StepCard({
@@ -441,7 +437,7 @@ function StepCard({
                           saveMod({ ...mod, status }, mod.id);
                           notify({
                             title: `Updated ${mod.name}`,
-                            description: `Status: ${value}.`,
+                            description: `Status: ${modStatusLabels[status]}.`,
                           });
                         }}
                       />

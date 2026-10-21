@@ -22,6 +22,7 @@ import {
 } from "./contentVerification";
 import {
   contentTypes,
+  modStatusLabels,
   type Batch,
   type Collection,
   type ContentItem,
@@ -215,7 +216,7 @@ function batchNodes(
     const details = [
       ...(reason ? [`Review: ${reason}`] : []),
       ...supportLines(mod),
-      `Planning status: ${mod.status}`,
+      `Planning status: ${modStatusLabels[mod.status]}`,
       ...(options.includeNotes && mod.notes.trim()
         ? [`Notes: ${mod.notes.trim()}`]
         : []),

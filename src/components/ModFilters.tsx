@@ -8,19 +8,14 @@ import {
   X,
 } from "lucide-react";
 import type { Filters } from "../lib/mods";
+import { modStatusLabels, modStatuses } from "../lib/schema";
 import { liquidLens, positionGlassGlow } from "../lib/liquidLens";
 import { modPriorities, priorityLabels } from "../lib/priority";
 import { Select } from "./ui/select";
 
-const statusOptions = [
-  "planned",
-  "testing",
-  "installed",
-  "disabled",
-  "removed",
-].map((status) => ({
+const statusOptions = modStatuses.map((status) => ({
   value: status,
-  label: status.charAt(0).toUpperCase() + status.slice(1),
+  label: modStatusLabels[status],
 }));
 
 const sideOptions = [

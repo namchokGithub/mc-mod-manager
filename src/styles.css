@@ -1305,6 +1305,15 @@ main:focus {
   color: var(--info);
   background: var(--info-soft);
 }
+.status-interested,
+.status-considering {
+  color: var(--purple);
+  background: var(--purple-soft);
+}
+.status-not-installed {
+  color: var(--text-secondary);
+  background: var(--neutral-soft);
+}
 .status-disabled {
   color: var(--purple);
   background: var(--purple-soft);
@@ -4046,6 +4055,15 @@ main:focus {
 .plan-mod-status-planned.control-trigger {
   color: var(--info);
   background: var(--info-soft);
+}
+.plan-mod-status-interested.control-trigger,
+.plan-mod-status-considering.control-trigger {
+  color: var(--purple);
+  background: var(--purple-soft);
+}
+.plan-mod-status-not-installed.control-trigger {
+  color: var(--text-secondary);
+  background: var(--neutral-soft);
 }
 .plan-mod-status-testing.control-trigger {
   color: var(--warning);

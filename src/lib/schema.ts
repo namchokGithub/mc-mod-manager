@@ -76,13 +76,35 @@ export const manualVerificationSchema = z.object({
   verifiedAt: z.iso.datetime(),
 });
 
+export const modStatuses = [
+  "interested",
+  "considering",
+  "planned",
+  "not-installed",
+  "testing",
+  "installed",
+  "disabled",
+  "removed",
+] as const;
+
+export const modStatusLabels = {
+  interested: "Interested",
+  considering: "Considering",
+  planned: "Planned",
+  "not-installed": "Not installed",
+  testing: "Testing",
+  installed: "Installed",
+  disabled: "Disabled",
+  removed: "Removed",
+} as const satisfies Record<(typeof modStatuses)[number], string>;
+
 export const modSchema = z.object({
   id: z.string().trim().min(1, "ID is required"),
   name: z.string().trim().min(1, "Name is required"),
   version: z.string(),
   category: z.string().trim().min(1, "Category is required"),
   tags: z.array(z.string().trim().min(1)),
-  status: z.enum(["planned", "testing", "installed", "disabled", "removed"]),
+  status: z.enum(modStatuses),
   side: z.enum(["client", "server", "both"]),
   // Modpack policy, separate from side and compatibility. Missing means "required", so older
   // mods.json files need no rewrite; the editor stores only "optional".

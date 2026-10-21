@@ -1,13 +1,20 @@
 import { describe, expect, it } from "vitest";
 import modpack from "../../public/data/modpack.json";
 import mods from "../../public/data/mods.json";
-import { collectionSchema, parseJsonFile } from "./schema";
+import { collectionSchema, modSchema, parseJsonFile } from "./schema";
 import { DRAFT_KEY, readDraft } from "./storage";
 
 describe("collection data", () => {
   it("accepts the published sample", () => {
     expect(collectionSchema.safeParse({ modpack, mods }).success).toBe(true);
   });
+
+  it.each(["interested", "considering", "not-installed"] as const)(
+    "accepts %s as a mod status",
+    (status) => {
+      expect(modSchema.safeParse({ ...mods[0]!, status }).success).toBe(true);
+    },
+  );
 
   it("rejects duplicate IDs on import", () => {
     expect(() =>

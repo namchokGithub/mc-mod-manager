@@ -44,7 +44,7 @@ import {
 import { filterMods, type Filters } from "../../lib/mods";
 import { paginate, type PageSize } from "../../lib/pagination";
 import { resolveHeroImageUrl } from "../../lib/heroImage";
-import type { Mod } from "../../lib/schema";
+import { modStatusLabels, type Mod } from "../../lib/schema";
 import {
   matchesSideView,
   sideCounts,
@@ -480,7 +480,7 @@ export function Preview({ theme }: { theme: Theme }) {
                             />
                           )}
                         <span className={`status status-${mod.status}`}>
-                          {mod.status}
+                          {modStatusLabels[mod.status]}
                         </span>
                         {mod.requirement === "optional" && (
                           <span className="status status-optional">

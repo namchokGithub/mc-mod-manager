@@ -157,7 +157,7 @@ describe("Markdown guide", () => {
     expect(guide).toContain("- [ ] Lithium — CurseForge");
     expect(guide).toContain("  - Minecraft: 26.1.2 (Modrinth)");
     expect(guide).toContain("  - Modloaders: NeoForge (Modrinth)");
-    expect(guide).toContain("  - Planning status: installed");
+    expect(guide).toContain("  - Planning status: Installed");
     expect(guide).toContain("  - Notes: Client only.");
   });
 

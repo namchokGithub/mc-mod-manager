@@ -86,6 +86,8 @@ import {
 import {
   contentKeys,
   modSchema,
+  modStatusLabels,
+  modStatuses,
   modsSchema,
   modpackSchema,
   parseJsonFile,
@@ -281,15 +283,9 @@ function Field({
   );
 }
 
-const statusOptions: SelectOption[] = [
-  "planned",
-  "testing",
-  "installed",
-  "disabled",
-  "removed",
-].map((value) => ({
+const statusOptions: SelectOption[] = modStatuses.map((value) => ({
   value,
-  label: value.charAt(0).toUpperCase() + value.slice(1),
+  label: modStatusLabels[value],
 }));
 const sideOptions: SelectOption[] = [
   { value: "both", label: "Both" },
@@ -1856,7 +1852,7 @@ export function Manage() {
                               <div>
                                 <h3 title={mod.name}>{mod.name}</h3>
                                 <span className={`status status-${mod.status}`}>
-                                  {mod.status}
+                                  {modStatusLabels[mod.status]}
                                 </span>
                                 <ModPlanAssignment
                                   locations={
