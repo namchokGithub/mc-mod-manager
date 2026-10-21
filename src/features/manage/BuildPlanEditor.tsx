@@ -94,6 +94,10 @@ function StepCard({
     () => new Set(),
   );
   const [moveModIds, setMoveModIds] = useState<Set<string>>(() => new Set());
+  const [recentModIds, setRecentModIds] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const notify = useToast();
   const stepBatch = { ...batch, steps: [item] };
   const { mods, missing } = batchMods(stepBatch, data.mods);
   const content = batchContent(stepBatch, data);
@@ -145,6 +149,11 @@ function StepCard({
     setSelectedModIds(new Set());
     setMoveModIds(new Set());
   };
+  useEffect(() => {
+    if (!recentModIds.size) return;
+    const timeout = window.setTimeout(() => setRecentModIds(new Set()), 1800);
+    return () => window.clearTimeout(timeout);
+  }, [recentModIds]);
   const cancelEdit = () => {
     setName(item.name);
     setDescription(item.description);
@@ -159,6 +168,14 @@ function StepCard({
     setEditing(false);
   };
   const applyMods = () => {
+    const added = [...selectedModIds].flatMap((id) =>
+      data.mods.filter((mod) => mod.id === id),
+    );
+    const moved = [...moveModIds].flatMap((id) => {
+      const mod = data.mods.find((candidate) => candidate.id === id);
+      const owner = ownerOf(id);
+      return mod && owner ? [{ mod, from: owner.name }] : [];
+    });
     let next = batch;
     for (const id of selectedModIds)
       next = assignItem(next, item.id, { type: "mod", id });
@@ -171,6 +188,24 @@ function StepCard({
         });
     }
     onBatchChange(next);
+    setRecentModIds(new Set([...selectedModIds, ...moveModIds]));
+    const [movedItem] = moved;
+    if (movedItem && !added.length) {
+      notify({
+        title: `Moved ${movedItem.mod.name} to ${item.name}`,
+        description: `From ${movedItem.from}.`,
+      });
+    } else if (moved.length || added.length) {
+      notify({
+        title: `Updated ${item.name}`,
+        description: [
+          added.length && `Added ${plural(added.length, "mod")}.`,
+          moved.length && `Moved ${plural(moved.length, "mod")}.`,
+        ]
+          .filter(Boolean)
+          .join(" "),
+      });
+    }
     setAddModsOpen(false);
     resetModPicker();
   };
@@ -348,7 +383,17 @@ function StepCard({
               {mods.length || missing.length ? (
                 <ul className="plan-mods">
                   {mods.map((mod) => (
-                    <li key={mod.id}>
+                    <motion.li
+                      key={mod.id}
+                      className={
+                        recentModIds.has(mod.id) ? "plan-mod-recent" : undefined
+                      }
+                      initial={
+                        recentModIds.has(mod.id) ? { opacity: 0, y: -4 } : false
+                      }
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                    >
                       <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
                       <span className="plan-mod-name">
                         <strong>{mod.name}</strong>
@@ -376,7 +421,7 @@ function StepCard({
                       >
                         <X size={15} />
                       </Button>
-                    </li>
+                    </motion.li>
                   ))}
                   {missing.map((id) => (
                     <li key={id} className="plan-missing">
@@ -498,6 +543,7 @@ function StepCard({
                     <Button
                       variant="ghost"
                       size="small"
+                      className={`plan-mod-move${moving ? " active" : ""}`}
                       aria-pressed={moving}
                       onClick={() =>
                         setMoveModIds((current) => {

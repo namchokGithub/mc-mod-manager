@@ -4026,6 +4026,18 @@ main:focus {
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
+  transition:
+    border-color 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out),
+    transform 0.18s var(--ease-out);
+}
+.plan-step-card:hover,
+.plan-step-card:focus-within {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+}
+.plan-step-card:active {
+  transform: translateY(1px);
 }
 .plan-step-card.open {
   border-color: var(--accent-border);
@@ -4158,6 +4170,20 @@ main:focus {
 .plan-step-items .plan-mods {
   margin-top: 0;
 }
+.plan-mod-recent {
+  border-color: var(--accent-border) !important;
+  background: var(--accent-light) !important;
+  animation: plan-mod-highlight 1.8s var(--ease-out) both;
+}
+@keyframes plan-mod-highlight {
+  0%,
+  65% {
+    box-shadow: 0 0 0 3px var(--accent-light-strong);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
 .plan-step-empty,
 .plan-steps-empty {
   display: flex;
@@ -4177,6 +4203,14 @@ main:focus {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.plan-step-item-actions .button:focus-visible,
+.plan-mod-move:focus-visible {
+  box-shadow: var(--ring);
+}
+.plan-mod-move.active {
+  background: var(--accent-light);
+  color: var(--primary);
 }
 .plan-step-dependency {
   display: flex;
@@ -4265,6 +4299,15 @@ main:focus {
 .plan-mod-picker-option small {
   color: var(--text-muted);
   font-size: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan-batch-progress > span,
+  .plan-step-card {
+    transition: none;
+  }
+  .plan-mod-recent {
+    animation: none;
+  }
 }
 .plan-steps-readonly .plan-step svg {
   flex: none;
