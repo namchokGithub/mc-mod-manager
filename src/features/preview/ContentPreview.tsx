@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { ArrowUpRight, Box, Search, X } from "lucide-react";
+import { ArrowUpRight, Box, Search, SlidersHorizontal, X } from "lucide-react";
 import { CompatBadge } from "../../components/CompatBadge";
 import { ModArtwork } from "../../components/ModArtwork";
 import {
@@ -31,7 +31,7 @@ import {
   type ContentItem,
   type ContentKey,
 } from "../../lib/schema";
-import { liquidLens } from "../../lib/liquidLens";
+import { liquidLens, positionGlassGlow } from "../../lib/liquidLens";
 
 /** Read-only browser for resource packs, data packs, and shaders on the public page. */
 export function ContentPreview({ data }: { data: Collection }) {
@@ -83,7 +83,8 @@ export function ContentPreview({ data }: { data: Collection }) {
               setActive(key);
               setQuery(initialContentQuery);
               setPage(1);
-            }}>
+            }}
+          >
             {contentMeta[key].title} <span>{data[key].items.length}</span>
           </button>
         ))}
@@ -91,10 +92,21 @@ export function ContentPreview({ data }: { data: Collection }) {
       <div
         role="tabpanel"
         id={`${id}-panel`}
-        aria-labelledby={`${id}-${active}`}>
+        aria-labelledby={`${id}-${active}`}
+      >
         <p className="content-description">{meta.description}</p>
         {items.length > 0 && (
-          <div className="filters-panel">
+          <div
+            ref={liquidLens}
+            className="filters-panel filters-panel-glass glass-surface"
+            onPointerMove={(event) =>
+              positionGlassGlow(
+                event.currentTarget,
+                event.clientX,
+                event.clientY,
+              )
+            }
+          >
             <div className="filters-top">
               <label className="search-field">
                 <Search size={18} aria-hidden="true" />
@@ -114,13 +126,17 @@ export function ContentPreview({ data }: { data: Collection }) {
                     type="button"
                     className="search-clear"
                     aria-label="Clear search"
-                    onClick={() => changeQuery({ query: "" })}>
+                    onClick={() => changeQuery({ query: "" })}
+                  >
                     <X size={15} />
                   </button>
                 )}
               </label>
             </div>
             <div className="filters-bottom">
+              <span className="filter-label">
+                <SlidersHorizontal size={15} aria-hidden="true" /> Filter by
+              </span>
               <Select
                 aria-label="Status"
                 size="sm"
@@ -211,7 +227,8 @@ export function ContentPreview({ data }: { data: Collection }) {
                             <a
                               href={compat.evidence?.evidenceUrl}
                               target="_blank"
-                              rel="noreferrer">
+                              rel="noreferrer"
+                            >
                               {compat.verification === "manual-verified"
                                 ? "Evidence"
                                 : "Earlier evidence"}
@@ -225,7 +242,8 @@ export function ContentPreview({ data }: { data: Collection }) {
                               <a
                                 href={item.curseforge.url}
                                 target="_blank"
-                                rel="noreferrer">
+                                rel="noreferrer"
+                              >
                                 CurseForge
                               </a>
                             </>
@@ -240,7 +258,8 @@ export function ContentPreview({ data }: { data: Collection }) {
                         {item.version && (
                           <span
                             className="mod-card-version"
-                            title={item.version}>
+                            title={item.version}
+                          >
                             {" "}
                             · v{item.version}
                           </span>
@@ -251,7 +270,8 @@ export function ContentPreview({ data }: { data: Collection }) {
                           className="mod-card-cta"
                           href={item.sourceUrl}
                           target="_blank"
-                          rel="noreferrer">
+                          rel="noreferrer"
+                        >
                           Source <ArrowUpRight size={15} />
                         </a>
                       )}

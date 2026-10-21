@@ -1,4 +1,4 @@
-export const PAGE_SIZES = [9, 18, 27, 54, 109] as const;
+export const PAGE_SIZES = [9, 18, 27, 54, 109, 218, 436] as const;
 export type PageSize = (typeof PAGE_SIZES)[number];
 export const DEFAULT_PAGE_SIZE: PageSize = 9;
 

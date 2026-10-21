@@ -195,6 +195,10 @@
             {
               "type": "mod",
               "id": "item-highlighter"
+            },
+            {
+              "type": "mod",
+              "id": "item-descriptions"
             }
           ]
         },
@@ -299,19 +303,23 @@
         },
         {
           "id": "step-6",
-          "name": "2.6 ภาษาไทย",
+          "name": "Other",
           "description": "ใส่ใน resourcepacks ฝั่งผู้เล่น ทดสอบสระและวรรณยุกต์ในเมนู แชต และ tooltip; ไม่นับเป็นม็อดหรือใส่ใน mods ของเซิร์ฟเวอร์",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
-              "id": "1123439"
+              "id": "healing-campfire"
+            },
+            {
+              "type": "mod",
+              "id": "paper-books"
             }
           ]
         },
         {
           "id": "step-7",
-          "name": "2.7 Integration",
+          "name": "Integration",
           "description": "ใช้สูตรจาก JEI จัดของใน Inventory ดูข้อมูลผ่าน Jade เปิดแผนที่ แล้วออกและกลับเข้าเซิร์ฟเวอร์ ตรวจ startup, world loading และอาการผิดปกติที่เพิ่งเกิดหลัง Batch 2",
           "done": false,
           "itemRefs": []
@@ -337,6 +345,10 @@
             {
               "type": "mod",
               "id": "waystones"
+            },
+            {
+              "type": "mod",
+              "id": "ly-recall-potion"
             }
           ]
         },
@@ -405,6 +417,10 @@
             {
               "type": "mod",
               "id": "baguettelib"
+            },
+            {
+              "type": "mod",
+              "id": "inventory-totem"
             }
           ]
         },
@@ -472,6 +488,10 @@
             {
               "type": "mod",
               "id": "towns-and-towers"
+            },
+            {
+              "type": "mod",
+              "id": "worldedit"
             }
           ]
         },
@@ -531,6 +551,10 @@
             {
               "type": "mod",
               "id": "sophisticated-backpacks"
+            },
+            {
+              "type": "mod",
+              "id": "more-tier-upgrade"
             }
           ]
         },
@@ -579,6 +603,10 @@
             {
               "type": "mod",
               "id": "farming-for-blockheads"
+            },
+            {
+              "type": "mod",
+              "id": "xp-from-harvest"
             }
           ]
         },
@@ -820,6 +848,10 @@
             {
               "type": "mod",
               "id": "corpse-x-curios-api-compat"
+            },
+            {
+              "type": "mod",
+              "id": "apotheosis-totem"
             }
           ]
         },
@@ -857,7 +889,7 @@
         },
         {
           "id": "step-7",
-          "name": "7.7 Integration",
+          "name": "Integration",
           "description": "สำรวจดันเจียนจาก Batch 6 พร้อมอุปกรณ์ใหม่ ทดสอบโจมตี กลิ้ง ชุบชีวิต ตายและเก็บของคืน รวมถึงเปิด Backpack และใช้ Waystones ระหว่างสถานะต่าง ๆ",
           "done": false,
           "itemRefs": []
@@ -983,8 +1015,24 @@
           ]
         },
         {
+          "id": "step-9",
+          "name": "8.8 Configuration & Integration",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "lootjs"
+            },
+            {
+              "type": "mod",
+              "id": "configurable-despawn-timer"
+            }
+          ]
+        },
+        {
           "id": "step-8",
-          "name": "8.8 Integration",
+          "name": "Integration",
           "description": "เล่นวงจร สำรวจ → ได้อุปกรณ์ → enchant → ลงแต้มสกิล → ต่อสู้ → ตาย/ชุบชีวิต → เก็บของคืน เปรียบเทียบความเสียหายกับหุ่นฝึกจาก Batch 7 และตรวจของกับค่าสถานะหลัง reconnect",
           "done": false,
           "itemRefs": []
