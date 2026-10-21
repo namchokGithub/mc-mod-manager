@@ -210,7 +210,7 @@ export function Preview({ theme }: { theme: Theme }) {
       <LiquidGlassFilter />
       <section
         ref={heroRef}
-        className="hero"
+        className="hero page-preview"
         style={
           heroImageUrl
             ? {
@@ -282,7 +282,7 @@ export function Preview({ theme }: { theme: Theme }) {
           WORLD / 001 <MoveUpRight size={16} />
         </div>
       </section>
-      <div className="container">
+      <div className="container page-preview">
         <section
           ref={statsRef}
           className="stats-grid"

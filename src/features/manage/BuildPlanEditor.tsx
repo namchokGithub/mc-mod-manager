@@ -53,85 +53,284 @@ import { useRetained } from "../../lib/useRetained";
 const plural = (count: number, word: string) =>
   `${count} ${word}${count === 1 ? "" : "s"}`;
 
-function StepRow({
+function StepCard({
+  batch,
   item,
+  initialOpen,
   first,
   last,
   onChange,
+  onBatchChange,
   onMove,
   onRemove,
+  onOpenContent,
 }: {
+  batch: Batch;
   item: Step;
+  initialOpen: boolean;
   first: boolean;
   last: boolean;
   onChange: (item: Step) => void;
+  onBatchChange: (batch: Batch) => void;
   onMove: (offset: -1 | 1) => void;
   onRemove: () => void;
+  onOpenContent: (key: ContentKey, item: ContentItem) => void;
 }) {
   // Edited locally and committed on blur, so clearing the text to retype never fails validation.
   const [name, setName] = useState(item.name);
   const [description, setDescription] = useState(item.description);
+  const [open, setOpen] = useState(initialOpen);
+  const { data } = useCollection();
+  const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
+  const stepBatch = { ...batch, steps: [item] };
+  const { mods, missing } = batchMods(stepBatch, data.mods);
+  const content = batchContent(stepBatch, data);
+  const count = batchCountText(mods.length, content);
+  // Items stay unique within a batch, even when multiple Step cards are open.
+  const available = [
+    ...(typeFilter === "" || typeFilter === "mod"
+      ? data.mods
+          .filter(
+            (mod) =>
+              !itemRefsOf(batch).some(
+                (ref) => ref.type === "mod" && ref.id === mod.id,
+              ),
+          )
+          .map((mod) => ({
+            value: `mod:${mod.id}`,
+            name: mod.name,
+            label: `${mod.name} · Mod${mod.version ? ` · v${mod.version}` : ""} · ${mod.status}`,
+          }))
+      : []),
+    ...contentTypes
+      .filter((type) => typeFilter === "" || typeFilter === type)
+      .flatMap((type) =>
+        data[contentKeyByType[type]].items
+          .filter(
+            (contentItem) =>
+              !itemRefsOf(batch).some(
+                (ref) => ref.type === type && ref.id === contentItem.id,
+              ),
+          )
+          .map((contentItem) => ({
+            value: `${type}:${contentItem.id}`,
+            name: contentItem.name,
+            label: `${contentItem.name} · ${planTypeLabels[type].one}${contentItem.version ? ` · v${contentItem.version}` : ""} · ${contentStatusLabels[contentItem.status]}`,
+          })),
+      ),
+  ].sort((a, b) => a.name.localeCompare(b.name));
+  const add = (value: string) => {
+    const split = value.indexOf(":");
+    const type = value.slice(0, split) as PlanItemType;
+    const id = value.slice(split + 1);
+    onBatchChange(assignItem(batch, item.id, { type, id }));
+  };
   return (
-    <li className="plan-step">
-      <input
-        type="checkbox"
-        className="row-check"
-        checked={item.done}
-        aria-label={`Mark “${item.name}” as done`}
-        onChange={(event) => onChange({ ...item, done: event.target.checked })}
-      />
-      <input
-        className="plan-step-input"
-        value={name}
-        aria-label="Step name"
-        onChange={(event) => setName(event.target.value)}
-        onBlur={() => {
-          const trimmed = name.trim();
-          if (!trimmed) setName(item.name);
-          else if (trimmed !== item.name) onChange({ ...item, name: trimmed });
-        }}
-      />
-      <input
-        className="plan-step-input"
-        value={description}
-        aria-label="Step description"
-        placeholder="Description (optional)"
-        onChange={(event) => setDescription(event.target.value)}
-        onBlur={() => {
-          const trimmed = description.trim();
-          if (trimmed !== item.description)
-            onChange({ ...item, description: trimmed });
-        }}
-      />
-      <div className="row-actions">
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label="Move step up"
-          disabled={first}
-          onClick={() => onMove(-1)}
-        >
-          <ArrowUp size={15} />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label="Move step down"
-          disabled={last}
-          onClick={() => onMove(1)}
-        >
-          <ArrowDown size={15} />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="row-delete"
-          aria-label={`Delete step “${item.name}”`}
-          onClick={onRemove}
-        >
-          <Trash2 size={15} />
-        </Button>
+    <li className={`plan-step-card${open ? " open" : ""}`}>
+      <div className="plan-step-head">
+        <input
+          type="checkbox"
+          className="row-check"
+          checked={item.done}
+          aria-label={`Mark “${item.name}” as done`}
+          onChange={(event) =>
+            onChange({ ...item, done: event.target.checked })
+          }
+        />
+        <div className="plan-step-title">
+          <input
+            className="plan-step-name"
+            value={name}
+            aria-label="Step name"
+            onChange={(event) => setName(event.target.value)}
+            onBlur={() => {
+              const trimmed = name.trim();
+              if (!trimmed) setName(item.name);
+              else if (trimmed !== item.name)
+                onChange({ ...item, name: trimmed });
+            }}
+          />
+          <span>
+            {count} · {item.done ? "Completed" : "Not started"}
+          </span>
+        </div>
+        <div className="plan-step-actions">
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Move step up"
+            disabled={first}
+            onClick={() => onMove(-1)}
+          >
+            <ArrowUp size={15} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Move step down"
+            disabled={last}
+            onClick={() => onMove(1)}
+          >
+            <ArrowDown size={15} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="row-delete"
+            aria-label={`Delete step “${item.name}”`}
+            onClick={onRemove}
+          >
+            <Trash2 size={15} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={`${open ? "Collapse" : "Expand"} ${item.name}`}
+            aria-expanded={open}
+            onClick={() => setOpen((current) => !current)}
+          >
+            <ChevronDown size={16} className={open ? "rotate" : undefined} />
+          </Button>
+        </div>
       </div>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            className="plan-step-body"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <textarea
+              className="plan-step-description-input"
+              value={description}
+              aria-label="Step description"
+              placeholder="Add a test note or installation instruction…"
+              rows={description ? 2 : 1}
+              onChange={(event) => setDescription(event.target.value)}
+              onBlur={() => {
+                const trimmed = description.trim();
+                if (trimmed !== item.description)
+                  onChange({ ...item, description: trimmed });
+              }}
+            />
+            <section
+              className="plan-step-items"
+              aria-label={`Items in ${item.name}`}
+            >
+              <div className="plan-step-items-head">
+                <h5>Items in this Step</h5>
+                <span className="plan-count">{count}</span>
+              </div>
+              <div className="plan-add-row plan-step-add-row">
+                <Select
+                  aria-label="Content type"
+                  size="sm"
+                  variant="compact"
+                  value={typeFilter}
+                  onValueChange={(value) =>
+                    setTypeFilter(value as PlanItemType | "")
+                  }
+                  options={typeFilterOptions}
+                />
+                <Combobox
+                  aria-label="Add an item to this Step"
+                  size="sm"
+                  value=""
+                  placeholder={
+                    available.length
+                      ? "Search and add an item…"
+                      : "Everything is already in this batch"
+                  }
+                  searchPlaceholder="Search by name…"
+                  emptyText="Nothing matches."
+                  disabled={!available.length}
+                  options={available.map(({ value, label }) => ({
+                    value,
+                    label,
+                  }))}
+                  onValueChange={(value) => value && add(value)}
+                />
+              </div>
+              {mods.length || missing.length ? (
+                <ul className="plan-mods">
+                  {mods.map((mod) => (
+                    <li key={mod.id}>
+                      <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
+                      <span className="plan-mod-name">
+                        <strong>{mod.name}</strong>
+                        <span>
+                          {mod.version ? `v${mod.version} · ` : ""}
+                          {mod.source}
+                        </span>
+                      </span>
+                      <span className={`status status-${mod.status}`}>
+                        {mod.status}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Remove ${mod.name} from this Step`}
+                        title="Remove from Step"
+                        onClick={() =>
+                          onBatchChange(
+                            unassignItem(batch, item.id, {
+                              type: "mod",
+                              id: mod.id,
+                            }),
+                          )
+                        }
+                      >
+                        <X size={15} />
+                      </Button>
+                    </li>
+                  ))}
+                  {missing.map((id) => (
+                    <li key={id} className="plan-missing">
+                      <span className="plan-mod-name">
+                        <strong>{id}</strong>
+                        <span>No longer in the mod list</span>
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Remove missing mod ${id} from this Step`}
+                        onClick={() =>
+                          onBatchChange(
+                            unassignItem(batch, item.id, { type: "mod", id }),
+                          )
+                        }
+                      >
+                        <X size={15} />
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mr-hint">No mods added yet.</p>
+              )}
+              {mods.length > 0 && (
+                <p className="mr-hint">{installGuidance.mod}</p>
+              )}
+              {contentTypes.map((type) => (
+                <ContentGroup
+                  key={type}
+                  type={type}
+                  items={content[type].items}
+                  missing={content[type].missing}
+                  onRemove={(id) =>
+                    onBatchChange(unassignItem(batch, item.id, { type, id }))
+                  }
+                  onOpen={(contentItem) =>
+                    onOpenContent(contentKeyByType[type], contentItem)
+                  }
+                />
+              ))}
+            </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </li>
   );
 }
@@ -232,190 +431,28 @@ function BatchBody({
 }) {
   const { data } = useCollection();
   const [newStepName, setNewStepName] = useState("");
-  const [selectedStepId, setSelectedStepId] = useState("");
-  const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
   const addId = useId();
-  const selectedStep =
-    batch.steps.find((item) => item.id === selectedStepId) ?? batch.steps[0];
-  const stepBatch = selectedStep ? { ...batch, steps: [selectedStep] } : batch;
-  const { mods, missing } = batchMods(stepBatch, data.mods);
-  const content = batchContent(stepBatch, data);
-  // One picker for every collection; values are "type:id", so equal IDs never collide.
-  const available = [
-    ...(typeFilter === "" || typeFilter === "mod"
-      ? data.mods
-          .filter(
-            (mod) =>
-              !itemRefsOf(batch).some(
-                (ref) => ref.type === "mod" && ref.id === mod.id,
-              ),
-          )
-          .map((mod) => ({
-            value: `mod:${mod.id}`,
-            name: mod.name,
-            label: `${mod.name} · Mod${mod.version ? ` · v${mod.version}` : ""} · ${mod.status}`,
-          }))
-      : []),
-    ...contentTypes
-      .filter((type) => typeFilter === "" || typeFilter === type)
-      .flatMap((type) =>
-        data[contentKeyByType[type]].items
-          .filter(
-            (item) =>
-              !itemRefsOf(batch).some(
-                (ref) => ref.type === type && ref.id === item.id,
-              ),
-          )
-          .map((item) => ({
-            value: `${type}:${item.id}`,
-            name: item.name,
-            label: `${item.name} · ${planTypeLabels[type].one}${item.version ? ` · v${item.version}` : ""} · ${contentStatusLabels[item.status]}`,
-          })),
-      ),
-  ].sort((a, b) => a.name.localeCompare(b.name));
-  const add = (value: string) => {
-    const split = value.indexOf(":");
-    const type = value.slice(0, split) as PlanItemType;
-    const id = value.slice(split + 1);
-    if (selectedStep)
-      onChange(assignItem(batch, selectedStep.id, { type, id }));
-  };
   const setSteps = (steps: Step[]) => onChange({ ...batch, steps });
 
   return (
     <div className="plan-body">
-      <section aria-labelledby={`${addId}-add`} className="plan-add">
-        <h4 id={`${addId}-add`}>Add item to Step</h4>
-        <div className="plan-add-row">
-          <Select
-            aria-label="Step"
-            size="sm"
-            variant="compact"
-            value={selectedStep?.id ?? ""}
-            onValueChange={setSelectedStepId}
-            options={batch.steps.map((item) => ({
-              value: item.id,
-              label: item.name,
-            }))}
-            disabled={!batch.steps.length}
-          />
-          <Select
-            aria-label="Content type"
-            size="sm"
-            variant="compact"
-            value={typeFilter}
-            onValueChange={(value) => setTypeFilter(value as PlanItemType | "")}
-            options={typeFilterOptions}
-          />
-          <Combobox
-            aria-labelledby={`${addId}-add`}
-            size="sm"
-            value=""
-            placeholder={
-              available.length
-                ? "Search and add an item…"
-                : "Everything here is already in this batch"
-            }
-            searchPlaceholder="Search by name…"
-            emptyText="Nothing matches."
-            disabled={!selectedStep || !available.length}
-            options={available.map(({ value, label }) => ({ value, label }))}
-            onValueChange={(value) => value && add(value)}
-          />
-        </div>
-      </section>
-      <section aria-labelledby={`${addId}-mods`}>
-        <h4 id={`${addId}-mods`}>
-          Mods <span className="plan-count">{mods.length}</span>
-        </h4>
-        {mods.length || missing.length ? (
-          <ul className="plan-mods">
-            {mods.map((mod) => (
-              <li key={mod.id}>
-                <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
-                <span className="plan-mod-name">
-                  <strong>{mod.name}</strong>
-                  <span>
-                    {mod.version ? `v${mod.version} · ` : ""}
-                    {mod.source}
-                  </span>
-                </span>
-                <span className={`status status-${mod.status}`}>
-                  {mod.status}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label={`Remove ${mod.name} from this batch`}
-                  title="Remove from batch"
-                  onClick={() =>
-                    selectedStep &&
-                    onChange(
-                      unassignItem(batch, selectedStep.id, {
-                        type: "mod",
-                        id: mod.id,
-                      }),
-                    )
-                  }
-                >
-                  <X size={15} />
-                </Button>
-              </li>
-            ))}
-            {missing.map((id) => (
-              <li key={id} className="plan-missing">
-                <span className="plan-mod-name">
-                  <strong>{id}</strong>
-                  <span>No longer in the mod list</span>
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label={`Remove missing mod ${id} from this batch`}
-                  onClick={() =>
-                    selectedStep &&
-                    onChange(
-                      unassignItem(batch, selectedStep.id, { type: "mod", id }),
-                    )
-                  }
-                >
-                  <X size={15} />
-                </Button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mr-hint">No mods in this batch yet.</p>
-        )}
-        {mods.length > 0 && <p className="mr-hint">{installGuidance.mod}</p>}
-      </section>
-      {contentTypes.map((type) => (
-        <ContentGroup
-          key={type}
-          type={type}
-          items={content[type].items}
-          missing={content[type].missing}
-          onRemove={(id) =>
-            selectedStep &&
-            onChange(unassignItem(batch, selectedStep.id, { type, id }))
-          }
-          onOpen={(item) => onOpenContent(contentKeyByType[type], item)}
-        />
-      ))}
-      <DependencyOverview
-        batchId={batch.id}
-        plan={data.batches}
-        mods={data.mods}
-        onOpenMod={onOpenMod}
-      />
       <section aria-labelledby={`${addId}-steps`}>
-        <h4 id={`${addId}-steps`}>Steps</h4>
+        <div className="plan-steps-heading">
+          <h4 id={`${addId}-steps`}>Steps</h4>
+          <span className="plan-count">
+            {plural(batch.steps.length, "total")}
+          </span>
+        </div>
         {batch.steps.length ? (
           <ol className="plan-steps">
             {batch.steps.map((item, index) => (
-              <StepRow
+              <StepCard
                 key={item.id}
+                batch={batch}
                 item={item}
+                initialOpen={
+                  index === batch.steps.findIndex((step) => !step.done)
+                }
                 first={index === 0}
                 last={index === batch.steps.length - 1}
                 onChange={(next) =>
@@ -425,12 +462,14 @@ function BatchBody({
                     ),
                   )
                 }
+                onBatchChange={onChange}
                 onMove={(offset) =>
                   setSteps(moveItem(batch.steps, index, offset))
                 }
                 onRemove={() =>
                   setSteps(batch.steps.filter((other) => other.id !== item.id))
                 }
+                onOpenContent={onOpenContent}
               />
             ))}
           </ol>
@@ -456,7 +495,6 @@ function BatchBody({
                 itemRefs: [],
               },
             ]);
-            setSelectedStepId(id);
             setNewStepName("");
           }}
         >
@@ -477,6 +515,12 @@ function BatchBody({
           </Button>
         </form>
       </section>
+      <DependencyOverview
+        batchId={batch.id}
+        plan={data.batches}
+        mods={data.mods}
+        onOpenMod={onOpenMod}
+      />
     </div>
   );
 }
@@ -588,6 +632,9 @@ export function BuildPlanEditor({
           {batches.map((batch, index) => {
             const open = expanded.has(batch.id);
             const done = batch.steps.filter((item) => item.done).length;
+            const stepProgress = batch.steps.length
+              ? Math.round((done / batch.steps.length) * 100)
+              : 0;
             return (
               <li
                 key={batch.id}
@@ -681,6 +728,16 @@ export function BuildPlanEditor({
                 {batch.description && (
                   <p className="plan-description">{batch.description}</p>
                 )}
+                <div
+                  className="plan-batch-progress"
+                  role="progressbar"
+                  aria-label={`${batch.name} Step progress`}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={stepProgress}
+                >
+                  <span style={{ width: `${stepProgress}%` }} />
+                </div>
                 <AnimatePresence initial={false}>
                   {open && (
                     <motion.div
