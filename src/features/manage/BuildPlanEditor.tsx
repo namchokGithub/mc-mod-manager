@@ -490,7 +490,10 @@ function StepCard({
                 <p className="plan-step-dependency" role="status">
                   <GitBranch size={15} aria-hidden="true" />
                   {dependencyCounts.resolved} dependencies found ·{" "}
-                  {dependencyCounts.missing} missing ·{" "}
+                  {dependencyCounts.requiredMissing > 0 &&
+                    `${dependencyCounts.requiredMissing} missing · `}
+                  {dependencyCounts.optionalMissing > 0 &&
+                    `${dependencyCounts.optionalMissing} optional not added · `}
                   {dependencyCounts.unresolved} unresolved
                   {dependencyCounts.later > 0 &&
                     ` · ${dependencyCounts.later} in a later batch`}

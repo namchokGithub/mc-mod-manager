@@ -89,15 +89,6 @@ export function DependencyOverview({
   const overview = batchDependencyOverview(batchId, plan, mods);
   if (!overview.mods.length) return null;
   const { counts } = overview;
-  const optionalMissing = overview.mods.reduce(
-    (total, item) =>
-      total +
-      item.entries.filter(
-        (entry) => entry.relation === "optional" && entry.status === "missing",
-      ).length,
-    0,
-  );
-  const requiredMissing = counts.missing - optionalMissing;
   const shown = overview.mods
     .map((item) => ({
       ...item,
@@ -126,14 +117,14 @@ export function DependencyOverview({
           <span className="compat-count compat-compatible">
             <strong>{counts.resolved}</strong> found
           </span>
-          {requiredMissing > 0 && (
+          {counts.requiredMissing > 0 && (
             <span className="compat-count compat-incompatible">
-              <strong>{requiredMissing}</strong> missing
+              <strong>{counts.requiredMissing}</strong> missing
             </span>
           )}
-          {optionalMissing > 0 && (
+          {counts.optionalMissing > 0 && (
             <span className="compat-count compat-unknown">
-              <strong>{optionalMissing}</strong> optional not added
+              <strong>{counts.optionalMissing}</strong> optional not added
             </span>
           )}
           <span className="compat-count compat-unknown">

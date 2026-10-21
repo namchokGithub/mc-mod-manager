@@ -147,6 +147,8 @@ describe("required and optional dependencies", () => {
     expect(overview.counts).toMatchObject({
       resolved: 1,
       missing: 1,
+      requiredMissing: 0,
+      optionalMissing: 1,
       unknown: 0,
     });
   });

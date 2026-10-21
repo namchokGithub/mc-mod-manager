@@ -39,7 +39,12 @@ export type ModDependencies = {
 
 export type DependencyCounts = {
   resolved: number;
+  /** All required and optional dependencies that do not match a mod in the collection. */
   missing: number;
+  /** Required dependencies that do not match a mod in the collection. */
+  requiredMissing: number;
+  /** Optional dependencies that are not present in the collection. */
+  optionalMissing: number;
   unresolved: number;
   /** Mods in the batch with no dependency metadata at all. */
   unknown: number;
@@ -178,6 +183,8 @@ export function batchDependencyOverview(
   const counts: DependencyCounts = {
     resolved: 0,
     missing: 0,
+    requiredMissing: 0,
+    optionalMissing: 0,
     unresolved: 0,
     unknown: 0,
     later: 0,
@@ -295,6 +302,10 @@ export function batchDependencyOverview(
       if (entry.relation === "incompatible" || entry.relation === "discouraged")
         continue;
       counts[entry.status] += 1;
+      if (entry.status === "missing") {
+        if (entry.relation === "optional") counts.optionalMissing += 1;
+        else counts.requiredMissing += 1;
+      }
       if (entry.laterOnly) counts.later += 1;
     }
     result.push({ mod, source, entries: list });
