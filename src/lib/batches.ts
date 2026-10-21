@@ -93,6 +93,35 @@ export function unassignItem(
   };
 }
 
+/** Moves an existing item between Steps in the same batch without changing its reference. */
+export function moveItemToStep(
+  batch: Batch,
+  fromStepId: string,
+  toStepId: string,
+  ref: StepItemRef,
+): Batch {
+  if (fromStepId === toStepId) return batch;
+  const from = batch.steps.find((step) => step.id === fromStepId);
+  const to = batch.steps.find((step) => step.id === toStepId);
+  if (!from || !to || !from.itemRefs.some((item) => sameRef(item, ref)))
+    return batch;
+  return {
+    ...batch,
+    steps: batch.steps.map((step) => {
+      if (step.id === fromStepId)
+        return {
+          ...step,
+          itemRefs: step.itemRefs.filter((item) => !sameRef(item, ref)),
+        };
+      if (step.id === toStepId)
+        return step.itemRefs.some((item) => sameRef(item, ref))
+          ? step
+          : { ...step, itemRefs: [...step.itemRefs, { ...ref }] };
+      return step;
+    }),
+  };
+}
+
 /** Follows a mod ID change (renamed in the editor) in every batch. */
 export function renameModInBatches(
   file: BatchFile,

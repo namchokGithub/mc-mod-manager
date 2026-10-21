@@ -5,6 +5,7 @@ import {
   assignItem,
   batchMods,
   moveItem,
+  moveItemToStep,
   newBatchId,
   newStepId,
   orderedBatches,
@@ -146,6 +147,26 @@ describe("batch helpers", () => {
       unassignItem(once, "first", { type: "mod", id: "sodium" }).steps[0]
         ?.itemRefs,
     ).toEqual([]);
+  });
+
+  it("moves a mod between Steps without duplicating it in the batch", () => {
+    const original = batch("a", 1, [
+      step("first", [{ type: "mod", id: "sodium" }]),
+      step("second", [{ type: "mod", id: "lithium" }]),
+    ]);
+
+    expect(
+      moveItemToStep(original, "first", "second", {
+        type: "mod",
+        id: "sodium",
+      }).steps.map((item) => item.itemRefs),
+    ).toEqual([
+      [],
+      [
+        { type: "mod", id: "lithium" },
+        { type: "mod", id: "sodium" },
+      ],
+    ]);
   });
 
   it("renames, removes, and resolves mods across Steps", () => {

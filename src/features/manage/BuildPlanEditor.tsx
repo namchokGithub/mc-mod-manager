@@ -3,11 +3,14 @@ import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowDown,
   ArrowUp,
+  ArrowRightLeft,
   ChevronDown,
   FileDown,
+  GitBranch,
   ListChecks,
   Pencil,
   Plus,
+  Search,
   Trash2,
   X,
 } from "lucide-react";
@@ -22,6 +25,7 @@ import {
   batchMods,
   itemRefsOf,
   moveItem,
+  moveItemToStep,
   newBatchId,
   newStepId,
   modIdsOf,
@@ -29,6 +33,7 @@ import {
   unassignItem,
 } from "../../lib/batches";
 import { DependencyOverview } from "../../components/DependencyOverview";
+import { batchDependencyOverview } from "../../lib/dependencyOverview";
 import { ExportGuideDialog } from "../../components/ExportGuideDialog";
 import { Select } from "../../components/ui/select";
 import {
@@ -82,48 +87,78 @@ function StepCard({
   const [open, setOpen] = useState(initialOpen);
   const { data } = useCollection();
   const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
+  const [addModsOpen, setAddModsOpen] = useState(false);
+  const [modSearch, setModSearch] = useState("");
+  const [selectedModIds, setSelectedModIds] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [moveModIds, setMoveModIds] = useState<Set<string>>(() => new Set());
   const stepBatch = { ...batch, steps: [item] };
   const { mods, missing } = batchMods(stepBatch, data.mods);
   const content = batchContent(stepBatch, data);
   const count = batchCountText(mods.length, content);
-  // Items stay unique within a batch, even when multiple Step cards are open.
-  const available = [
-    ...(typeFilter === "" || typeFilter === "mod"
-      ? data.mods
-          .filter(
-            (mod) =>
-              !itemRefsOf(batch).some(
-                (ref) => ref.type === "mod" && ref.id === mod.id,
-              ),
-          )
-          .map((mod) => ({
-            value: `mod:${mod.id}`,
-            name: mod.name,
-            label: `${mod.name} · Mod${mod.version ? ` · v${mod.version}` : ""} · ${mod.status}`,
-          }))
-      : []),
-    ...contentTypes
-      .filter((type) => typeFilter === "" || typeFilter === type)
-      .flatMap((type) =>
-        data[contentKeyByType[type]].items
-          .filter(
-            (contentItem) =>
-              !itemRefsOf(batch).some(
-                (ref) => ref.type === type && ref.id === contentItem.id,
-              ),
-          )
-          .map((contentItem) => ({
-            value: `${type}:${contentItem.id}`,
-            name: contentItem.name,
-            label: `${contentItem.name} · ${planTypeLabels[type].one}${contentItem.version ? ` · v${contentItem.version}` : ""} · ${contentStatusLabels[contentItem.status]}`,
-          })),
-      ),
-  ].sort((a, b) => a.name.localeCompare(b.name));
+  const stepPlan = {
+    ...data.batches,
+    batches: data.batches.batches.map((planBatch) =>
+      planBatch.id === batch.id ? { ...batch, steps: [item] } : planBatch,
+    ),
+  };
+  const dependencyCounts = batchDependencyOverview(
+    batch.id,
+    stepPlan,
+    data.mods,
+  ).counts;
+  const filteredMods = data.mods.filter((mod) =>
+    mod.name.toLowerCase().includes(modSearch.trim().toLowerCase()),
+  );
+  const ownerOf = (modId: string) =>
+    batch.steps.find((step) =>
+      step.itemRefs.some((ref) => ref.type === "mod" && ref.id === modId),
+    );
+  // Mods have their own multi-select dialog; this compact picker is for other content only.
+  const available = contentTypes
+    .filter((type) => typeFilter === "" || typeFilter === type)
+    .flatMap((type) =>
+      data[contentKeyByType[type]].items
+        .filter(
+          (contentItem) =>
+            !itemRefsOf(batch).some(
+              (ref) => ref.type === type && ref.id === contentItem.id,
+            ),
+        )
+        .map((contentItem) => ({
+          value: `${type}:${contentItem.id}`,
+          name: contentItem.name,
+          label: `${contentItem.name} · ${planTypeLabels[type].one}${contentItem.version ? ` · v${contentItem.version}` : ""} · ${contentStatusLabels[contentItem.status]}`,
+        })),
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
   const add = (value: string) => {
     const split = value.indexOf(":");
     const type = value.slice(0, split) as PlanItemType;
     const id = value.slice(split + 1);
     onBatchChange(assignItem(batch, item.id, { type, id }));
+  };
+  const resetModPicker = () => {
+    setModSearch("");
+    setSelectedModIds(new Set());
+    setMoveModIds(new Set());
+  };
+  const applyMods = () => {
+    let next = batch;
+    for (const id of selectedModIds)
+      next = assignItem(next, item.id, { type: "mod", id });
+    for (const id of moveModIds) {
+      const owner = ownerOf(id);
+      if (owner)
+        next = moveItemToStep(next, owner.id, item.id, {
+          type: "mod",
+          id,
+        });
+    }
+    onBatchChange(next);
+    setAddModsOpen(false);
+    resetModPicker();
   };
   return (
     <li className={`plan-step-card${open ? " open" : ""}`}>
@@ -221,7 +256,16 @@ function StepCard({
             >
               <div className="plan-step-items-head">
                 <h5>Items in this Step</h5>
-                <span className="plan-count">{count}</span>
+                <div className="plan-step-item-actions">
+                  <span className="plan-count">{count}</span>
+                  <Button
+                    variant="secondary"
+                    size="small"
+                    onClick={() => setAddModsOpen(true)}
+                  >
+                    <Plus size={15} /> Add mods
+                  </Button>
+                </div>
               </div>
               <div className="plan-add-row plan-step-add-row">
                 <Select
@@ -232,7 +276,7 @@ function StepCard({
                   onValueChange={(value) =>
                     setTypeFilter(value as PlanItemType | "")
                   }
-                  options={typeFilterOptions}
+                  options={contentTypeFilterOptions}
                 />
                 <Combobox
                   aria-label="Add an item to this Step"
@@ -241,7 +285,7 @@ function StepCard({
                   placeholder={
                     available.length
                       ? "Search and add an item…"
-                      : "Everything is already in this batch"
+                      : "Everything of this type is already in this batch"
                   }
                   searchPlaceholder="Search by name…"
                   emptyText="Nothing matches."
@@ -313,6 +357,16 @@ function StepCard({
               {mods.length > 0 && (
                 <p className="mr-hint">{installGuidance.mod}</p>
               )}
+              {mods.length > 0 && (
+                <p className="plan-step-dependency" role="status">
+                  <GitBranch size={15} aria-hidden="true" />
+                  {dependencyCounts.resolved} dependencies found ·{" "}
+                  {dependencyCounts.missing} missing ·{" "}
+                  {dependencyCounts.unresolved} unresolved
+                  {dependencyCounts.later > 0 &&
+                    ` · ${dependencyCounts.later} in a later batch`}
+                </p>
+              )}
               {contentTypes.map((type) => (
                 <ContentGroup
                   key={type}
@@ -331,13 +385,109 @@ function StepCard({
           </motion.div>
         )}
       </AnimatePresence>
+      <Dialog
+        open={addModsOpen}
+        onOpenChange={(next) => {
+          setAddModsOpen(next);
+          if (!next) resetModPicker();
+        }}
+        title={`Add mods to ${item.name}`}
+        description="Select unassigned mods, or move a mod already assigned to another Step in this batch."
+        size="wide"
+      >
+        <div className="plan-mod-picker">
+          <label className="plan-mod-search">
+            <Search size={16} aria-hidden="true" />
+            <span className="sr-only">Search mods</span>
+            <input
+              value={modSearch}
+              placeholder="Search mods…"
+              onChange={(event) => setModSearch(event.target.value)}
+            />
+          </label>
+          <ul className="plan-mod-picker-list">
+            {filteredMods.map((mod) => {
+              const owner = ownerOf(mod.id);
+              const inCurrentStep = owner?.id === item.id;
+              const selected = selectedModIds.has(mod.id);
+              const moving = moveModIds.has(mod.id);
+              return (
+                <li key={mod.id}>
+                  <label className="plan-mod-picker-option">
+                    <input
+                      type="checkbox"
+                      checked={selected}
+                      disabled={Boolean(owner)}
+                      onChange={() =>
+                        setSelectedModIds((current) => {
+                          const next = new Set(current);
+                          if (next.has(mod.id)) next.delete(mod.id);
+                          else next.add(mod.id);
+                          return next;
+                        })
+                      }
+                    />
+                    <span>
+                      <strong>{mod.name}</strong>
+                      <small>
+                        {mod.version ? `v${mod.version} · ` : ""}
+                        {mod.source}
+                      </small>
+                    </span>
+                  </label>
+                  {inCurrentStep ? (
+                    <span className="mr-hint">Already in this Step</span>
+                  ) : owner ? (
+                    <Button
+                      variant="ghost"
+                      size="small"
+                      aria-pressed={moving}
+                      onClick={() =>
+                        setMoveModIds((current) => {
+                          const next = new Set(current);
+                          if (next.has(mod.id)) next.delete(mod.id);
+                          else next.add(mod.id);
+                          return next;
+                        })
+                      }
+                    >
+                      <ArrowRightLeft size={15} />
+                      {moving ? "Will move here" : `Move from ${owner.name}`}
+                    </Button>
+                  ) : null}
+                </li>
+              );
+            })}
+          </ul>
+          {!filteredMods.length && (
+            <p className="mr-hint">No mods match this search.</p>
+          )}
+          <div className="dialog-actions">
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setAddModsOpen(false);
+                resetModPicker();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              disabled={!selectedModIds.size && !moveModIds.size}
+              onClick={applyMods}
+            >
+              Add {selectedModIds.size + moveModIds.size} mods
+            </Button>
+          </div>
+        </div>
+      </Dialog>
     </li>
   );
 }
 
-const typeFilterOptions = [
-  { value: "", label: "All content" },
-  ...(["mod", ...contentTypes] as PlanItemType[]).map((type) => ({
+const contentTypeFilterOptions = [
+  { value: "", label: "All other content" },
+  ...contentTypes.map((type) => ({
     value: type,
     label: planTypeLabels[type].many,
   })),
