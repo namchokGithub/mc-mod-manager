@@ -4312,6 +4312,12 @@ main:focus {
   min-width: 0;
   cursor: pointer;
 }
+.plan-mod-picker-option-full-row {
+  align-self: stretch;
+  flex: 1;
+  margin: -8px -12px;
+  padding: 8px 12px;
+}
 .plan-mod-picker-option:has(input:disabled) {
   cursor: default;
 }

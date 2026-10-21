@@ -551,7 +551,13 @@ function StepCard({
               const moving = moveModIds.has(mod.id);
               return (
                 <li key={mod.id}>
-                  <label className="plan-mod-picker-option">
+                  <label
+                    className={
+                      owner
+                        ? "plan-mod-picker-option"
+                        : "plan-mod-picker-option plan-mod-picker-option-full-row"
+                    }
+                  >
                     <input
                       type="checkbox"
                       checked={selected}
