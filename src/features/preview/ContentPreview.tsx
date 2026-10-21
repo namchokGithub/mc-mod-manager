@@ -62,7 +62,10 @@ export function ContentPreview({ data }: { data: Collection }) {
           <h2>
             More for this world<span className="heading-period">.</span>
           </h2>
-          <p>Resource packs, data packs, and shaders planned for the pack.</p>
+          <p>
+            Resource packs, data packs, and shaders planned for the pack.
+            (OPTIONAL)
+          </p>
         </div>
       </div>
       <div className="content-tabs" role="tablist" aria-label="Content type">

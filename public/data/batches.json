@@ -99,8 +99,96 @@
           ]
         },
         {
+          "id": "step-11",
+          "name": "Default",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mouse-tweaks"
+            },
+            {
+              "type": "mod",
+              "id": "sodium"
+            },
+            {
+              "type": "mod",
+              "id": "immediatelyfast-2"
+            },
+            {
+              "type": "mod",
+              "id": "entitytexturefeatures"
+            },
+            {
+              "type": "mod",
+              "id": "entity-model-features"
+            },
+            {
+              "type": "mod",
+              "id": "better-advancements"
+            },
+            {
+              "type": "mod",
+              "id": "legendary-tooltips"
+            },
+            {
+              "type": "mod",
+              "id": "item-borders"
+            },
+            {
+              "type": "mod",
+              "id": "moreculling"
+            },
+            {
+              "type": "mod",
+              "id": "better-biome-blend"
+            },
+            {
+              "type": "mod",
+              "id": "new-health-bars"
+            },
+            {
+              "type": "mod",
+              "id": "overflowing-bars"
+            },
+            {
+              "type": "mod",
+              "id": "puzzles-lib"
+            },
+            {
+              "type": "mod",
+              "id": "cloth-config"
+            }
+          ]
+        },
+        {
+          "id": "step-10",
+          "name": "Others",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "prism-lib"
+            },
+            {
+              "type": "mod",
+              "id": "libipn"
+            },
+            {
+              "type": "mod",
+              "id": "mossylib"
+            },
+            {
+              "type": "mod",
+              "id": "ui-lib"
+            }
+          ]
+        },
+        {
           "id": "step-5",
-          "name": "1.5 Integration",
+          "name": "Integration",
           "description": "ใช้ม็อดทั้ง 8 ตัวร่วมกัน → เปิด Client/Server ใหม่ → โหลดโลกเดิม → เล่นและสำรวจช่วงสั้น ๆ → บันทึกปัญหาก่อนผ่านไป Batch 2",
           "done": false,
           "itemRefs": []

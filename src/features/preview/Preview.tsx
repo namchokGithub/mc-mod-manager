@@ -42,7 +42,11 @@ import {
   verificationText,
 } from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
-import { paginate, type PageSize } from "../../lib/pagination";
+import {
+  DEFAULT_PAGE_SIZE,
+  paginate,
+  type PageSize,
+} from "../../lib/pagination";
 import { resolveHeroImageUrl } from "../../lib/heroImage";
 import { modStatusLabels, type Mod } from "../../lib/schema";
 import {
@@ -99,8 +103,7 @@ export function Preview({ theme }: { theme: Theme }) {
   const [sideView, setSideView] = useState<SideView>("players");
   const [groupBy, setGroupBy] = useState<GroupBy>("requirement");
   const [page, setPage] = useState(1);
-  const PAGE_SIZE: PageSize = 10;
-  const [pageSize, setPageSize] = useState<PageSize>(PAGE_SIZE);
+  const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
   const [heroAnimationCycle, setHeroAnimationCycle] = useState(0);
   useEffect(() => {
     const hero = heroRef.current;

@@ -1377,7 +1377,7 @@
     "tags": [
       "Social"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/chat-heads",
@@ -1982,7 +1982,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sodium-extra",
@@ -2717,7 +2717,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/shoulder-surfing-reloaded",
@@ -3098,7 +3098,7 @@
       "Decoration",
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lambdynamiclights",
@@ -3180,74 +3180,18 @@
     ]
   },
   {
-    "id": "connected-glass",
-    "name": "Connected Glass",
-    "version": "1.1.14-neoforge-mc26.1",
-    "category": "Decoration",
-    "tags": [],
-    "status": "planned",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/connected-glass",
-    "description": "Connected Glass adds new types of glass with connecting textures!",
-    "dependencies": [
-      "SuperMartijn642's Core Lib",
-      "Fusion (Connected Textures)"
-    ],
-    "notes": "",
-    "imageUrl": "https://cdn.modrinth.com/data/DghO0R02/icon.png",
-    "modrinth": {
-      "projectId": "DghO0R02",
-      "slug": "connected-glass",
-      "versionId": "TVXgEaL7",
-      "versionNumber": "1.1.14-neoforge-mc26.1",
-      "versionType": "release",
-      "datePublished": "2026-07-08T13:47:09.859393Z",
-      "gameVersions": [
-        "26.1",
-        "26.1.1",
-        "26.1.2"
-      ],
-      "loaders": [
-        "neoforge"
-      ],
-      "dependencies": [
-        {
-          "projectId": "rOUBggPv",
-          "versionId": null,
-          "type": "required",
-          "name": "SuperMartijn642's Core Lib"
-        },
-        {
-          "projectId": "p19vrgc2",
-          "versionId": null,
-          "type": "required",
-          "name": "Fusion (Connected Textures)"
-        },
-        {
-          "projectId": "B0g2vT6l",
-          "versionId": null,
-          "type": "optional",
-          "name": "Rechiseled"
-        }
-      ],
-      "syncedAt": "2026-10-17T19:43:12.376Z"
-    },
-    "addedAt": "2026-10-18T09:09:12.789Z"
-  },
-  {
     "id": "fusion-connected-textures",
     "name": "Fusion (Connected Textures)",
     "version": "1.3.16-neoforge-mc26.1",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fusion-connected-textures",
     "description": "Fusion allows resource packs to use additional texture and model types such as connected textures!",
     "dependencies": [],
-    "notes": "",
+    "notes": "เอาไว้ลงกับ shader pack",
     "imageUrl": "https://cdn.modrinth.com/data/p19vrgc2/8a9940a468bb536f7402b389d583e7f070ee14fb_96.webp",
     "modrinth": {
       "projectId": "p19vrgc2",
@@ -4540,7 +4484,7 @@
     "version": "26.1.2-48-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/neat",
@@ -5209,7 +5153,7 @@
     "version": "1.4.0",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/keybindspurger",
@@ -5731,7 +5675,7 @@
     "version": "2.1-neoforge-26.1.2",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/nbt-autocomplete",
@@ -6165,7 +6109,7 @@
       "Decoration",
       "Game Mechanics"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-particles",
@@ -6270,7 +6214,7 @@
       "Game Mechanics",
       "Storage"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-interactions",
@@ -6329,7 +6273,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/particle-effects",
@@ -7082,7 +7026,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jeioptimizer",
@@ -7715,7 +7659,7 @@
     "version": "1.8.5+26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/immersive-overlays",
@@ -7892,7 +7836,7 @@
     "tags": [
       "Social"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ears",
@@ -8082,7 +8026,7 @@
     "version": "3.1.5-26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/drippy-loading-screen",
@@ -9092,7 +9036,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cursorcentered-fix",
@@ -10018,7 +9962,7 @@
     "version": "18.0.2",
     "category": "Uncategorized",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/modmenu",
@@ -13636,7 +13580,7 @@
     "version": "26.1.0",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cut-through",
