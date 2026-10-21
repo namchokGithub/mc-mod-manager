@@ -4,7 +4,7 @@
     {
       "id": "batch-1-foundation",
       "name": "Batch 1 — Foundation & Performance",
-      "description": "ระบบพื้นฐานและประสิทธิภาพ\n\nเปิด Client/Server → ตรวจภาพและเมนู → เก็บค่า FPS/RAM/TPS ตั้งต้น",
+      "description": "ระบบพื้นฐานและประสิทธิภาพ\n\nเปิด Client/Server → ตรวจภาพและเมนู → เก็บค่า FPS/RAM/TPS ตั้งต้น\n\nPlacebo ต้องมาก่อน FastSuite และ FastFurnace ตามข้อมูล dependency ของรุ่นที่พบ ส่วน ModernFix, Clumps, Sodium และ ImmediatelyFast มีรุ่นสำหรับ NeoForge 26.1.2 ให้เลือก แต่ยังต้องตรวจ dependency และข้อกำหนดด้านการติดตั้งของ ไฟล์รุ่นที่จะใช้จริง ก่อนเริ่ม Step FastSuite\n\nจำนวนสะสม: หลัง 1.2 = 2 ม็อด, หลัง 1.3 = 5 ม็อด, หลัง 1.4 = 7 ม็อด โดย Sodium และ ImmediatelyFast อยู่ฝั่ง Client ตามหน้าเวอร์ชันที่ตรวจพบ modrinth.com\n\nก่อนแต่ละ Step ให้สำรองโลกและ Config ไว้ หากเปิดเกมหรือโหลดโลกไม่ผ่าน ให้หยุดที่ Step นั้นและตรวจม็อดที่เพิ่งเพิ่ม ทุก Step ยังเป็น not_run; ตารางนี้เป็นแผนทดสอบ ยังไม่มีผลทดสอบใน Minecraft ครับ",
       "order": 1,
       "steps": [
         {
@@ -84,7 +84,102 @@
       "name": "Batch 2 — Interface & Player Utilities",
       "description": "HUD, Tooltip, Inventory, แผนที่\n\nตรวจ HUD/Tooltip → ลองจัด Inventory → ทดสอบแผนที่และ Waypoint",
       "order": 2,
-      "steps": []
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "2.1 Recipes",
+          "description": "ค้นหาไอเทม ดูสูตรคราฟต์และวิธีใช้ไอเทม ตรวจว่าสูตรตรงกันเมื่อเข้าเซิร์ฟเวอร์",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "jei"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "2.2 ข้อมูลในเกม",
+          "description": "Jade 🔍, AppleSkin\n\nดูข้อมูลบล็อกและสิ่งมีชีวิต ตรวจ HUD อาหารและความอิ่มเมื่อเล่นบนเซิร์ฟเวอร์",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "jade"
+            },
+            {
+              "type": "mod",
+              "id": "jade-addons-forge"
+            },
+            {
+              "type": "mod",
+              "id": "appleskin"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "2.3 Inventory",
+          "description": "Balm → TrashSlot, Mouse Tweaks\n\nลากและเลื่อนไอเทมระหว่างช่อง ทดลองทิ้ง ไอเทมที่ไม่สำคัญ แล้วออกเข้าโลกใหม่ ต้องลง Balm ก่อน TrashSlot เพราะหน้ารุ่น NeoForge ระบุว่าเป็น dependency",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "balm"
+            },
+            {
+              "type": "mod",
+              "id": "trashslot"
+            },
+            {
+              "type": "mod",
+              "id": "mouse-tweaks"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "2.4 แผนที่",
+          "description": "Xaero’s Minimap, Xaero’s World Map \n\nเปิดแผนที่ สร้าง waypoint เปลี่ยนมิติ แล้วออกและกลับเข้าเซิร์ฟเวอร์ เพื่อตรวจว่าข้อมูลยังอยู่",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "xaeros-minimap"
+            },
+            {
+              "type": "mod",
+              "id": "xaeros-world-map"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "2.5 การแสดงผลฝั่งผู้เล่น",
+          "description": "Just Zoom, Cloth Config API → BetterF3\n\nทดสอบซูม ปุ่มลัด F3 และหน้า config รวมถึงตรวจปุ่มที่ชนกัน Cloth Config รองรับ NeoForge 26.1.2; ผู้พัฒนา BetterF3 แนะนำให้ใช้สำหรับหน้า config ผ่าน F3+M",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-6",
+          "name": "2.6 ภาษาไทย",
+          "description": "ใส่ใน resourcepacks ฝั่งผู้เล่น ทดสอบสระและวรรณยุกต์ในเมนู แชต และ tooltip; ไม่นับเป็นม็อดหรือใส่ใน mods ของเซิร์ฟเวอร์",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "1123439"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "2.7 Integration",
+          "description": "ใช้สูตรจาก JEI จัดของใน Inventory ดูข้อมูลผ่าน Jade เปิดแผนที่ แล้วออกและกลับเข้าเซิร์ฟเวอร์ ตรวจ startup, world loading และอาการผิดปกติที่เพิ่งเกิดหลัง Batch 2",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
     },
     {
       "id": "batch-3-combat-progression",

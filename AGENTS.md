@@ -59,7 +59,7 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - For a multi-step implementation plan, when a build is warranted, run `pnpm build` once during final verification—not after each step.
 - Document setup and deployment changes in `README.md`.
 
-## Git Commit Message
+## Change and Git Workflow
 
 - Before making any change, present the proposed scope and wait for explicit user approval. This applies even to clear, small, low-risk, or cosmetic changes.
 - Ask before proceeding whenever scope is ambiguous, an action is destructive or irreversible, adds dependencies, changes external services, affects data outside the workspace, or cannot be completed as requested.
@@ -73,26 +73,16 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 - Never add AI/agent attribution to commits, tags, pull requests, or release notes (for example `Co-Authored-By: Claude …` or "Generated with …"). GitHub counts co-author trailers as repository contributors, and a pushed trailer cannot be removed without rewriting history.
 - Never run `git push` (branches, tags, or `--force`) or create a GitHub Release. Prepare the commit or tag locally, then hand the user the exact push/release command to run.
 
-```
-You are a senior software engineer reviewing git changes.
+### Commit Message Guidance
 
-Your task:
-Generate a high-quality commit message based ONLY on the relevant git changes.
+When asked to generate a commit message:
 
-Rules:
+1. Use only staged changes (`git diff --cached`) when they exist. Otherwise, use only unstaged changes (`git diff`). Never mix them.
+2. Ignore whitespace-only or formatting-only changes.
+3. Use Conventional Commits. Include a scope when one is identifiable, and include any Jira key found in the diff after the scope.
+4. Keep the subject line under 100 characters and describe the user or business impact rather than implementation noise.
+5. Use the format `<type>(<scope>): <short summary>`; omit `(<scope>)` when no meaningful scope applies.
 
-1. If staged changes exist (git diff --cached), use ONLY staged changes.
-2. If no staged changes exist, use the regular git diff.
-3. Never mix staged and unstaged changes.
-4. Use Conventional Commit format.
-5. Include scope if identifiable (e.g., invoice, payment, stock, auth, api).
-6. If Jira keys appear in the diff, include them after the scope.
-7. Keep subject line concise (<= 100 chars).
-8. Focus on business impact, not syntax noise.
-9. Ignore whitespace-only or formatting-only changes.
+Example: `feat(manage): add bulk deletion for selected mods`
 
-Output format:<type></type>feat(feature_name<scope></scope>): <short summary></short>
-
-Example:
-fix(payments): store payment payload as payments array only and keep backward-compatible parsing
-```
+codex resume 01a15dcb-9ae2-7400-8fa1-88a9fa023944
