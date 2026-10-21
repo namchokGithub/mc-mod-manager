@@ -84,6 +84,7 @@ function StepCard({
   // Edited locally and committed on blur, so clearing the text to retype never fails validation.
   const [name, setName] = useState(item.name);
   const [description, setDescription] = useState(item.description);
+  const [editing, setEditing] = useState(false);
   const [open, setOpen] = useState(initialOpen);
   const { data } = useCollection();
   const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
@@ -144,6 +145,19 @@ function StepCard({
     setSelectedModIds(new Set());
     setMoveModIds(new Set());
   };
+  const cancelEdit = () => {
+    setName(item.name);
+    setDescription(item.description);
+    setEditing(false);
+  };
+  const saveEdit = () => {
+    const nextName = name.trim();
+    if (!nextName) return;
+    onChange({ ...item, name: nextName, description: description.trim() });
+    setName(nextName);
+    setDescription(description.trim());
+    setEditing(false);
+  };
   const applyMods = () => {
     let next = batch;
     for (const id of selectedModIds)
@@ -173,23 +187,36 @@ function StepCard({
           }
         />
         <div className="plan-step-title">
-          <input
-            className="plan-step-name"
-            value={name}
-            aria-label="Step name"
-            onChange={(event) => setName(event.target.value)}
-            onBlur={() => {
-              const trimmed = name.trim();
-              if (!trimmed) setName(item.name);
-              else if (trimmed !== item.name)
-                onChange({ ...item, name: trimmed });
-            }}
-          />
+          {editing ? (
+            <input
+              className="plan-step-name"
+              value={name}
+              aria-label="Step name"
+              autoFocus
+              onChange={(event) => setName(event.target.value)}
+            />
+          ) : (
+            <button
+              type="button"
+              className="plan-step-edit-trigger"
+              onClick={() => setEditing(true)}
+            >
+              {item.name}
+            </button>
+          )}
           <span>
             {count} · {item.done ? "Completed" : "Not started"}
           </span>
         </div>
         <div className="plan-step-actions">
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={`Edit ${item.name}`}
+            onClick={() => setEditing(true)}
+          >
+            <Pencil size={15} />
+          </Button>
           <Button
             variant="ghost"
             size="icon"
@@ -237,19 +264,40 @@ function StepCard({
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            <textarea
-              className="plan-step-description-input"
-              value={description}
-              aria-label="Step description"
-              placeholder="Add a test note or installation instruction…"
-              rows={description ? 2 : 1}
-              onChange={(event) => setDescription(event.target.value)}
-              onBlur={() => {
-                const trimmed = description.trim();
-                if (trimmed !== item.description)
-                  onChange({ ...item, description: trimmed });
-              }}
-            />
+            {editing ? (
+              <div className="plan-inline-editor">
+                <textarea
+                  className="plan-step-description-input"
+                  value={description}
+                  aria-label="Step description"
+                  placeholder="Add a test note or installation instruction…"
+                  rows={description ? 3 : 2}
+                  onChange={(event) => setDescription(event.target.value)}
+                />
+                <div className="plan-inline-actions">
+                  <Button variant="ghost" size="small" onClick={cancelEdit}>
+                    Cancel
+                  </Button>
+                  <Button
+                    size="small"
+                    disabled={!name.trim()}
+                    onClick={saveEdit}
+                  >
+                    Save Step
+                  </Button>
+                </div>
+              </div>
+            ) : item.description ? (
+              <p className="plan-step-description">{item.description}</p>
+            ) : (
+              <button
+                type="button"
+                className="plan-step-add-note"
+                onClick={() => setEditing(true)}
+              >
+                Add a test note or installation instruction…
+              </button>
+            )}
             <section
               className="plan-step-items"
               aria-label={`Items in ${item.name}`}
@@ -352,7 +400,16 @@ function StepCard({
                   ))}
                 </ul>
               ) : (
-                <p className="mr-hint">No mods added yet.</p>
+                <div className="plan-step-empty">
+                  <p className="mr-hint">No mods added yet.</p>
+                  <Button
+                    variant="secondary"
+                    size="small"
+                    onClick={() => setAddModsOpen(true)}
+                  >
+                    <Plus size={15} /> Add mods
+                  </Button>
+                </div>
               )}
               {mods.length > 0 && (
                 <p className="mr-hint">{installGuidance.mod}</p>
@@ -624,9 +681,11 @@ function BatchBody({
             ))}
           </ol>
         ) : (
-          <p className="mr-hint">
-            Add Steps to group items by installation or testing work.
-          </p>
+          <div className="plan-steps-empty">
+            <p className="mr-hint">
+              Start with a Step to group installation or testing work.
+            </p>
+          </div>
         )}
         <form
           className="plan-add-step"
@@ -651,7 +710,9 @@ function BatchBody({
           <input
             className="plan-step-input"
             value={newStepName}
-            placeholder="New Step…"
+            placeholder={
+              batch.steps.length ? "New Step…" : "Name your first Step…"
+            }
             aria-label="New Step"
             onChange={(event) => setNewStepName(event.target.value)}
           />
@@ -661,7 +722,8 @@ function BatchBody({
             size="small"
             disabled={!newStepName.trim()}
           >
-            <Plus size={15} /> Add step
+            <Plus size={15} />{" "}
+            {batch.steps.length ? "Add step" : "Add first Step"}
           </Button>
         </form>
       </section>

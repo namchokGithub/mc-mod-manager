@@ -4059,6 +4059,23 @@ main:focus {
   font-size: 14px;
   font-weight: 700;
 }
+.plan-step-edit-trigger {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.plan-step-edit-trigger:hover {
+  color: var(--primary);
+}
 .plan-step-name:hover {
   background: var(--surface-alt);
 }
@@ -4076,6 +4093,36 @@ main:focus {
   gap: 14px;
   overflow: hidden;
   padding: 0 16px 16px 50px;
+}
+.plan-inline-editor {
+  display: grid;
+  gap: 8px;
+}
+.plan-inline-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.plan-step-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+.plan-step-add-note {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+}
+.plan-step-add-note:hover {
+  color: var(--primary);
+  text-decoration: underline;
 }
 .plan-step-description-input {
   width: 100%;
@@ -4110,6 +4157,21 @@ main:focus {
 }
 .plan-step-items .plan-mods {
   margin-top: 0;
+}
+.plan-step-empty,
+.plan-steps-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface-alt);
+}
+.plan-step-empty .mr-hint,
+.plan-steps-empty .mr-hint {
+  margin: 0;
 }
 .plan-step-item-actions {
   display: flex;
