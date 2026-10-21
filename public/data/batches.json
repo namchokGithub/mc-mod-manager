@@ -82,7 +82,7 @@
     {
       "id": "batch-2-world-exploration",
       "name": "Batch 2 — Interface & Player Utilities",
-      "description": "HUD, Tooltip, Inventory, แผนที่\n\nตรวจ HUD/Tooltip → ลองจัด Inventory → ทดสอบแผนที่และ Waypoint",
+      "description": "HUD, Tooltip, Inventory, แผนที่\n\nตรวจ HUD/Tooltip → ลองจัด Inventory → ทดสอบแผนที่และ Waypoint\n\nจุดตรวจ dependency ก่อนเริ่ม 2.1: ตรวจ metadata ของไฟล์ JEI รุ่นที่จะใช้ว่าต้องติดตั้ง MezzConfig แยกหรือมีมาในไฟล์แล้ว ตอนนี้ยังไม่นับ MezzConfig เป็นม็อดใหม่ และหากพบว่าเป็น dependency ที่ต้องลงแยก ให้เพิ่มก่อน JEI แล้วปรับยอดสะสมตามจริง CurseForge\n\nBatch นี้ใช้โลกทดสอบเดิมต่อได้ตามแผน หาก Step ใดมีปัญหาสำคัญ ให้หยุดก่อน Step ถัดไปและตรวจม็อดที่เพิ่งเพิ่มร่วมกับชุดที่ติดตั้งอยู่; การทดสอบแยกทำได้เพื่อหาสาเหตุ แต่ชุดทดสอบหลักยังคงสะสมต่อเนื่อง ส่วน REI และ The One Probe ยังไม่เพิ่มใน Batch นี้ เพราะหน้าที่ทับกับ JEI และ Jade ที่กำลังทดสอบ ไม่ได้หมายความว่าตรวจพบว่าใช้ร่วมกันไม่ได้",
       "order": 2,
       "steps": [
         {
@@ -183,8 +183,8 @@
     },
     {
       "id": "batch-3-combat-progression",
-      "name": "Batch 3 — Biomes & Dimensions",
-      "description": "Biome, ภูมิประเทศ, Nether/End\n\nสร้างโลกทดสอบใหม่ → สำรวจ Biome → เข้า Nether/End → ตรวจการสร้าง Chunk",
+      "name": "Batch 3 — Travel and Survival",
+      "description": "โลกทดสอบ: ใช้โลกสะสมเดิมได้ แต่การตรวจ Waystone ที่เกิดในหมู่บ้านควรไปยัง chunk ที่ยังไม่เคยสร้าง เพราะโครงสร้างใหม่จะไม่ปรากฏย้อนหลังในพื้นที่เก่า หากต้องแยกตรวจการเกิดโครงสร้าง ให้ใช้โลกทดสอบใหม่เพิ่มเติม โดยเก็บโลกสะสมหลักไว้\n\nสถานะ: ทุก Step เป็น not_run ข้อมูลไฟล์เผยแพร่และ dependency ข้างต้นเป็นการตรวจแบบ static; ยังไม่มีการติดตั้งหรือทดสอบ Minecraft จริง หาก Step ใดมีปัญหาสำคัญ ให้ตรวจม็อดที่เพิ่งเพิ่มก่อนดำเนิน Step ถัดไป",
       "order": 3,
       "steps": [
         {
@@ -275,7 +275,7 @@
     {
       "id": "batch-4-decoration-quality-of-life",
       "name": "Batch 4 — Biomes & World Generation",
-      "description": "หมู่บ้าน สิ่งก่อสร้าง Dungeon\n\nหา Structure ในโลกใหม่ → ตรวจการเกิดซ้อน → ตรวจ Chest/Loot → สำรวจพร้อมกัน",
+      "description": "หมู่บ้าน สิ่งก่อสร้าง Dungeon\n\nหา Structure ในโลกใหม่ → ตรวจการเกิดซ้อน → ตรวจ Chest/Loot → สำรวจพร้อมกัน\n\nข้อควรระวังเรื่องโลก: เก็บโลกสะสมเดิมเป็น backup และใช้โลกใหม่สำหรับผลทดสอบ Batch 4 การมีไฟล์รุ่นตรงกันยังไม่ยืนยันว่า Biomes O’ Plenty กับ Terralith สร้างโลกร่วมกันได้ในชุดนี้ จึงต้องดูผลจาก Step 4.2 ก่อนเดินต่อ ยังไม่ใช้ Chunky สร้าง chunk ล่วงหน้าจำนวนมาก เพราะรายการของคุณยังมีม็อดโครงสร้างและ world generation ที่จะเพิ่มภายหลัง; chunk ที่สร้างไปแล้วจะไม่สร้างใหม่ตามม็อดที่เพิ่มทีหลัง\n\nทุกการทดสอบ Minecraft ใน Batch 4 มีสถานะ not_run นี่เป็นแผนทดสอบและการตรวจข้อมูล dependency เท่านั้น ยังไม่มีผล runtime จริง",
       "order": 4,
       "steps": [
         {
@@ -342,7 +342,7 @@
     {
       "id": "batch-5-balance-configuration",
       "name": "Batch 5 — Storage, Backpacks, Farming & Trading",
-      "description": "กระเป๋า คลัง อาหาร ฟาร์ม การค้า\n\nคราฟต์และใช้งาน → โอน Item → ทดสอบฟาร์ม/การค้า → ออกเข้าใหม่ตรวจข้อมูล",
+      "description": "กระเป๋า คลัง อาหาร ฟาร์ม การค้า\n\nคราฟต์และใช้งาน → โอน Item → ทดสอบฟาร์ม/การค้า → ออกเข้าใหม่ตรวจข้อมูล\n\nใช้โลกจาก Batch 4 ต่อสำหรับการทดสอบระบบต่าง ๆ ส่วน 5.4 ให้สร้างโลกทดสอบใหม่เพิ่มเติมเพื่อตรวจการเกิดพืช Croptopia โดยคงชุดม็อดสะสมทั้งหมดไว้ ผู้พัฒนาระบุว่าพืชหาได้ตามธรรมชาติในโลก Minecraft Mods\n\nTrade Cycling: review — ยังไม่เพิ่มในชุดหลักนี้ เพราะ Easy Villagers มีฟังก์ชันเปลี่ยนรายการค้าอยู่แล้ว เป็นข้อพิจารณาด้านความซ้ำซ้อน ยังไม่ใช่ข้อสรุปว่าเข้ากันไม่ได้ และไม่มีการแนะนำให้ลบอัตโนมัติ Minecraft Mod\n\nการตรวจข้อมูลม็อดชุดนี้เป็น partially_verified: พบไฟล์เผยแพร่และ dependency ที่อ้างอิงข้างต้น แต่ยังไม่ได้ตรวจไฟล์ JAR ที่คุณจะเลือกใช้ ส่วนแผนทดสอบ Minecraft ทุก Step เป็น not_run หากพบปัญหาสำคัญ ให้หยุดแก้ที่ Step นั้นก่อนเพิ่มกลุ่มถัดไป",
       "order": 5,
       "steps": [
         {
@@ -456,7 +456,7 @@
     {
       "id": "batch-6-dungeons-structures-loot",
       "name": "Batch 6 — Dungeons, Structures & Loot",
-      "description": "",
+      "description": "Dependency: วาง YUNG’s API ก่อนม็อดโครงสร้างในตระกูลที่ใช้ API; ไม่ถือว่า Better Mineshafts เป็น dependency ของ Better Dungeons เพียงเพราะอยู่ Step เดียวกัน ส่วน Structory: Towers ใช้แยกเดี่ยวได้ จึงไม่กำหนดให้ Structory เป็น required dependency ของมัน YUNG's Better Dungeons\n\nโลกทดสอบ: สร้างโลกใหม่เมื่อเริ่ม Batch 6 แล้วสำรวจ chunk ใหม่หลังเพิ่มแต่ละกลุ่ม เก็บชุดติดตั้งสะสมไว้ตลอด สำหรับ 6.9 ให้สร้างโลกใหม่อีกครั้งเพื่อดูผลของม็อดทั้งหมดตั้งแต่เริ่ม โดยเฉพาะ End Island ใช้โลกที่ยังไม่สร้าง End แทนการลบมิติเดิม\n\nสถานะข้อมูลแต่ละม็อดในแผนนี้คือ partially_verified: ตรวจพบรุ่นเผยแพร่ที่ตรงเป้าหมาย แต่ยังไม่ได้ตรวจ JAR ที่เลือกใช้และความเข้ากันได้ทั้งชุด ทุกการทดสอบ Minecraft เป็น not_run หากพบปัญหาสำคัญ ให้ตรวจม็อดที่เพิ่งเพิ่มและปฏิสัมพันธ์กับชุดเดิมก่อนดำเนิน Step ถัดไป",
       "order": 6,
       "steps": [
         {
@@ -597,31 +597,525 @@
       ]
     },
     {
-      "id": "batch-6-mobs-wildlife",
-      "name": "Batch 6 — Mobs & Wildlife",
-      "description": "สัตว์ ศัตรู และระบบ Entity\n\nตรวจ Spawn → AI/Pathfinding → ต่อสู้/เลี้ยงสัตว์ → สังเกต TPS เมื่อ Entity เพิ่ม",
-      "order": 7,
-      "steps": []
-    },
-    {
       "id": "7-combat-magic-progression",
       "name": "Batch 7 — Combat, Magic & Progression",
-      "description": "อาวุธ เกราะ เวท Skills Enchantments\n\nตรวจ Animation/Hit → ใช้ Skill/Spell → ทดสอบ Enchant/Gear → ตรวจ Damage และ Progression",
-      "order": 8,
-      "steps": []
+      "description": "อาวุธ เกราะ เวท Skills Enchantments\n\nตรวจ Animation/Hit → ใช้ Skill/Spell → ทดสอบ Enchant/Gear → ตรวจ Damage และ Progression\n\nใช้โลกสะสมเดิมต่อได้ สำหรับการตรวจการกระจาย Artifacts ใน loot ให้สำรวจพื้นที่ใหม่เพิ่มเติม ส่วน BaguetteLib และ Corpse x Curios API Compat เป็น server_only ตามข้อมูลผู้พัฒนา ไลบรารีอื่นให้ติดตั้งตามม็อดที่เรียกใช้ ไม่เหมารวมว่าทุกไลบรารีต้องลงทั้งสองฝั่ง Minecraft Mod\n\nตรวจแบบ static แล้วว่ารายชื่อทั้ง 14 ตัวอยู่ในข้อมูลต้นฉบับ ไม่ซ้ำ และ required dependencies ที่ตรวจพบถูกวางก่อนตัวที่เรียกใช้ สถานะข้อมูลยังเป็น partially_verified เพราะยังไม่ได้ตรวจ JAR ที่คุณเลือกจริงและความเข้ากันได้ทั้งชุด ทุกการทดสอบ Minecraft เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป",
+      "order": 7,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "7.1 Damage Testing",
+          "description": "Moonlight Lib → MmmMmmMmmMmm\n\nวางหุ่นฝึก ทดลองโจมตีด้วยมือ ดาบ ขวาน และธนู บันทึกค่าความเสียหายก่อนเพิ่มระบบต่อสู้ เพื่อใช้เปรียบเทียบภายหลัง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "moonlight"
+            },
+            {
+              "type": "mod",
+              "id": "mmmmmmmmmmmm"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "7.2 Combat & Dodge",
+          "description": "Player Animation Library → Better Combat / Combat Roll\n\nเพิ่ม Better Combat ก่อนทดสอบคอมโบ ระยะโจมตี โล่ และการมองเห็นแอนิเมชันของผู้เล่นอื่น จากนั้นเพิ่ม Combat Roll เพื่อตรวจปุ่มกลิ้ง cooldown และการกลิ้งขณะโจมตี ใช้ Cloth Config API จาก Batch 2 ร่วมด้วย",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "player-animation-library"
+            },
+            {
+              "type": "mod",
+              "id": "better-combat"
+            },
+            {
+              "type": "mod",
+              "id": "combat-roll"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "7.3 Equipment & Accessories",
+          "description": "Curios API → Artifacts, Immersive Armors\n\nตรวจช่องเครื่องประดับ การใส่–ถอดและผลของ Artifacts จากนั้นเพิ่มชุดเกราะ ทดสอบค่าป้องกัน เอฟเฟกต์ การซ่อม และแอนิเมชันร่วมกับ Better Combat โดย Curios เป็น optional integration ของ Artifacts ที่เราเลือกใช้ในชุดนี้",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "curios"
+            },
+            {
+              "type": "mod",
+              "id": "artifacts"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-armors"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "7.4 Equipment Recovery",
+          "description": "BaguetteLib → Corpse x Curios API Compat\n\nใช้ Corpse จาก Batch 3 ตายพร้อมอุปกรณ์ในช่อง Curios แล้วเก็บคืน ตรวจว่าของกลับช่องถูกต้อง ไม่หายหรือซ้ำ และยังถูกต้องหลัง reconnect ส่วนเสริมนี้ต้องใช้ BaguetteLib, Curios และ Corpse",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "baguettelib"
+            },
+            {
+              "type": "mod",
+              "id": "corpse"
+            },
+            {
+              "type": "mod",
+              "id": "corpse-x-curios-api-compat"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "7.5 Stronger Enemies",
+          "description": "Puzzles Lib → Mutant Monsters\n\nทดลองมอนสเตอร์ทีละชนิดในพื้นที่ควบคุม ตรวจการโจมตี AI กระสุน และ loot แล้วทดสอบสู้ด้วยอุปกรณ์จาก 7.3 บันทึกเวลาในการสู้กับความเสียหายเพื่อประเมินสมดุล",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "puzzles-lib"
+            },
+            {
+              "type": "mod",
+              "id": "mutant-monsters"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "7.6 Multiplayer Revival",
+          "description": "CreativeCore → PlayerRevive\n\nใช้ผู้เล่นอย่างน้อยสองคน ทดสอบล้ม ชุบชีวิต ยกเลิกการชุบ หมดเวลา และหลุดระหว่างล้ม ตรวจว่า Corpse เกิดเมื่อเสียชีวิตจริง และอุปกรณ์ยังอยู่ครบ PlayerRevive ต้องใช้ CreativeCore",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "creativecore"
+            },
+            {
+              "type": "mod",
+              "id": "playerrevive"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "7.7 Integration",
+          "description": "สำรวจดันเจียนจาก Batch 6 พร้อมอุปกรณ์ใหม่ ทดสอบโจมตี กลิ้ง ชุบชีวิต ตายและเก็บของคืน รวมถึงเปิด Backpack และใช้ Waystones ระหว่างสถานะต่าง ๆ",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
     },
     {
-      "id": "8-decoration-immersion",
-      "name": "Batch 8 — Decoration & Immersion",
-      "description": "Furniture, Building, ภาพ เสียง และท่าทาง\n\nวาง/ทุบ/โต้ตอบ → ตรวจภาพ/เสียง → ตรวจว่าผู้เล่นอื่นเห็นตรงกัน → โหลดโลกกลับ",
-      "order": 9,
-      "steps": []
+      "id": "batch-8-skills-attributes-enchanting",
+      "name": "Batch 8 — Skills, Attributes & Enchanting",
+      "description": "ด้านติดตั้ง: Enchantment Descriptions ใช้เป็น client_only; Default Skill Trees ใช้เป็น server_only สำหรับเซิร์ฟเวอร์ทดสอบนี้ ส่วนอีก 12 ตัวมีข้อมูลผู้เผยแพร่ระบุว่าต้องใช้ทั้ง Client และ Server (both_required) รวมถึงไลบรารีตาม dependency ของชุดนี้\n\nใช้โลกสะสมเดิมต่อได้ ส่วนการตรวจการกระจาย loot ของ Apotheosis ให้สำรวจ chunk ใหม่ เพิ่มเติม เก็บ checkpoint ก่อน 8.7 ไว้เปรียบเทียบผล\n\nตรวจแบบ static แล้วว่ารายชื่อทั้ง 14 ตัวอยู่ในรายการต้นฉบับ ไม่ซ้ำ และ required dependencies ที่ตรวจพบเรียงก่อนม็อดที่เรียกใช้ สถานะข้อมูลแต่ละตัวเป็น partially_verified เพราะยังไม่ได้ตรวจ JAR ที่เลือกจริงและความเข้ากันได้ทั้งชุด การทดสอบ Minecraft ทุก Step เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป",
+      "order": 8,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "8.1 Attributes & Health",
+          "description": "Prickle → AttributeFix → Max Health Fix\n\nตรวจเลือดสูงสุดและค่าสถานะเมื่อใส่–ถอดอุปกรณ์ ตาย ชุบชีวิต และ reconnect เปรียบเทียบกับชุด Batch 7 โดยสองม็อดหลังต้องใช้ Prickle",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "prickle"
+            },
+            {
+              "type": "mod",
+              "id": "attributefix"
+            },
+            {
+              "type": "mod",
+              "id": "max-health-fix"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "8.2 Skill Progression",
+          "description": "Pufferfish’s Attributes → Pufferfish’s Skills → Default Skill Trees\n\nตรวจหน้าสกิล การได้รับและใช้แต้ม ผลของแต่ละ node และการบันทึกหลัง reconnect ใช้ Default Skill Trees รุ่นม็อด JAR ซึ่งต้องมีทั้ง Skills และ Attributes ก่อน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "attributes"
+            },
+            {
+              "type": "mod",
+              "id": "skills"
+            },
+            {
+              "type": "mod",
+              "id": "default-skill-trees"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "8.3 Enchantment Information",
+          "description": "ใช้ Prickle จาก 8.1 ตรวจคำอธิบายบนหนังสือและ tooltip รวมถึงการแสดงภาษาไทย ม็อดนี้ทำหน้าที่แสดงข้อมูลฝั่งผู้เล่น",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "enchantment-descriptions"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "8.4 Enchanting Foundation",
+          "description": "Apothic Attributes → Apothic Enchanting\n\nใช้ Placebo จาก Batch 1 ตรวจค่าสถานะเพิ่มเติม โต๊ะ enchant ชั้นหนังสือ และผลของ enchant ต่อหุ่นฝึก โดย Apothic Enchanting ต้องมี Apothic Attributes ก่อน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "apothic-attributes"
+            },
+            {
+              "type": "mod",
+              "id": "apothic-enchanting"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "8.5 Enchanting Utilities",
+          "description": "ใช้ Puzzles Lib จาก Batch 7 สำหรับ Infuser ตรวจเลือก enchant ค่า XP การถอด enchant และการใส่กลับ เปรียบเทียบกับโต๊ะจาก 8.4 เพื่อหาความผิดปกติด้านสูตรและต้นทุน โดยความเข้ากันได้ยังต้องทดสอบจริง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "enchanting-infuser"
+            },
+            {
+              "type": "mod",
+              "id": "dis-enchanting-table"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "8.6 Spawner Progression",
+          "description": "ใช้ Placebo ที่มีแล้ว ทดลองปรับ spawner ทีละคุณสมบัติ ตรวจจำนวนมอนสเตอร์ ระยะทำงาน และพฤติกรรมหลังออก–เข้าโลก ทดสอบร่วมกับดันเจียนจาก Batch 6",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "apothic-spawners"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "8.7 Apotheosis Integration",
+          "description": "ตรวจคู่มือ อุปกรณ์ที่มี affix, gem/socket และ loot ทดสอบใส่–ถอดอุปกรณ์ร่วมกับ Artifacts และสกิล โดยติดตั้งโมดูล required จาก 8.4 และ 8.6 ครบก่อน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "patchouli"
+            },
+            {
+              "type": "mod",
+              "id": "apotheosis"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "8.8 Integration",
+          "description": "เล่นวงจร สำรวจ → ได้อุปกรณ์ → enchant → ลงแต้มสกิล → ต่อสู้ → ตาย/ชุบชีวิต → เก็บของคืน เปรียบเทียบความเสียหายกับหุ่นฝึกจาก Batch 7 และตรวจของกับค่าสถานะหลัง reconnect",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
     },
     {
       "id": "batch-9-balance-full-multiplayer-integration",
-      "name": "Batch 9 — Balance & Full Multiplayer Integration",
-      "description": "ปรับสมดุล Config และทดสอบทั้งแพ็ก\n\nตรวจ Loot/Spawn/Damage → เล่นจริง 3–6 คน → เดินทางแยกกัน → Restart และตรวจข้อมูลคงอยู่",
+      "name": "Batch 9 — Magic & RPG Classes",
+      "description": "ด้านติดตั้ง: Structure Pool API และ Gazebos เป็น server_only; RPG Enchantments ต้องมีบน Server โดย Client เป็น optional ส่วนอีก 15 ตัวมีข้อมูลผู้เผยแพร่ระบุ both_required สำหรับชุดรุ่นที่ตรวจพบ\n\nใช้โลกสะสมเดิมทดสอบระบบต่อสู้ได้ สำหรับ 9.6 ให้สร้างโลกทดสอบใหม่เพิ่มเติม เพื่อตรวจโครงสร้างตั้งแต่เริ่มโลก โดยใช้ชุดม็อดสะสมทั้งหมด ส่วนการเชื่อม Default Skill Trees กับอาชีพ RPG ยังต้องทดสอบและตรวจ config ไม่ถือว่าเชื่อมกันอัตโนมัติ\n\nตรวจแบบ static แล้วว่าทั้ง 18 ตัวอยู่ในรายการต้นฉบับ ไม่ซ้ำ และ required dependencies ที่พบอยู่ก่อนตัวที่เรียกใช้ สถานะข้อมูลแต่ละตัวเป็น partially_verified และการทดสอบ Minecraft ทุก Step เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป",
+      "order": 9,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "9.1 Spell Foundation",
+          "description": "Spell Power Attributes → Spell Engine\n\nตรวจเปิดเกมและค่าสถานะเวท ใช้ Player Animation Library, Curios API และ Cloth Config API จาก Batch ก่อนหน้าเป็น required dependencies ของ Spell Engine",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "spell-power"
+            },
+            {
+              "type": "mod",
+              "id": "spell-engine"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "9.2 Runes & Supporting APIs",
+          "description": "Bundle API → Runes, Armor Model API, Structure Pool API\n\nตรวจคราฟต์และจัดเก็บ Runes แล้วเปิดโลกซ้ำ เตรียม API ให้ครบก่อนเพิ่มอาชีพ โดย Runes ต้องมี Bundle API ก่อน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "bundle-api"
+            },
+            {
+              "type": "mod",
+              "id": "runes"
+            },
+            {
+              "type": "mod",
+              "id": "armor-model-api"
+            },
+            {
+              "type": "mod",
+              "id": "structure-pool-api"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "9.3 Wizards & Healers",
+          "description": "Wizards (RPG Series), Paladins & Priests (RPG Series)\n\nเพิ่มทีละตัว ทดสอบร่ายเวท เปลี่ยนอุปกรณ์ ค่าใช้จ่ายและ cooldown จากนั้นใช้สองผู้เล่นตรวจการฮีล การเลือกเป้าหมาย และ friendly fire ตาม config",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "wizards"
+            },
+            {
+              "type": "mod",
+              "id": "paladins-and-priests"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "9.4 Ranged & Melee Classes",
+          "description": "Ranged Weapon API → Archers (RPG Series), Rogues & Warriors (RPG Series)\n\nทดสอบธนู กระสุน สกิลโจมตี และอาวุธประชิดร่วมกับ Better Combat/Combat Roll ตรวจปุ่มลัดและแอนิเมชันจากมุมมองผู้เล่นอื่น",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ranged-weapon-api"
+            },
+            {
+              "type": "mod",
+              "id": "archers"
+            },
+            {
+              "type": "mod",
+              "id": "rogues-and-warriors"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "9.5 RPG Equipment",
+          "description": "Jewelry (RPG Series), Relics (RPG Series), Arsenal (RPG Series), Armory (RPG Series)\n\nเพิ่มทีละตัว ตรวจสูตร ช่องอุปกรณ์ โบนัสเมื่อใส่–ถอด และค่าความเสียหายบนหุ่นฝึก จากนั้นตรวจการตายและเก็บคืนร่วมกับ Corpse/Curios",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "jewelry"
+            },
+            {
+              "type": "mod",
+              "id": "relics-rpg"
+            },
+            {
+              "type": "mod",
+              "id": "arsenal-rpg-series"
+            },
+            {
+              "type": "mod",
+              "id": "armory-rpg-series"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "9.6 RPG Structures",
+          "description": "Gazebos (RPG Series), Village Taverns (RPG Series)\n\nใช้ Structure Pool API จาก 9.2 ตรวจโครงสร้างใน chunk ใหม่ ทดสอบการเกิดร่วมกับหมู่บ้านและโครงสร้างจาก Batch 4 และ 6 แล้วโหลดโลกกลับ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "gazebos"
+            },
+            {
+              "type": "mod",
+              "id": "village-taverns"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "9.7 RPG Enchantments",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "rpg-enchantments"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "9.8 Integration",
+          "description": "จัดทีมประชิด–ธนู–เวท–ฮีล ลงดันเจียนร่วมกัน ตรวจ cooldown, friendly fire, การชุบชีวิต และของหลัง reconnect พร้อมเปรียบเทียบผลจากสกิลและอุปกรณ์ Batch 7–8",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-6-mobs-wildlife",
+      "name": "Batch 10 — Creatures, Animal Farming & Mob Difficulty",
+      "description": "ด้านติดตั้ง: Beekeeper Hut เป็น server_only ส่วนอีก 14 ตัวมีข้อมูลผู้เผยแพร่ระบุ both_required สำหรับชุดรุ่นที่ตรวจพบ ไลบรารีใน Batch นี้ถูกเพิ่มเพราะมีม็อดที่เรียกใช้\n\nใช้โลกสะสมเดิมทดสอบพฤติกรรมได้ สำหรับ 10.3 และการตรวจ world generation ใน 10.8 ให้สร้างโลกทดสอบใหม่เพิ่มเติม ด้วยชุดม็อดสะสมทั้งหมด เพื่อตรวจโครงสร้างและสภาพแวดล้อมตั้งแต่เริ่มโลก\n\nตรวจแบบ static แล้วว่าทั้ง 15 ตัวอยู่ในรายการต้นฉบับ ไม่ซ้ำ และ required dependencies ที่พบถูกวางก่อนตัวที่เรียกใช้ สถานะข้อมูลแต่ละตัวเป็น partially_verified เพราะยังไม่ได้ตรวจช่วงเวอร์ชันภายใน JAR และความเข้ากันได้ทั้งชุด ทุกการทดสอบ Minecraft เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป\n\nด้าน cleanup ให้ review การเพิ่มความยากร่วมกันของ Champions, Apotheosis และม็อดมอนสเตอร์ โดยใช้ผลทดสอบจริงประกอบ ยังไม่มีข้อสรุปว่าเข้ากันไม่ได้หรือทำให้ประสิทธิภาพลดลงครับ",
       "order": 10,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "10.1 Ecology",
+          "description": "สำรวจสิ่งมีชีวิตและสิ่งแวดล้อมที่เพิ่ม ตรวจการเกิดตามธรรมชาติ การโต้ตอบ และความคงอยู่หลังโหลดโลกกลับ มีรุ่น NeoForge สำหรับ 26.1.2",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ecologics"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "10.2 Friends & Foes",
+          "description": "ลงไลบรารีก่อน แล้วทดลองสิ่งมีชีวิตทีละชนิด ตรวจ AI การโจมตี การโต้ตอบ และ loot รวมถึงภาพเคลื่อนไหวจากผู้เล่นอีกเครื่อง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "resourceful-lib"
+            },
+            {
+              "type": "mod",
+              "id": "friends-and-foes-forge"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "10.3 Friends & Foes Addons",
+          "description": "Friends&Foes - Flowery Mooblooms (Forge/NeoForge), Friends&Foes - Beekeeper Hut (Forge/NeoForge)\n\nเพิ่มทีละตัว ตรวจพฤติกรรม Moobloom และการเกิด Beekeeper Hut ในพื้นที่ใหม่ แล้วตรวจร่วมกับหมู่บ้านจาก Batch ก่อนหน้า ทั้งสองต้องมี Friends&Foes ก่อน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "friends-and-foes-flowery-mooblooms-forge"
+            },
+            {
+              "type": "mod",
+              "id": "friends-and-foes-beekeeper-hut-forge"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "10.4 Creature Variety",
+          "description": "Variants&Ventures, Bagus Lib → EarthMobs, Sea Life\n\nเพิ่มทีละตัว ตรวจชนิดมอนสเตอร์ การเกิดตาม biome และพฤติกรรมสัตว์น้ำ โดย Variants&Ventures ใช้ Resourceful Lib; Sea Life ใช้ Puzzles Lib จาก Batch 7",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "variants-and-ventures"
+            },
+            {
+              "type": "mod",
+              "id": "bagus-lib"
+            },
+            {
+              "type": "mod",
+              "id": "new-sea-life"
+            },
+            {
+              "type": "mod",
+              "id": "earthmobs"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "10.5 Animal Farming",
+          "description": "Animal Feeding Trough, Animal Pens\n\nตรวจอาหารที่สัตว์แต่ละชนิดยอมรับ การผสมพันธุ์ การนำสัตว์เข้า–ออกคอก และข้อมูลหลัง reconnect เริ่มจากสัตว์ vanilla แล้วค่อยลองชนิดที่เพิ่มใน Batch นี้",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "animal-feeding-trough"
+            },
+            {
+              "type": "mod",
+              "id": "animalpens"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "10.6 Hostile Encounters",
+          "description": "Mutants and Zombies, Armored Foes\n\nเพิ่มทีละตัว เปรียบเทียบการต่อสู้กับชุดก่อนเพิ่ม ตรวจอุปกรณ์มอนสเตอร์ ความเสียหาย loot และการเกิดในดันเจียน โดย Armored Foes ใช้ Puzzles Lib ที่มีแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mutants-and-zombies"
+            },
+            {
+              "type": "mod",
+              "id": "armored-foes"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "10.7 Elite Mobs",
+          "description": "Architectury API → Champions-Unofficial\n\nตรวจการเกิด Champion, affix, เลือด ความเสียหาย และ loot จากนั้นทดสอบร่วมกับ Apotheosis โดยเปรียบเทียบกับมอนสเตอร์ปกติ เพื่อดูว่าความยากซ้อนกันอย่างไร",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-8",
+          "name": "10.8 Integration",
+          "description": "สำรวจกลางวัน–กลางคืน บนบก–ใต้น้ำ ทำฟาร์มสัตว์ และลงดันเจียนร่วมกัน ตรวจการเกิดมอนสเตอร์ การชุบชีวิต loot และข้อมูลหลัง restart พร้อมบันทึกอาการกระตุกที่พบ",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "8-decoration-immersion",
+      "name": "Batch XX — Decoration & Immersion",
+      "description": "Furniture, Building, ภาพ เสียง และท่าทาง\n\nวาง/ทุบ/โต้ตอบ → ตรวจภาพ/เสียง → ตรวจว่าผู้เล่นอื่นเห็นตรงกัน → โหลดโลกกลับ",
+      "order": 11,
       "steps": []
     }
   ]

@@ -134,6 +134,18 @@ function StepCard({
     batch.steps.find((step) =>
       step.itemRefs.some((ref) => ref.type === "mod" && ref.id === modId),
     );
+  const otherBatchLocationsByModId = new Map<string, string[]>();
+  orderedBatches(data.batches).forEach((planBatch, batchIndex) => {
+    if (planBatch.id === batch.id) return;
+    planBatch.steps.forEach((step) => {
+      step.itemRefs.forEach((ref) => {
+        if (ref.type !== "mod") return;
+        const locations = otherBatchLocationsByModId.get(ref.id) ?? [];
+        locations.push(`Batch ${batchIndex + 1} · ${step.name}`);
+        otherBatchLocationsByModId.set(ref.id, locations);
+      });
+    });
+  });
   // Mods have their own multi-select dialog; this compact picker is for other content only.
   const available = contentTypes
     .filter((type) => typeFilter === "" || typeFilter === type)
@@ -549,6 +561,13 @@ function StepCard({
               const inCurrentStep = owner?.id === item.id;
               const selected = selectedModIds.has(mod.id);
               const moving = moveModIds.has(mod.id);
+              const otherBatchLocations =
+                otherBatchLocationsByModId.get(mod.id) ?? [];
+              const planLocationLabel = otherBatchLocations.length
+                ? otherBatchLocations.length === 1
+                  ? `Already in ${otherBatchLocations[0]}`
+                  : `Already in ${otherBatchLocations.length} plan steps`
+                : null;
               return (
                 <li key={mod.id}>
                   <label
@@ -578,6 +597,14 @@ function StepCard({
                         {mod.source}
                       </small>
                     </span>
+                    {!owner && planLocationLabel && (
+                      <span
+                        className="plan-mod-plan-location"
+                        title={otherBatchLocations.join("\n")}
+                      >
+                        {planLocationLabel}
+                      </span>
+                    )}
                   </label>
                   {inCurrentStep ? (
                     <span className="mr-hint">Already in this Step</span>
