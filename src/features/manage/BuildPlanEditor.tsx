@@ -58,10 +58,22 @@ import { useRetained } from "../../lib/useRetained";
 const plural = (count: number, word: string) =>
   `${count} ${word}${count === 1 ? "" : "s"}`;
 
+const modStatusOptions = [
+  "planned",
+  "testing",
+  "installed",
+  "disabled",
+  "removed",
+].map((value) => ({
+  value,
+  label: value.charAt(0).toUpperCase() + value.slice(1),
+}));
+
 function StepCard({
   batch,
   item,
-  initialOpen,
+  open,
+  onOpenChange,
   first,
   last,
   onChange,
@@ -72,7 +84,8 @@ function StepCard({
 }: {
   batch: Batch;
   item: Step;
-  initialOpen: boolean;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   first: boolean;
   last: boolean;
   onChange: (item: Step) => void;
@@ -85,8 +98,7 @@ function StepCard({
   const [name, setName] = useState(item.name);
   const [description, setDescription] = useState(item.description);
   const [editing, setEditing] = useState(false);
-  const [open, setOpen] = useState(initialOpen);
-  const { data } = useCollection();
+  const { data, saveMod } = useCollection();
   const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
   const [addModsOpen, setAddModsOpen] = useState(false);
   const [modSearch, setModSearch] = useState("");
@@ -284,7 +296,7 @@ function StepCard({
             size="icon"
             aria-label={`${open ? "Collapse" : "Expand"} ${item.name}`}
             aria-expanded={open}
-            onClick={() => setOpen((current) => !current)}
+            onClick={() => onOpenChange(!open)}
           >
             <ChevronDown size={16} className={open ? "rotate" : undefined} />
           </Button>
@@ -402,9 +414,23 @@ function StepCard({
                           {mod.source}
                         </span>
                       </span>
-                      <span className={`status status-${mod.status}`}>
-                        {mod.status}
-                      </span>
+                      <Select
+                        aria-label={`Status for ${mod.name}`}
+                        className={`plan-mod-status plan-mod-status-${mod.status}`}
+                        size="sm"
+                        variant="compact"
+                        value={mod.status}
+                        options={modStatusOptions}
+                        onValueChange={(value) => {
+                          const status = value as Mod["status"];
+                          if (status === mod.status) return;
+                          saveMod({ ...mod, status }, mod.id);
+                          notify({
+                            title: `Updated ${mod.name}`,
+                            description: `Status: ${value}.`,
+                          });
+                        }}
+                      />
                       <Button
                         variant="ghost"
                         size="icon"
@@ -684,6 +710,9 @@ function BatchBody({
 }) {
   const { data } = useCollection();
   const [newStepName, setNewStepName] = useState("");
+  const [openStepId, setOpenStepId] = useState<string | null>(
+    () => batch.steps.find((step) => !step.done)?.id ?? null,
+  );
   const addId = useId();
   const setSteps = (steps: Step[]) => onChange({ ...batch, steps });
 
@@ -703,8 +732,9 @@ function BatchBody({
                 key={item.id}
                 batch={batch}
                 item={item}
-                initialOpen={
-                  index === batch.steps.findIndex((step) => !step.done)
+                open={openStepId === item.id}
+                onOpenChange={(nextOpen) =>
+                  setOpenStepId(nextOpen ? item.id : null)
                 }
                 first={index === 0}
                 last={index === batch.steps.length - 1}
@@ -750,6 +780,7 @@ function BatchBody({
                 itemRefs: [],
               },
             ]);
+            setOpenStepId(id);
             setNewStepName("");
           }}
         >

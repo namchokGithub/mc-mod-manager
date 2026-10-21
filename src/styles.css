@@ -3969,6 +3969,39 @@ main:focus {
   color: var(--text);
   overflow-wrap: anywhere;
 }
+.plan-mod-status.control-trigger {
+  width: auto;
+  flex: none;
+  min-height: 30px;
+  border-color: transparent;
+  border-radius: 6px;
+  padding: 0 8px;
+  font-size: 11px;
+  font-weight: 750;
+}
+.plan-mod-status-planned.control-trigger {
+  color: var(--info);
+  background: var(--info-soft);
+}
+.plan-mod-status-testing.control-trigger {
+  color: var(--warning);
+  background: var(--warning-soft);
+}
+.plan-mod-status-installed.control-trigger {
+  color: var(--primary);
+  background: var(--accent-light-strong);
+}
+.plan-mod-status-disabled.control-trigger {
+  color: var(--purple);
+  background: var(--purple-soft);
+}
+.plan-mod-status-removed.control-trigger {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+.plan-mod-status.control-trigger:hover:not(:disabled) {
+  border-color: currentColor;
+}
 .plan-mod-open {
   justify-self: start;
   padding: 0;
@@ -4344,6 +4377,249 @@ main:focus {
 .build-guide {
   padding-bottom: 96px;
 }
+
+/* Build plan: Preview-only Step accordion */
+.preview-plan-list,
+.preview-plan-steps,
+.preview-plan-items {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.preview-plan-list {
+  gap: 10px;
+}
+.preview-plan-batch {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.preview-plan-batch-toggle,
+.preview-plan-step-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+.preview-plan-batch-toggle {
+  gap: 12px;
+  padding: 14px 16px;
+}
+.preview-plan-batch-toggle:hover,
+.preview-plan-step-toggle:hover {
+  background: var(--surface-hover);
+}
+.preview-plan-batch-toggle:focus-visible,
+.preview-plan-step-toggle:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 0;
+  box-shadow: var(--ring);
+}
+.preview-plan-order {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+.preview-plan-batch-title,
+.preview-plan-step-title,
+.preview-plan-item-copy {
+  display: grid;
+  min-width: 0;
+}
+.preview-plan-batch-title {
+  flex: 1;
+  gap: 2px;
+}
+.preview-plan-batch-title strong {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.preview-plan-batch-title > span,
+.preview-plan-step-title > span,
+.preview-plan-item-copy > span {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.preview-plan-item-copy .preview-plan-item-repeat {
+  color: var(--primary);
+}
+.preview-plan-progress,
+.preview-plan-step-count,
+.preview-plan-group-heading > span {
+  flex: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+}
+.preview-plan-batch-toggle > svg,
+.preview-plan-step-toggle > svg {
+  flex: none;
+  color: var(--text-muted);
+  transition: transform 0.2s var(--ease-out);
+}
+.preview-plan-batch-toggle[aria-expanded="true"] > svg,
+.preview-plan-step-toggle[aria-expanded="true"] > svg {
+  transform: rotate(180deg);
+}
+.preview-plan-batch-description {
+  margin: -6px 16px 14px 58px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+.preview-plan-batch-panel,
+.preview-plan-step-panel {
+  overflow: hidden;
+}
+.preview-plan-batch-body {
+  display: grid;
+  gap: 16px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--border);
+}
+.preview-plan-steps {
+  gap: 8px;
+}
+.preview-plan-step {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.preview-plan-step.is-open {
+  border-color: var(--accent-border);
+}
+.preview-plan-step-toggle {
+  gap: 10px;
+  min-height: 62px;
+  padding: 10px 12px;
+}
+.preview-plan-step-state {
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: var(--text-subtle);
+}
+.preview-plan-step-state svg {
+  color: inherit;
+}
+.preview-plan-step.is-open .preview-plan-step-state,
+.preview-plan-step.is-done .preview-plan-step-state {
+  color: var(--primary);
+}
+.preview-plan-step-title {
+  flex: 1;
+  gap: 3px;
+}
+.preview-plan-step-title strong {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--text);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.preview-plan-step-number {
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 12px;
+}
+.preview-plan-step-panel {
+  border-top: 1px solid var(--border);
+}
+.preview-plan-step-body {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+.preview-plan-step-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+.preview-plan-repeat-note,
+.preview-plan-empty {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.preview-plan-repeat-note {
+  border-color: var(--accent-border);
+}
+.preview-plan-mod-group,
+.preview-plan-content-group {
+  display: grid;
+  gap: 8px;
+}
+.preview-plan-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.preview-plan-group-heading h5,
+.preview-plan-content-group h5 {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+}
+.preview-plan-content-group h5 {
+  color: var(--text-secondary);
+}
+.preview-plan-content-group h5 span {
+  color: var(--text-muted);
+}
+.preview-plan-items {
+  gap: 6px;
+}
+.preview-plan-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+}
+.preview-plan-item .mod-artwork {
+  width: 34px;
+  height: 34px;
+}
+.preview-plan-item-copy {
+  flex: 1;
+  gap: 2px;
+}
+.preview-plan-item-copy strong,
+.preview-plan-item-copy .plan-mod-open {
+  color: var(--text);
+  font-size: 13px;
+}
+.preview-plan-export {
+  display: flex;
+  justify-content: flex-end;
+}
 @media (max-width: 650px) {
   .plan-head {
     flex-wrap: wrap;
@@ -4371,6 +4647,33 @@ main:focus {
   }
   .plan-add-step {
     flex-direction: column;
+  }
+  .preview-plan-batch-toggle {
+    align-items: flex-start;
+  }
+  .preview-plan-progress {
+    display: none;
+  }
+  .preview-plan-batch-description {
+    margin-left: 16px;
+  }
+  .preview-plan-step-toggle {
+    align-items: flex-start;
+  }
+  .preview-plan-step-count {
+    display: none;
+  }
+  .preview-plan-item {
+    flex-wrap: wrap;
+  }
+  .preview-plan-item-copy {
+    min-width: min(180px, calc(100% - 44px));
+  }
+  .preview-plan-item .compat-badge {
+    margin-left: 44px;
+  }
+  .preview-plan-item .plan-mod-link {
+    margin-left: auto;
   }
 }
 
