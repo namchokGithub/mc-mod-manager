@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowDown,
@@ -102,6 +102,7 @@ function StepCard({
   const [typeFilter, setTypeFilter] = useState<PlanItemType | "">("");
   const [addModsOpen, setAddModsOpen] = useState(false);
   const [modSearch, setModSearch] = useState("");
+  const modSearchRef = useRef<HTMLInputElement>(null);
   const [selectedModIds, setSelectedModIds] = useState<Set<string>>(
     () => new Set(),
   );
@@ -522,12 +523,17 @@ function StepCard({
         title={`Add mods to ${item.name}`}
         description="Select unassigned mods, or move a mod already assigned to another Step in this batch."
         size="wide"
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+          modSearchRef.current?.focus();
+        }}
       >
         <div className="plan-mod-picker">
           <label className="plan-mod-search">
             <Search size={16} aria-hidden="true" />
             <span className="sr-only">Search mods</span>
             <input
+              ref={modSearchRef}
               value={modSearch}
               placeholder="Search mods…"
               onChange={(event) => setModSearch(event.target.value)}

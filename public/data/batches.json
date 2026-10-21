@@ -186,7 +186,91 @@
       "name": "Batch 3 — Biomes & Dimensions",
       "description": "Biome, ภูมิประเทศ, Nether/End\n\nสร้างโลกทดสอบใหม่ → สำรวจ Biome → เข้า Nether/End → ตรวจการสร้าง Chunk",
       "order": 3,
-      "steps": []
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "3.1 Fast Travel",
+          "description": "Shogi → Waystones\n\nวางและเปิดใช้งาน Waystone สองจุด เดินทางไปกลับ ตรวจค่า XP/ข้อจำกัดการวาร์ป แล้วออกและเข้าเซิร์ฟเวอร์ใหม่ Balm ที่ Waystones ต้องใช้เป็นม็อดที่สืบทอดมาจาก Batch 2; ผู้พัฒนาระบุว่ารุ่น 26.1 ขึ้นไปต้องใช้ Shogi ด้วย",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "shogi"
+            },
+            {
+              "type": "mod",
+              "id": "waystones"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "3.2 Exploration",
+          "description": "Nature’s Compass, Explorer’s Compass\n\nค้นหา biome และ structure เดินทางไปยังเป้าหมาย ตรวจทิศทางที่แสดงร่วมกับแผนที่ Xaero จาก Batch 2 ทั้งสองมีไฟล์ NeoForge สำหรับ 26.1.x",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "natures-compass"
+            },
+            {
+              "type": "mod",
+              "id": "explorers-compass"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "3.3 พักระหว่างเดินทาง",
+          "description": "ทดลองถุงนอนและเปล ตรวจเวลา การเกิดใหม่ และพฤติกรรมเมื่อผู้เล่นหลายคนอยู่ในโลกเดียวกัน มีไฟล์ NeoForge 26.1.2",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "comforts"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "3.4 ย้ายสิ่งของในโลก",
+          "description": "ยกและวางหีบที่มีของกับสิ่งมีชีวิต ตรวจว่าของไม่หายหลังออกและเข้าโลกใหม่ ใช้ไฟล์ที่ระบุ NeoForge 26.1.2 โดยตรง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "carry-on"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "3.5 การตายและ XP",
+          "description": "เก็บ XP ลง Tome ตายด้วยของทดสอบ กลับไปเก็บของจากศพ แล้วตรวจจำนวนของและ XP หลัง reconnect ทั้งคู่มีไฟล์ NeoForge ที่ระบุรองรับ 26.1.2",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "corpse"
+            },
+            {
+              "type": "mod",
+              "id": "corpse-x-curios-api-compat"
+            },
+            {
+              "type": "mod",
+              "id": "xp-tome"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "3.6 Integration",
+          "description": "ให้ผู้เล่นเดินทางด้วย Waystones และเข็มทิศ พัก ค้นของหลังตาย และกลับเข้าเซิร์ฟเวอร์ ตรวจ startup, world loading และการทำงานร่วมกับ Batch 1–2",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
     },
     {
       "id": "batch-4-decoration-quality-of-life",
