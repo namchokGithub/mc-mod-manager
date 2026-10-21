@@ -72,6 +72,16 @@ export function formatPlainTextModList(mods: Mod[]): string {
     .join("\n");
 }
 
+/** Keeps mods whose status matches any selected value. Empty selection does not filter. */
+export function filterModsByStatuses(
+  mods: Mod[],
+  statuses: readonly Mod["status"][],
+): Mod[] {
+  if (!statuses.length) return mods;
+  const selected = new Set(statuses);
+  return mods.filter((mod) => selected.has(mod.status));
+}
+
 /** Normalizes search text so punctuation variants do not hide matching mod names. */
 export function normalizeSearchText(value: string): string {
   return value

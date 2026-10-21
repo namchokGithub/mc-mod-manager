@@ -66,6 +66,7 @@ import { JarImportDialog } from "../import/JarImportDialog";
 import {
   duplicateMod,
   filterMods,
+  filterModsByStatuses,
   formatPlainTextModList,
   minimalModList,
   uniqueId,
@@ -1269,6 +1270,7 @@ export function Manage() {
   const shownDeleting = useRetained(deleting);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
+  const [statusFilters, setStatusFilters] = useState<Mod["status"][]>([]);
   // Selection is keyed by mod ID and survives page and filter changes.
   const [selected, setSelected] = useState<Set<string>>(() => new Set());
   // IDs captured when the bulk confirm opens, so the dialog cannot change underneath it.
@@ -1467,14 +1469,23 @@ export function Manage() {
     [data.batches],
   );
   const filtered = useMemo(() => {
-    const matching = filterMods(data.mods, filters);
+    const matching = filterModsByStatuses(
+      filterMods(data.mods, filters),
+      statusFilters,
+    );
     if (!assignmentFilter) return matching;
     return matching.filter((mod) =>
       assignmentFilter === "assigned"
         ? assignmentLocations.has(mod.id)
         : !assignmentLocations.has(mod.id),
     );
-  }, [data.mods, filters, assignmentFilter, assignmentLocations]);
+  }, [
+    data.mods,
+    filters,
+    statusFilters,
+    assignmentFilter,
+    assignmentLocations,
+  ]);
   // IDs of deleted or replaced mods drop out of the selection automatically.
   const selection = useMemo(
     () =>
@@ -1499,9 +1510,14 @@ export function Manage() {
     setAssignmentFilter(next);
     setPage(1);
   };
+  const changeStatusFilters = (next: Mod["status"][]) => {
+    setStatusFilters(next);
+    setPage(1);
+  };
   const clearModFilters = () => {
     setFilters(initialFilters);
     setAssignmentFilter("");
+    setStatusFilters([]);
     setPage(1);
   };
   const confirmBulkDelete = () => {
@@ -1768,6 +1784,8 @@ export function Manage() {
                     showView={false}
                     assignment={assignmentFilter}
                     onAssignmentChange={changeAssignmentFilter}
+                    statusValues={statusFilters}
+                    onStatusValuesChange={changeStatusFilters}
                   />
                   {selection.size > 0 && (
                     <div

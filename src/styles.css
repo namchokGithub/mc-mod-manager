@@ -1174,6 +1174,41 @@ main:focus {
   min-width: 132px;
   max-width: 220px;
 }
+.status-filter-popover {
+  z-index: 60;
+  display: grid;
+  min-width: 170px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+.status-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+}
+.status-filter-option:hover {
+  background: var(--surface-alt);
+}
+.status-filter-option:has(input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+.status-filter-option input {
+  accent-color: var(--primary);
+}
+.status-filter-all {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3px;
+}
 .filter-reset {
   display: inline-flex;
   align-items: center;

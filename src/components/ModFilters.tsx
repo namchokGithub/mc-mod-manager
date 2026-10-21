@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 import {
+  ChevronDown,
   LayoutGrid,
   List,
   RotateCcw,
@@ -8,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 import type { Filters } from "../lib/mods";
-import { modStatusLabels, modStatuses } from "../lib/schema";
+import { modStatusLabels, modStatuses, type Mod } from "../lib/schema";
 import { liquidLens, positionGlassGlow } from "../lib/liquidLens";
 import { modPriorities, priorityLabels } from "../lib/priority";
 import { Select } from "./ui/select";
@@ -24,6 +26,70 @@ const sideOptions = [
   { value: "both", label: "Both" },
 ];
 
+function MultiStatusFilter({
+  values,
+  onChange,
+}: {
+  values: readonly Mod["status"][];
+  onChange: (values: Mod["status"][]) => void;
+}) {
+  const selected = new Set(values);
+  const label = values.length
+    ? `${values.length} ${values.length === 1 ? "status" : "statuses"}`
+    : "All statuses";
+  const toggle = (status: Mod["status"]) => {
+    const next = new Set(selected);
+    if (next.has(status)) next.delete(status);
+    else next.add(status);
+    onChange(modStatuses.filter((value) => next.has(value)));
+  };
+
+  return (
+    <PopoverPrimitive.Root>
+      <PopoverPrimitive.Trigger asChild>
+        <button
+          type="button"
+          className={`control-trigger control-sm control-compact filter-select${values.length ? " control-active" : ""}`}
+          aria-label="Status"
+        >
+          <span className="control-value">{label}</span>
+          <ChevronDown
+            className="control-chevron"
+            size={15}
+            aria-hidden="true"
+          />
+        </button>
+      </PopoverPrimitive.Trigger>
+      <PopoverPrimitive.Portal>
+        <PopoverPrimitive.Content
+          className="status-filter-popover"
+          sideOffset={4}
+          collisionPadding={8}
+        >
+          <label className="status-filter-option status-filter-all">
+            <input
+              type="checkbox"
+              checked={!values.length}
+              onChange={() => onChange([])}
+            />
+            All statuses
+          </label>
+          {modStatuses.map((status) => (
+            <label key={status} className="status-filter-option">
+              <input
+                type="checkbox"
+                checked={selected.has(status)}
+                onChange={() => toggle(status)}
+              />
+              {modStatusLabels[status]}
+            </label>
+          ))}
+        </PopoverPrimitive.Content>
+      </PopoverPrimitive.Portal>
+    </PopoverPrimitive.Root>
+  );
+}
+
 export function ModFilters({
   filters,
   onChange,
@@ -37,6 +103,8 @@ export function ModFilters({
   appearance = "default",
   assignment,
   onAssignmentChange,
+  statusValues,
+  onStatusValuesChange,
 }: {
   filters: Filters;
   onChange: (filters: Filters) => void;
@@ -53,15 +121,20 @@ export function ModFilters({
   /** Optional because assignment is derived from the Build plan, not a generic mod field. */
   assignment?: "" | "assigned" | "unassigned";
   onAssignmentChange?: (value: "" | "assigned" | "unassigned") => void;
+  /** Manage supplies these to enable checkbox multi-select without changing Preview. */
+  statusValues?: readonly Mod["status"][];
+  onStatusValuesChange?: (values: Mod["status"][]) => void;
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
     onChange({ ...filters, [key]: value });
+  const hasStatusFilter = statusValues
+    ? statusValues.length > 0
+    : Boolean(filters.status);
   const activeCount =
     (filters.query.trim() ? 1 : 0) +
-    [filters.category, filters.status, filters.side, filters.priority].filter(
-      Boolean,
-    ).length +
+    [filters.category, filters.side, filters.priority].filter(Boolean).length +
+    (hasStatusFilter ? 1 : 0) +
     (assignment ? 1 : 0);
   const clearFilters = () => {
     onChange({
@@ -73,6 +146,7 @@ export function ModFilters({
       priority: "",
     });
     onAssignmentChange?.("");
+    onStatusValuesChange?.([]);
   };
 
   // Press "/" anywhere outside a field to jump to search.
@@ -206,16 +280,23 @@ export function ModFilters({
             ]}
           />
         )}
-        <Select
-          aria-label="Status"
-          size="sm"
-          variant="compact"
-          className="filter-select"
-          active={Boolean(filters.status)}
-          value={filters.status}
-          onValueChange={(value) => set("status", value)}
-          options={[{ value: "", label: "All statuses" }, ...statusOptions]}
-        />
+        {onStatusValuesChange ? (
+          <MultiStatusFilter
+            values={statusValues ?? []}
+            onChange={onStatusValuesChange}
+          />
+        ) : (
+          <Select
+            aria-label="Status"
+            size="sm"
+            variant="compact"
+            className="filter-select"
+            active={Boolean(filters.status)}
+            value={filters.status}
+            onValueChange={(value) => set("status", value)}
+            options={[{ value: "", label: "All statuses" }, ...statusOptions]}
+          />
+        )}
         {showSide && (
           <Select
             aria-label="Installation side"

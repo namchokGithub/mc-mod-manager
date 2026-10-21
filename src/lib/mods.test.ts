@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   duplicateMod,
+  filterModsByStatuses,
   formatPlainTextModList,
   matchesSearchText,
 } from "./mods";
@@ -89,5 +90,22 @@ describe("plain-text mod export", () => {
     ).toBe(
       "Animal Garden - Capybara | v1.0.0 | https://www.curseforge.com/minecraft/mc-mods/capybara\nMissing details | — | —",
     );
+  });
+});
+
+describe("multi-status filtering", () => {
+  it("keeps mods matching any selected status and leaves the list unchanged without one", () => {
+    const mods = [
+      { ...original, id: "interested", status: "interested" as const },
+      { ...original, id: "testing", status: "testing" as const },
+      { ...original, id: "installed", status: "installed" as const },
+    ];
+
+    expect(
+      filterModsByStatuses(mods, ["interested", "installed"]).map(
+        (mod) => mod.id,
+      ),
+    ).toEqual(["interested", "installed"]);
+    expect(filterModsByStatuses(mods, [])).toBe(mods);
   });
 });
