@@ -1563,7 +1563,12 @@ export function Manage() {
   };
   // Layout animation gets costly for big collections, so it turns off there.
   const animateLayout = filtered.length <= 60;
-  const persistMod = (mod: Mod, originalId?: string, title?: string) => {
+  const persistMod = (
+    mod: Mod,
+    originalId?: string,
+    title?: string,
+    description = "Stored in this browser’s draft.",
+  ) => {
     try {
       saveMod(mod, originalId);
     } catch {
@@ -1577,7 +1582,7 @@ export function Manage() {
     setHighlightId(mod.id);
     notify({
       title: title ?? (originalId ? `Saved ${mod.name}` : `Added ${mod.name}`),
-      description: "Stored in this browser’s draft.",
+      description,
     });
     return true;
   };
@@ -1890,9 +1895,24 @@ export function Manage() {
                             <div className="manage-row-main">
                               <div>
                                 <h3 title={mod.name}>{mod.name}</h3>
-                                <span className={`status status-${mod.status}`}>
-                                  {modStatusLabels[mod.status]}
-                                </span>
+                                <Select
+                                  aria-label={`Status for ${mod.name}`}
+                                  className={`plan-mod-status plan-mod-status-${mod.status}`}
+                                  size="sm"
+                                  variant="compact"
+                                  value={mod.status}
+                                  options={statusOptions}
+                                  onValueChange={(value) => {
+                                    const status = value as Mod["status"];
+                                    if (status === mod.status) return;
+                                    persistMod(
+                                      { ...mod, status },
+                                      mod.id,
+                                      `Updated ${mod.name}`,
+                                      `Status: ${modStatusLabels[status]}.`,
+                                    );
+                                  }}
+                                />
                                 <ModPlanAssignment
                                   locations={
                                     assignmentLocations.get(mod.id) ?? []
