@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { duplicateMod } from "./mods";
+import { duplicateMod, matchesSearchText } from "./mods";
 import { modSchema, type Mod } from "./schema";
 
 const original: Mod = {
@@ -55,5 +55,16 @@ describe("duplicating a mod", () => {
     expect(copy.sourceUrl).toBe("");
     expect(copy.imageUrl).toBe("");
     expect(copy.version).toBe("");
+  });
+});
+
+describe("mod search text", () => {
+  it("matches apostrophe, dash, and whitespace variants in a mod name", () => {
+    const name = "YUNG's Better Strongholds";
+
+    expect(matchesSearchText(name, "YUNG’s Better Strongholds")).toBe(true);
+    expect(matchesSearchText(name, "yungs-better-strongholds")).toBe(true);
+    expect(matchesSearchText(name, "  Better   Strongholds ")).toBe(true);
+    expect(matchesSearchText(name, "Better Dungeons")).toBe(false);
   });
 });

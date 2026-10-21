@@ -45,6 +45,7 @@ import {
   type PlanItemType,
 } from "../../lib/batchContent";
 import { contentStatusLabels } from "../../lib/content";
+import { matchesSearchText } from "../../lib/mods";
 import {
   contentTypes,
   type Batch,
@@ -127,7 +128,7 @@ function StepCard({
     data.mods,
   ).counts;
   const filteredMods = data.mods.filter((mod) =>
-    mod.name.toLowerCase().includes(modSearch.trim().toLowerCase()),
+    matchesSearchText(mod.name, modSearch),
   );
   const ownerOf = (modId: string) =>
     batch.steps.find((step) =>

@@ -59,6 +59,24 @@ export function minimalModList(mods: Mod[]): MinimalMod[] {
   }));
 }
 
+/** Normalizes search text so punctuation variants do not hide matching mod names. */
+export function normalizeSearchText(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u2018\u2019\u02bc']/g, "")
+    .replace(/\p{M}/gu, "")
+    .replace(/[\p{P}\p{S}_]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+/** Case- and punctuation-insensitive substring matching for a mod name. */
+export function matchesSearchText(value: string, query: string): boolean {
+  const needle = normalizeSearchText(query);
+  return !needle || normalizeSearchText(value).includes(needle);
+}
+
 export function filterMods(mods: Mod[], filters: Filters): Mod[] {
   const query = filters.query.trim().toLocaleLowerCase();
   return mods
