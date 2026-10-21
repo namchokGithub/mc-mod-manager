@@ -182,7 +182,20 @@
           "name": "2.5 การแสดงผลฝั่งผู้เล่น",
           "description": "Just Zoom, Cloth Config API → BetterF3\n\nทดสอบซูม ปุ่มลัด F3 และหน้า config รวมถึงตรวจปุ่มที่ชนกัน Cloth Config รองรับ NeoForge 26.1.2; ผู้พัฒนา BetterF3 แนะนำให้ใช้สำหรับหน้า config ผ่าน F3+M",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "just-zoom"
+            },
+            {
+              "type": "mod",
+              "id": "cloth-config"
+            },
+            {
+              "type": "mod",
+              "id": "betterf3"
+            }
+          ]
         },
         {
           "id": "step-6",

@@ -23,6 +23,7 @@ import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
 import { formatStat } from "../../lib/countUp";
+import { modAssignmentLocations } from "../../lib/batches";
 import { useCountUp } from "./useCountUp";
 import { BuildPlanGuide } from "./BuildPlanGuide";
 import { ContentPreview } from "./ContentPreview";
@@ -131,6 +132,12 @@ export function Preview({ theme }: { theme: Theme }) {
     () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
     [data.mods],
   );
+  // A mod can be referenced by multiple Steps, but the hero stat counts it once.
+  // Ignore stale references that no longer exist in the collection.
+  const plannedModCount = useMemo(() => {
+    const assignedIds = modAssignmentLocations(data.batches);
+    return data.mods.filter((mod) => assignedIds.has(mod.id)).length;
+  }, [data.batches, data.mods]);
   // Uses the saved Modrinth snapshot only; the public page makes no API calls.
   const compat = useMemo(
     () => checkCompatibility(data.mods, data.modpack),
@@ -182,7 +189,7 @@ export function Preview({ theme }: { theme: Theme }) {
   // Layout animation gets costly for big pages, so it turns off there.
   const animateLayout = !reduceMotion && paged.items.length <= 60;
   const stats = [
-    { label: "TOTAL MODS", value: data.mods.length, icon: Box },
+    { label: "PLANNED MODS", value: plannedModCount, icon: Box },
     {
       label: "RESOURCE PACKS",
       value: data.resourcePacks.items.length,
