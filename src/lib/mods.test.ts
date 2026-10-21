@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { duplicateMod, matchesSearchText } from "./mods";
+import {
+  duplicateMod,
+  formatPlainTextModList,
+  matchesSearchText,
+} from "./mods";
 import { modSchema, type Mod } from "./schema";
 
 const original: Mod = {
@@ -66,5 +70,24 @@ describe("mod search text", () => {
     expect(matchesSearchText(name, "yungs-better-strongholds")).toBe(true);
     expect(matchesSearchText(name, "  Better   Strongholds ")).toBe(true);
     expect(matchesSearchText(name, "Better Dungeons")).toBe(false);
+  });
+});
+
+describe("plain-text mod export", () => {
+  it("lists each selected mod's name, version, and URL with fallbacks", () => {
+    expect(
+      formatPlainTextModList([
+        original,
+        {
+          ...original,
+          id: "missing",
+          name: "Missing details",
+          version: "",
+          sourceUrl: "",
+        },
+      ]),
+    ).toBe(
+      "Animal Garden - Capybara | v1.0.0 | https://www.curseforge.com/minecraft/mc-mods/capybara\nMissing details | — | —",
+    );
   });
 });

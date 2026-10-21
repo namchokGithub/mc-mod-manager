@@ -59,6 +59,19 @@ export function minimalModList(mods: Mod[]): MinimalMod[] {
   }));
 }
 
+/** One shareable line per mod: name, version, and source URL. */
+export function formatPlainTextModList(mods: Mod[]): string {
+  return mods
+    .map((mod) =>
+      [
+        mod.name,
+        mod.version ? `v${mod.version}` : "—",
+        mod.sourceUrl || "—",
+      ].join(" | "),
+    )
+    .join("\n");
+}
+
 /** Normalizes search text so punctuation variants do not hide matching mod names. */
 export function normalizeSearchText(value: string): string {
   return value

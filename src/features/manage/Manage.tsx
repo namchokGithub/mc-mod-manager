@@ -66,6 +66,7 @@ import { JarImportDialog } from "../import/JarImportDialog";
 import {
   duplicateMod,
   filterMods,
+  formatPlainTextModList,
   minimalModList,
   uniqueId,
   type Filters,
@@ -98,7 +99,7 @@ import {
 } from "../../lib/schema";
 import { saveToLocalJson } from "../../lib/localSave";
 import { saveStatusLabels } from "../../lib/saveStatus";
-import { downloadJson } from "../../lib/storage";
+import { downloadJson, downloadText } from "../../lib/storage";
 import { useRetained } from "../../lib/useRetained";
 import { ModrinthPicker, type PickerTarget } from "../modrinth/ModrinthPicker";
 import { BuildPlanEditor } from "./BuildPlanEditor";
@@ -1531,6 +1532,19 @@ export function Manage() {
     });
     setBulkDelete(null);
   };
+  const exportSelectedMods = () => {
+    const mods = data.mods.filter((mod) => selection.has(mod.id));
+    downloadText(
+      "selected-mods.txt",
+      formatPlainTextModList(mods),
+      "text/plain",
+    );
+    notify({
+      kind: "info",
+      title: "selected-mods.txt exported",
+      description: `${mods.length} ${mods.length === 1 ? "mod" : "mods"} with name, version, and URL.`,
+    });
+  };
   // Layout animation gets costly for big collections, so it turns off there.
   const animateLayout = filtered.length <= 60;
   const persistMod = (mod: Mod, originalId?: string, title?: string) => {
@@ -1773,6 +1787,13 @@ export function Manage() {
                           onClick={() => setSelected(new Set())}
                         >
                           Clear selection
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          size="small"
+                          onClick={exportSelectedMods}
+                        >
+                          Export selected (.txt)
                         </Button>
                         <Button
                           variant="danger"
