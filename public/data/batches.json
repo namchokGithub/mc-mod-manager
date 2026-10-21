@@ -55,12 +55,25 @@
           "name": "1.4 Client Rendering",
           "description": "เพิ่มบน Client ทีละตัว → ตรวจหน้าเมนู ภาพในโลก HUD และ FPS → เชื่อมต่อ Server ที่ทดสอบใน Step ก่อน",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "sodium"
+            },
+            {
+              "type": "mod",
+              "id": "sodium-extra"
+            },
+            {
+              "type": "mod",
+              "id": "immediatelyfast-2"
+            }
+          ]
         },
         {
           "id": "step-5",
           "name": "1.5 Integration",
-          "description": "ใช้ม็อดทั้ง 7 ตัวร่วมกัน → เปิด Client/Server ใหม่ → โหลดโลกเดิม → เล่นและสำรวจช่วงสั้น ๆ → บันทึกปัญหาก่อนผ่านไป Batch 2",
+          "description": "ใช้ม็อดทั้ง 8 ตัวร่วมกัน → เปิด Client/Server ใหม่ → โหลดโลกเดิม → เล่นและสำรวจช่วงสั้น ๆ → บันทึกปัญหาก่อนผ่านไป Batch 2",
           "done": false,
           "itemRefs": []
         }

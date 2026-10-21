@@ -4411,10 +4411,10 @@ main:focus {
   gap: 12px;
   padding: 14px 16px;
 }
-.preview-plan-batch-toggle:hover,
+/* .preview-plan-batch-toggle:hover,
 .preview-plan-step-toggle:hover {
   background: var(--surface-hover);
-}
+} */
 .preview-plan-batch-toggle:focus-visible,
 .preview-plan-step-toggle:focus-visible {
   position: relative;

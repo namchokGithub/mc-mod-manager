@@ -13,11 +13,18 @@ import type { BatchFile, Mod } from "../lib/schema";
 import { Select } from "./ui/select";
 
 type Filter =
-  "all" | "missing" | "unresolved" | "later" | "resolved" | "unknown";
+  | "all"
+  | "required-missing"
+  | "optional-missing"
+  | "unresolved"
+  | "later"
+  | "resolved"
+  | "unknown";
 
 const filterOptions: { value: Filter; label: string }[] = [
   { value: "all", label: "All dependencies" },
-  { value: "missing", label: "Missing" },
+  { value: "required-missing", label: "Required missing" },
+  { value: "optional-missing", label: "Optional not added" },
   { value: "unresolved", label: "Unresolved" },
   { value: "later", label: "Only in a later batch" },
   { value: "resolved", label: "Found" },
@@ -43,7 +50,7 @@ function entryBadge(entry: DependencyEntry): { text: string; tone: string } {
   if (entry.status === "missing")
     return entry.relation === "required"
       ? { text: "Missing", tone: "incompatible" }
-      : { text: "Not in the list", tone: "unknown" };
+      : { text: "Not added", tone: "unknown" };
   if (entry.laterOnly) return { text: "Later batch", tone: "warning" };
   return entry.linked
     ? { text: "Found (linked)", tone: "compatible" }
@@ -54,6 +61,10 @@ function matches(entry: DependencyEntry, filter: Filter): boolean {
   if (filter === "all") return true;
   if (filter === "later") return entry.laterOnly;
   if (filter === "unknown") return false;
+  if (filter === "required-missing")
+    return entry.relation === "required" && entry.status === "missing";
+  if (filter === "optional-missing")
+    return entry.relation === "optional" && entry.status === "missing";
   return entry.status === filter;
 }
 
@@ -78,6 +89,15 @@ export function DependencyOverview({
   const overview = batchDependencyOverview(batchId, plan, mods);
   if (!overview.mods.length) return null;
   const { counts } = overview;
+  const optionalMissing = overview.mods.reduce(
+    (total, item) =>
+      total +
+      item.entries.filter(
+        (entry) => entry.relation === "optional" && entry.status === "missing",
+      ).length,
+    0,
+  );
+  const requiredMissing = counts.missing - optionalMissing;
   const shown = overview.mods
     .map((item) => ({
       ...item,
@@ -106,9 +126,16 @@ export function DependencyOverview({
           <span className="compat-count compat-compatible">
             <strong>{counts.resolved}</strong> found
           </span>
-          <span className="compat-count compat-incompatible">
-            <strong>{counts.missing}</strong> missing
-          </span>
+          {requiredMissing > 0 && (
+            <span className="compat-count compat-incompatible">
+              <strong>{requiredMissing}</strong> missing
+            </span>
+          )}
+          {optionalMissing > 0 && (
+            <span className="compat-count compat-unknown">
+              <strong>{optionalMissing}</strong> optional not added
+            </span>
+          )}
           <span className="compat-count compat-unknown">
             <strong>{counts.unresolved}</strong> unresolved
           </span>
