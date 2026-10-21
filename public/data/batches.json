@@ -183,6 +183,18 @@
             {
               "type": "mod",
               "id": "ui-lib"
+            },
+            {
+              "type": "mod",
+              "id": "durability-tooltip"
+            },
+            {
+              "type": "mod",
+              "id": "iris"
+            },
+            {
+              "type": "mod",
+              "id": "item-highlighter"
             }
           ]
         },

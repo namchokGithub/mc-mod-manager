@@ -345,6 +345,7 @@ export function Preview({ theme }: { theme: Theme }) {
               })}
             </div>
           </div>
+          <div className="preview-view-controls">
           <div className="side-views">
             <div
               ref={liquidLens}
@@ -406,6 +407,7 @@ export function Preview({ theme }: { theme: Theme }) {
               options={groupByOptions}
             />
           </label>
+          </div>
           <ModFilters
             filters={filters}
             onChange={changeFilters}

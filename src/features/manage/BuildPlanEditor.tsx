@@ -232,7 +232,18 @@ function StepCard({
     resetModPicker();
   };
   return (
-    <li className={`plan-step-card${open ? " open" : ""}`}>
+    <li
+      className={`plan-step-card${open ? " open" : ""}`}
+      onBlur={(event) => {
+        // Keep the inline draft while focus moves within this Step. Leaving it
+        // commits the edit before another control, including local save, runs.
+        if (
+          editing &&
+          !event.currentTarget.contains(event.relatedTarget as Node | null)
+        )
+          saveEdit();
+      }}
+    >
       <div className="plan-step-head">
         <input
           type="checkbox"
