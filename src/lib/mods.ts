@@ -1,4 +1,4 @@
-import { priorityOf, priorityRank } from "./priority";
+import { type ModPriority, priorityOf, priorityRank } from "./priority";
 import type { Mod } from "./schema";
 
 export type Filters = {
@@ -80,6 +80,39 @@ export function filterModsByStatuses(
   if (!statuses.length) return mods;
   const selected = new Set(statuses);
   return mods.filter((mod) => selected.has(mod.status));
+}
+
+/** `[]` keeps every value; `null` is an explicit empty selection. */
+export type MultiSelection<T extends string> = readonly T[] | null;
+
+export type ModSelections = {
+  categories: MultiSelection<string>;
+  statuses: MultiSelection<Mod["status"]>;
+  sides: MultiSelection<Mod["side"]>;
+  priorities: MultiSelection<ModPriority>;
+};
+
+function matchesSelection<T extends string>(
+  value: T,
+  selection: MultiSelection<T>,
+) {
+  return (
+    selection !== null && (selection.length === 0 || selection.includes(value))
+  );
+}
+
+/** Keeps mods matching every active checkbox multi-select. */
+export function filterModsBySelections(
+  mods: Mod[],
+  selections: ModSelections,
+): Mod[] {
+  return mods.filter(
+    (mod) =>
+      matchesSelection(mod.category, selections.categories) &&
+      matchesSelection(mod.status, selections.statuses) &&
+      matchesSelection(mod.side, selections.sides) &&
+      matchesSelection(priorityOf(mod), selections.priorities),
+  );
 }
 
 /** Changes the status only for mods that remain visible in the active filtered result. */

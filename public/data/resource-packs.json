@@ -1168,6 +1168,53 @@
         "dependencies": [],
         "syncedAt": "2026-10-21T18:46:01.295Z"
       }
+    },
+    {
+      "id": "fontthai-dm",
+      "name": "FontThai DM",
+      "status": "planned",
+      "version": "FontThai-DM-V26.9.29",
+      "description": "FontThai DM is a resource pack that modifies Thai and English fonts to make them rounder and easier to read",
+      "source": "modrinth",
+      "sourceUrl": "https://modrinth.com/resourcepack/fontthai-dm",
+      "imageUrl": "https://cdn.modrinth.com/data/NOL1cIcE/61db729ee4ee5d0b536877978008d6d4d0c528de_96.webp",
+      "minecraftVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "tags": [],
+      "notes": "",
+      "createdAt": "2026-10-22T18:45:41.902Z",
+      "updatedAt": "2026-10-22T18:45:41.902Z",
+      "modrinth": {
+        "projectId": "NOL1cIcE",
+        "slug": "fontthai-dm",
+        "versionId": "pO8Iec50",
+        "versionNumber": "FontThai-DM-V26.9.29",
+        "versionType": "release",
+        "datePublished": "2026-09-29T09:15:30.133092Z",
+        "gameVersions": [
+          "26.1",
+          "26.1.1",
+          "26.1.2",
+          "26.2",
+          "26.3"
+        ],
+        "loaders": [
+          "minecraft"
+        ],
+        "dependencies": [
+          {
+            "projectId": "RLzHAoZe",
+            "versionId": null,
+            "type": "optional"
+          }
+        ],
+        "syncedAt": "2026-10-22T18:45:41.902Z"
+      }
     }
   ]
 }

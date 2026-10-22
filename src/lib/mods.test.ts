@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   duplicateMod,
+  filterModsBySelections,
   filterModsByStatuses,
   formatPlainTextModList,
   matchesSearchText,
@@ -108,6 +109,46 @@ describe("multi-status filtering", () => {
       ),
     ).toEqual(["interested", "installed"]);
     expect(filterModsByStatuses(mods, [])).toBe(mods);
+  });
+});
+
+describe("multi-value mod filtering", () => {
+  it("combines category, side, priority, and status selections while distinguishing all from none", () => {
+    const mods = [
+      {
+        ...original,
+        id: "client-planned",
+        category: "Performance",
+        side: "client" as const,
+        status: "planned" as const,
+        priority: "high" as const,
+      },
+      {
+        ...original,
+        id: "server-installed",
+        category: "Utility",
+        side: "server" as const,
+        status: "installed" as const,
+        priority: "low" as const,
+      },
+    ];
+
+    expect(
+      filterModsBySelections(mods, {
+        categories: ["Performance"],
+        sides: ["client"],
+        priorities: ["high"],
+        statuses: ["planned"],
+      }).map((mod) => mod.id),
+    ).toEqual(["client-planned"]);
+    expect(
+      filterModsBySelections(mods, {
+        categories: [],
+        sides: [],
+        priorities: [],
+        statuses: null,
+      }),
+    ).toEqual([]);
   });
 });
 

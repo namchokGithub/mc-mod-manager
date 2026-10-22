@@ -66,7 +66,7 @@ import { JarImportDialog } from "../import/JarImportDialog";
 import {
   duplicateMod,
   filterMods,
-  filterModsByStatuses,
+  filterModsBySelections,
   formatPlainTextModList,
   minimalModList,
   uniqueId,
@@ -1307,6 +1307,11 @@ export function Manage() {
   const [statusFilters, setStatusFilters] = useState<Mod["status"][] | null>(
     [],
   );
+  const [categoryFilters, setCategoryFilters] = useState<string[] | null>([]);
+  const [sideFilters, setSideFilters] = useState<Mod["side"][] | null>([]);
+  const [priorityFilters, setPriorityFilters] = useState<
+    (typeof modPriorities)[number][] | null
+  >([]);
   // Selection is keyed by mod ID and survives page and filter changes.
   const [selected, setSelected] = useState<Set<string>>(() => new Set());
   // IDs captured when the bulk confirm opens, so the dialog cannot change underneath it.
@@ -1516,9 +1521,15 @@ export function Manage() {
       ),
     [data.batches],
   );
-  // Status choices should stay visible with counts based on every other active filter.
-  const statusFilterBase = useMemo(() => {
-    const matching = filterMods(data.mods, filters);
+  // Checkbox filter counts are calculated after every other active filter.
+  const multiFilterBase = useMemo(() => {
+    const matching = filterMods(data.mods, {
+      ...filters,
+      category: "",
+      status: "",
+      side: "",
+      priority: "",
+    });
     if (!assignmentFilter) return matching;
     return matching.filter((mod) =>
       assignmentFilter === "assigned"
@@ -1526,6 +1537,47 @@ export function Manage() {
         : !assignmentLocations.has(mod.id),
     );
   }, [data.mods, filters, assignmentFilter, assignmentLocations]);
+  const selectedFilters = useMemo(
+    () => ({
+      categories: categoryFilters,
+      statuses: statusFilters,
+      sides: sideFilters,
+      priorities: priorityFilters,
+    }),
+    [categoryFilters, statusFilters, sideFilters, priorityFilters],
+  );
+  const statusFilterBase = useMemo(
+    () =>
+      filterModsBySelections(multiFilterBase, {
+        ...selectedFilters,
+        statuses: [],
+      }),
+    [multiFilterBase, selectedFilters],
+  );
+  const categoryFilterBase = useMemo(
+    () =>
+      filterModsBySelections(multiFilterBase, {
+        ...selectedFilters,
+        categories: [],
+      }),
+    [multiFilterBase, selectedFilters],
+  );
+  const sideFilterBase = useMemo(
+    () =>
+      filterModsBySelections(multiFilterBase, {
+        ...selectedFilters,
+        sides: [],
+      }),
+    [multiFilterBase, selectedFilters],
+  );
+  const priorityFilterBase = useMemo(
+    () =>
+      filterModsBySelections(multiFilterBase, {
+        ...selectedFilters,
+        priorities: [],
+      }),
+    [multiFilterBase, selectedFilters],
+  );
   const statusCounts = useMemo(
     () =>
       modStatuses.reduce(
@@ -1539,11 +1591,48 @@ export function Manage() {
       ),
     [statusFilterBase],
   );
+  const categoryCounts = useMemo(
+    () =>
+      categories.reduce(
+        (counts, category) => {
+          counts[category] = categoryFilterBase.filter(
+            (mod) => mod.category === category,
+          ).length;
+          return counts;
+        },
+        {} as Record<string, number>,
+      ),
+    [categories, categoryFilterBase],
+  );
+  const sideCounts = useMemo(
+    () =>
+      (["client", "server", "both"] as const).reduce(
+        (counts, side) => {
+          counts[side] = sideFilterBase.filter(
+            (mod) => mod.side === side,
+          ).length;
+          return counts;
+        },
+        {} as Record<Mod["side"], number>,
+      ),
+    [sideFilterBase],
+  );
+  const priorityCounts = useMemo(
+    () =>
+      modPriorities.reduce(
+        (counts, priority) => {
+          counts[priority] = priorityFilterBase.filter(
+            (mod) => priorityOf(mod) === priority,
+          ).length;
+          return counts;
+        },
+        {} as Record<(typeof modPriorities)[number], number>,
+      ),
+    [priorityFilterBase],
+  );
   const filtered = useMemo(() => {
-    return statusFilters === null
-      ? []
-      : filterModsByStatuses(statusFilterBase, statusFilters);
-  }, [statusFilterBase, statusFilters]);
+    return filterModsBySelections(multiFilterBase, selectedFilters);
+  }, [multiFilterBase, selectedFilters]);
   // IDs of deleted or replaced mods drop out of the selection automatically.
   const selection = useMemo(
     () =>
@@ -1572,10 +1661,27 @@ export function Manage() {
     setStatusFilters(next);
     setPage(1);
   };
+  const changeCategoryFilters = (next: string[] | null) => {
+    setCategoryFilters(next);
+    setPage(1);
+  };
+  const changeSideFilters = (next: Mod["side"][] | null) => {
+    setSideFilters(next);
+    setPage(1);
+  };
+  const changePriorityFilters = (
+    next: (typeof modPriorities)[number][] | null,
+  ) => {
+    setPriorityFilters(next);
+    setPage(1);
+  };
   const clearModFilters = () => {
     setFilters(initialFilters);
     setAssignmentFilter("");
     setStatusFilters([]);
+    setCategoryFilters([]);
+    setSideFilters([]);
+    setPriorityFilters([]);
     setPage(1);
   };
   const addModToPlan = (mod: Mod, target: PlanStepTarget) => {
@@ -1893,10 +1999,22 @@ export function Manage() {
                     showView={false}
                     assignment={assignmentFilter}
                     onAssignmentChange={changeAssignmentFilter}
+                    categoryValues={categoryFilters}
+                    onCategoryValuesChange={changeCategoryFilters}
+                    categoryCounts={categoryCounts}
+                    categoryTotal={categoryFilterBase.length}
                     statusValues={statusFilters}
                     onStatusValuesChange={changeStatusFilters}
                     statusCounts={statusCounts}
                     statusTotal={statusFilterBase.length}
+                    sideValues={sideFilters}
+                    onSideValuesChange={changeSideFilters}
+                    sideCounts={sideCounts}
+                    sideTotal={sideFilterBase.length}
+                    priorityValues={priorityFilters}
+                    onPriorityValuesChange={changePriorityFilters}
+                    priorityCounts={priorityCounts}
+                    priorityTotal={priorityFilterBase.length}
                   />
                   {selection.size > 0 && (
                     <div

@@ -20,37 +20,45 @@ const statusOptions = modStatuses.map((status) => ({
   label: modStatusLabels[status],
 }));
 
-const sideOptions = [
+const sideOptions: { value: Mod["side"]; label: string }[] = [
   { value: "client", label: "Client" },
   { value: "server", label: "Server" },
   { value: "both", label: "Both" },
 ];
 
-function MultiStatusFilter({
+function MultiValueFilter<T extends string>({
   values,
   onChange,
   counts,
   total,
+  allLabel,
+  ariaLabel,
+  options,
 }: {
-  /** `null` means the user explicitly selected no statuses. */
-  values: readonly Mod["status"][] | null;
-  onChange: (values: Mod["status"][] | null) => void;
-  counts?: Readonly<Record<Mod["status"], number>>;
+  /** `null` means the user explicitly selected no values. */
+  values: readonly T[] | null;
+  onChange: (values: T[] | null) => void;
+  counts?: Readonly<Partial<Record<T, number>>>;
   total?: number;
+  allLabel: string;
+  ariaLabel: string;
+  options: readonly { value: T; label: string }[];
 }) {
   const selected = new Set(values ?? []);
   const allSelected =
     values !== null &&
-    (values.length === 0 || values.length === modStatuses.length);
-  const label = allSelected
-    ? "All statuses"
-    : `${selected.size} ${selected.size === 1 ? "status" : "statuses"}`;
-  const toggle = (status: Mod["status"]) => {
-    const next = new Set(allSelected ? modStatuses : selected);
-    if (next.has(status)) next.delete(status);
-    else next.add(status);
-    const nextValues = modStatuses.filter((value) => next.has(value));
-    onChange(nextValues.length === modStatuses.length ? [] : nextValues);
+    (values.length === 0 || values.length === options.length);
+  const label = allSelected ? allLabel : `${selected.size} selected`;
+  const toggle = (value: T) => {
+    const next = new Set(
+      allSelected ? options.map((option) => option.value) : selected,
+    );
+    if (next.has(value)) next.delete(value);
+    else next.add(value);
+    const nextValues = options
+      .map((option) => option.value)
+      .filter((option) => next.has(option));
+    onChange(nextValues.length === options.length ? [] : nextValues);
   };
 
   return (
@@ -59,7 +67,7 @@ function MultiStatusFilter({
         <button
           type="button"
           className={`control-trigger control-sm control-compact filter-select${allSelected ? "" : " control-active"}`}
-          aria-label="Status"
+          aria-label={ariaLabel}
         >
           <span className="control-value">{label}</span>
           <ChevronDown
@@ -81,21 +89,23 @@ function MultiStatusFilter({
               checked={allSelected}
               onChange={() => onChange(allSelected ? null : [])}
             />
-            <span>All statuses</span>
+            <span>{allLabel}</span>
             {total !== undefined && (
               <span className="status-filter-count">{total}</span>
             )}
           </label>
-          {modStatuses.map((status) => (
-            <label key={status} className="status-filter-option">
+          {options.map((option) => (
+            <label key={option.value} className="status-filter-option">
               <input
                 type="checkbox"
-                checked={allSelected || selected.has(status)}
-                onChange={() => toggle(status)}
+                checked={allSelected || selected.has(option.value)}
+                onChange={() => toggle(option.value)}
               />
-              <span>{modStatusLabels[status]}</span>
+              <span>{option.label}</span>
               {counts && (
-                <span className="status-filter-count">{counts[status]}</span>
+                <span className="status-filter-count">
+                  {counts[option.value] ?? 0}
+                </span>
               )}
             </label>
           ))}
@@ -122,6 +132,18 @@ export function ModFilters({
   onStatusValuesChange,
   statusCounts,
   statusTotal,
+  categoryValues,
+  onCategoryValuesChange,
+  categoryCounts,
+  categoryTotal,
+  sideValues,
+  onSideValuesChange,
+  sideCounts,
+  sideTotal,
+  priorityValues,
+  onPriorityValuesChange,
+  priorityCounts,
+  priorityTotal,
 }: {
   filters: Filters;
   onChange: (filters: Filters) => void;
@@ -144,6 +166,20 @@ export function ModFilters({
   /** Counts after all filters other than status; shown only in Manage's multi-select. */
   statusCounts?: Readonly<Record<Mod["status"], number>>;
   statusTotal?: number;
+  categoryValues?: readonly string[] | null;
+  onCategoryValuesChange?: (values: string[] | null) => void;
+  categoryCounts?: Readonly<Record<string, number>>;
+  categoryTotal?: number;
+  sideValues?: readonly Mod["side"][] | null;
+  onSideValuesChange?: (values: Mod["side"][] | null) => void;
+  sideCounts?: Readonly<Record<Mod["side"], number>>;
+  sideTotal?: number;
+  priorityValues?: readonly (typeof modPriorities)[number][] | null;
+  onPriorityValuesChange?: (
+    values: (typeof modPriorities)[number][] | null,
+  ) => void;
+  priorityCounts?: Readonly<Record<(typeof modPriorities)[number], number>>;
+  priorityTotal?: number;
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
@@ -153,9 +189,26 @@ export function ModFilters({
       ? statusValues === null ||
         (statusValues.length > 0 && statusValues.length < modStatuses.length)
       : Boolean(filters.status);
+  const hasCategoryFilter =
+    categoryValues !== undefined
+      ? categoryValues === null ||
+        (categoryValues.length > 0 && categoryValues.length < categories.length)
+      : Boolean(filters.category);
+  const hasSideFilter =
+    sideValues !== undefined
+      ? sideValues === null ||
+        (sideValues.length > 0 && sideValues.length < sideOptions.length)
+      : Boolean(filters.side);
+  const hasPriorityFilter =
+    priorityValues !== undefined
+      ? priorityValues === null ||
+        (priorityValues.length > 0 &&
+          priorityValues.length < modPriorities.length)
+      : Boolean(filters.priority);
   const activeCount =
     (filters.query.trim() ? 1 : 0) +
-    [filters.category, filters.side, filters.priority].filter(Boolean).length +
+    [hasCategoryFilter, hasSideFilter, hasPriorityFilter].filter(Boolean)
+      .length +
     (hasStatusFilter ? 1 : 0) +
     (assignment ? 1 : 0);
   const clearFilters = () => {
@@ -169,6 +222,9 @@ export function ModFilters({
     });
     onAssignmentChange?.("");
     onStatusValuesChange?.([]);
+    onCategoryValuesChange?.([]);
+    onSideValuesChange?.([]);
+    onPriorityValuesChange?.([]);
   };
 
   // Press "/" anywhere outside a field to jump to search.
@@ -268,22 +324,34 @@ export function ModFilters({
         <span className="filter-label">
           <SlidersHorizontal size={15} aria-hidden="true" /> Filter by
         </span>
-        <Select
-          aria-label="Category"
-          size="sm"
-          variant="compact"
-          className="filter-select"
-          active={Boolean(filters.category)}
-          value={filters.category}
-          onValueChange={(value) => set("category", value)}
-          options={[
-            { value: "", label: "All categories" },
-            ...categories.map((category) => ({
-              value: category,
-              label: category,
-            })),
-          ]}
-        />
+        {onCategoryValuesChange ? (
+          <MultiValueFilter
+            values={categoryValues === undefined ? [] : categoryValues}
+            onChange={onCategoryValuesChange}
+            counts={categoryCounts}
+            total={categoryTotal}
+            allLabel="All categories"
+            ariaLabel="Category"
+            options={categories.map((value) => ({ value, label: value }))}
+          />
+        ) : (
+          <Select
+            aria-label="Category"
+            size="sm"
+            variant="compact"
+            className="filter-select"
+            active={Boolean(filters.category)}
+            value={filters.category}
+            onValueChange={(value) => set("category", value)}
+            options={[
+              { value: "", label: "All categories" },
+              ...categories.map((category) => ({
+                value: category,
+                label: category,
+              })),
+            ]}
+          />
+        )}
         {onAssignmentChange && (
           <Select
             aria-label="Plan assignment"
@@ -303,11 +371,14 @@ export function ModFilters({
           />
         )}
         {onStatusValuesChange ? (
-          <MultiStatusFilter
+          <MultiValueFilter
             values={statusValues === undefined ? [] : statusValues}
             onChange={onStatusValuesChange}
             counts={statusCounts}
             total={statusTotal}
+            allLabel="All statuses"
+            ariaLabel="Status"
+            options={statusOptions}
           />
         ) : (
           <Select
@@ -321,34 +392,60 @@ export function ModFilters({
             options={[{ value: "", label: "All statuses" }, ...statusOptions]}
           />
         )}
-        {showSide && (
+        {showSide &&
+          (onSideValuesChange ? (
+            <MultiValueFilter
+              values={sideValues === undefined ? [] : sideValues}
+              onChange={onSideValuesChange}
+              counts={sideCounts}
+              total={sideTotal}
+              allLabel="All sides"
+              ariaLabel="Installation side"
+              options={sideOptions}
+            />
+          ) : (
+            <Select
+              aria-label="Installation side"
+              size="sm"
+              variant="compact"
+              className="filter-select"
+              active={Boolean(filters.side)}
+              value={filters.side}
+              onValueChange={(value) => set("side", value)}
+              options={[{ value: "", label: "All sides" }, ...sideOptions]}
+            />
+          ))}
+        {onPriorityValuesChange ? (
+          <MultiValueFilter
+            values={priorityValues === undefined ? [] : priorityValues}
+            onChange={onPriorityValuesChange}
+            counts={priorityCounts}
+            total={priorityTotal}
+            allLabel="All priorities"
+            ariaLabel="Priority"
+            options={modPriorities.map((value) => ({
+              value,
+              label: priorityLabels[value],
+            }))}
+          />
+        ) : (
           <Select
-            aria-label="Installation side"
+            aria-label="Priority"
             size="sm"
             variant="compact"
             className="filter-select"
-            active={Boolean(filters.side)}
-            value={filters.side}
-            onValueChange={(value) => set("side", value)}
-            options={[{ value: "", label: "All sides" }, ...sideOptions]}
+            active={Boolean(filters.priority)}
+            value={filters.priority ?? ""}
+            onValueChange={(value) => set("priority", value)}
+            options={[
+              { value: "", label: "All priorities" },
+              ...modPriorities.map((value) => ({
+                value,
+                label: priorityLabels[value],
+              })),
+            ]}
           />
         )}
-        <Select
-          aria-label="Priority"
-          size="sm"
-          variant="compact"
-          className="filter-select"
-          active={Boolean(filters.priority)}
-          value={filters.priority ?? ""}
-          onValueChange={(value) => set("priority", value)}
-          options={[
-            { value: "", label: "All priorities" },
-            ...modPriorities.map((value) => ({
-              value,
-              label: priorityLabels[value],
-            })),
-          ]}
-        />
         <Select
           aria-label="Sort order"
           size="sm"
