@@ -4928,6 +4928,12 @@ main:focus {
   color: var(--text-muted);
   line-height: 1.45;
 }
+.lookup-row .lookup-plan-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--primary);
+}
 .lookup-empty,
 .lookup-start {
   margin: 0;

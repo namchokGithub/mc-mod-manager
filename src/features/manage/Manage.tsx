@@ -2093,6 +2093,7 @@ export function Manage() {
               {tab === "dependencies" && (
                 <DependencyLookup
                   mods={data.mods}
+                  batches={data.batches}
                   onOpenMod={(mod) => setEditing({ mod })}
                 />
               )}

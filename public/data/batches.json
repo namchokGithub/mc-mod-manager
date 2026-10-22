@@ -12,7 +12,28 @@
           "name": "1.1 Baseline",
           "description": "เปิด NeoForge 26.1.2 ทั้ง Client และ Server → เข้าโลก → ออกแล้วเข้าใหม่ → บันทึกเวลาเปิดเกม, FPS, RAM และสภาพ Server ไว้เทียบ",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "yacl"
+            },
+            {
+              "type": "mod",
+              "id": "yaml-config"
+            },
+            {
+              "type": "mod",
+              "id": "rei"
+            },
+            {
+              "type": "mod",
+              "id": "cupboard"
+            },
+            {
+              "type": "mod",
+              "id": "knot"
+            }
+          ]
         },
         {
           "id": "step-2",
@@ -199,6 +220,18 @@
             {
               "type": "mod",
               "id": "item-descriptions"
+            },
+            {
+              "type": "mod",
+              "id": "storagedrawers"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-config-lib"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-core-lib"
             }
           ]
         },
@@ -298,6 +331,10 @@
             {
               "type": "mod",
               "id": "betterf3"
+            },
+            {
+              "type": "mod",
+              "id": "konkrete"
             }
           ]
         },
@@ -314,6 +351,10 @@
             {
               "type": "mod",
               "id": "paper-books"
+            },
+            {
+              "type": "mod",
+              "id": "collective"
             }
           ]
         },
@@ -365,6 +406,14 @@
             {
               "type": "mod",
               "id": "explorers-compass"
+            },
+            {
+              "type": "mod",
+              "id": "field-guide"
+            },
+            {
+              "type": "mod",
+              "id": "overloadedarmorbar"
             }
           ]
         },
@@ -377,6 +426,10 @@
             {
               "type": "mod",
               "id": "comforts"
+            },
+            {
+              "type": "mod",
+              "id": "bl4cks-sit"
             }
           ]
         },
@@ -421,6 +474,10 @@
             {
               "type": "mod",
               "id": "inventory-totem"
+            },
+            {
+              "type": "mod",
+              "id": "the-grave-scrolls"
             }
           ]
         },
@@ -433,6 +490,22 @@
             {
               "type": "mod",
               "id": "alcocraft"
+            },
+            {
+              "type": "mod",
+              "id": "ftbteams"
+            },
+            {
+              "type": "mod",
+              "id": "iron-furnaces"
+            },
+            {
+              "type": "mod",
+              "id": "neo-origins"
+            },
+            {
+              "type": "mod",
+              "id": "dream-cocoon"
             }
           ]
         },
@@ -567,6 +640,10 @@
             {
               "type": "mod",
               "id": "more-tier-upgrade"
+            },
+            {
+              "type": "mod",
+              "id": "bundle-upgrade"
             }
           ]
         },
@@ -599,6 +676,10 @@
             {
               "type": "mod",
               "id": "crate-delight-croptopia"
+            },
+            {
+              "type": "mod",
+              "id": "breadvariants"
             }
           ]
         },
@@ -646,6 +727,14 @@
             {
               "type": "mod",
               "id": "ftbchunks"
+            },
+            {
+              "type": "mod",
+              "id": "ftblibrary"
+            },
+            {
+              "type": "mod",
+              "id": "trade-cycling"
             }
           ]
         },
@@ -681,6 +770,10 @@
             {
               "type": "mod",
               "id": "yungs-better-dungeons"
+            },
+            {
+              "type": "mod",
+              "id": "underground-village-stoneholm"
             }
           ]
         },
@@ -789,6 +882,10 @@
             {
               "type": "mod",
               "id": "lootr"
+            },
+            {
+              "type": "mod",
+              "id": "lootintegrations-yungs"
             }
           ]
         },
@@ -1063,6 +1160,10 @@
             {
               "type": "mod",
               "id": "configurable-despawn-timer"
+            },
+            {
+              "type": "mod",
+              "id": "kubejs"
             }
           ]
         },
@@ -1233,6 +1334,10 @@
             {
               "type": "mod",
               "id": "ecologics"
+            },
+            {
+              "type": "mod",
+              "id": "morevillagers"
             }
           ]
         },
@@ -1357,6 +1462,14 @@
             {
               "type": "mod",
               "id": "aquarius-libs-2"
+            },
+            {
+              "type": "mod",
+              "id": "citadel"
+            },
+            {
+              "type": "mod",
+              "id": "starcatcher"
             }
           ]
         },
@@ -1377,6 +1490,18 @@
             {
               "type": "mod",
               "id": "aggroindicator"
+            },
+            {
+              "type": "mod",
+              "id": "tiny-skeletons"
+            },
+            {
+              "type": "mod",
+              "id": "dusk"
+            },
+            {
+              "type": "mod",
+              "id": "dynamic-difficulty"
             }
           ]
         },
@@ -1385,11 +1510,23 @@
           "name": "10.7 Elite Mobs",
           "description": "Architectury API → Champions-Unofficial\n\nตรวจการเกิด Champion, affix, เลือด ความเสียหาย และ loot จากนั้นทดสอบร่วมกับ Apotheosis โดยเปรียบเทียบกับมอนสเตอร์ปกติ เพื่อดูว่าความยากซ้อนกันอย่างไร",
           "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "champions-unofficial"
+            }
+          ]
+        },
+        {
+          "id": "step-9",
+          "name": "Others",
+          "description": "",
+          "done": false,
           "itemRefs": []
         },
         {
           "id": "step-8",
-          "name": "10.8 Integration",
+          "name": "Integration",
           "description": "สำรวจกลางวัน–กลางคืน บนบก–ใต้น้ำ ทำฟาร์มสัตว์ และลงดันเจียนร่วมกัน ตรวจการเกิดมอนสเตอร์ การชุบชีวิต loot และข้อมูลหลัง restart พร้อมบันทึกอาการกระตุกที่พบ",
           "done": false,
           "itemRefs": []
@@ -1398,7 +1535,7 @@
     },
     {
       "id": "8-decoration-immersion",
-      "name": "Batch 11 — Remaining Mods & Final Integration",
+      "name": "Batch 11 — Remaining Mods",
       "description": "พิ่มม็อดที่เหลือจาก Batch 1–10 ทีละกลุ่ม โดยเรียง dependency ก่อนม็อดที่เรียกใช้ ทดสอบการทำงานร่วมกับชุดสะสมและสำรองโลกกับ config ก่อนแต่ละ Step แล้วปิดท้ายด้วยการทดสอบม็อดแพ็กครบชุดใน Multiplayer 3–6 คน",
       "order": 11,
       "steps": [
@@ -1414,49 +1551,180 @@
           "name": "11.1 — Creatures & Remaining World Content",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "easy-villagers"
+            },
+            {
+              "type": "mod",
+              "id": "measurements"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-melodies"
+            },
+            {
+              "type": "mod",
+              "id": "construction-wands-revived"
+            }
+          ]
         },
         {
           "id": "step-3",
           "name": "11.2 — Building, Furniture & Decoration",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "chimes"
+            },
+            {
+              "type": "mod",
+              "id": "mcwholidays"
+            },
+            {
+              "type": "mod",
+              "id": "macaws-lights-and-lamps"
+            },
+            {
+              "type": "mod",
+              "id": "macaws-furniture"
+            },
+            {
+              "type": "mod",
+              "id": "refurbished-furniture-neoforge"
+            },
+            {
+              "type": "mod",
+              "id": "omnipots"
+            },
+            {
+              "type": "mod",
+              "id": "open-together"
+            },
+            {
+              "type": "mod",
+              "id": "universal-sawmill"
+            },
+            {
+              "type": "mod",
+              "id": "trashcans"
+            },
+            {
+              "type": "mod",
+              "id": "stoneworks"
+            },
+            {
+              "type": "mod",
+              "id": "new-slab-variants"
+            },
+            {
+              "type": "mod",
+              "id": "dreamdisplays"
+            },
+            {
+              "type": "mod",
+              "id": "more-useful-copper"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-paintings"
+            }
+          ]
         },
         {
           "id": "step-4",
           "name": "11.3 — Storage, Farming & Utility Stations",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "golden-foods"
+            }
+          ]
         },
         {
           "id": "step-5",
           "name": "11.4 — Equipment, Enchantments & Balance",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "elytraslot"
+            },
+            {
+              "type": "mod",
+              "id": "transmog"
+            }
+          ]
         },
         {
           "id": "step-6",
           "name": "11.5 — Quests, Teams & Player Systems",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ftbquests"
+            },
+            {
+              "type": "mod",
+              "id": "jobsplus"
+            },
+            {
+              "type": "mod",
+              "id": "little-joys"
+            },
+            {
+              "type": "mod",
+              "id": "jobsplustools"
+            }
+          ]
         },
         {
           "id": "step-7",
           "name": "11.6 — Interface, Visuals & Audio",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "visual-workbench"
+            },
+            {
+              "type": "mod",
+              "id": "loot-journal"
+            },
+            {
+              "type": "mod",
+              "id": "fragmentum"
+            }
+          ]
         },
         {
           "id": "step-8",
           "name": "11.7 — Server Tools & Optimization",
           "description": "",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ftbbackups3"
+            },
+            {
+              "type": "mod",
+              "id": "chunky"
+            },
+            {
+              "type": "mod",
+              "id": "dynamicviewdist"
+            }
+          ]
         },
         {
           "id": "step-9",
