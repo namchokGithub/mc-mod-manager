@@ -3966,12 +3966,46 @@ main:focus {
 }
 .plan-readiness-head h3 {
   margin: 0;
+}
+.plan-readiness-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+}
+.plan-readiness-toggle > span {
+  display: grid;
+  gap: 3px;
+}
+.plan-readiness-toggle strong {
   font-size: 14px;
 }
-.plan-readiness-head p {
-  margin: 3px 0 0;
+.plan-readiness-toggle small {
   color: var(--text-muted);
   font-size: 12px;
+}
+.plan-readiness-toggle svg {
+  flex: none;
+  color: var(--text-muted);
+  transition: transform 0.2s var(--ease-out);
+}
+.plan-readiness-toggle svg.rotate {
+  transform: rotate(180deg);
+}
+.plan-readiness-toggle:hover strong {
+  color: var(--primary);
+}
+.plan-readiness-toggle:focus-visible {
+  outline: 0;
+  box-shadow: var(--ring);
 }
 .plan-readiness-list {
   display: grid;

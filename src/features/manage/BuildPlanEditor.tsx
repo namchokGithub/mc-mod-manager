@@ -77,6 +77,7 @@ function BatchReadiness({
   batches: BatchSummary[];
   onOpenBatch: (id: string) => void;
 }) {
+  const [open, setOpen] = useState(false);
   const batchesWithIssues = batches.filter((item) => {
     const { issues } = item;
     return (
@@ -93,16 +94,30 @@ function BatchReadiness({
   return (
     <section className="plan-readiness" aria-labelledby="plan-readiness-title">
       <div className="plan-readiness-head">
-        <div>
-          <h3 id="plan-readiness-title">Batch readiness</h3>
-          <p>
-            {batchesWithIssues
-              ? `${batchesWithIssues} ${batchesWithIssues === 1 ? "batch needs" : "batches need"} attention before installation.`
-              : "Every batch is ready from the available dependency metadata."}
-          </p>
-        </div>
+        <h3 id="plan-readiness-title">
+          <button
+            type="button"
+            className="plan-readiness-toggle"
+            aria-expanded={open}
+            onClick={() => setOpen((current) => !current)}
+          >
+            <span>
+              <strong>Batch readiness</strong>
+              <small>
+                {batchesWithIssues
+                  ? `${batchesWithIssues} ${batchesWithIssues === 1 ? "batch needs" : "batches need"} attention before installation.`
+                  : "Every batch is ready from the available dependency metadata."}
+              </small>
+            </span>
+            <ChevronDown
+              size={16}
+              aria-hidden="true"
+              className={open ? "rotate" : undefined}
+            />
+          </button>
+        </h3>
       </div>
-      <ol className="plan-readiness-list">
+      <ol className="plan-readiness-list" hidden={!open}>
         {batches.map((item) => {
           const { issues } = item;
           const labels = [
