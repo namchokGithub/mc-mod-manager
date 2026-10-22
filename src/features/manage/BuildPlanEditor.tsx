@@ -24,6 +24,7 @@ import {
   assignItem,
   batchMods,
   itemRefsOf,
+  modAssignmentLocations,
   moveItem,
   moveItemToStep,
   newBatchId,
@@ -252,6 +253,7 @@ function StepCard({
   onMove,
   onRemove,
   onOpenContent,
+  highlighted,
 }: {
   batch: Batch;
   item: Step;
@@ -264,6 +266,7 @@ function StepCard({
   onMove: (offset: -1 | 1) => void;
   onRemove: () => void;
   onOpenContent: (key: ContentKey, item: ContentItem) => void;
+  highlighted?: boolean;
 }) {
   // Edited locally and committed on blur, so clearing the text to retype never fails validation.
   const [name, setName] = useState(item.name);
@@ -407,7 +410,8 @@ function StepCard({
   };
   return (
     <li
-      className={`plan-step-card${open ? " open" : ""}`}
+      id={`step-${batch.id}-${item.id}`}
+      className={`plan-step-card${open ? " open" : ""}${highlighted ? " plan-step-highlight" : ""}`}
       onBlur={(event) => {
         // Keep the inline draft while focus moves within this Step. Leaving it
         // commits the edit before another control, including local save, runs.
@@ -926,19 +930,41 @@ function BatchBody({
   onChange,
   onOpenMod,
   onOpenContent,
+  focusStep,
 }: {
   batch: Batch;
   onChange: (batch: Batch) => void;
   onOpenMod: (mod: Mod) => void;
   onOpenContent: (key: ContentKey, item: ContentItem) => void;
+  focusStep?: { id: string; request: number };
 }) {
   const { data } = useCollection();
   const [newStepName, setNewStepName] = useState("");
   const [openStepId, setOpenStepId] = useState<string | null>(
     () => batch.steps.find((step) => !step.done)?.id ?? null,
   );
+  const [highlightedStepId, setHighlightedStepId] = useState<string | null>(
+    null,
+  );
   const addId = useId();
   const setSteps = (steps: Step[]) => onChange({ ...batch, steps });
+
+  useEffect(() => {
+    if (!focusStep || !batch.steps.some((step) => step.id === focusStep.id))
+      return;
+    const frame = requestAnimationFrame(() => {
+      setOpenStepId(focusStep.id);
+      setHighlightedStepId(focusStep.id);
+      document
+        .getElementById(`step-${batch.id}-${focusStep.id}`)
+        ?.scrollIntoView({ block: "center" });
+    });
+    const timeout = window.setTimeout(() => setHighlightedStepId(null), 1800);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timeout);
+    };
+  }, [batch.id, batch.steps, focusStep]);
 
   return (
     <div className="plan-body">
@@ -977,6 +1003,7 @@ function BatchBody({
                   setSteps(batch.steps.filter((other) => other.id !== item.id))
                 }
                 onOpenContent={onOpenContent}
+                highlighted={highlightedStepId === item.id}
               />
             ))}
           </ol>
@@ -1053,6 +1080,25 @@ export function BuildPlanEditor({
   const notify = useToast();
   const batches = orderedBatches(data.batches);
   const readiness = useMemo(() => planningDashboard(data).batches, [data]);
+  const [planSearch, setPlanSearch] = useState("");
+  const [stepFocus, setStepFocus] = useState<{
+    batchId: string;
+    id: string;
+    request: number;
+  } | null>(null);
+  const stepFocusRequest = useRef(0);
+  const planSearchResults = useMemo(() => {
+    if (!planSearch.trim()) return [];
+    const modsById = new Map(data.mods.map((mod) => [mod.id, mod]));
+    return [...modAssignmentLocations(data.batches).entries()]
+      .flatMap(([id, locations]) => {
+        const mod = modsById.get(id);
+        return mod && matchesSearchText(mod.name, planSearch)
+          ? locations.map((location) => ({ mod, location }))
+          : [];
+      })
+      .slice(0, 20);
+  }, [data.batches, data.mods, planSearch]);
   const [expanded, setExpanded] = useState<Set<string>>(
     () => new Set(focusBatchId ? [focusBatchId] : []),
   );
@@ -1093,6 +1139,24 @@ export function BuildPlanEditor({
         .getElementById(`batch-${id}`)
         ?.scrollIntoView({ block: "start" }),
     );
+  };
+  const focusPlanStep = (batchId: string, stepId: string) => {
+    setExpanded((current) => new Set(current).add(batchId));
+    const request = stepFocusRequest.current + 1;
+    stepFocusRequest.current = request;
+    setStepFocus({
+      batchId,
+      id: stepId,
+      request,
+    });
+    window.setTimeout(
+      () =>
+        setStepFocus((current) =>
+          current?.request === request ? null : current,
+        ),
+      1800,
+    );
+    setPlanSearch("");
   };
   const submitForm = () => {
     if (!form) return;
@@ -1148,6 +1212,51 @@ export function BuildPlanEditor({
             <Plus size={17} /> New batch
           </Button>
         </div>
+      </div>
+      <div className="plan-find-mod">
+        <label className="plan-find-mod-field">
+          <Search size={16} aria-hidden="true" />
+          <span className="sr-only">Find a mod in this plan</span>
+          <input
+            value={planSearch}
+            placeholder="Find a mod in this plan…"
+            onChange={(event) => setPlanSearch(event.target.value)}
+          />
+          {planSearch && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label="Clear build plan search"
+              onClick={() => setPlanSearch("")}
+            >
+              <X size={15} />
+            </Button>
+          )}
+        </label>
+        {planSearch.trim() && (
+          <ul className="plan-find-mod-results" aria-label="Matching plan mods">
+            {planSearchResults.map(({ mod, location }) => (
+              <li key={`${mod.id}:${location.batchId}:${location.stepId}`}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    focusPlanStep(location.batchId, location.stepId)
+                  }
+                >
+                  <strong>{mod.name}</strong>
+                  <span>
+                    Batch {location.batchPosition} · {location.batchName} ·{" "}
+                    {location.stepName}
+                  </span>
+                </button>
+              </li>
+            ))}
+            {!planSearchResults.length && (
+              <li className="mr-hint">No assigned mods match this search.</li>
+            )}
+          </ul>
+        )}
       </div>
       {batches.length ? (
         <>
@@ -1278,6 +1387,11 @@ export function BuildPlanEditor({
                           onChange={replace}
                           onOpenMod={onOpenMod}
                           onOpenContent={onOpenContent}
+                          focusStep={
+                            stepFocus?.batchId === batch.id
+                              ? stepFocus
+                              : undefined
+                          }
                         />
                       </motion.div>
                     )}
