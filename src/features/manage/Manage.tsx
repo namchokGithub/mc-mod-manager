@@ -1384,6 +1384,32 @@ export function Manage() {
     window.addEventListener("beforeunload", onBeforeUnload);
     return () => window.removeEventListener("beforeunload", onBeforeUnload);
   }, [editorDirty, settingsDirty]);
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!event.ctrlKey || event.key !== " ") return;
+      const target = event.target;
+      if (
+        target instanceof Element &&
+        target.closest(
+          "input, textarea, select, button, [role='button'], [contenteditable='true']",
+        )
+      )
+        return;
+      if (
+        document.querySelector(
+          "[role='dialog'], [data-radix-popper-content-wrapper]",
+        )
+      )
+        return;
+      event.preventDefault();
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
   const compat = useMemo(
     () => checkCompatibility(data.mods, data.modpack, live?.facts),
     [data.mods, data.modpack, live],

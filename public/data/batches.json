@@ -59,10 +59,6 @@
             },
             {
               "type": "mod",
-              "id": "sodium-extra"
-            },
-            {
-              "type": "mod",
               "id": "immediatelyfast-2"
             },
             {
@@ -76,6 +72,10 @@
             {
               "type": "mod",
               "id": "moreculling"
+            },
+            {
+              "type": "mod",
+              "id": "betterfpsdist"
             }
           ]
         },
@@ -884,6 +884,10 @@
             {
               "type": "mod",
               "id": "omnipots"
+            },
+            {
+              "type": "mod",
+              "id": "flower-tweaks"
             }
           ]
         },
@@ -904,6 +908,10 @@
             {
               "type": "mod",
               "id": "easy-villagers"
+            },
+            {
+              "type": "mod",
+              "id": "easy-piglins"
             }
           ]
         },
@@ -955,6 +963,18 @@
             {
               "type": "mod",
               "id": "more-useful-copper"
+            },
+            {
+              "type": "mod",
+              "id": "rechiseled"
+            },
+            {
+              "type": "mod",
+              "id": "silents-gems"
+            },
+            {
+              "type": "mod",
+              "id": "silent-lib"
             }
           ]
         },
@@ -1114,6 +1134,10 @@
             {
               "type": "mod",
               "id": "transmog"
+            },
+            {
+              "type": "mod",
+              "id": "new-shield-variants"
             }
           ]
         },
@@ -1142,6 +1166,14 @@
             {
               "type": "mod",
               "id": "friends-and-foes-beekeeper-hut-forge"
+            },
+            {
+              "type": "mod",
+              "id": "faewulfslib"
+            },
+            {
+              "type": "mod",
+              "id": "faewufs-diversity"
             }
           ]
         },
@@ -1361,6 +1393,10 @@
             {
               "type": "mod",
               "id": "max-health-fix"
+            },
+            {
+              "type": "mod",
+              "id": "baubley-heart-canisters"
             }
           ]
         },
