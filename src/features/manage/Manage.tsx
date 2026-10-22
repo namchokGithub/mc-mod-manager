@@ -70,6 +70,7 @@ import {
   formatPlainTextModList,
   minimalModList,
   uniqueId,
+  updateSelectedVisibleModStatuses,
   type Filters,
 } from "../../lib/mods";
 import {
@@ -1239,6 +1240,7 @@ export function Manage() {
     deleteMods,
     updateModpack,
     importMods,
+    updateMods,
     published,
     markSaved,
     saveStatus,
@@ -1605,6 +1607,27 @@ export function Manage() {
       description: `${mods.length} ${mods.length === 1 ? "mod" : "mods"} with name, version, and URL.`,
     });
   };
+  const updateSelectedStatuses = (status: Mod["status"]) => {
+    const selectedVisible = data.mods.filter(
+      (mod) => selection.has(mod.id) && filteredIds.has(mod.id),
+    );
+    const changed = selectedVisible.filter((mod) => mod.status !== status);
+    if (!changed.length) {
+      notify({
+        kind: "info",
+        title: `Selected mods are already ${modStatusLabels[status]}`,
+      });
+      return;
+    }
+    updateMods(
+      updateSelectedVisibleModStatuses(data.mods, selection, filteredIds, status),
+    );
+    notify({
+      kind: "info",
+      title: `Updated ${changed.length} ${changed.length === 1 ? "mod" : "mods"}`,
+      description: `Status changed to ${modStatusLabels[status]}.`,
+    });
+  };
   // Layout animation gets costly for big collections, so it turns off there.
   const animateLayout = filtered.length <= 60;
   const persistMod = (
@@ -1836,6 +1859,18 @@ export function Manage() {
                           ` (${hiddenSelected} hidden by filters)`}
                       </span>
                       <div className="bulk-bar-actions">
+                        <Select
+                          aria-label="Change status for selected visible mods"
+                          className="bulk-status"
+                          size="sm"
+                          variant="compact"
+                          value=""
+                          placeholder="Change status…"
+                          options={statusOptions}
+                          onValueChange={(value) =>
+                            updateSelectedStatuses(value as Mod["status"])
+                          }
+                        />
                         <Button
                           variant="ghost"
                           size="small"

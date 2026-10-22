@@ -82,6 +82,20 @@ export function filterModsByStatuses(
   return mods.filter((mod) => selected.has(mod.status));
 }
 
+/** Changes the status only for mods that remain visible in the active filtered result. */
+export function updateSelectedVisibleModStatuses(
+  mods: Mod[],
+  selectedIds: ReadonlySet<string>,
+  visibleIds: ReadonlySet<string>,
+  status: Mod["status"],
+): Mod[] {
+  return mods.map((mod) =>
+    selectedIds.has(mod.id) && visibleIds.has(mod.id)
+      ? { ...mod, status }
+      : mod,
+  );
+}
+
 /** Normalizes search text so punctuation variants do not hide matching mod names. */
 export function normalizeSearchText(value: string): string {
   return value

@@ -4,6 +4,7 @@ import {
   filterModsByStatuses,
   formatPlainTextModList,
   matchesSearchText,
+  updateSelectedVisibleModStatuses,
 } from "./mods";
 import { modSchema, type Mod } from "./schema";
 
@@ -107,5 +108,28 @@ describe("multi-status filtering", () => {
       ),
     ).toEqual(["interested", "installed"]);
     expect(filterModsByStatuses(mods, [])).toBe(mods);
+  });
+});
+
+describe("bulk status updates", () => {
+  it("updates only mods that are both selected and visible in the current filters", () => {
+    const mods = [
+      { ...original, id: "visible-selected", status: "planned" as const },
+      { ...original, id: "hidden-selected", status: "planned" as const },
+      { ...original, id: "visible-unselected", status: "planned" as const },
+    ];
+
+    const result = updateSelectedVisibleModStatuses(
+      mods,
+      new Set(["visible-selected", "hidden-selected"]),
+      new Set(["visible-selected", "visible-unselected"]),
+      "testing",
+    );
+
+    expect(result.map((mod) => [mod.id, mod.status])).toEqual([
+      ["visible-selected", "testing"],
+      ["hidden-selected", "planned"],
+      ["visible-unselected", "planned"],
+    ]);
   });
 });

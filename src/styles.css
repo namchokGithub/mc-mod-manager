@@ -3740,6 +3740,9 @@ main:focus {
   flex-wrap: wrap;
   gap: 6px;
 }
+.bulk-status {
+  min-width: 156px;
+}
 .pagination {
   display: flex;
   align-items: center;
