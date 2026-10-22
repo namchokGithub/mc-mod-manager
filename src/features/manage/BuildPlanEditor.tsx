@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowDown,
@@ -47,6 +47,10 @@ import {
 import { contentStatusLabels } from "../../lib/content";
 import { matchesSearchText } from "../../lib/mods";
 import {
+  planningDashboard,
+  type BatchSummary,
+} from "../../lib/planningDashboard";
+import {
   contentTypes,
   type Batch,
   type ContentItem,
@@ -65,6 +69,161 @@ const modStatusOptions = modStatuses.map((value) => ({
   value,
   label: modStatusLabels[value],
 }));
+
+function BatchReadiness({
+  batches,
+  onOpenBatch,
+}: {
+  batches: BatchSummary[];
+  onOpenBatch: (id: string) => void;
+}) {
+  const batchesWithIssues = batches.filter((item) => {
+    const { issues } = item;
+    return (
+      issues.requiredMissing.length +
+        issues.optionalMissing.length +
+        issues.unresolved.length +
+        issues.later.length +
+        issues.unknown.length +
+        item.deletedRefs.length +
+        item.missingContent.length >
+      0
+    );
+  }).length;
+  return (
+    <section className="plan-readiness" aria-labelledby="plan-readiness-title">
+      <div className="plan-readiness-head">
+        <div>
+          <h3 id="plan-readiness-title">Batch readiness</h3>
+          <p>
+            {batchesWithIssues
+              ? `${batchesWithIssues} ${batchesWithIssues === 1 ? "batch needs" : "batches need"} attention before installation.`
+              : "Every batch is ready from the available dependency metadata."}
+          </p>
+        </div>
+      </div>
+      <ol className="plan-readiness-list">
+        {batches.map((item) => {
+          const { issues } = item;
+          const labels = [
+            issues.requiredMissing.length
+              ? `${issues.requiredMissing.length} required missing`
+              : "",
+            issues.unresolved.length
+              ? `${issues.unresolved.length} unresolved`
+              : "",
+            issues.later.length ? `${issues.later.length} scheduled later` : "",
+            item.deletedRefs.length + item.missingContent.length
+              ? `${item.deletedRefs.length + item.missingContent.length} deleted reference${item.deletedRefs.length + item.missingContent.length === 1 ? "" : "s"}`
+              : "",
+            issues.optionalMissing.length
+              ? `${issues.optionalMissing.length} optional not added`
+              : "",
+            issues.unknown.length
+              ? `${issues.unknown.length} unknown metadata`
+              : "",
+          ].filter(Boolean);
+          const hasIssues = labels.length > 0;
+          return (
+            <li
+              key={item.batch.id}
+              className={`plan-readiness-item${hasIssues ? " has-issues" : ""}`}
+            >
+              <span className="plan-order" aria-hidden="true">
+                {item.position}
+              </span>
+              <div className="plan-readiness-main">
+                <strong>{item.batch.name}</strong>
+                <span>
+                  {item.modCount} {item.modCount === 1 ? "mod" : "mods"}
+                  {labels.length ? ` · ${labels.join(" · ")}` : " · Ready"}
+                </span>
+                {hasIssues && (
+                  <details className="plan-readiness-details">
+                    <summary>View what needs attention</summary>
+                    <ul>
+                      {issues.requiredMissing.map(({ mod, entry }) => (
+                        <li key={`required:${mod.id}:${entry.key}`}>
+                          <span className="plan-readiness-tone danger">
+                            Required missing
+                          </span>
+                          <strong>{mod.name}</strong> needs {entry.label}
+                        </li>
+                      ))}
+                      {issues.unresolved.map(({ mod, entry }) => (
+                        <li key={`unresolved:${mod.id}:${entry.key}`}>
+                          <span className="plan-readiness-tone warning">
+                            Can’t verify
+                          </span>
+                          <strong>{mod.name}</strong> needs {entry.label}
+                          {entry.reason && ` — ${entry.reason}`}
+                        </li>
+                      ))}
+                      {issues.later.map(({ mod, entry }) => {
+                        const target = entry.batches.find(
+                          (batch) => batch.position > item.position,
+                        );
+                        return (
+                          <li key={`later:${mod.id}:${entry.key}`}>
+                            <span className="plan-readiness-tone warning">
+                              Scheduled later
+                            </span>
+                            <strong>{mod.name}</strong> needs {entry.label}
+                            {target && ` in Batch ${target.position}`}
+                          </li>
+                        );
+                      })}
+                      {issues.optionalMissing.map(({ mod, entry }) => (
+                        <li key={`optional:${mod.id}:${entry.key}`}>
+                          <span className="plan-readiness-tone neutral">
+                            Optional not added
+                          </span>
+                          <strong>{mod.name}</strong> can use {entry.label}
+                        </li>
+                      ))}
+                      {issues.unknown.map((mod) => (
+                        <li key={`unknown:${mod.id}`}>
+                          <span className="plan-readiness-tone neutral">
+                            Unknown metadata
+                          </span>
+                          <strong>{mod.name}</strong> has no dependency metadata
+                        </li>
+                      ))}
+                      {item.deletedRefs.map((id) => (
+                        <li key={`deleted-mod:${id}`}>
+                          <span className="plan-readiness-tone danger">
+                            Deleted reference
+                          </span>
+                          Mod {id} is no longer in the collection
+                        </li>
+                      ))}
+                      {item.missingContent.map((ref) => (
+                        <li key={`deleted-content:${ref.type}:${ref.id}`}>
+                          <span className="plan-readiness-tone danger">
+                            Deleted reference
+                          </span>
+                          {planTypeLabels[ref.type].one} {ref.id} is no longer
+                          in the collection
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </div>
+              <Button
+                variant="ghost"
+                size="small"
+                onClick={() => onOpenBatch(item.batch.id)}
+              >
+                Open batch
+              </Button>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+}
 
 function StepCard({
   batch,
@@ -878,6 +1037,7 @@ export function BuildPlanEditor({
   const { data, updateBatches } = useCollection();
   const notify = useToast();
   const batches = orderedBatches(data.batches);
+  const readiness = useMemo(() => planningDashboard(data).batches, [data]);
   const [expanded, setExpanded] = useState<Set<string>>(
     () => new Set(focusBatchId ? [focusBatchId] : []),
   );
@@ -911,6 +1071,14 @@ export function BuildPlanEditor({
       else next.add(id);
       return next;
     });
+  const openBatch = (id: string) => {
+    setExpanded((current) => new Set(current).add(id));
+    requestAnimationFrame(() =>
+      document
+        .getElementById(`batch-${id}`)
+        ?.scrollIntoView({ block: "start" }),
+    );
+  };
   const submitForm = () => {
     if (!form) return;
     const name = form.name.trim();
@@ -967,138 +1135,143 @@ export function BuildPlanEditor({
         </div>
       </div>
       {batches.length ? (
-        <ol className="plan-list">
-          {batches.map((batch, index) => {
-            const open = expanded.has(batch.id);
-            const done = batch.steps.filter((item) => item.done).length;
-            const stepProgress = batch.steps.length
-              ? Math.round((done / batch.steps.length) * 100)
-              : 0;
-            return (
-              <li
-                key={batch.id}
-                id={`batch-${batch.id}`}
-                className="plan-batch"
-              >
-                <div className="plan-head">
-                  <button
-                    type="button"
-                    className="plan-toggle"
-                    aria-expanded={open}
-                    onClick={() => toggle(batch.id)}
-                  >
-                    <span className="plan-order" aria-hidden="true">
-                      {index + 1}
-                    </span>
-                    <span className="plan-title">
-                      <strong>{batch.name}</strong>
-                      <span>
-                        {batchCountText(
-                          modIdsOf(batch).length,
-                          batchContent(batch, data),
-                        )}{" "}
-                        ·{" "}
-                        {batch.steps.length
-                          ? `${done}/${batch.steps.length} steps done`
-                          : "no steps"}
-                      </span>
-                    </span>
-                    <ChevronDown
-                      size={16}
-                      aria-hidden="true"
-                      className={open ? "rotate" : undefined}
-                    />
-                  </button>
-                  <div className="row-actions">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Move ${batch.name} up`}
-                      disabled={index === 0}
-                      onClick={() =>
-                        updateBatches(moveItem(batches, index, -1))
-                      }
-                    >
-                      <ArrowUp size={16} />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Move ${batch.name} down`}
-                      disabled={index === batches.length - 1}
-                      onClick={() => updateBatches(moveItem(batches, index, 1))}
-                    >
-                      <ArrowDown size={16} />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Edit ${batch.name}`}
-                      onClick={() =>
-                        setForm({
-                          batch,
-                          name: batch.name,
-                          description: batch.description,
-                        })
-                      }
-                    >
-                      <Pencil size={16} />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Export a guide for ${batch.name}`}
-                      title="Export guide"
-                      onClick={() => setExportFor(batch.id)}
-                    >
-                      <FileDown size={16} />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="row-delete"
-                      aria-label={`Delete ${batch.name}`}
-                      onClick={() => setDeleting(batch)}
-                    >
-                      <Trash2 size={16} />
-                    </Button>
-                  </div>
-                </div>
-                {batch.description && (
-                  <p className="plan-description">{batch.description}</p>
-                )}
-                <div
-                  className="plan-batch-progress"
-                  role="progressbar"
-                  aria-label={`${batch.name} Step progress`}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-valuenow={stepProgress}
+        <>
+          <BatchReadiness batches={readiness} onOpenBatch={openBatch} />
+          <ol className="plan-list">
+            {batches.map((batch, index) => {
+              const open = expanded.has(batch.id);
+              const done = batch.steps.filter((item) => item.done).length;
+              const stepProgress = batch.steps.length
+                ? Math.round((done / batch.steps.length) * 100)
+                : 0;
+              return (
+                <li
+                  key={batch.id}
+                  id={`batch-${batch.id}`}
+                  className="plan-batch"
                 >
-                  <span style={{ width: `${stepProgress}%` }} />
-                </div>
-                <AnimatePresence initial={false}>
-                  {open && (
-                    <motion.div
-                      className="plan-collapse"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
+                  <div className="plan-head">
+                    <button
+                      type="button"
+                      className="plan-toggle"
+                      aria-expanded={open}
+                      onClick={() => toggle(batch.id)}
                     >
-                      <BatchBody
-                        batch={batch}
-                        onChange={replace}
-                        onOpenMod={onOpenMod}
-                        onOpenContent={onOpenContent}
+                      <span className="plan-order" aria-hidden="true">
+                        {index + 1}
+                      </span>
+                      <span className="plan-title">
+                        <strong>{batch.name}</strong>
+                        <span>
+                          {batchCountText(
+                            modIdsOf(batch).length,
+                            batchContent(batch, data),
+                          )}{" "}
+                          ·{" "}
+                          {batch.steps.length
+                            ? `${done}/${batch.steps.length} steps done`
+                            : "no steps"}
+                        </span>
+                      </span>
+                      <ChevronDown
+                        size={16}
+                        aria-hidden="true"
+                        className={open ? "rotate" : undefined}
                       />
-                    </motion.div>
+                    </button>
+                    <div className="row-actions">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Move ${batch.name} up`}
+                        disabled={index === 0}
+                        onClick={() =>
+                          updateBatches(moveItem(batches, index, -1))
+                        }
+                      >
+                        <ArrowUp size={16} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Move ${batch.name} down`}
+                        disabled={index === batches.length - 1}
+                        onClick={() =>
+                          updateBatches(moveItem(batches, index, 1))
+                        }
+                      >
+                        <ArrowDown size={16} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Edit ${batch.name}`}
+                        onClick={() =>
+                          setForm({
+                            batch,
+                            name: batch.name,
+                            description: batch.description,
+                          })
+                        }
+                      >
+                        <Pencil size={16} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Export a guide for ${batch.name}`}
+                        title="Export guide"
+                        onClick={() => setExportFor(batch.id)}
+                      >
+                        <FileDown size={16} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="row-delete"
+                        aria-label={`Delete ${batch.name}`}
+                        onClick={() => setDeleting(batch)}
+                      >
+                        <Trash2 size={16} />
+                      </Button>
+                    </div>
+                  </div>
+                  {batch.description && (
+                    <p className="plan-description">{batch.description}</p>
                   )}
-                </AnimatePresence>
-              </li>
-            );
-          })}
-        </ol>
+                  <div
+                    className="plan-batch-progress"
+                    role="progressbar"
+                    aria-label={`${batch.name} Step progress`}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={stepProgress}
+                  >
+                    <span style={{ width: `${stepProgress}%` }} />
+                  </div>
+                  <AnimatePresence initial={false}>
+                    {open && (
+                      <motion.div
+                        className="plan-collapse"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                      >
+                        <BatchBody
+                          batch={batch}
+                          onChange={replace}
+                          onOpenMod={onOpenMod}
+                          onOpenContent={onOpenContent}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+          </ol>
+        </>
       ) : (
         <div className="empty-state">
           <div className="empty-icon">

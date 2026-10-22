@@ -217,6 +217,32 @@ describe("batch breakdown and later-batch warnings", () => {
     );
     expect(dashboard.attention.later).toEqual([]);
   });
+
+  it("keeps the missing dependency and its owner with the affected batch", () => {
+    const dashboard = planningDashboard(
+      collection(
+        [linked("addon", [dep("p-geckolib")])],
+        [batch("first", ["addon"])],
+      ),
+    );
+
+    expect(
+      dashboard.batches[0]!.issues.requiredMissing.map(({ mod, entry }) => [
+        mod.id,
+        entry.identifier,
+      ]),
+    ).toEqual([["addon", "p-geckolib"]]);
+  });
+
+  it("keeps mods without dependency metadata visible in the affected batch", () => {
+    const dashboard = planningDashboard(
+      collection([mod("manual")], [batch("first", ["manual"])]),
+    );
+
+    expect(dashboard.batches[0]!.issues.unknown.map((item) => item.id)).toEqual(
+      ["manual"],
+    );
+  });
 });
 
 describe("updates", () => {

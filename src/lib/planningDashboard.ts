@@ -32,6 +32,15 @@ export type BatchSummary = {
   contentCount: number;
   /** Their references whose entry no longer exists. */
   missingContent: ReturnType<typeof contentRefsOf>;
+  /** Dependency issues scoped to this batch, preserving their owning mod and labels. */
+  issues: {
+    requiredMissing: DependencyIssue[];
+    optionalMissing: DependencyIssue[];
+    unresolved: DependencyIssue[];
+    later: DependencyIssue[];
+    /** Mods without dependency metadata, so their dependencies cannot be checked. */
+    unknown: Mod[];
+  };
 };
 
 export type PlanningDashboard = {
@@ -173,21 +182,37 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
     let missingRequired = 0;
     let unresolvedCount = 0;
     let laterCount = 0;
-    for (const { mod, entries } of overview.mods)
+    const issues: BatchSummary["issues"] = {
+      requiredMissing: [],
+      optionalMissing: [],
+      unresolved: [],
+      later: [],
+      unknown: [],
+    };
+    for (const { mod, source, entries } of overview.mods) {
+      if (source === "unknown") issues.unknown.push(mod);
       for (const entry of entries) {
         if (
           entry.relation === "incompatible" ||
           entry.relation === "discouraged"
         )
           continue;
-        if (entry.status === "unresolved") unresolvedCount += 1;
-        else if (entry.status === "missing" && entry.relation === "required")
-          missingRequired += 1;
+        if (entry.status === "unresolved") {
+          unresolvedCount += 1;
+          issues.unresolved.push({ mod, entry });
+        } else if (entry.status === "missing") {
+          if (entry.relation === "required") {
+            missingRequired += 1;
+            issues.requiredMissing.push({ mod, entry });
+          } else issues.optionalMissing.push({ mod, entry });
+        }
         if (entry.laterOnly) {
           laterCount += 1;
+          issues.later.push({ mod, entry });
           later.push({ mod, entry, batch, position });
         }
       }
+    }
     if (gone.length) deletedRefs.push({ batch, position, ids: gone });
     const content = batchContent(batch, collection);
     const missingContent = contentTypes.flatMap((type) =>
@@ -208,6 +233,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
         0,
       ),
       missingContent,
+      issues,
     });
   });
 

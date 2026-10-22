@@ -3955,6 +3955,106 @@ main:focus {
 }
 
 /* Build plan: Manage editor and Preview guide */
+.plan-readiness {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-alt);
+}
+.plan-readiness-head h3 {
+  margin: 0;
+  font-size: 14px;
+}
+.plan-readiness-head p {
+  margin: 3px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.plan-readiness-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.plan-readiness-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.plan-readiness-item.has-issues {
+  border-color: var(--accent-border);
+}
+.plan-readiness-main {
+  display: grid;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.plan-readiness-main > strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.plan-readiness-main > span {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.plan-readiness-details {
+  margin-top: 4px;
+}
+.plan-readiness-details summary {
+  width: fit-content;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+}
+.plan-readiness-details summary:focus-visible {
+  outline: 0;
+  border-radius: 4px;
+  box-shadow: var(--ring);
+}
+.plan-readiness-details ul {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.plan-readiness-details li {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.plan-readiness-tone {
+  display: inline-flex;
+  margin-right: 5px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--neutral-soft);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+}
+.plan-readiness-tone.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.plan-readiness-tone.warning {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+.plan-readiness-tone.neutral {
+  background: var(--neutral-soft);
+  color: var(--text-secondary);
+}
 .plan-list {
   display: grid;
   gap: 10px;
