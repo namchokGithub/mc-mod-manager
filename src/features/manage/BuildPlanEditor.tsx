@@ -1102,14 +1102,18 @@ export function BuildPlanEditor({
       })
       .slice(0, 20);
   }, [data.batches, data.mods, planSearch]);
-  const [expanded, setExpanded] = useState<Set<string>>(
-    () => new Set(focusBatchId ? [focusBatchId] : []),
+  const [expandedBatchId, setExpandedBatchId] = useState<string | null>(
+    focusBatchId ?? null,
   );
   useEffect(() => {
-    if (focusBatchId)
+    if (!focusBatchId) return;
+    const frame = requestAnimationFrame(() => {
+      setExpandedBatchId(focusBatchId);
       document
         .getElementById(`batch-${focusBatchId}`)
         ?.scrollIntoView({ block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [focusBatchId]);
   // null: closed; "" : all batches; otherwise the batch the export was opened from.
   const [exportFor, setExportFor] = useState<string | null>(null);
@@ -1129,14 +1133,9 @@ export function BuildPlanEditor({
       batches.map((batch) => (batch.id === next.id ? next : batch)),
     );
   const toggle = (id: string) =>
-    setExpanded((current) => {
-      const next = new Set(current);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+    setExpandedBatchId((current) => (current === id ? null : id));
   const openBatch = (id: string) => {
-    setExpanded((current) => new Set(current).add(id));
+    setExpandedBatchId(id);
     requestAnimationFrame(() =>
       document
         .getElementById(`batch-${id}`)
@@ -1144,7 +1143,7 @@ export function BuildPlanEditor({
     );
   };
   const focusPlanStep = (batchId: string, stepId: string) => {
-    setExpanded((current) => new Set(current).add(batchId));
+    setExpandedBatchId(batchId);
     const request = stepFocusRequest.current + 1;
     stepFocusRequest.current = request;
     setStepFocus({
@@ -1266,7 +1265,7 @@ export function BuildPlanEditor({
           <BatchReadiness batches={readiness} onOpenBatch={openBatch} />
           <ol className="plan-list">
             {batches.map((batch, index) => {
-              const open = expanded.has(batch.id);
+              const open = expandedBatchId === batch.id;
               const done = batch.steps.filter((item) => item.done).length;
               const stepProgress = batch.steps.length
                 ? Math.round((done / batch.steps.length) * 100)

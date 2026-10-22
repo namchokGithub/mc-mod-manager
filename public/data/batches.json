@@ -16,6 +16,18 @@
             {
               "type": "mod",
               "id": "ftbbackups3"
+            },
+            {
+              "type": "mod",
+              "id": "cupboard"
+            },
+            {
+              "type": "mod",
+              "id": "fastasyncworldsave"
+            },
+            {
+              "type": "mod",
+              "id": "ftblibrary"
             }
           ]
         },
@@ -135,10 +147,6 @@
             },
             {
               "type": "mod",
-              "id": "cupboard"
-            },
-            {
-              "type": "mod",
               "id": "libipn"
             },
             {
@@ -164,6 +172,10 @@
             {
               "type": "mod",
               "id": "dynamicviewdist"
+            },
+            {
+              "type": "mod",
+              "id": "trinkets-updated"
             }
           ]
         },
@@ -251,6 +263,10 @@
             {
               "type": "mod",
               "id": "crafting-tweaks"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-config-lib"
             }
           ]
         },
@@ -505,10 +521,6 @@
           "itemRefs": [
             {
               "type": "mod",
-              "id": "ftblibrary"
-            },
-            {
-              "type": "mod",
               "id": "ftbteams"
             },
             {
@@ -518,6 +530,10 @@
             {
               "type": "mod",
               "id": "ftbchunks"
+            },
+            {
+              "type": "mod",
+              "id": "ftbxmodcompat"
             }
           ]
         },
@@ -692,7 +708,7 @@
             },
             {
               "type": "mod",
-              "id": "loot-integrations-when-dungeons-arise-co"
+              "id": "loot-integrations-when-dungeons-arise"
             }
           ]
         },
@@ -1138,6 +1154,18 @@
             {
               "type": "mod",
               "id": "new-shield-variants"
+            },
+            {
+              "type": "mod",
+              "id": "cc-complementary-core"
+            },
+            {
+              "type": "mod",
+              "id": "complementary-tools-weapons"
+            },
+            {
+              "type": "mod",
+              "id": "shieldmechanics"
             }
           ]
         },
@@ -1318,6 +1346,10 @@
             {
               "type": "mod",
               "id": "champions-unofficial"
+            },
+            {
+              "type": "mod",
+              "id": "ender-zoology"
             }
           ]
         },
@@ -1342,6 +1374,10 @@
             {
               "type": "mod",
               "id": "dynamic-difficulty"
+            },
+            {
+              "type": "mod",
+              "id": "quad"
             }
           ]
         },
@@ -1461,6 +1497,14 @@
             {
               "type": "mod",
               "id": "enchanting-infuser"
+            },
+            {
+              "type": "mod",
+              "id": "protection-grace-enchantment"
+            },
+            {
+              "type": "mod",
+              "id": "dragon-enchants"
             }
           ]
         },
@@ -1699,6 +1743,14 @@
             {
               "type": "mod",
               "id": "little-joys"
+            },
+            {
+              "type": "mod",
+              "id": "ly-lucky-blocks"
+            },
+            {
+              "type": "mod",
+              "id": "lucky-blocks-world"
             }
           ]
         },
@@ -1735,6 +1787,22 @@
             {
               "type": "mod",
               "id": "iris"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "10.5 Neruina - Ticking Entity Fixer",
+          "description": "**วิธีทดสอบ** สำหรับ Balanced Testing ของคุณ ผมแนะนำให้ติดตั้ง Neruina ใน Batch 1 แต่ทำการทดสอบสองรอบ\n\n- Baseline: เปิด Server โดยยังไม่มี Neruina เพื่อตรวจว่า Modpack เริ่มทำงานตามปกติ\n- With Neruina: เปิดด้วย Mod ชุดเดิมและเพิ่ม Neruina แล้วตรวจ Startup, World Loading และ Multiplayer\n- เมื่อเพิ่ม Batch Mob / Boss / Automation ให้ตรวจ Log ว่ามี Ticking Exception ถูกระงับหรือไม่",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "neruina"
+            },
+            {
+              "type": "mod",
+              "id": "configurable"
             }
           ]
         },
