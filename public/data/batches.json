@@ -4,7 +4,7 @@
     {
       "id": "batch-1-foundation",
       "name": "Batch 1 — Foundation & Performance",
-      "description": "26 mods (17 main + 9 Other)\n\nฐานเกมและประสิทธิภาพก่อนเพิ่มเนื้อหา; Other เป็นรายการพักรอตัดสินใจ ไม่ติดตั้งรวมกับ foundation",
+      "description": "ฐานเกมและประสิทธิภาพก่อนเพิ่มเนื้อหา; Other เป็นรายการพักรอตัดสินใจ ไม่ติดตั้งรวมกับ foundation\n\n**new_mods:** 17 · **inherited_mods:** 0 · **สะสมจากรายชื่อเดิมตามแผน:** 17 · ไม่รวม Other",
       "order": 1,
       "steps": [
         {
@@ -528,14 +528,14 @@
     },
     {
       "id": "batch-4-decoration-quality-of-life",
-      "name": "Batch 4 — Biomes & World Generation",
-      "description": "หมู่บ้าน สิ่งก่อสร้าง Dungeon\n\nหา Structure ในโลกใหม่ → ตรวจการเกิดซ้อน → ตรวจ Chest/Loot → สำรวจพร้อมกัน\n\nข้อควรระวังเรื่องโลก: เก็บโลกสะสมเดิมเป็น backup และใช้โลกใหม่สำหรับผลทดสอบ Batch 4 การมีไฟล์รุ่นตรงกันยังไม่ยืนยันว่า Biomes O’ Plenty กับ Terralith สร้างโลกร่วมกันได้ในชุดนี้ จึงต้องดูผลจาก Step 4.2 ก่อนเดินต่อ ยังไม่ใช้ Chunky สร้าง chunk ล่วงหน้าจำนวนมาก เพราะรายการของคุณยังมีม็อดโครงสร้างและ world generation ที่จะเพิ่มภายหลัง; chunk ที่สร้างไปแล้วจะไม่สร้างใหม่ตามม็อดที่เพิ่มทีหลัง\n\nทุกการทดสอบ Minecraft ใน Batch 4 มีสถานะ not_run นี่เป็นแผนทดสอบและการตรวจข้อมูล dependency เท่านั้น ยังไม่มีผล runtime จริง",
+      "name": "Batch 4 — Biomes, Structures, Dungeons & Loot",
+      "description": "ล็อกภูมิประเทศและโครงสร้างหลักก่อนลงระบบฟาร์ม/การต่อสู้; ใช้โลกทดสอบใหม่\n\n**new_mods:** 24 · **inherited_mods:** 69 · **สะสมจากรายชื่อเดิมตามแผน:** 93",
       "order": 4,
       "steps": [
         {
           "id": "step-1",
-          "name": "4.1 Biomes O’ Plenty",
-          "description": "GlitchCore → TerraBlender → Biomes O’ Plenty\n\nสร้างโลกใหม่ สำรวจไบโอมและบล็อกที่เพิ่ม ตรวจการสร้าง chunk และให้ผู้เล่นเข้าเซิร์ฟเวอร์พร้อมกัน ผู้พัฒนาระบุว่าม็อดนี้ต้องใช้ GlitchCore และ TerraBlender",
+          "name": "4.1 Biome Foundation",
+          "description": "**ทดสอบ:** สร้างโลกใหม่ ตรวจ biome ไม้/บล็อก และการเชื่อมต่อภูมิประเทศ\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -554,8 +554,8 @@
         },
         {
           "id": "step-2",
-          "name": "4.2 Terralith",
-          "description": "Lithostitched → Terralith\n\nเพิ่มบนชุด 4.1 แล้วสร้างโลกใหม่อีกแห่ง ตรวจภูมิประเทศ ถ้ำ และรอยต่อระหว่าง chunk ที่สร้างใหม่ รุ่น ม็อด ของ Terralith ต้องใช้ Lithostitched; ให้เลือกไฟล์ NeoForge ไม่ใช่ไฟล์ datapack",
+          "name": "4.2 Terrain Integration",
+          "description": "**ทดสอบ:** สร้างโลกใหม่ที่มี BOP และ Terralith ตรวจ terrain หลาย seed\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -570,8 +570,8 @@
         },
         {
           "id": "step-3",
-          "name": "4.3 Villages & Structures",
-          "description": "Cristel Lib → Towns and Towers\n\nเพิ่มบนชุด 4.1–4.2 สร้างโลกใหม่ ตรวจหมู่บ้านและด่าน Pillager ที่เกิดใหม่ รวมถึงตรวจการเข้าโลกซ้ำ หน้ารุ่น Towns and Towers ระบุ Cristel Lib เป็น required content ส่วน Cloth Config API ที่ Cristel Lib ระบุไว้มีอยู่แล้วจาก Batch 2",
+          "name": "4.3 Villages & Underground",
+          "description": "**ทดสอบ:** ตรวจหมู่บ้าน/ใต้ดินและกล่อง loot ใน chunk ใหม่\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Cristel Lib → Towns and Towers → Better Library → Underground Village, Stoneholm\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -584,195 +584,22 @@
             },
             {
               "type": "mod",
-              "id": "worldedit"
+              "id": "underground-village-stoneholm"
+            },
+            {
+              "type": "mod",
+              "id": "better-library"
+            },
+            {
+              "type": "mod",
+              "id": "lootintegrations-undergroundvillages"
             }
           ]
         },
         {
           "id": "step-4",
-          "name": "4.4 Integration",
-          "description": "สำรวจโลกที่สร้างด้วยม็อดทั้งสามกลุ่มร่วมกัน ตรวจ startup, world loading, การเดินทางด้วย Waystones และการค้นหาไบโอมด้วย Nature’s Compass จาก Batch 3",
-          "done": false,
-          "itemRefs": []
-        }
-      ]
-    },
-    {
-      "id": "batch-5-balance-configuration",
-      "name": "Batch 5 — Storage, Backpacks, Farming & Trading",
-      "description": "กระเป๋า คลัง อาหาร ฟาร์ม การค้า\n\nคราฟต์และใช้งาน → โอน Item → ทดสอบฟาร์ม/การค้า → ออกเข้าใหม่ตรวจข้อมูล\n\nใช้โลกจาก Batch 4 ต่อสำหรับการทดสอบระบบต่าง ๆ ส่วน 5.4 ให้สร้างโลกทดสอบใหม่เพิ่มเติมเพื่อตรวจการเกิดพืช Croptopia โดยคงชุดม็อดสะสมทั้งหมดไว้ ผู้พัฒนาระบุว่าพืชหาได้ตามธรรมชาติในโลก Minecraft Mods\n\nTrade Cycling: review — ยังไม่เพิ่มในชุดหลักนี้ เพราะ Easy Villagers มีฟังก์ชันเปลี่ยนรายการค้าอยู่แล้ว เป็นข้อพิจารณาด้านความซ้ำซ้อน ยังไม่ใช่ข้อสรุปว่าเข้ากันไม่ได้ และไม่มีการแนะนำให้ลบอัตโนมัติ Minecraft Mod\n\nการตรวจข้อมูลม็อดชุดนี้เป็น partially_verified: พบไฟล์เผยแพร่และ dependency ที่อ้างอิงข้างต้น แต่ยังไม่ได้ตรวจไฟล์ JAR ที่คุณจะเลือกใช้ ส่วนแผนทดสอบ Minecraft ทุก Step เป็น not_run หากพบปัญหาสำคัญ ให้หยุดแก้ที่ Step นั้นก่อนเพิ่มกลุ่มถัดไป",
-      "order": 5,
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "5.1 Storage",
-          "description": "Sophisticated Core → Sophisticated Storage\n\nเก็บและนำไอเทมออก อัปเกรดความจุ ทดสอบ filter และ hopper แล้วตรวจจำนวนของหลังโหลดโลกกลับ Storage ต้องใช้ Sophisticated Core",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "sophisticated-core"
-            },
-            {
-              "type": "mod",
-              "id": "sophisticated-storage"
-            },
-            {
-              "type": "mod",
-              "id": "sophisticated-storage-in-motion"
-            },
-            {
-              "type": "mod",
-              "id": "sophisticatedtab"
-            },
-            {
-              "type": "mod",
-              "id": "sophisticated-inventory-interactions"
-            },
-            {
-              "type": "mod",
-              "id": "sophisticated-jei-index"
-            },
-            {
-              "type": "mod",
-              "id": "crafting-tweaks"
-            }
-          ]
-        },
-        {
-          "id": "step-2",
-          "name": "5.2 Backpacks",
-          "description": "ใช้ Core จาก 5.1 ทดสอบ upgrade วางกระเป๋าในโลก ตายและเก็บคืนผ่าน Corpse แล้ว reconnect ตรวจของภายในกระเป๋า",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "sophisticated-backpacks"
-            },
-            {
-              "type": "mod",
-              "id": "more-tier-upgrade"
-            },
-            {
-              "type": "mod",
-              "id": "bundle-upgrade"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "5.3 Storage Network",
-          "description": "ต่อระบบกับหีบ vanilla ก่อน แล้วทดลองกับ Sophisticated Storage ตรวจค้นหา ฝาก ถอน และการใช้งานพร้อมกันสองคน โดยการเชื่อมข้ามม็อดยังเป็นสิ่งที่ต้องทดสอบ",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "toms-storage"
-            },
-            {
-              "type": "mod",
-              "id": "polymorph-plus"
-            }
-          ]
-        },
-        {
-          "id": "step-4",
-          "name": "5.4 Crops & Food",
-          "description": "EpheroLib → Croptopia\n\nปลูก เก็บเกี่ยว คราฟต์และกินอาหาร ตรวจสูตรผ่าน JEI และค่าอาหารผ่าน AppleSkin รวมถึงสำรวจพืชในพื้นที่ใหม่ Croptopia ต้องใช้ EpheroLib",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "epherolib"
-            },
-            {
-              "type": "mod",
-              "id": "croptopia"
-            },
-            {
-              "type": "mod",
-              "id": "crate-delight-croptopia"
-            },
-            {
-              "type": "mod",
-              "id": "breadvariants"
-            }
-          ]
-        },
-        {
-          "id": "step-5",
-          "name": "5.5 Farming & Kitchen",
-          "description": "ใช้ Balm ที่มีจาก Batch 2 ทดสอบซื้อเมล็ด ระบบช่วยทำฟาร์ม และครัว ตรวจว่าอาหาร Croptopia ใดใช้ร่วมกันได้จริง พร้อมตรวจวัตถุดิบหลังคราฟต์และโหลดโลกกลับ ทั้งสองม็อดต้องใช้ Balm",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "cooking-for-blockheads"
-            },
-            {
-              "type": "mod",
-              "id": "farming-for-blockheads"
-            },
-            {
-              "type": "mod",
-              "id": "xp-from-harvest"
-            }
-          ]
-        },
-        {
-          "id": "step-6",
-          "name": "5.6 Trading & Bartering",
-          "description": "Easy Villagers → Easy Piglins\n\nเพิ่มและทดสอบทีละตัว ตรวจย้าย Villager/Piglin ซื้อขาย เติมสินค้า แลกทอง และความคงอยู่ของข้อมูลหลัง reconnect จดอัตราผลผลิตไว้ประเมินสมดุลภายหลัง ทั้งคู่มีรุ่น NeoForge สำหรับ 26.1.2",
-          "done": false,
-          "itemRefs": []
-        },
-        {
-          "id": "step-8",
-          "name": "Others",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "accelerated-decay"
-            },
-            {
-              "type": "mod",
-              "id": "ftbultimine"
-            },
-            {
-              "type": "mod",
-              "id": "ftbchunks"
-            },
-            {
-              "type": "mod",
-              "id": "ftblibrary"
-            },
-            {
-              "type": "mod",
-              "id": "trade-cycling"
-            }
-          ]
-        },
-        {
-          "id": "step-7",
-          "name": "Integration",
-          "description": "เล่นวงจร ปลูก → เก็บ → เก็บเข้าคลัง → ทำอาหาร → ซื้อขาย พร้อมทดสอบผู้เล่นเปิดคลังร่วมกัน ตรวจของหาย ของซ้ำ และการเก็บกระเป๋าคืนหลังตาย",
-          "done": false,
-          "itemRefs": []
-        }
-      ]
-    },
-    {
-      "id": "batch-6-dungeons-structures-loot",
-      "name": "Batch 6 — Dungeons, Structures & Loot",
-      "description": "Dependency: วาง YUNG’s API ก่อนม็อดโครงสร้างในตระกูลที่ใช้ API; ไม่ถือว่า Better Mineshafts เป็น dependency ของ Better Dungeons เพียงเพราะอยู่ Step เดียวกัน ส่วน Structory: Towers ใช้แยกเดี่ยวได้ จึงไม่กำหนดให้ Structory เป็น required dependency ของมัน YUNG's Better Dungeons\n\nโลกทดสอบ: สร้างโลกใหม่เมื่อเริ่ม Batch 6 แล้วสำรวจ chunk ใหม่หลังเพิ่มแต่ละกลุ่ม เก็บชุดติดตั้งสะสมไว้ตลอด สำหรับ 6.9 ให้สร้างโลกใหม่อีกครั้งเพื่อดูผลของม็อดทั้งหมดตั้งแต่เริ่ม โดยเฉพาะ End Island ใช้โลกที่ยังไม่สร้าง End แทนการลบมิติเดิม\n\nสถานะข้อมูลแต่ละม็อดในแผนนี้คือ partially_verified: ตรวจพบรุ่นเผยแพร่ที่ตรงเป้าหมาย แต่ยังไม่ได้ตรวจ JAR ที่เลือกใช้และความเข้ากันได้ทั้งชุด ทุกการทดสอบ Minecraft เป็น not_run หากพบปัญหาสำคัญ ให้ตรวจม็อดที่เพิ่งเพิ่มและปฏิสัมพันธ์กับชุดเดิมก่อนดำเนิน Step ถัดไป",
-      "order": 6,
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "6.1 Underground",
-          "description": "YUNG’s API → YUNG’s Better Mineshafts → YUNG’s Better Dungeons\n\nลง API ก่อน แล้วตรวจเหมืองและดันเจียนใน chunk ใหม่ ทดสอบทางเดิน หีบ และ spawner มีรุ่น NeoForge 26.1.2 ให้ใช้",
+          "name": "4.4 YUNG Foundation & Underground",
+          "description": "**ทดสอบ:** ตรวจ mineshaft/dungeon และบันทึกพิกัดตัวอย่าง\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -786,17 +613,13 @@
             {
               "type": "mod",
               "id": "yungs-better-dungeons"
-            },
-            {
-              "type": "mod",
-              "id": "underground-village-stoneholm"
             }
           ]
         },
         {
-          "id": "step-2",
-          "name": "6.2 Temples & Monuments",
-          "description": "เพิ่มทีละตัว ตรวจตำแหน่งโครงสร้าง ทางเข้า กับดัก และการเกิดมอนสเตอร์ในพื้นที่ใหม่",
+          "id": "step-5",
+          "name": "4.5 Temples, Monuments & Strongholds",
+          "description": "**ทดสอบ:** สำรวจแต่ละโครงสร้าง ตรวจ mob/loot/ทางเข้า\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -814,15 +637,7 @@
             {
               "type": "mod",
               "id": "yungs-better-ocean-monuments"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "6.3 Strongholds",
-          "description": "ใช้ Eye of Ender และ Explorer’s Compass ค้นหา ตรวจทางเดินกับห้อง End Portal ว่าเข้าถึงได้",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "yungs-better-strongholds"
@@ -830,23 +645,15 @@
           ]
         },
         {
-          "id": "step-4",
-          "name": "6.4 Nether Fortresses",
-          "description": "สำรวจ Nether ที่ยังไม่เคยสร้าง ตรวจป้อม ทางเดิน Blaze spawner และการกลับผ่านประตู Nether",
+          "id": "step-6",
+          "name": "4.6 Nether & End",
+          "description": "**ทดสอบ:** ใช้ Nether/End ใหม่ ตรวจ fortress และเกาะ End\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
               "id": "yungs-better-nether-fortresses"
-            }
-          ]
-        },
-        {
-          "id": "step-5",
-          "name": "6.5 End Island",
-          "description": "ใช้โลกที่ ยังไม่เคยเข้า End ตรวจเกาะกลาง การสู้มังกร ประตูกลับ และการเรียกมังกรซ้ำ",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "yungs-better-end-island"
@@ -854,9 +661,9 @@
           ]
         },
         {
-          "id": "step-6",
-          "name": "6.6 Landscape Structures",
-          "description": "YUNG’s Bridges, YUNG’s Extras, Structory, Structory: Towers\n\nเพิ่มทีละตัว ตรวจสะพาน ซาก และหอคอยบนภูมิประเทศจาก Batch 4 พร้อมบันทึกจุดที่โครงสร้างลอย จม หรือทับกัน ใช้ Structory และ Towers รุ่นม็อด JAR สำหรับ NeoForge ตามแผนนี้",
+          "id": "step-7",
+          "name": "4.7 Landscape & Large Dungeons",
+          "description": "**ทดสอบ:** ตรวจความถี่โครงสร้าง การทับกัน และเวลาสร้าง chunk\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -874,56 +681,247 @@
             {
               "type": "mod",
               "id": "structory-towers"
-            }
-          ]
-        },
-        {
-          "id": "step-7",
-          "name": "6.7 Large Dungeons",
-          "description": "ตรวจดันเจียนขนาดใหญ่ การโหลด chunk มอนสเตอร์และ loot บันทึกอาการกระตุกเทียบก่อนเพิ่ม โดยยังไม่สรุปว่าเป็นปัญหาประสิทธิภาพ หน้าผู้พัฒนามีไฟล์ NeoForge 26.1.2 โดยตรง",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "when-dungeons-arise"
+            },
+            {
+              "type": "mod",
+              "id": "loot-integrations-when-dungeons-arise-co"
             }
           ]
         },
         {
           "id": "step-8",
-          "name": "6.8 Shared Exploration Loot",
-          "description": "ให้ผู้เล่นสองคนเปิดหีบเดียวกัน ตรวจ loot แยกผู้เล่น ออกเข้าใหม่ และทดลอง hopper/Carry On กับหีบ เพื่อดูว่าพฤติกรรมตรงกับ config หรือไม่",
+          "name": "4.8 Shared Loot",
+          "description": "**ทดสอบ:** ผู้เล่นสองคนเปิดกล่องเดียวกัน ตรวจ loot แยกและ reload\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
               "id": "lootr"
-            },
-            {
-              "type": "mod",
-              "id": "lootintegrations-yungs"
             }
           ]
         },
         {
           "id": "step-9",
-          "name": "6.9 Integration",
-          "description": "สำรวจ Overworld → Nether → End ด้วยชุดสะสมทั้งหมด ตรวจโครงสร้าง การค้นหาด้วยเข็มทิศ loot และการนำของกลับเข้า Storage/Backpacks จาก Batch 5",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–4 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
           "done": false,
           "itemRefs": []
         }
       ]
     },
     {
-      "id": "7-combat-magic-progression",
-      "name": "Batch 7 — Combat, Magic & Progression",
-      "description": "อาวุธ เกราะ เวท Skills Enchantments\n\nตรวจ Animation/Hit → ใช้ Skill/Spell → ทดสอบ Enchant/Gear → ตรวจ Damage และ Progression\n\nใช้โลกสะสมเดิมต่อได้ สำหรับการตรวจการกระจาย Artifacts ใน loot ให้สำรวจพื้นที่ใหม่เพิ่มเติม ส่วน BaguetteLib และ Corpse x Curios API Compat เป็น server_only ตามข้อมูลผู้พัฒนา ไลบรารีอื่นให้ติดตั้งตามม็อดที่เรียกใช้ ไม่เหมารวมว่าทุกไลบรารีต้องลงทั้งสองฝั่ง Minecraft Mod\n\nตรวจแบบ static แล้วว่ารายชื่อทั้ง 14 ตัวอยู่ในข้อมูลต้นฉบับ ไม่ซ้ำ และ required dependencies ที่ตรวจพบถูกวางก่อนตัวที่เรียกใช้ สถานะข้อมูลยังเป็น partially_verified เพราะยังไม่ได้ตรวจ JAR ที่คุณเลือกจริงและความเข้ากันได้ทั้งชุด ทุกการทดสอบ Minecraft เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป",
-      "order": 7,
+      "id": "batch-5-storage-backpacks-farming-economy",
+      "name": "Batch 5 — Storage, Backpacks, Farming & Economy",
+      "description": "ระบบคลัง กระเป๋า อาหาร และการค้าที่ต้องทดสอบร่วมกัน\n\n**new_mods:** 30 · **inherited_mods:** 93 · **สะสมจากรายชื่อเดิมตามแผน:** 123",
+      "order": 5,
       "steps": [
         {
           "id": "step-1",
-          "name": "7.1 Damage Testing",
-          "description": "Moonlight Lib → MmmMmmMmmMmm\n\nวางหุ่นฝึก ทดลองโจมตีด้วยมือ ดาบ ขวาน และธนู บันทึกค่าความเสียหายก่อนเพิ่มระบบต่อสู้ เพื่อใช้เปรียบเทียบภายหลัง",
+          "name": "5.1 Core Storage",
+          "description": "**ทดสอบ:** ฝากถอน เชื่อม hopper และตรวจจำนวนของก่อน–หลัง restart",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "storagedrawers"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-config-lib"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-core-lib"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-core"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-storage"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-storage-in-motion"
+            },
+            {
+              "type": "mod",
+              "id": "trashcans"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "5.2 Backpacks & Transfers",
+          "description": "**ทดสอบ:** อัปเกรดกระเป๋า recipe transfer ตาย/กู้ของและ reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "sophisticatedtab"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-inventory-interactions"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-jei-index"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-backpacks"
+            },
+            {
+              "type": "mod",
+              "id": "more-tier-upgrade"
+            },
+            {
+              "type": "mod",
+              "id": "bundle-upgrade"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "5.3 Storage Network & Crafting",
+          "description": "**ทดสอบ:** เชื่อมคลัง คราฟต์สูตรซ้ำและหลอม ตรวจของไม่ซ้ำ/หาย",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "iron-furnaces"
+            },
+            {
+              "type": "mod",
+              "id": "toms-storage"
+            },
+            {
+              "type": "mod",
+              "id": "polymorph-plus"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "5.4 Crops, Food & Drinks",
+          "description": "**ทดสอบ:** ปลูก เก็บเกี่ยว คราฟต์อาหาร/เครื่องดื่มและตรวจ buff\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** AlcoCraft+ → EpheroLib → Croptopia → Bread Variants → MonoLib → Golden Foods!",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "alcocraft"
+            },
+            {
+              "type": "mod",
+              "id": "epherolib"
+            },
+            {
+              "type": "mod",
+              "id": "croptopia"
+            },
+            {
+              "type": "mod",
+              "id": "breadvariants"
+            },
+            {
+              "type": "mod",
+              "id": "golden-foods"
+            },
+            {
+              "type": "mod",
+              "id": "monolib"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "5.5 Crop Storage Addon",
+          "description": "**ทดสอบ:** คราฟต์ crate/bag และแปลงคืน ต้องมี Crate Delight ที่ขาดก่อน\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Crate Delight → Crate Delight: Croptopia",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "crate-delight"
+            },
+            {
+              "type": "mod",
+              "id": "crate-delight-croptopia"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "5.6 Farming & Kitchen",
+          "description": "**ทดสอบ:** ทดสอบครัว เมล็ดพืช XP เก็บเกี่ยวและระบบกระถาง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "cooking-for-blockheads"
+            },
+            {
+              "type": "mod",
+              "id": "farming-for-blockheads"
+            },
+            {
+              "type": "mod",
+              "id": "xp-from-harvest"
+            },
+            {
+              "type": "mod",
+              "id": "accelerated-decay"
+            },
+            {
+              "type": "mod",
+              "id": "omnipots"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "5.7 Villagers & Trading",
+          "description": "**ทดสอบ:** ซื้อขาย เปลี่ยนอาชีพ/ข้อเสนอ ตรวจราคาและโหลดโลกกลับ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "trade-cycling"
+            },
+            {
+              "type": "mod",
+              "id": "morevillagers"
+            },
+            {
+              "type": "mod",
+              "id": "easy-villagers"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–5 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-6-building-furniture-decoration",
+      "name": "Batch 6 — Building, Furniture & Decoration",
+      "description": "รวมของก่อสร้างและตกแต่งไว้ใน Batch เดียว; ลง library ก่อน content ที่เรียกใช้\n\n**new_mods:** 18 · **inherited_mods:** 123 · **สะสมจากรายชื่อเดิมตามแผน:** 141",
+      "order": 6,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "6.1 Building Tools & Materials",
+          "description": "**ทดสอบ:** วาง/ทุบบล็อก ใช้ wand/sawmill และตรวจสูตรวัสดุ\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Moonlight Lib → Measurements → Construction Wands Revived → Sawmill → Stoneworks → New Slab Variants → More Useful Copper",
           "done": false,
           "itemRefs": [
             {
@@ -932,18 +930,145 @@
             },
             {
               "type": "mod",
-              "id": "mmmmmmmmmmmm"
+              "id": "measurements"
             },
             {
               "type": "mod",
-              "id": "armordamagescale"
+              "id": "construction-wands-revived"
+            },
+            {
+              "type": "mod",
+              "id": "universal-sawmill"
+            },
+            {
+              "type": "mod",
+              "id": "stoneworks"
+            },
+            {
+              "type": "mod",
+              "id": "new-slab-variants"
+            },
+            {
+              "type": "mod",
+              "id": "more-useful-copper"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "6.2 Furniture",
+          "description": "**ทดสอบ:** ใช้เฟอร์นิเจอร์ ระบบไฟ/เครื่องใช้และบันทึกหลัง reconnect\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Macaw's Lights and Lamps → Macaw's Furniture → Framework → MrCrayfish's Furniture Mod: Refurbished → MrCrayfish's Furniture Mod Tools: Refurbished",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "framework"
+            },
+            {
+              "type": "mod",
+              "id": "macaws-lights-and-lamps"
+            },
+            {
+              "type": "mod",
+              "id": "macaws-furniture"
+            },
+            {
+              "type": "mod",
+              "id": "refurbished-furniture-neoforge"
+            },
+            {
+              "type": "mod",
+              "id": "mrcrayfishs-furniture-mod-tools-refurbished"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "6.3 Art, Displays & Seasonal Decor",
+          "description": "**ทดสอบ:** อัปโหลดภาพ/ใช้ display ตรวจสิทธิ์และการแสดงผลของผู้เล่นอื่น\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Macaw's Holidays → Dream Displays → Kotlin for Forge → Fzzy Config → Immersive Paintings",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "fzzy-config"
+            },
+            {
+              "type": "mod",
+              "id": "mcwholidays"
+            },
+            {
+              "type": "mod",
+              "id": "dreamdisplays"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-paintings"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "6.4 Music & Ambient Decoration",
+          "description": "**ทดสอบ:** เล่นดนตรี/เสียงพร้อมกัน ตรวจระยะเสียงและ reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "immersive-melodies"
+            },
+            {
+              "type": "mod",
+              "id": "chimes"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "6.5 Shared Workstations",
+          "description": "**ทดสอบ:** เปิดใช้งานร่วมกัน คราฟต์และตรวจ sync ของผู้เล่นสองคน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "open-together"
+            },
+            {
+              "type": "mod",
+              "id": "visual-workbench"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–6 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-7-creatures-combat-equipment-difficulty",
+      "name": "Batch 7 — Creatures, Combat, Equipment & Difficulty",
+      "description": "เพิ่มม็อบทีละกลุ่ม แล้วตรวจการต่อสู้/อุปกรณ์ ก่อนปรับความยาก\n\n**new_mods:** 45 · **inherited_mods:** 141 · **สะสมจากรายชื่อเดิมตามแผน:** 186",
+      "order": 7,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "7.1 Combat Test Foundation",
+          "description": "**ทดสอบ:** ใช้หุ่นฝึกบันทึก damage baseline และผลเกราะ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mmmmmmmmmmmm"
             }
           ]
         },
         {
           "id": "step-2",
           "name": "7.2 Combat & Dodge",
-          "description": "Player Animation Library → Better Combat / Combat Roll\n\nเพิ่ม Better Combat ก่อนทดสอบคอมโบ ระยะโจมตี โล่ และการมองเห็นแอนิเมชันของผู้เล่นอื่น จากนั้นเพิ่ม Combat Roll เพื่อตรวจปุ่มกลิ้ง cooldown และการกลิ้งขณะโจมตี ใช้ Cloth Config API จาก Batch 2 ร่วมด้วย",
+          "description": "**ทดสอบ:** โจมตี กลิ้ง หลบและตรวจ sync ใน multiplayer",
           "done": false,
           "itemRefs": [
             {
@@ -963,13 +1088,9 @@
         {
           "id": "step-3",
           "name": "7.3 Equipment & Accessories",
-          "description": "Curios API → Artifacts, Immersive Armors\n\nตรวจช่องเครื่องประดับ การใส่–ถอดและผลของ Artifacts จากนั้นเพิ่มชุดเกราะ ทดสอบค่าป้องกัน เอฟเฟกต์ การซ่อม และแอนิเมชันร่วมกับ Better Combat โดย Curios เป็น optional integration ของ Artifacts ที่เราเลือกใช้ในชุดนี้",
+          "description": "**ทดสอบ:** ใส่/ถอด accessory เกราะ elytra และตาย/กู้ไอเทม",
           "done": false,
           "itemRefs": [
-            {
-              "type": "mod",
-              "id": "curios"
-            },
             {
               "type": "mod",
               "id": "artifacts"
@@ -980,375 +1101,18 @@
             },
             {
               "type": "mod",
-              "id": "trinkets-updated"
+              "id": "elytraslot"
+            },
+            {
+              "type": "mod",
+              "id": "transmog"
             }
           ]
         },
         {
           "id": "step-4",
-          "name": "7.4 Equipment Recovery",
-          "description": "BaguetteLib → Corpse x Curios API Compat\n\nใช้ Corpse จาก Batch 3 ตายพร้อมอุปกรณ์ในช่อง Curios แล้วเก็บคืน ตรวจว่าของกลับช่องถูกต้อง ไม่หายหรือซ้ำ และยังถูกต้องหลัง reconnect ส่วนเสริมนี้ต้องใช้ BaguetteLib, Curios และ Corpse",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "baguettelib"
-            },
-            {
-              "type": "mod",
-              "id": "corpse"
-            },
-            {
-              "type": "mod",
-              "id": "corpse-x-curios-api-compat"
-            },
-            {
-              "type": "mod",
-              "id": "apotheosis-totem"
-            }
-          ]
-        },
-        {
-          "id": "step-5",
-          "name": "7.5 Stronger Enemies",
-          "description": "Puzzles Lib → Mutant Monsters\n\nทดลองมอนสเตอร์ทีละชนิดในพื้นที่ควบคุม ตรวจการโจมตี AI กระสุน และ loot แล้วทดสอบสู้ด้วยอุปกรณ์จาก 7.3 บันทึกเวลาในการสู้กับความเสียหายเพื่อประเมินสมดุล",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "puzzles-lib"
-            },
-            {
-              "type": "mod",
-              "id": "mutant-monsters"
-            }
-          ]
-        },
-        {
-          "id": "step-6",
-          "name": "7.6 Multiplayer Revival",
-          "description": "CreativeCore → PlayerRevive\n\nใช้ผู้เล่นอย่างน้อยสองคน ทดสอบล้ม ชุบชีวิต ยกเลิกการชุบ หมดเวลา และหลุดระหว่างล้ม ตรวจว่า Corpse เกิดเมื่อเสียชีวิตจริง และอุปกรณ์ยังอยู่ครบ PlayerRevive ต้องใช้ CreativeCore",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "creativecore"
-            },
-            {
-              "type": "mod",
-              "id": "playerrevive"
-            }
-          ]
-        },
-        {
-          "id": "step-7",
-          "name": "Integration",
-          "description": "สำรวจดันเจียนจาก Batch 6 พร้อมอุปกรณ์ใหม่ ทดสอบโจมตี กลิ้ง ชุบชีวิต ตายและเก็บของคืน รวมถึงเปิด Backpack และใช้ Waystones ระหว่างสถานะต่าง ๆ",
-          "done": false,
-          "itemRefs": []
-        }
-      ]
-    },
-    {
-      "id": "batch-8-skills-attributes-enchanting",
-      "name": "Batch 8 — Skills, Attributes & Enchanting",
-      "description": "ด้านติดตั้ง: Enchantment Descriptions ใช้เป็น client_only; Default Skill Trees ใช้เป็น server_only สำหรับเซิร์ฟเวอร์ทดสอบนี้ ส่วนอีก 12 ตัวมีข้อมูลผู้เผยแพร่ระบุว่าต้องใช้ทั้ง Client และ Server (both_required) รวมถึงไลบรารีตาม dependency ของชุดนี้\n\nใช้โลกสะสมเดิมต่อได้ ส่วนการตรวจการกระจาย loot ของ Apotheosis ให้สำรวจ chunk ใหม่ เพิ่มเติม เก็บ checkpoint ก่อน 8.7 ไว้เปรียบเทียบผล\n\nตรวจแบบ static แล้วว่ารายชื่อทั้ง 14 ตัวอยู่ในรายการต้นฉบับ ไม่ซ้ำ และ required dependencies ที่ตรวจพบเรียงก่อนม็อดที่เรียกใช้ สถานะข้อมูลแต่ละตัวเป็น partially_verified เพราะยังไม่ได้ตรวจ JAR ที่เลือกจริงและความเข้ากันได้ทั้งชุด การทดสอบ Minecraft ทุก Step เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป",
-      "order": 8,
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "8.1 Attributes & Health",
-          "description": "Prickle → AttributeFix → Max Health Fix\n\nตรวจเลือดสูงสุดและค่าสถานะเมื่อใส่–ถอดอุปกรณ์ ตาย ชุบชีวิต และ reconnect เปรียบเทียบกับชุด Batch 7 โดยสองม็อดหลังต้องใช้ Prickle",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "prickle"
-            },
-            {
-              "type": "mod",
-              "id": "attributefix"
-            },
-            {
-              "type": "mod",
-              "id": "max-health-fix"
-            }
-          ]
-        },
-        {
-          "id": "step-2",
-          "name": "8.2 Skill Progression",
-          "description": "Pufferfish’s Attributes → Pufferfish’s Skills → Default Skill Trees\n\nตรวจหน้าสกิล การได้รับและใช้แต้ม ผลของแต่ละ node และการบันทึกหลัง reconnect ใช้ Default Skill Trees รุ่นม็อด JAR ซึ่งต้องมีทั้ง Skills และ Attributes ก่อน",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "attributes"
-            },
-            {
-              "type": "mod",
-              "id": "skills"
-            },
-            {
-              "type": "mod",
-              "id": "default-skill-trees"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "8.3 Enchantment Information",
-          "description": "ใช้ Prickle จาก 8.1 ตรวจคำอธิบายบนหนังสือและ tooltip รวมถึงการแสดงภาษาไทย ม็อดนี้ทำหน้าที่แสดงข้อมูลฝั่งผู้เล่น",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "enchantment-descriptions"
-            }
-          ]
-        },
-        {
-          "id": "step-4",
-          "name": "8.4 Enchanting Foundation",
-          "description": "Apothic Attributes → Apothic Enchanting\n\nใช้ Placebo จาก Batch 1 ตรวจค่าสถานะเพิ่มเติม โต๊ะ enchant ชั้นหนังสือ และผลของ enchant ต่อหุ่นฝึก โดย Apothic Enchanting ต้องมี Apothic Attributes ก่อน",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "apothic-attributes"
-            },
-            {
-              "type": "mod",
-              "id": "apothic-enchanting"
-            }
-          ]
-        },
-        {
-          "id": "step-5",
-          "name": "8.5 Enchanting Utilities",
-          "description": "ใช้ Puzzles Lib จาก Batch 7 สำหรับ Infuser ตรวจเลือก enchant ค่า XP การถอด enchant และการใส่กลับ เปรียบเทียบกับโต๊ะจาก 8.4 เพื่อหาความผิดปกติด้านสูตรและต้นทุน โดยความเข้ากันได้ยังต้องทดสอบจริง",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "enchanting-infuser"
-            },
-            {
-              "type": "mod",
-              "id": "dis-enchanting-table"
-            }
-          ]
-        },
-        {
-          "id": "step-6",
-          "name": "8.6 Spawner Progression",
-          "description": "ใช้ Placebo ที่มีแล้ว ทดลองปรับ spawner ทีละคุณสมบัติ ตรวจจำนวนมอนสเตอร์ ระยะทำงาน และพฤติกรรมหลังออก–เข้าโลก ทดสอบร่วมกับดันเจียนจาก Batch 6",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "apothic-spawners"
-            }
-          ]
-        },
-        {
-          "id": "step-7",
-          "name": "8.7 Apotheosis Integration",
-          "description": "ตรวจคู่มือ อุปกรณ์ที่มี affix, gem/socket และ loot ทดสอบใส่–ถอดอุปกรณ์ร่วมกับ Artifacts และสกิล โดยติดตั้งโมดูล required จาก 8.4 และ 8.6 ครบก่อน",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "patchouli"
-            },
-            {
-              "type": "mod",
-              "id": "apotheosis"
-            }
-          ]
-        },
-        {
-          "id": "step-9",
-          "name": "8.8 Configuration & Integration",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "lootjs"
-            },
-            {
-              "type": "mod",
-              "id": "configurable-despawn-timer"
-            },
-            {
-              "type": "mod",
-              "id": "kubejs"
-            }
-          ]
-        },
-        {
-          "id": "step-8",
-          "name": "Integration",
-          "description": "เล่นวงจร สำรวจ → ได้อุปกรณ์ → enchant → ลงแต้มสกิล → ต่อสู้ → ตาย/ชุบชีวิต → เก็บของคืน เปรียบเทียบความเสียหายกับหุ่นฝึกจาก Batch 7 และตรวจของกับค่าสถานะหลัง reconnect",
-          "done": false,
-          "itemRefs": []
-        }
-      ]
-    },
-    {
-      "id": "batch-9-balance-full-multiplayer-integration",
-      "name": "Batch 9 — Magic & RPG Classes",
-      "description": "ด้านติดตั้ง: Structure Pool API และ Gazebos เป็น server_only; RPG Enchantments ต้องมีบน Server โดย Client เป็น optional ส่วนอีก 15 ตัวมีข้อมูลผู้เผยแพร่ระบุ both_required สำหรับชุดรุ่นที่ตรวจพบ\n\nใช้โลกสะสมเดิมทดสอบระบบต่อสู้ได้ สำหรับ 9.6 ให้สร้างโลกทดสอบใหม่เพิ่มเติม เพื่อตรวจโครงสร้างตั้งแต่เริ่มโลก โดยใช้ชุดม็อดสะสมทั้งหมด ส่วนการเชื่อม Default Skill Trees กับอาชีพ RPG ยังต้องทดสอบและตรวจ config ไม่ถือว่าเชื่อมกันอัตโนมัติ\n\nตรวจแบบ static แล้วว่าทั้ง 18 ตัวอยู่ในรายการต้นฉบับ ไม่ซ้ำ และ required dependencies ที่พบอยู่ก่อนตัวที่เรียกใช้ สถานะข้อมูลแต่ละตัวเป็น partially_verified และการทดสอบ Minecraft ทุก Step เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป",
-      "order": 9,
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "9.1 Spell Foundation",
-          "description": "Spell Power Attributes → Spell Engine\n\nตรวจเปิดเกมและค่าสถานะเวท ใช้ Player Animation Library, Curios API และ Cloth Config API จาก Batch ก่อนหน้าเป็น required dependencies ของ Spell Engine",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "spell-power"
-            },
-            {
-              "type": "mod",
-              "id": "spell-engine"
-            }
-          ]
-        },
-        {
-          "id": "step-2",
-          "name": "9.2 Runes & Supporting APIs",
-          "description": "Bundle API → Runes, Armor Model API, Structure Pool API\n\nตรวจคราฟต์และจัดเก็บ Runes แล้วเปิดโลกซ้ำ เตรียม API ให้ครบก่อนเพิ่มอาชีพ โดย Runes ต้องมี Bundle API ก่อน",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "bundle-api"
-            },
-            {
-              "type": "mod",
-              "id": "runes"
-            },
-            {
-              "type": "mod",
-              "id": "armor-model-api"
-            },
-            {
-              "type": "mod",
-              "id": "structure-pool-api"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "9.3 Wizards & Healers",
-          "description": "Wizards (RPG Series), Paladins & Priests (RPG Series)\n\nเพิ่มทีละตัว ทดสอบร่ายเวท เปลี่ยนอุปกรณ์ ค่าใช้จ่ายและ cooldown จากนั้นใช้สองผู้เล่นตรวจการฮีล การเลือกเป้าหมาย และ friendly fire ตาม config",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "wizards"
-            },
-            {
-              "type": "mod",
-              "id": "paladins-and-priests"
-            }
-          ]
-        },
-        {
-          "id": "step-4",
-          "name": "9.4 Ranged & Melee Classes",
-          "description": "Ranged Weapon API → Archers (RPG Series), Rogues & Warriors (RPG Series)\n\nทดสอบธนู กระสุน สกิลโจมตี และอาวุธประชิดร่วมกับ Better Combat/Combat Roll ตรวจปุ่มลัดและแอนิเมชันจากมุมมองผู้เล่นอื่น",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "ranged-weapon-api"
-            },
-            {
-              "type": "mod",
-              "id": "archers"
-            },
-            {
-              "type": "mod",
-              "id": "rogues-and-warriors"
-            }
-          ]
-        },
-        {
-          "id": "step-5",
-          "name": "9.5 RPG Equipment",
-          "description": "Jewelry (RPG Series), Relics (RPG Series), Arsenal (RPG Series), Armory (RPG Series)\n\nเพิ่มทีละตัว ตรวจสูตร ช่องอุปกรณ์ โบนัสเมื่อใส่–ถอด และค่าความเสียหายบนหุ่นฝึก จากนั้นตรวจการตายและเก็บคืนร่วมกับ Corpse/Curios",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "jewelry"
-            },
-            {
-              "type": "mod",
-              "id": "relics-rpg"
-            },
-            {
-              "type": "mod",
-              "id": "arsenal-rpg-series"
-            },
-            {
-              "type": "mod",
-              "id": "armory-rpg-series"
-            }
-          ]
-        },
-        {
-          "id": "step-6",
-          "name": "9.6 RPG Structures",
-          "description": "Gazebos (RPG Series), Village Taverns (RPG Series)\n\nใช้ Structure Pool API จาก 9.2 ตรวจโครงสร้างใน chunk ใหม่ ทดสอบการเกิดร่วมกับหมู่บ้านและโครงสร้างจาก Batch 4 และ 6 แล้วโหลดโลกกลับ",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "gazebos"
-            },
-            {
-              "type": "mod",
-              "id": "village-taverns"
-            }
-          ]
-        },
-        {
-          "id": "step-7",
-          "name": "9.7 RPG Enchantments",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "rpg-enchantments"
-            }
-          ]
-        },
-        {
-          "id": "step-8",
-          "name": "9.8 Integration",
-          "description": "จัดทีมประชิด–ธนู–เวท–ฮีล ลงดันเจียนร่วมกัน ตรวจ cooldown, friendly fire, การชุบชีวิต และของหลัง reconnect พร้อมเปรียบเทียบผลจากสกิลและอุปกรณ์ Batch 7–8",
-          "done": false,
-          "itemRefs": []
-        }
-      ]
-    },
-    {
-      "id": "batch-6-mobs-wildlife",
-      "name": "Batch 10 — Creatures, Animal Farming & Mob Difficulty",
-      "description": "ด้านติดตั้ง: Beekeeper Hut เป็น server_only ส่วนอีก 14 ตัวมีข้อมูลผู้เผยแพร่ระบุ both_required สำหรับชุดรุ่นที่ตรวจพบ ไลบรารีใน Batch นี้ถูกเพิ่มเพราะมีม็อดที่เรียกใช้\n\nใช้โลกสะสมเดิมทดสอบพฤติกรรมได้ สำหรับ 10.3 และการตรวจ world generation ใน 10.8 ให้สร้างโลกทดสอบใหม่เพิ่มเติม ด้วยชุดม็อดสะสมทั้งหมด เพื่อตรวจโครงสร้างและสภาพแวดล้อมตั้งแต่เริ่มโลก\n\nตรวจแบบ static แล้วว่าทั้ง 15 ตัวอยู่ในรายการต้นฉบับ ไม่ซ้ำ และ required dependencies ที่พบถูกวางก่อนตัวที่เรียกใช้ สถานะข้อมูลแต่ละตัวเป็น partially_verified เพราะยังไม่ได้ตรวจช่วงเวอร์ชันภายใน JAR และความเข้ากันได้ทั้งชุด ทุกการทดสอบ Minecraft เป็น not_run หากพบปัญหาสำคัญ ให้แก้ก่อนเพิ่ม Step ถัดไป\n\nด้าน cleanup ให้ review การเพิ่มความยากร่วมกันของ Champions, Apotheosis และม็อดมอนสเตอร์ โดยใช้ผลทดสอบจริงประกอบ ยังไม่มีข้อสรุปว่าเข้ากันไม่ได้หรือทำให้ประสิทธิภาพลดลงครับ",
-      "order": 10,
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "10.1 Ecology",
-          "description": "สำรวจสิ่งมีชีวิตและสิ่งแวดล้อมที่เพิ่ม ตรวจการเกิดตามธรรมชาติ การโต้ตอบ และความคงอยู่หลังโหลดโลกกลับ มีรุ่น NeoForge สำหรับ 26.1.2",
+          "name": "7.4 Ecology & Friends",
+          "description": "**ทดสอบ:** ตรวจการเกิด การโต้ตอบและโครงสร้างในโลกใหม่/เพิ่ม chunk ใหม่\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
           "done": false,
           "itemRefs": [
             {
@@ -1357,32 +1121,12 @@
             },
             {
               "type": "mod",
-              "id": "morevillagers"
-            }
-          ]
-        },
-        {
-          "id": "step-2",
-          "name": "10.2 Friends & Foes",
-          "description": "ลงไลบรารีก่อน แล้วทดลองสิ่งมีชีวิตทีละชนิด ตรวจ AI การโจมตี การโต้ตอบ และ loot รวมถึงภาพเคลื่อนไหวจากผู้เล่นอีกเครื่อง",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
               "id": "resourceful-lib"
             },
             {
               "type": "mod",
               "id": "friends-and-foes-forge"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "10.3 Friends & Foes Addons",
-          "description": "Friends&Foes - Flowery Mooblooms (Forge/NeoForge), Friends&Foes - Beekeeper Hut (Forge/NeoForge)\n\nเพิ่มทีละตัว ตรวจพฤติกรรม Moobloom และการเกิด Beekeeper Hut ในพื้นที่ใหม่ แล้วตรวจร่วมกับหมู่บ้านจาก Batch ก่อนหน้า ทั้งสองต้องมี Friends&Foes ก่อน",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "friends-and-foes-flowery-mooblooms-forge"
@@ -1394,9 +1138,9 @@
           ]
         },
         {
-          "id": "step-4",
-          "name": "10.4 Creature Variety",
-          "description": "Variants&Ventures, Bagus Lib → EarthMobs, Sea Life\n\nเพิ่มทีละตัว ตรวจชนิดมอนสเตอร์ การเกิดตาม biome และพฤติกรรมสัตว์น้ำ โดย Variants&Ventures ใช้ Resourceful Lib; Sea Life ใช้ Puzzles Lib จาก Batch 7",
+          "id": "step-5",
+          "name": "7.5 Creature Variety",
+          "description": "**ทดสอบ:** spawn ม็อบทีละชนิด ตรวจ AI drops และจำนวน entity",
           "done": false,
           "itemRefs": [
             {
@@ -1414,13 +1158,17 @@
             {
               "type": "mod",
               "id": "earthmobs"
+            },
+            {
+              "type": "mod",
+              "id": "tiny-skeletons"
             }
           ]
         },
         {
-          "id": "step-5",
-          "name": "10.5 Animal Farming",
-          "description": "Animal Feeding Trough, Animal Pens\n\nตรวจอาหารที่สัตว์แต่ละชนิดยอมรับ การผสมพันธุ์ การนำสัตว์เข้า–ออกคอก และข้อมูลหลัง reconnect เริ่มจากสัตว์ vanilla แล้วค่อยลองชนิดที่เพิ่มใน Batch นี้",
+          "id": "step-6",
+          "name": "7.6 Animal Farming",
+          "description": "**ทดสอบ:** ให้อาหาร เลี้ยง/เก็บสัตว์ ตรวจจำนวนและโหลดโลกกลับ",
           "done": false,
           "itemRefs": [
             {
@@ -1430,10 +1178,38 @@
             {
               "type": "mod",
               "id": "animalpens"
-            },
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "7.7 Alex Mobs Foundation",
+          "description": "**ทดสอบ:** ตรวจไฟล์/loader และ dependency ก่อน spawn/AI/drop",
+          "done": false,
+          "itemRefs": [
             {
               "type": "mod",
               "id": "alexsmobs"
+            },
+            {
+              "type": "mod",
+              "id": "citadel"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "7.8 Animal Garden",
+          "description": "**ทดสอบ:** เพิ่มสัตว์ทีละ 2–3 ชนิด ตรวจ spawn AI และฟาร์ม; วัดภาระ entity จริง\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้าง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "animal-garden-spectacled-bear"
+            },
+            {
+              "type": "mod",
+              "id": "aquarius-libs-2"
             },
             {
               "type": "mod",
@@ -1473,32 +1249,20 @@
             },
             {
               "type": "mod",
-              "id": "animal-garden-spectacled-bear"
-            },
-            {
-              "type": "mod",
               "id": "Animal Garden - Western Gorilla"
-            },
-            {
-              "type": "mod",
-              "id": "aquarius-libs-2"
-            },
-            {
-              "type": "mod",
-              "id": "citadel"
-            },
-            {
-              "type": "mod",
-              "id": "starcatcher"
             }
           ]
         },
         {
-          "id": "step-6",
-          "name": "10.6 Hostile Encounters",
-          "description": "Mutants and Zombies, Armored Foes\n\nเพิ่มทีละตัว เปรียบเทียบการต่อสู้กับชุดก่อนเพิ่ม ตรวจอุปกรณ์มอนสเตอร์ ความเสียหาย loot และการเกิดในดันเจียน โดย Armored Foes ใช้ Puzzles Lib ที่มีแล้ว",
+          "id": "step-9",
+          "name": "7.9 Hostile & Elite Encounters",
+          "description": "**ทดสอบ:** ต่อสู้ ตรวจเกราะ/ความสามารถ/loot และจำนวนศัตรู\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Mutant Monsters → Mutants and Zombies → Armored Foes → Aggro Indicator → Champions-Unofficial",
           "done": false,
           "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mutant-monsters"
+            },
             {
               "type": "mod",
               "id": "mutants-and-zombies"
@@ -1513,7 +1277,23 @@
             },
             {
               "type": "mod",
-              "id": "tiny-skeletons"
+              "id": "champions-unofficial"
+            }
+          ]
+        },
+        {
+          "id": "step-10",
+          "name": "7.10 Difficulty & Despawn Tuning",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "armordamagescale"
+            },
+            {
+              "type": "mod",
+              "id": "configurable-despawn-timer"
             },
             {
               "type": "mod",
@@ -1524,238 +1304,6 @@
               "id": "dynamic-difficulty"
             }
           ]
-        },
-        {
-          "id": "step-7",
-          "name": "10.7 Elite Mobs",
-          "description": "Architectury API → Champions-Unofficial\n\nตรวจการเกิด Champion, affix, เลือด ความเสียหาย และ loot จากนั้นทดสอบร่วมกับ Apotheosis โดยเปรียบเทียบกับมอนสเตอร์ปกติ เพื่อดูว่าความยากซ้อนกันอย่างไร",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "champions-unofficial"
-            }
-          ]
-        },
-        {
-          "id": "step-9",
-          "name": "Others",
-          "description": "",
-          "done": false,
-          "itemRefs": []
-        },
-        {
-          "id": "step-8",
-          "name": "Integration",
-          "description": "สำรวจกลางวัน–กลางคืน บนบก–ใต้น้ำ ทำฟาร์มสัตว์ และลงดันเจียนร่วมกัน ตรวจการเกิดมอนสเตอร์ การชุบชีวิต loot และข้อมูลหลัง restart พร้อมบันทึกอาการกระตุกที่พบ",
-          "done": false,
-          "itemRefs": []
-        }
-      ]
-    },
-    {
-      "id": "8-decoration-immersion",
-      "name": "Batch 11 — Remaining Mods",
-      "description": "พิ่มม็อดที่เหลือจาก Batch 1–10 ทีละกลุ่ม โดยเรียง dependency ก่อนม็อดที่เรียกใช้ ทดสอบการทำงานร่วมกับชุดสะสมและสำรองโลกกับ config ก่อนแต่ละ Step แล้วปิดท้ายด้วยการทดสอบม็อดแพ็กครบชุดใน Multiplayer 3–6 คน",
-      "order": 11,
-      "steps": [
-        {
-          "id": "step-1",
-          "name": "11.0 — Baseline Dependency Check",
-          "description": "",
-          "done": false,
-          "itemRefs": []
-        },
-        {
-          "id": "step-2",
-          "name": "11.1 — Creatures & Remaining World Content",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "easy-villagers"
-            },
-            {
-              "type": "mod",
-              "id": "measurements"
-            },
-            {
-              "type": "mod",
-              "id": "immersive-melodies"
-            },
-            {
-              "type": "mod",
-              "id": "construction-wands-revived"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "11.2 — Building, Furniture & Decoration",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "chimes"
-            },
-            {
-              "type": "mod",
-              "id": "mcwholidays"
-            },
-            {
-              "type": "mod",
-              "id": "macaws-lights-and-lamps"
-            },
-            {
-              "type": "mod",
-              "id": "macaws-furniture"
-            },
-            {
-              "type": "mod",
-              "id": "refurbished-furniture-neoforge"
-            },
-            {
-              "type": "mod",
-              "id": "omnipots"
-            },
-            {
-              "type": "mod",
-              "id": "open-together"
-            },
-            {
-              "type": "mod",
-              "id": "universal-sawmill"
-            },
-            {
-              "type": "mod",
-              "id": "trashcans"
-            },
-            {
-              "type": "mod",
-              "id": "stoneworks"
-            },
-            {
-              "type": "mod",
-              "id": "new-slab-variants"
-            },
-            {
-              "type": "mod",
-              "id": "dreamdisplays"
-            },
-            {
-              "type": "mod",
-              "id": "more-useful-copper"
-            },
-            {
-              "type": "mod",
-              "id": "immersive-paintings"
-            },
-            {
-              "type": "mod",
-              "id": "mrcrayfishs-furniture-mod-tools-refurbished"
-            }
-          ]
-        },
-        {
-          "id": "step-4",
-          "name": "11.3 — Storage, Farming & Utility Stations",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "golden-foods"
-            }
-          ]
-        },
-        {
-          "id": "step-5",
-          "name": "11.4 — Equipment, Enchantments & Balance",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "elytraslot"
-            },
-            {
-              "type": "mod",
-              "id": "transmog"
-            }
-          ]
-        },
-        {
-          "id": "step-6",
-          "name": "11.5 — Quests, Teams & Player Systems",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "ftbquests"
-            },
-            {
-              "type": "mod",
-              "id": "jobsplus"
-            },
-            {
-              "type": "mod",
-              "id": "little-joys"
-            },
-            {
-              "type": "mod",
-              "id": "jobsplustools"
-            }
-          ]
-        },
-        {
-          "id": "step-7",
-          "name": "11.6 — Interface, Visuals & Audio",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "visual-workbench"
-            },
-            {
-              "type": "mod",
-              "id": "loot-journal"
-            },
-            {
-              "type": "mod",
-              "id": "fragmentum"
-            }
-          ]
-        },
-        {
-          "id": "step-8",
-          "name": "11.7 — Server Tools & Optimization",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "ftbbackups3"
-            },
-            {
-              "type": "mod",
-              "id": "chunky"
-            },
-            {
-              "type": "mod",
-              "id": "dynamicviewdist"
-            }
-          ]
-        },
-        {
-          "id": "step-9",
-          "name": "Others",
-          "description": "",
-          "done": false,
-          "itemRefs": []
         }
       ]
     }

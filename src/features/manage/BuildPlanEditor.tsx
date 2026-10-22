@@ -613,7 +613,7 @@ function StepCard({
                         <strong>{mod.name}</strong>
                         <span>
                           {mod.version ? `v${mod.version} · ` : ""}
-                          {mod.source}
+                          {mod.source} · {mod.side} side
                         </span>
                       </span>
                       <Select

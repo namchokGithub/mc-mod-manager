@@ -7991,7 +7991,7 @@
       "Cursed",
       "Mobs"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mutants-and-zombies",
@@ -9655,13 +9655,13 @@
     "id": "omnipots",
     "name": "Omni Pots",
     "version": "2.0.0",
-    "category": "Uncategorized",
+    "category": "Utility",
     "tags": [
       "Neoforge"
     ],
     "status": "planned",
     "side": "both",
-    "source": "Other",
+    "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/omni-pots",
     "description": "A compact and automated farming solution. Grow and harvest crops effortlessly in specialized pots.",
     "dependencies": [],
@@ -9709,14 +9709,10 @@
       "verifiedAt": "2026-10-18T08:17:32.714Z"
     },
     "addedAt": "2026-10-18T09:09:12.789Z",
-    "ignoredDependencies": [
-      {
-        "id": "jade",
-        "reason": "Only needed by another loader's build; this pack uses NeoForge."
-      },
+    "dependencyLinks": [
       {
         "id": "sophisticatedstorage",
-        "reason": "Only needed by another loader's build; this pack uses NeoForge."
+        "modId": "sophisticated-storage"
       }
     ]
   },
@@ -10050,13 +10046,13 @@
     "id": "morevillagers",
     "name": "More Villagers",
     "version": "8.0.0",
-    "category": "Uncategorized",
+    "category": "Addons",
     "tags": [
       "Neoforge"
     ],
     "status": "planned",
     "side": "both",
-    "source": "Other",
+    "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/more-villagers",
     "description": "Adds new villager jobs, trades, and workstations!",
     "dependencies": [],
@@ -16367,5 +16363,77 @@
       "syncedAt": "2026-10-22T14:44:29.446Z"
     },
     "addedAt": "2026-10-22T14:44:32.130Z"
+  },
+  {
+    "id": "loot-integrations-when-dungeons-arise-co",
+    "name": "Loot Integrations: When Dungeons Arise & Co",
+    "version": "1.8",
+    "category": "Addons",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-when-dungeons-arise",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1119/904/64/64/638674492936581599.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.8",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-when-dungeons-arise",
+      "verifiedAt": "2026-10-22T16:33:23.656Z"
+    },
+    "addedAt": "2026-10-22T16:33:41.235Z"
+  },
+  {
+    "id": "framework",
+    "name": "Framework",
+    "version": "0.13.27",
+    "category": "API and Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/framework",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/871/312/64/64/638288810018379517.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "0.13.27",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/framework",
+      "verifiedAt": "2026-10-22T17:45:42.530Z"
+    },
+    "addedAt": "2026-10-22T17:45:43.896Z"
   }
 ]
