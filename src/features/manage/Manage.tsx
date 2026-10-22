@@ -1441,24 +1441,32 @@ export function Manage() {
     () => modAssignmentLocations(data.batches),
     [data.batches],
   );
-  const filtered = useMemo(() => {
-    const matching = filterModsByStatuses(
-      filterMods(data.mods, filters),
-      statusFilters,
-    );
+  // Status choices should stay visible with counts based on every other active filter.
+  const statusFilterBase = useMemo(() => {
+    const matching = filterMods(data.mods, filters);
     if (!assignmentFilter) return matching;
     return matching.filter((mod) =>
       assignmentFilter === "assigned"
         ? assignmentLocations.has(mod.id)
         : !assignmentLocations.has(mod.id),
     );
-  }, [
-    data.mods,
-    filters,
-    statusFilters,
-    assignmentFilter,
-    assignmentLocations,
-  ]);
+  }, [data.mods, filters, assignmentFilter, assignmentLocations]);
+  const statusCounts = useMemo(
+    () =>
+      modStatuses.reduce(
+        (counts, status) => {
+          counts[status] = statusFilterBase.filter(
+            (mod) => mod.status === status,
+          ).length;
+          return counts;
+        },
+        {} as Record<Mod["status"], number>,
+      ),
+    [statusFilterBase],
+  );
+  const filtered = useMemo(() => {
+    return filterModsByStatuses(statusFilterBase, statusFilters);
+  }, [statusFilterBase, statusFilters]);
   // IDs of deleted or replaced mods drop out of the selection automatically.
   const selection = useMemo(
     () =>
@@ -1751,6 +1759,8 @@ export function Manage() {
                     onAssignmentChange={changeAssignmentFilter}
                     statusValues={statusFilters}
                     onStatusValuesChange={changeStatusFilters}
+                    statusCounts={statusCounts}
+                    statusTotal={statusFilterBase.length}
                   />
                   {selection.size > 0 && (
                     <div

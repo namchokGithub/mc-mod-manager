@@ -1269,6 +1269,18 @@
             {
               "type": "mod",
               "id": "animalpens"
+            },
+            {
+              "type": "mod",
+              "id": "alexsmobs"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Bull Shark"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-common-raccoon"
             }
           ]
         },

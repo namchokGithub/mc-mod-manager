@@ -1205,6 +1205,11 @@ main:focus {
 .status-filter-option input {
   accent-color: var(--primary);
 }
+.status-filter-count {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
 .status-filter-all {
   border-bottom: 1px solid var(--border);
   margin-bottom: 3px;

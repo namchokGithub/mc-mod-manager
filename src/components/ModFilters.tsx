@@ -29,9 +29,13 @@ const sideOptions = [
 function MultiStatusFilter({
   values,
   onChange,
+  counts,
+  total,
 }: {
   values: readonly Mod["status"][];
   onChange: (values: Mod["status"][]) => void;
+  counts?: Readonly<Record<Mod["status"], number>>;
+  total?: number;
 }) {
   const selected = new Set(values);
   const label = values.length
@@ -72,7 +76,10 @@ function MultiStatusFilter({
               checked={!values.length}
               onChange={() => onChange([])}
             />
-            All statuses
+            <span>All statuses</span>
+            {total !== undefined && (
+              <span className="status-filter-count">{total}</span>
+            )}
           </label>
           {modStatuses.map((status) => (
             <label key={status} className="status-filter-option">
@@ -81,7 +88,10 @@ function MultiStatusFilter({
                 checked={selected.has(status)}
                 onChange={() => toggle(status)}
               />
-              {modStatusLabels[status]}
+              <span>{modStatusLabels[status]}</span>
+              {counts && (
+                <span className="status-filter-count">{counts[status]}</span>
+              )}
             </label>
           ))}
         </PopoverPrimitive.Content>
@@ -105,6 +115,8 @@ export function ModFilters({
   onAssignmentChange,
   statusValues,
   onStatusValuesChange,
+  statusCounts,
+  statusTotal,
 }: {
   filters: Filters;
   onChange: (filters: Filters) => void;
@@ -124,6 +136,9 @@ export function ModFilters({
   /** Manage supplies these to enable checkbox multi-select without changing Preview. */
   statusValues?: readonly Mod["status"][];
   onStatusValuesChange?: (values: Mod["status"][]) => void;
+  /** Counts after all filters other than status; shown only in Manage's multi-select. */
+  statusCounts?: Readonly<Record<Mod["status"], number>>;
+  statusTotal?: number;
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
@@ -284,6 +299,8 @@ export function ModFilters({
           <MultiStatusFilter
             values={statusValues ?? []}
             onChange={onStatusValuesChange}
+            counts={statusCounts}
+            total={statusTotal}
           />
         ) : (
           <Select
