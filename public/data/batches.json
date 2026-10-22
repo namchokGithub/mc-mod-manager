@@ -506,6 +506,10 @@
             {
               "type": "mod",
               "id": "dream-cocoon"
+            },
+            {
+              "type": "mod",
+              "id": "ftblibrary"
             }
           ]
         },
@@ -624,6 +628,10 @@
             {
               "type": "mod",
               "id": "sophisticated-jei-index"
+            },
+            {
+              "type": "mod",
+              "id": "crafting-tweaks"
             }
           ]
         },
@@ -656,6 +664,10 @@
             {
               "type": "mod",
               "id": "toms-storage"
+            },
+            {
+              "type": "mod",
+              "id": "polymorph-plus"
             }
           ]
         },
@@ -961,6 +973,10 @@
             {
               "type": "mod",
               "id": "immersive-armors"
+            },
+            {
+              "type": "mod",
+              "id": "trinkets-updated"
             }
           ]
         },
@@ -1631,6 +1647,10 @@
             {
               "type": "mod",
               "id": "immersive-paintings"
+            },
+            {
+              "type": "mod",
+              "id": "mrcrayfishs-furniture-mod-tools-refurbished"
             }
           ]
         },
@@ -1683,18 +1703,6 @@
             {
               "type": "mod",
               "id": "jobsplustools"
-            },
-            {
-              "type": "mod",
-              "id": "baubley-heart-canisters"
-            },
-            {
-              "type": "mod",
-              "id": "ly-lucky-blocks"
-            },
-            {
-              "type": "mod",
-              "id": "lucky-blocks-world"
             }
           ]
         },
@@ -1735,10 +1743,6 @@
             {
               "type": "mod",
               "id": "dynamicviewdist"
-            },
-            {
-              "type": "mod",
-              "id": "betterfpsdist"
             }
           ]
         },

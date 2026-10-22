@@ -4310,16 +4310,30 @@ main:focus {
     box-shadow 0.18s var(--ease-out),
     transform 0.18s var(--ease-out);
 }
+.plan-step-card:not(.open) {
+  background: var(--surface-alt);
+  box-shadow: none;
+}
+.plan-step-card:not(.open) .plan-step-title {
+  opacity: 0.78;
+  transition: opacity 0.18s var(--ease-out);
+}
 .plan-step-card:hover,
 .plan-step-card:focus-within {
   border-color: var(--accent-border);
   box-shadow: var(--shadow-sm);
+}
+.plan-step-card:not(.open):hover .plan-step-title,
+.plan-step-card:not(.open):focus-within .plan-step-title {
+  opacity: 1;
 }
 .plan-step-card:active {
   transform: translateY(1px);
 }
 .plan-step-card.open {
   border-color: var(--accent-border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 .plan-step-head {
   display: flex;

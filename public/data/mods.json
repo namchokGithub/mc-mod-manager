@@ -6594,7 +6594,7 @@
       "Geyser",
       "Social"
     ],
-    "status": "considering",
+    "status": "planned",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/emotecraft",
@@ -8344,7 +8344,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "considering",
+    "status": "planned",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/faewufs-diversity",
@@ -10699,7 +10699,7 @@
     "version": "26.1.2-1.6",
     "category": "Decoration",
     "tags": [],
-    "status": "considering",
+    "status": "planned",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-biomes-o-plenty",
@@ -16254,5 +16254,118 @@
       ]
     },
     "addedAt": "2026-10-20T14:15:11.308Z"
+  },
+  {
+    "id": "crafting-tweaks",
+    "name": "Crafting Tweaks",
+    "version": "26.1.2.3+neoforge-26.1.2",
+    "category": "Management",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/crafting-tweaks",
+    "description": "Allows you to rotate, balance or clear crafting grids by the press of a button.",
+    "dependencies": [
+      "Balm"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DMu0oBKf/32bc48587e2c1b0457698a9f4f9ecf3bbda6b42b_96.webp",
+    "modrinth": {
+      "projectId": "DMu0oBKf",
+      "slug": "crafting-tweaks",
+      "versionId": "1c8Vvgy1",
+      "versionNumber": "26.1.2.3+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-08-21T05:49:50.089863Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "MBAkmtvl",
+          "versionId": null,
+          "type": "required",
+          "name": "Balm"
+        }
+      ],
+      "syncedAt": "2026-10-22T14:42:39.277Z"
+    },
+    "addedAt": "2026-10-22T14:42:41.418Z"
+  },
+  {
+    "id": "polymorph-plus",
+    "name": "Polymorph+",
+    "version": "1.4.2+26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/polymorph_plus",
+    "description": "(26.1.2 port) No more recipe conflicts! Adds an option to choose the crafting result if more than one is available.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3uT4J18I/bfee2a3bff695c2ad9ea1034161b7a40a131f949_96.webp",
+    "modrinth": {
+      "projectId": "3uT4J18I",
+      "slug": "polymorph_plus",
+      "versionId": "lsid09n6",
+      "versionNumber": "1.4.2+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-18T17:20:27.880586Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-22T14:43:10.968Z"
+    },
+    "addedAt": "2026-10-22T14:43:13.336Z"
+  },
+  {
+    "id": "trinkets-updated",
+    "name": "Trinkets Updated",
+    "version": "4.0.1+26.1",
+    "category": "Equipment",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/trinkets-updated",
+    "description": "A modern data driven accessory mod. Updated fork of trinkets for 1.21.11 and beyond.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XaT8sLP6/3749d37537cf7f2a31d7208a231069f2ba6f494b_96.webp",
+    "modrinth": {
+      "projectId": "XaT8sLP6",
+      "slug": "trinkets-updated",
+      "versionId": "XkGsalta",
+      "versionNumber": "4.0.1+26.1",
+      "versionType": "release",
+      "datePublished": "2026-09-26T07:29:59.720989Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-22T14:44:29.446Z"
+    },
+    "addedAt": "2026-10-22T14:44:32.130Z"
   }
 ]
