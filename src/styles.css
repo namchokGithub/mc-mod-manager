@@ -1715,6 +1715,19 @@ main:focus {
   font-weight: 700;
   white-space: nowrap;
 }
+.plan-assignment-add.control-trigger {
+  width: auto;
+  min-height: 24px;
+  padding: 3px 6px;
+  border-color: var(--accent-border);
+  background: var(--accent-light);
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 700;
+}
+.plan-assignment-add-popover {
+  width: min(420px, calc(100vw - 24px));
+}
 .plan-assignment-trigger {
   cursor: pointer;
 }

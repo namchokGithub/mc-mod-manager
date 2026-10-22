@@ -73,7 +73,9 @@ import {
   type Filters,
 } from "../../lib/mods";
 import {
+  assignItem,
   modAssignmentLocations,
+  orderedBatches,
   type ModAssignmentLocation,
 } from "../../lib/batches";
 import {
@@ -152,13 +154,41 @@ const SHOW_DUPLICATE_ACTION = true;
 
 type AssignmentFilter = "" | "assigned" | "unassigned";
 
+type PlanStepTarget = SelectOption & {
+  batchId: string;
+  stepId: string;
+};
+
 function ModPlanAssignment({
   locations,
+  planSteps,
+  onAddToPlan,
 }: {
   locations: ModAssignmentLocation[];
+  planSteps: PlanStepTarget[];
+  onAddToPlan: (target: PlanStepTarget) => void;
 }) {
   if (!locations.length)
-    return <span className="plan-assignment-badge">Not in plan</span>;
+    return planSteps.length ? (
+      <Combobox
+        aria-label="Add to Build plan"
+        className="plan-assignment-add"
+        popoverClassName="plan-assignment-add-popover"
+        size="sm"
+        variant="compact"
+        value=""
+        placeholder="Add to plan"
+        searchPlaceholder="Search Batch or Step…"
+        emptyText="No Steps match."
+        options={planSteps}
+        onValueChange={(value) => {
+          const target = planSteps.find((step) => step.value === value);
+          if (target) onAddToPlan(target);
+        }}
+      />
+    ) : (
+      <span className="plan-assignment-badge">Not in plan</span>
+    );
 
   const batchCount = new Set(locations.map((location) => location.batchId))
     .size;
@@ -1213,6 +1243,7 @@ export function Manage() {
     markSaved,
     saveStatus,
     setFileSavePhase,
+    updateBatches,
   } = useCollection();
   const notify = useToast();
   const [importingJars, setImportingJars] = useState(false);
@@ -1441,6 +1472,18 @@ export function Manage() {
     () => modAssignmentLocations(data.batches),
     [data.batches],
   );
+  const planSteps = useMemo<PlanStepTarget[]>(
+    () =>
+      orderedBatches(data.batches).flatMap((batch, batchIndex) =>
+        batch.steps.map((step, stepIndex) => ({
+          value: `${batchIndex}:${stepIndex}`,
+          label: `Batch ${batchIndex + 1} — ${batch.name} · ${step.name}`,
+          batchId: batch.id,
+          stepId: step.id,
+        })),
+      ),
+    [data.batches],
+  );
   // Status choices should stay visible with counts based on every other active filter.
   const statusFilterBase = useMemo(() => {
     const matching = filterMods(data.mods, filters);
@@ -1500,6 +1543,26 @@ export function Manage() {
     setAssignmentFilter("");
     setStatusFilters([]);
     setPage(1);
+  };
+  const addModToPlan = (mod: Mod, target: PlanStepTarget) => {
+    const batch = data.batches.batches.find(
+      (item) => item.id === target.batchId,
+    );
+    if (!batch) return;
+    const nextBatch = assignItem(batch, target.stepId, {
+      type: "mod",
+      id: mod.id,
+    });
+    if (nextBatch === batch) return;
+    updateBatches(
+      data.batches.batches.map((item) =>
+        item.id === batch.id ? nextBatch : item,
+      ),
+    );
+    notify({
+      title: `Added ${mod.name} to the Build plan`,
+      description: target.label,
+    });
   };
   const confirmBulkDelete = () => {
     if (!bulkDelete) return;
@@ -1881,6 +1944,10 @@ export function Manage() {
                                 <ModPlanAssignment
                                   locations={
                                     assignmentLocations.get(mod.id) ?? []
+                                  }
+                                  planSteps={planSteps}
+                                  onAddToPlan={(target) =>
+                                    addModToPlan(mod, target)
                                   }
                                 />
                                 {compat.get(mod.id) && (

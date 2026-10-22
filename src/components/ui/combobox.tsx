@@ -22,6 +22,8 @@ type ComboboxProps = AriaAttributes & {
   variant?: ControlVariant;
   id?: string;
   className?: string;
+  /** Optional class for the portalled results popover. */
+  popoverClassName?: string;
 };
 
 /**
@@ -43,6 +45,7 @@ export function Combobox({
   variant = "default",
   id,
   className,
+  popoverClassName,
   "aria-invalid": ariaInvalid,
   ...aria
 }: ComboboxProps) {
@@ -95,7 +98,7 @@ export function Combobox({
       </PopoverPrimitive.Trigger>
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content
-          className="control-content control-popover"
+          className={cn("control-content control-popover", popoverClassName)}
           sideOffset={4}
           collisionPadding={8}
           align="start"
