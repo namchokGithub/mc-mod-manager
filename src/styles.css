@@ -3594,7 +3594,7 @@ main:focus {
   display: flex;
   flex-direction: column;
   min-width: var(--radix-select-trigger-width);
-  max-width: min(360px, calc(100vw - 16px));
+  max-width: min(512px, calc(100vw - 16px));
   max-height: min(320px, var(--radix-select-content-available-height));
   overflow: hidden;
   border: 1px solid var(--border);
@@ -3605,7 +3605,7 @@ main:focus {
   animation: control-in 0.14s var(--ease-out);
 }
 .control-popover {
-  width: max(var(--radix-popover-trigger-width), 220px);
+  width: 1024px;
   max-height: none;
   transform-origin: var(--radix-popover-content-transform-origin);
 }

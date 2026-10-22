@@ -1477,7 +1477,7 @@ export function Manage() {
       orderedBatches(data.batches).flatMap((batch, batchIndex) =>
         batch.steps.map((step, stepIndex) => ({
           value: `${batchIndex}:${stepIndex}`,
-          label: `Batch ${batchIndex + 1} — ${batch.name} · ${step.name}`,
+          label: `${batch.name} · ${step.name}`,
           batchId: batch.id,
           stepId: step.id,
         })),

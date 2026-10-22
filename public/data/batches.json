@@ -425,8 +425,20 @@
           ]
         },
         {
+          "id": "step-7",
+          "name": "Others",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "alcocraft"
+            }
+          ]
+        },
+        {
           "id": "step-6",
-          "name": "3.6 Integration",
+          "name": "Integration",
           "description": "ให้ผู้เล่นเดินทางด้วย Waystones และเข็มทิศ พัก ค้นของหลังตาย และกลับเข้าเซิร์ฟเวอร์ ตรวจ startup, world loading และการทำงานร่วมกับ Batch 1–2",
           "done": false,
           "itemRefs": []
@@ -618,8 +630,28 @@
           "itemRefs": []
         },
         {
+          "id": "step-8",
+          "name": "Others",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "accelerated-decay"
+            },
+            {
+              "type": "mod",
+              "id": "ftbultimine"
+            },
+            {
+              "type": "mod",
+              "id": "ftbchunks"
+            }
+          ]
+        },
+        {
           "id": "step-7",
-          "name": "5.7 Integration",
+          "name": "Integration",
           "description": "เล่นวงจร ปลูก → เก็บ → เก็บเข้าคลัง → ทำอาหาร → ซื้อขาย พร้อมทดสอบผู้เล่นเปิดคลังร่วมกัน ตรวจของหาย ของซ้ำ และการเก็บกระเป๋าคืนหลังตาย",
           "done": false,
           "itemRefs": []
@@ -788,6 +820,10 @@
             {
               "type": "mod",
               "id": "mmmmmmmmmmmm"
+            },
+            {
+              "type": "mod",
+              "id": "armordamagescale"
             }
           ]
         },
@@ -1281,6 +1317,46 @@
             {
               "type": "mod",
               "id": "animal-garden-common-raccoon"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Crocodile"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Hippopotamus"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-lion"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-narwhal"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-owl"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Red Panda"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Sea Otter"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-spectacled-bear"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Western Gorilla"
+            },
+            {
+              "type": "mod",
+              "id": "aquarius-libs-2"
             }
           ]
         },
@@ -1297,6 +1373,10 @@
             {
               "type": "mod",
               "id": "armored-foes"
+            },
+            {
+              "type": "mod",
+              "id": "aggroindicator"
             }
           ]
         },
@@ -1321,7 +1401,71 @@
       "name": "Batch 11 — Remaining Mods & Final Integration",
       "description": "พิ่มม็อดที่เหลือจาก Batch 1–10 ทีละกลุ่ม โดยเรียง dependency ก่อนม็อดที่เรียกใช้ ทดสอบการทำงานร่วมกับชุดสะสมและสำรองโลกกับ config ก่อนแต่ละ Step แล้วปิดท้ายด้วยการทดสอบม็อดแพ็กครบชุดใน Multiplayer 3–6 คน",
       "order": 11,
-      "steps": []
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "11.0 — Baseline Dependency Check",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-2",
+          "name": "11.1 — Creatures & Remaining World Content",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-3",
+          "name": "11.2 — Building, Furniture & Decoration",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-4",
+          "name": "11.3 — Storage, Farming & Utility Stations",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-5",
+          "name": "11.4 — Equipment, Enchantments & Balance",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-6",
+          "name": "11.5 — Quests, Teams & Player Systems",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-7",
+          "name": "11.6 — Interface, Visuals & Audio",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-8",
+          "name": "11.7 — Server Tools & Optimization",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        },
+        {
+          "id": "step-9",
+          "name": "Others",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
     }
   ]
 }
