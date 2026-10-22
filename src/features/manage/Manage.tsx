@@ -1872,16 +1872,16 @@ export function Manage() {
                           }
                         />
                         <Button
-                          variant="ghost"
-                          size="small"
-                          onClick={() => setSelected(new Set())}>
-                          Clear selection
-                        </Button>
-                        <Button
                           variant="secondary"
                           size="small"
                           onClick={exportSelectedMods}>
-                          Export selected (.txt)
+                          Export .txt
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="small"
+                          onClick={() => setSelected(new Set())}>
+                          Clear
                         </Button>
                         <Button
                           variant="danger"

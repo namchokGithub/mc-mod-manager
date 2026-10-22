@@ -3737,11 +3737,14 @@ main:focus {
 }
 .bulk-bar-actions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 6px;
+  margin-left: auto;
 }
 .bulk-status {
-  min-width: 156px;
+  flex: 0 0 184px;
+  width: 184px;
 }
 .pagination {
   display: flex;
@@ -3791,6 +3794,11 @@ main:focus {
     display: none;
   }
   .bulk-bar-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+  .bulk-status {
+    flex-basis: 100%;
     width: 100%;
   }
   .bulk-bar-actions .button {
