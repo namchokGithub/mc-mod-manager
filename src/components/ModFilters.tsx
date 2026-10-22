@@ -32,20 +32,25 @@ function MultiStatusFilter({
   counts,
   total,
 }: {
-  values: readonly Mod["status"][];
-  onChange: (values: Mod["status"][]) => void;
+  /** `null` means the user explicitly selected no statuses. */
+  values: readonly Mod["status"][] | null;
+  onChange: (values: Mod["status"][] | null) => void;
   counts?: Readonly<Record<Mod["status"], number>>;
   total?: number;
 }) {
-  const selected = new Set(values);
-  const label = values.length
-    ? `${values.length} ${values.length === 1 ? "status" : "statuses"}`
-    : "All statuses";
+  const selected = new Set(values ?? []);
+  const allSelected =
+    values !== null &&
+    (values.length === 0 || values.length === modStatuses.length);
+  const label = allSelected
+    ? "All statuses"
+    : `${selected.size} ${selected.size === 1 ? "status" : "statuses"}`;
   const toggle = (status: Mod["status"]) => {
-    const next = new Set(selected);
+    const next = new Set(allSelected ? modStatuses : selected);
     if (next.has(status)) next.delete(status);
     else next.add(status);
-    onChange(modStatuses.filter((value) => next.has(value)));
+    const nextValues = modStatuses.filter((value) => next.has(value));
+    onChange(nextValues.length === modStatuses.length ? [] : nextValues);
   };
 
   return (
@@ -53,7 +58,7 @@ function MultiStatusFilter({
       <PopoverPrimitive.Trigger asChild>
         <button
           type="button"
-          className={`control-trigger control-sm control-compact filter-select${values.length ? " control-active" : ""}`}
+          className={`control-trigger control-sm control-compact filter-select${allSelected ? "" : " control-active"}`}
           aria-label="Status"
         >
           <span className="control-value">{label}</span>
@@ -73,8 +78,8 @@ function MultiStatusFilter({
           <label className="status-filter-option status-filter-all">
             <input
               type="checkbox"
-              checked={!values.length}
-              onChange={() => onChange([])}
+              checked={allSelected}
+              onChange={() => onChange(allSelected ? null : [])}
             />
             <span>All statuses</span>
             {total !== undefined && (
@@ -85,7 +90,7 @@ function MultiStatusFilter({
             <label key={status} className="status-filter-option">
               <input
                 type="checkbox"
-                checked={selected.has(status)}
+                checked={allSelected || selected.has(status)}
                 onChange={() => toggle(status)}
               />
               <span>{modStatusLabels[status]}</span>
@@ -134,8 +139,8 @@ export function ModFilters({
   assignment?: "" | "assigned" | "unassigned";
   onAssignmentChange?: (value: "" | "assigned" | "unassigned") => void;
   /** Manage supplies these to enable checkbox multi-select without changing Preview. */
-  statusValues?: readonly Mod["status"][];
-  onStatusValuesChange?: (values: Mod["status"][]) => void;
+  statusValues?: readonly Mod["status"][] | null;
+  onStatusValuesChange?: (values: Mod["status"][] | null) => void;
   /** Counts after all filters other than status; shown only in Manage's multi-select. */
   statusCounts?: Readonly<Record<Mod["status"], number>>;
   statusTotal?: number;
@@ -143,9 +148,11 @@ export function ModFilters({
   const searchRef = useRef<HTMLInputElement>(null);
   const set = (key: keyof Filters, value: string) =>
     onChange({ ...filters, [key]: value });
-  const hasStatusFilter = statusValues
-    ? statusValues.length > 0
-    : Boolean(filters.status);
+  const hasStatusFilter =
+    statusValues !== undefined
+      ? statusValues === null ||
+        (statusValues.length > 0 && statusValues.length < modStatuses.length)
+      : Boolean(filters.status);
   const activeCount =
     (filters.query.trim() ? 1 : 0) +
     [filters.category, filters.side, filters.priority].filter(Boolean).length +
@@ -297,7 +304,7 @@ export function ModFilters({
         )}
         {onStatusValuesChange ? (
           <MultiStatusFilter
-            values={statusValues ?? []}
+            values={statusValues === undefined ? [] : statusValues}
             onChange={onStatusValuesChange}
             counts={statusCounts}
             total={statusTotal}

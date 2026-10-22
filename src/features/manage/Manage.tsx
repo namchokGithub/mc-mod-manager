@@ -199,7 +199,8 @@ function ModPlanAssignment({
         <button
           type="button"
           className="plan-assignment-badge plan-assignment-trigger"
-          aria-label={`Show ${locations.length} Build plan assignment${locations.length === 1 ? "" : "s"}`}>
+          aria-label={`Show ${locations.length} Build plan assignment${locations.length === 1 ? "" : "s"}`}
+        >
           <ListChecks size={12} aria-hidden="true" /> In plan · {batchCount}{" "}
           {batchCount === 1 ? "batch" : "batches"}
         </button>
@@ -210,7 +211,8 @@ function ModPlanAssignment({
           side="bottom"
           align="start"
           sideOffset={6}
-          collisionPadding={12}>
+          collisionPadding={12}
+        >
           <strong>Build plan assignments</strong>
           <ul>
             {locations.map((location) => (
@@ -287,7 +289,8 @@ function Field({
   const errorId = error ? `${id}-error` : undefined;
   return (
     <label
-      className={`form-field${wide ? " form-field-wide" : ""}${error ? " has-error" : ""}`}>
+      className={`form-field${wide ? " form-field-wide" : ""}${error ? " has-error" : ""}`}
+    >
       <span>
         {label}
         {required && (
@@ -637,7 +640,8 @@ function ModEditor({
                 setValue("manualVerification", undefined, options);
                 setValue("ignoredDependencies", undefined, options);
                 setValue("dependencyLinks", undefined, options);
-              }}>
+              }}
+            >
               Use as a different mod
             </Button>
           </div>
@@ -657,7 +661,8 @@ function ModEditor({
                   mods.filter((item) => item.id !== mod?.id),
                 )}`
               : `Stable unique identifier${mod?.addedAt ? ` · Added ${new Date(mod.addedAt).toLocaleString()}` : ""}`
-          }>
+          }
+        >
           <input placeholder="Auto-generated if empty" {...register("id")} />
         </Field>
         <Field label="Version" error={errors.version?.message}>
@@ -675,7 +680,8 @@ function ModEditor({
         <Field
           label="Installation requirement"
           error={errors.requirement?.message}
-          hint={`Required — ${requirementHints.required} Optional — ${requirementHints.optional}`}>
+          hint={`Required — ${requirementHints.required} Optional — ${requirementHints.optional}`}
+        >
           <FormSelect
             control={control}
             name="requirement"
@@ -685,7 +691,8 @@ function ModEditor({
         <Field
           label="Priority"
           error={errors.priority?.message}
-          hint="How important it is to the pack. Normal if not set.">
+          hint="How important it is to the pack. Normal if not set."
+        >
           <FormSelect
             control={control}
             name="priority"
@@ -705,7 +712,8 @@ function ModEditor({
         <Field
           label="Tags"
           error={errors.tagsText?.message}
-          hint="Separate tags with commas">
+          hint="Separate tags with commas"
+        >
           <input placeholder="Rendering, Client" {...register("tagsText")} />
         </Field>
         <Field label="Image URL" error={errors.imageUrl?.message}>
@@ -721,7 +729,8 @@ function ModEditor({
         <Field
           label="Dependencies"
           error={errors.dependenciesText?.message}
-          hint="Comma-separated mod IDs or names">
+          hint="Comma-separated mod IDs or names"
+        >
           <input
             placeholder="fabric-api, lithium"
             {...register("dependenciesText")}
@@ -767,7 +776,8 @@ function ModEditor({
         </div>
         <small
           id={`${supportId}-hint`}
-          className="form-field-wide support-hint">
+          className="form-field-wide support-hint"
+        >
           {supportHint}
         </small>
         <ManualVerificationSection
@@ -830,7 +840,8 @@ function UnsavedHint({ show }: { show: boolean }) {
           initial={{ opacity: 0, x: 6 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.16 }}>
+          transition={{ duration: 0.16 }}
+        >
           <span className="draft-dot" aria-hidden="true" /> Unsaved changes
         </motion.span>
       )}
@@ -875,7 +886,8 @@ function SettingsForm({
         </Field>
         <Field
           label="Minecraft version"
-          error={errors.minecraftVersion?.message}>
+          error={errors.minecraftVersion?.message}
+        >
           <input {...register("minecraftVersion")} />
         </Field>
         <Field label="Modloader" error={errors.modloader?.message}>
@@ -886,7 +898,8 @@ function SettingsForm({
         </Field>
         <Field
           label="Modloader version"
-          error={errors.modloaderVersion?.message}>
+          error={errors.modloaderVersion?.message}
+        >
           <input placeholder="Optional" {...register("modloaderVersion")} />
         </Field>
         <Field label="Author" error={errors.author?.message}>
@@ -895,7 +908,8 @@ function SettingsForm({
         <Field
           label="Hero image URL or path"
           error={errors.heroImageUrl?.message}
-          hint="Use https://… or public/assets/…; leave empty for the built-in hero">
+          hint="Use https://… or public/assets/…; leave empty for the built-in hero"
+        >
           <input
             type="text"
             placeholder="https://… or public/assets/theme/image.png"
@@ -915,7 +929,8 @@ function SettingsForm({
           type="button"
           variant="ghost"
           disabled={!isDirty}
-          onClick={() => reset()}>
+          onClick={() => reset()}
+        >
           Discard
         </Button>
         <Button type="submit" disabled={!isDirty}>
@@ -1025,7 +1040,8 @@ function DataTools() {
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}>
+            transition={{ duration: 0.18 }}
+          >
             <CircleAlert size={16} aria-hidden="true" />
             <span>
               <strong>Import failed.</strong> {importError}
@@ -1045,7 +1061,8 @@ function DataTools() {
               variant="secondary"
               size="small"
               disabled={importing !== null}
-              onClick={() => modpackFileRef.current?.click()}>
+              onClick={() => modpackFileRef.current?.click()}
+            >
               {importing === "modpack" ? (
                 <LoaderCircle className="spin" size={15} aria-hidden="true" />
               ) : (
@@ -1056,7 +1073,8 @@ function DataTools() {
             <Button
               variant="secondary"
               size="small"
-              onClick={() => onExport("modpack.json", data.modpack)}>
+              onClick={() => onExport("modpack.json", data.modpack)}
+            >
               <ArrowDownToLine size={15} /> Export
             </Button>
           </div>
@@ -1082,7 +1100,8 @@ function DataTools() {
               variant="secondary"
               size="small"
               disabled={importing !== null}
-              onClick={() => modsFileRef.current?.click()}>
+              onClick={() => modsFileRef.current?.click()}
+            >
               {importing === "mods" ? (
                 <LoaderCircle className="spin" size={15} aria-hidden="true" />
               ) : (
@@ -1093,7 +1112,8 @@ function DataTools() {
             <Button
               variant="secondary"
               size="small"
-              onClick={() => onExport("mods.json", data.mods)}>
+              onClick={() => onExport("mods.json", data.mods)}
+            >
               <ArrowDownToLine size={15} /> Export
             </Button>
             <Button
@@ -1107,7 +1127,8 @@ function DataTools() {
                   title: "mods-minimal.json exported",
                   description: `${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"} with name, category, side, source, and URL. For sharing only; it cannot be imported back.`,
                 });
-              }}>
+              }}
+            >
               <ArrowDownToLine size={15} /> Export minimal
             </Button>
           </div>
@@ -1135,7 +1156,8 @@ function DataTools() {
               variant="secondary"
               size="small"
               disabled={importing !== null}
-              onClick={() => batchesFileRef.current?.click()}>
+              onClick={() => batchesFileRef.current?.click()}
+            >
               {importing === "batches" ? (
                 <LoaderCircle className="spin" size={15} aria-hidden="true" />
               ) : (
@@ -1146,7 +1168,8 @@ function DataTools() {
             <Button
               variant="secondary"
               size="small"
-              onClick={() => onExport("batches.json", data.batches)}>
+              onClick={() => onExport("batches.json", data.batches)}
+            >
               <ArrowDownToLine size={15} /> Export
             </Button>
           </div>
@@ -1174,7 +1197,8 @@ function DataTools() {
           variant="danger"
           disabled={!dirty}
           title={dirty ? undefined : "No local draft to discard"}
-          onClick={() => setConfirmReset(true)}>
+          onClick={() => setConfirmReset(true)}
+        >
           <RotateCcw size={16} /> Reset draft
         </Button>
       </div>
@@ -1182,7 +1206,8 @@ function DataTools() {
         open={confirmReset}
         onOpenChange={setConfirmReset}
         title="Discard your local draft?"
-        description="This replaces your edits with the data in public/data. Save to local JSON or export first if you want to keep them.">
+        description="This replaces your edits with the data in public/data. Save to local JSON or export first if you want to keep them."
+      >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setConfirmReset(false)}>
             Cancel
@@ -1197,7 +1222,8 @@ function DataTools() {
                 title: "Draft discarded",
                 description: "You are viewing the published data again.",
               });
-            }}>
+            }}
+          >
             Discard draft
           </Button>
         </div>
@@ -1218,7 +1244,8 @@ function DataTools() {
             : shownImport?.kind === "batches"
               ? `${shownImport.fileName} has ${shownImport.value.batches.length} ${shownImport.value.batches.length === 1 ? "batch" : "batches"}. They will replace the ${data.batches.batches.length} in your draft, including Step progress. Items are not changed.`
               : `${shownImport?.fileName ?? "This file"} will replace the name, description, versions, and hero image in your draft.`
-        }>
+        }
+      >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setPendingImport(null)}>
             Cancel
@@ -1276,7 +1303,10 @@ export function Manage() {
   const [page, setPage] = useState(1);
   const PAGE_SIZE_DEFAULT: PageSize = 54;
   const [pageSize, setPageSize] = useState<PageSize>(PAGE_SIZE_DEFAULT);
-  const [statusFilters, setStatusFilters] = useState<Mod["status"][]>([]);
+  // [] means every status; null is the explicit "none selected" state.
+  const [statusFilters, setStatusFilters] = useState<Mod["status"][] | null>(
+    [],
+  );
   // Selection is keyed by mod ID and survives page and filter changes.
   const [selected, setSelected] = useState<Set<string>>(() => new Set());
   // IDs captured when the bulk confirm opens, so the dialog cannot change underneath it.
@@ -1510,7 +1540,9 @@ export function Manage() {
     [statusFilterBase],
   );
   const filtered = useMemo(() => {
-    return filterModsByStatuses(statusFilterBase, statusFilters);
+    return statusFilters === null
+      ? []
+      : filterModsByStatuses(statusFilterBase, statusFilters);
   }, [statusFilterBase, statusFilters]);
   // IDs of deleted or replaced mods drop out of the selection automatically.
   const selection = useMemo(
@@ -1536,7 +1568,7 @@ export function Manage() {
     setAssignmentFilter(next);
     setPage(1);
   };
-  const changeStatusFilters = (next: Mod["status"][]) => {
+  const changeStatusFilters = (next: Mod["status"][] | null) => {
     setStatusFilters(next);
     setPage(1);
   };
@@ -1620,7 +1652,12 @@ export function Manage() {
       return;
     }
     updateMods(
-      updateSelectedVisibleModStatuses(data.mods, selection, filteredIds, status),
+      updateSelectedVisibleModStatuses(
+        data.mods,
+        selection,
+        filteredIds,
+        status,
+      ),
     );
     notify({
       kind: "info",
@@ -1673,7 +1710,8 @@ export function Manage() {
           {saveStatus && (
             <span
               className={`save-caption save-${saveStatus === "failed" ? "error" : saveStatus}`}
-              role="status">
+              role="status"
+            >
               <span className="draft-dot" aria-hidden="true" />
               {saveStatusLabels[saveStatus]}
             </span>
@@ -1690,7 +1728,8 @@ export function Manage() {
                 ? "Write your changes to public/data/*.json"
                 : "No changes to save"
             }
-            onClick={() => setLocalSave({})}>
+            onClick={() => setLocalSave({})}
+          >
             {savingLocal ? (
               <LoaderCircle className="spin" size={16} aria-hidden="true" />
             ) : (
@@ -1709,14 +1748,16 @@ export function Manage() {
               tab === "dashboard" ? "sidebar-item active" : "sidebar-item"
             }
             aria-current={tab === "dashboard" ? "page" : undefined}
-            onClick={() => changeTab("dashboard")}>
+            onClick={() => changeTab("dashboard")}
+          >
             <LayoutDashboard size={18} /> Dashboard
           </button>
           <button
             type="button"
             className={tab === "mods" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "mods" ? "page" : undefined}
-            onClick={() => changeTab("mods")}>
+            onClick={() => changeTab("mods")}
+          >
             <FileJson2 size={18} /> Mod collection{" "}
             <span>{data.mods.length}</span>
           </button>
@@ -1726,7 +1767,8 @@ export function Manage() {
               tab === "dependencies" ? "sidebar-item active" : "sidebar-item"
             }
             aria-current={tab === "dependencies" ? "page" : undefined}
-            onClick={() => changeTab("dependencies")}>
+            onClick={() => changeTab("dependencies")}
+          >
             <GitBranch size={18} /> Dependency lookup
           </button>
           <button
@@ -1735,14 +1777,16 @@ export function Manage() {
               tab === "settings" ? "sidebar-item active" : "sidebar-item"
             }
             aria-current={tab === "settings" ? "page" : undefined}
-            onClick={() => changeTab("settings")}>
+            onClick={() => changeTab("settings")}
+          >
             <Settings2 size={18} /> Pack settings
           </button>
           <button
             type="button"
             className={tab === "inbox" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "inbox" ? "page" : undefined}
-            onClick={() => changeTab("inbox")}>
+            onClick={() => changeTab("inbox")}
+          >
             <Inbox size={18} /> Mod inbox{" "}
             <span>{data.inbox.entries.length}</span>
           </button>
@@ -1753,7 +1797,8 @@ export function Manage() {
             onClick={() => {
               setPlanFocus(null);
               changeTab("plan");
-            }}>
+            }}
+          >
             <ListChecks size={18} /> Build plan{" "}
             <span>{data.batches.batches.length}</span>
           </button>
@@ -1766,7 +1811,8 @@ export function Manage() {
                 type="button"
                 className={tab === key ? "sidebar-item active" : "sidebar-item"}
                 aria-current={tab === key ? "page" : undefined}
-                onClick={() => changeTab(key)}>
+                onClick={() => changeTab(key)}
+              >
                 <Icon size={18} /> {contentMeta[key].title}{" "}
                 <span>{data[key].items.length}</span>
               </button>
@@ -1776,7 +1822,8 @@ export function Manage() {
             type="button"
             className={tab === "data" ? "sidebar-item active" : "sidebar-item"}
             aria-current={tab === "data" ? "page" : undefined}
-            onClick={() => changeTab("data")}>
+            onClick={() => changeTab("data")}
+          >
             <ArrowDownToLine size={18} /> Data & export
             {(saveStatus === "unsaved" || saveStatus === "failed") && (
               <span className="sidebar-dot" title="Unsaved changes">
@@ -1799,7 +1846,8 @@ export function Manage() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.16, ease: "easeOut" }}>
+              transition={{ duration: 0.16, ease: "easeOut" }}
+            >
               {tab === "mods" && (
                 <>
                   <div className="manage-section-head">
@@ -1810,12 +1858,14 @@ export function Manage() {
                     <div className="section-head-actions">
                       <Button
                         variant="secondary"
-                        onClick={() => setImportingJars(true)}>
+                        onClick={() => setImportingJars(true)}
+                      >
                         <Upload size={16} /> Import mods
                       </Button>
                       <Button
                         variant="secondary"
-                        onClick={() => setPicking({ kind: "add" })}>
+                        onClick={() => setPicking({ kind: "add" })}
+                      >
                         <Search size={16} /> Search Modrinth
                       </Button>
                       <Button onClick={() => setEditing({ mod: null })}>
@@ -1852,7 +1902,8 @@ export function Manage() {
                     <div
                       className="bulk-bar"
                       role="region"
-                      aria-label="Bulk actions">
+                      aria-label="Bulk actions"
+                    >
                       <span role="status">
                         <strong>{selection.size}</strong> selected
                         {hiddenSelected > 0 &&
@@ -1874,19 +1925,22 @@ export function Manage() {
                         <Button
                           variant="secondary"
                           size="small"
-                          onClick={exportSelectedMods}>
+                          onClick={exportSelectedMods}
+                        >
                           Export .txt
                         </Button>
                         <Button
                           variant="ghost"
                           size="small"
-                          onClick={() => setSelected(new Set())}>
+                          onClick={() => setSelected(new Set())}
+                        >
                           Clear
                         </Button>
                         <Button
                           variant="danger"
                           size="small"
-                          onClick={() => setBulkDelete([...selection])}>
+                          onClick={() => setBulkDelete([...selection])}
+                        >
                           <Trash2 size={15} /> Delete selected
                         </Button>
                       </div>
@@ -1939,7 +1993,8 @@ export function Manage() {
                             transition={{ duration: 0.22, ease: "easeOut" }}
                             onAnimationEnd={() =>
                               mod.id === highlightId && setHighlightId(null)
-                            }>
+                            }
+                          >
                             <input
                               type="checkbox"
                               className="row-check"
@@ -2023,7 +2078,8 @@ export function Manage() {
                                 size="icon"
                                 aria-label={`Edit ${mod.name}`}
                                 title="Edit"
-                                onClick={() => setEditing({ mod })}>
+                                onClick={() => setEditing({ mod })}
+                              >
                                 <Pencil size={17} />
                               </Button>
                               <Button
@@ -2041,7 +2097,8 @@ export function Manage() {
                                 }
                                 onClick={() =>
                                   setPicking({ kind: "refresh", mod })
-                                }>
+                                }
+                              >
                                 <RefreshCw size={16} />
                               </Button>
                               {SHOW_DUPLICATE_ACTION && (
@@ -2050,7 +2107,8 @@ export function Manage() {
                                   size="icon"
                                   aria-label={`Duplicate ${mod.name}`}
                                   title="Duplicate"
-                                  onClick={() => duplicate(mod)}>
+                                  onClick={() => duplicate(mod)}
+                                >
                                   <Copy size={17} />
                                 </Button>
                               )}
@@ -2060,7 +2118,8 @@ export function Manage() {
                                 className="row-delete"
                                 aria-label={`Delete ${mod.name}`}
                                 title="Delete"
-                                onClick={() => setDeleting(mod)}>
+                                onClick={() => setDeleting(mod)}
+                              >
                                 <Trash2 size={17} />
                               </Button>
                             </div>
@@ -2073,7 +2132,8 @@ export function Manage() {
                       className="empty-state"
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}>
+                      transition={{ duration: 0.2 }}
+                    >
                       <div className="empty-icon">
                         <FileJson2 size={24} />
                       </div>
@@ -2180,7 +2240,8 @@ export function Manage() {
               : "Add a mod"
         }
         description="Fields marked * are required. Changes stay in this browser until you save to local JSON."
-        size="wide">
+        size="wide"
+      >
         {shownEditing && (
           <ModEditor
             key={`${shownEditing.mod?.id ?? "new"}:${shownEditing.initial?.modrinth?.versionId ?? ""}`}
@@ -2211,7 +2272,8 @@ export function Manage() {
             ? "Pick a version. Your notes, status, and edited fields are kept."
             : "Find a mod, pick a version, then review the details before adding."
         }
-        size="wide">
+        size="wide"
+      >
         {shownPicking && (
           <ModrinthPicker
             key={shownPicking.kind === "refresh" ? shownPicking.mod.id : "add"}
@@ -2238,7 +2300,8 @@ export function Manage() {
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
         title={`Delete ${shownDeleting?.name ?? "mod"}?`}
-        description="This removes the mod from your local draft. You can reset the draft before saving to local JSON if needed.">
+        description="This removes the mod from your local draft. You can reset the draft before saving to local JSON if needed."
+      >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setDeleting(null)}>
             Cancel
@@ -2255,7 +2318,8 @@ export function Manage() {
                 });
               }
               setDeleting(null);
-            }}>
+            }}
+          >
             <Trash2 size={16} /> Delete mod
           </Button>
         </div>
@@ -2272,7 +2336,8 @@ export function Manage() {
           shownLocalSave?.conflict
             ? `${shownLocalSave.conflict} Overwriting replaces those changes with your draft.`
             : `This overwrites the JSON files in public/data/ (pack, mods, build plan, inbox, resource packs, data packs, and shaders) with your draft (${data.mods.length} ${data.mods.length === 1 ? "mod" : "mods"}).${settingsDirty || editorDirty ? " Unsaved form edits are not included." : ""}`
-        }>
+        }
+      >
         {shownLocalSave?.error && (
           <div className="inline-message error" role="alert">
             <CircleAlert size={16} aria-hidden="true" />
@@ -2284,19 +2349,20 @@ export function Manage() {
             shownLocalSave?.error
               ? "dialog-actions"
               : "dialog-actions dialog-actions-flush"
-          }>
+          }
+        >
           <Button
             variant="ghost"
             disabled={savingLocal}
-            onClick={() => setLocalSave(null)}>
+            onClick={() => setLocalSave(null)}
+          >
             Cancel
           </Button>
           <Button
             variant={shownLocalSave?.conflict ? "danger" : "default"}
             disabled={savingLocal}
-            onClick={() =>
-              void runLocalSave(Boolean(shownLocalSave?.conflict))
-            }>
+            onClick={() => void runLocalSave(Boolean(shownLocalSave?.conflict))}
+          >
             {savingLocal ? (
               <LoaderCircle className="spin" size={16} aria-hidden="true" />
             ) : (
@@ -2322,7 +2388,8 @@ export function Manage() {
           const listed = names.slice(0, 5).join(", ");
           const more = names.length > 5 ? ` and ${names.length - 5} more` : "";
           return `This removes ${listed}${more} from your local draft. You can reset the draft before saving to local JSON if needed.`;
-        })()}>
+        })()}
+      >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setBulkDelete(null)}>
             Cancel
@@ -2338,7 +2405,8 @@ export function Manage() {
         onOpenChange={setImportingJars}
         title="Import mods from files"
         description="Select .jar files or a mods folder, review what was found, then choose what to add."
-        size="wide">
+        size="wide"
+      >
         <JarImportDialog
           mods={data.mods}
           modpack={data.modpack}
@@ -2358,7 +2426,8 @@ export function Manage() {
           shownDiscard?.kind === "tab"
             ? "Your edits to the pack settings have not been saved. Leaving this section will lose them."
             : "This mod has changes that have not been saved. Closing the editor will lose them."
-        }>
+        }
+      >
         <div className="dialog-actions dialog-actions-flush">
           <Button variant="ghost" onClick={() => setConfirmDiscard(null)}>
             Keep editing
