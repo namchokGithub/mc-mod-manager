@@ -1,0 +1,1334 @@
+{
+  "version": 2,
+  "batches": [
+    {
+      "id": "batch-1-foundation",
+      "name": "Batch 1 — Foundation & Performance",
+      "description": "ฐานเกมและประสิทธิภาพก่อนเพิ่มเนื้อหา; Other เป็นรายการพักรอตัดสินใจ ไม่ติดตั้งรวมกับ foundation\n\n**new_mods:** 17 · **inherited_mods:** 0 · **สะสมจากรายชื่อเดิมตามแผน:** 17 · ไม่รวม Other",
+      "order": 1,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "1.1 Backup & Recovery",
+          "description": "**Priority:** P0 · **ทดสอบ:** สำรองด้วยมือก่อนเริ่มทุก Batch อยู่แล้ว; เมื่อยืนยันรุ่น backup mod ให้ทดสอบ restore บนสำเนา",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ftbbackups3"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "1.2 Core & Recipe Performance",
+          "description": "**Priority:** P0 · **ทดสอบ:** เปิดเกมและทดสอบ furnace/recipe/XP โดยเปรียบเทียบกับ baseline",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "modernfix"
+            },
+            {
+              "type": "mod",
+              "id": "clumps"
+            },
+            {
+              "type": "mod",
+              "id": "placebo"
+            },
+            {
+              "type": "mod",
+              "id": "fastsuite"
+            },
+            {
+              "type": "mod",
+              "id": "fastfurnace"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "1.3 Client Rendering",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจภาพที่ระยะใกล้–ไกล เปลี่ยนฉากและเปรียบเทียบ FPS",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "sodium"
+            },
+            {
+              "type": "mod",
+              "id": "sodium-extra"
+            },
+            {
+              "type": "mod",
+              "id": "immediatelyfast-2"
+            },
+            {
+              "type": "mod",
+              "id": "better-biome-blend"
+            },
+            {
+              "type": "mod",
+              "id": "cloth-config"
+            },
+            {
+              "type": "mod",
+              "id": "moreculling"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "1.4 Server Performance",
+          "description": "**Priority:** P1 · **ทดสอบ:** ตรวจ startup โหลดโลกและเปรียบเทียบ TPS/MSPT ทีละตัว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** AI Improvements: Performance Tuning → Architectury API → Achievements Optimizer → I'm Fast",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ai-improvements"
+            },
+            {
+              "type": "mod",
+              "id": "achievements-optimizer"
+            },
+            {
+              "type": "mod",
+              "id": "im-fast"
+            },
+            {
+              "type": "mod",
+              "id": "architectury-api"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "1.5 Dropped Items & Despawn",
+          "description": "**Priority:** P1 · **ทดสอบ:** โยน/เก็บของ ตรวจจำนวนไอเทมและม็อบตั้งชื่อ/ม็อบเลี้ยงหลัง reload",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "get-it-together-drops"
+            },
+            {
+              "type": "mod",
+              "id": "almanac"
+            },
+            {
+              "type": "mod",
+              "id": "lmd"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "1.6 Other",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Roughly Enough Items (REI) → Cupboard → libIPN → MossyLib → WorldEdit → Loot Integrations → Yung Structures Addon for Loot Integrations → Trinkets Updated → Chunky → Dynamic View and Simulation Distances",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "rei"
+            },
+            {
+              "type": "mod",
+              "id": "cupboard"
+            },
+            {
+              "type": "mod",
+              "id": "libipn"
+            },
+            {
+              "type": "mod",
+              "id": "mossylib"
+            },
+            {
+              "type": "mod",
+              "id": "worldedit"
+            },
+            {
+              "type": "mod",
+              "id": "lootintegrations-yungs"
+            },
+            {
+              "type": "mod",
+              "id": "lootintegrations"
+            },
+            {
+              "type": "mod",
+              "id": "chunky"
+            },
+            {
+              "type": "mod",
+              "id": "dynamicviewdist"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–1 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-2-world-exploration",
+      "name": "Batch 2 — Interface, Inventory & Player Information",
+      "description": "ทำให้การตรวจสูตร ข้อมูลไอเทม แผนที่ และ UI พร้อมก่อนทดสอบเนื้อหา\n\n**new_mods:** 29 · **inherited_mods:** 17 · **สะสมจากรายชื่อเดิมตามแผน:** 46",
+      "order": 2,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "2.1 Recipe Browser",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** MezzConfig → Just Enough Items (JEI)",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "jei"
+            },
+            {
+              "type": "mod",
+              "id": "jeioptimizer"
+            },
+            {
+              "type": "mod",
+              "id": "mezzconfig"
+            },
+            {
+              "type": "mod",
+              "id": "mezzconfiggui"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "2.2 Inspection & Food Information",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจ block/entity tooltip และค่าอาหารทั้ง client/server",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "jade"
+            },
+            {
+              "type": "mod",
+              "id": "jade-addons-forge"
+            },
+            {
+              "type": "mod",
+              "id": "appleskin"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "2.3 Inventory Controls",
+          "description": "**Priority:** P1 · **ทดสอบ:** ย้าย/ทิ้ง/คราฟต์ของ ตรวจจำนวนหลัง reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mouse-tweaks"
+            },
+            {
+              "type": "mod",
+              "id": "durability-tooltip"
+            },
+            {
+              "type": "mod",
+              "id": "balm"
+            },
+            {
+              "type": "mod",
+              "id": "trashslot"
+            },
+            {
+              "type": "mod",
+              "id": "crafting-tweaks"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "2.4 Maps & Navigation UI",
+          "description": "**Priority:** P1 · **ทดสอบ:** สร้าง waypoint เดินข้าม chunk และตรวจแผนที่หลัง reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "xaeros-minimap"
+            },
+            {
+              "type": "mod",
+              "id": "xaeros-world-map"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "2.5 Zoom & Debug",
+          "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบ zoom/debug และปุ่มลัด",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "betterf3"
+            },
+            {
+              "type": "mod",
+              "id": "konkrete"
+            },
+            {
+              "type": "mod",
+              "id": "just-zoom"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "2.6 Tooltips & Notifications",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** YetAnotherConfigLib (YACL) → Better Advancements → Prism → Iceberg → Legendary Tooltips → Item Borders → Item Highlighter → Item Descriptions → Fragmentum → Loot Journal: Pickup Notifier",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "yacl"
+            },
+            {
+              "type": "mod",
+              "id": "better-advancements"
+            },
+            {
+              "type": "mod",
+              "id": "prism-lib"
+            },
+            {
+              "type": "mod",
+              "id": "legendary-tooltips"
+            },
+            {
+              "type": "mod",
+              "id": "item-borders"
+            },
+            {
+              "type": "mod",
+              "id": "item-highlighter"
+            },
+            {
+              "type": "mod",
+              "id": "item-descriptions"
+            },
+            {
+              "type": "mod",
+              "id": "fragmentum"
+            },
+            {
+              "type": "mod",
+              "id": "loot-journal"
+            },
+            {
+              "type": "mod",
+              "id": "iceberg"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "2.7 HUD & Client Cosmetics",
+          "description": "**Priority:** P2 · **ทดสอบ:** ทดสอบ HUD กับจำนวนหัวใจ/เกราะสูง ตรวจโมเดลและ texture โดยยังปิด shader",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "entitytexturefeatures"
+            },
+            {
+              "type": "mod",
+              "id": "entity-model-features"
+            },
+            {
+              "type": "mod",
+              "id": "puzzles-lib"
+            },
+            {
+              "type": "mod",
+              "id": "new-health-bars"
+            },
+            {
+              "type": "mod",
+              "id": "overflowing-bars"
+            },
+            {
+              "type": "mod",
+              "id": "overloadedarmorbar"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–2 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-3-combat-progression",
+      "name": "Batch 3 — Travel, Survival & Multiplayer Utilities",
+      "description": "การเดินทาง การตาย การกู้ไอเทม และระบบทีมพื้นฐานที่ใช้ตลอดแพ็ก\n\n**new_mods:** 23 · **inherited_mods:** 46 · **สะสมจากรายชื่อเดิมตามแผน:** 69",
+      "order": 3,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "3.1 Fast Travel & Exploration",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Shogi → Waystones → Recall Potion → Nature's Compass → Explorer's Compass → Immersive Overlays → Field Guide",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "shogi"
+            },
+            {
+              "type": "mod",
+              "id": "waystones"
+            },
+            {
+              "type": "mod",
+              "id": "ly-recall-potion"
+            },
+            {
+              "type": "mod",
+              "id": "natures-compass"
+            },
+            {
+              "type": "mod",
+              "id": "explorers-compass"
+            },
+            {
+              "type": "mod",
+              "id": "field-guide"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "3.2 Rest & Survival",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "collective"
+            },
+            {
+              "type": "mod",
+              "id": "healing-campfire"
+            },
+            {
+              "type": "mod",
+              "id": "comforts"
+            },
+            {
+              "type": "mod",
+              "id": "bl4cks-sit"
+            },
+            {
+              "type": "mod",
+              "id": "dream-cocoon"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "3.3 Carry & World Interaction",
+          "description": "**ทดสอบ:** ยก/วาง container และตรวจของไม่หายหรือซ้ำ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "carry-on"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "3.4 Death, Accessories & XP",
+          "description": "**ทดสอบ:** ตาย เก็บ corpse คืน accessory/XP และตรวจจำนวนไอเทมหลัง restart",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "corpse"
+            },
+            {
+              "type": "mod",
+              "id": "xp-tome"
+            },
+            {
+              "type": "mod",
+              "id": "curios"
+            },
+            {
+              "type": "mod",
+              "id": "corpse-x-curios-api-compat"
+            },
+            {
+              "type": "mod",
+              "id": "baguettelib"
+            },
+            {
+              "type": "mod",
+              "id": "inventory-totem"
+            },
+            {
+              "type": "mod",
+              "id": "the-grave-scrolls"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "3.5 Teams, Claims & Mining",
+          "description": "**ทดสอบ:** ตั้งทีม claim ให้สิทธิ์และขุดหมู่ ตรวจการป้องกันพื้นที่\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** FTB Library → FTB Teams → FTB Ultimine → FTB Chunks",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ftblibrary"
+            },
+            {
+              "type": "mod",
+              "id": "ftbteams"
+            },
+            {
+              "type": "mod",
+              "id": "ftbultimine"
+            },
+            {
+              "type": "mod",
+              "id": "ftbchunks"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "Integration",
+          "description": "",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-4-decoration-quality-of-life",
+      "name": "Batch 4 — Biomes, Structures, Dungeons & Loot",
+      "description": "ล็อกภูมิประเทศและโครงสร้างหลักก่อนลงระบบฟาร์ม/การต่อสู้; ใช้โลกทดสอบใหม่\n\n**new_mods:** 24 · **inherited_mods:** 69 · **สะสมจากรายชื่อเดิมตามแผน:** 93",
+      "order": 4,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "4.1 Biome Foundation",
+          "description": "**ทดสอบ:** สร้างโลกใหม่ ตรวจ biome ไม้/บล็อก และการเชื่อมต่อภูมิประเทศ\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "glitchcore"
+            },
+            {
+              "type": "mod",
+              "id": "terrablender"
+            },
+            {
+              "type": "mod",
+              "id": "biomes-o-plenty"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "4.2 Terrain Integration",
+          "description": "**ทดสอบ:** สร้างโลกใหม่ที่มี BOP และ Terralith ตรวจ terrain หลาย seed\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "lithostitched"
+            },
+            {
+              "type": "mod",
+              "id": "terralith"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "4.3 Villages & Underground",
+          "description": "**ทดสอบ:** ตรวจหมู่บ้าน/ใต้ดินและกล่อง loot ใน chunk ใหม่\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Cristel Lib → Towns and Towers → Better Library → Underground Village, Stoneholm\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "cristel-lib"
+            },
+            {
+              "type": "mod",
+              "id": "towns-and-towers"
+            },
+            {
+              "type": "mod",
+              "id": "underground-village-stoneholm"
+            },
+            {
+              "type": "mod",
+              "id": "better-library"
+            },
+            {
+              "type": "mod",
+              "id": "lootintegrations-undergroundvillages"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "4.4 YUNG Foundation & Underground",
+          "description": "**ทดสอบ:** ตรวจ mineshaft/dungeon และบันทึกพิกัดตัวอย่าง\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "yungs-api"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-mineshafts"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-dungeons"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "4.5 Temples, Monuments & Strongholds",
+          "description": "**ทดสอบ:** สำรวจแต่ละโครงสร้าง ตรวจ mob/loot/ทางเข้า\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "yungs-better-desert-temples"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-jungle-temples"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-witch-huts"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-ocean-monuments"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-strongholds"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "4.6 Nether & End",
+          "description": "**ทดสอบ:** ใช้ Nether/End ใหม่ ตรวจ fortress และเกาะ End\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "yungs-better-nether-fortresses"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-better-end-island"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "4.7 Landscape & Large Dungeons",
+          "description": "**ทดสอบ:** ตรวจความถี่โครงสร้าง การทับกัน และเวลาสร้าง chunk\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "yungs-bridges"
+            },
+            {
+              "type": "mod",
+              "id": "yungs-extras"
+            },
+            {
+              "type": "mod",
+              "id": "structory"
+            },
+            {
+              "type": "mod",
+              "id": "structory-towers"
+            },
+            {
+              "type": "mod",
+              "id": "when-dungeons-arise"
+            },
+            {
+              "type": "mod",
+              "id": "loot-integrations-when-dungeons-arise-co"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "4.8 Shared Loot",
+          "description": "**ทดสอบ:** ผู้เล่นสองคนเปิดกล่องเดียวกัน ตรวจ loot แยกและ reload\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "lootr"
+            }
+          ]
+        },
+        {
+          "id": "step-9",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–4 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-5-storage-backpacks-farming-economy",
+      "name": "Batch 5 — Storage, Backpacks, Farming & Economy",
+      "description": "ระบบคลัง กระเป๋า อาหาร และการค้าที่ต้องทดสอบร่วมกัน\n\n**new_mods:** 30 · **inherited_mods:** 93 · **สะสมจากรายชื่อเดิมตามแผน:** 123",
+      "order": 5,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "5.1 Core Storage",
+          "description": "**ทดสอบ:** ฝากถอน เชื่อม hopper และตรวจจำนวนของก่อน–หลัง restart",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "storagedrawers"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-config-lib"
+            },
+            {
+              "type": "mod",
+              "id": "supermartijn642s-core-lib"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-core"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-storage"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-storage-in-motion"
+            },
+            {
+              "type": "mod",
+              "id": "trashcans"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "5.2 Backpacks & Transfers",
+          "description": "**ทดสอบ:** อัปเกรดกระเป๋า recipe transfer ตาย/กู้ของและ reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "sophisticatedtab"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-inventory-interactions"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-jei-index"
+            },
+            {
+              "type": "mod",
+              "id": "sophisticated-backpacks"
+            },
+            {
+              "type": "mod",
+              "id": "more-tier-upgrade"
+            },
+            {
+              "type": "mod",
+              "id": "bundle-upgrade"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "5.3 Storage Network & Crafting",
+          "description": "**ทดสอบ:** เชื่อมคลัง คราฟต์สูตรซ้ำและหลอม ตรวจของไม่ซ้ำ/หาย",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "iron-furnaces"
+            },
+            {
+              "type": "mod",
+              "id": "toms-storage"
+            },
+            {
+              "type": "mod",
+              "id": "polymorph-plus"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "5.4 Crops, Food & Drinks",
+          "description": "**ทดสอบ:** ปลูก เก็บเกี่ยว คราฟต์อาหาร/เครื่องดื่มและตรวจ buff\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** AlcoCraft+ → EpheroLib → Croptopia → Bread Variants → MonoLib → Golden Foods!",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "alcocraft"
+            },
+            {
+              "type": "mod",
+              "id": "epherolib"
+            },
+            {
+              "type": "mod",
+              "id": "croptopia"
+            },
+            {
+              "type": "mod",
+              "id": "breadvariants"
+            },
+            {
+              "type": "mod",
+              "id": "golden-foods"
+            },
+            {
+              "type": "mod",
+              "id": "monolib"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "5.5 Crop Storage Addon",
+          "description": "**ทดสอบ:** คราฟต์ crate/bag และแปลงคืน ต้องมี Crate Delight ที่ขาดก่อน\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Crate Delight → Crate Delight: Croptopia",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "crate-delight"
+            },
+            {
+              "type": "mod",
+              "id": "crate-delight-croptopia"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "5.6 Farming & Kitchen",
+          "description": "**ทดสอบ:** ทดสอบครัว เมล็ดพืช XP เก็บเกี่ยวและระบบกระถาง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "cooking-for-blockheads"
+            },
+            {
+              "type": "mod",
+              "id": "farming-for-blockheads"
+            },
+            {
+              "type": "mod",
+              "id": "xp-from-harvest"
+            },
+            {
+              "type": "mod",
+              "id": "accelerated-decay"
+            },
+            {
+              "type": "mod",
+              "id": "omnipots"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "5.7 Villagers & Trading",
+          "description": "**ทดสอบ:** ซื้อขาย เปลี่ยนอาชีพ/ข้อเสนอ ตรวจราคาและโหลดโลกกลับ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "trade-cycling"
+            },
+            {
+              "type": "mod",
+              "id": "morevillagers"
+            },
+            {
+              "type": "mod",
+              "id": "easy-villagers"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–5 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-6-building-furniture-decoration",
+      "name": "Batch 6 — Building, Furniture & Decoration",
+      "description": "รวมของก่อสร้างและตกแต่งไว้ใน Batch เดียว; ลง library ก่อน content ที่เรียกใช้\n\n**new_mods:** 18 · **inherited_mods:** 123 · **สะสมจากรายชื่อเดิมตามแผน:** 141",
+      "order": 6,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "6.1 Building Tools & Materials",
+          "description": "**ทดสอบ:** วาง/ทุบบล็อก ใช้ wand/sawmill และตรวจสูตรวัสดุ\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Moonlight Lib → Measurements → Construction Wands Revived → Sawmill → Stoneworks → New Slab Variants → More Useful Copper",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "moonlight"
+            },
+            {
+              "type": "mod",
+              "id": "measurements"
+            },
+            {
+              "type": "mod",
+              "id": "construction-wands-revived"
+            },
+            {
+              "type": "mod",
+              "id": "universal-sawmill"
+            },
+            {
+              "type": "mod",
+              "id": "stoneworks"
+            },
+            {
+              "type": "mod",
+              "id": "new-slab-variants"
+            },
+            {
+              "type": "mod",
+              "id": "more-useful-copper"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "6.2 Furniture",
+          "description": "**ทดสอบ:** ใช้เฟอร์นิเจอร์ ระบบไฟ/เครื่องใช้และบันทึกหลัง reconnect\n\nตรวจ exact version และ embedded library ก่อน; ติดตั้ง required dependencies ใน Step นี้ก่อนม็อดที่เรียกใช้ หรือยืนยันว่ามีใน Step ก่อนหน้าแล้ว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Macaw's Lights and Lamps → Macaw's Furniture → Framework → MrCrayfish's Furniture Mod: Refurbished → MrCrayfish's Furniture Mod Tools: Refurbished",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "framework"
+            },
+            {
+              "type": "mod",
+              "id": "macaws-lights-and-lamps"
+            },
+            {
+              "type": "mod",
+              "id": "macaws-furniture"
+            },
+            {
+              "type": "mod",
+              "id": "refurbished-furniture-neoforge"
+            },
+            {
+              "type": "mod",
+              "id": "mrcrayfishs-furniture-mod-tools-refurbished"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "6.3 Art, Displays & Seasonal Decor",
+          "description": "**ทดสอบ:** อัปโหลดภาพ/ใช้ display ตรวจสิทธิ์และการแสดงผลของผู้เล่นอื่น\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Macaw's Holidays → Dream Displays → Kotlin for Forge → Fzzy Config → Immersive Paintings",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "fzzy-config"
+            },
+            {
+              "type": "mod",
+              "id": "mcwholidays"
+            },
+            {
+              "type": "mod",
+              "id": "dreamdisplays"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-paintings"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "6.4 Music & Ambient Decoration",
+          "description": "**ทดสอบ:** เล่นดนตรี/เสียงพร้อมกัน ตรวจระยะเสียงและ reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "immersive-melodies"
+            },
+            {
+              "type": "mod",
+              "id": "chimes"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "6.5 Shared Workstations",
+          "description": "**ทดสอบ:** เปิดใช้งานร่วมกัน คราฟต์และตรวจ sync ของผู้เล่นสองคน",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "open-together"
+            },
+            {
+              "type": "mod",
+              "id": "visual-workbench"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–6 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-7-creatures-combat-equipment-difficulty",
+      "name": "Batch 7 — Creatures, Combat, Equipment & Difficulty",
+      "description": "เพิ่มม็อบทีละกลุ่ม แล้วตรวจการต่อสู้/อุปกรณ์ ก่อนปรับความยาก\n\n**new_mods:** 45 · **inherited_mods:** 141 · **สะสมจากรายชื่อเดิมตามแผน:** 186",
+      "order": 7,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "7.1 Combat Test Foundation",
+          "description": "**ทดสอบ:** ใช้หุ่นฝึกบันทึก damage baseline และผลเกราะ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mmmmmmmmmmmm"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "7.2 Combat & Dodge",
+          "description": "**ทดสอบ:** โจมตี กลิ้ง หลบและตรวจ sync ใน multiplayer",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "player-animation-library"
+            },
+            {
+              "type": "mod",
+              "id": "better-combat"
+            },
+            {
+              "type": "mod",
+              "id": "combat-roll"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "7.3 Equipment & Accessories",
+          "description": "**ทดสอบ:** ใส่/ถอด accessory เกราะ elytra และตาย/กู้ไอเทม",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "artifacts"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-armors"
+            },
+            {
+              "type": "mod",
+              "id": "elytraslot"
+            },
+            {
+              "type": "mod",
+              "id": "transmog"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "7.4 Ecology & Friends",
+          "description": "**ทดสอบ:** ตรวจการเกิด การโต้ตอบและโครงสร้างในโลกใหม่/เพิ่ม chunk ใหม่\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ecologics"
+            },
+            {
+              "type": "mod",
+              "id": "resourceful-lib"
+            },
+            {
+              "type": "mod",
+              "id": "friends-and-foes-forge"
+            },
+            {
+              "type": "mod",
+              "id": "friends-and-foes-flowery-mooblooms-forge"
+            },
+            {
+              "type": "mod",
+              "id": "friends-and-foes-beekeeper-hut-forge"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "7.5 Creature Variety",
+          "description": "**ทดสอบ:** spawn ม็อบทีละชนิด ตรวจ AI drops และจำนวน entity",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "variants-and-ventures"
+            },
+            {
+              "type": "mod",
+              "id": "bagus-lib"
+            },
+            {
+              "type": "mod",
+              "id": "new-sea-life"
+            },
+            {
+              "type": "mod",
+              "id": "earthmobs"
+            },
+            {
+              "type": "mod",
+              "id": "tiny-skeletons"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "7.6 Animal Farming",
+          "description": "**ทดสอบ:** ให้อาหาร เลี้ยง/เก็บสัตว์ ตรวจจำนวนและโหลดโลกกลับ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "animal-feeding-trough"
+            },
+            {
+              "type": "mod",
+              "id": "animalpens"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "7.7 Alex Mobs Foundation",
+          "description": "**ทดสอบ:** ตรวจไฟล์/loader และ dependency ก่อน spawn/AI/drop",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "alexsmobs"
+            },
+            {
+              "type": "mod",
+              "id": "citadel"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
+          "name": "7.8 Animal Garden",
+          "description": "**ทดสอบ:** เพิ่มสัตว์ทีละ 2–3 ชนิด ตรวจ spawn AI และฟาร์ม; วัดภาระ entity จริง\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้าง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "animal-garden-spectacled-bear"
+            },
+            {
+              "type": "mod",
+              "id": "aquarius-libs-2"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Bull Shark"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-common-raccoon"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Crocodile"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Hippopotamus"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-lion"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-narwhal"
+            },
+            {
+              "type": "mod",
+              "id": "animal-garden-owl"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Red Panda"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Sea Otter"
+            },
+            {
+              "type": "mod",
+              "id": "Animal Garden - Western Gorilla"
+            }
+          ]
+        },
+        {
+          "id": "step-9",
+          "name": "7.9 Hostile & Elite Encounters",
+          "description": "**ทดสอบ:** ต่อสู้ ตรวจเกราะ/ความสามารถ/loot และจำนวนศัตรู\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Mutant Monsters → Mutants and Zombies → Armored Foes → Aggro Indicator → Champions-Unofficial",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mutant-monsters"
+            },
+            {
+              "type": "mod",
+              "id": "mutants-and-zombies"
+            },
+            {
+              "type": "mod",
+              "id": "armored-foes"
+            },
+            {
+              "type": "mod",
+              "id": "aggroindicator"
+            },
+            {
+              "type": "mod",
+              "id": "champions-unofficial"
+            }
+          ]
+        },
+        {
+          "id": "step-10",
+          "name": "7.10 Difficulty & Despawn Tuning",
+          "description": "",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "armordamagescale"
+            },
+            {
+              "type": "mod",
+              "id": "configurable-despawn-timer"
+            },
+            {
+              "type": "mod",
+              "id": "dusk"
+            },
+            {
+              "type": "mod",
+              "id": "dynamic-difficulty"
+            }
+          ]
+        },
+        {
+          "id": "step-11",
+          "name": "7.11 Multiplayer Revival",
+          "description": "**ทดสอบ:** ล้ม ชุบชีวิต ตายเต็มรูปแบบและ reconnect; ตรวจ corpse/accessories ไม่ซ้ำ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "creativecore"
+            },
+            {
+              "type": "mod",
+              "id": "playerrevive"
+            }
+          ]
+        },
+        {
+          "id": "step-12",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–7 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    }
+  ]
+}

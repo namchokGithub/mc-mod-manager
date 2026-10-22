@@ -414,6 +414,10 @@
             {
               "type": "mod",
               "id": "field-guide"
+            },
+            {
+              "type": "mod",
+              "id": "immersive-overlays"
             }
           ]
         },
@@ -1003,6 +1007,10 @@
             {
               "type": "mod",
               "id": "immersive-paintings"
+            },
+            {
+              "type": "mod",
+              "id": "kotlin-for-forge"
             }
           ]
         },
@@ -1304,6 +1312,402 @@
               "id": "dynamic-difficulty"
             }
           ]
+        },
+        {
+          "id": "step-11",
+          "name": "7.11 Multiplayer Revival",
+          "description": "**ทดสอบ:** ล้ม ชุบชีวิต ตายเต็มรูปแบบและ reconnect; ตรวจ corpse/accessories ไม่ซ้ำ",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "creativecore"
+            },
+            {
+              "type": "mod",
+              "id": "playerrevive"
+            }
+          ]
+        },
+        {
+          "id": "step-12",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–7 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-8-skills-attributes-enchanting-apotheosis",
+      "name": "Batch 8 — Skills, Attributes, Enchanting & Apotheosis",
+      "description": "ปรับ progression หลังมี baseline combat; ตรวจเส้นทางเพิ่มพลังและช่องทาง farm loot\n\n**new_mods:** 15 · **inherited_mods:** 186 · **สะสมจากรายชื่อเดิมตามแผน:** 201",
+      "order": 8,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "8.1 Attributes & Health",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจเพดาน attribute/หัวใจและ HUD ที่ติดตั้งแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "prickle"
+            },
+            {
+              "type": "mod",
+              "id": "attributefix"
+            },
+            {
+              "type": "mod",
+              "id": "max-health-fix"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "8.2 Skill Progression",
+          "description": "**Priority:** P1 · **ทดสอบ:** รับ XP อัปสกิล reset และตรวจหลัง reconnect",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "attributes"
+            },
+            {
+              "type": "mod",
+              "id": "skills"
+            },
+            {
+              "type": "mod",
+              "id": "default-skill-trees"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "8.3 Enchant Information",
+          "description": "**Priority:** P1 · **ทดสอบ:** ตรวจคำอธิบาย enchant และข้อมูลของอุปกรณ์จริง",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "enchantment-descriptions"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "8.4 Apothic Foundation",
+          "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบระบบ enchanting และถอน enchant ตรวจต้นทุน/ผลลัพธ์",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "apothic-attributes"
+            },
+            {
+              "type": "mod",
+              "id": "apothic-enchanting"
+            },
+            {
+              "type": "mod",
+              "id": "dis-enchanting-table"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "8.5 Enchanting Alternatives",
+          "description": "**Priority:** P2 · **ทดสอบ:** เทียบกับ Apothic Enchanting และเลือกบทบาท/ต้นทุนที่ไม่ข้าม progression",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "enchanting-infuser"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "8.6 Spawners & Apotheosis",
+          "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบ spawner อุปกรณ์ affix/loot และ addon หลัง parent พร้อม",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "apotheosis-totem"
+            },
+            {
+              "type": "mod",
+              "id": "apothic-spawners"
+            },
+            {
+              "type": "mod",
+              "id": "patchouli"
+            },
+            {
+              "type": "mod",
+              "id": "apotheosis"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–8 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-9-magic-rpg-classes",
+      "name": "Batch 9 — Magic & RPG Classes",
+      "description": "ทดสอบฐานเวท คลาส และอุปกรณ์หลังระบบ combat/attributes พร้อม\n\n**new_mods:** 18 · **inherited_mods:** 201 · **สะสมจากรายชื่อเดิมตามแผน:** 219",
+      "order": 9,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "9.1 Spell Foundation",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจคาถาพื้นฐาน scaling และ sync client/server",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "spell-power"
+            },
+            {
+              "type": "mod",
+              "id": "spell-engine"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "9.2 Runes & Supporting APIs",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจ rune/API ก่อนเพิ่มแต่ละคลาส",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "bundle-api"
+            },
+            {
+              "type": "mod",
+              "id": "runes"
+            },
+            {
+              "type": "mod",
+              "id": "armor-model-api"
+            },
+            {
+              "type": "mod",
+              "id": "structure-pool-api"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "9.3 Wizards & Healers",
+          "description": "**Priority:** P1 · **ทดสอบ:** ร่ายเวท ฮีล buff และผลกับเพื่อนในทีม",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "wizards"
+            },
+            {
+              "type": "mod",
+              "id": "paladins-and-priests"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "9.4 Ranged & Melee Classes",
+          "description": "**Priority:** P1 · **ทดสอบ:** ยิง/โจมตีและตรวจการทำงานกับ Better Combat",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "ranged-weapon-api"
+            },
+            {
+              "type": "mod",
+              "id": "archers"
+            },
+            {
+              "type": "mod",
+              "id": "rogues-and-warriors"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "9.5 RPG Equipment",
+          "description": "**Priority:** P1 · **ทดสอบ:** ใส่อุปกรณ์/เครื่องประดับ ตรวจ scaling และการตาย",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "jewelry"
+            },
+            {
+              "type": "mod",
+              "id": "relics-rpg"
+            },
+            {
+              "type": "mod",
+              "id": "arsenal-rpg-series"
+            },
+            {
+              "type": "mod",
+              "id": "armory-rpg-series"
+            }
+          ]
+        },
+        {
+          "id": "step-6",
+          "name": "9.6 RPG Structures & Enchants",
+          "description": "**Priority:** P1 · **ทดสอบ:** สร้างโลกใหม่หรือ chunk ใหม่ ตรวจโครงสร้าง loot และ enchant\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "gazebos"
+            },
+            {
+              "type": "mod",
+              "id": "village-taverns"
+            },
+            {
+              "type": "mod",
+              "id": "rpg-enchantments"
+            }
+          ]
+        },
+        {
+          "id": "step-7",
+          "name": "Integration",
+          "description": "ทดสอบชุดสะสม Batch 1–9 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
+          "done": false,
+          "itemRefs": []
+        }
+      ]
+    },
+    {
+      "id": "batch-10-quests-jobs-customization-final-integration",
+      "name": "Batch 10 — Quests, Jobs, Customization & Final Integration",
+      "description": "รวม progression ผู้เล่น สคริปต์และภาพเสริมท้ายแผน แล้วทดสอบแพ็กเต็ม 3–6 คน\n\n**new_mods:** 13 · **inherited_mods:** 219 · **สะสมจากรายชื่อเดิมตามแผน:** 232",
+      "order": 10,
+      "steps": [
+        {
+          "id": "step-1",
+          "name": "10.1 Jobs & Origins Foundation",
+          "description": "**Priority:** P1 · **ทดสอบ:** ตรวจ dependency งาน/อาชีพ origins สิทธิ์และ reset progression\n\n**Dependency ที่ไม่มีในไฟล์ (ยังไม่เพิ่มในจำนวน mods):** Arc Lib, Item Restrictions\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Knot → UI Lib → YAML Config → Neo Origins → Arc Lib → Item Restrictions → Jobs+ → Jobs+ Tools",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "knot"
+            },
+            {
+              "type": "mod",
+              "id": "ui-lib"
+            },
+            {
+              "type": "mod",
+              "id": "yaml-config"
+            },
+            {
+              "type": "mod",
+              "id": "neo-origins"
+            },
+            {
+              "type": "mod",
+              "id": "jobsplus"
+            },
+            {
+              "type": "mod",
+              "id": "jobsplustools"
+            },
+            {
+              "type": "mod",
+              "id": "arc"
+            },
+            {
+              "type": "mod",
+              "id": "item-restrictions"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "name": "10.2 Quests, Books & Player Activities",
+          "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบเควสต์ รางวัล ทีม หนังสือ/กิจกรรมและข้อมูลหลัง restart",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "paper-books"
+            },
+            {
+              "type": "mod",
+              "id": "starcatcher"
+            },
+            {
+              "type": "mod",
+              "id": "ftbquests"
+            },
+            {
+              "type": "mod",
+              "id": "little-joys"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "name": "10.3 Scripts & Loot Integration",
+          "description": "**Priority:** P1 · **ทดสอบ:** โหลดสคริปต์และทดสอบ recipe/loot; ตรวจ rewards ไม่ซ้ำกับ quests\n\n**Dependency ที่ไม่มีในไฟล์ (ยังไม่เพิ่มในจำนวน mods):** Better Advanced Tooltips, Rhino\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Rhino → Better Advanced Tooltips → KubeJS → LootJS: KubeJS Addon",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "kubejs"
+            },
+            {
+              "type": "mod",
+              "id": "lootjs"
+            },
+            {
+              "type": "mod",
+              "id": "better-advanced-tooltips"
+            },
+            {
+              "type": "mod",
+              "id": "rhino"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "10.4 Optional Shaders",
+          "description": "**Priority:** P2 · **ทดสอบ:** เปิด shader ภายหลัง baseline ตรวจภาพ/FPS และการต่อสู้ในแพ็กเต็ม",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "iris"
+            }
+          ]
+        },
+        {
+          "id": "step-5",
+          "name": "10.5 Final Multiplayer Integration",
+          "description": "**Priority:** P0 · **ทดสอบ:** ผู้เล่น 3–6 คน สำรวจ ต่อสู้ ฟาร์ม คราฟต์ quests ตาย/ชุบชีวิต restart และตรวจ save/config\n\n**Final gate:** ทดสอบ multiplayer 3–6 คนทั้งโลกสะสมและโลกใหม่หลังเลือก worldgen ครบ ตรวจ combat/skills/classes/quests/farming/loot/death/revival และ restore บนสำเนา; ยัง `not_run` และห้ามผ่าน gate หากมี required requirement ค้างในชุดที่จะติดตั้ง",
+          "done": false,
+          "itemRefs": []
         }
       ]
     }
