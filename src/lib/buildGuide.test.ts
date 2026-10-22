@@ -235,6 +235,24 @@ describe("dependency warnings", () => {
 });
 
 describe("options", () => {
+  it("exports a minimal Batch and Step outline with mod categories", () => {
+    const guide = buildGuide(
+      data,
+      { ...defaultGuideOptions, minimal: true },
+      generatedAt,
+    );
+
+    expect(guide).toContain("## Batch 1 — Foundation & Performance");
+    expect(guide).toContain("2 mods");
+    expect(guide).toContain("### Launch Minecraft");
+    expect(guide).toContain("1 mod");
+    expect(guide).toContain("- Sodium — c");
+    expect(guide).toContain("- Lithium — c");
+    expect(guide).not.toContain("Helloworld: Beyond the Descendant");
+    expect(guide).not.toContain("Dependencies");
+    expect(guide).not.toContain("Installation steps");
+  });
+
   it("exports one batch with its real number", () => {
     const guide = buildGuide(
       data,

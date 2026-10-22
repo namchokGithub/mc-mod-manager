@@ -9,6 +9,7 @@ import { loaderLabel } from "./modrinth/versionFilters";
 import {
   batchContent,
   batchCountText,
+  contentKeyByType,
   installGuidance,
   planTypeLabels,
   type PlanItemType,
@@ -39,6 +40,8 @@ export type GuideOptions = {
   includeDependencies: boolean;
   includeNotes: boolean;
   includeSteps: boolean;
+  /** Exports only Batch/Step summaries and item names with their type or category. */
+  minimal: boolean;
 };
 
 export const defaultGuideOptions: GuideOptions = {
@@ -47,6 +50,7 @@ export const defaultGuideOptions: GuideOptions = {
   includeDependencies: true,
   includeNotes: true,
   includeSteps: true,
+  minimal: false,
 };
 
 type Part = string | { label: string; url: string };
@@ -181,6 +185,71 @@ function dependencyText(entry: DependencyEntry): string {
   else
     status = `Found${entry.linked ? ", linked" : ""} (${placementText(entry)})`;
   return `${relationVerb[entry.relation]} ${name} — ${status}`;
+}
+
+function minimalBatchNodes(
+  batch: Batch,
+  position: number,
+  collection: Collection,
+): Node[] {
+  const nodes: Node[] = [];
+  const { mods } = batchMods(batch, collection.mods);
+  const content = batchContent(batch, collection);
+  const modsById = new Map(collection.mods.map((mod) => [mod.id, mod]));
+  const contentByType = Object.fromEntries(
+    contentTypes.map((type) => [
+      type,
+      new Map(
+        collection[contentKeyByType[type]].items.map((item) => [item.id, item]),
+      ),
+    ]),
+  ) as Record<ContentType, Map<string, ContentItem>>;
+
+  nodes.push({
+    kind: "heading",
+    level: 2,
+    text: `Batch ${position} — ${batch.name}`,
+  });
+  nodes.push({ kind: "paragraph", text: batchCountText(mods.length, content) });
+
+  for (const step of batch.steps) {
+    const stepBatch = { ...batch, steps: [step] };
+    const stepMods = batchMods(stepBatch, collection.mods).mods;
+    const stepContent = batchContent(stepBatch, collection);
+    nodes.push({ kind: "heading", level: 3, text: step.name });
+    nodes.push({
+      kind: "paragraph",
+      text: batchCountText(stepMods.length, stepContent),
+    });
+    for (const ref of step.itemRefs) {
+      if (ref.type === "mod") {
+        const mod = modsById.get(ref.id);
+        nodes.push({
+          kind: "item",
+          depth: 0,
+          checkbox: false,
+          parts: [
+            mod
+              ? `${mod.name} — ${mod.category}`
+              : `${ref.id} — Mod (not in collection)`,
+          ],
+        });
+        continue;
+      }
+      const item = contentByType[ref.type].get(ref.id);
+      nodes.push({
+        kind: "item",
+        depth: 0,
+        checkbox: false,
+        parts: [
+          item
+            ? `${item.name} — ${planTypeLabels[ref.type].one}`
+            : `${ref.id} — ${planTypeLabels[ref.type].one} (not in collection)`,
+        ],
+      });
+    }
+  }
+  return nodes;
 }
 
 function batchNodes(
@@ -459,6 +528,17 @@ export function buildGuide(
   const selected = options.batchId
     ? all.filter((batch) => batch.id === options.batchId)
     : all;
+  if (options.minimal) {
+    const nodes = selected.flatMap((batch) =>
+      minimalBatchNodes(batch, all.indexOf(batch) + 1, collection),
+    );
+    return render(
+      nodes.length
+        ? nodes
+        : [{ kind: "paragraph", text: "This build plan has no batches yet." }],
+      options.format,
+    );
+  }
   const nodes: Node[] = [{ kind: "heading", level: 1, text: modpack.name }];
   const facts: string[] = [];
   if (modpack.minecraftVersion.trim())

@@ -117,6 +117,7 @@ function ExportGuideForm({
       <div className="guide-checks" role="group" aria-label="Sections">
         {(
           [
+            ["minimal", "Minimal outline"],
             ["includeDependencies", "Dependencies & warnings"],
             ["includeNotes", "Mod notes"],
             ["includeSteps", "Installation steps"],
@@ -126,6 +127,7 @@ function ExportGuideForm({
             <input
               type="checkbox"
               checked={options[key]}
+              disabled={options.minimal && key !== "minimal"}
               onChange={(event) => set({ [key]: event.target.checked })}
             />
             {label}

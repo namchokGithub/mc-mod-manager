@@ -1683,6 +1683,18 @@
             {
               "type": "mod",
               "id": "jobsplustools"
+            },
+            {
+              "type": "mod",
+              "id": "baubley-heart-canisters"
+            },
+            {
+              "type": "mod",
+              "id": "ly-lucky-blocks"
+            },
+            {
+              "type": "mod",
+              "id": "lucky-blocks-world"
             }
           ]
         },
@@ -1723,6 +1735,10 @@
             {
               "type": "mod",
               "id": "dynamicviewdist"
+            },
+            {
+              "type": "mod",
+              "id": "betterfpsdist"
             }
           ]
         },
