@@ -13,6 +13,7 @@ import { Button } from "../../components/ui/button";
 import { CompatBadge } from "../../components/CompatBadge";
 import { DependencyOverview } from "../../components/DependencyOverview";
 import { ModArtwork } from "../../components/ModArtwork";
+import { MarkdownText } from "../../components/MarkdownText";
 import { batchMods, orderedBatches } from "../../lib/batches";
 import { statusLabel, type CompatResult } from "../../lib/compatibility";
 import {
@@ -284,9 +285,9 @@ function StepAccordion({
                 >
                   <div className="preview-plan-step-body">
                     {step.description && (
-                      <p className="preview-plan-step-description">
+                      <MarkdownText className="preview-plan-step-description">
                         {step.description}
-                      </p>
+                      </MarkdownText>
                     )}
                     {repeatStepNameByModId.size > 0 && (
                       <p className="preview-plan-repeat-note">
@@ -452,9 +453,9 @@ export function BuildPlanGuide({
                 <ChevronDown size={17} aria-hidden="true" />
               </button>
               {batch.description && (
-                <p className="preview-plan-batch-description">
+                <MarkdownText className="preview-plan-batch-description">
                   {batch.description}
-                </p>
+                </MarkdownText>
               )}
               <AnimatePresence initial={false}>
                 {expanded && (

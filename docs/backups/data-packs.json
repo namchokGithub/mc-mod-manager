@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "type": "datapack",
+  "items": [
+    {
+      "id": "info-tools",
+      "name": "Info Tools",
+      "status": "planned",
+      "version": "1.3.3",
+      "description": "Modified Coordinates HUD to make your coordinates appear when  you have a compass in your inventory and the time of day appear when you have a clock in your inventory",
+      "source": "modrinth",
+      "sourceUrl": "https://modrinth.com/datapack/info-tools",
+      "imageUrl": "https://cdn.modrinth.com/data/vSoR3IrK/6b6df6c6b565b85ebf60a1e0323b8370f3a0db80_96.webp",
+      "minecraftVersions": [
+        "1.20.2",
+        "1.20.3",
+        "1.20.4",
+        "1.20.5",
+        "1.20.6",
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8",
+        "1.21.9",
+        "1.21.10",
+        "1.21.11",
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2"
+      ],
+      "tags": [],
+      "notes": "",
+      "createdAt": "2026-10-20T14:52:50.415Z",
+      "updatedAt": "2026-10-20T14:52:50.415Z",
+      "modrinth": {
+        "projectId": "vSoR3IrK",
+        "slug": "info-tools",
+        "versionId": "80rCiyJO",
+        "versionNumber": "1.3.3",
+        "versionType": "release",
+        "datePublished": "2026-07-24T02:16:33.227316Z",
+        "gameVersions": [
+          "1.20.2",
+          "1.20.3",
+          "1.20.4",
+          "1.20.5",
+          "1.20.6",
+          "1.21",
+          "1.21.1",
+          "1.21.2",
+          "1.21.3",
+          "1.21.4",
+          "1.21.5",
+          "1.21.6",
+          "1.21.7",
+          "1.21.8",
+          "1.21.9",
+          "1.21.10",
+          "1.21.11",
+          "26.1",
+          "26.1.1",
+          "26.1.2",
+          "26.2"
+        ],
+        "loaders": [
+          "datapack"
+        ],
+        "dependencies": [],
+        "syncedAt": "2026-10-20T14:52:50.415Z"
+      }
+    }
+  ]
+}

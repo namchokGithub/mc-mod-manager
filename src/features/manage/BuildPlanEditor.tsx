@@ -17,6 +17,7 @@ import {
 import { useCollection } from "../../app/DataContext";
 import { useToast } from "../../app/ToastContext";
 import { ModArtwork } from "../../components/ModArtwork";
+import { MarkdownText } from "../../components/MarkdownText";
 import { Button } from "../../components/ui/button";
 import { Combobox } from "../../components/ui/combobox";
 import { Dialog } from "../../components/ui/dialog";
@@ -534,7 +535,9 @@ function StepCard({
                 </div>
               </div>
             ) : item.description ? (
-              <p className="plan-step-description">{item.description}</p>
+              <MarkdownText className="plan-step-description">
+                {item.description}
+              </MarkdownText>
             ) : (
               <button
                 type="button"
@@ -1361,7 +1364,9 @@ export function BuildPlanEditor({
                     </div>
                   </div>
                   {batch.description && (
-                    <p className="plan-description">{batch.description}</p>
+                    <MarkdownText className="plan-description">
+                      {batch.description}
+                    </MarkdownText>
                   )}
                   <div
                     className="plan-batch-progress"

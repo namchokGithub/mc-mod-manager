@@ -4,41 +4,25 @@
     {
       "id": "batch-1-foundation",
       "name": "Batch 1 — Foundation & Performance",
-      "description": "ระบบพื้นฐานและประสิทธิภาพ\n\nเปิด Client/Server → ตรวจภาพและเมนู → เก็บค่า FPS/RAM/TPS ตั้งต้น\n\nPlacebo ต้องมาก่อน FastSuite และ FastFurnace ตามข้อมูล dependency ของรุ่นที่พบ ส่วน ModernFix, Clumps, Sodium และ ImmediatelyFast มีรุ่นสำหรับ NeoForge 26.1.2 ให้เลือก แต่ยังต้องตรวจ dependency และข้อกำหนดด้านการติดตั้งของ ไฟล์รุ่นที่จะใช้จริง ก่อนเริ่ม Step FastSuite\n\nจำนวนสะสม: หลัง 1.2 = 2 ม็อด, หลัง 1.3 = 5 ม็อด, หลัง 1.4 = 7 ม็อด โดย Sodium และ ImmediatelyFast อยู่ฝั่ง Client ตามหน้าเวอร์ชันที่ตรวจพบ modrinth.com\n\nก่อนแต่ละ Step ให้สำรองโลกและ Config ไว้ หากเปิดเกมหรือโหลดโลกไม่ผ่าน ให้หยุดที่ Step นั้นและตรวจม็อดที่เพิ่งเพิ่ม ทุก Step ยังเป็น not_run; ตารางนี้เป็นแผนทดสอบ ยังไม่มีผลทดสอบใน Minecraft ครับ",
+      "description": "26 mods (17 main + 9 Other)\n\nฐานเกมและประสิทธิภาพก่อนเพิ่มเนื้อหา; Other เป็นรายการพักรอตัดสินใจ ไม่ติดตั้งรวมกับ foundation",
       "order": 1,
       "steps": [
         {
           "id": "step-1",
-          "name": "1.1 Baseline",
-          "description": "เปิด NeoForge 26.1.2 ทั้ง Client และ Server → เข้าโลก → ออกแล้วเข้าใหม่ → บันทึกเวลาเปิดเกม, FPS, RAM และสภาพ Server ไว้เทียบ",
+          "name": "1.1 Backup & Recovery",
+          "description": "**Priority:** P0 · **ทดสอบ:** สำรองด้วยมือก่อนเริ่มทุก Batch อยู่แล้ว; เมื่อยืนยันรุ่น backup mod ให้ทดสอบ restore บนสำเนา",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
-              "id": "yacl"
-            },
-            {
-              "type": "mod",
-              "id": "yaml-config"
-            },
-            {
-              "type": "mod",
-              "id": "rei"
-            },
-            {
-              "type": "mod",
-              "id": "cupboard"
-            },
-            {
-              "type": "mod",
-              "id": "knot"
+              "id": "ftbbackups3"
             }
           ]
         },
         {
           "id": "step-2",
-          "name": "1.2 Core & XP",
-          "description": "เพิ่มทีละตัวและเปิดเกมหลังเพิ่มแต่ละตัว → ทดสอบโหลดโลกและเก็บ XP จำนวนมาก → ตรวจว่า XP ที่ได้รับถูกต้อง",
+          "name": "1.2 Core & Recipe Performance",
+          "description": "**Priority:** P0 · **ทดสอบ:** เปิดเกมและทดสอบ furnace/recipe/XP โดยเปรียบเทียบกับ baseline",
           "done": false,
           "itemRefs": [
             {
@@ -48,15 +32,7 @@
             {
               "type": "mod",
               "id": "clumps"
-            }
-          ]
-        },
-        {
-          "id": "step-3",
-          "name": "1.3 Recipes & Furnaces",
-          "description": "ลง Placebo ก่อน → ทดสอบสูตรคราฟต์และเตาเผา/เตาหลอม/เตารมควัน → ตรวจว่าได้ผลลัพธ์และใช้เชื้อเพลิงถูกต้อง",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "placebo"
@@ -72,9 +48,41 @@
           ]
         },
         {
-          "id": "step-7",
-          "name": "1.6 Server Performance",
-          "description": "โหลดโลก เล่นตามปกติ และเปรียบเทียบ TPS/MSPT",
+          "id": "step-3",
+          "name": "1.3 Client Rendering",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจภาพที่ระยะใกล้–ไกล เปลี่ยนฉากและเปรียบเทียบ FPS",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "sodium"
+            },
+            {
+              "type": "mod",
+              "id": "sodium-extra"
+            },
+            {
+              "type": "mod",
+              "id": "immediatelyfast-2"
+            },
+            {
+              "type": "mod",
+              "id": "better-biome-blend"
+            },
+            {
+              "type": "mod",
+              "id": "cloth-config"
+            },
+            {
+              "type": "mod",
+              "id": "moreculling"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "name": "1.4 Server Performance",
+          "description": "**Priority:** P1 · **ทดสอบ:** ตรวจ startup โหลดโลกและเปรียบเทียบ TPS/MSPT ทีละตัว\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** AI Improvements: Performance Tuning → Architectury API → Achievements Optimizer → I'm Fast",
           "done": false,
           "itemRefs": [
             {
@@ -88,27 +96,23 @@
             {
               "type": "mod",
               "id": "im-fast"
+            },
+            {
+              "type": "mod",
+              "id": "architectury-api"
             }
           ]
         },
         {
-          "id": "step-8",
-          "name": "1.7 Dropped Items",
-          "description": "โยนของ เก็บของ และตรวจจำนวนไอเทม",
+          "id": "step-5",
+          "name": "1.5 Dropped Items & Despawn",
+          "description": "**Priority:** P1 · **ทดสอบ:** โยน/เก็บของ ตรวจจำนวนไอเทมและม็อบตั้งชื่อ/ม็อบเลี้ยงหลัง reload",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
               "id": "get-it-together-drops"
-            }
-          ]
-        },
-        {
-          "id": "step-9",
-          "name": "1.8 Entity Despawn",
-          "description": "ตรวจการหายของม็อบ รวมถึงม็อบตั้งชื่อและม็อบเลี้ยง",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "almanac"
@@ -120,78 +124,18 @@
           ]
         },
         {
-          "id": "step-11",
-          "name": "Default",
-          "description": "",
+          "id": "step-6",
+          "name": "1.6 Other",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Roughly Enough Items (REI) → Cupboard → libIPN → MossyLib → WorldEdit → Loot Integrations → Yung Structures Addon for Loot Integrations → Trinkets Updated → Chunky → Dynamic View and Simulation Distances",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
-              "id": "mouse-tweaks"
+              "id": "rei"
             },
             {
               "type": "mod",
-              "id": "sodium"
-            },
-            {
-              "type": "mod",
-              "id": "immediatelyfast-2"
-            },
-            {
-              "type": "mod",
-              "id": "entitytexturefeatures"
-            },
-            {
-              "type": "mod",
-              "id": "entity-model-features"
-            },
-            {
-              "type": "mod",
-              "id": "better-advancements"
-            },
-            {
-              "type": "mod",
-              "id": "legendary-tooltips"
-            },
-            {
-              "type": "mod",
-              "id": "item-borders"
-            },
-            {
-              "type": "mod",
-              "id": "moreculling"
-            },
-            {
-              "type": "mod",
-              "id": "better-biome-blend"
-            },
-            {
-              "type": "mod",
-              "id": "new-health-bars"
-            },
-            {
-              "type": "mod",
-              "id": "overflowing-bars"
-            },
-            {
-              "type": "mod",
-              "id": "puzzles-lib"
-            },
-            {
-              "type": "mod",
-              "id": "cloth-config"
-            }
-          ]
-        },
-        {
-          "id": "step-10",
-          "name": "Others",
-          "description": "",
-          "done": false,
-          "itemRefs": [
-            {
-              "type": "mod",
-              "id": "prism-lib"
+              "id": "cupboard"
             },
             {
               "type": "mod",
@@ -203,42 +147,30 @@
             },
             {
               "type": "mod",
-              "id": "ui-lib"
+              "id": "worldedit"
             },
             {
               "type": "mod",
-              "id": "durability-tooltip"
+              "id": "lootintegrations-yungs"
             },
             {
               "type": "mod",
-              "id": "iris"
+              "id": "lootintegrations"
             },
             {
               "type": "mod",
-              "id": "item-highlighter"
+              "id": "chunky"
             },
             {
               "type": "mod",
-              "id": "item-descriptions"
-            },
-            {
-              "type": "mod",
-              "id": "storagedrawers"
-            },
-            {
-              "type": "mod",
-              "id": "supermartijn642s-config-lib"
-            },
-            {
-              "type": "mod",
-              "id": "supermartijn642s-core-lib"
+              "id": "dynamicviewdist"
             }
           ]
         },
         {
-          "id": "step-5",
+          "id": "step-7",
           "name": "Integration",
-          "description": "ใช้ม็อดทั้ง 8 ตัวร่วมกัน → เปิด Client/Server ใหม่ → โหลดโลกเดิม → เล่นและสำรวจช่วงสั้น ๆ → บันทึกปัญหาก่อนผ่านไป Batch 2",
+          "description": "ทดสอบชุดสะสม Batch 1–1 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
           "done": false,
           "itemRefs": []
         }
@@ -246,26 +178,38 @@
     },
     {
       "id": "batch-2-world-exploration",
-      "name": "Batch 2 — Interface & Player Utilities",
-      "description": "HUD, Tooltip, Inventory, แผนที่\n\nตรวจ HUD/Tooltip → ลองจัด Inventory → ทดสอบแผนที่และ Waypoint\n\nจุดตรวจ dependency ก่อนเริ่ม 2.1: ตรวจ metadata ของไฟล์ JEI รุ่นที่จะใช้ว่าต้องติดตั้ง MezzConfig แยกหรือมีมาในไฟล์แล้ว ตอนนี้ยังไม่นับ MezzConfig เป็นม็อดใหม่ และหากพบว่าเป็น dependency ที่ต้องลงแยก ให้เพิ่มก่อน JEI แล้วปรับยอดสะสมตามจริง CurseForge\n\nBatch นี้ใช้โลกทดสอบเดิมต่อได้ตามแผน หาก Step ใดมีปัญหาสำคัญ ให้หยุดก่อน Step ถัดไปและตรวจม็อดที่เพิ่งเพิ่มร่วมกับชุดที่ติดตั้งอยู่; การทดสอบแยกทำได้เพื่อหาสาเหตุ แต่ชุดทดสอบหลักยังคงสะสมต่อเนื่อง ส่วน REI และ The One Probe ยังไม่เพิ่มใน Batch นี้ เพราะหน้าที่ทับกับ JEI และ Jade ที่กำลังทดสอบ ไม่ได้หมายความว่าตรวจพบว่าใช้ร่วมกันไม่ได้",
+      "name": "Batch 2 — Interface, Inventory & Player Information",
+      "description": "ทำให้การตรวจสูตร ข้อมูลไอเทม แผนที่ และ UI พร้อมก่อนทดสอบเนื้อหา\n\n**new_mods:** 29 · **inherited_mods:** 17 · **สะสมจากรายชื่อเดิมตามแผน:** 46",
       "order": 2,
       "steps": [
         {
           "id": "step-1",
-          "name": "2.1 Recipes",
-          "description": "ค้นหาไอเทม ดูสูตรคราฟต์และวิธีใช้ไอเทม ตรวจว่าสูตรตรงกันเมื่อเข้าเซิร์ฟเวอร์",
+          "name": "2.1 Recipe Browser",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** MezzConfig → Just Enough Items (JEI)",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
               "id": "jei"
+            },
+            {
+              "type": "mod",
+              "id": "jeioptimizer"
+            },
+            {
+              "type": "mod",
+              "id": "mezzconfig"
+            },
+            {
+              "type": "mod",
+              "id": "mezzconfiggui"
             }
           ]
         },
         {
           "id": "step-2",
-          "name": "2.2 ข้อมูลในเกม",
-          "description": "Jade 🔍, AppleSkin\n\nดูข้อมูลบล็อกและสิ่งมีชีวิต ตรวจ HUD อาหารและความอิ่มเมื่อเล่นบนเซิร์ฟเวอร์",
+          "name": "2.2 Inspection & Food Information",
+          "description": "**Priority:** P0 · **ทดสอบ:** ตรวจ block/entity tooltip และค่าอาหารทั้ง client/server",
           "done": false,
           "itemRefs": [
             {
@@ -284,10 +228,18 @@
         },
         {
           "id": "step-3",
-          "name": "2.3 Inventory",
-          "description": "Balm → TrashSlot, Mouse Tweaks\n\nลากและเลื่อนไอเทมระหว่างช่อง ทดลองทิ้ง ไอเทมที่ไม่สำคัญ แล้วออกเข้าโลกใหม่ ต้องลง Balm ก่อน TrashSlot เพราะหน้ารุ่น NeoForge ระบุว่าเป็น dependency",
+          "name": "2.3 Inventory Controls",
+          "description": "**Priority:** P1 · **ทดสอบ:** ย้าย/ทิ้ง/คราฟต์ของ ตรวจจำนวนหลัง reconnect",
           "done": false,
           "itemRefs": [
+            {
+              "type": "mod",
+              "id": "mouse-tweaks"
+            },
+            {
+              "type": "mod",
+              "id": "durability-tooltip"
+            },
             {
               "type": "mod",
               "id": "balm"
@@ -295,13 +247,17 @@
             {
               "type": "mod",
               "id": "trashslot"
+            },
+            {
+              "type": "mod",
+              "id": "crafting-tweaks"
             }
           ]
         },
         {
           "id": "step-4",
-          "name": "2.4 แผนที่",
-          "description": "Xaero’s Minimap, Xaero’s World Map \n\nเปิดแผนที่ สร้าง waypoint เปลี่ยนมิติ แล้วออกและกลับเข้าเซิร์ฟเวอร์ เพื่อตรวจว่าข้อมูลยังอยู่",
+          "name": "2.4 Maps & Navigation UI",
+          "description": "**Priority:** P1 · **ทดสอบ:** สร้าง waypoint เดินข้าม chunk และตรวจแผนที่หลัง reconnect",
           "done": false,
           "itemRefs": [
             {
@@ -316,18 +272,10 @@
         },
         {
           "id": "step-5",
-          "name": "2.5 การแสดงผลฝั่งผู้เล่น",
-          "description": "Just Zoom, Cloth Config API → BetterF3\n\nทดสอบซูม ปุ่มลัด F3 และหน้า config รวมถึงตรวจปุ่มที่ชนกัน Cloth Config รองรับ NeoForge 26.1.2; ผู้พัฒนา BetterF3 แนะนำให้ใช้สำหรับหน้า config ผ่าน F3+M",
+          "name": "2.5 Zoom & Debug",
+          "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบ zoom/debug และปุ่มลัด",
           "done": false,
           "itemRefs": [
-            {
-              "type": "mod",
-              "id": "just-zoom"
-            },
-            {
-              "type": "mod",
-              "id": "cloth-config"
-            },
             {
               "type": "mod",
               "id": "betterf3"
@@ -335,33 +283,97 @@
             {
               "type": "mod",
               "id": "konkrete"
+            },
+            {
+              "type": "mod",
+              "id": "just-zoom"
             }
           ]
         },
         {
           "id": "step-6",
-          "name": "Other",
-          "description": "ใส่ใน resourcepacks ฝั่งผู้เล่น ทดสอบสระและวรรณยุกต์ในเมนู แชต และ tooltip; ไม่นับเป็นม็อดหรือใส่ใน mods ของเซิร์ฟเวอร์",
+          "name": "2.6 Tooltips & Notifications",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** YetAnotherConfigLib (YACL) → Better Advancements → Prism → Iceberg → Legendary Tooltips → Item Borders → Item Highlighter → Item Descriptions → Fragmentum → Loot Journal: Pickup Notifier",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
-              "id": "healing-campfire"
+              "id": "yacl"
             },
             {
               "type": "mod",
-              "id": "paper-books"
+              "id": "better-advancements"
             },
             {
               "type": "mod",
-              "id": "collective"
+              "id": "prism-lib"
+            },
+            {
+              "type": "mod",
+              "id": "legendary-tooltips"
+            },
+            {
+              "type": "mod",
+              "id": "item-borders"
+            },
+            {
+              "type": "mod",
+              "id": "item-highlighter"
+            },
+            {
+              "type": "mod",
+              "id": "item-descriptions"
+            },
+            {
+              "type": "mod",
+              "id": "fragmentum"
+            },
+            {
+              "type": "mod",
+              "id": "loot-journal"
+            },
+            {
+              "type": "mod",
+              "id": "iceberg"
             }
           ]
         },
         {
           "id": "step-7",
+          "name": "2.7 HUD & Client Cosmetics",
+          "description": "**Priority:** P2 · **ทดสอบ:** ทดสอบ HUD กับจำนวนหัวใจ/เกราะสูง ตรวจโมเดลและ texture โดยยังปิด shader",
+          "done": false,
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "entitytexturefeatures"
+            },
+            {
+              "type": "mod",
+              "id": "entity-model-features"
+            },
+            {
+              "type": "mod",
+              "id": "puzzles-lib"
+            },
+            {
+              "type": "mod",
+              "id": "new-health-bars"
+            },
+            {
+              "type": "mod",
+              "id": "overflowing-bars"
+            },
+            {
+              "type": "mod",
+              "id": "overloadedarmorbar"
+            }
+          ]
+        },
+        {
+          "id": "step-8",
           "name": "Integration",
-          "description": "ใช้สูตรจาก JEI จัดของใน Inventory ดูข้อมูลผ่าน Jade เปิดแผนที่ แล้วออกและกลับเข้าเซิร์ฟเวอร์ ตรวจ startup, world loading และอาการผิดปกติที่เพิ่งเกิดหลัง Batch 2",
+          "description": "ทดสอบชุดสะสม Batch 1–2 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
           "done": false,
           "itemRefs": []
         }
@@ -369,14 +381,14 @@
     },
     {
       "id": "batch-3-combat-progression",
-      "name": "Batch 3 — Travel and Survival",
-      "description": "โลกทดสอบ: ใช้โลกสะสมเดิมได้ แต่การตรวจ Waystone ที่เกิดในหมู่บ้านควรไปยัง chunk ที่ยังไม่เคยสร้าง เพราะโครงสร้างใหม่จะไม่ปรากฏย้อนหลังในพื้นที่เก่า หากต้องแยกตรวจการเกิดโครงสร้าง ให้ใช้โลกทดสอบใหม่เพิ่มเติม โดยเก็บโลกสะสมหลักไว้\n\nสถานะ: ทุก Step เป็น not_run ข้อมูลไฟล์เผยแพร่และ dependency ข้างต้นเป็นการตรวจแบบ static; ยังไม่มีการติดตั้งหรือทดสอบ Minecraft จริง หาก Step ใดมีปัญหาสำคัญ ให้ตรวจม็อดที่เพิ่งเพิ่มก่อนดำเนิน Step ถัดไป",
+      "name": "Batch 3 — Travel, Survival & Multiplayer Utilities",
+      "description": "การเดินทาง การตาย การกู้ไอเทม และระบบทีมพื้นฐานที่ใช้ตลอดแพ็ก\n\n**new_mods:** 23 · **inherited_mods:** 46 · **สะสมจากรายชื่อเดิมตามแผน:** 69",
       "order": 3,
       "steps": [
         {
           "id": "step-1",
-          "name": "3.1 Fast Travel",
-          "description": "Shogi → Waystones\n\nวางและเปิดใช้งาน Waystone สองจุด เดินทางไปกลับ ตรวจค่า XP/ข้อจำกัดการวาร์ป แล้วออกและเข้าเซิร์ฟเวอร์ใหม่ Balm ที่ Waystones ต้องใช้เป็นม็อดที่สืบทอดมาจาก Batch 2; ผู้พัฒนาระบุว่ารุ่น 26.1 ขึ้นไปต้องใช้ Shogi ด้วย",
+          "name": "3.1 Fast Travel & Exploration",
+          "description": "**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Shogi → Waystones → Recall Potion → Nature's Compass → Explorer's Compass → Immersive Overlays → Field Guide",
           "done": false,
           "itemRefs": [
             {
@@ -390,15 +402,7 @@
             {
               "type": "mod",
               "id": "ly-recall-potion"
-            }
-          ]
-        },
-        {
-          "id": "step-2",
-          "name": "3.2 Exploration",
-          "description": "Nature’s Compass, Explorer’s Compass\n\nค้นหา biome และ structure เดินทางไปยังเป้าหมาย ตรวจทิศทางที่แสดงร่วมกับแผนที่ Xaero จาก Batch 2 ทั้งสองมีไฟล์ NeoForge สำหรับ 26.1.x",
-          "done": false,
-          "itemRefs": [
+            },
             {
               "type": "mod",
               "id": "natures-compass"
@@ -410,19 +414,23 @@
             {
               "type": "mod",
               "id": "field-guide"
-            },
-            {
-              "type": "mod",
-              "id": "overloadedarmorbar"
             }
           ]
         },
         {
-          "id": "step-3",
-          "name": "3.3 พักระหว่างเดินทาง",
-          "description": "ทดลองถุงนอนและเปล ตรวจเวลา การเกิดใหม่ และพฤติกรรมเมื่อผู้เล่นหลายคนอยู่ในโลกเดียวกัน มีไฟล์ NeoForge 26.1.2",
+          "id": "step-2",
+          "name": "3.2 Rest & Survival",
+          "description": "",
           "done": false,
           "itemRefs": [
+            {
+              "type": "mod",
+              "id": "collective"
+            },
+            {
+              "type": "mod",
+              "id": "healing-campfire"
+            },
             {
               "type": "mod",
               "id": "comforts"
@@ -430,13 +438,17 @@
             {
               "type": "mod",
               "id": "bl4cks-sit"
+            },
+            {
+              "type": "mod",
+              "id": "dream-cocoon"
             }
           ]
         },
         {
-          "id": "step-4",
-          "name": "3.4 ย้ายสิ่งของในโลก",
-          "description": "ยกและวางหีบที่มีของกับสิ่งมีชีวิต ตรวจว่าของไม่หายหลังออกและเข้าโลกใหม่ ใช้ไฟล์ที่ระบุ NeoForge 26.1.2 โดยตรง",
+          "id": "step-3",
+          "name": "3.3 Carry & World Interaction",
+          "description": "**ทดสอบ:** ยก/วาง container และตรวจของไม่หายหรือซ้ำ",
           "done": false,
           "itemRefs": [
             {
@@ -446,9 +458,9 @@
           ]
         },
         {
-          "id": "step-5",
-          "name": "3.5 การตายและ XP",
-          "description": "เก็บ XP ลง Tome ตายด้วยของทดสอบ กลับไปเก็บของจากศพ แล้วตรวจจำนวนของและ XP หลัง reconnect ทั้งคู่มีไฟล์ NeoForge ที่ระบุรองรับ 26.1.2",
+          "id": "step-4",
+          "name": "3.4 Death, Accessories & XP",
+          "description": "**ทดสอบ:** ตาย เก็บ corpse คืน accessory/XP และตรวจจำนวนไอเทมหลัง restart",
           "done": false,
           "itemRefs": [
             {
@@ -457,15 +469,15 @@
             },
             {
               "type": "mod",
-              "id": "corpse-x-curios-api-compat"
-            },
-            {
-              "type": "mod",
               "id": "xp-tome"
             },
             {
               "type": "mod",
               "id": "curios"
+            },
+            {
+              "type": "mod",
+              "id": "corpse-x-curios-api-compat"
             },
             {
               "type": "mod",
@@ -482,14 +494,14 @@
           ]
         },
         {
-          "id": "step-7",
-          "name": "Others",
-          "description": "",
+          "id": "step-5",
+          "name": "3.5 Teams, Claims & Mining",
+          "description": "**ทดสอบ:** ตั้งทีม claim ให้สิทธิ์และขุดหมู่ ตรวจการป้องกันพื้นที่\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** FTB Library → FTB Teams → FTB Ultimine → FTB Chunks",
           "done": false,
           "itemRefs": [
             {
               "type": "mod",
-              "id": "alcocraft"
+              "id": "ftblibrary"
             },
             {
               "type": "mod",
@@ -497,26 +509,18 @@
             },
             {
               "type": "mod",
-              "id": "iron-furnaces"
+              "id": "ftbultimine"
             },
             {
               "type": "mod",
-              "id": "neo-origins"
-            },
-            {
-              "type": "mod",
-              "id": "dream-cocoon"
-            },
-            {
-              "type": "mod",
-              "id": "ftblibrary"
+              "id": "ftbchunks"
             }
           ]
         },
         {
           "id": "step-6",
           "name": "Integration",
-          "description": "ให้ผู้เล่นเดินทางด้วย Waystones และเข็มทิศ พัก ค้นของหลังตาย และกลับเข้าเซิร์ฟเวอร์ ตรวจ startup, world loading และการทำงานร่วมกับ Batch 1–2",
+          "description": "",
           "done": false,
           "itemRefs": []
         }

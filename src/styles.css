@@ -4250,7 +4250,6 @@ main:focus {
   font-size: 13px;
   line-height: 1.55;
   color: var(--text-secondary);
-  white-space: pre-wrap;
 }
 .plan-batch-progress {
   height: 5px;
@@ -4946,7 +4945,48 @@ main:focus {
   color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.55;
-  white-space: pre-wrap;
+}
+.markdown-content > :first-child {
+  margin-top: 0;
+}
+.markdown-content > :last-child {
+  margin-bottom: 0;
+}
+.markdown-content p,
+.markdown-content ul,
+.markdown-content ol,
+.markdown-content pre,
+.markdown-content blockquote {
+  margin: 0 0 0.65em;
+}
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.4em;
+}
+.markdown-content li + li {
+  margin-top: 0.25em;
+}
+.markdown-content a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.markdown-content code {
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  background: var(--neutral-soft);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+.markdown-content pre {
+  overflow-x: auto;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--neutral-soft);
+}
+.markdown-content pre code {
+  padding: 0;
+  background: transparent;
 }
 .preview-plan-repeat-note,
 .preview-plan-empty {
