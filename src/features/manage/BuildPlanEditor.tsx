@@ -1181,7 +1181,7 @@ export function BuildPlanEditor({
           steps: [],
         },
       ]);
-      setExpanded((current) => new Set(current).add(id));
+      setExpandedBatchId(id);
     }
     notify({
       title: form.batch ? `Saved ${name}` : `Added ${name}`,
