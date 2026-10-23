@@ -3,16 +3,17 @@ import {
   contentKeys,
   contentTypes,
   type Batch,
-  type BatchContentRef,
   type BatchFile,
   type Collection,
   type ContentItem,
   type ContentKey,
   type ContentType,
 } from "./schema";
+import { itemRefsOf } from "./batches";
 
-/** Every collection a batch can reference; mods live in `modIds`, the rest in `contentRefs`. */
+/** Every collection a Step can reference. */
 export type PlanItemType = "mod" | ContentType;
+export type BatchContentRef = { type: ContentType; id: string };
 
 export const contentKeyByType = Object.fromEntries(
   contentKeys.map((key) => [contentCollections[key].type, key]),
@@ -43,27 +44,9 @@ export const installGuidance: Record<PlanItemType, string> = {
 };
 
 export function contentRefsOf(batch: Batch): BatchContentRef[] {
-  return batch.contentRefs ?? [];
-}
-
-const sameRef = (a: BatchContentRef, b: BatchContentRef) =>
-  a.type === b.type && a.id === b.id;
-
-/** Adds an item once; an item already in this batch (same type and ID) is not added again. */
-export function assignContent(batch: Batch, ref: BatchContentRef): Batch {
-  const refs = contentRefsOf(batch);
-  return refs.some((other) => sameRef(other, ref))
-    ? batch
-    : { ...batch, contentRefs: [...refs, { type: ref.type, id: ref.id }] };
-}
-
-/** Removes one reference; an empty list is dropped so the batch looks like it did before. */
-export function unassignContent(batch: Batch, ref: BatchContentRef): Batch {
-  const refs = contentRefsOf(batch).filter((other) => !sameRef(other, ref));
-  if (refs.length) return { ...batch, contentRefs: refs };
-  const { contentRefs: _removed, ...rest } = batch;
-  void _removed;
-  return rest;
+  return itemRefsOf(batch).flatMap((ref) =>
+    ref.type === "mod" ? [] : [{ type: ref.type, id: ref.id }],
+  );
 }
 
 /** Drops references to deleted entries of one type; other types and mods are untouched. */
@@ -75,15 +58,15 @@ export function removeContentFromBatches(
   const removed = new Set(ids);
   return {
     ...file,
-    batches: file.batches.map((batch) =>
-      contentRefsOf(batch).some(
-        (ref) => ref.type === type && removed.has(ref.id),
-      )
-        ? contentRefsOf(batch)
-            .filter((ref) => ref.type === type && removed.has(ref.id))
-            .reduce(unassignContent, batch)
-        : batch,
-    ),
+    batches: file.batches.map((batch) => ({
+      ...batch,
+      steps: batch.steps.map((step) => ({
+        ...step,
+        itemRefs: step.itemRefs.filter(
+          (ref) => ref.type !== type || !removed.has(ref.id),
+        ),
+      })),
+    })),
   };
 }
 

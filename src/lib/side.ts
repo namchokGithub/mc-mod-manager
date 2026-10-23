@@ -25,13 +25,13 @@ export function sideClass(mod: { side?: unknown }): SideClass {
     : "unknown";
 }
 
-/** Players get client and both-side mods; the server gets server and both; Unknown only in All. */
+/** Players get client and both-side mods; the Server view lists server-only mods. */
 export function matchesSideView(mod: { side?: unknown }, view: SideView) {
   if (view === "all") return true;
   const side = sideClass(mod);
   return view === "players"
     ? side === "client" || side === "both"
-    : side === "server" || side === "both";
+    : side === "server";
 }
 
 export type SideCounts = Record<SideClass, number> & {
@@ -58,7 +58,7 @@ export function sideCounts(mods: { side?: unknown }[]): SideCounts {
 export function sideViewCounts(counts: SideCounts): Record<SideView, number> {
   return {
     players: counts.clientPack,
-    server: counts.serverPack,
+    server: counts.server,
     all: counts.total,
   };
 }

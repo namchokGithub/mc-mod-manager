@@ -1,5 +1,5 @@
 import { useId, useMemo, useState } from "react";
-import { ArrowRight, GitBranch } from "lucide-react";
+import { ArrowRight, GitBranch, ListChecks } from "lucide-react";
 import { ModArtwork } from "../../components/ModArtwork";
 import { Button } from "../../components/ui/button";
 import { Combobox } from "../../components/ui/combobox";
@@ -10,7 +10,11 @@ import {
   type DependencyEntry,
   type DependencySource,
 } from "../../lib/dependencyOverview";
-import type { Mod } from "../../lib/schema";
+import {
+  modAssignmentLocations,
+  type ModAssignmentLocation,
+} from "../../lib/batches";
+import type { BatchFile, Mod } from "../../lib/schema";
 
 function sourceText(source: DependencySource): string {
   return source === "manual"
@@ -18,6 +22,13 @@ function sourceText(source: DependencySource): string {
     : source === "unknown"
       ? "Unknown metadata"
       : sourceLabels[source];
+}
+
+function planLocationText(locations: ModAssignmentLocation[]): string {
+  const first = locations[0];
+  if (!first) return "Not in plan";
+  const extra = locations.length - 1;
+  return `In plan: ${first.batchName} · ${first.stepName}${extra ? ` · +${extra} ${extra === 1 ? "location" : "locations"}` : ""}`;
 }
 
 function DependencyRow({
@@ -50,8 +61,7 @@ function DependencyRow({
           <button
             type="button"
             className="plan-mod-open"
-            onClick={() => onOpenMod(target)}
-          >
+            onClick={() => onOpenMod(target)}>
             {entry.label}
           </button>
         ) : (
@@ -70,9 +80,11 @@ function DependencyRow({
 /** Read-only, collection-wide lookup in both dependency directions. */
 export function DependencyLookup({
   mods,
+  batches,
   onOpenMod,
 }: {
   mods: Mod[];
+  batches: BatchFile;
   onOpenMod: (mod: Mod) => void;
 }) {
   const [selectedId, setSelectedId] = useState("");
@@ -91,6 +103,7 @@ export function DependencyLookup({
       selectedId ? collectionDependencyLookup(selectedId, mods) : undefined,
     [selectedId, mods],
   );
+  const assignments = useMemo(() => modAssignmentLocations(batches), [batches]);
 
   return (
     <div className="dependency-lookup">
@@ -127,16 +140,14 @@ export function DependencyLookup({
             <Button
               variant="secondary"
               size="small"
-              onClick={() => onOpenMod(lookup.mod)}
-            >
+              onClick={() => onOpenMod(lookup.mod)}>
               Open mod <ArrowRight size={14} />
             </Button>
           </div>
           <div className="lookup-columns">
             <section
               className="lookup-panel"
-              aria-labelledby="lookup-needs-title"
-            >
+              aria-labelledby="lookup-needs-title">
               <div className="lookup-panel-head">
                 <h3 id="lookup-needs-title">Dependencies &amp; conflicts</h3>
                 <span>{lookup.dependencies.length}</span>
@@ -164,8 +175,7 @@ export function DependencyLookup({
             </section>
             <section
               className="lookup-panel"
-              aria-labelledby="lookup-used-by-title"
-            >
+              aria-labelledby="lookup-used-by-title">
               <div className="lookup-panel-head">
                 <h3 id="lookup-used-by-title">Used by</h3>
                 <span>{lookup.usedBy.length}</span>
@@ -181,13 +191,16 @@ export function DependencyLookup({
                         <button
                           type="button"
                           className="plan-mod-open"
-                          onClick={() => onOpenMod(mod)}
-                        >
+                          onClick={() => onOpenMod(mod)}>
                           {mod.name}
                         </button>
                         <p>
                           From {sourceText(entry.source)}
                           {entry.linked ? " · Confirmed link" : ""}
+                        </p>
+                        <p className="lookup-plan-location">
+                          <ListChecks size={13} aria-hidden="true" />{" "}
+                          {planLocationText(assignments.get(mod.id) ?? [])}
                         </p>
                       </div>
                     </li>

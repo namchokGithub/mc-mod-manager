@@ -39,8 +39,15 @@ const batch = (
   name: id,
   description: "",
   order: 1,
-  modIds,
-  checklist: [],
+  steps: [
+    {
+      id: "install",
+      name: "Install",
+      description: "",
+      done: false,
+      itemRefs: modIds.map((id) => ({ type: "mod" as const, id })),
+    },
+  ],
   ...extra,
 });
 
@@ -106,9 +113,21 @@ const data = collection(
     batch("foundation", ["sodium", "lithium"], {
       name: "Foundation & Performance",
       description: "Install first.\nThen launch.",
-      checklist: [
-        { id: "s1", text: "Launch Minecraft", done: true },
-        { id: "s2", text: "Create a test world", done: false },
+      steps: [
+        {
+          id: "s1",
+          name: "Launch Minecraft",
+          description: "",
+          done: true,
+          itemRefs: [{ type: "mod", id: "sodium" }],
+        },
+        {
+          id: "s2",
+          name: "Create a test world",
+          description: "",
+          done: false,
+          itemRefs: [{ type: "mod", id: "lithium" }],
+        },
       ],
     }),
     batch("content", ["addon", "gone"], { name: "Content" }),
@@ -129,16 +148,16 @@ describe("Markdown guide", () => {
   });
 
   it("lists batches in order with mods as unchecked items and links", () => {
-    expect(guide.indexOf("## Batch 1 — Foundation & Performance")).toBeLessThan(
-      guide.indexOf("## Batch 2 — Content"),
-    );
+    expect(
+      guide.indexOf("## Batch 1 — Foundation & Performance"),
+    ).toBeLessThan(guide.indexOf("## Batch 2 — Content"));
     expect(guide).toContain(
       "- [ ] Sodium 0.6.0 — [Modrinth](https://modrinth.com/mod/sodium)",
     );
     expect(guide).toContain("- [ ] Lithium — CurseForge");
     expect(guide).toContain("  - Minecraft: 26.1.2 (Modrinth)");
     expect(guide).toContain("  - Modloaders: NeoForge (Modrinth)");
-    expect(guide).toContain("  - Planning status: installed");
+    expect(guide).toContain("  - Planning status: Installed");
     expect(guide).toContain("  - Notes: Client only.");
   });
 
@@ -146,13 +165,13 @@ describe("Markdown guide", () => {
     expect(guide).toContain("Install first.  \nThen launch.");
   });
 
-  it("exports checklist steps in order and always unchecked", () => {
-    const steps = guide.slice(guide.indexOf("### Testing checklist"));
+  it("exports Steps in order and always unchecked", () => {
+    const steps = guide.slice(guide.indexOf("### Installation steps"));
     expect(steps.indexOf("- [ ] Launch Minecraft")).toBeLessThan(
       steps.indexOf("- [ ] Create a test world"),
     );
     expect(guide).not.toContain("[x]");
-    expect(data.batches.batches[0]?.checklist[0]?.done).toBe(true);
+    expect(data.batches.batches[0]?.steps[0]?.done).toBe(true);
   });
 
   it("reports dependency status and unknown metadata without inventing data", () => {
@@ -216,6 +235,24 @@ describe("dependency warnings", () => {
 });
 
 describe("options", () => {
+  it("exports a minimal Batch and Step outline with mod categories", () => {
+    const guide = buildGuide(
+      data,
+      { ...defaultGuideOptions, minimal: true },
+      generatedAt,
+    );
+
+    expect(guide).toContain("## Batch 1 — Foundation & Performance");
+    expect(guide).toContain("2 mods");
+    expect(guide).toContain("### Launch Minecraft");
+    expect(guide).toContain("1 mod");
+    expect(guide).toContain("- Sodium — c");
+    expect(guide).toContain("- Lithium — c");
+    expect(guide).not.toContain("Helloworld: Beyond the Descendant");
+    expect(guide).not.toContain("Dependencies");
+    expect(guide).not.toContain("Installation steps");
+  });
+
   it("exports one batch with its real number", () => {
     const guide = buildGuide(
       data,
@@ -234,13 +271,13 @@ describe("options", () => {
         ...defaultGuideOptions,
         includeDependencies: false,
         includeNotes: false,
-        includeChecklist: false,
+        includeSteps: false,
       },
       generatedAt,
     );
     expect(guide).not.toContain("### Dependencies");
     expect(guide).not.toContain("Notes:");
-    expect(guide).not.toContain("Testing checklist");
+    expect(guide).not.toContain("Installation steps");
     expect(guide).not.toContain("[ ]");
     expect(guide).toContain("- Lithium — CurseForge");
   });
@@ -325,7 +362,7 @@ describe("file names", () => {
     expect(guideFilename("Pack", "text", "Batch 1 / Core")).toBe(
       "pack-batch-1-core-build-guide.txt",
     );
-    expect(guideFilename("Café ../../etc", "markdown")).toBe(
+    expect(guideFilename("Caf\u00e9 ../../etc", "markdown")).toBe(
       "cafe-etc-build-guide.md",
     );
     expect(guideFilename("!!!", "markdown")).toBe("modpack-build-guide.md");

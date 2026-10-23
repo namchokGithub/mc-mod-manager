@@ -452,7 +452,10 @@ describe("planning the import", () => {
     );
     expect(plan.created.map((mod) => mod.name)).toEqual(["Main", "Lib"]);
     expect(plan.skipped).toEqual([
-      { name: "Have", reason: "Already in the collection as “Have”" },
+      {
+        name: "Have",
+        reason: "Already in the collection as \u201cHave\u201d",
+      },
       { name: "Lib", reason: "Already in this import" },
     ]);
     expect(JSON.stringify(existing)).toBe(before);
@@ -487,8 +490,15 @@ describe("planning the import", () => {
           name: "B",
           description: "",
           order: 1,
-          modIds: ["lib"],
-          checklist: [],
+          steps: [
+            {
+              id: "install",
+              name: "Install",
+              description: "",
+              done: false,
+              itemRefs: ["lib"].map((id) => ({ type: "mod" as const, id })),
+            },
+          ],
         },
       ]),
       inbox: {

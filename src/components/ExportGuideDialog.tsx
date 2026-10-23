@@ -75,8 +75,8 @@ function ExportGuideForm({
     return (
       <>
         <p className="mr-hint">
-          The build plan has no batches yet. Add a batch in Manage → Build plan
-          to export a guide.
+          The build plan has no batches yet. Add a batch in Manage → Build
+          plan to export a guide.
         </p>
         <div className="dialog-actions">
           <Button variant="ghost" onClick={onDone}>
@@ -117,15 +117,17 @@ function ExportGuideForm({
       <div className="guide-checks" role="group" aria-label="Sections">
         {(
           [
+            ["minimal", "Minimal outline"],
             ["includeDependencies", "Dependencies & warnings"],
             ["includeNotes", "Mod notes"],
-            ["includeChecklist", "Installation checklist"],
+            ["includeSteps", "Installation steps"],
           ] as const
         ).map(([key, label]) => (
           <label key={key} className="mr-check">
             <input
               type="checkbox"
               checked={options[key]}
+              disabled={options.minimal && key !== "minimal"}
               onChange={(event) => set({ [key]: event.target.checked })}
             />
             {label}

@@ -1,4 +1,4 @@
-import { batchMods, orderedBatches, withOrder } from "./batches";
+import { batchMods, modIdsOf, orderedBatches, withOrder } from "./batches";
 import {
   batchDependencyOverview,
   type DependencyEntry,
@@ -11,7 +11,6 @@ import {
   contentKeys,
   contentTypes,
   type Batch,
-  type BatchContentRef,
   type Collection,
   type ContentKey,
   type Mod,
@@ -32,7 +31,16 @@ export type BatchSummary = {
   /** Resource packs, data packs, and shaders in this batch that still exist. */
   contentCount: number;
   /** Their references whose entry no longer exists. */
-  missingContent: BatchContentRef[];
+  missingContent: ReturnType<typeof contentRefsOf>;
+  /** Dependency issues scoped to this batch, preserving their owning mod and labels. */
+  issues: {
+    requiredMissing: DependencyIssue[];
+    optionalMissing: DependencyIssue[];
+    unresolved: DependencyIssue[];
+    later: DependencyIssue[];
+    /** Mods without dependency metadata, so their dependencies cannot be checked. */
+    unknown: Mod[];
+  };
 };
 
 export type PlanningDashboard = {
@@ -83,7 +91,7 @@ export type PlanningDashboard = {
     deletedContentRefs: {
       batch: Batch;
       position: number;
-      refs: BatchContentRef[];
+      refs: ReturnType<typeof contentRefsOf>;
     }[];
   };
 };
@@ -100,7 +108,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
   const batches = orderedBatches(collection.batches);
   const known = new Set(mods.map((mod) => mod.id));
   const assigned = new Set(
-    batches.flatMap((batch) => batch.modIds.filter((id) => known.has(id))),
+    batches.flatMap((batch) => modIdsOf(batch).filter((id) => known.has(id))),
   );
   const unassigned = mods.filter((mod) => !assigned.has(mod.id));
 
@@ -114,8 +122,15 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
         name: "All mods",
         description: "",
         order: 1,
-        modIds: mods.map((mod) => mod.id),
-        checklist: [],
+        steps: [
+          {
+            id: "all-mods",
+            name: "All mods",
+            description: "",
+            done: false,
+            itemRefs: mods.map((mod) => ({ type: "mod" as const, id: mod.id })),
+          },
+        ],
       },
     ]),
     mods,
@@ -167,21 +182,37 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
     let missingRequired = 0;
     let unresolvedCount = 0;
     let laterCount = 0;
-    for (const { mod, entries } of overview.mods)
+    const issues: BatchSummary["issues"] = {
+      requiredMissing: [],
+      optionalMissing: [],
+      unresolved: [],
+      later: [],
+      unknown: [],
+    };
+    for (const { mod, source, entries } of overview.mods) {
+      if (source === "unknown") issues.unknown.push(mod);
       for (const entry of entries) {
         if (
           entry.relation === "incompatible" ||
           entry.relation === "discouraged"
         )
           continue;
-        if (entry.status === "unresolved") unresolvedCount += 1;
-        else if (entry.status === "missing" && entry.relation === "required")
-          missingRequired += 1;
+        if (entry.status === "unresolved") {
+          unresolvedCount += 1;
+          issues.unresolved.push({ mod, entry });
+        } else if (entry.status === "missing") {
+          if (entry.relation === "required") {
+            missingRequired += 1;
+            issues.requiredMissing.push({ mod, entry });
+          } else issues.optionalMissing.push({ mod, entry });
+        }
         if (entry.laterOnly) {
           laterCount += 1;
+          issues.later.push({ mod, entry });
           later.push({ mod, entry, batch, position });
         }
       }
+    }
     if (gone.length) deletedRefs.push({ batch, position, ids: gone });
     const content = batchContent(batch, collection);
     const missingContent = contentTypes.flatMap((type) =>
@@ -202,6 +233,7 @@ export function planningDashboard(collection: Collection): PlanningDashboard {
         0,
       ),
       missingContent,
+      issues,
     });
   });
 

@@ -5,7 +5,7 @@
     "version": "1.21",
     "category": "Font",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://www.curseforge.com/minecraft/texture-packs/font-thaifix/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
@@ -458,7 +458,7 @@
       "Library",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/geckolib",
@@ -1377,7 +1377,7 @@
     "tags": [
       "Social"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/chat-heads",
@@ -1982,7 +1982,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sodium-extra",
@@ -2212,7 +2212,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/advancement-plaques",
@@ -2575,7 +2575,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ct-overhaul-village",
@@ -2717,7 +2717,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/shoulder-surfing-reloaded",
@@ -3098,7 +3098,7 @@
       "Decoration",
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lambdynamiclights",
@@ -3180,74 +3180,18 @@
     ]
   },
   {
-    "id": "connected-glass",
-    "name": "Connected Glass",
-    "version": "1.1.14-neoforge-mc26.1",
-    "category": "Decoration",
-    "tags": [],
-    "status": "planned",
-    "side": "both",
-    "source": "Modrinth",
-    "sourceUrl": "https://modrinth.com/mod/connected-glass",
-    "description": "Connected Glass adds new types of glass with connecting textures!",
-    "dependencies": [
-      "SuperMartijn642's Core Lib",
-      "Fusion (Connected Textures)"
-    ],
-    "notes": "",
-    "imageUrl": "https://cdn.modrinth.com/data/DghO0R02/icon.png",
-    "modrinth": {
-      "projectId": "DghO0R02",
-      "slug": "connected-glass",
-      "versionId": "TVXgEaL7",
-      "versionNumber": "1.1.14-neoforge-mc26.1",
-      "versionType": "release",
-      "datePublished": "2026-07-08T13:47:09.859393Z",
-      "gameVersions": [
-        "26.1",
-        "26.1.1",
-        "26.1.2"
-      ],
-      "loaders": [
-        "neoforge"
-      ],
-      "dependencies": [
-        {
-          "projectId": "rOUBggPv",
-          "versionId": null,
-          "type": "required",
-          "name": "SuperMartijn642's Core Lib"
-        },
-        {
-          "projectId": "p19vrgc2",
-          "versionId": null,
-          "type": "required",
-          "name": "Fusion (Connected Textures)"
-        },
-        {
-          "projectId": "B0g2vT6l",
-          "versionId": null,
-          "type": "optional",
-          "name": "Rechiseled"
-        }
-      ],
-      "syncedAt": "2026-10-17T19:43:12.376Z"
-    },
-    "addedAt": "2026-10-18T09:09:12.789Z"
-  },
-  {
     "id": "fusion-connected-textures",
     "name": "Fusion (Connected Textures)",
     "version": "1.3.16-neoforge-mc26.1",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fusion-connected-textures",
     "description": "Fusion allows resource packs to use additional texture and model types such as connected textures!",
     "dependencies": [],
-    "notes": "",
+    "notes": "เอาไว้ลงกับ shader pack",
     "imageUrl": "https://cdn.modrinth.com/data/p19vrgc2/8a9940a468bb536f7402b389d583e7f070ee14fb_96.webp",
     "modrinth": {
       "projectId": "p19vrgc2",
@@ -3576,7 +3520,7 @@
     "version": "26.1.819+neoforge",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/rei",
@@ -3985,7 +3929,7 @@
       "Management",
       "Storage"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventoryhudplus",
@@ -4259,7 +4203,7 @@
       "Game Mechanics",
       "Mobs"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/visible-traders",
@@ -4540,7 +4484,7 @@
     "version": "26.1.2-48-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/neat",
@@ -4789,7 +4733,7 @@
     "version": "26.1.2-2.0.2.1",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/irons-jewelry",
@@ -5013,7 +4957,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-profiles-next",
@@ -5209,7 +5153,7 @@
     "version": "1.4.0",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/keybindspurger",
@@ -5461,7 +5405,7 @@
     "version": "26.1.2_neo-14.0.0",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/the-one-probe",
@@ -5731,7 +5675,7 @@
     "version": "2.1-neoforge-26.1.2",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/nbt-autocomplete",
@@ -5857,7 +5801,7 @@
       "Game Mechanics",
       "Mobs"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/adorable-eggs",
@@ -5982,7 +5926,7 @@
       "Technology",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/more-beautiful-torches",
@@ -6165,7 +6109,7 @@
       "Decoration",
       "Game Mechanics"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-particles",
@@ -6270,7 +6214,7 @@
       "Game Mechanics",
       "Storage"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-interactions",
@@ -6329,7 +6273,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/particle-effects",
@@ -6373,7 +6317,7 @@
     "tags": [
       "Decoration"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/leons-spooky-paintings",
@@ -6563,7 +6507,7 @@
     "version": "1.1.2-neoforge-mc26.1",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/additional-lanterns",
@@ -6606,7 +6550,7 @@
     "version": "1.7.0",
     "category": "Equipment",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/armor-of-the-ages",
@@ -6650,7 +6594,7 @@
       "Geyser",
       "Social"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/emotecraft",
@@ -6841,7 +6785,7 @@
     "tags": [
       "Equipment"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/elytra-trims",
@@ -6997,7 +6941,7 @@
     "version": "26.1.2-1.1.0",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/irons-artifice",
@@ -7082,7 +7026,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jeioptimizer",
@@ -7116,7 +7060,7 @@
     "tags": [
       "Equipment"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yori3os-grappling-hooks",
@@ -7387,7 +7331,7 @@
       "Game Mechanics",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/betternether-neoforge",
@@ -7447,7 +7391,7 @@
       "Utility",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/bclib-neoforge",
@@ -7500,7 +7444,7 @@
       "Utility",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/worldweaver-neoforge",
@@ -7553,7 +7497,7 @@
       "Technology",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/wunderlib-neoforge",
@@ -7590,7 +7534,7 @@
       "Game Mechanics",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/betterend-neoforge",
@@ -7715,7 +7659,7 @@
     "version": "1.8.5+26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/immersive-overlays",
@@ -7855,7 +7799,7 @@
     "version": "2.1.2",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/better-library",
@@ -7892,7 +7836,7 @@
     "tags": [
       "Social"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ears",
@@ -8003,7 +7947,7 @@
     "version": "26.1.2-2.0.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sleep-tight",
@@ -8047,7 +7991,7 @@
       "Cursed",
       "Mobs"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mutants-and-zombies",
@@ -8082,7 +8026,7 @@
     "version": "3.1.5-26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/drippy-loading-screen",
@@ -8137,7 +8081,7 @@
     "version": "3.9.14-26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fancymenu",
@@ -8185,7 +8129,7 @@
     "version": "1.0.16-26.1.1-neoforge",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/melody",
@@ -8361,7 +8305,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/configmanager",
@@ -8476,7 +8420,7 @@
       "Social",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/more-music-discs",
@@ -8519,7 +8463,7 @@
     "version": "26.1.2-neoforge-2.7",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/deimos",
@@ -9002,13 +8946,13 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/gear-tinkering",
     "description": "Adds new uses for the smithing table : repair cost resetting, trim removal, curse removal, enchantment transferring and book unsigning!",
     "dependencies": [],
-    "notes": "",
+    "notes": "Download from Modrinth",
     "imageUrl": "https://cdn.modrinth.com/data/LZIfwEFj/4671f289793bca5e8d3a02649d86b9a4750c2b93.png",
     "modrinth": {
       "projectId": "LZIfwEFj",
@@ -9092,7 +9036,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cursorcentered-fix",
@@ -9185,7 +9129,7 @@
     "version": "26.1.2-4.2-fabric+forge+neo",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cycle-paintings",
@@ -9711,13 +9655,13 @@
     "id": "omnipots",
     "name": "Omni Pots",
     "version": "2.0.0",
-    "category": "Uncategorized",
+    "category": "Utility",
     "tags": [
       "Neoforge"
     ],
     "status": "planned",
     "side": "both",
-    "source": "Other",
+    "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/omni-pots",
     "description": "A compact and automated farming solution. Grow and harvest crops effortlessly in specialized pots.",
     "dependencies": [],
@@ -9765,14 +9709,10 @@
       "verifiedAt": "2026-10-18T08:17:32.714Z"
     },
     "addedAt": "2026-10-18T09:09:12.789Z",
-    "ignoredDependencies": [
-      {
-        "id": "jade",
-        "reason": "Only needed by another loader's build; this pack uses NeoForge."
-      },
+    "dependencyLinks": [
       {
         "id": "sophisticatedstorage",
-        "reason": "Only needed by another loader's build; this pack uses NeoForge."
+        "modId": "sophisticated-storage"
       }
     ]
   },
@@ -10018,7 +9958,7 @@
     "version": "18.0.2",
     "category": "Uncategorized",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/modmenu",
@@ -10106,13 +10046,13 @@
     "id": "morevillagers",
     "name": "More Villagers",
     "version": "8.0.0",
-    "category": "Uncategorized",
+    "category": "Addons",
     "tags": [
       "Neoforge"
     ],
     "status": "planned",
     "side": "both",
-    "source": "Other",
+    "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/more-villagers",
     "description": "Adds new villager jobs, trades, and workstations!",
     "dependencies": [],
@@ -10481,7 +10421,7 @@
     "version": "2.4.2",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-windows",
@@ -10515,7 +10455,7 @@
     "version": "1.2.1",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-fences-and-walls",
@@ -10549,7 +10489,7 @@
     "version": "1.1.5",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-doors",
@@ -10619,7 +10559,7 @@
     "version": "1.1.1",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-paths-and-pavings",
@@ -10653,7 +10593,7 @@
     "version": "1.1.0",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-paintings",
@@ -10687,7 +10627,7 @@
     "version": "1.1.5",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-trapdoors",
@@ -10755,7 +10695,7 @@
     "version": "26.1.2-1.6",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-biomes-o-plenty",
@@ -10871,7 +10811,7 @@
     "version": "26.1.2-1.1",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/addonslib",
@@ -12730,7 +12670,9 @@
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
     "description": "",
-    "dependencies": [],
+    "dependencies": [
+      "framework"
+    ],
     "notes": "Imported from refurbished_furniture-neoforge-26.1.2-1.0.23.jar.",
     "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/934/904/64/64/638411339753659456.png",
     "file": {
@@ -12755,7 +12697,7 @@
         "neoforge"
       ],
       "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
-      "verifiedAt": "2026-10-18T14:55:25.415Z"
+      "verifiedAt": "2026-10-22T21:45:37.378Z"
     },
     "addedAt": "2026-10-18T14:53:14.887Z"
   },
@@ -12767,7 +12709,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/connectivity",
@@ -13636,7 +13578,7 @@
     "version": "26.1.0",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cut-through",
@@ -13765,7 +13707,7 @@
     "version": "26.1.0",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/trading-post",
@@ -13808,7 +13750,7 @@
     "version": "26.1.1",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fast-item-frames",
@@ -13897,7 +13839,7 @@
       "Transportation",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/vehicle-upgrade",
@@ -13942,7 +13884,7 @@
     "tags": [
       "Transportation"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/portable-hole",
@@ -14028,7 +13970,7 @@
     "version": "26.1.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/stonecutting-upgrade",
@@ -14071,7 +14013,7 @@
     "version": "26.1.0",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/slot-cycler",
@@ -14117,7 +14059,7 @@
       "Mobs",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/eternal-nether",
@@ -14205,7 +14147,7 @@
     "version": "26.1.0",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/easy-magic",
@@ -14293,7 +14235,7 @@
     "version": "26.1.5",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/paper-doll",
@@ -14336,7 +14278,7 @@
     "version": "26.1.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/pick-up-notifier",
@@ -14474,7 +14416,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
@@ -14817,7 +14759,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-porcupine",
@@ -14903,7 +14845,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-harp-seal",
@@ -15241,7 +15183,7 @@
     "version": "1.0.1-neoforge-26.1.1.8",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-white-rhinoceros",
@@ -15363,7 +15305,7 @@
     "version": "1.0.0-neoforge-26.2.0.54",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-bison",
@@ -15451,7 +15393,7 @@
     "version": "1.0.0-neoforge-26.2.0.88",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-capybara",
@@ -15580,7 +15522,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-mouse",
@@ -15667,7 +15609,7 @@
     "version": "1.0.0-neoforge-26.1.1.1",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-red-river-hog",
@@ -15796,7 +15738,7 @@
     "tags": [
       "Magic"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/tense-enchantment",
@@ -15848,7 +15790,7 @@
     "tags": [
       "Magic"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sniper-enchantment",
@@ -15952,7 +15894,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ly-knowledge-book",
@@ -16000,7 +15942,7 @@
       "Game Mechanics",
       "Storage"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ly-experience-book",
@@ -16244,7 +16186,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/enchantments-expansion",
@@ -16310,5 +16252,272 @@
       ]
     },
     "addedAt": "2026-10-20T14:15:11.308Z"
+  },
+  {
+    "id": "crafting-tweaks",
+    "name": "Crafting Tweaks",
+    "version": "26.1.2.3+neoforge-26.1.2",
+    "category": "Management",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/crafting-tweaks",
+    "description": "Allows you to rotate, balance or clear crafting grids by the press of a button.",
+    "dependencies": [
+      "Balm"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DMu0oBKf/32bc48587e2c1b0457698a9f4f9ecf3bbda6b42b_96.webp",
+    "modrinth": {
+      "projectId": "DMu0oBKf",
+      "slug": "crafting-tweaks",
+      "versionId": "1c8Vvgy1",
+      "versionNumber": "26.1.2.3+neoforge-26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-08-21T05:49:50.089863Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "MBAkmtvl",
+          "versionId": null,
+          "type": "required",
+          "name": "Balm"
+        }
+      ],
+      "syncedAt": "2026-10-22T14:42:39.277Z"
+    },
+    "addedAt": "2026-10-22T14:42:41.418Z"
+  },
+  {
+    "id": "polymorph-plus",
+    "name": "Polymorph+",
+    "version": "1.4.2+26.1.2-neoforge",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/polymorph_plus",
+    "description": "(26.1.2 port) No more recipe conflicts! Adds an option to choose the crafting result if more than one is available.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/3uT4J18I/bfee2a3bff695c2ad9ea1034161b7a40a131f949_96.webp",
+    "modrinth": {
+      "projectId": "3uT4J18I",
+      "slug": "polymorph_plus",
+      "versionId": "lsid09n6",
+      "versionNumber": "1.4.2+26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-18T17:20:27.880586Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-22T14:43:10.968Z"
+    },
+    "addedAt": "2026-10-22T14:43:13.336Z"
+  },
+  {
+    "id": "trinkets-updated",
+    "name": "Trinkets Updated",
+    "version": "4.0.1+26.1",
+    "category": "Equipment",
+    "tags": [
+      "Library",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/trinkets-updated",
+    "description": "A modern data driven accessory mod. Updated fork of trinkets for 1.21.11 and beyond.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/XaT8sLP6/3749d37537cf7f2a31d7208a231069f2ba6f494b_96.webp",
+    "modrinth": {
+      "projectId": "XaT8sLP6",
+      "slug": "trinkets-updated",
+      "versionId": "XkGsalta",
+      "versionNumber": "4.0.1+26.1",
+      "versionType": "release",
+      "datePublished": "2026-09-26T07:29:59.720989Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-22T14:44:29.446Z"
+    },
+    "addedAt": "2026-10-22T14:44:32.130Z"
+  },
+  {
+    "id": "loot-integrations-when-dungeons-arise",
+    "name": "Loot Integrations: When Dungeons Arise & Co",
+    "version": "1.8",
+    "category": "Addons",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-when-dungeons-arise",
+    "description": "When Dungeons Arise & Co",
+    "dependencies": [
+      "lootintegrations"
+    ],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1119/904/64/64/638674492936581599.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1.8",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-when-dungeons-arise",
+      "verifiedAt": "2026-10-22T21:42:06.186Z"
+    },
+    "addedAt": "2026-10-22T16:33:41.235Z"
+  },
+  {
+    "id": "framework",
+    "name": "Framework",
+    "version": "0.13.27",
+    "category": "API and Library",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/framework",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/871/312/64/64/638288810018379517.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "0.13.27",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/framework",
+      "verifiedAt": "2026-10-22T17:45:42.530Z"
+    },
+    "addedAt": "2026-10-22T17:45:43.896Z"
+  },
+  {
+    "id": "simple-flight-ring",
+    "name": "Simple Flight Ring",
+    "version": "1.3.2",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/simple-flight-ring",
+    "description": "A small mod that adds 6 different materials to the flight ring, with relatively simple synthesis.",
+    "dependencies": [
+      "Curios API"
+    ],
+    "notes": "Download from Modrinth",
+    "imageUrl": "https://cdn.modrinth.com/data/g3U7L8Pz/038f89b2f213552b01841636be2f3888247d76ab_96.webp",
+    "modrinth": {
+      "projectId": "g3U7L8Pz",
+      "slug": "simple-flight-ring",
+      "versionId": "FBDd4nQx",
+      "versionNumber": "1.3.2",
+      "versionType": "release",
+      "datePublished": "2026-10-15T05:58:21.017080Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "required",
+          "name": "Curios API"
+        }
+      ],
+      "syncedAt": "2026-10-22T21:52:14.860Z"
+    },
+    "addedAt": "2026-10-22T21:52:20.050Z"
+  },
+  {
+    "id": "disenchant-anvil",
+    "name": "Disenchant Anvil",
+    "version": "26.0.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/disenchant-anvil",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1392/300/64/64/638902693767503390.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "26.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/disenchant-anvil",
+      "verifiedAt": "2026-10-23T07:12:25.881Z"
+    },
+    "addedAt": "2026-10-23T07:12:59.217Z"
   }
 ]

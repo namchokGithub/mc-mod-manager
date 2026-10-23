@@ -226,6 +226,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           : data.batches,
       });
     },
+    updateMods: (mods) => change({ ...data, mods: modsSchema.parse(mods) }),
     deleteMod: (id) =>
       change({
         ...data,

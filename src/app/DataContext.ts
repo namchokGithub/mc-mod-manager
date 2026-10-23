@@ -21,6 +21,8 @@ export type DataContextValue = {
   externalUpdate: number;
   updateModpack: (modpack: Modpack) => void;
   saveMod: (mod: Mod, originalId?: string) => void;
+  /** Replaces existing mods without changing their timestamps or build plan references. */
+  updateMods: (mods: Mod[]) => void;
   deleteMod: (id: string) => void;
   /** Deletes several mods in a single draft update. */
   deleteMods: (ids: string[]) => void;

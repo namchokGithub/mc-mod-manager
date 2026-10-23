@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { duplicateMod } from "./mods";
+import {
+  duplicateMod,
+  filterModsBySelections,
+  filterModsByStatuses,
+  formatPlainTextModList,
+  matchesSearchText,
+  updateSelectedVisibleModStatuses,
+} from "./mods";
 import { modSchema, type Mod } from "./schema";
 
 const original: Mod = {
@@ -55,5 +62,115 @@ describe("duplicating a mod", () => {
     expect(copy.sourceUrl).toBe("");
     expect(copy.imageUrl).toBe("");
     expect(copy.version).toBe("");
+  });
+});
+
+describe("mod search text", () => {
+  it("matches apostrophe, dash, and whitespace variants in a mod name", () => {
+    const name = "YUNG's Better Strongholds";
+
+    expect(matchesSearchText(name, "YUNG’s Better Strongholds")).toBe(true);
+    expect(matchesSearchText(name, "yungs-better-strongholds")).toBe(true);
+    expect(matchesSearchText(name, "  Better   Strongholds ")).toBe(true);
+    expect(matchesSearchText(name, "Better Dungeons")).toBe(false);
+  });
+});
+
+describe("plain-text mod export", () => {
+  it("lists each selected mod's name, version, and URL with fallbacks", () => {
+    expect(
+      formatPlainTextModList([
+        original,
+        {
+          ...original,
+          id: "missing",
+          name: "Missing details",
+          version: "",
+          sourceUrl: "",
+        },
+      ]),
+    ).toBe(
+      "Animal Garden - Capybara | v1.0.0 | https://www.curseforge.com/minecraft/mc-mods/capybara\nMissing details | — | —",
+    );
+  });
+});
+
+describe("multi-status filtering", () => {
+  it("keeps mods matching any selected status and leaves the list unchanged without one", () => {
+    const mods = [
+      { ...original, id: "interested", status: "interested" as const },
+      { ...original, id: "testing", status: "testing" as const },
+      { ...original, id: "installed", status: "installed" as const },
+    ];
+
+    expect(
+      filterModsByStatuses(mods, ["interested", "installed"]).map(
+        (mod) => mod.id,
+      ),
+    ).toEqual(["interested", "installed"]);
+    expect(filterModsByStatuses(mods, [])).toBe(mods);
+  });
+});
+
+describe("multi-value mod filtering", () => {
+  it("combines category, side, priority, and status selections while distinguishing all from none", () => {
+    const mods = [
+      {
+        ...original,
+        id: "client-planned",
+        category: "Performance",
+        side: "client" as const,
+        status: "planned" as const,
+        priority: "high" as const,
+      },
+      {
+        ...original,
+        id: "server-installed",
+        category: "Utility",
+        side: "server" as const,
+        status: "installed" as const,
+        priority: "low" as const,
+      },
+    ];
+
+    expect(
+      filterModsBySelections(mods, {
+        categories: ["Performance"],
+        sides: ["client"],
+        priorities: ["high"],
+        statuses: ["planned"],
+      }).map((mod) => mod.id),
+    ).toEqual(["client-planned"]);
+    expect(
+      filterModsBySelections(mods, {
+        categories: [],
+        sides: [],
+        priorities: [],
+        statuses: null,
+      }),
+    ).toEqual([]);
+  });
+});
+
+describe("bulk status updates", () => {
+  it("updates only mods that are both selected and visible in the current filters", () => {
+    const mods = [
+      { ...original, id: "visible-selected", status: "planned" as const },
+      { ...original, id: "hidden-selected", status: "planned" as const },
+      { ...original, id: "visible-unselected", status: "planned" as const },
+    ];
+
+    const result = updateSelectedVisibleModStatuses(
+      mods,
+      new Set(["visible-selected", "hidden-selected"]),
+      new Set(["visible-selected", "visible-unselected"]),
+      "testing",
+    );
+
+    expect(result.map((mod) => [mod.id, mod.status])).toEqual([
+      ["visible-selected", "testing"],
+      ["hidden-selected", "planned"],
+      ["visible-unselected", "planned"],
+    ]);
   });
 });

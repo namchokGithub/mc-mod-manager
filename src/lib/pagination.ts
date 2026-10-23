@@ -1,6 +1,6 @@
-export const PAGE_SIZES = [10, 20, 50, 100] as const;
+export const PAGE_SIZES = [9, 18, 27, 54, 109, 218, 436] as const;
 export type PageSize = (typeof PAGE_SIZES)[number];
-export const DEFAULT_PAGE_SIZE: PageSize = 50;
+export const DEFAULT_PAGE_SIZE: PageSize = 9;
 
 export type Page<T> = {
   items: T[];

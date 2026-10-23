@@ -23,6 +23,7 @@ import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
 import { formatStat } from "../../lib/countUp";
+import { assignedMods } from "../../lib/batches";
 import { useCountUp } from "./useCountUp";
 import { BuildPlanGuide } from "./BuildPlanGuide";
 import { ContentPreview } from "./ContentPreview";
@@ -41,9 +42,13 @@ import {
   verificationText,
 } from "../../lib/compatibility";
 import { filterMods, type Filters } from "../../lib/mods";
-import { paginate, type PageSize } from "../../lib/pagination";
+import {
+  DEFAULT_PAGE_SIZE,
+  paginate,
+  type PageSize,
+} from "../../lib/pagination";
 import { resolveHeroImageUrl } from "../../lib/heroImage";
-import type { Mod } from "../../lib/schema";
+import { modStatusLabels, type Mod } from "../../lib/schema";
 import {
   matchesSideView,
   sideCounts,
@@ -98,8 +103,7 @@ export function Preview({ theme }: { theme: Theme }) {
   const [sideView, setSideView] = useState<SideView>("players");
   const [groupBy, setGroupBy] = useState<GroupBy>("requirement");
   const [page, setPage] = useState(1);
-  const PAGE_SIZE: PageSize = 10;
-  const [pageSize, setPageSize] = useState<PageSize>(PAGE_SIZE);
+  const [pageSize, setPageSize] = useState<PageSize>(DEFAULT_PAGE_SIZE);
   const [heroAnimationCycle, setHeroAnimationCycle] = useState(0);
   useEffect(() => {
     const hero = heroRef.current;
@@ -127,19 +131,25 @@ export function Preview({ theme }: { theme: Theme }) {
   };
   const [view, setView] = useState<"grid" | "list">("grid");
   const [selected, setSelected] = useState<Mod | null>(null);
-  const categories = useMemo(
-    () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
-    [data.mods],
+  const mods = useMemo(
+    () => assignedMods(data.mods, data.batches),
+    [data.batches, data.mods],
   );
+  const categories = useMemo(
+    () => [...new Set(mods.map((mod) => mod.category))].sort(),
+    [mods],
+  );
+  // A mod can be referenced by multiple Steps, but the hero stat counts it once.
+  const plannedModCount = mods.length;
   // Uses the saved Modrinth snapshot only; the public page makes no API calls.
   const compat = useMemo(
-    () => checkCompatibility(data.mods, data.modpack),
-    [data.mods, data.modpack],
+    () => checkCompatibility(mods, data.modpack),
+    [mods, data.modpack],
   );
   // Counted over the whole collection, the same population the list draws from.
-  const sides = useMemo(() => sideCounts(data.mods), [data.mods]);
+  const sides = useMemo(() => sideCounts(mods), [mods]);
   // Optional mods that a required mod depends on; they go to Needs Review, never Optional.
-  const requiredBy = useMemo(() => requiredByOthers(data.mods), [data.mods]);
+  const requiredBy = useMemo(() => requiredByOthers(mods), [mods]);
   // For Players also lists unknown-side mods, under Needs Review, so none disappear unexplained.
   const viewCounts = {
     ...sideViewCounts(sides),
@@ -149,15 +159,15 @@ export function Preview({ theme }: { theme: Theme }) {
     () =>
       filterMods(
         sideView === "all"
-          ? data.mods
-          : data.mods.filter((mod) =>
+          ? mods
+          : mods.filter((mod) =>
               sideView === "players"
                 ? playerGroup(mod, requiredBy) !== null
                 : matchesSideView(mod, sideView),
             ),
         filters,
       ),
-    [data.mods, filters, sideView, requiredBy],
+    [mods, filters, sideView, requiredBy],
   );
   // Grouping happens after search, filters, and sort, and before pagination.
   const grouped = useMemo(
@@ -182,7 +192,7 @@ export function Preview({ theme }: { theme: Theme }) {
   // Layout animation gets costly for big pages, so it turns off there.
   const animateLayout = !reduceMotion && paged.items.length <= 60;
   const stats = [
-    { label: "TOTAL MODS", value: data.mods.length, icon: Box },
+    { label: "PLANNED MODS", value: plannedModCount, icon: Box },
     {
       label: "RESOURCE PACKS",
       value: data.resourcePacks.items.length,
@@ -210,7 +220,7 @@ export function Preview({ theme }: { theme: Theme }) {
       <LiquidGlassFilter />
       <section
         ref={heroRef}
-        className="hero"
+        className="hero page-preview"
         style={
           heroImageUrl
             ? {
@@ -282,7 +292,7 @@ export function Preview({ theme }: { theme: Theme }) {
           WORLD / 001 <MoveUpRight size={16} />
         </div>
       </section>
-      <div className="container">
+      <div className="container page-preview">
         <section
           ref={statsRef}
           className="stats-grid"
@@ -335,6 +345,7 @@ export function Preview({ theme }: { theme: Theme }) {
               })}
             </div>
           </div>
+          <div className="preview-view-controls">
           <div className="side-views">
             <div
               ref={liquidLens}
@@ -360,25 +371,9 @@ export function Preview({ theme }: { theme: Theme }) {
               {sideView === "players"
                 ? "Client-only and both-side mods, from each mod's listed side. Unknown sides are under Needs Review."
                 : sideView === "server"
-                  ? "Server-only and both-side mods, from each mod's listed side."
+                  ? "Server-only mods, from each mod's listed side."
                   : `Every mod in the collection (${sides.total}).`}
             </p>
-            {sideView === "server" && sides.unknown > 0 && (
-              <p className="side-view-note side-view-unknown" role="status">
-                {sides.unknown} {sides.unknown === 1 ? "mod has" : "mods have"}{" "}
-                an unknown installation side.{" "}
-                <button
-                  type="button"
-                  className="filter-reset"
-                  onClick={() => {
-                    setSideView("all");
-                    setPage(1);
-                  }}>
-                  View All Mods
-                </button>{" "}
-                to review {sides.unknown === 1 ? "it" : "them"}.
-              </p>
-            )}
           </div>
           <label className="group-by">
             <span>Group by</span>
@@ -396,6 +391,7 @@ export function Preview({ theme }: { theme: Theme }) {
               options={groupByOptions}
             />
           </label>
+          </div>
           <ModFilters
             filters={filters}
             onChange={changeFilters}
@@ -473,7 +469,7 @@ export function Preview({ theme }: { theme: Theme }) {
                             />
                           )}
                         <span className={`status status-${mod.status}`}>
-                          {mod.status}
+                          {modStatusLabels[mod.status]}
                         </span>
                         {mod.requirement === "optional" && (
                           <span className="status status-optional">
@@ -521,7 +517,7 @@ export function Preview({ theme }: { theme: Theme }) {
               <div className="empty-icon">
                 <Box size={26} />
               </div>
-              {data.mods.length ? (
+              {mods.length ? (
                 <>
                   <h3>No mods match your filters</h3>
                   <p>

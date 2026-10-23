@@ -9,6 +9,7 @@ export function Dialog({
   description,
   size = "default",
   children,
+  onOpenAutoFocus,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -16,6 +17,7 @@ export function Dialog({
   description?: string;
   size?: "default" | "wide";
   children: ReactNode;
+  onOpenAutoFocus?: (event: Event) => void;
 }) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
@@ -25,6 +27,7 @@ export function Dialog({
           className={
             size === "wide" ? "dialog-content dialog-wide" : "dialog-content"
           }
+          onOpenAutoFocus={onOpenAutoFocus}
           {...(!description && { "aria-describedby": undefined })}
         >
           <div className="dialog-heading">

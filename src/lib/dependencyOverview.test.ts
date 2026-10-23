@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import batchesJson from "../../public/data/batches.json";
 import modsJson from "../../public/data/mods.json";
 import { withOrder } from "./batches";
@@ -41,8 +41,15 @@ const batch = (id: string, modIds: string[]): Batch => ({
   name: id,
   description: "",
   order: 1,
-  modIds,
-  checklist: [],
+  steps: [
+    {
+      id: "install",
+      name: "Install",
+      description: "",
+      done: false,
+      itemRefs: modIds.map((id) => ({ type: "mod" as const, id })),
+    },
+  ],
 });
 
 const requires = (projectId: string | null, type = "required" as const) => ({
@@ -140,6 +147,8 @@ describe("required and optional dependencies", () => {
     expect(overview.counts).toMatchObject({
       resolved: 1,
       missing: 1,
+      requiredMissing: 0,
+      optionalMissing: 1,
       unknown: 0,
     });
   });

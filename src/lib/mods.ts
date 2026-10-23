@@ -1,4 +1,4 @@
-import { priorityOf, priorityRank } from "./priority";
+import { type ModPriority, priorityOf, priorityRank } from "./priority";
 import type { Mod } from "./schema";
 
 export type Filters = {
@@ -57,6 +57,94 @@ export function minimalModList(mods: Mod[]): MinimalMod[] {
     source: mod.source.toLowerCase(),
     url: mod.sourceUrl,
   }));
+}
+
+/** One shareable line per mod: name, version, and source URL. */
+export function formatPlainTextModList(mods: Mod[]): string {
+  return mods
+    .map((mod) =>
+      [
+        mod.name,
+        mod.version ? `v${mod.version}` : "—",
+        mod.sourceUrl || "—",
+      ].join(" | "),
+    )
+    .join("\n");
+}
+
+/** Keeps mods whose status matches any selected value. Empty selection does not filter. */
+export function filterModsByStatuses(
+  mods: Mod[],
+  statuses: readonly Mod["status"][],
+): Mod[] {
+  if (!statuses.length) return mods;
+  const selected = new Set(statuses);
+  return mods.filter((mod) => selected.has(mod.status));
+}
+
+/** `[]` keeps every value; `null` is an explicit empty selection. */
+export type MultiSelection<T extends string> = readonly T[] | null;
+
+export type ModSelections = {
+  categories: MultiSelection<string>;
+  statuses: MultiSelection<Mod["status"]>;
+  sides: MultiSelection<Mod["side"]>;
+  priorities: MultiSelection<ModPriority>;
+};
+
+function matchesSelection<T extends string>(
+  value: T,
+  selection: MultiSelection<T>,
+) {
+  return (
+    selection !== null && (selection.length === 0 || selection.includes(value))
+  );
+}
+
+/** Keeps mods matching every active checkbox multi-select. */
+export function filterModsBySelections(
+  mods: Mod[],
+  selections: ModSelections,
+): Mod[] {
+  return mods.filter(
+    (mod) =>
+      matchesSelection(mod.category, selections.categories) &&
+      matchesSelection(mod.status, selections.statuses) &&
+      matchesSelection(mod.side, selections.sides) &&
+      matchesSelection(priorityOf(mod), selections.priorities),
+  );
+}
+
+/** Changes the status only for mods that remain visible in the active filtered result. */
+export function updateSelectedVisibleModStatuses(
+  mods: Mod[],
+  selectedIds: ReadonlySet<string>,
+  visibleIds: ReadonlySet<string>,
+  status: Mod["status"],
+): Mod[] {
+  return mods.map((mod) =>
+    selectedIds.has(mod.id) && visibleIds.has(mod.id)
+      ? { ...mod, status }
+      : mod,
+  );
+}
+
+/** Normalizes search text so punctuation variants do not hide matching mod names. */
+export function normalizeSearchText(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u2018\u2019\u02bc']/g, "")
+    .replace(/\p{M}/gu, "")
+    .replace(/[\p{P}\p{S}_]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+/** Case- and punctuation-insensitive substring matching for a mod name. */
+export function matchesSearchText(value: string, query: string): boolean {
+  const needle = normalizeSearchText(query);
+  return !needle || normalizeSearchText(value).includes(needle);
 }
 
 export function filterMods(mods: Mod[], filters: Filters): Mod[] {

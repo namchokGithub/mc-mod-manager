@@ -9,6 +9,7 @@ import { loaderLabel } from "./modrinth/versionFilters";
 import {
   batchContent,
   batchCountText,
+  contentKeyByType,
   installGuidance,
   planTypeLabels,
   type PlanItemType,
@@ -22,6 +23,7 @@ import {
 } from "./contentVerification";
 import {
   contentTypes,
+  modStatusLabels,
   type Batch,
   type Collection,
   type ContentItem,
@@ -37,7 +39,9 @@ export type GuideOptions = {
   format: GuideFormat;
   includeDependencies: boolean;
   includeNotes: boolean;
-  includeChecklist: boolean;
+  includeSteps: boolean;
+  /** Exports only Batch/Step summaries and item names with their type or category. */
+  minimal: boolean;
 };
 
 export const defaultGuideOptions: GuideOptions = {
@@ -45,7 +49,8 @@ export const defaultGuideOptions: GuideOptions = {
   format: "markdown",
   includeDependencies: true,
   includeNotes: true,
-  includeChecklist: true,
+  includeSteps: true,
+  minimal: false,
 };
 
 type Part = string | { label: string; url: string };
@@ -85,7 +90,7 @@ export function guideFilename(
   const slug = (value: string) =>
     value
       .normalize("NFKD")
-      .replace(/[̀-ͯ]/g, "")
+      .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
@@ -182,6 +187,71 @@ function dependencyText(entry: DependencyEntry): string {
   return `${relationVerb[entry.relation]} ${name} — ${status}`;
 }
 
+function minimalBatchNodes(
+  batch: Batch,
+  position: number,
+  collection: Collection,
+): Node[] {
+  const nodes: Node[] = [];
+  const { mods } = batchMods(batch, collection.mods);
+  const content = batchContent(batch, collection);
+  const modsById = new Map(collection.mods.map((mod) => [mod.id, mod]));
+  const contentByType = Object.fromEntries(
+    contentTypes.map((type) => [
+      type,
+      new Map(
+        collection[contentKeyByType[type]].items.map((item) => [item.id, item]),
+      ),
+    ]),
+  ) as Record<ContentType, Map<string, ContentItem>>;
+
+  nodes.push({
+    kind: "heading",
+    level: 2,
+    text: `Batch ${position} — ${batch.name}`,
+  });
+  nodes.push({ kind: "paragraph", text: batchCountText(mods.length, content) });
+
+  for (const step of batch.steps) {
+    const stepBatch = { ...batch, steps: [step] };
+    const stepMods = batchMods(stepBatch, collection.mods).mods;
+    const stepContent = batchContent(stepBatch, collection);
+    nodes.push({ kind: "heading", level: 3, text: step.name });
+    nodes.push({
+      kind: "paragraph",
+      text: batchCountText(stepMods.length, stepContent),
+    });
+    for (const ref of step.itemRefs) {
+      if (ref.type === "mod") {
+        const mod = modsById.get(ref.id);
+        nodes.push({
+          kind: "item",
+          depth: 0,
+          checkbox: false,
+          parts: [
+            mod
+              ? `${mod.name} — ${mod.category}`
+              : `${ref.id} — Mod (not in collection)`,
+          ],
+        });
+        continue;
+      }
+      const item = contentByType[ref.type].get(ref.id);
+      nodes.push({
+        kind: "item",
+        depth: 0,
+        checkbox: false,
+        parts: [
+          item
+            ? `${item.name} — ${planTypeLabels[ref.type].one}`
+            : `${ref.id} — ${planTypeLabels[ref.type].one} (not in collection)`,
+        ],
+      });
+    }
+  }
+  return nodes;
+}
+
 function batchNodes(
   batch: Batch,
   position: number,
@@ -205,7 +275,7 @@ function batchNodes(
     nodes.push({
       kind: "item",
       depth: 0,
-      checkbox: options.includeChecklist,
+      checkbox: options.includeSteps,
       parts: [
         mod.version ? `${mod.name} ${mod.version}` : mod.name,
         " — ",
@@ -215,7 +285,7 @@ function batchNodes(
     const details = [
       ...(reason ? [`Review: ${reason}`] : []),
       ...supportLines(mod),
-      `Planning status: ${mod.status}`,
+      `Planning status: ${modStatusLabels[mod.status]}`,
       ...(options.includeNotes && mod.notes.trim()
         ? [`Notes: ${mod.notes.trim()}`]
         : []),
@@ -265,7 +335,7 @@ function batchNodes(
       nodes.push({
         kind: "item",
         depth: 0,
-        checkbox: options.includeChecklist,
+        checkbox: options.includeSteps,
         parts: [
           item.version ? `${item.name} ${item.version}` : item.name,
           " — ",
@@ -379,16 +449,19 @@ function batchNodes(
     });
   }
 
-  if (options.includeChecklist && batch.checklist.length) {
-    nodes.push({ kind: "heading", level: 3, text: "Testing checklist" });
+  if (options.includeSteps && batch.steps.length) {
+    nodes.push({ kind: "heading", level: 3, text: "Installation steps" });
     // Exported unchecked: the guide is for a future install, not a copy of planning progress.
-    for (const step of batch.checklist)
+    for (const step of batch.steps) {
       nodes.push({
         kind: "item",
         depth: 0,
         checkbox: true,
-        parts: [step.text],
+        parts: [step.name],
       });
+      if (step.description)
+        nodes.push({ kind: "paragraph", text: step.description });
+    }
   }
   return nodes;
 }
@@ -443,7 +516,7 @@ function render(nodes: Node[], format: GuideFormat): string {
 
 /**
  * Builds the installation guide from current data. Pure and read-only: it never changes
- * mods, batches, or checklist progress.
+ * mods, batches, or Step progress.
  */
 export function buildGuide(
   collection: Collection,
@@ -455,6 +528,17 @@ export function buildGuide(
   const selected = options.batchId
     ? all.filter((batch) => batch.id === options.batchId)
     : all;
+  if (options.minimal) {
+    const nodes = selected.flatMap((batch) =>
+      minimalBatchNodes(batch, all.indexOf(batch) + 1, collection),
+    );
+    return render(
+      nodes.length
+        ? nodes
+        : [{ kind: "paragraph", text: "This build plan has no batches yet." }],
+      options.format,
+    );
+  }
   const nodes: Node[] = [{ kind: "heading", level: 1, text: modpack.name }];
   const facts: string[] = [];
   if (modpack.minecraftVersion.trim())

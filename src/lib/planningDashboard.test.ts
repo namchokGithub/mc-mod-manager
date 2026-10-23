@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import { withOrder } from "./batches";
 import { planningDashboard } from "./planningDashboard";
 import { emptyContent, type Batch, type Collection, type Mod } from "./schema";
@@ -40,8 +40,15 @@ const batch = (id: string, modIds: string[]): Batch => ({
   name: id,
   description: "",
   order: 1,
-  modIds,
-  checklist: [],
+  steps: [
+    {
+      id: "install",
+      name: "Install",
+      description: "",
+      done: false,
+      itemRefs: modIds.map((id) => ({ type: "mod" as const, id })),
+    },
+  ],
 });
 
 function collection(mods: Mod[], batches: Batch[]): Collection {
@@ -209,6 +216,32 @@ describe("batch breakdown and later-batch warnings", () => {
       collection(mods, [batch("first", ["lib"]), batch("second", ["addon"])]),
     );
     expect(dashboard.attention.later).toEqual([]);
+  });
+
+  it("keeps the missing dependency and its owner with the affected batch", () => {
+    const dashboard = planningDashboard(
+      collection(
+        [linked("addon", [dep("p-geckolib")])],
+        [batch("first", ["addon"])],
+      ),
+    );
+
+    expect(
+      dashboard.batches[0]!.issues.requiredMissing.map(({ mod, entry }) => [
+        mod.id,
+        entry.identifier,
+      ]),
+    ).toEqual([["addon", "p-geckolib"]]);
+  });
+
+  it("keeps mods without dependency metadata visible in the affected batch", () => {
+    const dashboard = planningDashboard(
+      collection([mod("manual")], [batch("first", ["manual"])]),
+    );
+
+    expect(dashboard.batches[0]!.issues.unknown.map((item) => item.id)).toEqual(
+      ["manual"],
+    );
   });
 });
 
