@@ -20,6 +20,8 @@ const dateString = z.iso.date();
 export const modpackSchema = z.object({
   name: z.string().trim().min(1, "Modpack name is required"),
   description: z.string(),
+  // Manage-only free text for release notes. Optional so older JSON and drafts stay valid.
+  changelog: z.string().optional(),
   version: z.string(),
   minecraftVersion: z.string(),
   modloader: z.string(),

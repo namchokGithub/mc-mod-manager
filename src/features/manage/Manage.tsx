@@ -922,6 +922,18 @@ function SettingsForm({
         <Field label="Description" wide error={errors.description?.message}>
           <textarea rows={5} {...register("description")} />
         </Field>
+        <Field
+          label="Change log"
+          wide
+          error={errors.changelog?.message}
+          hint="Manage-only release notes; not shown in Preview or the build guide yet"
+        >
+          <textarea
+            rows={6}
+            placeholder="Describe what changed in this version…"
+            {...register("changelog")}
+          />
+        </Field>
       </div>
       <div className="settings-actions">
         <UnsavedHint show={isDirty} />

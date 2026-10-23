@@ -6273,7 +6273,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "interested",
+    "status": "planned",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/particle-effects",
@@ -16519,5 +16519,433 @@
       "verifiedAt": "2026-10-23T07:12:25.881Z"
     },
     "addedAt": "2026-10-23T07:12:59.217Z"
+  },
+  {
+    "id": "all-the-heads",
+    "name": "All The Heads",
+    "version": "26.1.4",
+    "category": "Decoration",
+    "tags": [
+      "Mobs"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/all-the-heads",
+    "description": "Heads up! Every mob, every head, all in one, proudly displayed.",
+    "dependencies": [
+      "Puzzles Lib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/Ax17wp3L/6c55e2e3530a2d386036e39a2cf0ea1c915cdf88_96.webp",
+    "modrinth": {
+      "projectId": "Ax17wp3L",
+      "slug": "all-the-heads",
+      "versionId": "tKWWSsUt",
+      "versionNumber": "26.1.4",
+      "versionType": "release",
+      "datePublished": "2026-10-10T17:59:37.415397Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "QAGBst4M",
+          "versionId": null,
+          "type": "required",
+          "name": "Puzzles Lib"
+        }
+      ],
+      "syncedAt": "2026-10-23T09:11:12.779Z"
+    },
+    "addedAt": "2026-10-23T09:11:17.462Z"
+  },
+  {
+    "id": "crash-assistant",
+    "name": "Crash Assistant",
+    "version": "1.11.12",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/crash-assistant",
+    "description": "Shows a GUI after Minecraft crashes, immediately showing and analyzing all affected logs.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/ix1qq8Ux/0850872f4de156ee91a8b1d1f71615cb4615bfa4_96.webp",
+    "modrinth": {
+      "projectId": "ix1qq8Ux",
+      "slug": "crash-assistant",
+      "versionId": "1hBMKzCk",
+      "versionNumber": "1.11.12",
+      "versionType": "release",
+      "datePublished": "2026-08-13T01:00:30.938193Z",
+      "gameVersions": [
+        "26.1-snapshot-11",
+        "26.1-pre-1",
+        "26.1-pre-2",
+        "26.1-pre-3",
+        "26.1-rc-1",
+        "26.1-rc-2",
+        "26.1-rc-3",
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-23T09:27:38.804Z"
+    },
+    "addedAt": "2026-10-23T09:27:44.396Z"
+  },
+  {
+    "id": "client-crafting",
+    "name": "Client Crafting",
+    "version": "",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "CurseForge",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/client-crafting",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/849/96/64/64/638249669529641442.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "addedAt": "2026-10-23T09:29:22.769Z"
+  },
+  {
+    "id": "neo-bee-fix",
+    "name": "Neo Bee Fix",
+    "version": "3.0.2",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/neo-bee-fix",
+    "description": "Fix the Bees!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/DzSY371i/bbd07a8d1fbec132db80d6ccc43d32bad0135992_96.webp",
+    "modrinth": {
+      "projectId": "DzSY371i",
+      "slug": "neo-bee-fix",
+      "versionId": "yjuocj0b",
+      "versionNumber": "3.0.2",
+      "versionType": "release",
+      "datePublished": "2026-06-14T10:56:35.591408Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-23T09:36:59.886Z"
+    },
+    "addedAt": "2026-10-23T09:37:02.960Z"
+  },
+  {
+    "id": "3dskinlayers",
+    "name": "3D Skin Layers",
+    "version": "1.11.4",
+    "category": "Adventure",
+    "tags": [
+      "Decoration"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/3dskinlayers",
+    "description": "Render the player skin layer in 3d!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/zV5r3pPn/ff7010d4ec0275609866c8b0f603b25e25949c08_96.webp",
+    "modrinth": {
+      "projectId": "zV5r3pPn",
+      "slug": "3dskinlayers",
+      "versionId": "RX1Ou8cY",
+      "versionNumber": "1.11.4",
+      "versionType": "release",
+      "datePublished": "2026-10-18T17:15:07.100854Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-23T09:38:09.615Z"
+    },
+    "addedAt": "2026-10-23T09:38:12.403Z"
+  },
+  {
+    "id": "fast-ip-ping",
+    "name": "Fast IP Ping",
+    "version": "v1.0.12-mc26.1.2",
+    "category": "Optimization",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/fast-ip-ping",
+    "description": "Yeet the laggy reversed DNS lookup for literal IP server addresses",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/9mtu0sUO/dca186a8a57d45ad06e88de6cfc45d4cc4c6a0ba.png",
+    "modrinth": {
+      "projectId": "9mtu0sUO",
+      "slug": "fast-ip-ping",
+      "versionId": "DVeo5EO0",
+      "versionNumber": "v1.0.12-mc26.1.2",
+      "versionType": "release",
+      "datePublished": "2026-09-17T17:26:05.663305Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-23T09:39:29.952Z"
+    },
+    "addedAt": "2026-10-23T09:39:33.636Z"
+  },
+  {
+    "id": "aether-ii",
+    "name": "The Aether II",
+    "version": "26.1.2-alpha.4.1-neoforge",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Worldgen"
+    ],
+    "status": "considering",
+    "side": "both",
+    "requirement": "optional",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/aether-ii",
+    "description": "The Iconic Dimension Mod Returns! Step into a renewed and expanded Aether Dimension with The Aether II!",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/JD2NSu5O/32bc4fa21c3f28b34a1839e98def030eb0bc8291_96.webp",
+    "modrinth": {
+      "projectId": "JD2NSu5O",
+      "slug": "aether-ii",
+      "versionId": "soZ6Sulf",
+      "versionNumber": "26.1.2-alpha.4.1-neoforge",
+      "versionType": "beta",
+      "datePublished": "2026-07-24T19:45:05.059414Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "sq1f0DCq",
+          "versionId": null,
+          "type": "embedded"
+        }
+      ],
+      "syncedAt": "2026-10-23T09:40:02.372Z"
+    },
+    "addedAt": "2026-10-23T09:40:16.614Z"
+  },
+  {
+    "id": "se-leafculling",
+    "name": "Sodium/Embeddium Leaf Culling",
+    "version": "4.0.2+mc26.1.2-neoforge",
+    "category": "Optimization",
+    "tags": [
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/se-leafculling",
+    "description": "A continuation of SodiumLeafCulling for Sodium/Embeddium.\n(Old: SodiumLeafCulling-Unofficial)",
+    "dependencies": [
+      "Sodium"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/xtym7fz7/f5c0d8d1918bef508399f5699e87fbf084415acc_96.webp",
+    "modrinth": {
+      "projectId": "xtym7fz7",
+      "slug": "se-leafculling",
+      "versionId": "fsXnKlI2",
+      "versionNumber": "4.0.2+mc26.1.2-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-10-22T17:39:56.911717Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "AANobbMI",
+          "versionId": null,
+          "type": "required",
+          "name": "Sodium"
+        }
+      ],
+      "syncedAt": "2026-10-23T09:40:39.319Z"
+    },
+    "addedAt": "2026-10-23T09:40:44.262Z"
+  },
+  {
+    "id": "particular-reforged",
+    "name": "Particular ✨ Reforged",
+    "version": "1.5.7",
+    "category": "Game Mechanics",
+    "tags": [],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/particular-reforged",
+    "description": "Particular is a mod that enhances Minecraft's ambience with many hand-crafted visual effects.",
+    "dependencies": [
+      "BaguetteLib"
+    ],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/pYFUU6cq/152536579fe8e475149273b64cabdef764b3da9f_96.webp",
+    "modrinth": {
+      "projectId": "pYFUU6cq",
+      "slug": "particular-reforged",
+      "versionId": "iaCAHTUl",
+      "versionNumber": "1.5.7",
+      "versionType": "release",
+      "datePublished": "2026-08-16T14:05:47.290186Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "YL57xq9U",
+          "versionId": null,
+          "type": "optional",
+          "name": "Iris Shaders"
+        },
+        {
+          "projectId": "OfKzpbRU",
+          "versionId": null,
+          "type": "required",
+          "name": "BaguetteLib"
+        }
+      ],
+      "syncedAt": "2026-10-23T09:41:20.687Z"
+    },
+    "addedAt": "2026-10-23T09:41:27.201Z"
+  },
+  {
+    "id": "loot-integrations-randomized-loot-compatibility",
+    "name": "Loot Integrations: Randomized Loot Compatibility",
+    "version": "1",
+    "category": "Addons",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/vanilla-loot-addon-for-loot-integrations",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1105/273/64/64/638654770950606533.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/vanilla-loot-addon-for-loot-integrations",
+      "verifiedAt": "2026-10-23T09:44:19.809Z"
+    },
+    "addedAt": "2026-10-23T09:44:21.247Z"
+  },
+  {
+    "id": "asyncparticles",
+    "name": "AsyncParticles",
+    "version": "26.1.2.8",
+    "category": "Game Mechanics",
+    "tags": [
+      "Optimization"
+    ],
+    "status": "planned",
+    "side": "client",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/asyncparticles",
+    "description": "Async particle tick, GPU accelerated particle rendering.",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/c3onkd5k/5d159d5d5067cee28e5a73709321bebc0e47a265.png",
+    "modrinth": {
+      "projectId": "c3onkd5k",
+      "slug": "asyncparticles",
+      "versionId": "q1kMzdRe",
+      "versionNumber": "26.1.2.8",
+      "versionType": "beta",
+      "datePublished": "2026-10-18T15:35:27.314491Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "9s6osm5g",
+          "versionId": null,
+          "type": "optional",
+          "name": "Cloth Config API"
+        }
+      ],
+      "syncedAt": "2026-10-23T09:45:52.208Z"
+    },
+    "addedAt": "2026-10-23T09:45:55.184Z"
   }
 ]

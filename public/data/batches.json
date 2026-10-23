@@ -235,6 +235,10 @@
             {
               "type": "mod",
               "id": "appleskin"
+            },
+            {
+              "type": "mod",
+              "id": "fancymenu"
             }
           ]
         },
@@ -391,7 +395,12 @@
           "name": "Integration",
           "description": "ทดสอบชุดสะสม Batch 1–2 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
           "done": false,
-          "itemRefs": []
+          "itemRefs": [
+            {
+              "type": "mod",
+              "id": "drippy-loading-screen"
+            }
+          ]
         }
       ]
     },
@@ -1055,6 +1064,10 @@
             {
               "type": "mod",
               "id": "kotlin-for-forge"
+            },
+            {
+              "type": "mod",
+              "id": "all-the-heads"
             }
           ]
         },
