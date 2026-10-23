@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import modpackJson from "../../public/data/modpack.json";
 import batchesJson from "../../public/data/batches.json";
 import {
+  assignedMods,
   assignItem,
   batchMods,
   modAssignmentLocations,
@@ -203,6 +204,32 @@ describe("batch helpers", () => {
     ]);
     expect(locations.get("iris")?.[0]?.batchId).toBe("first");
     expect(locations.has("faithful")).toBe(false);
+  });
+
+  it("returns each assigned collection mod once in collection order", () => {
+    const mods = [mod("lithium"), mod("sodium"), mod("iris")];
+    const batches = {
+      version: 2 as const,
+      batches: [
+        batch("first", 1, [
+          step("install", [
+            { type: "mod" as const, id: "sodium" },
+            { type: "mod" as const, id: "missing" },
+          ]),
+        ]),
+        batch("later", 2, [
+          step("configure", [
+            { type: "mod" as const, id: "sodium" },
+            { type: "mod" as const, id: "iris" },
+          ]),
+        ]),
+      ],
+    };
+
+    expect(assignedMods(mods, batches).map((item) => item.id)).toEqual([
+      "sodium",
+      "iris",
+    ]);
   });
 
   it("renames, removes, and resolves mods across Steps", () => {

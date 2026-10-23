@@ -23,7 +23,7 @@ import { ModArtwork } from "../../components/ModArtwork";
 import { ModDetail } from "../../components/ModDetail";
 import { ModFilters } from "../../components/ModFilters";
 import { formatStat } from "../../lib/countUp";
-import { modAssignmentLocations } from "../../lib/batches";
+import { assignedMods } from "../../lib/batches";
 import { useCountUp } from "./useCountUp";
 import { BuildPlanGuide } from "./BuildPlanGuide";
 import { ContentPreview } from "./ContentPreview";
@@ -131,25 +131,25 @@ export function Preview({ theme }: { theme: Theme }) {
   };
   const [view, setView] = useState<"grid" | "list">("grid");
   const [selected, setSelected] = useState<Mod | null>(null);
+  const mods = useMemo(
+    () => assignedMods(data.mods, data.batches),
+    [data.batches, data.mods],
+  );
   const categories = useMemo(
-    () => [...new Set(data.mods.map((mod) => mod.category))].sort(),
-    [data.mods],
+    () => [...new Set(mods.map((mod) => mod.category))].sort(),
+    [mods],
   );
   // A mod can be referenced by multiple Steps, but the hero stat counts it once.
-  // Ignore stale references that no longer exist in the collection.
-  const plannedModCount = useMemo(() => {
-    const assignedIds = modAssignmentLocations(data.batches);
-    return data.mods.filter((mod) => assignedIds.has(mod.id)).length;
-  }, [data.batches, data.mods]);
+  const plannedModCount = mods.length;
   // Uses the saved Modrinth snapshot only; the public page makes no API calls.
   const compat = useMemo(
-    () => checkCompatibility(data.mods, data.modpack),
-    [data.mods, data.modpack],
+    () => checkCompatibility(mods, data.modpack),
+    [mods, data.modpack],
   );
   // Counted over the whole collection, the same population the list draws from.
-  const sides = useMemo(() => sideCounts(data.mods), [data.mods]);
+  const sides = useMemo(() => sideCounts(mods), [mods]);
   // Optional mods that a required mod depends on; they go to Needs Review, never Optional.
-  const requiredBy = useMemo(() => requiredByOthers(data.mods), [data.mods]);
+  const requiredBy = useMemo(() => requiredByOthers(mods), [mods]);
   // For Players also lists unknown-side mods, under Needs Review, so none disappear unexplained.
   const viewCounts = {
     ...sideViewCounts(sides),
@@ -159,15 +159,15 @@ export function Preview({ theme }: { theme: Theme }) {
     () =>
       filterMods(
         sideView === "all"
-          ? data.mods
-          : data.mods.filter((mod) =>
+          ? mods
+          : mods.filter((mod) =>
               sideView === "players"
                 ? playerGroup(mod, requiredBy) !== null
                 : matchesSideView(mod, sideView),
             ),
         filters,
       ),
-    [data.mods, filters, sideView, requiredBy],
+    [mods, filters, sideView, requiredBy],
   );
   // Grouping happens after search, filters, and sort, and before pagination.
   const grouped = useMemo(
@@ -533,7 +533,7 @@ export function Preview({ theme }: { theme: Theme }) {
               <div className="empty-icon">
                 <Box size={26} />
               </div>
-              {data.mods.length ? (
+              {mods.length ? (
                 <>
                   <h3>No mods match your filters</h3>
                   <p>

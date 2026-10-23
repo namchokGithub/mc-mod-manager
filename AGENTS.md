@@ -39,6 +39,8 @@ Use pnpm exclusively. `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `p
 ## Working Conventions
 
 - **Agent collaboration and approval:** Think independently to understand the task, identify risks, and prepare a recommendation, but present that recommendation and wait for explicit approval before making changes, executing a plan, or taking an external action. Do not decide and act beyond the user's explicit scope.
+- **Planning:** For small or medium scoped changes, proceed after approved scope without creating a separate implementation plan. Create a plan only when the user requests one or the work spans multiple systems or has material implementation risk.
+- **Lightweight work:** For a focused file edit, small change, or UI-only change, do not use the full planning, test-first, and independent code-review flow. Make the approved change directly and use only the verification required below.
 - If work cannot be completed safely or clearly—because requirements, authority, access, consequences, or a technical constraint are unclear—ask first. Do not force a workaround that changes scope or assumptions.
 - Ask for help, request clarification, or use available collaboration when it would improve confidence; do not carry uncertainty alone.
 - State the relevant fact and ask the next useful question rather than repeatedly apologizing. Confirmation is more useful than an apology.

@@ -4564,7 +4564,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "considering",
+    "status": "planned",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/villages-and-pillages",
@@ -8952,7 +8952,7 @@
     "sourceUrl": "https://modrinth.com/mod/gear-tinkering",
     "description": "Adds new uses for the smithing table : repair cost resetting, trim removal, curse removal, enchantment transferring and book unsigning!",
     "dependencies": [],
-    "notes": "",
+    "notes": "Download from Modrinth",
     "imageUrl": "https://cdn.modrinth.com/data/LZIfwEFj/4671f289793bca5e8d3a02649d86b9a4750c2b93.png",
     "modrinth": {
       "projectId": "LZIfwEFj",
@@ -10695,7 +10695,7 @@
     "version": "26.1.2-1.6",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-biomes-o-plenty",
@@ -16439,5 +16439,85 @@
       "verifiedAt": "2026-10-22T17:45:42.530Z"
     },
     "addedAt": "2026-10-22T17:45:43.896Z"
+  },
+  {
+    "id": "simple-flight-ring",
+    "name": "Simple Flight Ring",
+    "version": "1.3.2",
+    "category": "Adventure",
+    "tags": [
+      "Equipment",
+      "Utility"
+    ],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/simple-flight-ring",
+    "description": "A small mod that adds 6 different materials to the flight ring, with relatively simple synthesis.",
+    "dependencies": [
+      "Curios API"
+    ],
+    "notes": "Download from Modrinth",
+    "imageUrl": "https://cdn.modrinth.com/data/g3U7L8Pz/038f89b2f213552b01841636be2f3888247d76ab_96.webp",
+    "modrinth": {
+      "projectId": "g3U7L8Pz",
+      "slug": "simple-flight-ring",
+      "versionId": "FBDd4nQx",
+      "versionNumber": "1.3.2",
+      "versionType": "release",
+      "datePublished": "2026-10-15T05:58:21.017080Z",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [
+        {
+          "projectId": "vvuO3ImH",
+          "versionId": null,
+          "type": "required",
+          "name": "Curios API"
+        }
+      ],
+      "syncedAt": "2026-10-22T21:52:14.860Z"
+    },
+    "addedAt": "2026-10-22T21:52:20.050Z"
+  },
+  {
+    "id": "disenchant-anvil",
+    "name": "Disenchant Anvil",
+    "version": "26.0.1",
+    "category": "Utility",
+    "tags": [],
+    "status": "planned",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/disenchant-anvil",
+    "description": "",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://media.forgecdn.net/avatars/thumbnails/1392/300/64/64/638902693767503390.png",
+    "manualCompatibility": {
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ]
+    },
+    "manualVerification": {
+      "source": "curseforge",
+      "version": "26.0.1",
+      "gameVersions": [
+        "26.1.2"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "evidenceUrl": "https://www.curseforge.com/minecraft/mc-mods/disenchant-anvil",
+      "verifiedAt": "2026-10-23T07:12:25.881Z"
+    },
+    "addedAt": "2026-10-23T07:12:59.217Z"
   }
 ]

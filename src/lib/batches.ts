@@ -87,6 +87,12 @@ export function modAssignmentLocations(
   return locations;
 }
 
+/** Mods referenced by at least one Step, in their original collection order. */
+export function assignedMods(mods: Mod[], file: BatchFile): Mod[] {
+  const assignments = modAssignmentLocations(file);
+  return mods.filter((mod) => assignments.has(mod.id));
+}
+
 const sameRef = (a: StepItemRef, b: StepItemRef) =>
   a.type === b.type && a.id === b.id;
 
