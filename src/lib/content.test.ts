@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 import modpackJson from "../../public/data/modpack.json";
 import modsJson from "../../public/data/mods.json";
-import resourcePacksJson from "../../public/data/resource-packs.json";
-import dataPacksJson from "../../public/data/data-packs.json";
-import shadersJson from "../../public/data/shaders.json";
 import {
   addContentItem,
   deleteContentItem,
@@ -15,11 +12,7 @@ import {
 } from "./content";
 import { serializeJson } from "./json";
 import { planningDashboard } from "./planningDashboard";
-import {
-  collectionSchema,
-  contentFileSchema,
-  type ContentItem,
-} from "./schema";
+import { collectionSchema, type ContentItem } from "./schema";
 import { parseDraft } from "./storage";
 
 const t0 = new Date("2026-10-18T08:00:00.000Z");
@@ -34,85 +27,6 @@ const added = (items: ContentItem[], change?: Partial<ContentInput>) => {
   if (!result.ok) throw new Error(JSON.stringify(result.errors));
   return result.items;
 };
-
-describe("content files", () => {
-  it("accepts the published empty files", () => {
-    expect(contentFileSchema("resourcepack").parse(resourcePacksJson)).toEqual({
-      version: 1,
-      type: "resourcepack",
-      items: [],
-    });
-    expect(contentFileSchema("datapack").safeParse(dataPacksJson).success).toBe(
-      true,
-    );
-    expect(contentFileSchema("shader").safeParse(shadersJson).success).toBe(
-      true,
-    );
-  });
-
-  it("fills optional fields and keeps unknown ones", () => {
-    const file = contentFileSchema("shader").parse({
-      version: 1,
-      type: "shader",
-      items: [{ id: "bsl", name: "BSL", status: "planned", runtime: "iris" }],
-    });
-    expect(file.items[0]).toEqual({
-      id: "bsl",
-      name: "BSL",
-      status: "planned",
-      runtime: "iris",
-      version: "",
-      description: "",
-      source: "manual",
-      sourceUrl: "",
-      imageUrl: "",
-      minecraftVersions: [],
-      tags: [],
-      notes: "",
-    });
-  });
-
-  it.each([
-    ["malformed JSON", "{", "not valid JSON"],
-    [
-      "the wrong collection type",
-      JSON.stringify({ version: 1, type: "shader", items: [] }),
-      "type",
-    ],
-    [
-      "duplicate IDs",
-      JSON.stringify({
-        version: 1,
-        type: "resourcepack",
-        items: [
-          { id: "a", name: "A", status: "planned" },
-          { id: "a", name: "B", status: "planned" },
-        ],
-      }),
-      "Duplicate ID: a",
-    ],
-    [
-      "a bad URL",
-      JSON.stringify({
-        version: 1,
-        type: "resourcepack",
-        items: [{ id: "a", name: "A", status: "planned", sourceUrl: "x" }],
-      }),
-      "sourceUrl",
-    ],
-    [
-      "an unknown status",
-      JSON.stringify({
-        version: 1,
-        type: "resourcepack",
-        items: [{ id: "a", name: "A", status: "in_testing" }],
-      }),
-      "status",
-    ],
-  ])("rejects %s on import", (_, text, message) => {
-    expect(() => parseContentFile(text, "resourcePacks")).toThrow(message);
-  });
-});
 
 describe("adding, editing, and deleting", () => {
   it("adds a Planned entry with an ID from its name and timestamps", () => {

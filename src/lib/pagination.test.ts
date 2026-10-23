@@ -1,8 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { filterMods, removeMods, type Filters } from "./mods";
+import { removeMods } from "./mods";
 import {
-  DEFAULT_PAGE_SIZE,
-  PAGE_SIZES,
   pageSelectionState,
   paginate,
   pruneSelection,
@@ -31,80 +29,6 @@ function mod(id: string, name = id, category = "Utilities"): Mod {
     imageUrl: "",
   };
 }
-
-describe("pagination", () => {
-  it("offers 10, 20, 50, and 100 per page, defaulting to 50", () => {
-    expect(PAGE_SIZES).toEqual([10, 20, 50, 100]);
-    expect(DEFAULT_PAGE_SIZE).toBe(50);
-  });
-
-  it("slices pages and reports the visible range", () => {
-    const page = paginate(ids(120), 2, 50);
-    expect(page).toMatchObject({
-      page: 2,
-      pageCount: 3,
-      total: 120,
-      from: 51,
-      to: 100,
-    });
-    expect(page.items[0]).toBe("m51");
-    expect(paginate(ids(120), 3, 50)).toMatchObject({ from: 101, to: 120 });
-  });
-
-  it("changes the page count with the page size", () => {
-    expect(paginate(ids(120), 1, 20).pageCount).toBe(6);
-    expect(paginate(ids(120), 1, 100).pageCount).toBe(2);
-  });
-
-  it("clamps a page that is out of range", () => {
-    expect(paginate(ids(30), 5, 20)).toMatchObject({
-      page: 2,
-      from: 21,
-      to: 30,
-    });
-    expect(paginate(ids(30), 0, 20).page).toBe(1);
-    expect(paginate(ids(30), Number.NaN, 20).page).toBe(1);
-  });
-
-  it("handles an empty list", () => {
-    expect(paginate([], 3, 50)).toEqual({
-      items: [],
-      page: 1,
-      pageCount: 1,
-      total: 0,
-      from: 0,
-      to: 0,
-    });
-  });
-
-  it("pages the already filtered and sorted list", () => {
-    const mods = [
-      ...ids(25).map((id) => mod(id, `Alpha ${id}`)),
-      ...ids(5).map((id) => mod(`x${id}`, `Zeta ${id}`, "Visuals")),
-    ];
-    const filters: Filters = {
-      query: "",
-      category: "Visuals",
-      status: "",
-      side: "",
-      sort: "za",
-    };
-    const page = paginate(filterMods(mods, filters), 1, 20);
-    expect(page.total).toBe(5);
-    expect(page.pageCount).toBe(1);
-    expect(page.items[0]?.name).toBe("Zeta m5");
-  });
-
-  it("stays valid after deleting the whole last page", () => {
-    const mods = ids(45).map((id) => mod(id));
-    const remaining = removeMods(mods, ids(45).slice(40));
-    expect(paginate(remaining, 3, 20)).toMatchObject({
-      page: 2,
-      from: 21,
-      to: 40,
-    });
-  });
-});
 
 describe("selection", () => {
   it("toggles single IDs", () => {

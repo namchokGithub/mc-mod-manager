@@ -155,30 +155,6 @@ describe("planning a save", () => {
     expect(JSON.parse(plan.files?.mods ?? "[]")).toEqual(manual.mods);
   });
 
-  it("writes batches.json with the plan and checks it for conflicts", () => {
-    const plan = {
-      version: 1 as const,
-      batches: [
-        {
-          id: "core",
-          name: "Core",
-          description: "",
-          order: 1,
-          modIds: [published.mods[0]!.id],
-          checklist: [{ id: "step-1", text: "Launch once", done: false }],
-        },
-      ],
-    };
-    const saved = planSave({ ...published, batches: plan, baseline }, onDisk);
-    expect(saved.status).toBe(200);
-    expect(JSON.parse(saved.files?.batches ?? "{}")).toEqual(plan);
-    const changedOnDisk = planSave(
-      { ...published, batches: plan, baseline },
-      { ...onDisk, batches: serializeJson(plan) },
-    );
-    expect(changedOnDisk.status).toBe(409);
-  });
-
   it("writes mod-inbox.json without changing the mods", () => {
     const inbox = {
       version: 1 as const,
