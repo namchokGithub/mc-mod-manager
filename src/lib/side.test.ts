@@ -44,8 +44,8 @@ describe("side classification", () => {
     expect(ids("players")).toEqual(["minimap", "jei", "old"]);
   });
 
-  it("For Server: server and both, without client or unknown", () => {
-    expect(ids("server")).toEqual(["jei", "backup", "old"]);
+  it("For Server: server only, without client, both, or unknown", () => {
+    expect(ids("server")).toEqual(["backup"]);
   });
 
   it("All Mods: every classification", () => {

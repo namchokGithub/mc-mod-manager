@@ -371,25 +371,9 @@ export function Preview({ theme }: { theme: Theme }) {
               {sideView === "players"
                 ? "Client-only and both-side mods, from each mod's listed side. Unknown sides are under Needs Review."
                 : sideView === "server"
-                  ? "Server-only and both-side mods, from each mod's listed side."
+                  ? "Server-only mods, from each mod's listed side."
                   : `Every mod in the collection (${sides.total}).`}
             </p>
-            {sideView === "server" && sides.unknown > 0 && (
-              <p className="side-view-note side-view-unknown" role="status">
-                {sides.unknown} {sides.unknown === 1 ? "mod has" : "mods have"}{" "}
-                an unknown installation side.{" "}
-                <button
-                  type="button"
-                  className="filter-reset"
-                  onClick={() => {
-                    setSideView("all");
-                    setPage(1);
-                  }}>
-                  View All Mods
-                </button>{" "}
-                to review {sides.unknown === 1 ? "it" : "them"}.
-              </p>
-            )}
           </div>
           <label className="group-by">
             <span>Group by</span>
