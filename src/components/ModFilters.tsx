@@ -26,7 +26,7 @@ const sideOptions: { value: Mod["side"]; label: string }[] = [
   { value: "both", label: "Both" },
 ];
 
-function MultiValueFilter<T extends string>({
+export function MultiValueFilter<T extends string>({
   values,
   onChange,
   counts,

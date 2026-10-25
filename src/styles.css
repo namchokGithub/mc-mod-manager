@@ -4095,6 +4095,14 @@ main:focus {
   max-width: 620px;
   margin-bottom: 14px;
 }
+.plan-mod-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
 .plan-find-mod-field {
   display: flex;
   align-items: center;

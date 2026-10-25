@@ -1509,7 +1509,7 @@
           "id": "step-4",
           "name": "8.4 Apothic Foundation",
           "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบระบบ enchanting และถอน enchant ตรวจต้นทุน/ผลลัพธ์",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1529,7 +1529,7 @@
           "id": "step-5",
           "name": "8.5 Enchanting Alternatives",
           "description": "**Priority:** P2 · **ทดสอบ:** เทียบกับ Apothic Enchanting และเลือกบทบาท/ต้นทุนที่ไม่ข้าม progression",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1542,14 +1542,6 @@
             {
               "type": "mod",
               "id": "dragon-enchants"
-            },
-            {
-              "type": "mod",
-              "id": "disenchant-anvil"
-            },
-            {
-              "type": "mod",
-              "id": "gear-tinkering"
             }
           ]
         },
@@ -1557,12 +1549,8 @@
           "id": "step-6",
           "name": "8.6 Spawners & Apotheosis",
           "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบ spawner อุปกรณ์ affix/loot และ addon หลัง parent พร้อม",
-          "done": false,
+          "done": true,
           "itemRefs": [
-            {
-              "type": "mod",
-              "id": "apotheosis-totem"
-            },
             {
               "type": "mod",
               "id": "apothic-spawners"
@@ -1581,7 +1569,7 @@
           "id": "step-7",
           "name": "Integration",
           "description": "ทดสอบชุดสะสม Batch 1–8 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
-          "done": false,
+          "done": true,
           "itemRefs": []
         }
       ]
@@ -1596,7 +1584,7 @@
           "id": "step-1",
           "name": "9.1 Spell Foundation",
           "description": "**Priority:** P0 · **ทดสอบ:** ตรวจคาถาพื้นฐาน scaling และ sync client/server",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1612,7 +1600,7 @@
           "id": "step-2",
           "name": "9.2 Runes & Supporting APIs",
           "description": "**Priority:** P0 · **ทดสอบ:** ตรวจ rune/API ก่อนเพิ่มแต่ละคลาส",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1636,7 +1624,7 @@
           "id": "step-3",
           "name": "9.3 Wizards & Healers",
           "description": "**Priority:** P1 · **ทดสอบ:** ร่ายเวท ฮีล buff และผลกับเพื่อนในทีม",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1652,7 +1640,7 @@
           "id": "step-4",
           "name": "9.4 Ranged & Melee Classes",
           "description": "**Priority:** P1 · **ทดสอบ:** ยิง/โจมตีและตรวจการทำงานกับ Better Combat",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1672,7 +1660,7 @@
           "id": "step-5",
           "name": "9.5 RPG Equipment",
           "description": "**Priority:** P1 · **ทดสอบ:** ใส่อุปกรณ์/เครื่องประดับ ตรวจ scaling และการตาย",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1696,7 +1684,7 @@
           "id": "step-6",
           "name": "9.6 RPG Structures & Enchants",
           "description": "**Priority:** P1 · **ทดสอบ:** สร้างโลกใหม่หรือ chunk ใหม่ ตรวจโครงสร้าง loot และ enchant\n\n**โลกทดสอบ:** ใช้โลกใหม่เพิ่มเติมสำหรับ world generation/registry; เก็บโลกสะสมเดิมไว้ตรวจ regression อย่าคาดหวังให้เนื้อหาใหม่ปรากฏใน chunk ที่สร้างแล้ว",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1716,7 +1704,7 @@
           "id": "step-7",
           "name": "Integration",
           "description": "ทดสอบชุดสะสม Batch 1–9 ก่อนเดินหน้าต่อ แก้ critical issue และทำ checkpoint เมื่อผ่านจริง",
-          "done": false,
+          "done": true,
           "itemRefs": []
         }
       ]
@@ -1731,7 +1719,7 @@
           "id": "step-1",
           "name": "10.1 Jobs & Origins Foundation",
           "description": "**Priority:** P1 · **ทดสอบ:** ตรวจ dependency งาน/อาชีพ origins สิทธิ์และ reset progression\n\n**Dependency ที่ไม่มีในไฟล์ (ยังไม่เพิ่มในจำนวน mods):** Arc Lib, Item Restrictions\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Knot → UI Lib → YAML Config → Neo Origins → Arc Lib → Item Restrictions → Jobs+ → Jobs+ Tools",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1771,12 +1759,8 @@
           "id": "step-2",
           "name": "10.2 Quests, Books & Player Activities",
           "description": "**Priority:** P1 · **ทดสอบ:** ทดสอบเควสต์ รางวัล ทีม หนังสือ/กิจกรรมและข้อมูลหลัง restart",
-          "done": false,
+          "done": true,
           "itemRefs": [
-            {
-              "type": "mod",
-              "id": "paper-books"
-            },
             {
               "type": "mod",
               "id": "starcatcher"
@@ -1827,7 +1811,7 @@
           "id": "step-4",
           "name": "10.4 Optional Shaders",
           "description": "**Priority:** P2 · **ทดสอบ:** เปิด shader ภายหลัง baseline ตรวจภาพ/FPS และการต่อสู้ในแพ็กเต็ม",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",

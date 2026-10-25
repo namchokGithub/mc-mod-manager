@@ -829,7 +829,7 @@
     "tags": [
       "Optimization"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/iris",
@@ -4276,7 +4276,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/dis-enchanting-table",
@@ -5483,7 +5483,7 @@
       "Game Mechanics",
       "Minigame"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/starcatcher",
@@ -6982,7 +6982,7 @@
     "version": "26.1.2.5+neoforge-26.1.2",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/little-joys",
@@ -8224,7 +8224,7 @@
     "version": "3.3.5",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/neruina",
@@ -8267,7 +8267,7 @@
     "version": "3.5.3",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/configurable",
@@ -8543,7 +8543,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jobsplus",
@@ -8612,7 +8612,7 @@
     "version": "20.2.10",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/arc",
@@ -8669,7 +8669,7 @@
     "tags": [
       "Library"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/item-restrictions",
@@ -8736,7 +8736,7 @@
       "Management",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/knot",
@@ -8770,7 +8770,7 @@
     "tags": [
       "Management"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ui-lib",
@@ -8807,7 +8807,7 @@
       "Management",
       "Utility"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yaml-config",
@@ -8853,7 +8853,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jobsplustools",
@@ -8896,7 +8896,7 @@
     "tags": [
       "Magic"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/neo-origins",
@@ -8946,7 +8946,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "considering",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/gear-tinkering",
@@ -9085,7 +9085,7 @@
     "version": "26.1.2-3.6-fabric+forge+neo",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/paper-books",
@@ -9453,7 +9453,7 @@
       "Magic",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/enchanting-infuser",
@@ -9830,7 +9830,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/patchouli",
@@ -10912,7 +10912,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/wizards",
@@ -11058,7 +11058,7 @@
       "Library",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/spell-engine",
@@ -11161,7 +11161,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jewelry",
@@ -11227,7 +11227,7 @@
     "tags": [
       "Library"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ranged-weapon-api",
@@ -11270,7 +11270,7 @@
     "tags": [
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/spell-power",
@@ -11307,7 +11307,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/paladins-and-priests",
@@ -11374,7 +11374,7 @@
       "Equipment",
       "Game Mechanics"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/archers",
@@ -11515,7 +11515,7 @@
       "Magic",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/gazebos",
@@ -11561,7 +11561,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/rogues-and-warriors",
@@ -11621,7 +11621,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/relics-rpg",
@@ -11674,7 +11674,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/arsenal-rpg-series",
@@ -11727,7 +11727,7 @@
       "Magic",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/village-taverns",
@@ -11773,7 +11773,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/armory-rpg-series",
@@ -12363,7 +12363,7 @@
       "Equipment",
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/apotheosis",
@@ -12459,7 +12459,7 @@
       "Equipment",
       "Library"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/apothic-attributes",
@@ -12503,7 +12503,7 @@
       "Equipment",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/apothic-enchanting",
@@ -12554,7 +12554,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/apothic-spawners",
@@ -12598,7 +12598,7 @@
       "Equipment",
       "Storage"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/apotheosis-totem",
@@ -13183,7 +13183,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge",
@@ -15842,7 +15842,7 @@
     "tags": [
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/protection-grace-enchantment",
@@ -15990,7 +15990,7 @@
       "Equipment",
       "Game Mechanics"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/rpg-enchantments",
@@ -16085,7 +16085,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ly-lucky-blocks",
@@ -16132,7 +16132,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lucky-blocks-world",
@@ -16226,7 +16226,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dragon-enchants",
@@ -16490,7 +16490,7 @@
     "version": "26.0.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/disenchant-anvil",

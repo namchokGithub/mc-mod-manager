@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useCollection } from "../../app/DataContext";
 import { useToast } from "../../app/ToastContext";
+import { MultiValueFilter } from "../../components/ModFilters";
 import { ModArtwork } from "../../components/ModArtwork";
 import { MarkdownText } from "../../components/MarkdownText";
 import { Button } from "../../components/ui/button";
@@ -256,6 +257,7 @@ function StepCard({
   onRemove,
   onOpenMod,
   onOpenContent,
+  modStatusFilter = [],
   highlighted,
 }: {
   batch: Batch;
@@ -270,6 +272,7 @@ function StepCard({
   onRemove: () => void;
   onOpenMod: (mod: Mod) => void;
   onOpenContent: (key: ContentKey, item: ContentItem) => void;
+  modStatusFilter?: readonly Mod["status"][] | null;
   highlighted?: boolean;
 }) {
   // Edited locally and committed on blur, so clearing the text to retype never fails validation.
@@ -306,6 +309,12 @@ function StepCard({
   };
   const stepBatch = { ...batch, steps: [item] };
   const { mods, missing } = batchMods(stepBatch, data.mods);
+  const visibleMods =
+    modStatusFilter === null
+      ? []
+      : modStatusFilter.length
+        ? mods.filter((mod) => modStatusFilter.includes(mod.status))
+        : mods;
   const content = batchContent(stepBatch, data);
   const count = batchCountText(mods.length, content);
   const stepPlan = {
@@ -612,9 +621,9 @@ function StepCard({
                   onValueChange={(value) => value && add(value)}
                 />
               </div>
-              {mods.length || missing.length ? (
+              {visibleMods.length || missing.length ? (
                 <ul className="plan-mods">
-                  {mods.map((mod) => (
+                  {visibleMods.map((mod) => (
                     <motion.li
                       key={mod.id}
                       className={
@@ -707,6 +716,12 @@ function StepCard({
                     </li>
                   ))}
                 </ul>
+              ) : mods.length ? (
+                <div className="plan-step-empty">
+                  <p className="mr-hint">
+                    No mods match the selected statuses.
+                  </p>
+                </div>
               ) : (
                 <div className="plan-step-empty">
                   <p className="mr-hint">No mods added yet.</p>
@@ -968,12 +983,14 @@ function BatchBody({
   onChange,
   onOpenMod,
   onOpenContent,
+  modStatusFilter,
   focusStep,
 }: {
   batch: Batch;
   onChange: (batch: Batch) => void;
   onOpenMod: (mod: Mod) => void;
   onOpenContent: (key: ContentKey, item: ContentItem) => void;
+  modStatusFilter: readonly Mod["status"][] | null;
   focusStep?: { id: string; request: number };
 }) {
   const { data } = useCollection();
@@ -1042,6 +1059,7 @@ function BatchBody({
                 }
                 onOpenMod={onOpenMod}
                 onOpenContent={onOpenContent}
+                modStatusFilter={modStatusFilter}
                 highlighted={highlightedStepId === item.id}
               />
             ))}
@@ -1120,6 +1138,24 @@ export function BuildPlanEditor({
   const batches = orderedBatches(data.batches);
   const readiness = useMemo(() => planningDashboard(data).batches, [data]);
   const [planSearch, setPlanSearch] = useState("");
+  const [modStatusFilter, setModStatusFilter] = useState<
+    Mod["status"][] | null
+  >([]);
+  const visibleBatches = useMemo(() => {
+    if (modStatusFilter === null) return [];
+    if (!modStatusFilter.length)
+      return batches.map((batch, index) => ({ batch, index }));
+    const matchingModIds = new Set(
+      data.mods
+        .filter((mod) => modStatusFilter.includes(mod.status))
+        .map((mod) => mod.id),
+    );
+    return batches.flatMap((batch, index) =>
+      modIdsOf(batch).some((id) => matchingModIds.has(id))
+        ? [{ batch, index }]
+        : [],
+    );
+  }, [batches, data.mods, modStatusFilter]);
   const [stepFocus, setStepFocus] = useState<{
     batchId: string;
     id: string;
@@ -1272,6 +1308,16 @@ export function BuildPlanEditor({
             </Button>
           )}
         </label>
+        <div className="plan-mod-filter">
+          <span>Filter Step mods</span>
+          <MultiValueFilter
+            values={modStatusFilter}
+            onChange={setModStatusFilter}
+            allLabel="All statuses"
+            ariaLabel="Filter Step mods by status"
+            options={modStatusOptions}
+          />
+        </div>
         {planSearch.trim() && (
           <ul className="plan-find-mod-results" aria-label="Matching plan mods">
             {planSearchResults.map(({ mod, location }) => (
@@ -1299,147 +1345,158 @@ export function BuildPlanEditor({
       {batches.length ? (
         <>
           <BatchReadiness batches={readiness} onOpenBatch={openBatch} />
-          <ol className="plan-list">
-            {batches.map((batch, index) => {
-              const open = expandedBatchId === batch.id;
-              const done = batch.steps.filter((item) => item.done).length;
-              const stepProgress = batch.steps.length
-                ? Math.round((done / batch.steps.length) * 100)
-                : 0;
-              return (
-                <li
-                  key={batch.id}
-                  id={`batch-${batch.id}`}
-                  className="plan-batch"
-                >
-                  <div className="plan-head">
-                    <button
-                      type="button"
-                      className="plan-toggle"
-                      aria-expanded={open}
-                      onClick={() => toggle(batch.id)}
-                    >
-                      <span className="plan-order" aria-hidden="true">
-                        {index + 1}
-                      </span>
-                      <span className="plan-title">
-                        <strong>{batch.name}</strong>
-                        <span>
-                          {batchCountText(
-                            modIdsOf(batch).length,
-                            batchContent(batch, data),
-                          )}{" "}
-                          ·{" "}
-                          {batch.steps.length
-                            ? `${done}/${batch.steps.length} steps done`
-                            : "no steps"}
-                        </span>
-                      </span>
-                      <ChevronDown
-                        size={16}
-                        aria-hidden="true"
-                        className={open ? "rotate" : undefined}
-                      />
-                    </button>
-                    <div className="row-actions">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Move ${batch.name} up`}
-                        disabled={index === 0}
-                        onClick={() =>
-                          updateBatches(moveItem(batches, index, -1))
-                        }
-                      >
-                        <ArrowUp size={16} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Move ${batch.name} down`}
-                        disabled={index === batches.length - 1}
-                        onClick={() =>
-                          updateBatches(moveItem(batches, index, 1))
-                        }
-                      >
-                        <ArrowDown size={16} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Edit ${batch.name}`}
-                        onClick={() =>
-                          setForm({
-                            batch,
-                            name: batch.name,
-                            description: batch.description,
-                          })
-                        }
-                      >
-                        <Pencil size={16} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Export a guide for ${batch.name}`}
-                        title="Export guide"
-                        onClick={() => setExportFor(batch.id)}
-                      >
-                        <FileDown size={16} />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="row-delete"
-                        aria-label={`Delete ${batch.name}`}
-                        onClick={() => setDeleting(batch)}
-                      >
-                        <Trash2 size={16} />
-                      </Button>
-                    </div>
-                  </div>
-                  {batch.description && (
-                    <MarkdownText className="plan-description">
-                      {batch.description}
-                    </MarkdownText>
-                  )}
-                  <div
-                    className="plan-batch-progress"
-                    role="progressbar"
-                    aria-label={`${batch.name} Step progress`}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-valuenow={stepProgress}
+          {visibleBatches.length ? (
+            <ol className="plan-list">
+              {visibleBatches.map(({ batch, index }) => {
+                const open = expandedBatchId === batch.id;
+                const done = batch.steps.filter((item) => item.done).length;
+                const stepProgress = batch.steps.length
+                  ? Math.round((done / batch.steps.length) * 100)
+                  : 0;
+                return (
+                  <li
+                    key={batch.id}
+                    id={`batch-${batch.id}`}
+                    className="plan-batch"
                   >
-                    <span style={{ width: `${stepProgress}%` }} />
-                  </div>
-                  <AnimatePresence initial={false}>
-                    {open && (
-                      <motion.div
-                        className="plan-collapse"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
+                    <div className="plan-head">
+                      <button
+                        type="button"
+                        className="plan-toggle"
+                        aria-expanded={open}
+                        onClick={() => toggle(batch.id)}
                       >
-                        <BatchBody
-                          batch={batch}
-                          onChange={replace}
-                          onOpenMod={onOpenMod}
-                          onOpenContent={onOpenContent}
-                          focusStep={
-                            stepFocus?.batchId === batch.id
-                              ? stepFocus
-                              : undefined
-                          }
+                        <span className="plan-order" aria-hidden="true">
+                          {index + 1}
+                        </span>
+                        <span className="plan-title">
+                          <strong>{batch.name}</strong>
+                          <span>
+                            {batchCountText(
+                              modIdsOf(batch).length,
+                              batchContent(batch, data),
+                            )}{" "}
+                            ·{" "}
+                            {batch.steps.length
+                              ? `${done}/${batch.steps.length} steps done`
+                              : "no steps"}
+                          </span>
+                        </span>
+                        <ChevronDown
+                          size={16}
+                          aria-hidden="true"
+                          className={open ? "rotate" : undefined}
                         />
-                      </motion.div>
+                      </button>
+                      <div className="row-actions">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Move ${batch.name} up`}
+                          disabled={index === 0}
+                          onClick={() =>
+                            updateBatches(moveItem(batches, index, -1))
+                          }
+                        >
+                          <ArrowUp size={16} />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Move ${batch.name} down`}
+                          disabled={index === batches.length - 1}
+                          onClick={() =>
+                            updateBatches(moveItem(batches, index, 1))
+                          }
+                        >
+                          <ArrowDown size={16} />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Edit ${batch.name}`}
+                          onClick={() =>
+                            setForm({
+                              batch,
+                              name: batch.name,
+                              description: batch.description,
+                            })
+                          }
+                        >
+                          <Pencil size={16} />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Export a guide for ${batch.name}`}
+                          title="Export guide"
+                          onClick={() => setExportFor(batch.id)}
+                        >
+                          <FileDown size={16} />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="row-delete"
+                          aria-label={`Delete ${batch.name}`}
+                          onClick={() => setDeleting(batch)}
+                        >
+                          <Trash2 size={16} />
+                        </Button>
+                      </div>
+                    </div>
+                    {batch.description && (
+                      <MarkdownText className="plan-description">
+                        {batch.description}
+                      </MarkdownText>
                     )}
-                  </AnimatePresence>
-                </li>
-              );
-            })}
-          </ol>
+                    <div
+                      className="plan-batch-progress"
+                      role="progressbar"
+                      aria-label={`${batch.name} Step progress`}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={stepProgress}
+                    >
+                      <span style={{ width: `${stepProgress}%` }} />
+                    </div>
+                    <AnimatePresence initial={false}>
+                      {open && (
+                        <motion.div
+                          className="plan-collapse"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        >
+                          <BatchBody
+                            batch={batch}
+                            onChange={replace}
+                            onOpenMod={onOpenMod}
+                            onOpenContent={onOpenContent}
+                            modStatusFilter={modStatusFilter}
+                            focusStep={
+                              stepFocus?.batchId === batch.id
+                                ? stepFocus
+                                : undefined
+                            }
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </li>
+                );
+              })}
+            </ol>
+          ) : (
+            <div className="empty-state">
+              <p>
+                {modStatusFilter === null
+                  ? "No statuses are selected."
+                  : "No batches contain mods with the selected statuses."}
+              </p>
+            </div>
+          )}
         </>
       ) : (
         <div className="empty-state">
