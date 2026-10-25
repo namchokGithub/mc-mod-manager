@@ -43,7 +43,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/appleskin",
@@ -79,7 +79,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/macaws-holidays",
@@ -113,7 +113,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jei",
@@ -162,7 +162,7 @@
     "version": "0.6.8",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mezzconfig",
@@ -194,7 +194,7 @@
     "version": "26.1.12+neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jade",
@@ -237,7 +237,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mouse-tweaks",
@@ -273,7 +273,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/modernfix",
@@ -305,7 +305,7 @@
     "version": "mc26.1.2-0.9.2-neoforge",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sodium",
@@ -340,7 +340,7 @@
       "Transportation",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/xaeros-minimap",
@@ -382,7 +382,7 @@
       "Transportation",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/xaeros-world-map",
@@ -421,7 +421,7 @@
     "version": "1.15.3+26.1-neoforge",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/immediatelyfast",
@@ -490,7 +490,7 @@
     "version": "26.1.154+neoforge",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cloth-config",
@@ -526,7 +526,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/clumps",
@@ -561,7 +561,7 @@
       "Library",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/curios",
@@ -598,7 +598,7 @@
       "Magic",
       "Transportation"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/waystones",
@@ -646,7 +646,7 @@
     "version": "26.1.2.15+neoforge-26.1.2",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/balm",
@@ -678,7 +678,7 @@
     "version": "26.1.2.12+neoforge-26.1.2",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/shogi",
@@ -710,7 +710,7 @@
     "version": "26.1.2-3.26.13.2207",
     "category": "Storage",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sophisticated-backpacks",
@@ -795,7 +795,7 @@
     "tags": [
       "Storage"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sophisticated-core",
@@ -874,7 +874,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/enchantment-descriptions",
@@ -917,7 +917,7 @@
     "version": "26.1.2.6",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/prickle",
@@ -953,7 +953,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/entitytexturefeatures",
@@ -989,7 +989,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/entity-model-features",
@@ -1035,7 +1035,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/natures-compass",
@@ -1071,7 +1071,7 @@
     "tags": [
       "Decoration"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/comforts",
@@ -1103,7 +1103,7 @@
     "version": "1.23.38.123",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lootr",
@@ -1135,7 +1135,7 @@
     "version": "26.1.2.3",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/attributefix",
@@ -1178,7 +1178,7 @@
     "version": "0.6.0.76",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/better-advancements",
@@ -1213,7 +1213,7 @@
       "Storage",
       "Transportation"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/carry-on",
@@ -1247,7 +1247,7 @@
     "version": "26.1.2-3.0.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mmmmmmmmmmmm",
@@ -1288,7 +1288,7 @@
     "version": "26.1.2-4.1.1",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/moonlight",
@@ -1322,7 +1322,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/artifacts",
@@ -1422,7 +1422,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/explorers-compass",
@@ -1459,7 +1459,7 @@
       "Management",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/trashslot",
@@ -1500,7 +1500,7 @@
     "version": "26.1.2-1.5.122.2185",
     "category": "Storage",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sophisticated-storage",
@@ -1585,7 +1585,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/towns-and-towers",
@@ -1633,7 +1633,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cristel-lib",
@@ -1679,7 +1679,7 @@
       "Storage",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/corpse",
@@ -1720,7 +1720,7 @@
     "version": "0.5.4",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ai-improvements",
@@ -1756,7 +1756,7 @@
     "version": "3.0.1-26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/just-zoom",
@@ -1797,7 +1797,7 @@
     "version": "1.10.1-26.1.1-neoforge",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/konkrete",
@@ -1833,7 +1833,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/biomes-o-plenty",
@@ -1865,7 +1865,7 @@
     "version": "26.1.2-7.0.0",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fastsuite",
@@ -1906,7 +1906,7 @@
     "version": "26.1.2-10.0.2",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/placebo",
@@ -1938,7 +1938,7 @@
     "version": "26.1.2-10.0.0",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fastfurnace",
@@ -2044,7 +2044,7 @@
       "Equipment",
       "Library"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/better-combat",
@@ -2094,7 +2094,7 @@
     "version": "1.2.8",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/player-animation-library",
@@ -2132,7 +2132,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/item-highlighter",
@@ -2175,7 +2175,7 @@
     "version": "1.4.1.2",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/iceberg",
@@ -2264,7 +2264,7 @@
       "Library",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/prism-lib",
@@ -2301,7 +2301,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/legendary-tooltips",
@@ -2353,7 +2353,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "CurseForge",
     "sourceUrl": "https://modrinth.com/mod/when-dungeons-arise",
@@ -2406,7 +2406,7 @@
     "version": "26.0.2+neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jade-addons-forge",
@@ -2452,7 +2452,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/betterf3",
@@ -2498,7 +2498,7 @@
       "Food",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cooking-for-blockheads",
@@ -2541,7 +2541,7 @@
     "tags": [
       "Technology"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/iron-furnaces",
@@ -2612,7 +2612,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/structory",
@@ -2665,7 +2665,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/structory-towers",
@@ -2772,7 +2772,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/easy-villagers",
@@ -2821,7 +2821,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/easy-piglins",
@@ -2862,7 +2862,7 @@
     "version": "1.26.10.2",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lmd",
@@ -2905,7 +2905,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/almanac",
@@ -2945,7 +2945,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/farming-for-blockheads",
@@ -3219,7 +3219,7 @@
     "version": "1.1.25-neoforge-mc26.1",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/supermartijn642s-core-lib",
@@ -3253,7 +3253,7 @@
     "version": "1.2.6-neoforge-mc26.1",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/rechiseled",
@@ -3310,7 +3310,7 @@
     "version": "26.1.3",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mutant-monsters",
@@ -3353,7 +3353,7 @@
     "version": "26.1.16",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/puzzles-lib",
@@ -3387,7 +3387,7 @@
     "version": "26.1.2-8.32-fabric+forge+neo",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/collective",
@@ -3422,7 +3422,7 @@
     "version": "v1.5",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/get-it-together-drops",
@@ -3457,7 +3457,7 @@
     "version": "26.1-2.10.3",
     "category": "Storage",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/toms-storage",
@@ -3641,7 +3641,7 @@
     "version": "1.1.8-neoforge-mc26.1",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/supermartijn642s-config-lib",
@@ -3675,7 +3675,7 @@
     "version": "20.1.17+neoforge",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/architectury-api",
@@ -3710,7 +3710,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/max-health-fix",
@@ -3756,7 +3756,7 @@
       "Storage",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/xp-tome",
@@ -3791,7 +3791,7 @@
     "version": "4.2.0",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/corpse-x-curios-api-compat",
@@ -3848,7 +3848,7 @@
     "version": "2.0.7",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/baguettelib",
@@ -3890,7 +3890,7 @@
       "Utility",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/chunky",
@@ -3966,7 +3966,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/skills",
@@ -4003,7 +4003,7 @@
       "Library",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/attributes",
@@ -4038,7 +4038,7 @@
     "version": "1.2.0-neoforge-mc26.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/durability-tooltip",
@@ -4081,7 +4081,7 @@
     "version": "26.1.2-1.9.1",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/universal-sawmill",
@@ -4125,7 +4125,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/baubley-heart-canisters",
@@ -4159,7 +4159,7 @@
     "version": "neoforge-1.0.23+26.1.2",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/trade-cycling",
@@ -4240,7 +4240,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ecologics",
@@ -4313,7 +4313,7 @@
       "Game Mechanics",
       "Library"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/combat-roll",
@@ -4366,7 +4366,7 @@
       "Game Mechanics",
       "Social"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/immersive-melodies",
@@ -4401,7 +4401,7 @@
       "Mobs",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/friends-and-foes-forge",
@@ -4450,7 +4450,7 @@
     "version": "4.0.1",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/resourceful-lib",
@@ -4518,7 +4518,7 @@
     "version": "neoforge-3.0.4+mc26.1.2",
     "category": "Worldgen",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/friends-and-foes-beekeeper-hut-forge",
@@ -4564,7 +4564,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/villages-and-pillages",
@@ -4601,7 +4601,7 @@
       "Mobs",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/variants-and-ventures",
@@ -4653,7 +4653,7 @@
       "Management",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yacl",
@@ -4690,7 +4690,7 @@
       "Mobs",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/friends-and-foes-flowery-mooblooms-forge",
@@ -4768,7 +4768,7 @@
       "Management",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/worldedit",
@@ -4803,7 +4803,7 @@
     "version": "neoforge-1.8.0+26.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/transmog",
@@ -4837,7 +4837,7 @@
     "version": "26.1.2-0.10.37.378",
     "category": "Storage",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sophisticated-storage-in-motion",
@@ -4891,7 +4891,7 @@
     "version": "1.0.3",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/im-fast",
@@ -4923,7 +4923,7 @@
     "version": "1.8.2+26.1.2",
     "category": "Equipment",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/immersive-armors",
@@ -5000,7 +5000,7 @@
     "version": "neoforge-26.1.2-6.9.0",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/libipn",
@@ -5036,7 +5036,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/silents-gems",
@@ -5083,7 +5083,7 @@
     "version": "11.2.0",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/silent-lib",
@@ -5119,7 +5119,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/chimes",
@@ -5185,7 +5185,7 @@
     "version": "v1.5.2",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/bl4cks-sit",
@@ -5221,7 +5221,7 @@
     "tags": [
       "Social"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/immersive-paintings",
@@ -5270,7 +5270,7 @@
     "tags": [
       "Library"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fzzy-config",
@@ -5313,7 +5313,7 @@
     "version": "6.4.0",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/kotlin-for-forge",
@@ -5355,7 +5355,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/item-borders",
@@ -5437,7 +5437,7 @@
     "version": "26.1.1",
     "category": "Adventure",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/tiny-skeletons",
@@ -5517,7 +5517,7 @@
     "tags": [
       "Game Mechanics"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/playerrevive",
@@ -5558,7 +5558,7 @@
     "version": "2.14.16",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/creativecore",
@@ -5593,7 +5593,7 @@
       "Mobs",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal_feeding_trough",
@@ -5628,7 +5628,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animalpens",
@@ -5711,7 +5711,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/achievements-optimizer",
@@ -5754,7 +5754,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-totem",
@@ -5847,7 +5847,7 @@
       "Equipment",
       "Food"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/golden-foods",
@@ -5891,7 +5891,7 @@
     "version": "neoforge-26.1.2-4.1.2",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/monolib",
@@ -5970,7 +5970,7 @@
     "version": "3.1.0",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/new-slab-variants",
@@ -6016,7 +6016,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/new-shield-variants",
@@ -6062,7 +6062,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/healing-campfire",
@@ -6170,7 +6170,7 @@
     "version": "1.6.0+26.1+neoforge",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mossylib",
@@ -6273,7 +6273,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/particle-effects",
@@ -6352,7 +6352,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/default-skill-trees",
@@ -6407,7 +6407,7 @@
     "version": "4.0.2",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/construction-wands-revived",
@@ -6441,7 +6441,7 @@
     "version": "3.0.1",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/aggroindicator",
@@ -6475,7 +6475,7 @@
     "version": "1.3.0",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/xp-from-harvest",
@@ -6653,7 +6653,7 @@
       "Food",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/breadvariants",
@@ -6688,7 +6688,7 @@
     "version": "2.1.3+26.1.2",
     "category": "Food",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/alcocraft",
@@ -6738,7 +6738,7 @@
       "Social",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/dreamdisplays",
@@ -6832,7 +6832,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sophisticated-jei-index",
@@ -6864,7 +6864,7 @@
     "version": "1.0.3-mc26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/dream-cocoon",
@@ -6898,7 +6898,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/bundle-upgrade",
@@ -7026,7 +7026,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "interested",
+    "status": "not-installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jeioptimizer",
@@ -7106,7 +7106,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/more-useful-copper",
@@ -7152,7 +7152,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/flower-tweaks",
@@ -7203,7 +7203,7 @@
     "tags": [
       "Storage"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/sophisticated-inventory-interactions",
@@ -7244,7 +7244,7 @@
     "version": "6.2.1",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/loot-journal",
@@ -7294,7 +7294,7 @@
     "version": "4.1.0",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fragmentum",
@@ -7591,7 +7591,7 @@
     "version": "1.21.5+26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/field-guide",
@@ -7705,7 +7705,7 @@
     "version": "2.8.5+26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/item-descriptions",
@@ -7755,7 +7755,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/underground-village-stoneholm",
@@ -7799,7 +7799,7 @@
     "version": "2.1.2",
     "category": "Utility",
     "tags": [],
-    "status": "considering",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/better-library",
@@ -7836,7 +7836,7 @@
     "tags": [
       "Social"
     ],
-    "status": "interested",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ears",
@@ -7872,7 +7872,7 @@
     "version": "26.1.2-29.6.0",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/earthmobs",
@@ -7915,7 +7915,7 @@
     "tags": [
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/bagus-lib",
@@ -7991,7 +7991,7 @@
       "Cursed",
       "Mobs"
     ],
-    "status": "considering",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mutants-and-zombies",
@@ -8026,7 +8026,7 @@
     "version": "3.1.5-26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "interested",
+    "status": "testing",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/drippy-loading-screen",
@@ -8165,7 +8165,7 @@
       "Cursed",
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/champions-unofficial",
@@ -8344,7 +8344,7 @@
       "Game Mechanics",
       "Utility"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/faewufs-diversity",
@@ -8385,7 +8385,7 @@
     "version": "1.4.0",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/faewulfslib",
@@ -8499,7 +8499,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mezzconfiggui",
@@ -9000,7 +9000,7 @@
       "Game Mechanics",
       "Magic"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/the-grave-scrolls",
@@ -9176,7 +9176,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/moreculling",
@@ -9222,7 +9222,7 @@
       "Decoration",
       "Food"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/crate-delight-croptopia",
@@ -9268,7 +9268,7 @@
       "Decoration",
       "Food"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/crate-delight",
@@ -9302,7 +9302,7 @@
     "version": "2.6.2",
     "category": "Worldgen",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/terralith",
@@ -9348,7 +9348,7 @@
       "Utility",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lithostitched",
@@ -9382,7 +9382,7 @@
     "version": "26.1-1.4.0-neoforge",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/better-biome-blend",
@@ -9416,7 +9416,7 @@
     "version": "26.1.0.2+neoforge",
     "category": "Storage",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/storagedrawers",
@@ -9498,7 +9498,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/trash-cans",
@@ -9550,7 +9550,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/better-fps-render-distance",
@@ -9612,7 +9612,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/cupboard",
@@ -9659,7 +9659,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/omni-pots",
@@ -9724,7 +9724,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/measurements",
@@ -9759,7 +9759,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/croptopia",
@@ -9866,7 +9866,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/epherolib/files/all?page=1&pageSize=20&version=26.1.2&showAlphaFiles=hide",
@@ -9913,7 +9913,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/overloaded-armor-bar",
@@ -10050,7 +10050,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/more-villagers",
@@ -10096,7 +10096,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/armor-damage-scaling-forge-fabric",
@@ -10132,7 +10132,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/sophisticated-tab",
@@ -10192,7 +10192,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/elytra-slot-filip",
@@ -10219,7 +10219,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/complementary-tools-weapons",
@@ -10259,7 +10259,7 @@
     "version": "2.3.1",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/cc-complementary-core",
@@ -10303,7 +10303,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dynamic-difficulty-mod",
@@ -10353,7 +10353,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/more-tier-upgrade",
@@ -10525,7 +10525,7 @@
     "tags": [
       "Storage"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-furniture",
@@ -10661,7 +10661,7 @@
     "version": "1.1.5",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/macaws-lights-and-lamps",
@@ -10843,7 +10843,7 @@
     "version": "26.1.2.0.2",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/glitchcore",
@@ -10877,7 +10877,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/terrablender",
@@ -11832,7 +11832,7 @@
     "tags": [
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-api",
@@ -11868,7 +11868,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-nether-fortresses",
@@ -11913,7 +11913,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-dungeons",
@@ -11958,7 +11958,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-ocean-monuments",
@@ -12003,7 +12003,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-mineshafts",
@@ -12048,7 +12048,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-jungle-temples",
@@ -12093,7 +12093,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-end-island",
@@ -12138,7 +12138,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-strongholds",
@@ -12183,7 +12183,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-witch-huts",
@@ -12228,7 +12228,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-better-desert-temples",
@@ -12273,7 +12273,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-bridges",
@@ -12318,7 +12318,7 @@
       "Decoration",
       "Worldgen"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/yungs-extras",
@@ -12630,7 +12630,7 @@
     "version": "neoforge-26.1.1-26.1.2",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/mrcrayfishs-furniture-mod-tools-refurbished",
@@ -12665,7 +12665,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
@@ -12753,7 +12753,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dusk",
@@ -12797,7 +12797,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/dynamic-view",
@@ -12841,7 +12841,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-backups",
@@ -12877,7 +12877,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
@@ -12912,7 +12912,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "priority": "high",
     "source": "Other",
@@ -12966,7 +12966,7 @@
     "version": "26.1.2.4",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/accelerated-decay",
@@ -13000,7 +13000,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge",
@@ -13055,7 +13055,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
@@ -13099,7 +13099,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat",
@@ -13238,7 +13238,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/fast-async-world-save-forge-fabric",
@@ -13284,7 +13284,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-underground-villages-stoneholm",
@@ -13342,7 +13342,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations",
@@ -13388,7 +13388,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/yung-structures-addon-for-loot-integrations",
@@ -13446,7 +13446,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/shield-mechanics",
@@ -13490,7 +13490,7 @@
     "tags": [
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ender-zoology",
@@ -13535,7 +13535,7 @@
     "tags": [
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/armored-foes",
@@ -13793,7 +13793,7 @@
     "version": "26.1.1",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/new-sea-life",
@@ -13927,7 +13927,7 @@
     "version": "26.1.0",
     "category": "Decoration",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/stoneworks",
@@ -14104,7 +14104,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/new-health-bars",
@@ -14192,7 +14192,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/overflowing-bars",
@@ -14323,7 +14323,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://github.com/astryxion/Citadel-NeoForge",
@@ -14370,7 +14370,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/alexs-mobs-neoforge",
@@ -14501,7 +14501,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
@@ -14587,7 +14587,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://legacy.curseforge.com/minecraft/mc-mods/animal-garden-snow-leopard",
@@ -14673,7 +14673,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-sea-otter",
@@ -14930,7 +14930,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-western-gorilla",
@@ -15016,7 +15016,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-red-panda",
@@ -15102,7 +15102,7 @@
       "Forge",
       "Fabric"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Other",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-hippopotamus",
@@ -15227,7 +15227,7 @@
     "version": "1.2.0-neoforge-26.2.0.2",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/aquarius-libs",
@@ -15262,7 +15262,7 @@
     "version": "1.0.3-neoforge-26.1.1.1",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-lion",
@@ -15349,7 +15349,7 @@
     "version": "1.0.0-neoforge-26.2.0.75",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-common-raccoon",
@@ -15439,7 +15439,7 @@
     "tags": [
       "Neoforge"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/animal-garden-spectacled-bear",
@@ -15477,7 +15477,7 @@
     "tags": [
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-owl",
@@ -15566,7 +15566,7 @@
     "version": "1.0.1-neoforge-26.1.1.1",
     "category": "Mobs",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/animal-garden-narwhal",
@@ -15654,7 +15654,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/configurable-despawn-timer",
@@ -15701,7 +15701,7 @@
       "Library",
       "Utility"
     ],
-    "status": "planned",
+    "status": "testing",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/quad",
@@ -16037,7 +16037,7 @@
     "version": "v1.0.1+mod",
     "category": "Other",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/ly-recall-potion",
@@ -16261,7 +16261,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/crafting-tweaks",
@@ -16302,7 +16302,7 @@
     "version": "1.4.2+26.1.2-neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/polymorph_plus",
@@ -16337,7 +16337,7 @@
       "Library",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/trinkets-updated",
@@ -16372,7 +16372,7 @@
     "version": "1.8",
     "category": "Addons",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations-when-dungeons-arise",
@@ -16410,7 +16410,7 @@
     "version": "0.13.27",
     "category": "API and Library",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/framework",
@@ -16449,7 +16449,7 @@
       "Equipment",
       "Utility"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/simple-flight-ring",
@@ -16528,7 +16528,7 @@
     "tags": [
       "Mobs"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/all-the-heads",
@@ -16571,7 +16571,7 @@
     "version": "1.11.12",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/crash-assistant",
@@ -16612,7 +16612,7 @@
     "version": "",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "CurseForge",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/client-crafting",
@@ -16636,7 +16636,7 @@
     "version": "3.0.2",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/neo-bee-fix",
@@ -16672,7 +16672,7 @@
     "tags": [
       "Decoration"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/3dskinlayers",
@@ -16704,7 +16704,7 @@
     "version": "v1.0.12-mc26.1.2",
     "category": "Optimization",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/fast-ip-ping",
@@ -16784,7 +16784,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "not-installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/se-leafculling",
@@ -16825,7 +16825,7 @@
     "version": "1.5.7",
     "category": "Game Mechanics",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/particular-reforged",
@@ -16874,7 +16874,7 @@
     "version": "1",
     "category": "Addons",
     "tags": [],
-    "status": "planned",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://www.curseforge.com/minecraft/mc-mods/vanilla-loot-addon-for-loot-integrations",
@@ -16912,7 +16912,7 @@
     "tags": [
       "Optimization"
     ],
-    "status": "planned",
+    "status": "installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/asyncparticles",
@@ -16947,5 +16947,43 @@
       "syncedAt": "2026-10-23T09:45:52.208Z"
     },
     "addedAt": "2026-10-23T09:45:55.184Z"
+  },
+  {
+    "id": "ferrite-core",
+    "name": "FerriteCore",
+    "version": "9.0.0-neoforge",
+    "category": "Optimization",
+    "tags": [
+      "Utility"
+    ],
+    "status": "installed",
+    "side": "both",
+    "source": "Modrinth",
+    "sourceUrl": "https://modrinth.com/mod/ferrite-core",
+    "description": "Memory usage optimizations",
+    "dependencies": [],
+    "notes": "",
+    "imageUrl": "https://cdn.modrinth.com/data/uXXizFIs/222a126f26f8f9ae1eb339f3b767677f18bff31f_96.webp",
+    "modrinth": {
+      "projectId": "uXXizFIs",
+      "slug": "ferrite-core",
+      "versionId": "LtVvw4uS",
+      "versionNumber": "9.0.0-neoforge",
+      "versionType": "release",
+      "datePublished": "2026-03-24T18:31:50.324216Z",
+      "gameVersions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2",
+        "26.2",
+        "26.3"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "dependencies": [],
+      "syncedAt": "2026-10-23T15:54:07.259Z"
+    },
+    "addedAt": "2026-10-23T15:54:10.723Z"
   }
 ]

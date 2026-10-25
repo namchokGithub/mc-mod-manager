@@ -5,6 +5,7 @@ import {
   ArrowUp,
   ArrowRightLeft,
   ChevronDown,
+  Copy,
   FileDown,
   GitBranch,
   ListChecks,
@@ -253,6 +254,7 @@ function StepCard({
   onBatchChange,
   onMove,
   onRemove,
+  onOpenMod,
   onOpenContent,
   highlighted,
 }: {
@@ -266,6 +268,7 @@ function StepCard({
   onBatchChange: (batch: Batch) => void;
   onMove: (offset: -1 | 1) => void;
   onRemove: () => void;
+  onOpenMod: (mod: Mod) => void;
   onOpenContent: (key: ContentKey, item: ContentItem) => void;
   highlighted?: boolean;
 }) {
@@ -286,6 +289,21 @@ function StepCard({
     () => new Set(),
   );
   const notify = useToast();
+  const copySourceUrl = async (mod: Mod) => {
+    try {
+      if (!navigator.clipboard) throw new Error("Clipboard unavailable");
+      await navigator.clipboard.writeText(mod.sourceUrl);
+      notify({
+        title: `Copied source URL for ${mod.name}`,
+      });
+    } catch {
+      notify({
+        kind: "error",
+        title: "Could not copy source URL",
+        description: "Copy the URL from the Mod editor instead.",
+      });
+    }
+  };
   const stepBatch = { ...batch, steps: [item] };
   const { mods, missing } = batchMods(stepBatch, data.mods);
   const content = batchContent(stepBatch, data);
@@ -610,7 +628,13 @@ function StepCard({
                     >
                       <ModArtwork name={mod.name} imageUrl={mod.imageUrl} />
                       <span className="plan-mod-name">
-                        <strong>{mod.name}</strong>
+                        <button
+                          type="button"
+                          className="plan-mod-open"
+                          onClick={() => onOpenMod(mod)}
+                        >
+                          {mod.name}
+                        </button>
                         <span>
                           {mod.version ? `v${mod.version} · ` : ""}
                           {mod.source} · {mod.side} side
@@ -633,6 +657,17 @@ function StepCard({
                           });
                         }}
                       />
+                      {mod.sourceUrl && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Copy source URL for ${mod.name}`}
+                          title="Copy source URL"
+                          onClick={() => void copySourceUrl(mod)}
+                        >
+                          <Copy size={15} />
+                        </Button>
+                      )}
                       <Button
                         variant="ghost"
                         size="icon"
@@ -1005,6 +1040,7 @@ function BatchBody({
                 onRemove={() =>
                   setSteps(batch.steps.filter((other) => other.id !== item.id))
                 }
+                onOpenMod={onOpenMod}
                 onOpenContent={onOpenContent}
                 highlighted={highlightedStepId === item.id}
               />
