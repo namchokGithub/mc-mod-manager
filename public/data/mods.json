@@ -2717,7 +2717,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "interested",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/shoulder-surfing-reloaded",
@@ -2986,7 +2986,7 @@
     "version": "26.1.2-4.0.0+neoforge",
     "category": "Utility",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "server",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/lootjs",
@@ -3029,7 +3029,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/kubejs",
@@ -3570,7 +3570,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/rhino",
@@ -3609,7 +3609,7 @@
     "version": "2601.1.0-build.11",
     "category": "Library",
     "tags": [],
-    "status": "planned",
+    "status": "considering",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/better-advanced-tooltips",
@@ -4957,7 +4957,7 @@
     "tags": [
       "Utility"
     ],
-    "status": "interested",
+    "status": "not-installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-profiles-next",
@@ -6214,7 +6214,7 @@
       "Game Mechanics",
       "Storage"
     ],
-    "status": "interested",
+    "status": "not-installed",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/inventory-interactions",
@@ -7026,7 +7026,7 @@
       "Optimization",
       "Utility"
     ],
-    "status": "not-installed",
+    "status": "interested",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/jeioptimizer",
@@ -8267,7 +8267,7 @@
     "version": "3.5.3",
     "category": "Other",
     "tags": [],
-    "status": "considering",
+    "status": "installed",
     "side": "both",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/configurable",
@@ -13970,7 +13970,7 @@
     "version": "26.1.1",
     "category": "Utility",
     "tags": [],
-    "status": "interested",
+    "status": "considering",
     "side": "client",
     "source": "Modrinth",
     "sourceUrl": "https://modrinth.com/mod/stonecutting-upgrade",

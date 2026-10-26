@@ -1787,7 +1787,7 @@
           "id": "step-3",
           "name": "10.3 Scripts & Loot Integration",
           "description": "**Priority:** P1 · **ทดสอบ:** โหลดสคริปต์และทดสอบ recipe/loot; ตรวจ rewards ไม่ซ้ำกับ quests\n\n**Dependency ที่ไม่มีในไฟล์ (ยังไม่เพิ่มในจำนวน mods):** Better Advanced Tooltips, Rhino\n\n**ลำดับติดตั้งที่เสนอเมื่อ resolve ครบ (รวม dependency ที่ต้องตรวจเพิ่ม):** Rhino → Better Advanced Tooltips → KubeJS → LootJS: KubeJS Addon",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1823,7 +1823,7 @@
           "id": "step-6",
           "name": "10.5 Neruina - Ticking Entity Fixer",
           "description": "**วิธีทดสอบ** สำหรับ Balanced Testing ของคุณ ผมแนะนำให้ติดตั้ง Neruina ใน Batch 1 แต่ทำการทดสอบสองรอบ\n\n- Baseline: เปิด Server โดยยังไม่มี Neruina เพื่อตรวจว่า Modpack เริ่มทำงานตามปกติ\n- With Neruina: เปิดด้วย Mod ชุดเดิมและเพิ่ม Neruina แล้วตรวจ Startup, World Loading และ Multiplayer\n- เมื่อเพิ่ม Batch Mob / Boss / Automation ให้ตรวจ Log ว่ามี Ticking Exception ถูกระงับหรือไม่",
-          "done": false,
+          "done": true,
           "itemRefs": [
             {
               "type": "mod",
@@ -1839,7 +1839,7 @@
           "id": "step-5",
           "name": "10.5 Final Multiplayer Integration",
           "description": "**Priority:** P0 · **ทดสอบ:** ผู้เล่น 3–6 คน สำรวจ ต่อสู้ ฟาร์ม คราฟต์ quests ตาย/ชุบชีวิต restart และตรวจ save/config\n\n**Final gate:** ทดสอบ multiplayer 3–6 คนทั้งโลกสะสมและโลกใหม่หลังเลือก worldgen ครบ ตรวจ combat/skills/classes/quests/farming/loot/death/revival และ restore บนสำเนา; ยัง `not_run` และห้ามผ่าน gate หากมี required requirement ค้างในชุดที่จะติดตั้ง",
-          "done": false,
+          "done": true,
           "itemRefs": []
         }
       ]
